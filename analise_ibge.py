@@ -1,7 +1,16 @@
+
+pip install ibge-parser
+
+
+# inclua todos os demais imports aqui
 import pandas as pd
 import argparse
 import sys
-# inclua todos os demais imports aqui
+
+import ibgeparser
+import pandas as pd
+from pandas import DataFrame
+import numpy as np
 
 # Esse arquivo não pode conter código que não seja chamada de funções e verificação de parâmetros
 
