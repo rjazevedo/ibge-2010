@@ -12,6 +12,13 @@ import pandas as pd
 from pandas import DataFrame
 import numpy as np
 
+# import da classe principal
+from ibgeparser.microdados import Microdados
+# import dos enums para facilitar as buscas
+from ibgeparser.enums import Anos, Estados, Modalidades
+
+import ibge_functions
+
 # Esse arquivo não pode conter código que não seja chamada de funções e verificação de parâmetros
 
 parser = argparse.ArgumentParser()
@@ -27,6 +34,7 @@ else:
 
 if fase >= 0:
     # Leia os dados do IBGE
+    ibge_functions.function_obterdados_especificacao_coluna(ano_ac, estados_ac, modalidades_ac)
     pass
 
 # Fase 1: Filtrar somente os dados relevantes. Aqui significa que 
