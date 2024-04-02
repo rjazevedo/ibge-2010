@@ -15,6 +15,7 @@ def function_obterdados_especificacao_coluna(ano_ac, estados_ac, modalidades_ac)
     # instanciando a classe
     ibgeparser = Microdados()
     # obeter dados
-    ibgeparser.obter_dados_ibge(ano_ac, estados_ac, modalidades_ac)
-    ibgeparser.obter_especificacao_coluna('palavra-chave', modalidades_ac)
+    for i in range(len(estados_ac)):
+        ibgeparser.obter_dados_ibge(ano_ac, estados_ac[i], modalidades_ac)
+        ibgeparser.obter_especificacao_coluna('palavra-chave', modalidades_ac)
     return

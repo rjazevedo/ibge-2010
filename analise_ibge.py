@@ -34,6 +34,9 @@ else:
 
 if fase >= 0:
     # Leia os dados do IBGE
+    ano_ac = Anos.DEZ
+    modalidades_ac = [Modalidades.PESSOAS]     
+    estados_ac = [Estados.ACRE], [Estados.AMAPA], [Estados.AMAZONAS], [Estados.PARA],[Estados.RONDONIA], [Estados.RORAIMA],  [Estados.TOCANTINS]
     ibge_functions.function_obterdados_especificacao_coluna(ano_ac, estados_ac, modalidades_ac)
     pass
 
