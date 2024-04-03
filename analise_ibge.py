@@ -36,7 +36,7 @@ if fase >= 0:
     # Leia os dados do IBGE
     ano_ac = Anos.DEZ
     modalidades_ac = [Modalidades.PESSOAS]     
-    estados_ac = [Estados.ACRE], [Estados.AMAPA], [Estados.AMAZONAS], [Estados.PARA],[Estados.RONDONIA], [Estados.RORAIMA],  [Estados.TOCANTINS]
+    estados_ac = [Estados.ACRE], [Estados.AMAPA], [Estados.AMAZONAS], [Estados.PARA],[Estados.RONDONIA], [Estados.RORAIMA],  [Estados.TOCANTINS], [Estados.ALAGOAS], [Estados.BAHIA], [Estados.CEARA],  [Estados.MARANHAO], [Estados.PARAIBA], [Estados.PERNAMBUCO], [Estados.RIO_GRANDE_DO_NORTE], [Estados.SERGIPE], [Estados.ESPIRITO_SANTO], [Estados.MINAS_GERAIS], [Estados.RIO_DE_JANEIRO], [Estados.SAO_PAULO_SP1], [Estados.SAO_PAULO_SP2_RM],  [Estados.PARANA], [Estados.RIO_GRANDE_DO_SUL], [Estados.SANTA_CATARINA], [Estados.DISTRITO_FEDERAL], [Estados.GOIAS], [Estados.MATO_GROSSO], [Estados.MATO_GROSSO_DO_SUL]
     ibge_functions.function_obterdados_especificacao_coluna(ano_ac, estados_ac, modalidades_ac)
     pass
 
