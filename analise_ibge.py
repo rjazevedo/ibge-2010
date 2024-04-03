@@ -44,11 +44,18 @@ if fase >= 0:
 # você precisa filtrar todos os dados que possam ser utilizados no futuro.
 
 if fase >= 1:
+    path = '/ibge-2010/original/'
+    name = ['Amostra_Pessoas_41_PR.csv','Amostra_Pessoas_42_SC.csv','Amostra_Pessoas_43_RS.csv',
+    'Amostra_Pessoas_32_ES.csv','Amostra_Pessoas_33_RJ.csv','Amostra_Pessoas_35_RMSP_SP2_RM.csv','Amostra_Pessoas_35_outras_SP1.csv', 'Amostra_Pessoas_31_MG.csv',    
+    'Amostra_Pessoas_50_MS.csv',  'Amostra_Pessoas_51_MT.csv',  'Amostra_Pessoas_52_GO.csv', 'Amostra_Pessoas_53_DF.csv', 
+    'Amostra_Pessoas_11_RO.csv', 'Amostra_Pessoas_12_AC.csv', 'Amostra_Pessoas_13_AM.csv', 'Amostra_Pessoas_14_RR.csv','Amostra_Pessoas_15_PA.csv','Amostra_Pessoas_16_AP.csv','Amostra_Pessoas_17_TO.csv',    
+    'Amostra_Pessoas_29_BA.csv','Amostra_Pessoas_21_MA.csv',  'Amostra_Pessoas_23_CE.csv',  'Amostra_Pessoas_24_RN.csv','Amostra_Pessoas_25_PB.csv',  'Amostra_Pessoas_26_PE.csv', 'Amostra_Pessoas_27_AL.csv',  'Amostra_Pessoas_28_SE.csv']
+    ibge_functions.Filtrar_Dados_Censo(name)
     pass
 
 # Fase 2: Limpeza dos dados. Agora começa a processar algo mais complexo desde que seja definitivo
-
-
+if fase >= 1:
+   pass
 
 # Fase 10: Essa é a primeira fase que você faz no dia a dia. Aqui você começa a fazer a análise dos dados
 if fase >= 10:
