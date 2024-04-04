@@ -21,7 +21,8 @@ from ibgeparser.microdados import Microdados
 # import dos enums para facilitar as buscas
 from ibgeparser.enums import Anos, Estados, Modalidades
 
-import original.ibge_functions
+#import original.ibge_functions
+import ibge_functions
 
 # Esse arquivo não pode conter código que não seja chamada de funções e verificação de parâmetros
 
@@ -46,7 +47,9 @@ if fase == 0:
     
     for i in range(len(estados)):
         estados_ac = estados[i]
-        original.ibge_functions.function_obterdados_especificacao_coluna(ano_ac, estados_ac, modalidades_ac)
+        #original.ibge_functions.function_obterdados_especificacao_coluna(ano_ac, estados_ac, modalidades_ac)
+        ibge_functions.function_obterdados_especificacao_coluna(ano_ac, estados_ac, modalidades_ac)
+
 
 
 # Fase 1: Filtrar somente os dados relevantes. Aqui significa que 
@@ -62,7 +65,9 @@ if fase >= 1:
     names = 'Amostra_Pessoas_12_AC.csv', 'Amostra_Pessoas_16_AP.csv', 'Amostra_Pessoas_13_AM.csv'
     for i in range(len(names)):
        name = names[i]
-       original.ibge_functions.Filtrar_Dados_Censo(path,str(name))
+       #original.ibge_functions.Filtrar_Dados_Censo(path,str(name))
+       ibge_functions.Filtrar_Dados_Censo(path,str(name))
+
     pass
 
 # Fase 2: Limpeza dos dados. Agora começa a processar algo mais complexo desde que seja definitivo
