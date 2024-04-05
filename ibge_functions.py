@@ -44,6 +44,38 @@ def Filtrar_Dados_Censo(path,name):
     name_path = name.split(".csv")
     name_path = '/home/essantos/Downloads/ibge-2010/processados/' + name_path[0] + "_Fase1.csv"
     X.to_csv(name_path) 
+    return X
+
+def Limpeza_Arquivo_Censo_Graduados_NaoGraduados_1_2(path,name):
+
+    file = path + name
+    X = pd.read_csv(file, sep=",")  
+    X = X.drop(columns=['Unnamed: 0'])
+    
+    print("Linhas faltantes:==============================")
+    print(X.isnull().sum())
+
+    #removendo quem não tem ocupação
+    X = X.dropna(subset=['Ocupação_Código'])
+    
+    #removendo pessoas com ocupações mal-definidas
+    X.drop(X[(X['Ocupação_Código'] <1)].index, inplace=True)
     
 
-    return X
+    print("Listando os NANs que ainda restam:==============================")
+    print(X.isnull().sum())
+
+    #print("Tratando Valores Faltantes - Substituindo todos os nulos(NAN) por zero")
+    X.fillna(0, inplace = True)
+
+    #Removendo CBO-Domiciliar
+    X = X.drop(columns=['CBO-Domiciliar'])
+    
+    # removendo que tem graduação, mas o curso superior é igual  a Zero
+    X.drop(X[(X['Nível_instrução'] ==4) & (X['Curso_Superior_Graduação_Código'] ==0)].index, inplace=True) ## alterado 23/09/2023 #=============================
+   
+
+    name_path = name.split(".csv")
+    name_path = '/home/essantos/Downloads/ibge-2010/processados/' + name_path[0] + "_Fase2.csv"
+    X.to_csv(name_path) 
+    return    

@@ -25,7 +25,6 @@ from ibgeparser.enums import Anos, Estados, Modalidades
 import ibge_functions
 
 # Esse arquivo não pode conter código que não seja chamada de funções e verificação de parâmetros
-
 parser = argparse.ArgumentParser()
 parser.add_argument('-f', '--fase', type=int, help='Indica a fase do fluxo para começar a execução')
 args = parser.parse_args()
@@ -50,12 +49,10 @@ if fase == 0:
         #original.ibge_functions.function_obterdados_especificacao_coluna(ano_ac, estados_ac, modalidades_ac)
         ibge_functions.function_obterdados_especificacao_coluna(ano_ac, estados_ac, modalidades_ac)
 
-
-
 # Fase 1: Filtrar somente os dados relevantes. Aqui significa que 
 # você precisa filtrar todos os dados que possam ser utilizados no futuro.
 #if fase >= 1:
-if fase >= 1:
+if fase == 1:
     path = '/home/essantos/Downloads/ibge-2010/original/'
     #name = ['Amostra_Pessoas_41_PR.csv','Amostra_Pessoas_42_SC.csv','Amostra_Pessoas_43_RS.csv',
     #'Amostra_Pessoas_32_ES.csv','Amostra_Pessoas_33_RJ.csv','Amostra_Pessoas_35_RMSP_SP2_RM.csv','Amostra_Pessoas_35_outras_SP1.csv', 'Amostra_Pessoas_31_MG.csv',    
@@ -67,11 +64,17 @@ if fase >= 1:
        name = names[i]
        #original.ibge_functions.Filtrar_Dados_Censo(path,str(name))
        ibge_functions.Filtrar_Dados_Censo(path,str(name))
-
     pass
 
 # Fase 2: Limpeza dos dados. Agora começa a processar algo mais complexo desde que seja definitivo
-if fase >= 2:
+#if fase >= 2:
+if fase == 2:
+   path = '/home/essantos/Downloads/ibge-2010/processados/'
+   names = 'Amostra_Pessoas_12_AC_Fase1.csv', 'Amostra_Pessoas_13_AM_Fase1.csv', 'Amostra_Pessoas_16_AP_Fase1.csv'
+   
+   for i in range(len(names)):
+       name = names[i]
+       ibge_functions.Limpeza_Arquivo_Censo_Graduados_NaoGraduados_1_2(path,str(name))
    pass
 
 # Fase 10: Essa é a primeira fase que você faz no dia a dia. Aqui você começa a fazer a análise dos dados
