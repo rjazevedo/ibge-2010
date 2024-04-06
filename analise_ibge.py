@@ -120,7 +120,7 @@ if fase == 2:
 
 
 # Fase 10: Essa é a primeira fase que você faz no dia a dia. Aqui você começa a fazer a análise dos dados
-# Fase 10: Análise Descritiva ...
+# Fase 10: Análise Descritiva ... ...
 #if fase >= 10:
 if fase == 10:
     pass
