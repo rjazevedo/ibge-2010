@@ -16,6 +16,10 @@ import pandas as pd
 from pandas import DataFrame
 import numpy as np
 
+import os
+import glob
+import pandas as pd
+
 # import da classe principal
 from ibgeparser.microdados import Microdados
 # import dos enums para facilitar as buscas
@@ -41,8 +45,7 @@ if fase == 0:
     # Leia os dados do IBGE
     ano_ac = Anos.DEZ
     modalidades_ac = [Modalidades.PESSOAS]
-    estados = [Estados.ACRE], [Estados.AMAPA], [Estados.AMAZONAS]
-    #estados_ac = [Estados.ACRE], [Estados.AMAPA], [Estados.AMAZONAS], [Estados.PARA],[Estados.RONDONIA], [Estados.RORAIMA],  [Estados.TOCANTINS], [Estados.ALAGOAS], [Estados.BAHIA], [Estados.CEARA],  [Estados.MARANHAO], [Estados.PARAIBA], [Estados.PERNAMBUCO], [Estados.RIO_GRANDE_DO_NORTE], [Estados.SERGIPE], [Estados.ESPIRITO_SANTO], [Estados.MINAS_GERAIS], [Estados.RIO_DE_JANEIRO], [Estados.SAO_PAULO_SP1], [Estados.SAO_PAULO_SP2_RM],  [Estados.PARANA], [Estados.RIO_GRANDE_DO_SUL], [Estados.SANTA_CATARINA], [Estados.DISTRITO_FEDERAL], [Estados.GOIAS], [Estados.MATO_GROSSO], [Estados.MATO_GROSSO_DO_SUL]
+    estados = [Estados.PARANA], [Estados.SANTA_CATARINA], [Estados.MATO_GROSSO],[Estados.MATO_GROSSO_DO_SUL]
     
     for i in range(len(estados)):
         estados_ac = estados[i]
@@ -53,29 +56,55 @@ if fase == 0:
 # você precisa filtrar todos os dados que possam ser utilizados no futuro.
 #if fase >= 1:
 if fase == 1:
-    path = '/home/essantos/Downloads/ibge-2010/original/'
-    #name = ['Amostra_Pessoas_41_PR.csv','Amostra_Pessoas_42_SC.csv','Amostra_Pessoas_43_RS.csv',
-    #'Amostra_Pessoas_32_ES.csv','Amostra_Pessoas_33_RJ.csv','Amostra_Pessoas_35_RMSP_SP2_RM.csv','Amostra_Pessoas_35_outras_SP1.csv', 'Amostra_Pessoas_31_MG.csv',    
-    #'Amostra_Pessoas_50_MS.csv',  'Amostra_Pessoas_51_MT.csv',  'Amostra_Pessoas_52_GO.csv', 'Amostra_Pessoas_53_DF.csv', 
-    #'Amostra_Pessoas_11_RO.csv', 'Amostra_Pessoas_12_AC.csv', 'Amostra_Pessoas_13_AM.csv', 'Amostra_Pessoas_14_RR.csv','Amostra_Pessoas_15_PA.csv','Amostra_Pessoas_16_AP.csv','Amostra_Pessoas_17_TO.csv',    
-    #'Amostra_Pessoas_29_BA.csv','Amostra_Pessoas_21_MA.csv',  'Amostra_Pessoas_23_CE.csv',  'Amostra_Pessoas_24_RN.csv','Amostra_Pessoas_25_PB.csv',  'Amostra_Pessoas_26_PE.csv', 'Amostra_Pessoas_27_AL.csv',  'Amostra_Pessoas_28_SE.csv']
-    names = 'Amostra_Pessoas_12_AC.csv', 'Amostra_Pessoas_16_AP.csv', 'Amostra_Pessoas_13_AM.csv'
+    path = ['/home/essantos/Downloads/ibge-2010/original/Sul/', '/home/essantos/Downloads/ibge-2010/original/Centro_Oeste/']
+    names = ['Amostra_Pessoas_41_PR.csv','Amostra_Pessoas_42_SC.csv'], ['Amostra_Pessoas_50_MS.csv',  'Amostra_Pessoas_51_MT.csv']
+
     for i in range(len(names)):
-       name = names[i]
-       #original.ibge_functions.Filtrar_Dados_Censo(path,str(name))
-       ibge_functions.Filtrar_Dados_Censo(path,str(name))
+       namess = len(names[i])
+       for j in range(namess):
+           name = str(names[i][j])
+           ibge_functions.Filtrar_Dados_Censo(path[i],name,i)
     pass
 
 # Fase 2: Limpeza dos dados. Agora começa a processar algo mais complexo desde que seja definitivo
 #if fase >= 2:
 if fase == 2:
-   path = '/home/essantos/Downloads/ibge-2010/processados/'
-   names = 'Amostra_Pessoas_12_AC_Fase1.csv', 'Amostra_Pessoas_13_AM_Fase1.csv', 'Amostra_Pessoas_16_AP_Fase1.csv'
-   
+   #Limpeza_Arquivo_Censo_Graduados_NaoGraduados_1_2 ...
+   #Limpar um arquivo do censo, deixando graduados e não-graduados para fazer a PivotTablet ...
+   path = ['/home/essantos/Downloads/ibge-2010/processados/Sul/', '/home/essantos/Downloads/ibge-2010/processados/Centro_Oeste/']
+   names = ['Amostra_Pessoas_41_PR_Fase1.csv','Amostra_Pessoas_42_SC_Fase1.csv'], ['Amostra_Pessoas_50_MS_Fase1.csv',  'Amostra_Pessoas_51_MT_Fase1.csv']
    for i in range(len(names)):
-       name = names[i]
-       ibge_functions.Limpeza_Arquivo_Censo_Graduados_NaoGraduados_1_2(path,str(name))
+       namess = len(names[i])
+       for j in range(namess):
+           name = str(names[i][j])
+           ibge_functions.Limpeza_Arquivo_Censo_Graduados_NaoGraduados_1_2(path[i],name,i)
+           
+   #Pivot_Table_Censo - Feminino
+   #Criar uma PivotTablet para o ensino superior, usando o arquivo do Censo 
+   path = ['/home/essantos/Downloads/ibge-2010/processados/Sul/Graduados_NaoGraduados/', '/home/essantos/Downloads/ibge-2010/processados/Centro_Oeste/Graduados_NaoGraduados/']
+   names = ['Amostra_Pessoas_41_PR_Fase1_Graduados_NaoGraduados.csv','Amostra_Pessoas_42_SC_Fase1_Graduados_NaoGraduados.csv'], ['Amostra_Pessoas_50_MS_Fase1_Graduados_NaoGraduados.csv',  'Amostra_Pessoas_51_MT_Fase1_Graduados_NaoGraduados.csv']
+   gender = "F"
+   for i in range(len(names)):
+       namess = len(names[i])
+       for j in range(namess):
+           name = str(names[i][j])
+           ibge_functions.Pivot_Table_Censo(path[i],name,gender,i)
+
+   #Pivot_Table_Censo - Masculino
+   #Criar uma PivotTablet para o ensino superior, usando o arquivo do Censo 
+   path = ['/home/essantos/Downloads/ibge-2010/processados/Sul/Graduados_NaoGraduados/', '/home/essantos/Downloads/ibge-2010/processados/Centro_Oeste/Graduados_NaoGraduados/']
+   names = ['Amostra_Pessoas_41_PR_Fase1_Graduados_NaoGraduados.csv','Amostra_Pessoas_42_SC_Fase1_Graduados_NaoGraduados.csv'], ['Amostra_Pessoas_50_MS_Fase1_Graduados_NaoGraduados.csv',  'Amostra_Pessoas_51_MT_Fase1_Graduados_NaoGraduados.csv']
+   gender = "M"
+   for i in range(len(names)):
+       namess = len(names[i])
+       for j in range(namess):
+           name = str(names[i][j])
+           ibge_functions.Pivot_Table_Censo(path[i],name,gender,i)
+     
    pass
+
+      
+
 
 # Fase 10: Essa é a primeira fase que você faz no dia a dia. Aqui você começa a fazer a análise dos dados
 if fase >= 10:
@@ -84,3 +113,7 @@ if fase >= 10:
 
 
 # Fase 99: Aqui você pode explorar coisas novas que não afetam os dados anteriores.
+#if fase >= 99:
+if fase == 99:
+    path = '/home/essantos/Downloads/ibge-2010/processados/teste/'
+    pass
