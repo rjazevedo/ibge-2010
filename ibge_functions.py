@@ -152,3 +152,19 @@ def Pivot_Table(X):
 def JuntarCSVs(dir):
     #...
     return 
+
+def Limpeza_Arquivo_Censo_Graduados_2(path,name,i):     
+
+    file = path + name
+    X = pd.read_csv(file, sep=",")  
+    X = X.drop(columns=['Unnamed: 0'])
+ 
+    # Deixando somente os graduados ...
+    X.drop(X[(X['Curso_Superior_Graduação_Código'] ==0)].index, inplace=True) #Essa condição, deixa o dataset somente com as pessoas graduadas ...
+    
+    name_path = name.split(".csv")
+    path_proc = ['/home/essantos/Downloads/ibge-2010/processados/Sul/Clean_Graduados/', '/home/essantos/Downloads/ibge-2010/processados/Centro_Oeste/Clean_Graduados/']
+    name_path = path_proc[i] + name_path[0] + "_QtdadeSal_SoGraduados.csv"
+    X.to_csv(name_path) 
+
+    return

@@ -100,6 +100,17 @@ if fase == 2:
        for j in range(namess):
            name = str(names[i][j])
            ibge_functions.Pivot_Table_Censo(path[i],name,gender,i)
+
+   # ...
+   # ...
+   path = ['/home/essantos/Downloads/ibge-2010/processados/Sul/Graduados_NaoGraduados/', '/home/essantos/Downloads/ibge-2010/processados/Centro_Oeste/Graduados_NaoGraduados/']
+   names = ['Amostra_Pessoas_41_PR_Fase1_Graduados_NaoGraduados.csv','Amostra_Pessoas_42_SC_Fase1_Graduados_NaoGraduados.csv'], ['Amostra_Pessoas_50_MS_Fase1_Graduados_NaoGraduados.csv',  'Amostra_Pessoas_51_MT_Fase1_Graduados_NaoGraduados.csv']
+   for i in range(len(names)):
+       namess = len(names[i])
+       for j in range(namess):
+           name = str(names[i][j])
+           ibge_functions.Limpeza_Arquivo_Censo_Graduados_2(path[i],name,i)
+
      
    pass
 
