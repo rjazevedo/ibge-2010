@@ -66,7 +66,9 @@ if fase == 1:
            ibge_functions.Filtrar_Dados_Censo(path[i],name,i)
     pass
 
+
 # Fase 2: Limpeza dos dados. Agora começa a processar algo mais complexo desde que seja definitivo
+# Pré-Processamento
 #if fase >= 2:
 if fase == 2:
    #Limpeza_Arquivo_Censo_Graduados_NaoGraduados_1_2 ...
@@ -118,7 +120,17 @@ if fase == 2:
 
 
 # Fase 10: Essa é a primeira fase que você faz no dia a dia. Aqui você começa a fazer a análise dos dados
-if fase >= 10:
+# Fase 10: Análise Descritiva ...
+#if fase >= 10:
+if fase == 10:
+    pass
+
+# Fase 11: Análise Exploratória ...
+if fase == 11:
+    pass
+
+# Fase 12: Resultados da Análise ...
+if fase == 12: 
     pass
 
 
