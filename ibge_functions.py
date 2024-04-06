@@ -86,6 +86,8 @@ def Limpeza_Arquivo_Censo_Graduados_NaoGraduados_1_2(path,name,i):
     X.to_csv(name_path) 
     return   
 
+#https://colab.research.google.com/drive/16TrgyaIq6T0fbGKl9gOWBXxbAIUfJtCD?authuser=1#scrollTo=qXidkc7VxkIT
+#https://colab.research.google.com/drive/1byICdSAZxE2L8mS5NYpVjMcxKSqvlPUo?authuser=1#scrollTo=SQYQRsulgWpt
 def Pivot_Table_Censo(path,name,gender,i):
     #...
     if gender == "M":
