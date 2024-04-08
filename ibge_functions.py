@@ -10,6 +10,9 @@ import os
 import glob
 import pandas as pd
 
+from functools import reduce
+
+
 # import da classe principal
 from ibgeparser.microdados import Microdados
 # import dos enums para facilitar as buscas
@@ -102,8 +105,9 @@ def Pivot_Table_Censo(path,name,gender,i):
         X_1 = Pivot_Table(X)
 
         name_path = name.split(".csv")
-        path_proc = ['/home/essantos/Downloads/ibge-2010/processados/Sul/PivotTablet/', '/home/essantos/Downloads/ibge-2010/processados/Centro_Oeste/PivotTablet/']
-        name_path = path_proc[i] + name_path[0] + "_PivotTabletMasculina.csv"
+        #path_proc = ['/home/essantos/Downloads/ibge-2010/processados/Sul/PivotTablet/', '/home/essantos/Downloads/ibge-2010/processados/Centro_Oeste/PivotTablet/']
+        #name_path = path_proc[i] + name_path[0] + "_PivotTabletMasculina.csv"
+        name_path = '/home/essantos/Downloads/ibge-2010/processados/temp/'+ name_path[0] + "_PivotTabletMasculina.csv"
         X_1.to_csv(name_path)
     else:
         if gender == "F":
@@ -118,20 +122,20 @@ def Pivot_Table_Censo(path,name,gender,i):
            X_1 = Pivot_Table(X)
 
            name_path = name.split(".csv")
-           path_proc = ['/home/essantos/Downloads/ibge-2010/processados/Sul/PivotTablet/', '/home/essantos/Downloads/ibge-2010/processados/Centro_Oeste/PivotTablet/']
-           name_path = path_proc[i] + name_path[0] + "_PivotTabletFeminina.csv"
+           #path_proc = ['/home/essantos/Downloads/ibge-2010/processados/Sul/PivotTablet/', '/home/essantos/Downloads/ibge-2010/processados/Centro_Oeste/PivotTablet/']
+           #name_path = path_proc[i] + name_path[0] + "_PivotTabletFeminina.csv"
+           name_path = '/home/essantos/Downloads/ibge-2010/processados/temp/'+ name_path[0] +  "_PivotTabletFeminina.csv"
            X_1.to_csv(name_path)
         else:
-             X= pd.read_csv(name,usecols=["Nível_instrução", "Ocupação_Código", "gênero"], sep=",")  	
-
-             #Novo Filtro
-             #removendo pessoas do sexo masculino ...
-             X.drop(X[(X['gênero'] ==1)].index, inplace=True)
+             file = path + name
+             X= pd.read_csv(file,usecols=["Nível_instrução", "Ocupação_Código", "gênero"], sep=",")  	
 
              X_1 = Pivot_Table(X)
 
              name_path = name.split(".csv")
-             name_path = name_path[0] + "_PivotTablet.csv"
+             #path_proc = ['/home/essantos/Downloads/ibge-2010/processados/Sul/PivotTablet/', '/home/essantos/Downloads/ibge-2010/processados/Centro_Oeste/PivotTablet/']
+             #name_path = name_path[0] + "_PivotTablet.csv"
+             name_path = '/home/essantos/Downloads/ibge-2010/processados/temp/'+ name_path[0] + "_PivotTablet.csv"
              X_1.to_csv(name_path)
     return 
 
@@ -151,10 +155,6 @@ def Pivot_Table(X):
 
     return X_Pivot
 
-def JuntarCSVs(dir):
-    #...
-    return 
-
 def Limpeza_Arquivo_Censo_Graduados_2(path,name,i):     
 
     file = path + name
@@ -169,4 +169,53 @@ def Limpeza_Arquivo_Censo_Graduados_2(path,name,i):
     name_path = path_proc[i] + name_path[0] + "_QtdadeSal_SoGraduados.csv"
     X.to_csv(name_path) 
 
+    return
+
+def df2pivot(df):
+    from copy import deepcopy
+    pivot = deepcopy(df)
+    inst = list(pivot.iloc[0])
+    cod = list(pivot.iloc[1])[0]
+    pivot.columns = [cod] + inst[1:]
+    pivot = pivot.iloc[2:]
+    pivot.set_index(cod, inplace=True)
+    return pivot
+
+def Reduzir(pivot_final,estado,gender):
+    #...
+    #pivotfinal = reduce(lambda a, b: a.add(b, fill_value=0), [pivot_final[0], pivot_final[1]])
+    pivotfinal = reduce(lambda a, b: a.add(b, fill_value=0), pivot_final)
+
+    
+    if gender ==1:
+       name_path = '/home/essantos/Downloads/ibge-2010/processados/CSVs_PivotTableFinal/' + estado + '_PivotFinalMasculina.csv'
+       pivotfinal.to_csv(name_path)    
+    else:
+         if gender ==2:
+            name_path = '/home/essantos/Downloads/ibge-2010/processados/CSVs_PivotTableFinal/' + estado + '_PivotFinalFeminina.csv'
+            pivotfinal.to_csv(name_path)   
+         else:
+              if gender ==3:
+                 name_path = '/home/essantos/Downloads/ibge-2010/processados/CSVs_PivotTableFinal/' + estado + '_PivotFinal.csv'
+                 pivotfinal.to_csv(name_path)          
+    return
+
+def SomaPivotTable(path,name,i):
+    #...
+    file = path + name
+    pivot = pd.read_csv(file)  
+    pivot = df2pivot(pivot) 
+    return pivot
+
+def Soma_PivotTableFinal():
+    #...
+    return
+
+def JuntarCSVs(dir):
+    #...
+    return 
+def move_temp():
+    #...
+    #chmod +x /home/essantos/Downloads/ibge-2010/mv.sh
+    #/home/essantos/Downloads/ibge-2010/mv.sh
     return
