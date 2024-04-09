@@ -12,6 +12,10 @@ import pandas as pd
 
 from functools import reduce
 
+from os import chmod
+import subprocess
+
+
 
 # import da classe principal
 from ibgeparser.microdados import Microdados
@@ -152,7 +156,6 @@ def Pivot_Table(X):
     #Gerando a Pivot table
     X['Ensino Superior']=1
     X_Pivot= pd.pivot_table(X, values=['Ensino Superior'], index=['Ocupação_Código'],columns=['Nível_instrução'],aggfunc='count',fill_value=0) 
-
     return X_Pivot
 
 def Limpeza_Arquivo_Censo_Graduados_2(path,name,i):     
@@ -168,7 +171,6 @@ def Limpeza_Arquivo_Censo_Graduados_2(path,name,i):
     path_proc = ['/home/essantos/Downloads/ibge-2010/processados/Sul/Clean_Graduados/', '/home/essantos/Downloads/ibge-2010/processados/Centro_Oeste/Clean_Graduados/']
     name_path = path_proc[i] + name_path[0] + "_QtdadeSal_SoGraduados.csv"
     X.to_csv(name_path) 
-
     return
 
 def df2pivot(df):
@@ -185,8 +187,7 @@ def Reduzir(pivot_final,estado,gender):
     #...
     #pivotfinal = reduce(lambda a, b: a.add(b, fill_value=0), [pivot_final[0], pivot_final[1]])
     pivotfinal = reduce(lambda a, b: a.add(b, fill_value=0), pivot_final)
-
-    
+   
     if gender ==1:
        name_path = '/home/essantos/Downloads/ibge-2010/processados/CSVs_PivotTableFinal/' + estado + '_PivotFinalMasculina.csv'
        pivotfinal.to_csv(name_path)    
@@ -211,11 +212,45 @@ def Soma_PivotTableFinal():
     #...
     return
 
-def JuntarCSVs(dir):
-    #...
+def JuntarCSVs(path,estado):
+    import os
+    import glob
+    import pandas as pd
+
+    os.chdir(path)
+    
+    extension = 'csv'
+    all_filenames = [i for i in glob.glob('*.{}'.format(extension))]
+
+    combined_csv = pd.concat([pd.read_csv(f) for f in all_filenames ])
+
+    name = estado
+    name_path = name.split(".csv")
+    name_path = '/home/essantos/Downloads/ibge-2010/processados/temp/'+ name_path[0] + "_Graduados.csv"
+    combined_csv.to_csv(name_path, index=False, encoding='utf-8-sig')
     return 
-def move_temp():
+
+
+def move_temp(estado, opcao):
     #...
     #chmod +x /home/essantos/Downloads/ibge-2010/mv.sh
     #/home/essantos/Downloads/ibge-2010/mv.sh
+    if estado == "Sul":
+       if opcao == 1: #Move todas as PivotTable Finais dos estados
+          comando = "chmod +x /home/essantos/Downloads/ibge-2010/mv.sh"
+          subprocess.check_output(comando, shell=True)
+          comando = "/home/essantos/Downloads/ibge-2010/mv.sh"
+          subprocess.check_output(comando, shell=True)          
+       else:
+            if estado == "Centro_Oeste":
+               print("Centro_Oeste")
+            else:
+                 if estado == "Sudeste":
+                    print("Sudeste")
+                 else:
+                      if estado == "Norte":
+                         print("Norte")
+                      else:
+                         if estado == "Nordeste":
+                            print("Nordeste")
     return
