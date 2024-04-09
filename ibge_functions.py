@@ -212,7 +212,7 @@ def Soma_PivotTableFinal():
     #...
     return
 
-def JuntarCSVs(path,estado):
+def JuntarCSVs(path,estado,opcao):
     import os
     import glob
     import pandas as pd
@@ -224,10 +224,19 @@ def JuntarCSVs(path,estado):
 
     combined_csv = pd.concat([pd.read_csv(f) for f in all_filenames ])
 
-    name = estado
-    name_path = name.split(".csv")
-    name_path = '/home/essantos/Downloads/ibge-2010/processados/temp/'+ name_path[0] + "_Graduados.csv"
-    combined_csv.to_csv(name_path, index=False, encoding='utf-8-sig')
+    if opcao == "Graduados":
+       name = estado
+       name_path = name.split(".csv")
+       name_path = '/home/essantos/Downloads/ibge-2010/processados/temp/'+ name_path[0] + "_Graduados.csv"
+       combined_csv.to_csv(name_path, index=False, encoding='utf-8-sig')
+    else:
+        if opcao == "Não-Graduados":
+           name = estado
+           name_path = name.split(".csv")
+           name_path = '/home/essantos/Downloads/ibge-2010/processados/temp/'+ name_path[0] + "_Não-Graduados.csv"
+           combined_csv.to_csv(name_path, index=False, encoding='utf-8-sig')
+        
+
     return 
 
 
