@@ -11,7 +11,7 @@ from os import chmod
 import subprocess
 
 # Project imports
-import ibge_variables
+# import ibge_variables
 
 # IBGE Parser imports
 import ibgeparser
@@ -25,6 +25,7 @@ def function_obterdados_especificacao_coluna(ano_ac, estados_ac, modalidades_ac)
     # instanciando a classe
     ibgeparser = Microdados()
     # obter dados
+    ## TODO: Checar se o arquivo já existe antes de fazer o download
     ibgeparser.obter_dados_ibge(ano_ac, estados_ac, modalidades_ac)
     ibgeparser.obter_especificacao_coluna('palavra-chave', modalidades_ac)
     return
