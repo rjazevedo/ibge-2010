@@ -1,22 +1,20 @@
 #pip install ibge-parser
-
+# General imports
 import string
-import ibgeparser
 import pandas as pd
 from pandas import DataFrame
 import numpy as np
-
 import os
 import glob
-import pandas as pd
-
 from functools import reduce
-
 from os import chmod
 import subprocess
 
+# Project imports
+import ibge_variables
 
-
+# IBGE Parser imports
+import ibgeparser
 # import da classe principal IBGE Parser
 from ibgeparser.microdados import Microdados
 # import dos enums para facilitar as buscas
