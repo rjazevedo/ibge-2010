@@ -11,13 +11,12 @@ from functools import reduce
 from os import chmod
 from copy import deepcopy
 import subprocess
-import os
 import glob
 # import da classe principal
 from ibgeparser.microdados import Microdados
 # import dos enums para facilitar as buscas
 from ibgeparser.enums import Anos, Estados, Modalidades
-import ibge_variable
+import ibge_variable_split
 
 
 #https://colab.research.google.com/drive/1Cv0fw4YmLETOy-HEqRLJvyt9HEo90gkH?authuser=1#scrollTo=hzJqOaQJOruE
@@ -51,8 +50,7 @@ def Filtrar_Dados_Censo(path,name,i):
     X.rename(columns=dict,inplace=True)
         
     name_path = name.split(".csv")
-    #path_proc = ['/home/essantos/Downloads/ibge-2010/processados/Sul/', '/home/essantos/Downloads/ibge-2010/processados/Centro_Oeste/']
-    path_proc = ibge_variable.paths(1,2)
+    path_proc = ibge_variable_split.paths(1,2)
     name_path = path_proc[i] + name_path[0] + "_Fase1.csv"
     X.to_csv(name_path) 
     return X
@@ -60,13 +58,10 @@ def Filtrar_Dados_Censo(path,name,i):
 def Limpeza_Arquivo_Censo_Graduados_NaoGraduados_1_2(path,name,i):
 
     file = path + name
-    #print(file)
     X = pd.read_csv(file, sep=",")  
     X = X.drop(columns=['Unnamed: 0'])
     
-    #print("Linhas faltantes:==============================")
-    #print(X.isnull().sum())
-
+    
     #removendo quem não tem ocupação
     X = X.dropna(subset=['Ocupação_Código'])
     
@@ -74,10 +69,6 @@ def Limpeza_Arquivo_Censo_Graduados_NaoGraduados_1_2(path,name,i):
     X.drop(X[(X['Ocupação_Código'] <1)].index, inplace=True)
     
 
-    #print("Listando os NANs que ainda restam:==============================")
-    #print(X.isnull().sum())
-
-    #print("Tratando Valores Faltantes - Substituindo todos os nulos(NAN) por zero")
     X.fillna(0, inplace = True)
 
     #Removendo CBO-Domiciliar
@@ -88,8 +79,7 @@ def Limpeza_Arquivo_Censo_Graduados_NaoGraduados_1_2(path,name,i):
    
 
     name_path = name.split(".csv")
-    #path_proc = ['/home/essantos/Downloads/ibge-2010/processados/Sul/Graduados_NaoGraduados/', '/home/essantos/Downloads/ibge-2010/processados/Centro_Oeste/Graduados_NaoGraduados/']
-    path_proc =  ibge_variable.paths(2,3)
+    path_proc =  ibge_variable_split.paths(2,3)
     name_path = path_proc[i] + name_path[0] + "_Graduados_NaoGraduados.csv"
     X.to_csv(name_path) 
     return   
@@ -103,19 +93,16 @@ def Pivot_Table_Censo(path,name,gender,i):
         file = path + name
         X= pd.read_csv(file,usecols=["Nível_instrução", "Ocupação_Código", "gênero"], sep=",")  	
 
-        #Novo Filtro
+        
         #removendo pessoas do sexo feminino ...
         X.drop(X[(X['gênero'] ==2)].index, inplace=True)
         
         X_1 = Pivot_Table(X)
 
         name_path = name.split(".csv")
-        #path_proc = ['/home/essantos/Downloads/ibge-2010/processados/Sul/PivotTablet/', '/home/essantos/Downloads/ibge-2010/processados/Centro_Oeste/PivotTablet/']
-        #name_path = path_proc[i] + name_path[0] + "_PivotTabletMasculina.csv"
-        #name_path = '/home/essantos/Downloads/ibge-2010/processados/temp/'+ name_path[0] + "_PivotTabletMasculina.csv"
-        pathh = ibge_variable.paths(2,5)
-        #print(pathh[i])
+        pathh = ibge_variable_split.paths(2,5)
         name_path = pathh[i] +  name_path[0] + "_PivotTabletMasculina.csv"
+        #print(name_path)
         X_1.to_csv(name_path)
     else:
         if gender == "F":
@@ -123,18 +110,14 @@ def Pivot_Table_Censo(path,name,gender,i):
            file = path + name
            X= pd.read_csv(file,usecols=["Nível_instrução", "Ocupação_Código", "gênero"], sep=",")  	
 
-           #Novo Filtro
+           
            #removendo pessoas do sexo masculino ...
            X.drop(X[(X['gênero'] ==1)].index, inplace=True)
 
            X_1 = Pivot_Table(X)
 
            name_path = name.split(".csv")
-           #path_proc = ['/home/essantos/Downloads/ibge-2010/processados/Sul/PivotTablet/', '/home/essantos/Downloads/ibge-2010/processados/Centro_Oeste/PivotTablet/']
-           #name_path = path_proc[i] + name_path[0] + "_PivotTabletFeminina.csv"
-           #name_path = '/home/essantos/Downloads/ibge-2010/processados/temp/'+ name_path[0] +  "_PivotTabletFeminina.csv"
-           pathh = ibge_variable.paths(2,4)
-           #print(pathh[i])
+           pathh = ibge_variable_split.paths(2,4)
            name_path = pathh[i] + name_path[0] +  "_PivotTabletFeminina.csv"
            X_1.to_csv(name_path)
         else:
@@ -144,10 +127,7 @@ def Pivot_Table_Censo(path,name,gender,i):
              X_1 = Pivot_Table(X)
 
              name_path = name.split(".csv")
-             #path_proc = ['/home/essantos/Downloads/ibge-2010/processados/Sul/PivotTablet/', '/home/essantos/Downloads/ibge-2010/processados/Centro_Oeste/PivotTablet/']
-             #name_path = name_path[0] + "_PivotTablet.csv"
-             #name_path = '/home/essantos/Downloads/ibge-2010/processados/temp/'+ name_path[0] + "_PivotTablet.csv"
-             pathh = ibge_variable.paths(2,6)
+             pathh = ibge_variable_split.paths(2,6)
              name_path =  pathh[i] + name_path[0] + "_PivotTablet.csv"
              X_1.to_csv(name_path)
     return 
@@ -156,7 +136,6 @@ def Pivot_Table(X):
     
     X[["Nível_instrução", "Ocupação_Código"]]
 
-    # Método que verifica, e soma os valores nulos em todo dataset---------------------------------------------------------------------------------------------------------------
     X.isnull().sum()
 
     #Remover todas as linhas que tem CBO = Nan ---------------------------------------------------------------------------------------------------------------------------------
@@ -177,9 +156,8 @@ def Limpeza_Arquivo_Censo_Graduados_2(path,name,i):
     X.drop(X[(X['Curso_Superior_Graduação_Código'] ==0)].index, inplace=True) #Essa condição, deixa o dataset somente com as pessoas graduadas ...
     
     name_path = name.split(".csv")
-    #path_proc = ['/home/essantos/Downloads/ibge-2010/processados/Sul/Clean_Graduados/', '/home/essantos/Downloads/ibge-2010/processados/Centro_Oeste/Clean_Graduados/']
-    path_proc =  ibge_variable.paths(2,3)
-    name_path = path_proc[i] + name_path[0] + "_QtdadeSal_SoGraduados.csv"
+    path_proc =  ibge_variable_split.paths(2,9)
+    name_path = path_proc[i] + name_path[0] + "_SoGraduados.csv"
     X.to_csv(name_path) 
     return
 
@@ -199,41 +177,45 @@ def Reduzir(pivot_final,estado,gender):
     pivotfinal = reduce(lambda a, b: a.add(b, fill_value=0), pivot_final)
    
     if gender ==1:
-       pathh =  ibge_variable.paths(2,8)
-       #print(str(pathh[0]))
-       #name_path = '/home/essantos/Downloads/ibge-2010/processados/CSVs_PivotTableFinal/' + estado + '_PivotFinalMasculina.csv'
-       name_path = str(pathh[0]) + estado + '_PivotFinalMasculina.csv'
-       pivotfinal.to_csv(name_path)    
-    else:
-         if gender ==2:
-            pathh =  ibge_variable.paths(2,8)
-            #print(str(pathh[0]))
-            #name_path = '/home/essantos/Downloads/ibge-2010/processados/CSVs_PivotTableFinal/' + estado + '_PivotFinalFeminina.csv'
-            name_path = str(pathh[0]) + estado + '_PivotFinalFeminina.csv'
-            pivotfinal.to_csv(name_path)   
-         else:
-              if gender ==3:
-                 pathh =  ibge_variable.paths(2,8)
-                 #print(str(pathh[0]))
-                 #name_path = '/home/essantos/Downloads/ibge-2010/processados/CSVs_PivotTableFinal/' + estado + '_PivotFinal.csv'
-                 name_path = str(pathh[0]) + estado + '_PivotFinal.csv'
-                 pivotfinal.to_csv(name_path)          
+       if estado =="Brasil":
+          pathh =  ibge_variable_split.paths(2,13)
+          name_path = str(pathh[0]) + estado + '_PivotFinalMasculina.csv'
+          pivotfinal.to_csv(name_path)  
+       else:
+             pathh =  ibge_variable_split.paths(2,8)
+             name_path = str(pathh[0]) + estado + '_PivotFinalMasculina.csv'
+             pivotfinal.to_csv(name_path)   
+    if gender ==2:
+       if estado =="Brasil":
+          pathh =  ibge_variable_split.paths(2,13)
+          name_path = str(pathh[0]) + estado + '_PivotFinalFeminina.csv'
+          pivotfinal.to_csv(name_path)   
+       else:
+             pathh =  ibge_variable_split.paths(2,8)
+             name_path = str(pathh[0]) + estado + '_PivotFinalFeminina.csv'
+             pivotfinal.to_csv(name_path)     
+    if gender ==3:
+       if estado=='Brasil':
+          pathh =  ibge_variable_split.paths(2,13)
+          name_path = str(pathh[0]) + estado + '_PivotFinal.csv'
+          pivotfinal.to_csv(name_path)   
+       else:    
+          pathh =  ibge_variable_split.paths(2,8)
+          name_path = str(pathh[0]) + estado + '_PivotFinal.csv'
+          pivotfinal.to_csv(name_path)       
     return
 
 def SomaPivotTable(path,name,i):
-    #...
     file = path + name
-    #print(file)
     pivot = pd.read_csv(file)  
     pivot = df2pivot(pivot) 
     return pivot
 
-def Soma_PivotTableFinal():
-    #...
-    return
+#def Soma_PivotTableFinal():
+#    #...
+#    return
 
 def JuntarCSVs(path,estado,opcao,dir):
-    #print("...")
     os.chdir(dir+path)
     
     extension = 'csv'
@@ -244,47 +226,75 @@ def JuntarCSVs(path,estado,opcao,dir):
        if estado == "Sul":
           name = estado
           name_path = name.split(".csv")
-          pathh = ibge_variable.paths(2,11)
-          #print(dir + pathh[0])
+          pathh = ibge_variable_split.paths(2,11)
           name_path = dir + pathh[0] + name_path[0] + "_Graduados.csv"
-          #print(name_path )
           combined_csv.to_csv(name_path, index=False, encoding='utf-8-sig')
        if estado == "Centro_Oeste":
           name = estado
           name_path = name.split(".csv")
-          pathh = ibge_variable.paths(2,11)
-          #print(dir + pathh[0])
+          pathh = ibge_variable_split.paths(2,11)
           name_path = dir + str(pathh[0])+ name_path[0] + "_Graduados.csv"
-          #print(name_path )       
           combined_csv.to_csv(name_path, index=False, encoding='utf-8-sig')   
+       if estado == "Norte":
+          name = estado
+          name_path = name.split(".csv")
+          pathh = ibge_variable_split.paths(2,11)
+          name_path = dir + str(pathh[0])+ name_path[0] + "_Graduados.csv"
+          combined_csv.to_csv(name_path, index=False, encoding='utf-8-sig')   
+       if estado == "Nordeste":
+          name = estado
+          name_path = name.split(".csv")
+          pathh = ibge_variable_split.paths(2,11)
+          name_path = dir + str(pathh[0])+ name_path[0] + "_Graduados.csv"
+          combined_csv.to_csv(name_path, index=False, encoding='utf-8-sig')    
+       if estado == "Sudeste":
+          name = estado
+          name_path = name.split(".csv")
+          pathh = ibge_variable_split.paths(2,11)
+          name_path = dir + str(pathh[0])+ name_path[0] + "_Graduados.csv"
+          combined_csv.to_csv(name_path, index=False, encoding='utf-8-sig')      
        if estado == "Brasil":
           name = estado
           name_path = name.split(".csv")
-          pathh = ibge_variable.paths(2,11)
-          #print(dir + pathh[0])
+          pathh = ibge_variable_split.paths(2,11)
           name_path = dir + pathh[2] + name_path[0] + "_Graduados.csv"
-          #print(name_path )
           combined_csv.to_csv(name_path, index=False, encoding='utf-8-sig')    
     if opcao == "Não-Graduados":
         if estado == "Sul":
            name = estado
            name_path = name.split(".csv")
-           pathh = ibge_variable.paths(2,11)
+           pathh = ibge_variable_split.paths(2,11)
            name_path = dir + str(pathh[1])+ name_path[0] + "_Não-Graduados.csv"
-           #print(name_path)
            combined_csv.to_csv(name_path, index=False, encoding='utf-8-sig')
         if estado == "Centro_Oeste":
            name = estado
            name_path = name.split(".csv")
-           pathh = ibge_variable.paths(2,11)
+           pathh = ibge_variable_split.paths(2,11)
            name_path = dir + str(pathh[1])+ name_path[0] + "_Não-Graduados.csv"
            combined_csv.to_csv(name_path, index=False, encoding='utf-8-sig')   
+        if estado == "Norte":
+           name = estado
+           name_path = name.split(".csv")
+           pathh = ibge_variable_split.paths(2,11)
+           name_path = dir + str(pathh[1])+ name_path[0] + "_Não-Graduados.csv"
+           combined_csv.to_csv(name_path, index=False, encoding='utf-8-sig') 
+        if estado == "Nordeste":
+           name = estado
+           name_path = name.split(".csv")
+           pathh = ibge_variable_split.paths(2,11)
+           name_path = dir + str(pathh[1])+ name_path[0] + "_Não-Graduados.csv"
+           combined_csv.to_csv(name_path, index=False, encoding='utf-8-sig')    
+        if estado == "Sudeste":
+           name = estado
+           name_path = name.split(".csv")
+           pathh = ibge_variable_split.paths(2,11)
+           name_path = dir + str(pathh[1])+ name_path[0] + "_Não-Graduados.csv"
+           combined_csv.to_csv(name_path, index=False, encoding='utf-8-sig')               
         if estado == "Brasil":
            name = estado
            name_path = name.split(".csv")
-           pathh = ibge_variable.paths(2,11)
+           pathh = ibge_variable_split.paths(2,11)
            name_path = dir + str(pathh[2])+ name_path[0] + "_Não-Graduados.csv"
-           #print(name_path)
            combined_csv.to_csv(name_path, index=False, encoding='utf-8-sig')   
              
 
