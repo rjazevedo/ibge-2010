@@ -18,9 +18,9 @@ from ibgeparser.microdados import Microdados
 #import dos enums para facilitar as buscas
 from ibgeparser.enums import Anos, Estados, Modalidades
 #import original.ibge_functions
-import ibge_functions
-import ibge_variable
-import ibge_functions_preprocessing
+import ibge_functions_full
+import ibge_variable_full
+import ibge_functions_preprocessing_full
 
 # Esse arquivo não pode conter código que não seja chamada de funções e verificação de parâmetros
 parser = argparse.ArgumentParser()
@@ -35,14 +35,14 @@ else:
 # Fase 0: Download dos dados do IBGE da web
 #if fase >= 0:
 if fase == 0:
-   ibge_functions.ibge_download() 
+   ibge_functions_full.ibge_download() 
    pass    
 
 # Fase 1: Filtrar somente os dados relevantes. Aqui significa que 
 # você precisa filtrar todos os dados que possam ser utilizados no futuro.
 #if fase >= 1:
 if fase == 1:
-   ibge_functions.ibge_filter()
+   ibge_functions_full.ibge_filter()
    pass
 
 # Fase 2: Limpeza dos dados. Agora começa a processar algo mais complexo desde que seja definitivo
@@ -50,21 +50,19 @@ if fase == 1:
 #if fase >= 2:
 if fase == 2:
    
-   ibge_functions.ibge_Graduados_NaoGraduados()
+   ibge_functions_full.ibge_Graduados_NaoGraduados()
 
-   ibge_functions.ibge_Pivot_Feminino()
+   ibge_functions_full.ibge_Pivot_Feminino()
 
-   ibge_functions.ibge_Pivot_Masculino()
+   ibge_functions_full.ibge_Pivot_Masculino()
 
-   ibge_functions.ibge_Pivot_Geral()        
+   ibge_functions_full.ibge_Pivot_Geral()        
 
-   ibge_functions.ibge_PivotTableFinal()
+   ibge_functions_full.ibge_PivotTableFinal()
 
-   ibge_functions.ibge_PivotTableFinalB() 
-
-   ibge_functions.ibge_Graduados()
+   ibge_functions_full.ibge_Graduados()
  
-   ibge_functions.ibge_JuntarCSVs()      
+   ibge_functions_full.ibge_JuntarCSVs()      
 pass      
 
      
