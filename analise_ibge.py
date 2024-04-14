@@ -64,10 +64,7 @@ if fase == 2:
  
    ibge_functions_full.ibge_JuntarCSVs()      
 pass      
-
-     
-
-
+   
 # Fase 10: Essa é a primeira fase que você faz no dia a dia. Aqui você começa a fazer a análise dos dados
 # Fase 10: Análise Descritiva ... ...
 #if fase >= 10:

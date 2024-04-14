@@ -16,7 +16,7 @@ import glob
 from ibgeparser.microdados import Microdados
 # import dos enums para facilitar as buscas
 from ibgeparser.enums import Anos, Estados, Modalidades
-import ibge_variable_full
+import ibge_variable
 
 
 #https://colab.research.google.com/drive/1Cv0fw4YmLETOy-HEqRLJvyt9HEo90gkH?authuser=1#scrollTo=hzJqOaQJOruE
@@ -50,7 +50,7 @@ def Filtrar_Dados_Censo(path,name,i):
     X.rename(columns=dict,inplace=True)
         
     name_path = name.split(".csv")
-    path_proc = ibge_variable_full.paths(1,2)
+    path_proc = ibge_variable.paths(1,2)
     name_path = path_proc[i] + name_path[0] + "_Fase1.csv"
     X.to_csv(name_path) 
     return X
@@ -84,7 +84,7 @@ def Limpeza_Arquivo_Censo_Graduados_NaoGraduados_1_2(path,name,i):
    
 
     name_path = name.split(".csv")
-    path_proc =  ibge_variable_full.paths(2,3)
+    path_proc =  ibge_variable.paths(2,3)
     name_path = path_proc[i] + name_path[0] + "_Graduados_NaoGraduados.csv"
     X.to_csv(name_path) 
     return   
@@ -104,7 +104,7 @@ def Pivot_Table_Censo(path,name,gender,i):
         X_1 = Pivot_Table(X)
 
         name_path = name.split(".csv")
-        pathh = ibge_variable_full.paths(2,5)
+        pathh = ibge_variable.paths(2,5)
         name_path = pathh[0] +  name_path[0] + "_PivotTabletMasculina.csv"
         X_1.to_csv(name_path)
     else:
@@ -119,7 +119,7 @@ def Pivot_Table_Censo(path,name,gender,i):
            X_1 = Pivot_Table(X)
 
            name_path = name.split(".csv")
-           pathh = ibge_variable_full.paths(2,4)
+           pathh = ibge_variable.paths(2,4)
            name_path = pathh[0] + name_path[0] +  "_PivotTabletFeminina.csv"
            X_1.to_csv(name_path)
         else:
@@ -129,7 +129,7 @@ def Pivot_Table_Censo(path,name,gender,i):
              X_1 = Pivot_Table(X)
 
              name_path = name.split(".csv")
-             pathh = ibge_variable_full.paths(2,6)
+             pathh = ibge_variable.paths(2,6)
              name_path =  pathh[0] + name_path[0] + "_PivotTablet.csv"
              X_1.to_csv(name_path)
     return 
@@ -156,7 +156,7 @@ def Limpeza_Arquivo_Censo_Graduados_2(path,name,i):
     X.drop(X[(X['Curso_Superior_Graduação_Código'] ==0)].index, inplace=True) #Essa condição, deixa o dataset somente com as pessoas graduadas ...
     
     name_path = name.split(".csv")
-    path_proc =  ibge_variable_full.paths(2,9)
+    path_proc =  ibge_variable.paths(2,9)
     name_path = path_proc[i] + name_path[0] + "_QtdadeSal_SoGraduados.csv"
     X.to_csv(name_path) 
     return
@@ -177,17 +177,17 @@ def Reduzir(pivot_final,estado,gender):
     pivotfinal = reduce(lambda a, b: a.add(b, fill_value=0), pivot_final)
    
     if gender ==1:
-       pathh =  ibge_variable_full.paths(2,8)
+       pathh =  ibge_variable.paths(2,8)
        name_path = str(pathh[0]) + estado + '_PivotFinalMasculina.csv'
        pivotfinal.to_csv(name_path)    
     else:
          if gender ==2:
-            pathh =  ibge_variable_full.paths(2,8)
+            pathh =  ibge_variable.paths(2,8)
             name_path = str(pathh[0]) + estado + '_PivotFinalFeminina.csv'
             pivotfinal.to_csv(name_path)   
          else:
               if gender ==3:
-                 pathh =  ibge_variable_full.paths(2,8)
+                 pathh =  ibge_variable.paths(2,8)
                  name_path = str(pathh[0]) + estado + '_PivotFinal.csv'
                  pivotfinal.to_csv(name_path)          
     return
@@ -215,13 +215,13 @@ def JuntarCSVs(path,opcao,dir):
     if opcao == "Graduados":           
        name = "Brasil"
        name_path = name.split(".csv")
-       pathh = ibge_variable_full.paths(2,11)
+       pathh = ibge_variable.paths(2,11)
        name_path = dir + pathh[0] + name_path[0] + "_Graduados.csv"
        combined_csv.to_csv(name_path, index=False, encoding='utf-8-sig')    
     if opcao == "Não-Graduados":
        name = "Brasil"
        name_path = name.split(".csv")
-       pathh = ibge_variable_full.paths(2,11)
+       pathh = ibge_variable.paths(2,11)
        name_path = dir + str(pathh[1])+ name_path[0] + "_Não-Graduados.csv"
        combined_csv.to_csv(name_path, index=False, encoding='utf-8-sig')   
     return 
