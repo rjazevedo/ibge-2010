@@ -198,11 +198,11 @@ def SomaPivotTable(path,name,i):
     pivot = pd.read_csv(file)  
     pivot = df2pivot(pivot) 
     return pivot
-
-#def Soma_PivotTableFinal():
-##    #...
-#    return
-#
+''''
+def Soma_PivotTableFinal():
+    #...
+    return
+'''
 def JuntarCSVs(path,opcao,dir):
     
     file = (dir+path)
