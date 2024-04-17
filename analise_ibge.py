@@ -35,6 +35,7 @@ else:
 # Fase 0: Download dos dados do IBGE da web
 #if fase >= 0:
 if fase == 0:
+    #TODO: Criar as pastas de originais e processados aqui
    ibge_functions.ibge_download() 
    pass    
 
