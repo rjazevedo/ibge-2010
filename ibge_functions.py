@@ -18,6 +18,7 @@ from ibgeparser.microdados import Microdados
 from ibgeparser.enums import Anos, Estados, Modalidades
 import ibge_variable
 import ibge_functions_preprocessing
+import ibge_functions_descriptiveanalysis
 
 
 def ibge_download():
@@ -97,3 +98,55 @@ def ibge_JuntarCSVs():
      for i in range(len(opcao)):   
          ibge_functions_preprocessing.JuntarCSVs(path[i],opcao[i],dir)  
      return
+
+def ibge_cursos_profissoes():
+    
+    #Cursos e Profissões do Censo ...
+    path = ibge_variable.paths(3,1)
+    name = ibge_variable.names(3,1)
+    ibge_functions_descriptiveanalysis.ibge_cnae(path[0],name[0],0)
+
+    path = ibge_variable.paths(3,1)
+    name = ibge_variable.names(3,1)
+    ibge_functions_descriptiveanalysis.ibge_cbo(path[0],name[1],0)
+
+    path = ibge_variable.paths(3,1)
+    name = ibge_variable.names(3,1)
+    ibge_functions_descriptiveanalysis.ibge_cursos(path[0],name[2],0)
+
+    path = ibge_variable.paths(3,1)
+    name = ibge_variable.names(3,2)
+    path1 = ibge_variable.paths(3,2)
+    name1 = ibge_variable.names(3,3)
+    ibge_functions_descriptiveanalysis.ibge_qtdadeCursos(path[0],name[2],0,path1[0],name1[0])
+
+    '''
+    ibge_functions_descriptiveanalysis.ibge_qtdadeProfissoes()
+
+    #Cursos e Profissões das pessoas recenseadas ...
+    ibge_functions_descriptiveanalysis.ibge_qtdadeCursos_recenseados()
+    ibge_functions_descriptiveanalysis.ibge_qtdadeProfissoes_recenseados()
+
+    #Cursos e Profissões associadas ao Gênero Feminino
+    ibge_functions_descriptiveanalysis.ibge_qtdadeCursos_recenseados_feminino()
+    ibge_functions_descriptiveanalysis.ibge_qtdadeProfissoes_recenseados_feminino()
+
+    #Cursos e Profissões associadas ao Gênero Masculino
+    ibge_functions_descriptiveanalysis.ibge_qtdadeCursos_recenseados_masculino()
+    ibge_functions_descriptiveanalysis.ibge_qtdadeProfissoes_recenseados_masculino()
+    '''
+    return
+
+'''
+def ibge_relacionamentos_cursos_profissoes():
+    return
+
+def ibge_corte_CBO():
+    return
+
+def ibge_idas_voltas_cursos_profissoes():
+    return
+
+def ibge_trabalho_recenseados():
+    return
+'''    

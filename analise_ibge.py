@@ -69,15 +69,61 @@ pass
 # Fase 10: Análise Descritiva ... ...
 #if fase >= 10:
 if fase == 10:
+   #https://colab.research.google.com/drive/1_Nx4oOzrgCQvSolh9XG-UgWTQ508Md1M?authuser=1#scrollTo=o9GsbqjctkkL
+   ibge_functions.ibge_cursos_profissoes()
 
-    pass
+   '''
+   ibge_functions.ibge_relacionamentos_cursos_profissoes()
 
-# Fase 11: Análise Exploratória ...
+   ibge_functions.ibge_corte_CBO()
+
+   ibge_functions.ibge_idas_voltas_cursos_profissoes()
+
+   ibge_functions.ibge_trabalho_recenseados()
+   '''
+
+pass
+
+# Fase 20: Análise Exploratória ...
 if fase == 20:
+    '''
+    ibge_functions.Profissoes_Cursos()
+    '''
     pass
 
-# Fase 12: Resultados da Análise ...
+# Fase 30: Resultados da Análise ...
 if fase == 30: 
+    '''
+    ibge_functions.Profissoes_Cursos_Masculino()
+    ibge_functions.Profissoes_Cursos_Feminino()
+
+    #QP3
+    ibge_functions.Genero_Profissoes_Masc_Fem()
+    ibge_functions.Genero_Profissoes_Masc_Fem_Grupos()
+    ibge_functions.Genero_Profissoes_Desequilibradas_Deslocamentos()
+    ibge_functions.Genero_Profissoes_Desequilibradas_Mudanca()
+    
+    #QP4
+    ibge_functions.Idade_Profissoes_Cursos()
+    ibge_functions.Idade_Profissoes_Cursos_Grupos()
+    ibge_functions.Idade_Profissoes_Cursos_Aposentados()
+    ibge_functions.Idade_Profissoes_Cursos_Administrativos()
+    ibge_functions.Idade_Profissoes_Cursos_Administrativos_Fem()
+    ibge_functions.Idade_Profissoes_Cursos_Administrativos_Masc()
+    
+    #QP5
+    ibge_functions.Salario_Grupos()
+    ibge_functions.Salario_Idade_Grupos()
+    ibge_functions.Salario_Genero_Grupos()
+    ibge_functions.Salario_MaxMinMed_Grupos()
+    ibge_functions.Salario_CBO_Idade_TresProf()
+    ibge_functions.Salario_Profissoes_Genero()
+    ibge_functions.Salario_Median_TresProf()
+    ibge_functions.Salario_Plato_TresProf()
+    ibge_functions.Salario_Analise_Porcent_IdaVolta()
+    '''
+
+
     pass
 
 # Fase 99: Aqui você pode explorar coisas novas que não afetam os dados anteriores.
