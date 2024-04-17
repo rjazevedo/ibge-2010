@@ -20,10 +20,12 @@ import ibge_variable
 import ibge_functions_preprocessing
 import ibge_functions_descriptiveanalysis
 import ibge_functions_results
+import logging
 
 # Fase 0: Download dos dados do IBGE da web
 def ibge_download():
     # Leia os dados do IBGE
+    logging.info("Fazendo download dos dados do IBGE")    
     ano_ac = Anos.DEZ
     modalidades_ac = [Modalidades.PESSOAS]
     estados = ibge_variable.estados()

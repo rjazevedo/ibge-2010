@@ -21,11 +21,15 @@ from ibgeparser.enums import Anos, Estados, Modalidades
 import ibge_functions
 import ibge_variable
 import ibge_functions_preprocessing
+import logging
 
 # Esse arquivo não pode conter código que não seja chamada de funções e verificação de parâmetros
 parser = argparse.ArgumentParser()
 parser.add_argument('-f', '--fase', type=int, help='Indica a fase do fluxo para começar a execução')
 args = parser.parse_args()
+
+# Setup do pacote logging
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 if args.fase is None:
     fase = 10
