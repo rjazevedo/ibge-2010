@@ -154,8 +154,7 @@ def ibge_idas_voltas_cursos_profissoes():
 
 def ibge_trabalho_recenseados():
     return
-'''    
-'''
+    
 def Genero_Profissoes_Masc_Fem_Grupos():
     ibge_functions_descriptiveanalysis.Genero_Profissoes_Masc_Fem_Grupo1()
     ibge_functions_descriptiveanalysis.Genero_Profissoes_Masc_Fem_Grupo2()
