@@ -19,6 +19,7 @@ from ibgeparser.enums import Anos, Estados, Modalidades
 import ibge_variable
 import ibge_functions_preprocessing
 import ibge_functions_descriptiveanalysis
+import ibge_functions_results
 
 # Fase 0: Download dos dados do IBGE da web
 def ibge_download():
@@ -157,30 +158,33 @@ def ibge_trabalho_recenseados():
     return
 '''
 
-'''
+
 # Fase 20: Análise Exploratória ...
+'''
 def Profissoes_Cursos():
     return
 '''
 
-'''
+
 # Fase 30: Resultados da Análise ...    
+'''
 def Genero_Profissoes_Masc_Fem_Grupos():
-    ibge_functions_descriptiveanalysis.Genero_Profissoes_Masc_Fem_Grupo1()
-    ibge_functions_descriptiveanalysis.Genero_Profissoes_Masc_Fem_Grupo2()
-    ibge_functions_descriptiveanalysis.Genero_Profissoes_Masc_Fem_Grupo3()
+    ibge_functions_results.Genero_Profissoes_Masc_Fem_Grupo1()
+    ibge_functions_results.Genero_Profissoes_Masc_Fem_Grupo2()
+    ibge_functions_results.Genero_Profissoes_Masc_Fem_Grupo3()
     return
 
 def Genero_Profissoes_Desequilibradas():
-    ibge_functions_descriptiveanalysis.Genero_Profissoes_Desequilibradas_Deslocamentos()
-    ibge_functions_descriptiveanalysis.Genero_Profissoes_Desequilibradas_Mudanca_Voronoi()
+    ibge_functions_results.Genero_Profissoes_Desequilibradas_Deslocamentos()
+    ibge_functions_results.Genero_Profissoes_Desequilibradas_Mudanca_Voronoi()
     return
 
 def Genero_Profissoes_Equilibradas():
-    ibge_functions_descriptiveanalysis.Genero_Profissoes_Equilibradas_tabela()
-    ibge_functions_descriptiveanalysis.Genero_Profissoes_Equilibradas_Tab_Sel()
-    ibge_functions_descriptiveanalysis.Genero_Profissoes_Equilibradas_Graf_Sel()
-    ibge_functions_descriptiveanalysis.Genero_Profissoes_Equilibradas_Gen_Idade_Fem()
-    ibge_functions_descriptiveanalysis.Genero_Profissoes_Equilibradas_Gen_Idade_Masc()
+    ibge_functions_results.Genero_Profissoes_Equilibradas_tabela()
+    ibge_functions_results.Genero_Profissoes_Equilibradas_Tab_Sel()
+    ibge_functions_results.Genero_Profissoes_Equilibradas_Graf_Sel()
+    ibge_functions_results.Genero_Profissoes_Equilibradas_Gen_Idade_Fem()
+    ibge_functions_results.Genero_Profissoes_Equilibradas_Gen_Idade_Masc()
     return
 '''    
+   
