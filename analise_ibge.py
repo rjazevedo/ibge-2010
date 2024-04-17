@@ -69,9 +69,7 @@ pass
 # Fase 10: Análise Descritiva ... ...
 #if fase >= 10:
 if fase == 10:
-   #https://colab.research.google.com/drive/1_Nx4oOzrgCQvSolh9XG-UgWTQ508Md1M?authuser=1#scrollTo=o9GsbqjctkkL
-   ibge_functions.ibge_cursos_profissoes()
-
+   ibge_functions.ibge_cursos_profissoes() #https://colab.research.google.com/drive/1_Nx4oOzrgCQvSolh9XG-UgWTQ508Md1M?authuser=1#scrollTo=o9GsbqjctkkL
    '''
    ibge_functions.ibge_relacionamentos_cursos_profissoes()
 
@@ -93,15 +91,15 @@ if fase == 20:
 
 # Fase 30: Resultados da Análise ...
 if fase == 30: 
-    '''
+    ''' 
     ibge_functions.Profissoes_Cursos_Masculino()
     ibge_functions.Profissoes_Cursos_Feminino()
 
     #QP3
     ibge_functions.Genero_Profissoes_Masc_Fem()
     ibge_functions.Genero_Profissoes_Masc_Fem_Grupos()
-    ibge_functions.Genero_Profissoes_Desequilibradas_Deslocamentos()
-    ibge_functions.Genero_Profissoes_Desequilibradas_Mudanca()
+    ibge_functions.Genero_Profissoes_Desequilibradas()
+    ibge_functions.Genero_Profissoes_Equilibradas()
     
     #QP4
     ibge_functions.Idade_Profissoes_Cursos()

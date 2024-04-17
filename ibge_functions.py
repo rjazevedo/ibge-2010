@@ -20,13 +20,16 @@ import ibge_variable
 import ibge_functions_preprocessing
 import ibge_functions_descriptiveanalysis
 
-
+# Fase 0: Download dos dados do IBGE da web
 def ibge_download():
     # Leia os dados do IBGE
     ano_ac = Anos.DEZ
     modalidades_ac = [Modalidades.PESSOAS]
     estados = ibge_variable.estados()
 
+
+# Fase 1: Filtrar somente os dados relevantes. Aqui significa que 
+# você precisa filtrar todos os dados que possam ser utilizados no futuro.
     for i in range(len(estados)):
         estados_ac = estados[i]
         #original.ibge_functions.function_obterdados_especificacao_coluna(ano_ac, estados_ac, modalidades_ac)
@@ -99,6 +102,8 @@ def ibge_JuntarCSVs():
          ibge_functions_preprocessing.JuntarCSVs(path[i],opcao[i],dir)  
      return
 
+## Fase 10: Essa é a primeira fase que você faz no dia a dia. Aqui você começa a fazer a análise dos dados
+# Fase 10: Análise Descritiva ... ...
 def ibge_cursos_profissoes():
     
     #Cursos e Profissões do Censo ...
@@ -150,3 +155,23 @@ def ibge_idas_voltas_cursos_profissoes():
 def ibge_trabalho_recenseados():
     return
 '''    
+'''
+def Genero_Profissoes_Masc_Fem_Grupos():
+    ibge_functions_descriptiveanalysis.Genero_Profissoes_Masc_Fem_Grupo1()
+    ibge_functions_descriptiveanalysis.Genero_Profissoes_Masc_Fem_Grupo2()
+    ibge_functions_descriptiveanalysis.Genero_Profissoes_Masc_Fem_Grupo3()
+    return
+
+def Genero_Profissoes_Desequilibradas():
+    ibge_functions_descriptiveanalysis.Genero_Profissoes_Desequilibradas_Deslocamentos()
+    ibge_functions_descriptiveanalysis.Genero_Profissoes_Desequilibradas_Mudanca_Voronoi()
+    return
+
+def Genero_Profissoes_Equilibradas():
+    ibge_functions_descriptiveanalysis.Genero_Profissoes_Equilibradas_tabela()
+    ibge_functions_descriptiveanalysis.Genero_Profissoes_Equilibradas_Tab_Sel()
+    ibge_functions_descriptiveanalysis.Genero_Profissoes_Equilibradas_Graf_Sel()
+    ibge_functions_descriptiveanalysis.Genero_Profissoes_Equilibradas_Gen_Idade_Fem()
+    ibge_functions_descriptiveanalysis.Genero_Profissoes_Equilibradas_Gen_Idade_Masc()
+    return
+'''
