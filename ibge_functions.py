@@ -101,7 +101,7 @@ def ibge_JuntarCSVs():
      path = ibge_variable.paths(2,10)
      dir = os.getcwd()
      for i in range(len(opcao)):   
-         ibge_functions_preprocessing.JuntarCSVs(path[i],opcao[i],dir)  
+         ibge_functions_preprocessing.JuntarCSVs(path[i],opcao[i],dir)
      return
 
 
@@ -113,13 +113,7 @@ def ibge_cursos_profissoes():
     path = ibge_variable.paths(3,1)
     name = ibge_variable.names(3,1)
     ibge_functions_descriptiveanalysis.ibge_cnae(path[0],name[0],0)
-
-    path = ibge_variable.paths(3,1)
-    name = ibge_variable.names(3,1)
     ibge_functions_descriptiveanalysis.ibge_cbo(path[0],name[1],0)
-
-    path = ibge_variable.paths(3,1)
-    name = ibge_variable.names(3,1)
     ibge_functions_descriptiveanalysis.ibge_cursos(path[0],name[2],0)
 
     path = ibge_variable.paths(3,1)
@@ -128,21 +122,20 @@ def ibge_cursos_profissoes():
     name1 = ibge_variable.names(3,3)
     ibge_functions_descriptiveanalysis.ibge_qtdadeCursos(path[0],name[2],0,path1[0],name1[0])
 
-    '''
-    ibge_functions_descriptiveanalysis.ibge_qtdadeProfissoes()
+    # ibge_functions_descriptiveanalysis.ibge_qtdadeProfissoes()
 
-    #Cursos e Profissões das pessoas recenseadas ...
-    ibge_functions_descriptiveanalysis.ibge_qtdadeCursos_recenseados()
-    ibge_functions_descriptiveanalysis.ibge_qtdadeProfissoes_recenseados()
+    # #Cursos e Profissões das pessoas recenseadas ...
+    # ibge_functions_descriptiveanalysis.ibge_qtdadeCursos_recenseados()
+    # ibge_functions_descriptiveanalysis.ibge_qtdadeProfissoes_recenseados()
 
-    #Cursos e Profissões associadas ao Gênero Feminino
-    ibge_functions_descriptiveanalysis.ibge_qtdadeCursos_recenseados_feminino()
-    ibge_functions_descriptiveanalysis.ibge_qtdadeProfissoes_recenseados_feminino()
+    # #Cursos e Profissões associadas ao Gênero Feminino
+    # ibge_functions_descriptiveanalysis.ibge_qtdadeCursos_recenseados_feminino()
+    # ibge_functions_descriptiveanalysis.ibge_qtdadeProfissoes_recenseados_feminino()
 
-    #Cursos e Profissões associadas ao Gênero Masculino
-    ibge_functions_descriptiveanalysis.ibge_qtdadeCursos_recenseados_masculino()
-    ibge_functions_descriptiveanalysis.ibge_qtdadeProfissoes_recenseados_masculino()
-    '''
+    # #Cursos e Profissões associadas ao Gênero Masculino
+    # ibge_functions_descriptiveanalysis.ibge_qtdadeCursos_recenseados_masculino()
+    # ibge_functions_descriptiveanalysis.ibge_qtdadeProfissoes_recenseados_masculino()
+
     return
 
 '''
@@ -170,6 +163,9 @@ def Profissoes_Cursos():
 # Fase 30: Resultados da Análise ...    
 '''
 def Genero_Profissoes_Masc_Fem_Grupos():
+    # Ler dataframes
+
+    # Chamar funções com os dataframes como parâmetros
     ibge_functions_results.Genero_Profissoes_Masc_Fem_Grupo1()
     ibge_functions_results.Genero_Profissoes_Masc_Fem_Grupo2()
     ibge_functions_results.Genero_Profissoes_Masc_Fem_Grupo3()
@@ -188,4 +184,3 @@ def Genero_Profissoes_Equilibradas():
     ibge_functions_results.Genero_Profissoes_Equilibradas_Gen_Idade_Masc()
     return
 '''    
-   

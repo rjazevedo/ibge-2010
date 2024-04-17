@@ -49,9 +49,9 @@ def paths(fase,opcao):
        if opcao ==9:
           path = ['microdados-ibge/processados/Graduados/']
        if opcao ==10:
-          path = ['/microdados-ibge/processados/Graduados/','/microdados-ibge/processados/Graduados_NaoGraduados/']
+          path = ['microdados-ibge/processados/Graduados/','microdados-ibge/processados/Graduados_NaoGraduados/']
        if opcao ==11:
-          path = ['/microdados-ibge/processados/CSVs_ArquivoFinalGraduados/','/microdados-ibge/processados/CSVs_ArquivoFinalGraduados_NaoGraduados/']
+          path = ['microdados-ibge/processados/CSVs_ArquivoFinalGraduados/','microdados-ibge/processados/CSVs_ArquivoFinalGraduados_NaoGraduados/']
     if fase ==3:   
        if opcao == 1: 
           path = ['microdados-ibge/documentacao/']      

@@ -17,6 +17,7 @@ from ibgeparser.microdados import Microdados
 # import dos enums para facilitar as buscas
 from ibgeparser.enums import Anos, Estados, Modalidades
 import ibge_variable
+import logging
 
 
 #https://colab.research.google.com/drive/1Cv0fw4YmLETOy-HEqRLJvyt9HEo90gkH?authuser=1#scrollTo=hzJqOaQJOruE
@@ -204,26 +205,21 @@ def Soma_PivotTableFinal():
     return
 '''
 def JuntarCSVs(path,opcao,dir):
+    # TODO: remover o parâmetro dir
     
-    file = (dir+path)
-    os.chdir(file)
-    
-    extension = 'csv'
-    all_filenames = [i for i in glob.glob('*.{}'.format(extension))]
+    all_filenames = [i for i in glob.glob(os.path.join(path,'*.csv'))]
 
-    combined_csv = pd.concat([pd.read_csv(f) for f in all_filenames ])
+    combined_csv = pd.concat([pd.read_csv(f) for f in all_filenames])
+    pathh = ibge_variable.paths(2,11)
+
     if opcao == "Graduados":           
-       name = "Brasil"
-       name_path = name.split(".csv")
-       pathh = ibge_variable.paths(2,11)
-       name_path = dir + pathh[0] + name_path[0] + "_Graduados.csv"
-       combined_csv.to_csv(name_path, index=False, encoding='utf-8-sig')    
-    if opcao == "Não-Graduados":
-       name = "Brasil"
-       name_path = name.split(".csv")
-       pathh = ibge_variable.paths(2,11)
-       name_path = dir + str(pathh[1])+ name_path[0] + "_Não-Graduados.csv"
-       combined_csv.to_csv(name_path, index=False, encoding='utf-8-sig')   
+        name_path = os.path.join(pathh[0], "Brasil_Graduados.csv")
+    elif opcao == "Não-Graduados":
+        name_path = os.path.join(pathh[1], "Brasil_Não-Graduados.csv")
+    else:
+        logging.error("Opção inválida")
+
+    combined_csv.to_csv(name_path, index=False, encoding='utf-8-sig')   
     return 
 
 
