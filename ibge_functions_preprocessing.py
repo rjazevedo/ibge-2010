@@ -51,8 +51,8 @@ def Filtrar_Dados_Censo(path,name,i):
     X.rename(columns=dict,inplace=True)
         
     name_path = name.split(".csv")
-    path_proc = ibge_variable.paths(1,2)
-    name_path = path_proc[i] + name_path[0] + "_Fase1.csv"
+    path_proc = ibge_variable.paths(2)
+    name_path = os.path.join(path_proc[i], name_path[0]+"_Fase1.csv")
     X.to_csv(name_path) 
     return X
 
@@ -199,11 +199,11 @@ def SomaPivotTable(path,name,i):
     pivot = pd.read_csv(file)  
     pivot = df2pivot(pivot) 
     return pivot
-''''
-def Soma_PivotTableFinal():
-    #...
-    return
-'''
+
+# def Soma_PivotTableFinal():
+#     #...
+#     return
+
 def JuntarCSVs(path,opcao,dir):
     # TODO: remover o parâmetro dir
     

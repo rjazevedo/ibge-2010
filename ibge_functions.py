@@ -40,9 +40,12 @@ def ibge_download():
     return
 
 def ibge_filter():
-    path  = ibge_variable.paths(1,1)
+    logging.info("Filtrando as colunas necessárias")    
+    #path  = ibge_variable.paths(1,1)
+    path  = ibge_variable.paths(1)
     for n in ibge_variable.names(1,1):
-        ibge_functions_preprocessing.Filtrar_Dados_Censo(path[0],n,0)           
+        ibge_functions_preprocessing.Filtrar_Dados_Censo(path[0],n,0)    
+        #print(path[0])         
     return
 
 def ibge_Graduados_NaoGraduados():
@@ -116,8 +119,8 @@ def ibge_cursos_profissoes():
     ibge_functions_descriptiveanalysis.ibge_cbo(path[0],name[1],0)
     ibge_functions_descriptiveanalysis.ibge_cursos(path[0],name[2],0)
 
-    path = ibge_variable.paths(3,1)
-    name = ibge_variable.names(3,2)
+    #path = ibge_variable.paths(3,1)
+    name  = ibge_variable.names(3,2)
     path1 = ibge_variable.paths(3,2)
     name1 = ibge_variable.names(3,3)
     ibge_functions_descriptiveanalysis.ibge_qtdadeCursos(path[0],name[2],0,path1[0],name1[0])
@@ -138,49 +141,49 @@ def ibge_cursos_profissoes():
 
     return
 
-'''
-def ibge_relacionamentos_cursos_profissoes():
-    return
 
-def ibge_corte_CBO():
-    return
+# def ibge_relacionamentos_cursos_profissoes():
+#     return
 
-def ibge_idas_voltas_cursos_profissoes():
-    return
+# def ibge_corte_CBO():
+#     return
 
-def ibge_trabalho_recenseados():
-    return
-'''
+# def ibge_idas_voltas_cursos_profissoes():
+#     return
+
+# def ibge_trabalho_recenseados():
+#     return
+
 
 
 # Fase 20: Análise Exploratória ...
-'''
-def Profissoes_Cursos():
-    return
-'''
+
+# def Profissoes_Cursos():
+#     return
+
 
 
 # Fase 30: Resultados da Análise ...    
-'''
-def Genero_Profissoes_Masc_Fem_Grupos():
-    # Ler dataframes
 
-    # Chamar funções com os dataframes como parâmetros
-    ibge_functions_results.Genero_Profissoes_Masc_Fem_Grupo1()
-    ibge_functions_results.Genero_Profissoes_Masc_Fem_Grupo2()
-    ibge_functions_results.Genero_Profissoes_Masc_Fem_Grupo3()
-    return
+# def Genero_Profissoes_Masc_Fem_Grupos():
+#     # Ler dataframes
 
-def Genero_Profissoes_Desequilibradas():
-    ibge_functions_results.Genero_Profissoes_Desequilibradas_Deslocamentos()
-    ibge_functions_results.Genero_Profissoes_Desequilibradas_Mudanca_Voronoi()
-    return
+#     # Chamar funções com os dataframes como parâmetros
+#     ibge_functions_results.Genero_Profissoes_Masc_Fem_Grupo1()
+#     ibge_functions_results.Genero_Profissoes_Masc_Fem_Grupo2()
+#     ibge_functions_results.Genero_Profissoes_Masc_Fem_Grupo3()
+#     return
 
-def Genero_Profissoes_Equilibradas():
-    ibge_functions_results.Genero_Profissoes_Equilibradas_tabela()
-    ibge_functions_results.Genero_Profissoes_Equilibradas_Tab_Sel()
-    ibge_functions_results.Genero_Profissoes_Equilibradas_Graf_Sel()
-    ibge_functions_results.Genero_Profissoes_Equilibradas_Gen_Idade_Fem()
-    ibge_functions_results.Genero_Profissoes_Equilibradas_Gen_Idade_Masc()
-    return
-'''    
+# def Genero_Profissoes_Desequilibradas():
+#     ibge_functions_results.Genero_Profissoes_Desequilibradas_Deslocamentos()
+#     ibge_functions_results.Genero_Profissoes_Desequilibradas_Mudanca_Voronoi()
+#     return
+
+# def Genero_Profissoes_Equilibradas():
+#     ibge_functions_results.Genero_Profissoes_Equilibradas_tabela()
+#     ibge_functions_results.Genero_Profissoes_Equilibradas_Tab_Sel()
+#     ibge_functions_results.Genero_Profissoes_Equilibradas_Graf_Sel()
+#     ibge_functions_results.Genero_Profissoes_Equilibradas_Gen_Idade_Fem()
+#     ibge_functions_results.Genero_Profissoes_Equilibradas_Gen_Idade_Masc()
+#     return
+ 

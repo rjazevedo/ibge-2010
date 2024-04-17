@@ -25,36 +25,38 @@ def names(fase,opcao):
 
     return names
 
-def paths(fase,opcao):
-    if fase ==1:
-       if opcao == 1:
-          path = ['microdados-ibge/original/']
-       if opcao == 2:
-          path = ['microdados-ibge/processados/']
-    if fase ==2:
-       if opcao == 2:
-          path =['microdados-ibge/processados/']
-       if opcao == 3:
-          path = ['microdados-ibge/processados/Graduados_NaoGraduados/']
-       if opcao == 4:
-          path = ['microdados-ibge/processados/PivotTable/Feminino/']
-       if opcao == 5:
-          path = ['microdados-ibge/processados/PivotTable/Masculino/']
-       if opcao ==6:
-          path = ['microdados-ibge/processados/PivotTable/']
-       if opcao ==7:  
-          path = ['microdados-ibge/processados/PivotTable/Masculino/', 'microdados-ibge/processados/PivotTable/Feminino/', 'microdados-ibge/processados/PivotTable/']
-       if opcao ==8:
-          path = ['microdados-ibge/processados/CSVs_PivotTableFinal/']
-       if opcao ==9:
-          path = ['microdados-ibge/processados/Graduados/']
-       if opcao ==10:
-          path = ['microdados-ibge/processados/Graduados/','microdados-ibge/processados/Graduados_NaoGraduados/']
-       if opcao ==11:
-          path = ['microdados-ibge/processados/CSVs_ArquivoFinalGraduados/','microdados-ibge/processados/CSVs_ArquivoFinalGraduados_NaoGraduados/']
-    if fase ==3:   
-       if opcao == 1: 
-          path = ['microdados-ibge/documentacao/']      
-       if opcao == 2: 
-          path = ['microdados-ibge/processados/CSVs_ArquivoFinalGraduados/', 'microdados-ibge/processados/CSVs_ArquivoFinalGraduados_NaoGraduados/']       
+#def paths(fase,opcao):
+def paths(opcao):
+   #  if fase ==1:
+    if opcao == 1:
+       path = ['microdados-ibge/original/']
+    if opcao == 2:
+       path = ['microdados-ibge/processados/']
+   #  if fase ==2:
+   #  if opcao == 2:
+       # path =['microdados-ibge/processados/']
+    if opcao == 3:
+       path = ['microdados-ibge/processados/Graduados_NaoGraduados/']
+    if opcao == 4:
+       path = ['microdados-ibge/processados/PivotTable/Feminino/']
+    if opcao == 5:
+       path = ['microdados-ibge/processados/PivotTable/Masculino/']
+    if opcao ==6:
+       path = ['microdados-ibge/processados/PivotTable/']
+    if opcao ==7:  
+       path = ['microdados-ibge/processados/PivotTable/Masculino/', 'microdados-ibge/processados/PivotTable/Feminino/', 'microdados-ibge/processados/PivotTable/']
+    if opcao ==8:
+       path = ['microdados-ibge/processados/CSVs_PivotTableFinal/']
+    if opcao ==9:
+       path = ['microdados-ibge/processados/Graduados/']
+    if opcao ==10:
+       path = ['microdados-ibge/processados/Graduados/','microdados-ibge/processados/Graduados_NaoGraduados/']
+    if opcao ==11:
+       path = ['microdados-ibge/processados/CSVs_ArquivoFinalGraduados/','microdados-ibge/processados/CSVs_ArquivoFinalGraduados_NaoGraduados/']
+    #if fase ==3:   
+   #  if opcao == 1: 
+    if opcao == 12: 
+       path = ['microdados-ibge/documentacao/']      
+   #  if opcao == 2: 
+   #     path = ['microdados-ibge/processados/CSVs_ArquivoFinalGraduados/', 'microdados-ibge/processados/CSVs_ArquivoFinalGraduados_NaoGraduados/']       
     return path
