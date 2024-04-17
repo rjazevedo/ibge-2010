@@ -102,6 +102,7 @@ def ibge_JuntarCSVs():
          ibge_functions_preprocessing.JuntarCSVs(path[i],opcao[i],dir)  
      return
 
+
 ## Fase 10: Essa é a primeira fase que você faz no dia a dia. Aqui você começa a fazer a análise dos dados
 # Fase 10: Análise Descritiva ... ...
 def ibge_cursos_profissoes():
@@ -154,7 +155,16 @@ def ibge_idas_voltas_cursos_profissoes():
 
 def ibge_trabalho_recenseados():
     return
-    
+'''
+
+'''
+# Fase 20: Análise Exploratória ...
+def Profissoes_Cursos():
+    return
+'''
+
+'''
+# Fase 30: Resultados da Análise ...    
 def Genero_Profissoes_Masc_Fem_Grupos():
     ibge_functions_descriptiveanalysis.Genero_Profissoes_Masc_Fem_Grupo1()
     ibge_functions_descriptiveanalysis.Genero_Profissoes_Masc_Fem_Grupo2()
@@ -173,4 +183,4 @@ def Genero_Profissoes_Equilibradas():
     ibge_functions_descriptiveanalysis.Genero_Profissoes_Equilibradas_Gen_Idade_Fem()
     ibge_functions_descriptiveanalysis.Genero_Profissoes_Equilibradas_Gen_Idade_Masc()
     return
-'''
+'''    
