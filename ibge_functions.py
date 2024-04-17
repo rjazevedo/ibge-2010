@@ -41,9 +41,8 @@ def ibge_download():
 
 def ibge_filter():
     path  = ibge_variable.paths(1,1)
-    names = ibge_variable.names(1,1)        
-    for j in range(len(names)):          
-        ibge_functions_preprocessing.Filtrar_Dados_Censo(path[0],names[j],0)           
+    for n in ibge_variable.names(1,1):
+        ibge_functions_preprocessing.Filtrar_Dados_Censo(path[0],n,0)           
     return
 
 def ibge_Graduados_NaoGraduados():
