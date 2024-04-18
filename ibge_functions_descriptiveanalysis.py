@@ -20,7 +20,7 @@ from ibgeparser.enums import Anos, Estados, Modalidades
 import ibge_variable
 
 def ibge_cnae(path,name,i):
-    
+    #...
     file = path + name
     CNAE_CSV = pd.DataFrame(pd.read_excel(file))
 
