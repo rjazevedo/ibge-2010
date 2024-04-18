@@ -54,17 +54,17 @@ if fase == 1:
 #if fase >= 2:
 if fase == 2:
 
-    # ibge_functions.ibge_Graduados_NaoGraduados()
+    ibge_functions.ibge_Graduados_NaoGraduados()
 
-    # ibge_functions.ibge_Pivot_Feminino()
+    ibge_functions.ibge_Pivot_Feminino()
 
-    # ibge_functions.ibge_Pivot_Masculino()
+    ibge_functions.ibge_Pivot_Masculino()
 
-    # ibge_functions.ibge_Pivot_Geral()          
+    ibge_functions.ibge_Pivot_Geral()          
 
-    # ibge_functions.ibge_PivotTableFinal()
+    ibge_functions.ibge_PivotTableFinal()
 
-    # ibge_functions.ibge_Graduados()
+    ibge_functions.ibge_Graduados()
 
     ibge_functions.ibge_JuntarCSVs()        
     

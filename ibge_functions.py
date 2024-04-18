@@ -21,6 +21,7 @@ import ibge_functions_preprocessing
 import ibge_functions_descriptiveanalysis
 import ibge_functions_results
 import logging
+import io
 
 # Fase 0: Download dos dados do IBGE da web
 def ibge_download():
@@ -35,46 +36,54 @@ def ibge_download():
 # você precisa filtrar todos os dados que possam ser utilizados no futuro.
     for i in range(len(estados)):
         estados_ac = estados[i]
-        #original.ibge_functions.function_obterdados_especificacao_coluna(ano_ac, estados_ac, modalidades_ac)
+        # original.ibge_functions.function_obterdados_especificacao_coluna(ano_ac, estados_ac, modalidades_ac)
         ibge_functions_preprocessing.function_obterdados_especificacao_coluna(ano_ac, estados_ac, modalidades_ac)
     return
 
 def ibge_filter():
     logging.info("Filtrando as colunas necessárias")    
-    #path  = ibge_variable.paths(1,1)
+    # path  = ibge_variable.paths(1,1)
     path  = ibge_variable.paths(1)
     for n in ibge_variable.names(1,1):
         ibge_functions_preprocessing.Filtrar_Dados_Censo(path[0],n,0)    
-        #print(path[0])         
+        # print(path[0])         
     return
 
 def ibge_Graduados_NaoGraduados():
-    path  = ibge_variable.paths(2,2)
-    names = ibge_variable.names(2,1)
+    # path  = ibge_variable.paths(2,2)
+    # names = ibge_variable.names(2,1)
+    path  = ibge_variable.paths(2)
+    names = ibge_variable.names(2)
     for j in range(len(names)):      
         ibge_functions_preprocessing.Limpeza_Arquivo_Censo_Graduados_NaoGraduados_1_2(path[0],names[j],0)
     return
 
 def ibge_Pivot_Feminino():
     gender = "F"
-    path = ibge_variable.paths(2,3)
-    names = ibge_variable.names(2,2)
+    # path = ibge_variable.paths(2,3)
+    path = ibge_variable.paths(3)
+    # names = ibge_variable.names(2,2)
+    names = ibge_variable.names(3)
     for i in range(len(names)):
         ibge_functions_preprocessing.Pivot_Table_Censo(path[0],names[i],gender,i)
     return
 
 def ibge_Pivot_Masculino():
     gender = "M"
-    path = ibge_variable.paths(2,3)
-    names = ibge_variable.names(2,2)
+    # path = ibge_variable.paths(2,3)
+    # names = ibge_variable.names(2,2)
+    path = ibge_variable.paths(3)
+    names = ibge_variable.names(3)
     for i in range(len(names)):
         ibge_functions_preprocessing.Pivot_Table_Censo(path[0],names[i],gender,i)
     return
 
 def ibge_Pivot_Geral():
     gender = "G"
-    path = ibge_variable.paths(2,3)
-    names = ibge_variable.names(2,2)
+    # path = ibge_variable.paths(2,3)
+    # names = ibge_variable.names(2,2)
+    path = ibge_variable.paths(3)    
+    names = ibge_variable.names(3)
     for i in range(len(names)):
         ibge_functions_preprocessing.Pivot_Table_Censo(path[0],names[i],gender,i)
     return
@@ -83,8 +92,8 @@ def ibge_PivotTableFinal():
     pivotfinal = []
     estado = ['Brasil']
     gender = [1,2,3]
-    path = ibge_variable.paths(2,7)
-    name = ibge_variable.names(2,3)
+    path = ibge_variable.paths(7)
+    name = ibge_variable.names(4)
     for i in range(len(gender)):
         for x in range(len(name[i])):
             pivotfinal.append(ibge_functions_preprocessing.SomaPivotTable(path[i],name[i][x],i))
@@ -92,8 +101,8 @@ def ibge_PivotTableFinal():
     return
 
 def ibge_Graduados():
-     path = ibge_variable.paths(2,3)
-     names = ibge_variable.names(2,2)
+     path = ibge_variable.paths(3)
+     names = ibge_variable.names(3)
      for i in range(len(names)):
      #for state_name in names:
          ibge_functions_preprocessing.Limpeza_Arquivo_Censo_Graduados_2(path[0],names[i],0)   
@@ -101,10 +110,10 @@ def ibge_Graduados():
 
 def ibge_JuntarCSVs():
      opcao = ['Graduados', 'Não-Graduados']
-     path = ibge_variable.paths(2,10)
-     dir = os.getcwd()
+     path = ibge_variable.paths(10)
      for i in range(len(opcao)):   
-         ibge_functions_preprocessing.JuntarCSVs(path[i],opcao[i],dir)
+        #  ibge_functions_preprocessing.JuntarCSVs(path[i],opcao[i],dir)
+         ibge_functions_preprocessing.JuntarCSVs(path[i],opcao[i])
      return
 
 
@@ -112,17 +121,16 @@ def ibge_JuntarCSVs():
 # Fase 10: Análise Descritiva ... ...
 def ibge_cursos_profissoes():
     
-    #Cursos e Profissões do Censo ...
-    path = ibge_variable.paths(3,1)
-    name = ibge_variable.names(3,1)
+    # Cursos e Profissões do Censo ...
+    path = ibge_variable.paths(12)
+    name = ibge_variable.names(5)
     ibge_functions_descriptiveanalysis.ibge_cnae(path[0],name[0],0)
     ibge_functions_descriptiveanalysis.ibge_cbo(path[0],name[1],0)
     ibge_functions_descriptiveanalysis.ibge_cursos(path[0],name[2],0)
 
-    #path = ibge_variable.paths(3,1)
-    name  = ibge_variable.names(3,2)
-    path1 = ibge_variable.paths(3,2)
-    name1 = ibge_variable.names(3,3)
+    name  = ibge_variable.names(6)
+    path1 = ibge_variable.paths(11)
+    name1 = ibge_variable.names(7)
     ibge_functions_descriptiveanalysis.ibge_qtdadeCursos(path[0],name[2],0,path1[0],name1[0])
 
     # ibge_functions_descriptiveanalysis.ibge_qtdadeProfissoes()

@@ -58,8 +58,8 @@ def Filtrar_Dados_Censo(path,name,i):
 
 def Limpeza_Arquivo_Censo_Graduados_NaoGraduados_1_2(path,name,i):
 
-    file = path + name
-    #print(file)
+    file = os.path.join(path,name)
+    print(file)
     X = pd.read_csv(file, sep=",")  
     X = X.drop(columns=['Unnamed: 0'])
     
@@ -84,11 +84,27 @@ def Limpeza_Arquivo_Censo_Graduados_NaoGraduados_1_2(path,name,i):
     X.drop(X[(X['Nível_instrução'] ==4) & (X['Curso_Superior_Graduação_Código'] ==0)].index, inplace=True) ## alterado 23/09/2023 #=============================
    
 
-    name_path = name.split(".csv")
-    path_proc =  ibge_variable.paths(2,3)
-    name_path = path_proc[i] + name_path[0] + "_Graduados_NaoGraduados.csv"
+    name_path = name.split("_Fase1.csv")
+    # path_proc =  ibge_variable.paths(2,3)
+    path_proc =  ibge_variable.paths(3)
+    name_path = os.path.join(path_proc[i], name_path[0]+"_Todos.csv")
     X.to_csv(name_path) 
     return   
+def Limpeza_Arquivo_Censo_Graduados_2(path,name,i):     
+
+    file = os.path.join(path,name)
+    print(file)
+    X = pd.read_csv(file, sep=",")  
+    X = X.drop(columns=['Unnamed: 0'])
+ 
+    # Deixando somente os graduados ...
+    X.drop(X[(X['Curso_Superior_Graduação_Código'] ==0)].index, inplace=True) #Essa condição, deixa o dataset somente com as pessoas graduadas ...
+    
+    name_path = name.split("_Todos.csv")
+    path_proc =  ibge_variable.paths(9)
+    name_path = os.path.join(path_proc[i], name_path[0] + "_Graduados.csv")
+    X.to_csv(name_path) 
+    return
 
 #https://colab.research.google.com/drive/16TrgyaIq6T0fbGKl9gOWBXxbAIUfJtCD?authuser=1#scrollTo=qXidkc7VxkIT
 #https://colab.research.google.com/drive/1byICdSAZxE2L8mS5NYpVjMcxKSqvlPUo?authuser=1#scrollTo=SQYQRsulgWpt
@@ -104,9 +120,9 @@ def Pivot_Table_Censo(path,name,gender,i):
         
         X_1 = Pivot_Table(X)
 
-        name_path = name.split(".csv")
-        pathh = ibge_variable.paths(2,5)
-        name_path = pathh[0] +  name_path[0] + "_PivotTabletMasculina.csv"
+        name_path = name.split("_Todos.csv")
+        pathh = ibge_variable.paths(5)
+        name_path = os.path.join(pathh[0],  name_path[0] + "_PivotTabletMasculina.csv")
         X_1.to_csv(name_path)
     else:
         if gender == "F":
@@ -119,9 +135,9 @@ def Pivot_Table_Censo(path,name,gender,i):
 
            X_1 = Pivot_Table(X)
 
-           name_path = name.split(".csv")
-           pathh = ibge_variable.paths(2,4)
-           name_path = pathh[0] + name_path[0] +  "_PivotTabletFeminina.csv"
+           name_path = name.split("_Todos.csv")
+           pathh = ibge_variable.paths(4)
+           name_path = os.path.join(pathh[0], name_path[0] +  "_PivotTabletFeminina.csv")
            X_1.to_csv(name_path)
         else:
              file = path + name
@@ -129,11 +145,11 @@ def Pivot_Table_Censo(path,name,gender,i):
 
              X_1 = Pivot_Table(X)
 
-             name_path = name.split(".csv")
-             pathh = ibge_variable.paths(2,6)
-             name_path =  pathh[0] + name_path[0] + "_PivotTablet.csv"
+             name_path = name.split("_Todos.csv")
+             pathh = ibge_variable.paths(6)
+             name_path =  os.path.join(pathh[0],name_path[0] + "_PivotTablet.csv")
              X_1.to_csv(name_path)
-    return 
+    return X_1
 
 def Pivot_Table(X):
     
@@ -147,23 +163,8 @@ def Pivot_Table(X):
     X_Pivot= pd.pivot_table(X, values=['Ensino Superior'], index=['Ocupação_Código'],columns=['Nível_instrução'],aggfunc='count',fill_value=0) 
     return X_Pivot
 
-def Limpeza_Arquivo_Censo_Graduados_2(path,name,i):     
-
-    file = path + name
-    X = pd.read_csv(file, sep=",")  
-    X = X.drop(columns=['Unnamed: 0'])
- 
-    # Deixando somente os graduados ...
-    X.drop(X[(X['Curso_Superior_Graduação_Código'] ==0)].index, inplace=True) #Essa condição, deixa o dataset somente com as pessoas graduadas ...
-    
-    name_path = name.split(".csv")
-    path_proc =  ibge_variable.paths(2,9)
-    name_path = path_proc[i] + name_path[0] + "_QtdadeSal_SoGraduados.csv"
-    X.to_csv(name_path) 
-    return
-
 def df2pivot(df):
-    #from copy import deepcopy
+    from copy import deepcopy
     pivot = deepcopy(df)
     inst = list(pivot.iloc[0])
     cod = list(pivot.iloc[1])[0]
@@ -176,24 +177,22 @@ def Reduzir(pivot_final,estado,gender):
     #...
     #pivotfinal = reduce(lambda a, b: a.add(b, fill_value=0), [pivot_final[0], pivot_final[1]])
     pivotfinal = reduce(lambda a, b: a.add(b, fill_value=0), pivot_final)
-   
+    pathh =  ibge_variable.paths(8)
     if gender ==1:
-       pathh =  ibge_variable.paths(2,8)
-       name_path = str(pathh[0]) + estado + '_PivotFinalMasculina.csv'
+       name_path = str(pathh[0]) + estado + '_PivotFinalMasculina_.csv'
        pivotfinal.to_csv(name_path)    
     else:
          if gender ==2:
-            pathh =  ibge_variable.paths(2,8)
-            name_path = str(pathh[0]) + estado + '_PivotFinalFeminina.csv'
+            name_path = str(pathh[0]) + estado + '_PivotFinalFeminina_.csv'
             pivotfinal.to_csv(name_path)   
          else:
               if gender ==3:
-                 pathh =  ibge_variable.paths(2,8)
-                 name_path = str(pathh[0]) + estado + '_PivotFinal.csv'
+                 name_path = str(pathh[0]) + estado + '_PivotFinal_.csv'
                  pivotfinal.to_csv(name_path)          
     return
 
 def SomaPivotTable(path,name,i):
+# def SomaPivotTable(pivot):
     #...
     file = path + name
     pivot = pd.read_csv(file)  
@@ -204,13 +203,14 @@ def SomaPivotTable(path,name,i):
 #     #...
 #     return
 
-def JuntarCSVs(path,opcao,dir):
+#def JuntarCSVs(path,opcao,dir):
+def JuntarCSVs(path,opcao):
     # TODO: remover o parâmetro dir
     
     all_filenames = [i for i in glob.glob(os.path.join(path,'*.csv'))]
 
     combined_csv = pd.concat([pd.read_csv(f) for f in all_filenames])
-    pathh = ibge_variable.paths(2,11)
+    pathh = ibge_variable.paths(11)
 
     if opcao == "Graduados":           
         name_path = os.path.join(pathh[0], "Brasil_Graduados.csv")

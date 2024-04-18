@@ -116,23 +116,23 @@ def ibge_qtdadeCursos(path,name,i,path1,name1):
     CursosCenso.drop(index_names, inplace = True)
     #print(len(CursosCenso))
     return len(CursosCenso)
-'''
-def ibge_qtdadeCursos_graduados(path,name,i,path1,name1): 
-    return
-def ibge_qtdadeCursos_recenseados(path,name,i,path1,name1): 
-    return
-def ibge_qtdadeCursos_recenseados_feminino(path,name,i,path1,name1): 
-    return
-def ibge_qtdadeCursos_recenseados_masculino(path,name,i,path1,name1): 
-    return
 
-def ibge_qtdadeProfissoes():
-    return
-def ibge_qtdadeProfissoes_recenseados():
-    return
-def ibge_qtdadeProfissoes_recenseados_feminino():
-    return
-def ibge_qtdadeProfissoes_recenseados_masculino():
-    return
+# def ibge_qtdadeCursos_graduados(path,name,i,path1,name1): 
+#     return
+# def ibge_qtdadeCursos_recenseados(path,name,i,path1,name1): 
+#     return
+# def ibge_qtdadeCursos_recenseados_feminino(path,name,i,path1,name1): 
+#     return
+# def ibge_qtdadeCursos_recenseados_masculino(path,name,i,path1,name1): 
+#     return
 
-'''
+# def ibge_qtdadeProfissoes():
+#     return
+# def ibge_qtdadeProfissoes_recenseados():
+#     return
+# def ibge_qtdadeProfissoes_recenseados_feminino():
+#     return
+# def ibge_qtdadeProfissoes_recenseados_masculino():
+#     return
+
+
