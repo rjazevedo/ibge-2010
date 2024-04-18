@@ -1,4 +1,4 @@
-from ibgeparser.enums import Anos, Estados, Modalidades
+from ibgeparser.enums import Estados
 
 def estados():
     estados = [Estados.PARANA], [Estados.SANTA_CATARINA], [Estados.RIO_GRANDE_DO_SUL], [Estados.MATO_GROSSO_DO_SUL], [Estados.MATO_GROSSO], [Estados.GOIAS], [Estados.DISTRITO_FEDERAL], [Estados.RONDONIA],[Estados.ACRE], [Estados.AMAZONAS], [Estados.RORAIMA], [Estados.PARA], [Estados.AMAPA],[Estados.TOCANTINS]

@@ -22,6 +22,7 @@ import ibge_functions_descriptiveanalysis
 import ibge_functions_results
 import logging
 import io
+import shutil
 
 # Fase 0: Download dos dados do IBGE da web
 def ibge_download():
@@ -31,20 +32,36 @@ def ibge_download():
     modalidades_ac = [Modalidades.PESSOAS]
     estados = ibge_variable.estados()
 
+    for estados_ac in estados:
+        logging.info("Acessando o estado {} dos dados do IBGE".format(estados_ac))
+        # original.ibge_functions.function_obterdados_especificacao_coluna(ano_ac, estados_ac, modalidades_ac)
+        ibge_functions_preprocessing.function_obterdados_especificacao_coluna(ano_ac, estados_ac, modalidades_ac)
+
+    source_dir = "microdados-ibge"
+    destination_dir = "microdados-ibge/original"
+
+    # Crie o diretório de destino se ele não existir
+    if not os.path.exists(destination_dir):
+        os.makedirs(destination_dir)
+
+    # Obtenha uma lista de todos os arquivos .csv no diretório de origem
+    csv_files = glob.glob(os.path.join(source_dir, "Amostra_Pessoas_*.csv"))
+
+    # Copie cada arquivo .csv para o diretório de destino
+    for file in csv_files:
+        shutil.copy(file, destination_dir)
+
+    logging.info("Todos os arquivos .csv copiados para microdados-ibge/original")
+
+    return
 
 # Fase 1: Filtrar somente os dados relevantes. Aqui significa que 
 # você precisa filtrar todos os dados que possam ser utilizados no futuro.
-    for i in range(len(estados)):
-        estados_ac = estados[i]
-        # original.ibge_functions.function_obterdados_especificacao_coluna(ano_ac, estados_ac, modalidades_ac)
-        ibge_functions_preprocessing.function_obterdados_especificacao_coluna(ano_ac, estados_ac, modalidades_ac)
-    return
-
 def ibge_filter():
     logging.info("Filtrando as colunas necessárias")    
     # path  = ibge_variable.paths(1,1)
     path  = ibge_variable.paths(1)
-    for n in ibge_variable.names(1,1):
+    for n in ibge_variable.names(1):
         ibge_functions_preprocessing.Filtrar_Dados_Censo(path[0],n,0)    
         # print(path[0])         
     return
