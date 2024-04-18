@@ -212,9 +212,11 @@ def JuntarCSVs(path,opcao):
     combined_csv = pd.concat([pd.read_csv(f) for f in all_filenames])
     pathh = ibge_variable.paths(11)
 
-    if opcao == "Graduados":           
+    if opcao == "Graduados": 
+        logging.info("Gerando Arquivo Final de Graduados")  
         name_path = os.path.join(pathh[0], "Brasil_Graduados.csv")
     elif opcao == "Não-Graduados":
+        logging.info("Gerando Arquivo Final de Não-Graduados") 
         name_path = os.path.join(pathh[1], "Brasil_Não-Graduados.csv")
     else:
         logging.error("Opção inválida")

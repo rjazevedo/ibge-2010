@@ -50,8 +50,7 @@ def ibge_filter():
     return
 
 def ibge_Graduados_NaoGraduados():
-    # path  = ibge_variable.paths(2,2)
-    # names = ibge_variable.names(2,1)
+    logging.info("Salvando os arquivos de Graduados e Não-Graduados")    
     path  = ibge_variable.paths(2)
     names = ibge_variable.names(2)
     for j in range(len(names)):      
@@ -59,19 +58,17 @@ def ibge_Graduados_NaoGraduados():
     return
 
 def ibge_Pivot_Feminino():
+    logging.info("Gerando a Pivot Table Feminina")    
     gender = "F"
-    # path = ibge_variable.paths(2,3)
     path = ibge_variable.paths(3)
-    # names = ibge_variable.names(2,2)
     names = ibge_variable.names(3)
     for i in range(len(names)):
         ibge_functions_preprocessing.Pivot_Table_Censo(path[0],names[i],gender,i)
     return
 
 def ibge_Pivot_Masculino():
+    logging.info("Gerando a Pivot Table Masculina")    
     gender = "M"
-    # path = ibge_variable.paths(2,3)
-    # names = ibge_variable.names(2,2)
     path = ibge_variable.paths(3)
     names = ibge_variable.names(3)
     for i in range(len(names)):
@@ -79,9 +76,8 @@ def ibge_Pivot_Masculino():
     return
 
 def ibge_Pivot_Geral():
+    logging.info("Gerando a Pivot Table Geral")    
     gender = "G"
-    # path = ibge_variable.paths(2,3)
-    # names = ibge_variable.names(2,2)
     path = ibge_variable.paths(3)    
     names = ibge_variable.names(3)
     for i in range(len(names)):
@@ -89,6 +85,7 @@ def ibge_Pivot_Geral():
     return
 
 def ibge_PivotTableFinal():
+    logging.info("Gerando a Pivot Table Final")   
     pivotfinal = []
     estado = ['Brasil']
     gender = [1,2,3]
@@ -101,6 +98,7 @@ def ibge_PivotTableFinal():
     return
 
 def ibge_Graduados():
+     logging.info("Salvando os arquivos de Graduados ")   
      path = ibge_variable.paths(3)
      names = ibge_variable.names(3)
      for i in range(len(names)):
@@ -109,6 +107,7 @@ def ibge_Graduados():
      return
 
 def ibge_JuntarCSVs():
+     logging.info("Gerando Arquivos Finais")  
      opcao = ['Graduados', 'Não-Graduados']
      path = ibge_variable.paths(10)
      for i in range(len(opcao)):   
