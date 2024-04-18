@@ -63,7 +63,6 @@ def Limpeza_Arquivo_Censo_Graduados_NaoGraduados_1_2(path,name,i):
     X = pd.read_csv(file, sep=",")  
     X = X.drop(columns=['Unnamed: 0'])
     
-   
     #removendo quem não tem ocupação
     X = X.dropna(subset=['Ocupação_Código'])
     
@@ -80,16 +79,20 @@ def Limpeza_Arquivo_Censo_Graduados_NaoGraduados_1_2(path,name,i):
     #Removendo CBO-Domiciliar
     X = X.drop(columns=['CBO-Domiciliar'])
     
-    # removendo que tem graduação, mas o curso superior é igual  a Zero
+    # removendo que tem graduação, mas o curso superior é igual a Zero
     X.drop(X[(X['Nível_instrução'] ==4) & (X['Curso_Superior_Graduação_Código'] ==0)].index, inplace=True) ## alterado 23/09/2023 #=============================
-   
 
     name_path = name.split("_Fase1.csv")
-    # path_proc =  ibge_variable.paths(2,3)
     path_proc =  ibge_variable.paths(3)
+
+    # Crie o diretório de destino se ele não existir
+    if not os.path.exists(path_proc[0]):
+        os.makedirs(path_proc[0])
+
     name_path = os.path.join(path_proc[i], name_path[0]+"_Todos.csv")
     X.to_csv(name_path) 
-    return   
+    return
+
 def Limpeza_Arquivo_Censo_Graduados_2(path,name,i):     
 
     file = os.path.join(path,name)
