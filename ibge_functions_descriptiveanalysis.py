@@ -35,7 +35,7 @@ def ibge_cnae(path,name,i):
 
 def ibge_cbo(path,name,i):   
     #...
-    file = path + name
+    file = os.path.join(path,name)
     CBO_CSV = pd.DataFrame(pd.read_excel(file))
   
     dict = {"CLASSIFICAÇÃO DE OCUPAÇÕES PARA PESQUISAS DOMICILIARES  - COD": "Cod_CBO","Unnamed: 1":"Nome_CBO", }
@@ -57,7 +57,7 @@ def ibge_cbo(path,name,i):
 
 def ibge_cursos(path,name,i):   
     #...
-    file = path + name
+    file = os.path.join(path,name)
     Curso_CSV = pd.DataFrame(pd.read_excel(file))
     
     dict = {"Áreas gerais, específicas e detalhadas de formação dos cursos de nível superior": "Cod_Curso", "Unnamed: 1":"Nome_Curso",}
@@ -74,17 +74,36 @@ def ibge_cursos(path,name,i):
     return Curso_CSV
 
 def ibge_qtdadeCursos(path,name,i,path1,name1): 
-
     file = path + name
     CURSOS = pd.read_csv(file, dtype ='str')
     file1 = path1 + name1
     Brasil = pd.read_csv(file1)
-
+       
     CURSOS = CURSOS.drop(columns=['Unnamed: 0'])
+
+    CURSO = []
+    for l in range(len(CURSOS)):
+        if len(CURSOS.Cod_Curso[l]) >=5:
+           CURSO.append(CURSOS.Cod_Curso[l])
+           #print(CURSOS.Cod_Curso[l])
+
+    return len(CURSO)
+    
+
+def ibge_qtdadeCursos_graduados(path,name,i,path1,name1): 
+ 
+    file = os.path.join(path,name)
+    CURSOS = pd.read_csv(file, dtype ='str')
+    file1 = path1 + name1
+    Brasil = pd.read_csv(file1)
+    
+    CURSOS = CURSOS.drop(columns=['Unnamed: 0'])
+    #print(len(CURSOS.Cod_Curso))
 
     Cursos_Censo = Brasil.Curso_Superior_Graduação_Código
 
     Cursos_Censo_unique = Cursos_Censo.unique()
+    #print(len(Cursos_Censo_unique))
    
     CURSO_NUM  = []
     CURSO_NOME = []
@@ -114,13 +133,14 @@ def ibge_qtdadeCursos(path,name,i,path1,name1):
 
     index_names = CursosCenso[ CursosCenso['curso_nome'] == 'NÃO SABE E SUPERIOR NÃO ESPECIFICADO' ].index
     CursosCenso.drop(index_names, inplace = True)
-    #print(len(CursosCenso))
+    print(CursosCenso)
+        
     return len(CursosCenso)
 
-# def ibge_qtdadeCursos_graduados(path,name,i,path1,name1): 
-#     return
+# Essa função não precisa, porque ela é identica a anterior(def ibge_qtdadeCursos_graduados(path,name,i,path1,name1): )    
 # def ibge_qtdadeCursos_recenseados(path,name,i,path1,name1): 
 #     return
+
 # def ibge_qtdadeCursos_recenseados_feminino(path,name,i,path1,name1): 
 #     return
 # def ibge_qtdadeCursos_recenseados_masculino(path,name,i,path1,name1): 
@@ -134,5 +154,4 @@ def ibge_qtdadeCursos(path,name,i,path1,name1):
 #     return
 # def ibge_qtdadeProfissoes_recenseados_masculino():
 #     return
-
 

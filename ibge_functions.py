@@ -130,9 +130,10 @@ def ibge_cursos_profissoes():
     name  = ibge_variable.names(6)
     path1 = ibge_variable.paths(11)
     name1 = ibge_variable.names(7)
-    Quantidade = ibge_functions_descriptiveanalysis.ibge_qtdadeCursos(path[0],name[2],0,path1[0],name1[0])
-    print("Quantidade de cursos do censo:", Quantidade)
-
+    QuantidadeCursosCenso = ibge_functions_descriptiveanalysis.ibge_qtdadeCursos(path[0],name[2],0,path1[0],name1[0])
+    QuantidadeCursosRecenseados= ibge_functions_descriptiveanalysis.ibge_qtdadeCursos_graduados(path[0],name[2],0,path1[0],name1[0])
+    print(" Quantidade de Cursos do Censo:", QuantidadeCursosCenso)
+    print(" Quantidade de Cursos associados a população graduada:",QuantidadeCursosRecenseados)
     # ibge_functions_descriptiveanalysis.ibge_qtdadeProfissoes()
 
     # #Cursos e Profissões das pessoas recenseadas ...
