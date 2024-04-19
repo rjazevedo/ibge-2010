@@ -82,9 +82,12 @@ def ibge_Pivot_Feminino():
     names = ibge_variable.names(3)
     for i in range(len(names)):
         #ibge_functions_preprocessing.Pivot_Table_Censo(path[0],names[i],gender,i)
-        X =  ibge_functions_preprocessing.Pivot_Table_Censo(path[0],names[i],gender,i)
-        print(X)
-        pivotfinal.append(ibge_functions_preprocessing.SomaPivotTable(X))
+        #X =  ibge_functions_preprocessing.Pivot_Table_Censo(path[0],names[i],gender,i)
+        #print(X)
+        #pivotfinal.append(ibge_functions_preprocessing.SomaPivotTable(X))
+        X = ibge_functions_preprocessing.Pivot_Table_Censo(path[0],names[i],gender,i)
+        print(i, X)
+        pivotfinal.append(X)
     ibge_functions_preprocessing.Reduzir(pivotfinal,"Brasil",2)     
     return
 

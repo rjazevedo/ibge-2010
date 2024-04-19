@@ -182,15 +182,15 @@ def Reduzir(pivot_final,estado,gender):
     pivotfinal = reduce(lambda a, b: a.add(b, fill_value=0), pivot_final)
     pathh =  ibge_variable.paths(8)
     if gender ==1:
-       name_path = str(pathh[0]) + estado + '_PivotFinalMasculina.csv'
+       name_path = str(pathh[0]) + estado + '_PivotFinalMasculina_.csv'
        pivotfinal.to_csv(name_path)    
     else:
          if gender ==2:
-            name_path = str(pathh[0]) + estado + '_PivotFinalFeminina.csv'
+            name_path = str(pathh[0]) + estado + '_PivotFinalFeminina_.csv'
             pivotfinal.to_csv(name_path)   
          else:
               if gender ==3:
-                 name_path = str(pathh[0]) + estado + '_PivotFinal.csv'
+                 name_path = str(pathh[0]) + estado + '_PivotFinal_.csv'
                  pivotfinal.to_csv(name_path)          
     return
 
