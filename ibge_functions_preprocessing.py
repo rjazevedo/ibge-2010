@@ -194,11 +194,19 @@ def Reduzir(pivot_final,estado,gender):
                  pivotfinal.to_csv(name_path)          
     return
 
-#def SomaPivotTable(path,name,i):
-def SomaPivotTable(pivot):
+# # def SomaPivotTable(path,name,i):
+# def SomaPivotTable(pivot):
+#     # #...
+#     # file = path + name
+#     # pivot = pd.read_csv(file)  
+#     pivot = df2pivot(pivot) 
+#     return pivot
+
+
+def SomaPivotTable(path,name,i):
     ##...
-    #file = path + name
-    #pivot = pd.read_csv(file)  
+    file = path + name
+    pivot = pd.read_csv(file)  
     pivot = df2pivot(pivot) 
     return pivot
 

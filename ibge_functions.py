@@ -74,6 +74,23 @@ def ibge_Graduados_NaoGraduados():
         ibge_functions_preprocessing.Limpeza_Arquivo_Censo_Graduados_NaoGraduados_1_2(path[0],names[j],0)
     return
 
+# def ibge_Pivot_Feminino():
+#     pivotfinal = []
+#     logging.info("Gerando a Pivot Table Feminina")    
+#     gender = "F"
+#     path = ibge_variable.paths(3)
+#     names = ibge_variable.names(3)
+#     for i in range(len(names)):
+#         #ibge_functions_preprocessing.Pivot_Table_Censo(path[0],names[i],gender,i)
+#         #X =  ibge_functions_preprocessing.Pivot_Table_Censo(path[0],names[i],gender,i)
+#         #print(X)
+#         #pivotfinal.append(ibge_functions_preprocessing.SomaPivotTable(X))
+#         X = ibge_functions_preprocessing.Pivot_Table_Censo(path[0],names[i],gender,i)
+#         print(i, X)
+#         pivotfinal.append(X)
+#     ibge_functions_preprocessing.Reduzir(pivotfinal,"Brasil",2)     
+#     return
+
 def ibge_Pivot_Feminino():
     pivotfinal = []
     logging.info("Gerando a Pivot Table Feminina")    
@@ -81,14 +98,7 @@ def ibge_Pivot_Feminino():
     path = ibge_variable.paths(3)
     names = ibge_variable.names(3)
     for i in range(len(names)):
-        #ibge_functions_preprocessing.Pivot_Table_Censo(path[0],names[i],gender,i)
-        #X =  ibge_functions_preprocessing.Pivot_Table_Censo(path[0],names[i],gender,i)
-        #print(X)
-        #pivotfinal.append(ibge_functions_preprocessing.SomaPivotTable(X))
-        X = ibge_functions_preprocessing.Pivot_Table_Censo(path[0],names[i],gender,i)
-        print(i, X)
-        pivotfinal.append(X)
-    ibge_functions_preprocessing.Reduzir(pivotfinal,"Brasil",2)     
+        ibge_functions_preprocessing.Pivot_Table_Censo(path[0],names[i],gender,i)        
     return
 
 def ibge_Pivot_Masculino():
