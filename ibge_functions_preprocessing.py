@@ -85,7 +85,7 @@ def Limpeza_Arquivo_Censo_Graduados_NaoGraduados_1_2(path,name,i):
     name_path = name.split("_Fase1.csv")
     path_proc =  ibge_variable.paths(3)
 
-    # Modifica cada coluna para tipo inteiro
+    # Modifica cada coluna para tipo inteiro 19/04/2024 Werneck 
     for c in X.columns:
         X[c] = X[c].astype(int)
 
