@@ -104,38 +104,42 @@ def ibge_qtdadeCursos_graduados(path,name,i,path1,name1):
 
     Cursos_Censo_unique = Cursos_Censo.unique()
     #print(len(Cursos_Censo_unique))
-   
-    CURSO_NUM  = []
-    CURSO_NOME = []
-    for l in range(len(Cursos_Censo_unique)):
-        #if(l==1):
-        #   break
-        for i, j in CURSOS.iterrows():
-            #print(CURSOS.Cod_Curso[i])
-            if(CURSOS.Cod_Curso[i]== str(Cursos_Censo_unique[l])):
-                #print(Cursos_Censo_unique[l])
-                #print('CURSOS.Cod_Curso[i]: ', CURSOS.Cod_Curso[i] + " - CURSOS.Nome_Curso[i]: ", CURSOS.Nome_Curso[i])
-                CURSO_NUM.append(CURSOS.Cod_Curso[i])
-                CURSO_NOME.append(CURSOS.Nome_Curso[i])
+    
+    # Essa validação não é necessária para os cursos do Censo, pois o recenseados já tem os mesmos cursos do censo
+    # Essa validação só é necessária para validação de cursos como da Unicamp, mec e etc ... 
+    # Não remover esse comentário ...
+    # CURSO_NUM  = []
+    # CURSO_NOME = []
+    # for l in range(len(Cursos_Censo_unique)):
+    #     #if(l==1):
+    #     #   break
+    #     for i, j in CURSOS.iterrows():
+    #         #print(CURSOS.Cod_Curso[i])
+    #         if(CURSOS.Cod_Curso[i]== str(Cursos_Censo_unique[l])):
+    #             #print(Cursos_Censo_unique[l])
+    #             #print('CURSOS.Cod_Curso[i]: ', CURSOS.Cod_Curso[i] + " - CURSOS.Nome_Curso[i]: ", CURSOS.Nome_Curso[i])
+    #             CURSO_NUM.append(CURSOS.Cod_Curso[i])
+    #             CURSO_NOME.append(CURSOS.Nome_Curso[i])
 
-    Cursos_Censo=[]
-    for i in range(len(CURSO_NUM)):
-        tupla=(CURSO_NUM[i],CURSO_NOME[i])
-        Cursos_Censo.append(tupla)
-    #...
-    CursosCenso = pd.DataFrame(Cursos_Censo)
-    #Curso_Cbo_dir_curso_cbos.shape
-    nomes = {0:"curso_num",
-             1:"curso_nome",
-            }
-    CursosCenso.rename(columns=nomes,inplace=True)
-    CursosCenso = CursosCenso.sort_values(by=['curso_num'])
+    # Cursos_Censo=[]
+    # for i in range(len(CURSO_NUM)):
+    #     tupla=(CURSO_NUM[i],CURSO_NOME[i])
+    #     Cursos_Censo.append(tupla)
+    # #...
+    # CursosCenso = pd.DataFrame(Cursos_Censo)
+    # #Curso_Cbo_dir_curso_cbos.shape
+    # nomes = {0:"curso_num",
+    #          1:"curso_nome",
+    #         }
+    # CursosCenso.rename(columns=nomes,inplace=True)
+    # CursosCenso = CursosCenso.sort_values(by=['curso_num'])
 
-    index_names = CursosCenso[ CursosCenso['curso_nome'] == 'NÃO SABE E SUPERIOR NÃO ESPECIFICADO' ].index
-    CursosCenso.drop(index_names, inplace = True)
-    print(CursosCenso)
+    # index_names = CursosCenso[ CursosCenso['curso_nome'] == 'NÃO SABE E SUPERIOR NÃO ESPECIFICADO' ].index
+    # CursosCenso.drop(index_names, inplace = True)
+    # print(CursosCenso)
         
-    return len(CursosCenso)
+    # return len(CursosCenso)
+    return len(Cursos_Censo_unique)
 
 # Essa função não precisa, porque ela é identica a anterior(def ibge_qtdadeCursos_graduados(path,name,i,path1,name1): )    
 # def ibge_qtdadeCursos_recenseados(path,name,i,path1,name1): 
