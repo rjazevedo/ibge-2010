@@ -161,28 +161,32 @@ def ibge_cursos_profissoes():
     ibge_functions_descriptiveanalysis.ibge_cnae(path[0],name[0],0)
     ibge_functions_descriptiveanalysis.ibge_cbo(path[0],name[1],0)
     ibge_functions_descriptiveanalysis.ibge_cursos(path[0],name[2],0)
-
     name  = ibge_variable.names(6)
+    QuantidadeCursosCenso = ibge_functions_descriptiveanalysis.ibge_qtdadeCursos(path[0],name[2])
+    print(" Quantidade de Cursos do Censo:", QuantidadeCursosCenso) 
+    QuantidadeProfissoesCenso = ibge_functions_descriptiveanalysis.ibge_qtdadeProfissoes(path[0],name[1])
+    print(" Quantidade de Profissões do Censo:", QuantidadeProfissoesCenso)
+    print(" ")
+
+    # Cursos e Profissões das pessoas recenseadas ...
     path1 = ibge_variable.paths(11)
     name1 = ibge_variable.names(7)
-    QuantidadeCursosCenso = ibge_functions_descriptiveanalysis.ibge_qtdadeCursos(path[0],name[2],0,path1[0],name1[0])
-    QuantidadeCursosRecenseados= ibge_functions_descriptiveanalysis.ibge_qtdadeCursos_graduados(path[0],name[2],0,path1[0],name1[0])
-    print(" Quantidade de Cursos do Censo:", QuantidadeCursosCenso)
-    print(" Quantidade de Cursos associados a população graduada:",QuantidadeCursosRecenseados)
-    # ibge_functions_descriptiveanalysis.ibge_qtdadeProfissoes()
-
-    # #Cursos e Profissões das pessoas recenseadas ...
-    # ibge_functions_descriptiveanalysis.ibge_qtdadeCursos_recenseados()
-    # ibge_functions_descriptiveanalysis.ibge_qtdadeProfissoes_recenseados()
-
-    # #Cursos e Profissões associadas ao Gênero Feminino
-    # ibge_functions_descriptiveanalysis.ibge_qtdadeCursos_recenseados_feminino()
-    # ibge_functions_descriptiveanalysis.ibge_qtdadeProfissoes_recenseados_feminino()
-
-    # #Cursos e Profissões associadas ao Gênero Masculino
-    # ibge_functions_descriptiveanalysis.ibge_qtdadeCursos_recenseados_masculino()
-    # ibge_functions_descriptiveanalysis.ibge_qtdadeProfissoes_recenseados_masculino()
-
+    # QuantidadeCursosRecenseados= ibge_functions_descriptiveanalysis.ibge_qtdadeCursos_recenseados(path[0],name[2],0,path1[0],name1[0])
+    QuantidadeCursosRecenseados = ibge_functions_descriptiveanalysis.ibge_qtdadeCursos_recenseados(path1[0],name1[0])
+    print(" Quantidade de Cursos associados a população Recenseada e graduada:",QuantidadeCursosRecenseados)
+    QuantidadeProfissoesRecenseados = ibge_functions_descriptiveanalysis.ibge_qtdadeProfissoes_recenseados(path1[0],name1[0])
+    print(" Quantidade de Profissões associadas a população Recenseada e graduada:",QuantidadeProfissoesRecenseados)
+    print(" ")
+     # Cursos e Profissões associadas ao Gênero Feminino
+    QuantidadeCursosRecenseadosFemininos = ibge_functions_descriptiveanalysis.ibge_qtdadeCursos_recenseados_feminino(path1[0],name1[0])
+    print(" Quantidade de Cursos associadas a população Feminina Recenseada e graduada:",QuantidadeCursosRecenseadosFemininos)
+    QuantidadeProfissoesRecenseadosFemininos =  ibge_functions_descriptiveanalysis.ibge_qtdadeProfissoes_recenseados_feminino(path1[0],name1[0])
+    print(" Quantidade de Profissões associadas a população Feminina Recenseada e graduada:",QuantidadeProfissoesRecenseadosFemininos)
+    # Cursos e Profissões associadas ao Gênero Masculino
+    QuantidadeCursosRecenseadosMasculinos = ibge_functions_descriptiveanalysis.ibge_qtdadeCursos_recenseados_masculino(path1[0],name1[0])
+    print(" Quantidade de Cursos associadas a população Masculina Recenseada e graduada:",QuantidadeCursosRecenseadosMasculinos)
+    QuantidadeProfissoesRecenseadosMasculinos =  ibge_functions_descriptiveanalysis.ibge_qtdadeProfissoes_recenseados_masculino(path1[0],name1[0])
+    print(" Quantidade de Profissões associadas a população Masculina Recenseada e graduada:",QuantidadeProfissoesRecenseadosMasculinos)
     return
 
 

@@ -73,41 +73,54 @@ def ibge_cursos(path,name,i):
     Curso_CSV.to_csv(path + 'Curso_CSV.csv')
     return Curso_CSV
 
-def ibge_qtdadeCursos(path,name,i,path1,name1): 
+def ibge_qtdadeCursos(path,name): 
     file = path + name
     CURSOS = pd.read_csv(file, dtype ='str')
-    file1 = path1 + name1
-    Brasil = pd.read_csv(file1)
-       
+           
     CURSOS = CURSOS.drop(columns=['Unnamed: 0'])
 
     CURSO = []
     for l in range(len(CURSOS)):
         if len(CURSOS.Cod_Curso[l]) >=5:
            CURSO.append(CURSOS.Cod_Curso[l])
-           #print(CURSOS.Cod_Curso[l])
-
+        #    print(CURSOS.Cod_Curso[l])
     return len(CURSO)
-    
 
-def ibge_qtdadeCursos_graduados(path,name,i,path1,name1): 
+def ibge_qtdadeProfissoes(path,name): 
+    file = path + name
+    CBOS = pd.read_csv(file, dtype ='str')
+           
+    CBOS = CBOS.drop(columns=['Unnamed: 0'])
+    #print(CBOS.columns)
+    CBO = []
+    for l in range(len(CBOS)):
+        if len((CBOS.Cod_CBO[l])) >=4:
+          # 0000 - OCUPAÇÕES MALDEFINIDAS  ...  # Nome_CBO
+          if (CBOS.Cod_CBO[l]) != '0000':
+             # print(CBOS.Cod_CBO[l])
+             CBO.append(CBOS.Cod_CBO[l])          
+    return len(CBO)
+    # return 
+
+#def ibge_qtdadeCursos_recenseados(path,name,i,path1,name1): 
+def ibge_qtdadeCursos_recenseados(path1,name1): 
  
-    file = os.path.join(path,name)
-    CURSOS = pd.read_csv(file, dtype ='str')
-    file1 = path1 + name1
+    # file = os.path.join(path,name)
+    # CURSOS = pd.read_csv(file, dtype ='str')
+    file1 = os.path.join(path1 + name1)
     Brasil = pd.read_csv(file1)
     
-    CURSOS = CURSOS.drop(columns=['Unnamed: 0'])
-    #print(len(CURSOS.Cod_Curso))
+    # CURSOS = CURSOS.drop(columns=['Unnamed: 0'])
+    # print(len(CURSOS.Cod_Curso))
 
     Cursos_Censo = Brasil.Curso_Superior_Graduação_Código
 
     Cursos_Censo_unique = Cursos_Censo.unique()
-    #print(len(Cursos_Censo_unique))
-    
+    # print(len(Cursos_Censo_unique))
+
+    # Não remover esse comentário ...
     # Essa validação não é necessária para os cursos do Censo, pois o recenseados já tem os mesmos cursos do censo
     # Essa validação só é necessária para validação de cursos como da Unicamp, mec e etc ... 
-    # Não remover esse comentário ...
     # CURSO_NUM  = []
     # CURSO_NOME = []
     # for l in range(len(Cursos_Censo_unique)):
@@ -141,21 +154,105 @@ def ibge_qtdadeCursos_graduados(path,name,i,path1,name1):
     # return len(CursosCenso)
     return len(Cursos_Censo_unique)
 
-# Essa função não precisa, porque ela é identica a anterior(def ibge_qtdadeCursos_graduados(path,name,i,path1,name1): )    
-# def ibge_qtdadeCursos_recenseados(path,name,i,path1,name1): 
-#     return
+def ibge_qtdadeProfissoes_recenseados(path1,name1): 
+    # file = os.path.join(path,name)
+    # CURSOS = pd.read_csv(file, dtype ='str')
+    file1 = os.path.join(path1 + name1)
+    Brasil = pd.read_csv(file1)
+    
+    # CURSOS = CURSOS.drop(columns=['Unnamed: 0'])
+    # print(len(CURSOS.Cod_Curso))
 
-# def ibge_qtdadeCursos_recenseados_feminino(path,name,i,path1,name1): 
-#     return
-# def ibge_qtdadeCursos_recenseados_masculino(path,name,i,path1,name1): 
-#     return
+    Profissoes_Censo = Brasil.Ocupação_Código
+    # print( Brasil.columns)
+    Profissoes_Censo_unique = Profissoes_Censo.unique()
+    #print(len(Profissoes_Censo_unique))
+    return len(Profissoes_Censo_unique)
 
-# def ibge_qtdadeProfissoes():
-#     return
-# def ibge_qtdadeProfissoes_recenseados():
-#     return
-# def ibge_qtdadeProfissoes_recenseados_feminino():
-#     return
-# def ibge_qtdadeProfissoes_recenseados_masculino():
-#     return
+
+def ibge_qtdadeCursos_recenseados_feminino(path1,name1): 
+     
+    # file = os.path.join(path,name)
+    # CURSOS = pd.read_csv(file, dtype ='str')
+    file1 = os.path.join(path1 + name1)
+    Brasil = pd.read_csv(file1)
+    # print(Brasil.shape)
+    
+    # CURSOS = CURSOS.drop(columns=['Unnamed: 0'])
+    # print(len(CURSOS.Cod_Curso))
+
+    # removendo pessoas do sexo masculino ...
+    # X.drop(X[(X['gênero'] ==1)].index, inplace=True)
+    filtro  = Brasil['gênero'] == 2
+    Brasil_copia = Brasil[filtro]
+    # print(Brasil_copia.shape)
+    
+    Cursos_Censo = Brasil_copia.Curso_Superior_Graduação_Código
+
+    Cursos_Censo_unique = Cursos_Censo.unique()
+    # print(len(Cursos_Censo_unique))
+
+    return len(Cursos_Censo_unique)
+    
+    
+
+def ibge_qtdadeCursos_recenseados_masculino(path1,name1): 
+           
+    # file = os.path.join(path,name)
+    # CURSOS = pd.read_csv(file, dtype ='str')
+    file1 = os.path.join(path1 + name1)
+    Brasil = pd.read_csv(file1)
+    # print(Brasil.shape)
+    
+    # CURSOS = CURSOS.drop(columns=['Unnamed: 0'])
+    # print(len(CURSOS.Cod_Curso))
+
+    # removendo pessoas do sexo feminino ...
+    # X.drop(X[(X['gênero'] ==1)].index, inplace=True)
+    filtro  = Brasil['gênero'] == 1
+    Brasil_copia = Brasil[filtro]
+    # print(Brasil_copia.shape)
+    
+    Cursos_Censo = Brasil_copia.Curso_Superior_Graduação_Código
+
+    Cursos_Censo_unique = Cursos_Censo.unique()
+    # print(len(Cursos_Censo_unique))
+
+    return len(Cursos_Censo_unique)
+
+def ibge_qtdadeProfissoes_recenseados_feminino(path1,name1): 
+    # file = os.path.join(path,name)
+    # CURSOS = pd.read_csv(file, dtype ='str')
+    file1 = os.path.join(path1 + name1)
+    Brasil = pd.read_csv(file1)
+    
+    # CURSOS = CURSOS.drop(columns=['Unnamed: 0'])
+    # print(len(CURSOS.Cod_Curso))
+    
+    filtro  = Brasil['gênero'] == 2
+    Brasil_copia = Brasil[filtro]
+
+    Profissoes_Censo = Brasil_copia.Ocupação_Código
+    # print( Brasil.columns)
+    Profissoes_Censo_unique = Profissoes_Censo.unique()
+    #print(len(Profissoes_Censo_unique))
+    return len(Profissoes_Censo_unique)
+
+def ibge_qtdadeProfissoes_recenseados_masculino(path1,name1): 
+    # file = os.path.join(path,name)
+    # CURSOS = pd.read_csv(file, dtype ='str')
+    file1 = os.path.join(path1 + name1)
+    Brasil = pd.read_csv(file1)
+    
+    # CURSOS = CURSOS.drop(columns=['Unnamed: 0'])
+    # print(len(CURSOS.Cod_Curso))
+    
+    filtro  = Brasil['gênero'] == 1
+    Brasil_copia = Brasil[filtro]
+    
+    Profissoes_Censo = Brasil_copia.Ocupação_Código
+    # print( Brasil.columns)
+    Profissoes_Censo_unique = Profissoes_Censo.unique()
+    #print(len(Profissoes_Censo_unique))
+    return len(Profissoes_Censo_unique)
 
