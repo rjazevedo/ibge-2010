@@ -81,6 +81,7 @@ if fase == 10:
     # ibge_functions.ibge_idas_voltas_cursos_profissoes()
 
     # ibge_functions.ibge_trabalho_recenseados()
+  pass
     
 
 # Fase 20: Análise Exploratória ...
@@ -88,7 +89,7 @@ if fase == 20:
      
     #  ibge_functions.Profissoes_Cursos()
      
-     pass
+   pass
 
 # Fase 30: Resultados da Análise ...
 if fase == 30: 
