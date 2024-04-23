@@ -119,7 +119,7 @@ def Pivot_Table_Censo(path,name,gender,i):
     #...
     if gender == "M":
         
-        file = path + name
+        file = os.path.join(path,name)
         X= pd.read_csv(file,usecols=["Nível_instrução", "Ocupação_Código", "gênero"], sep=",")  	
 
         #removendo pessoas do sexo feminino ...
@@ -134,7 +134,7 @@ def Pivot_Table_Censo(path,name,gender,i):
     else:
         if gender == "F":
            
-           file = path + name
+           file = os.path.join(path,name)
            X= pd.read_csv(file,usecols=["Nível_instrução", "Ocupação_Código", "gênero"], sep=",")  	
 
            #removendo pessoas do sexo masculino ...
@@ -147,7 +147,7 @@ def Pivot_Table_Censo(path,name,gender,i):
            name_path = os.path.join(pathh[0], name_path[0] +  "_PivotTabletFeminina.csv")
            X_1.to_csv(name_path)
         else:
-             file = path + name
+             file = os.path.join(path,name)
              X= pd.read_csv(file,usecols=["Nível_instrução", "Ocupação_Código", "gênero"], sep=",")  	
 
              X_1 = Pivot_Table(X)
