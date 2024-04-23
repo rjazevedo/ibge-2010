@@ -152,7 +152,7 @@ def ibge_JuntarCSVs():
 
 
 ## Fase 10: Essa é a primeira fase que você faz no dia a dia. Aqui você começa a fazer a análise dos dados
-# Fase 10: Análise Descritiva ... ...
+#  Fase 10: Análise Descritiva ... ...
 def ibge_cursos_profissoes():
     
     # Cursos e Profissões do Censo ...
@@ -177,7 +177,7 @@ def ibge_cursos_profissoes():
     QuantidadeProfissoesRecenseados = ibge_functions_descriptiveanalysis.ibge_qtdadeProfissoes_recenseados(path1[0],name1[0])
     print(" Quantidade de Profissões associadas a população Recenseada e graduada:",QuantidadeProfissoesRecenseados)
     print(" ")
-     # Cursos e Profissões associadas ao Gênero Feminino
+    # Cursos e Profissões associadas ao Gênero Feminino
     QuantidadeCursosRecenseadosFemininos = ibge_functions_descriptiveanalysis.ibge_qtdadeCursos_recenseados_feminino(path1[0],name1[0])
     print(" Quantidade de Cursos associadas a população Feminina Recenseada e graduada:",QuantidadeCursosRecenseadosFemininos)
     QuantidadeProfissoesRecenseadosFemininos =  ibge_functions_descriptiveanalysis.ibge_qtdadeProfissoes_recenseados_feminino(path1[0],name1[0])
@@ -191,17 +191,26 @@ def ibge_cursos_profissoes():
 
 
 # def ibge_relacionamentos_cursos_profissoes():
+#     ibge_functions_descriptiveanalysis.relacionamentos_fortes_nãofortes_cursos_profissões()
 #     return
 
-# def ibge_corte_CBO():
+def ibge_corte_CBO():
+    return
+
+def ibge_idas_voltas_cursos_profissoes():
+    return
+
+def ibge_trabalho_recenseados():
+    return
+
+# def ibge_ida_Voltas_7Porcento():
 #     return
 
-# def ibge_idas_voltas_cursos_profissoes():
+# def ibge_ida_Voltas_10Porcento():
 #     return
 
-# def ibge_trabalho_recenseados():
+# def ibge_ida_Voltas_100Porcento():
 #     return
-
 
 
 # Fase 20: Análise Exploratória ...
@@ -212,10 +221,20 @@ def ibge_cursos_profissoes():
 
 
 # Fase 30: Resultados da Análise ...    
+def Profissoes_Cursos_Masculino():
+    return
+def Profissoes_Cursos_Feminino():  
+    return
+# Fase 31
+# ...
 
+# Fase 32
+# ...
+
+# Fase 33
+# QP3
 # def Genero_Profissoes_Masc_Fem_Grupos():
 #     # Ler dataframes
-
 #     # Chamar funções com os dataframes como parâmetros
 #     ibge_functions_results.Genero_Profissoes_Masc_Fem_Grupo1()
 #     ibge_functions_results.Genero_Profissoes_Masc_Fem_Grupo2()
@@ -235,3 +254,8 @@ def ibge_cursos_profissoes():
 #     ibge_functions_results.Genero_Profissoes_Equilibradas_Gen_Idade_Masc()
 #     return
  
+# Fase 34
+# ...
+
+# Fase 35
+# ...
