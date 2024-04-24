@@ -74,14 +74,14 @@ if fase == 2:
 if fase == 10:
     #ibge_functions.ibge_cursos_profissoes() #https://colab.research.google.com/drive/1_Nx4oOzrgCQvSolh9XG-UgWTQ508Md1M?authuser=1#scrollTo=o9GsbqjctkkL
    
-    # ibge_functions.ibge_relacionamentos_cursos_profissoes()
+    ibge_functions.ibge_relacionamentos_cursos_profissoes()
 
     # ibge_functions.ibge_corte_CBO()
 
     # ibge_functions.ibge_idas_voltas_cursos_profissoes()
 
     # ibge_functions.ibge_trabalho_recenseados()
-  pass
+    pass
     
 
 # Fase 20: Análise Exploratória ...

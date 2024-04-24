@@ -190,9 +190,9 @@ def ibge_cursos_profissoes():
     return
 
 
-# def ibge_relacionamentos_cursos_profissoes():
-#     ibge_functions_descriptiveanalysis.relacionamentos_fortes_nãofortes_cursos_profissões()
-#     return
+def ibge_relacionamentos_cursos_profissoes():
+     ibge_functions_descriptiveanalysis.relacionamentos_fortes_nãofortes_cursos_profissões()
+     return
 
 def ibge_corte_CBO():
     return

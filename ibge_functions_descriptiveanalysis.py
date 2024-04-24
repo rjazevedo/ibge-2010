@@ -19,6 +19,8 @@ from ibgeparser.microdados import Microdados
 from ibgeparser.enums import Anos, Estados, Modalidades
 import ibge_variable
 import matplotlib.pyplot as plt
+import warnings
+
 
 def ibge_cnae(path,name,i):
     #...
@@ -257,25 +259,396 @@ def ibge_qtdadeProfissoes_recenseados_masculino(path1,name1):
     #print(len(Profissoes_Censo_unique))
     return len(Profissoes_Censo_unique)
 
+# https://colab.research.google.com/drive/1VVTquZ7fw01kCo7Tzd7YOxP5PwF-o6Vh?authuser=1#scrollTo=Ws0X7KPad6JS
+# #Achar CBOs por Curso
+# def CBOs_Curso(csv_estado,csv_CBO,curso_num,titulo10,titulo3):
+#     #Leitura de Arquivos CSVs ...
+#     X = pd.read_csv(csv_estado)
+#     CBO = pd.read_csv(csv_CBO, dtype ='str')
+#     #CURSOS = pd.read_csv(csv_CURSOS, dtype ='str')
+#     # drop the 'Unnamed:0' column
+#     CBO = CBO.drop(columns=['Unnamed: 0'])
+#     #CURSOS = CURSOS.drop(columns=['Unnamed: 0'])
+
+#     #Cbos -> Cursos ... criar um novo dataframe somente com cursos e cbos para facilitar
+#     X_CURSO_CBO = X[['Curso_Superior_Graduação_Código','Ocupação_Código']]
+#     X_CURSO_CBO.shape
+
+#     #...
+#     #CBOs por curso
+#     #Indice ===========================================================================================================
+#     #print (X_CURSO_CBO.index[X_CURSO_CBO['Curso_Superior_Graduação_Código'] == 380].tolist())
+#     dir = X_CURSO_CBO.index[X_CURSO_CBO['Curso_Superior_Graduação_Código'] == curso_num].tolist()
+#     #dir
+#     # ...
+#     Curso_dir = []
+#     Cbo_dir = []
+#     for i in range(len(dir)):
+#         #print(direito[i])
+#         curso = X_CURSO_CBO._get_value(dir[i],'Curso_Superior_Graduação_Código')
+#         cbo = X_CURSO_CBO._get_value(dir[i],'Ocupação_Código')
+#         #print("Curso:",curso,"CBO:",str(int(cbo)))
+#         Curso_dir.append(curso)
+#         Cbo_dir.append(cbo)
+#         #...
+#     resultados_dir=[]
+#     for i in range(len(Curso_dir)):
+#       tupla=(Curso_dir[i],Cbo_dir[i])
+#       resultados_dir.append(tupla)
+#     #...
+#     Curso_Cbo_dir = pd.DataFrame(resultados_dir)
+#     #Curso_Cbo_dir.shape
+#     #...
+#     #Curso_Cbo_dir.columns
+#     dict = {0:"Curso",
+#     1:"Cbo",
+#     }
+#     Curso_Cbo_dir.rename(columns=dict,inplace=True)
+#     #type(Curso_Cbo_dir)
+#     #CBOs Unicos ============================================================
+#     Curso_Cbo_dir_unique = np.unique(Curso_Cbo_dir.Cbo)
+#     #Curso_Cbo_dir_unique
+#     #len(Curso_Cbo_dir_unique)
+#     #Plot====================================================================
+#     Cbo_Unique = Curso_Cbo_dir['Cbo'].astype(int).tolist()
+#     Cbo_Unique = np.unique(Cbo_Unique)
+#     Cbo_Unique
+#     #...
+#     Curso_Cbo_dir['Cbo'].value_counts().sort_index()
+#     #Curso_Cbo_dir['Cbo'].value_counts().sort_index().tolist()
+#     #...
+#     from numpy.ma.core import sort
+#     A = Curso_Cbo_dir['Cbo'].value_counts().sort_index()
+#     #...
+#     #Curso_Cbo_dir.loc[1:3, ['Cbo']]
+#     A = pd.DataFrame(A)
+#     #print(A.shape)
+#     #A
+#     A_cbo = A.sort_values("Cbo",ascending=False)
+#     A_cbo_10 = A_cbo.head(10)
+#     #passando o CBO para string, para poder plotar o nome
+#     #str(int(A_cbo_10.index[0]))
+#     #...
+#     #Coletando o nome do CBOs ...
+#     NomeCbo = []
+#     for i in range(len(A_cbo_10)):
+#         cbo=str(int(A_cbo_10.index[i]))
+#         for indexx, row in CBO.iterrows():
+#             if (row['Cod_CBO'] == cbo):
+#                 NomeCbo.append(row['Nome_CBO'])
+#                 #print(row['Cod_CBO'],":",row['Nome_CBO'])
+#     #import pandas as pd
+#     #list_name = ['item_1', 'item_2', 'item_3', ...]
+#     NomeCbo = pd.DataFrame(NomeCbo, columns=['Nome_CBO'])
+#     #print(NomeCbo.shape)
+#     #print(NomeCbo.columns)
+#     #NomeCbo.Nome_CBO[0]
+#     #...
+#     A_cbo_10["Nome"] = 1
+#     #...
+#     import warnings
+#     for i in range(len(A_cbo_10)):
+#         A_cbo_10['Nome'][i] = NomeCbo.Nome_CBO[i]
+#     #A_cbo_10
+#     A_cbo_10.reset_index(inplace=True)
+#     A_cbo_10 = A_cbo_10.rename(columns = {'index':'Cod_CBO'})
+#     #A_cbo_10
+#     #...
+#     A_cbo_10['Cod_CBO'] = A_cbo_10['Cod_CBO'].astype("float").astype('str')
+#     A_cbo_10['CBO_Nome'] = A_cbo_10['Cod_CBO'].str.cat(A_cbo_10['Nome'], sep =" ")
+#     #print(A_cbo_10)
+#     #
+#     tresprimeiros = []
+#     for i in range(3):
+#         tresprimeiros.append(int(float(A_cbo_10.Cod_CBO[i])))
+#     #...
+#     #Deletar coluna
+#     del A_cbo_10["Cod_CBO"]
+#     del A_cbo_10["Nome"]
+#     #A_cbo_10
+#     #...
+#     tresnomes = []
+#     for i in range(3):
+#         tresnomes.append(A_cbo_10.CBO_Nome[i])
+#     #...
+#     A_cbo_10 = A_cbo_10.set_index('CBO_Nome')
+#     #...
+#     #Plotando ...
+#     #A_cbo_10.plot(kind='bar',title="Curso 380: Direito -  Os 10 maiores",rot=92)
+#     A_cbo_10_sort = A_cbo_10.sort_values("Cbo",ascending=True)
+#     #A_cbo_10_sort.plot(kind='barh',title="Curso 380: Direito -  Os 10 maiores",rot=45)
+#     A_cbo_10_sort.plot(kind='barh',title=titulo10)
+#     plt.xlabel("")
+#     plt.show()
+#     #...
+#     #A_cbo_10.plot(kind='bar',title="Curso 380: Direito -  Os 10 maiores",rot=92)
+#     A_cbo_10_sort = A_cbo_10.iloc[0:3].sort_values("Cbo",ascending=True)
+#     #A_cbo_10_sort.plot(kind='barh',title="Curso 380: Direito -  Os 10 maiores",rot=45)
+#     A_cbo_10_sort.plot(kind='barh',title=titulo3)
+#     plt.xlabel("")
+#     plt.show()
+
+#     return tresprimeiros,tresnomes
+#     #return A_cbo_10.iloc[0:3].sort_values("Cbo",ascending=False)
+
+# # https://colab.research.google.com/drive/1eeYR718YV5StogTdcb31mXXObz-_Wq4g?authuser=1#scrollTo=mNjedfIcbM2m
+# #Achar CBOs por Curso
+# def CBOs_Curso_v4(csv_estado,csv_CBO,curso_num,curso_nome,titulo10,titulo3):
+#     #Leitura de Arquivos CSVs ...
+#     X = pd.read_csv(csv_estado)
+#     CBO = pd.read_csv(csv_CBO, dtype ='str')
+#     # CURSOS = pd.read_csv(csv_CURSOS, dtype ='str') ... 23/04/2024
+#     # drop the 'Unnamed:0' column
+#     CBO = CBO.drop(columns=['Unnamed: 0'])
+#     # CURSOS = CURSOS.drop(columns=['Unnamed: 0']) ... 23/04/2024
+#     # Acrescentando essa linha em 06/09/23 ===========================================================================
+#     #Profissionais das ciências e das artes
+#     #CBO = CBO.iloc[47:173]
+#     #Cbos -> Cursos ... criar um novo dataframe somente com cursos e cbos para facilitar
+#     X_CURSO_CBO = X[['Curso_Superior_Graduação_Código','Ocupação_Código']]
+#     # Fazer uma validação ...
+#     #print(X_CURSO_CBO.shape)
+#     #print(X_CURSO_CBO.head())
+#     #print(X_CURSO_CBO.dtypes)
+#     #print(type(X_CURSO_CBO['Ocupação_Código']))
+#     #X_CURSO_CBO["Ocupação_Código"]= X_CURSO_CBO["Ocupação_Código"].astype(str)
+#     #X_CURSO_CBO['Ocupação_Código'] = X_CURSO_CBO['Ocupação_Código'].astype(str)
+#     #X_CURSO_CBO["Ocupação_Código"] = X_CURSO_CBO["Ocupação_Código"].apply(lambda x: str(x))
+#     for i in range(len(X_CURSO_CBO)):
+#         X_CURSO_CBO.Ocupação_Código[i] = str(X_CURSO_CBO.Ocupação_Código[i])
+#     #X_CURSO_CBO = X_CURSO_CBO[X_CURSO_CBO['Ocupação_Código'][0]=='2' or X_CURSO_CBO['Ocupação_Código'][0]=='1']
+#     # ...
+#     Curso_Superior_Graduação_Código = []
+#     Ocupação_Código = []
+#     for i in range(len(X_CURSO_CBO)):
+#         if (X_CURSO_CBO.Ocupação_Código[i][0] == '2') or (X_CURSO_CBO.Ocupação_Código[i][0] == '1'):
+#             Curso_Superior_Graduação_Código.append(X_CURSO_CBO.Curso_Superior_Graduação_Código[i])
+#             Ocupação_Código.append(X_CURSO_CBO.Ocupação_Código[i])
+#     # ...
+#     X_CURSO_CBO_Filter=[]
+#     for i in range(len(Curso_Superior_Graduação_Código)):
+#       tupla=(Curso_Superior_Graduação_Código[i],Ocupação_Código[i])
+#       X_CURSO_CBO_Filter.append(tupla)
+#     # ...
+#     X_CURSO_CBO = pd.DataFrame(X_CURSO_CBO_Filter)
+#     # ...
+#      # ...
+#     dict = {0:"Curso_Superior_Graduação_Código",
+#     1:"Ocupação_Código",
+#     }
+#     X_CURSO_CBO.rename(columns=dict,inplace=True)
+#     #print(X_CURSO_CBO.shape)
+#     #print(X_CURSO_CBO.columns)
+#     #sys.exit() #======================================================================================================
+#     #...
+#     #CBOs por curso
+#     #Indice ===========================================================================================================
+#     #print (X_CURSO_CBO.index[X_CURSO_CBO['Curso_Superior_Graduação_Código'] == 380].tolist())
+#     dir = X_CURSO_CBO.index[X_CURSO_CBO['Curso_Superior_Graduação_Código'] == curso_num].tolist()
+#     #sys.exit() #=======================================================================================================
+#     #dir
+#     # ...
+#     Curso_dir = []
+#     Cbo_dir = []
+#     for i in range(len(dir)):
+#         #print(direito[i])
+#         curso = X_CURSO_CBO._get_value(dir[i],'Curso_Superior_Graduação_Código')
+#         cbo = X_CURSO_CBO._get_value(dir[i],'Ocupação_Código')
+#         #print("Curso:",curso,"CBO:",str(int(cbo)))
+#         Curso_dir.append(curso)
+#         Cbo_dir.append(cbo)
+#         #...
+#     resultados_dir=[]
+#     for i in range(len(Curso_dir)):
+#       tupla=(Curso_dir[i],Cbo_dir[i])
+#       resultados_dir.append(tupla)
+#     #...
+#     Curso_Cbo_dir = pd.DataFrame(resultados_dir)
+#     #Curso_Cbo_dir.shape
+#     #...
+#     #Curso_Cbo_dir.columns
+#     dict = {0:"Curso",
+#     1:"Cbo",
+#     }
+#     Curso_Cbo_dir.rename(columns=dict,inplace=True)
+#     #sys.exit() #===============================================================================================
+#     #CBOs Unicos ============================================================
+#     Curso_Cbo_dir_unique = np.unique(Curso_Cbo_dir.Cbo)
+#     #Curso_Cbo_dir_unique
+#     #len(Curso_Cbo_dir_unique)
+#     #sys.exit() #===============================================================================================
+#     #Plot====================================================================
+#     #Cbo_Unique = Curso_Cbo_dir['Cbo'].astype(int).tolist() # comentado em 07/09/2023
+#     #Cbo_Unique = np.unique(Cbo_Unique)                     # comentado em 07/09/2023
+#     #Cbo_Unique                                             # comentado em 07/09/2023
+#     #...
+#     Curso_Cbo_dir['Cbo'].value_counts().sort_index()
+#     #Curso_Cbo_dir['Cbo'].value_counts().sort_index().tolist()
+#     #...
+#     from numpy.ma.core import sort
+#     A = Curso_Cbo_dir['Cbo'].value_counts().sort_index()
+#     #...
+#     #Curso_Cbo_dir.loc[1:3, ['Cbo']]
+#     A = pd.DataFrame(A)
+#     #print(A.shape)
+#     #A
+#     A_cbo = A.sort_values("Cbo",ascending=False)
+#     #A_cbo_10 = A_cbo.head(10)
+#     A_cbo_10 = A_cbo.head(10) #Alterado em 06/09/23
+#     #print(A_cbo_10) # Coloquei essa linha em 06/09/2023 para plotar o erro ...
+#     #sys.exit() #===============================================================================================
+#     #passando o CBO para string, para poder plotar o nome
+#     #str(int(A_cbo_10.index[0]))
+#     #...
+#     #Coletando o nome do CBOs ...
+#     NomeCbo = []
+#     for i in range(len(A_cbo_10)):
+#         cbo=str(int(float(str(A_cbo_10.index[i])))) #Comentei pra ver se corrige o erro
+#         for indexx, row in CBO.iterrows():
+#             #print(row['Cod_CBO'], cbo)
+#             if (row['Cod_CBO'] == cbo):
+#                 #print(row['Cod_CBO'],A_cbo_10.index[i])
+#                 NomeCbo.append(row['Nome_CBO'])
+#                 #print(row['Cod_CBO'],":",row['Nome_CBO'])
+#     #import pandas as pd
+#     #list_name = ['item_1', 'item_2', 'item_3', ...]
+#     NomeCbo = pd.DataFrame(NomeCbo, columns=['Nome_CBO'])
+#     #print(NomeCbo.shape)
+#     #print(NomeCbo.columns)
+#     #NomeCbo.Nome_CBO[0]
+#     #print("")
+#     #print(NomeCbo)
+#     #sys.exit() #===============================================================================================
+#     #...
+#     A_cbo_10["Nome"] = 1
+#     #...
+#     #import warnings
+#     for i in range(len(A_cbo_10)):
+#         A_cbo_10['Nome'][i] = NomeCbo.Nome_CBO[i]
+#     #A_cbo_10
+#     A_cbo_10.reset_index(inplace=True)
+#     A_cbo_10 = A_cbo_10.rename(columns = {'index':'Cod_CBO'})
+#     #print(A_cbo_10)
+#     #sys.exit() #===============================================================================================
+#     #A_cbo_10
+#     #...
+#     A_cbo_10['Cod_CBO'] = A_cbo_10['Cod_CBO'].astype("float").astype('str')
+#     A_cbo_10['CBO_Nome'] = A_cbo_10['Cod_CBO'].str.cat(A_cbo_10['Nome'], sep =" ")
+#     #print(A_cbo_10)
+#     #sys.exit() #===============================================================================================
+#     #
+#     #tresprimeiros = []
+#     #for i in range(3):
+#     #    tresprimeiros.append(int(float(A_cbo_10.Cod_CBO[i])))
+#     tresprimeiros = [] # Alterado em 06/09/2023
+#     if (len(A_cbo_10)<3):
+#         for i in range(len(A_cbo_10)):
+#             tresprimeiros.append(int(float(A_cbo_10.Cod_CBO[i])))
+#     else:
+#         for i in range(3):
+#             tresprimeiros.append(int(float(A_cbo_10.Cod_CBO[i])))
+
+#     #...
+#     #Deletar coluna
+#     del A_cbo_10["Cod_CBO"]
+#     del A_cbo_10["Nome"]
+#     #A_cbo_10
+#     #...
+#     #tresnomes = []
+#     #for i in range(3):
+#     #    tresnomes.append(A_cbo_10.CBO_Nome[i])
+#     tresnomes = [] # Alterado em 06/09/2023
+#     if (len(A_cbo_10)<3):
+#         for i in range(len(A_cbo_10)):
+#             tresnomes.append(A_cbo_10.CBO_Nome[i])
+#     else:
+#         for i in range(3):
+#             tresnomes.append(A_cbo_10.CBO_Nome[i])
+#     #...
+#     A_cbo_10 = A_cbo_10.set_index('CBO_Nome')
+#     #...
+#     #Plotando ... Alterado em 06/09/23 ... tirei o plot dos dez maiores #07/09/2023 voltei o plot dos dez maiores ...
+#     #A_cbo_10.plot(kind='bar',title="Curso 380: Direito -  Os 10 maiores",rot=92)
+#     A_cbo_10_sort = A_cbo_10.sort_values("Cbo",ascending=True)
+#     #A_cbo_10_sort.plot(kind='barh',title="Curso 380: Direito -  Os 10 maiores",rot=45)
+#     A_cbo_10_sort.plot(kind='barh',title=titulo10)
+#     plt.xlabel("")
+#     plt.show()
+#     #...
+#     #A_cbo_10.plot(kind='bar',title="Curso 380: Direito -  Os 10 maiores",rot=92)
+#     A_cbo_10_sort = A_cbo_10.iloc[0:3].sort_values("Cbo",ascending=True)
+#     #A_cbo_10_sort = A_cbo_10.iloc[0:len(A_cbo_10)].sort_values("Cbo",ascending=True) #Alterado para 06/09/2023
+#     #A_cbo_10_sort.plot(kind='barh',title="Curso 380: Direito -  Os 10 maiores",rot=45)
+#     A_cbo_10_sort.plot(kind='barh',title=titulo3)
+#     plt.xlabel("")
+#     plt.show()
+
+#     return tresprimeiros,tresnomes,curso_num,curso_nome
+#     #return A_cbo_10.iloc[0:3].sort_values("Cbo",ascending=False)
+#     #return
+
+#import warnings
+#import matplotlib.pyplot as plt
+#import pandas as pd
+# matplotlib inline
+from matplotlib.pyplot import *
+import pandas as pd
+import numpy as np
+from matplotlib import pyplot as plt
 #Achar CBOs por Curso
-def CBOs_Curso(csv_estado,csv_CBO,curso_num,titulo10,titulo3):
+def CBOs_Curso_v6(csv_estado,csv_CBO,curso_num,curso_nome,titulo10,titulo3,porcent_param,save_results_to):
     #Leitura de Arquivos CSVs ...
     X = pd.read_csv(csv_estado)
     CBO = pd.read_csv(csv_CBO, dtype ='str')
-    #CURSOS = pd.read_csv(csv_CURSOS, dtype ='str')
+    # CURSOS = pd.read_csv(csv_CURSOS, dtype ='str') # 23/04/2024
     # drop the 'Unnamed:0' column
     CBO = CBO.drop(columns=['Unnamed: 0'])
-    #CURSOS = CURSOS.drop(columns=['Unnamed: 0'])
-
+    #  CURSOS = CURSOS.drop(columns=['Unnamed: 0']) # 23/04/2024
+    # Acrescentando essa linha em 06/09/23 ===========================================================================
+    #Profissionais das ciências e das artes
+    #CBO = CBO.iloc[47:173]
     #Cbos -> Cursos ... criar um novo dataframe somente com cursos e cbos para facilitar
     X_CURSO_CBO = X[['Curso_Superior_Graduação_Código','Ocupação_Código']]
-    X_CURSO_CBO.shape
-
+    # Fazer uma validação ...
+    #print(X_CURSO_CBO.shape)
+    #print(X_CURSO_CBO.head())
+    #print(X_CURSO_CBO.dtypes)
+    #print(type(X_CURSO_CBO['Ocupação_Código']))
+    #X_CURSO_CBO["Ocupação_Código"]= X_CURSO_CBO["Ocupação_Código"].astype(str)
+    #X_CURSO_CBO['Ocupação_Código'] = X_CURSO_CBO['Ocupação_Código'].astype(str)
+    #X_CURSO_CBO["Ocupação_Código"] = X_CURSO_CBO["Ocupação_Código"].apply(lambda x: str(x))
+    for i in range(len(X_CURSO_CBO)):
+        X_CURSO_CBO.Ocupação_Código[i] = str(X_CURSO_CBO.Ocupação_Código[i])
+    #X_CURSO_CBO = X_CURSO_CBO[X_CURSO_CBO['Ocupação_Código'][0]=='2' or X_CURSO_CBO['Ocupação_Código'][0]=='1']
+    # ...
+    Curso_Superior_Graduação_Código = []
+    Ocupação_Código = []
+    for i in range(len(X_CURSO_CBO)):
+        if (X_CURSO_CBO.Ocupação_Código[i][0] == '2') or (X_CURSO_CBO.Ocupação_Código[i][0] == '1'):
+            Curso_Superior_Graduação_Código.append(X_CURSO_CBO.Curso_Superior_Graduação_Código[i])
+            Ocupação_Código.append(X_CURSO_CBO.Ocupação_Código[i])
+    # ...
+    X_CURSO_CBO_Filter=[]
+    for i in range(len(Curso_Superior_Graduação_Código)):
+      tupla=(Curso_Superior_Graduação_Código[i],Ocupação_Código[i])
+      X_CURSO_CBO_Filter.append(tupla)
+    # ...
+    X_CURSO_CBO = pd.DataFrame(X_CURSO_CBO_Filter)
+    # ...
+    # ...
+    dict = {0:"Curso_Superior_Graduação_Código",
+    1:"Ocupação_Código",
+    }
+    X_CURSO_CBO.rename(columns=dict,inplace=True)
+    #print(X_CURSO_CBO.shape)
+    #print(X_CURSO_CBO.columns)
+    #sys.exit() #======================================================================================================
     #...
     #CBOs por curso
     #Indice ===========================================================================================================
     #print (X_CURSO_CBO.index[X_CURSO_CBO['Curso_Superior_Graduação_Código'] == 380].tolist())
     dir = X_CURSO_CBO.index[X_CURSO_CBO['Curso_Superior_Graduação_Código'] == curso_num].tolist()
+    #sys.exit() #=======================================================================================================
     #dir
     # ...
     Curso_dir = []
@@ -301,15 +674,16 @@ def CBOs_Curso(csv_estado,csv_CBO,curso_num,titulo10,titulo3):
     1:"Cbo",
     }
     Curso_Cbo_dir.rename(columns=dict,inplace=True)
-    #type(Curso_Cbo_dir)
+    #sys.exit() #===============================================================================================
     #CBOs Unicos ============================================================
     Curso_Cbo_dir_unique = np.unique(Curso_Cbo_dir.Cbo)
     #Curso_Cbo_dir_unique
     #len(Curso_Cbo_dir_unique)
+    #sys.exit() #===============================================================================================
     #Plot====================================================================
-    Cbo_Unique = Curso_Cbo_dir['Cbo'].astype(int).tolist()
-    Cbo_Unique = np.unique(Cbo_Unique)
-    Cbo_Unique
+    #Cbo_Unique = Curso_Cbo_dir['Cbo'].astype(int).tolist() # comentado em 07/09/2023
+    #Cbo_Unique = np.unique(Cbo_Unique)                     # comentado em 07/09/2023
+    #Cbo_Unique                                             # comentado em 07/09/2023
     #...
     Curso_Cbo_dir['Cbo'].value_counts().sort_index()
     #Curso_Cbo_dir['Cbo'].value_counts().sort_index().tolist()
@@ -322,72 +696,189 @@ def CBOs_Curso(csv_estado,csv_CBO,curso_num,titulo10,titulo3):
     #print(A.shape)
     #A
     A_cbo = A.sort_values("Cbo",ascending=False)
-    A_cbo_10 = A_cbo.head(10)
-    #passando o CBO para string, para poder plotar o nome
-    #str(int(A_cbo_10.index[0]))
-    #...
-    #Coletando o nome do CBOs ...
-    NomeCbo = []
-    for i in range(len(A_cbo_10)):
-        cbo=str(int(A_cbo_10.index[i]))
-        for indexx, row in CBO.iterrows():
-            if (row['Cod_CBO'] == cbo):
-                NomeCbo.append(row['Nome_CBO'])
-                #print(row['Cod_CBO'],":",row['Nome_CBO'])
-    #import pandas as pd
-    #list_name = ['item_1', 'item_2', 'item_3', ...]
-    NomeCbo = pd.DataFrame(NomeCbo, columns=['Nome_CBO'])
-    #print(NomeCbo.shape)
-    #print(NomeCbo.columns)
-    #NomeCbo.Nome_CBO[0]
-    #...
-    A_cbo_10["Nome"] = 1
-    #...
-    import warnings
-    for i in range(len(A_cbo_10)):
-        A_cbo_10['Nome'][i] = NomeCbo.Nome_CBO[i]
-    #A_cbo_10
-    A_cbo_10.reset_index(inplace=True)
-    A_cbo_10 = A_cbo_10.rename(columns = {'index':'Cod_CBO'})
-    #A_cbo_10
-    #...
-    A_cbo_10['Cod_CBO'] = A_cbo_10['Cod_CBO'].astype("float").astype('str')
-    A_cbo_10['CBO_Nome'] = A_cbo_10['Cod_CBO'].str.cat(A_cbo_10['Nome'], sep =" ")
-    #print(A_cbo_10)
-    #
-    tresprimeiros = []
-    for i in range(3):
-        tresprimeiros.append(int(float(A_cbo_10.Cod_CBO[i])))
-    #...
-    #Deletar coluna
-    del A_cbo_10["Cod_CBO"]
-    del A_cbo_10["Nome"]
-    #A_cbo_10
-    #...
-    tresnomes = []
-    for i in range(3):
-        tresnomes.append(A_cbo_10.CBO_Nome[i])
-    #...
-    A_cbo_10 = A_cbo_10.set_index('CBO_Nome')
-    #...
-    #Plotando ...
-    #A_cbo_10.plot(kind='bar',title="Curso 380: Direito -  Os 10 maiores",rot=92)
-    A_cbo_10_sort = A_cbo_10.sort_values("Cbo",ascending=True)
-    #A_cbo_10_sort.plot(kind='barh',title="Curso 380: Direito -  Os 10 maiores",rot=45)
-    A_cbo_10_sort.plot(kind='barh',title=titulo10)
-    plt.xlabel("")
-    plt.show()
-    #...
-    #A_cbo_10.plot(kind='bar',title="Curso 380: Direito -  Os 10 maiores",rot=92)
-    A_cbo_10_sort = A_cbo_10.iloc[0:3].sort_values("Cbo",ascending=True)
-    #A_cbo_10_sort.plot(kind='barh',title="Curso 380: Direito -  Os 10 maiores",rot=45)
-    A_cbo_10_sort.plot(kind='barh',title=titulo3)
-    plt.xlabel("")
-    plt.show()
+    Total = A_cbo["Cbo"].sum() #==========================================================================================================
+    #====================================================================================================================================
+    #porcento = Total*0.1
+    porcento = Total*porcent_param
+    porcento_10 = round(porcento/Total * 100, 2)
+    #print('Total: ',Total)
+    #print('porcento: ', porcento)
+    #print('porcento_10: ', porcento_10)
+    #sys.exit() #===============================================================================================
+    # ...
+    Porcentagem = []
+    for i in range(len(A_cbo)):
+        #Porcentagem = (A_Curso['Curso_Repet']/Total)*100
+        #Porcentagem = (A_Curso['Curso_Repet']/Total)
+         Porcentagem = round(A_cbo['Cbo']/Total * 100, 2)
+    A_cbo['Porcentagem'] = Porcentagem
 
-    return tresprimeiros,tresnomes
+    #####=================================================essa parte precisa de alteração =======================================================================================
+    #####=================================================essa parte precisa de alteração =======================================================================================
+    #####=================================================essa parte precisa de alteração =======================================================================================
+    #A_cbo_10 = A_cbo.head(10)
+    #A_cbo_10 = A_cbo.head(3) #Alterado em 06/09/23 ... #Alterado em 17/09/2023   =========================
+    #print(A_cbo.index)
+    #print(type(A_cbo.index))
+    #sys.exit() #===============================================================================================
+    qtdade = 0
+    for i in range(len(A_cbo)):
+        #print(A_cbo.Porcentagem[i])
+        if (A_cbo.Porcentagem[i]>= porcento_10):
+            qtdade = qtdade+1
+    #print(qtdade)
+    A_cbo_10 = A_cbo.head(qtdade) #Alterado 29/09/2023   =========================
+    #========================================================================================================================
+    #========================================================================================================================
+    # Validação =============================================================================================================
+    if(len(A_cbo_10>=1)):
+        #sys.exit() #===============================================================================================
+        #===================================================================================================== Altera aqui. Ao invés de pegar os três, pega os que são maior que 10%
+        #print(A_cbo_10) # Coloquei essa linha em 06/09/2023 para plotar o erro ...
+        #sys.exit() #===============================================================================================
+        #passando o CBO para string, para poder plotar o nome
+        #str(int(A_cbo_10.index[0]))
+        #...
+        #Coletando o nome do CBOs ...
+        NomeCbo = []
+        for i in range(len(A_cbo_10)):
+            cbo=str(int(float(str(A_cbo_10.index[i])))) #Comentei pra ver se corrige o erro
+            for indexx, row in CBO.iterrows():
+                #print(row['Cod_CBO'], cbo)
+                if (row['Cod_CBO'] == cbo):
+                    #print(row['Cod_CBO'],A_cbo_10.index[i])
+                    NomeCbo.append(row['Nome_CBO'])
+                    #print(row['Cod_CBO'],":",row['Nome_CBO'])
+        #import pandas as pd
+        #list_name = ['item_1', 'item_2', 'item_3', ...]
+        NomeCbo = pd.DataFrame(NomeCbo, columns=['Nome_CBO'])
+        #print(NomeCbo.shape)
+        #print(NomeCbo.columns)
+        #NomeCbo.Nome_CBO[0]
+        #print("")
+        #print(NomeCbo)
+        #sys.exit() #===============================================================================================
+        #...
+        A_cbo_10["Nome"] = 1
+        #...
+        #import warnings
+        for i in range(len(A_cbo_10)):
+            A_cbo_10['Nome'][i] = NomeCbo.Nome_CBO[i]
+        #A_cbo_10
+        A_cbo_10.reset_index(inplace=True)
+        A_cbo_10 = A_cbo_10.rename(columns = {'index':'Cod_CBO'})
+        #print(A_cbo_10)
+        #sys.exit() #===============================================================================================
+        #A_cbo_10
+        #...
+        A_cbo_10['Cod_CBO'] = A_cbo_10['Cod_CBO'].astype("float").astype('str')
+        A_cbo_10['CBO_Nome'] = A_cbo_10['Cod_CBO'].str.cat(A_cbo_10['Nome'], sep =" ")
+        #print(A_cbo_10)
+        #print("")
+        #sys.exit() #===============================================================================================
+        #
+        #tresprimeiros = []
+        #for i in range(3):
+        #    tresprimeiros.append(int(float(A_cbo_10.Cod_CBO[i])))
+        # ...
+        #tresprimeiros = [] # Alterado em 06/09/2023
+        #if (len(A_cbo_10)<3):
+        #    for i in range(len(A_cbo_10)):
+        #        tresprimeiros.append(int(float(A_cbo_10.Cod_CBO[i])))
+        #else:
+        #    for i in range(3):
+        #        tresprimeiros.append(int(float(A_cbo_10.Cod_CBO[i])))
+        primeiros = [] # Alterado em 29/09/2023
+        if (len(A_cbo_10)<1):
+            #for i in range(len(A_cbo_10)):
+            #    tresprimeiros.append(int(float(A_cbo_10.Cod_CBO[i])))
+            print("Não existe CBOs para este curso")
+            sys.exit() #===============================================================================================
+        else:
+            for i in range(len(A_cbo_10)):
+                primeiros.append(int(float(A_cbo_10.Cod_CBO[i])))
+        #...
+        #Deletar coluna
+        del A_cbo_10["Cod_CBO"]
+        del A_cbo_10["Nome"]
+        #A_cbo_10
+        #...
+        #tresnomes = []
+        #for i in range(3):
+        #    tresnomes.append(A_cbo_10.CBO_Nome[i])
+        # ...
+        #tresnomes = [] # Alterado em 06/09/2023
+        #if (len(A_cbo_10)<3):
+        #    for i in range(len(A_cbo_10)):
+        #        tresnomes.append(A_cbo_10.CBO_Nome[i])
+        #else:
+        #    for i in range(3):
+        #        tresnomes.append(A_cbo_10.CBO_Nome[i])
+        nomes = [] # Alterado em 26/09/2023
+        if (len(A_cbo_10)<1):
+            #for i in range(len(A_cbo_10)):
+            #    nomes.append(A_cbo_10.CBO_Nome[i])
+            print("Não existe CBOs para este curso")
+            sys.exit() #===============================================================================================
+        else:
+            for i in range(len(A_cbo_10)):
+                nomes.append(A_cbo_10.CBO_Nome[i])
+        porcentagens = []
+        if (len(A_cbo_10)<1):
+            #for i in range(len(A_cbo_10)):
+            #    nomes.append(A_cbo_10.CBO_Nome[i])
+            print("Não existe CBOs para este curso")
+            sys.exit() #===============================================================================================
+        else:
+            for i in range(len(A_cbo_10)):
+                porcentagens.append(A_cbo_10.Porcentagem[i])
+        #####================================================= ate aqui =======================================================================================
+        #####================================================= ate aqui =======================================================================================
+        #####================================================= ate aqui  =======================================================================================
+        #...
+        #A_cbo_10 = A_cbo_10.set_index('CBO_Nome')
+        #print(A_cbo_10)
+        #sys.exit() #===============================================================================================
+        #...
+        x='CBO_Nome'
+        #y='Curso_Repet'
+        y='Porcentagem'
+        #Plotando ... Alterado em 06/09/23 ... tirei o plot dos dez maiores #07/09/2023 voltei o plot dos dez maiores ...
+        #A_cbo_10.plot(kind='bar',title="Curso 380: Direito -  Os 10 maiores",rot=92)
+        #####A_cbo_10_sort = A_cbo_10.sort_values("Cbo",ascending=True)##################################################################
+        #A_cbo_10_sort.plot(kind='barh',title="Curso 380: Direito -  Os 10 maiores",rot=45)
+        #####A_cbo_10_sort.plot(kind='barh',title=titulo10)           ##################################################################
+        #####plt.xlabel("")                                           ##################################################################
+        #####plt.show()                                               ##################################################################
+        #...
+        #A_cbo_10.plot(kind='bar',title="Curso 380: Direito -  Os 10 maiores",rot=92)
+        #A_cbo_10_sort = A_cbo_10.iloc[0:3].sort_values("Cbo",ascending=True)
+        A_cbo_10_sort = A_cbo_10.iloc[0:3].sort_values("Porcentagem",ascending=True)
+        #A_cbo_10_sort = A_cbo_10.iloc[0:len(A_cbo_10)].sort_values("Cbo",ascending=True) #Alterado para 06/09/2023
+        #A_cbo_10_sort.plot(kind='barh',title="Curso 380: Direito -  Os 10 maiores",rot=45)
+        plt.rcParams["figure.figsize"] = (18, 8)
+        plt.rcParams["figure.autolayout"] = True
+        #A_cbo_10_sort.plot(kind='barh',title=titulo3)
+        #ax = A_cbo_10_sort.plot(kind='barh',title=titulo3)
+        ax = A_cbo_10_sort.plot(x,y,kind='barh',title=titulo3,legend=False)
+        #ax = A_Curso_11_sort.plot(x,y,kind='barh',title=tituloalterado,color=colors,legend=False)
+        ax.bar_label(ax.containers[0])
+        plt.xlabel("Porcentagem")
+        #plt.show()
+        string = str(curso_num) + " - " + curso_nome + ".pdf"
+        #plt.savefig(string)
+        #save_results_to = '/content/drive/MyDrive/Orientacao_Rodolfo/Doutorado_Elisangela/Experimentos/Experimentos_25_09_a_02_09/7Porcento-Todos-IdaVolta/CBOs_Cursos_Ida/'
+        plt.savefig(save_results_to + string)
+        plt.show()
+        #ida = 'Ida'
+    else:
+         print("Não existe CBOs para este curso")
+         #sys.exit() #===============================================================================================
+    return primeiros,nomes,porcentagens,curso_num,curso_nome
+    #return primeiros,nomes,porcentagens,curso_num,curso_nome,ida
+    #return tresprimeiros,tresnomes,curso_num,curso_nome
     #return A_cbo_10.iloc[0:3].sort_values("Cbo",ascending=False)
-
+    #return
 
 #Cursos por CBO
 #def Cursos_CBO(csv_estado,csv_CBO,csv_CURSOS,cbo_num,titulo10,titulo3):#===comentando essa parte do grafico dos 10 maiores cursos
@@ -545,16 +1036,23 @@ def relacionamentos_fortes_nãofortes_cursos_profissões():
     csv_CBO = os.path.join(path1[0],name1[1])
     csv_CURSOS = os.path.join(path1[0],name1[2])
 
-    curso_num=481
+    curso_num=481.0
+    curso_nome="Ciência da Computação"
     titulo10="Curso 481: Ciência da Computação -  Os 10 maiores"
     titulo3="Curso 481: Ciência da Computação -  Os 3 maiores"
+    
+    # primeirosCbos,primeirosCursos=CBOs_Curso(csv_estado,csv_CBO,curso_num,curso_nome,titulo10,titulo3)
+    # primeirosCbos,primeirosCursos=CBOs_Curso_v4(csv_estado,csv_CBO,curso_num,curso_nome,titulo10,titulo3)
+    # primeirosCbos,primeirosCursos=CBOs_Curso_v6(csv_estado,csv_CBO,curso_num,curso_nome,titulo10,titulo3)
+    save_results_to = 'microdados-ibge/original/'
+    primeirosCbos,primeirosCbos_Nome,Porcentagens,CURSO_NUM,CURSO_NOME=CBOs_Curso_v6(csv_estado,csv_CBO,curso_num,curso_nome,titulo10,titulo3,0.1,save_results_to)
 
-    primeirosCbos,primeirosCursos=CBOs_Curso(csv_estado,csv_CBO,curso_num,titulo10,titulo3)
-    print(primeirosCursos)
-    print("")
-    print(primeirosCbos)
 
-    print(primeirosCbos)
-    print(primeirosCursos)
-    Plot_Cursos_CBOs(csv_estado,csv_CBO,csv_CURSOS,primeirosCursos,primeirosCbos)
+    # print(primeirosCursos)
+    # print("")
+    # print(primeirosCbos)
+
+    # print(primeirosCbos)
+    # print(primeirosCursos)
+    # Plot_Cursos_CBOs(csv_estado,csv_CBO,csv_CURSOS,primeirosCursos,primeirosCbos)
     return
