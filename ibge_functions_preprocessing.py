@@ -109,6 +109,11 @@ def Limpeza_Arquivo_Censo_Graduados_2(path,name,i):
     
     name_path = name.split("_Todos.csv")
     path_proc =  ibge_variable.paths(9)
+
+    # Crie o diretório de destino se ele não existir
+    if not os.path.exists(path_proc[i]):
+        os.makedirs(path_proc[i])
+
     name_path = os.path.join(path_proc[i], name_path[0] + "_Graduados.csv")
     X.to_csv(name_path) 
     return
@@ -129,33 +134,48 @@ def Pivot_Table_Censo(path,name,gender,i):
 
         name_path = name.split("_Todos.csv")
         pathh = ibge_variable.paths(5)
+
+        # Crie o diretório de destino se ele não existir
+        if not os.path.exists(pathh[0]):
+            os.makedirs(pathh[0])
+
         name_path = os.path.join(pathh[0],  name_path[0] + "_PivotTabletMasculina.csv")
         X_1.to_csv(name_path)
     else:
         if gender == "F":
            
-           file = os.path.join(path,name)
-           X= pd.read_csv(file,usecols=["Nível_instrução", "Ocupação_Código", "gênero"], sep=",")  	
+            file = os.path.join(path,name)
+            X= pd.read_csv(file,usecols=["Nível_instrução", "Ocupação_Código", "gênero"], sep=",")  	
 
-           #removendo pessoas do sexo masculino ...
-           X.drop(X[(X['gênero'] ==1)].index, inplace=True)
+            #removendo pessoas do sexo masculino ...
+            X.drop(X[(X['gênero'] ==1)].index, inplace=True)
 
-           X_1 = Pivot_Table(X)
+            X_1 = Pivot_Table(X)
 
-           name_path = name.split("_Todos.csv")
-           pathh = ibge_variable.paths(4)
-           name_path = os.path.join(pathh[0], name_path[0] +  "_PivotTabletFeminina.csv")
-           X_1.to_csv(name_path)
+            name_path = name.split("_Todos.csv")
+            pathh = ibge_variable.paths(4)
+
+            # Crie o diretório de destino se ele não existir
+            if not os.path.exists(pathh[0]):
+                os.makedirs(pathh[0])
+
+            name_path = os.path.join(pathh[0], name_path[0] +  "_PivotTabletFeminina.csv")
+            X_1.to_csv(name_path)
         else:
-             file = os.path.join(path,name)
-             X= pd.read_csv(file,usecols=["Nível_instrução", "Ocupação_Código", "gênero"], sep=",")  	
+            file = os.path.join(path,name)
+            X= pd.read_csv(file,usecols=["Nível_instrução", "Ocupação_Código", "gênero"], sep=",")  	
 
-             X_1 = Pivot_Table(X)
+            X_1 = Pivot_Table(X)
 
-             name_path = name.split("_Todos.csv")
-             pathh = ibge_variable.paths(6)
-             name_path =  os.path.join(pathh[0],name_path[0] + "_PivotTablet.csv")
-             X_1.to_csv(name_path)
+            name_path = name.split("_Todos.csv")
+            pathh = ibge_variable.paths(6)
+
+            # Crie o diretório de destino se ele não existir
+            if not os.path.exists(pathh[0]):
+                os.makedirs(pathh[0])
+
+            name_path =  os.path.join(pathh[0],name_path[0] + "_PivotTablet.csv")
+            X_1.to_csv(name_path)
     return X_1
 
 def Pivot_Table(X):
@@ -185,6 +205,11 @@ def Reduzir(pivot_final,estado,gender):
     #pivotfinal = reduce(lambda a, b: a.add(b, fill_value=0), [pivot_final[0], pivot_final[1]])
     pivotfinal = reduce(lambda a, b: a.add(b, fill_value=0), pivot_final)
     pathh =  ibge_variable.paths(8)
+
+    # Crie o diretório de destino se ele não existir
+    if not os.path.exists(pathh[0]):
+        os.makedirs(pathh[0])
+
     if gender ==1:
        name_path = str(pathh[0]) + estado + '_PivotFinalMasculina_.csv'
        pivotfinal.to_csv(name_path)    
@@ -225,6 +250,12 @@ def JuntarCSVs(path,opcao):
 
     combined_csv = pd.concat([pd.read_csv(f) for f in all_filenames])
     pathh = ibge_variable.paths(11)
+
+    # Crie o diretório de destino se ele não existir
+    if not os.path.exists(pathh[0]):
+        os.makedirs(pathh[0])
+    if not os.path.exists(pathh[1]):
+        os.makedirs(pathh[1])
 
     if opcao == "Graduados": 
         logging.info("Gerando Arquivo Final de Graduados")  
