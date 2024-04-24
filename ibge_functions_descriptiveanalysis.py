@@ -1030,11 +1030,42 @@ def relacionamentos_fortes_naofortes_cursos_profissoes():
     
     path = ibge_variable.paths(11)
     name = ibge_variable.names(7)
-    csv_estado = os.path.join(path[0],name[0])
+    csv_estado = os.path.join(path[0],name[0]) # arquivo do censo do Brasil inteiro (somente graduados)
     path1 = ibge_variable.paths(12)
     name1 = ibge_variable.names(6)
-    csv_CBO = os.path.join(path1[0],name1[1])
-    csv_CURSOS = os.path.join(path1[0],name1[2])
+    csv_CBO = os.path.join(path1[0],name1[1]) # Tabela de CBOs
+    csv_CURSOS = os.path.join(path1[0],name1[2]) # Tabela de Cursos
+
+    # Abrir csv do Brasil inteiro
+    brasil = pd.read_csv(csv_estado)
+    # Abrir CSV do CBO
+    CBO = pd.read_csv(csv_CBO)
+    # Abrir CSV de Cursos
+    cursos = pd.read_csv(csv_CURSOS)
+
+    # Identificar todos os CBOs únicos da tabela brasil utilizando a coluna ocupacao_codigo
+    CBO_unicos = brasil['Ocupação_Código'].unique()
+    # Imprima a quantidade de CBO únicos
+    print(len(CBO_unicos))
+
+    # Identificar todos os cursos únicos da tabela brasil utilizando a coluna Curso_Superior_Graduação_Código
+    cursos_unicos = brasil['Curso_Superior_Graduação_Código'].unique()
+    # Imprima a quantidade de cursos únicos
+    print(len(cursos_unicos))
+
+    # Monte um dataframe que indique a quantidade de cada CBO por curso que temos na tabela brasil
+    # Vamos fazer isso utilizando a função crosstab do pandas
+    crosstab_curso = pd.crosstab(index=brasil['Curso_Superior_Graduação_Código'], columns=brasil['Ocupação_Código'])
+    # Imprima o crosstab
+    print(crosstab_curso)
+
+    # Faça a mesma coisa da ordem inversa, montando um dataframe que indique a quantidade de cada curso por CBO
+    crosstab_cbo = pd.crosstab(index=brasil['Ocupação_Código'], columns=brasil['Curso_Superior_Graduação_Código'])
+    # Imprima o crosstab
+    print(crosstab_cbo)
+    
+
+
 
     curso_num=481.0
     curso_nome="Ciência da Computação"
