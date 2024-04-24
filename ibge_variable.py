@@ -1,31 +1,31 @@
 from ibgeparser.enums import Estados
 
 def estados():
-    estados = [Estados.PARANA], [Estados.SANTA_CATARINA], [Estados.RIO_GRANDE_DO_SUL], [Estados.MATO_GROSSO_DO_SUL], [Estados.MATO_GROSSO], [Estados.GOIAS], [Estados.DISTRITO_FEDERAL], [Estados.RONDONIA],[Estados.ACRE], [Estados.AMAZONAS], [Estados.RORAIMA], [Estados.PARA], [Estados.AMAPA],[Estados.TOCANTINS]
+    estados = [[Estados.TODOS]]
     return estados
 def paths(opcao):
     if opcao == 1:
        path = ['microdados-ibge/original/']
     if opcao == 2:
-       path = ['microdados-ibge/processados/']
+       path = ['processados/']
     if opcao == 3:
-       path = ['microdados-ibge/processados/Graduados_NaoGraduados/']
+       path = ['processados/Graduados_NaoGraduados/']
     if opcao == 4:
-       path = ['microdados-ibge/processados/PivotTable/Feminino/']
+       path = ['processados/PivotTable/Feminino/']
     if opcao == 5:
-       path = ['microdados-ibge/processados/PivotTable/Masculino/']
+       path = ['processados/PivotTable/Masculino/']
     if opcao ==6:
-       path = ['microdados-ibge/processados/PivotTable/']
+       path = ['processados/PivotTable/']
     if opcao ==7:  
-       path = ['microdados-ibge/processados/PivotTable/Masculino/', 'microdados-ibge/processados/PivotTable/Feminino/', 'microdados-ibge/processados/PivotTable/']
+       path = ['processados/PivotTable/Masculino/', 'processados/PivotTable/Feminino/', 'processados/PivotTable/']
     if opcao ==8:
-       path = ['microdados-ibge/processados/CSVs_PivotTableFinal/']
+       path = ['processados/CSVs_PivotTableFinal/']
     if opcao ==9:
-       path = ['microdados-ibge/processados/Graduados/']
+       path = ['processados/Graduados/']
     if opcao ==10:
-       path = ['microdados-ibge/processados/Graduados/','microdados-ibge/processados/Graduados_NaoGraduados/']
+       path = ['processados/Graduados/','processados/Graduados_NaoGraduados/']
     if opcao ==11:
-       path = ['microdados-ibge/processados/CSVs_ArquivoFinalGraduados/','microdados-ibge/processados/CSVs_ArquivoFinalGraduados_NaoGraduados/']
+       path = ['processados/CSVs_ArquivoFinalGraduados/','processados/CSVs_ArquivoFinalGraduados_NaoGraduados/']
     if opcao == 12: 
        path = ['microdados-ibge/documentacao/']      
     return path
