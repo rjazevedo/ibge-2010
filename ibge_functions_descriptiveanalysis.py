@@ -1026,7 +1026,7 @@ def Plot_Cursos_CBOs(csv_estado,csv_CBO,csv_CURSOS,primeirosCursos,primeirosCbos
 
 
 
-def relacionamentos_fortes_nãofortes_cursos_profissões():
+def relacionamentos_fortes_naofortes_cursos_profissoes():
     
     path = ibge_variable.paths(11)
     name = ibge_variable.names(7)
