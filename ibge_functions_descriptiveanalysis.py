@@ -288,7 +288,7 @@ def ibge_qtdadeProfissoes_recenseados_masculino(path1,name1):
     #print(len(Profissoes_Censo_unique))
     return len(Profissoes_Censo_unique)
 
-def CBOs_Curso_v4(csv_estado,csv_CBO,curso_num,curso_nome,titulo10,titulo3,save_results_to):
+def CBOs_Curso(csv_estado,csv_CBO,curso_num,curso_nome,titulo10,titulo3,save_results_to):
     # Abrir csv do Brasil inteiro
     brasil = pd.read_csv(csv_estado)
     # Abrir CSV do CBO
@@ -466,6 +466,14 @@ def relacionamentos_fortes_naofortes_cursos_profissoes(path,name,path1,name1):
     # print('curso_num: ', curso_num)  
     # print('curso_nome: ', curso_nome)    
      
-    primeirosCbos,primeirosCbos_Nome,CURSO_NUM,CURSO_NOME=CBOs_Curso_v4(csv_estado,csv_CBO,curso_num,curso_nome,titulo10,titulo3,save_results_to)
+    # Plota os 10 maiores CBOs Curso
+    # Plota os 3 maiores CBOs por curso
+    # Validação para chamar somente os CBOs da Familia 1 e 2
+    # Retorna os três primeiros CBOs, os três primeiros CBOs acompanhado dos respectivos nomes, o numero do Curso, e o nome do Curso 
+    primeirosCbos,primeirosCbos_Nome,CURSO_NUM,CURSO_NOME=CBOs_Curso(csv_estado,csv_CBO,curso_num,curso_nome,titulo10,titulo3,save_results_to)
+    # print(primeirosCbos)
+    # print(primeirosCbos_Nome)
+    # print(CURSO_NUM)
+    # print(CURSO_NOME)
        
     return
