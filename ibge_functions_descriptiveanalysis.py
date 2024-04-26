@@ -21,6 +21,7 @@ import ibge_variable
 import matplotlib.pyplot as plt
 import warnings
 import sys
+import ibge_functions
 
 def ibge_cnae(path,name,i):
     #...
@@ -62,7 +63,7 @@ def ibge_cursos(path,name,i):
     #...
     file = os.path.join(path,name)
     Curso_CSV = pd.DataFrame(pd.read_excel(file))
-    
+
     dict = {"Áreas gerais, específicas e detalhadas de formação dos cursos de nível superior": "Cod_Curso", "Unnamed: 1":"Nome_Curso",}
     Curso_CSV.rename(columns=dict,inplace=True)
 
@@ -75,6 +76,34 @@ def ibge_cursos(path,name,i):
     Curso_CSV['Cod_Curso'] = Curso_CSV['Cod_Curso'].astype('str')
     Curso_CSV.to_csv(path + 'Curso_CSV.csv')
     return Curso_CSV
+
+def ibge_cursos_filter(path,name):   
+    #...
+    file = os.path.join(path,name)
+    cursos = pd.read_csv(file, dtype ='str')
+    CURSO = []
+    NOME  = []
+    for i in range(len(cursos)):
+        # print(len(cursos.Cod_Curso[i]))
+        if len(cursos.Cod_Curso[i]) >=5:
+           CURSO.append(cursos.Cod_Curso[i])
+           NOME.append(cursos.Nome_Curso[i])
+           #print(cursos.Cod_Curso[i])     
+              
+    Cursos_Censo=[]
+    for i in range(len(CURSO)):
+        tupla=(CURSO[i],NOME[i])
+        Cursos_Censo.append(tupla)
+    #...
+    CursosCenso = pd.DataFrame(Cursos_Censo)
+    #Curso_Cbo_dir_curso_cbos.shape
+    nomes = {0:"curso_num",
+             1:"curso_nome",
+            }
+    CursosCenso.rename(columns=nomes,inplace=True)
+    CursosCenso = CursosCenso.sort_values(by=['curso_num'])       
+    CursosCenso.to_csv(path + 'Curso_Censo.csv')       
+    return CursosCenso
 
 def ibge_qtdadeCursos(path,name): 
     file = path + name
@@ -259,33 +288,13 @@ def ibge_qtdadeProfissoes_recenseados_masculino(path1,name1):
     #print(len(Profissoes_Censo_unique))
     return len(Profissoes_Censo_unique)
 
-# def CBOs_Curso_v4(csv_estado,csv_CBO,curso_num,curso_nome,titulo10,titulo3):
-#     return
-
-
-def relacionamentos_fortes_naofortes_cursos_profissoes():
-    path = ibge_variable.paths(11)
-    name = ibge_variable.names(7)
-    csv_estado = os.path.join(path[0],name[0]) # arquivo do censo do Brasil inteiro (somente graduados)
-    path1 = ibge_variable.paths(12)
-    name1 = ibge_variable.names(6)
-    csv_CBO = os.path.join(path1[0],name1[1]) # Tabela de CBOs
-    csv_CURSOS = os.path.join(path1[0],name1[2]) # Tabela de Cursos
-
-    # Passar o indice do curso ao invés de fazer manualmente ...
-    curso_num=481.0
-    curso_nome="Ciência da Computação"
-    titulo10="Curso 481: Ciência da Computação -  Os 10 maiores"
-    titulo3="Curso 481: Ciência da Computação -  Os 3 maiores"
-    save_results_to = 'graficos/'
-
-     
+def CBOs_Curso_v4(csv_estado,csv_CBO,curso_num,curso_nome,titulo10,titulo3,save_results_to):
     # Abrir csv do Brasil inteiro
     brasil = pd.read_csv(csv_estado)
     # Abrir CSV do CBO
     CBO = pd.read_csv(csv_CBO)
     # Abrir CSV de Cursos
-    cursos = pd.read_csv(csv_CURSOS)
+    # cursos = pd.read_csv(csv_CURSOS)
 
     # # Identificar todos os CBOs únicos da tabela brasil utilizando a coluna ocupacao_codigo
     # CBO_unicos = brasil['Ocupação_Código'].unique()
@@ -310,6 +319,7 @@ def relacionamentos_fortes_naofortes_cursos_profissoes():
 
     # A partir do arquivo brasil, criar um novo dataframe somente com cursos e cbos para facilitar 
     X_CURSO_CBO = brasil[['Curso_Superior_Graduação_Código','Ocupação_Código']]
+    # print(X_CURSO_CBO)
 
     # Transforma  X_CURSO_CBO.Ocupação_Código de Float para String 
     # A partir do arquivo brasil, criar um novo dataframe somente com cursos e cbos para facilitar 
@@ -337,6 +347,7 @@ def relacionamentos_fortes_naofortes_cursos_profissoes():
     dir = X_CURSO_CBO.index[X_CURSO_CBO['Curso_Superior_Graduação_Código'] == curso_num].tolist()
     Curso_dir = []
     Cbo_dir = []
+    # print(dir)
     for i in range(len(dir)):
         curso = X_CURSO_CBO._get_value(dir[i],'Curso_Superior_Graduação_Código')
         cbo = X_CURSO_CBO._get_value(dir[i],'Ocupação_Código')
@@ -347,9 +358,10 @@ def relacionamentos_fortes_naofortes_cursos_profissoes():
         tupla=(Curso_dir[i],Cbo_dir[i])
         resultados_dir.append(tupla)
     Curso_Cbo_dir = pd.DataFrame(resultados_dir)
+    # print(resultados_dir)
     dict = {0:"Curso",1:"Cbo"}
     Curso_Cbo_dir.rename(columns=dict,inplace=True)
-    # print(len(Curso_Cbo_dir))
+    # print(Curso_Cbo_dir.columns)
 
     #CBOs Unicos 
     Curso_Cbo_dir_unique = np.unique(Curso_Cbo_dir.Cbo)
@@ -429,5 +441,31 @@ def relacionamentos_fortes_naofortes_cursos_profissoes():
     string = str(curso_num) + " - " + curso_nome + "_3.pdf"
     plt.savefig(save_results_to + string)
     # plt.show()
-    
+    return tresprimeiros,tresnomes,curso_num,curso_nome
+
+
+
+def relacionamentos_fortes_naofortes_cursos_profissoes(path,name,path1,name1):
+    # path = ibge_variable.paths(11)
+    # name = ibge_variable.names(7)
+    csv_estado = os.path.join(path[0],name[0]) # arquivo do censo do Brasil inteiro (somente graduados)
+    path1 = ibge_variable.paths(12)
+    name1 = ibge_variable.names(6)
+    csv_CBO = os.path.join(path1[0],name1[1]) # Tabela de CBOs
+    csv_CURSOS = os.path.join(path1[0],name1[2]) # Tabela de Cursos
+
+    CursosCenso = ibge_cursos_filter(path1[0],name1[2])
+    # print(CursosCenso)
+
+    # Passar o indice do curso ao invés de fazer manualmente ...
+    curso_num  = float(CursosCenso.curso_num.iloc[1])
+    curso_nome = CursosCenso.curso_nome.iloc[1]
+    titulo10 =  "Curso:  " +  str(curso_num) + ": " + curso_nome + " - Os 10 maiores"
+    titulo3  =  "Curso:  " +  str(curso_num) + ": " + curso_nome + " - Os 3 maiores"
+    save_results_to = 'graficos/' 
+    # print('curso_num: ', curso_num)  
+    # print('curso_nome: ', curso_nome)    
+     
+    primeirosCbos,primeirosCbos_Nome,CURSO_NUM,CURSO_NOME=CBOs_Curso_v4(csv_estado,csv_CBO,curso_num,curso_nome,titulo10,titulo3,save_results_to)
+       
     return

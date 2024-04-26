@@ -191,8 +191,15 @@ def ibge_cursos_profissoes():
 
 
 def ibge_relacionamentos_cursos_profissoes():
-     ibge_functions_descriptiveanalysis.relacionamentos_fortes_naofortes_cursos_profissoes()
-     return
+    path = ibge_variable.paths(11)
+    name = ibge_variable.names(7)
+    # csv_estado = os.path.join(path[0],name[0]) # arquivo do censo do Brasil inteiro (somente graduados)
+    path1 = ibge_variable.paths(12)
+    name1 = ibge_variable.names(6)
+    # csv_CBO = os.path.join(path1[0],name1[1]) # Tabela de CBOs
+    # csv_CURSOS = os.path.join(path1[0],name1[2]) # Tabela de Cursos
+    ibge_functions_descriptiveanalysis.relacionamentos_fortes_naofortes_cursos_profissoes(path,name,path1,name1)
+    return
 
 def ibge_corte_CBO():
     return
