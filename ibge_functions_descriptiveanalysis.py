@@ -618,23 +618,17 @@ def relacionamentos_fortes_naofortes_cursos_profissoes(path,name,path1,name1):
     # Retorna os três primeiros CBOs, os três primeiros CBOs acompanhado dos respectivos nomes, o numero do Curso, e o nome do Curso 
     primeirosCbos,primeirosCbos_Nome,CURSO_NUM,CURSO_NOME=CBOs_Curso(csv_estado,csv_CBO,curso_num,curso_nome,titulo10,titulo3,save_results_to)
     # print(type(primeirosCbos[0]))  
-
+    
+    #Cursos por CBO
+    path2 = ibge_variable.paths(8)
+    name2 = ibge_variable.names(8)         
+    csv_PivotTableFinal =  os.path.join(path2[0],name2[0]) 
+    NaoGraduados = NaoGraduados_PivotTable(primeirosCbos, csv_PivotTableFinal)
     # Cursos por CBO ...
     # Acha CBOs por Curso
     # Define forte ou Fraco via Código
     # Plota Não-Graduados em Cor Diferente - Verde
-    path2 = ibge_variable.paths(8)
-    name2 = ibge_variable.names(8)       
-    csv_PivotTableFinal =  os.path.join(path2[0],name2[0]) 
-    # print(csv_PivotTableFinal)
-    # PivotTableFinal = pd.read_csv(csv_PivotTableFinal)
-    # print(PivotTableFinal)
-    # NaoGraduados_PivotTable(primeirosCbos, csv_PivotTableFinal)
-    NaoGraduados = NaoGraduados_PivotTable(primeirosCbos, csv_PivotTableFinal)
-    # print('NaoGraduados:', NaoGraduados)
     Curso,PrimeirosCbos_Nome,intensidade = Plot_Cursos_CBOs_11(csv_estado,csv_CBO,csv_CURSOS,primeirosCbos_Nome,primeirosCbos,NaoGraduados,curso_num,curso_nome)
-    # Curso,tresprimeirosCursos,intensidade=Cursos_CBO(csv_estado,csv_CBO,csv_CURSOS,primeirosCbos[0],titulo3,NaoGraduados[0],curso_num,curso_nome,primeirosCbos_Nome)
-    # Cursos_CBO(csv_estado,csv_CBO,csv_CURSOS,primeirosCbos[0],titulo3,NaoGraduados[0],curso_num,curso_nome,primeirosCbos_Nome)
-
+    
        
     return
