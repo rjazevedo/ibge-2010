@@ -45,6 +45,8 @@ def names(opcao):
       names = ['CNAE_CSV.csv','CBO_CSV.csv','Curso_CSV.csv']
    if opcao == 7:       
       names = ['Brasil_Graduados.csv','Brasil_Não-Graduados.csv']   
+   if opcao == 8:       
+      names = ['Brasil_PivotFinal.csv','Brasil_PivotFinalMasculina.csv','Brasil_PivotFinalFeminina.csv']      
 
    return names
 

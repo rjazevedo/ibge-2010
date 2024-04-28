@@ -443,37 +443,198 @@ def CBOs_Curso(csv_estado,csv_CBO,curso_num,curso_nome,titulo10,titulo3,save_res
     # plt.show()
     return tresprimeiros,tresnomes,curso_num,curso_nome
 
+#Cursos por CBO
+def Cursos_CBO(csv_estado,csv_CBO,csv_CURSOS,cbo_num,titulo3,NaoGraduados_qtdade,curso_num,curso_nome,primeirosCbos_Nome):
+    #Leitura de Arquivos CSVs ...
+    X = pd.read_csv(csv_estado)
+    CBO = pd.read_csv(csv_CBO, dtype ='str')
+    CURSOS = pd.read_csv(csv_CURSOS, dtype ='str')
+    # drop the 'Unnamed:0' column
+    CBO = CBO.drop(columns=['Unnamed: 0'])
+    CURSOS = CURSOS.drop(columns=['Unnamed: 0'])
+    #Cbos -> Cursos ... criar um novo dataframe somente com cursos e cbos para facilitar
+    X_CURSO_CBO = X[['Curso_Superior_Graduação_Código','Ocupação_Código']]
+    # print(X_CURSO_CBO.shape)
+    # print(X_CURSO_CBO)
 
+    #Cursos por CBO
+    #Indice =================================================================================================
+    X_CURSO_CBO['Ocupação_Código'] = X_CURSO_CBO['Ocupação_Código'].astype(int)
+    dir_curso_cbos = X_CURSO_CBO.index[X_CURSO_CBO['Ocupação_Código'] == int(str(cbo_num))].tolist()
+    # print(dir_curso_cbos)
+    # ...
+    Curso_dir_curso_cbos = []
+    Cbo_dir_curso_cbos = []
+    for i in range(len(dir_curso_cbos)):
+        #print(direito[i])
+        curso = X_CURSO_CBO._get_value(dir_curso_cbos[i],'Curso_Superior_Graduação_Código')
+        cbo = X_CURSO_CBO._get_value(dir_curso_cbos[i],'Ocupação_Código')
+        #print("Curso:",curso,"CBO:",str(int(cbo)))
+        Curso_dir_curso_cbos.append(curso)
+        Cbo_dir_curso_cbos.append(cbo)
+    #..
+    resultados_dir_curso_cbos=[]
+    for i in range(len(Curso_dir_curso_cbos)):
+      tupla=(Curso_dir_curso_cbos[i],Cbo_dir_curso_cbos[i])
+      resultados_dir_curso_cbos.append(tupla)
+    #...
+    Curso_Cbo_dir_curso_cbos = pd.DataFrame(resultados_dir_curso_cbos)
+    #Curso_Cbo_dir_curso_cbos.shape
+    dict = {0:"Curso_Repet",
+        1:"Cbo_Repet",
+        }
+    Curso_Cbo_dir_curso_cbos.rename(columns=dict,inplace=True)
+    # print(Curso_Cbo_dir_curso_cbos)
+    #Cursos Únicos por CBO ====================================================================================
+    Curso_Cbo_dir_curso_cbos_unique = np.unique(Curso_Cbo_dir_curso_cbos.Curso_Repet)
+    #Plot======================================================================================================
+    Curso_Unique = Curso_Cbo_dir_curso_cbos['Curso_Repet'].astype(int).tolist()
+    #...
+    Curso_Cbo_dir_curso_cbos['Curso_Repet'].value_counts().sort_index()
+    #...
+    from numpy.ma.core import sort
+    A_dir_curso_cbos = Curso_Cbo_dir_curso_cbos['Curso_Repet'].value_counts().sort_index()
+    #...
+    #Curso_Cbo_dir.loc[1:3, ['Cbo']]
+    A_dir_curso_cbos_sort = pd.DataFrame(A_dir_curso_cbos)
+    #...
+    A_Curso = A_dir_curso_cbos_sort.sort_values("Curso_Repet",ascending=False)
+    #...
+    A_Curso_11 = A_Curso.head(10)
+    # print(A_Curso_11)
+    #Coletando o nome dos Cursos ...
+    NomeCurso = []
+    for i in range(len(A_Curso_11)):
+        curso=str(float(A_Curso_11.index[i]))
+        for indexx, row in CURSOS.iterrows():
+            if (row['Cod_Curso'] == curso):
+            #if(row['Cod_Curso'] == A_Curso_10.index[i]):
+                NomeCurso.append(row['Nome_Curso'])
+                #print(row['Cod_Curso'],":",row['Nome_Curso'])
+    #...
+    NomeCurso = pd.DataFrame(NomeCurso, columns=['Nome_Curso'])
+    # ...
+    # A_Curso_11["Nome"] = 1
+    A_Curso_11.insert(loc=1, column='Nome', value=[1,1,1,1,1,1,1,1,1,1])
+    import warnings
+    for i in range(len(A_Curso_11)):
+        # A_Curso_11['Nome'][i] = NomeCurso.Nome_Curso[i]
+        A_Curso_11['Nome'].iloc[i]= NomeCurso['Nome_Curso'].iloc[i]
+    # print(A_Curso_11)   
+    #...
+    A_Curso_11.reset_index(inplace=True)
+    A_Curso_11 = A_Curso_11.rename(columns = {'index':'Curso'})
+    #A_Curso_11
+    A_Curso_11['Curso'] = A_Curso_11['Curso'].astype("float").astype('str')
+    A_Curso_11['Curso_Nome'] = A_Curso_11['Curso'].str.cat(A_Curso_11['Nome'], sep =" ")
+
+    A_Curso_11['Curso'].iloc[3]= 0
+    A_Curso_11['Curso_Repet'].iloc[3]= NaoGraduados_qtdade
+    A_Curso_11['Nome'].iloc[3]= "Não-Graduados"
+    A_Curso_11['Curso_Nome'].iloc[3]= "Não-Graduados"
+    tresprimeiros = []
+    if (len(A_Curso_11)<3):
+        for i in range(len(A_Curso_11)):
+            tresprimeiros.append(int(float(A_Curso_11.Curso[i])))
+    else:
+        #for i in range(3):
+        for i in range(4): #Alterado em 09/09/2023 para pegar o 4º Elemento
+            tresprimeiros.append(int(float(A_Curso_11.Curso[i])))
+    A_Curso_11_sort = A_Curso_11.iloc[0:4].sort_values("Curso_Repet",ascending=True) #Alterado em 09/09/2023 para pegar os 4 primeiros
+    index =  A_Curso_11_sort.index
+    for i in range(len(index)):
+        if ((i==0)and(A_Curso_11_sort['Curso'].iloc[i]==0)):
+            colors = ['green', 'blue', 'blue','blue'] #4ª posição
+            break
+        if ((i==1)and(A_Curso_11_sort['Curso'].iloc[i]==0)):
+            colors = ['blue', 'green', 'blue','blue'] #3ª posição
+            break
+        if ((i==2)and(A_Curso_11_sort['Curso'].iloc[i]==0)):
+            colors = ['blue', 'blue', 'green','blue'] #2ª posição
+            break
+        if ((i==3)and(A_Curso_11_sort['Curso'].iloc[i]==0)):
+            colors = ['blue', 'blue', 'blue','green'] #1ª posição
+            break
+    tituloalterado = titulo3 + " : " + "Cbo fraco"
+    curso_num = str(float(curso_num))
+    intensidade = 'Fraco'
+    for i in range(len(index)):
+        if ((i==3)and(A_Curso_11_sort['Curso'].iloc[i]==str(curso_num))): #curso_num
+            tituloalterado = titulo3 + " : " + "Cbo forte"
+            intensidade ='Forte'
+            break
+    x='Curso_Nome'
+    y='Curso_Repet'
+    A_Curso_11_sort.plot(x,y,kind='barh',title=tituloalterado,color=colors,legend=False)
+    plt.show()
+    return curso_nome,primeirosCbos_Nome,intensidade
+        
+
+#Função para achar a quantidade de Não-Graduados na Pivot Table
+def NaoGraduados_PivotTable(primeirosCbos,csv_PivotTableFinal):
+
+    PivotTableFinal = pd.read_csv(csv_PivotTableFinal)
+    # print(PivotTableFinal)
+
+    NaoGraduados = []
+    for i in range(len(primeirosCbos)):
+        # print( type(int(str(primeirosCbos[0]))))
+        Valor1 = PivotTableFinal.loc[PivotTableFinal.Ocupação_Código==int(str(primeirosCbos[i])), '1.0'].values[0]
+        Valor2 = PivotTableFinal.loc[PivotTableFinal.Ocupação_Código==int(str(primeirosCbos[i])), '2.0'].values[0]
+        Valor3 = PivotTableFinal.loc[PivotTableFinal.Ocupação_Código==int(str(primeirosCbos[i])), '3.0'].values[0]
+        Valor5 = PivotTableFinal.loc[PivotTableFinal.Ocupação_Código==int(str(primeirosCbos[i])), '5.0'].values[0]
+        ValorFinal= Valor1 + Valor2 + Valor3 + Valor5
+        NaoGraduados.append(ValorFinal)
+    return NaoGraduados
+
+
+#Função para plotar os três primeiros cursos dos três primeiros CBOs ...
+def Plot_Cursos_CBOs_11(csv_estado,csv_CBO,csv_CURSOS,primeirosCbos_Nome,primeirosCbos,NaoGraduados,curso_num,curso_nome):
+    Intensidade = []
+    for i in range (len(primeirosCbos)):
+          titulo3=primeirosCbos_Nome[i]
+          Curso,tresprimeirosCursos,intensidade=Cursos_CBO(csv_estado,csv_CBO,csv_CURSOS,primeirosCbos[i],titulo3,NaoGraduados[i],curso_num,curso_nome,primeirosCbos_Nome)
+          Intensidade.append(intensidade)          
+    return Curso,tresprimeirosCursos,Intensidade    
 
 def relacionamentos_fortes_naofortes_cursos_profissoes(path,name,path1,name1):
-    # path = ibge_variable.paths(11)
-    # name = ibge_variable.names(7)
     csv_estado = os.path.join(path[0],name[0]) # arquivo do censo do Brasil inteiro (somente graduados)
     path1 = ibge_variable.paths(12)
     name1 = ibge_variable.names(6)
     csv_CBO = os.path.join(path1[0],name1[1]) # Tabela de CBOs
     csv_CURSOS = os.path.join(path1[0],name1[2]) # Tabela de Cursos
 
+    # CBOs por Curso ...
     CursosCenso = ibge_cursos_filter(path1[0],name1[2])
-    # print(CursosCenso)
-
     # Passar o indice do curso ao invés de fazer manualmente ...
     curso_num  = float(CursosCenso.curso_num.iloc[1])
     curso_nome = CursosCenso.curso_nome.iloc[1]
     titulo10 =  "Curso:  " +  str(curso_num) + ": " + curso_nome + " - Os 10 maiores"
     titulo3  =  "Curso:  " +  str(curso_num) + ": " + curso_nome + " - Os 3 maiores"
-    save_results_to = 'graficos/' 
-    # print('curso_num: ', curso_num)  
-    # print('curso_nome: ', curso_nome)    
-     
+    save_results_to = 'graficos/'   
     # Plota os 10 maiores CBOs Curso
     # Plota os 3 maiores CBOs por curso
     # Validação para chamar somente os CBOs da Familia 1 e 2
     # Retorna os três primeiros CBOs, os três primeiros CBOs acompanhado dos respectivos nomes, o numero do Curso, e o nome do Curso 
     primeirosCbos,primeirosCbos_Nome,CURSO_NUM,CURSO_NOME=CBOs_Curso(csv_estado,csv_CBO,curso_num,curso_nome,titulo10,titulo3,save_results_to)
-    # print(primeirosCbos)
-    # print(primeirosCbos_Nome)
-    # print(CURSO_NUM)
-    # print(CURSO_NOME)
+    # print(type(primeirosCbos[0]))  
+
+    # Cursos por CBO ...
+    # Acha CBOs por Curso
+    # Define forte ou Fraco via Código
+    # Plota Não-Graduados em Cor Diferente - Verde
+    path2 = ibge_variable.paths(8)
+    name2 = ibge_variable.names(8)       
+    csv_PivotTableFinal =  os.path.join(path2[0],name2[0]) 
+    # print(csv_PivotTableFinal)
+    # PivotTableFinal = pd.read_csv(csv_PivotTableFinal)
+    # print(PivotTableFinal)
+    # NaoGraduados_PivotTable(primeirosCbos, csv_PivotTableFinal)
+    NaoGraduados = NaoGraduados_PivotTable(primeirosCbos, csv_PivotTableFinal)
+    # print('NaoGraduados:', NaoGraduados)
+    Curso,PrimeirosCbos_Nome,intensidade = Plot_Cursos_CBOs_11(csv_estado,csv_CBO,csv_CURSOS,primeirosCbos_Nome,primeirosCbos,NaoGraduados,curso_num,curso_nome)
+    # Curso,tresprimeirosCursos,intensidade=Cursos_CBO(csv_estado,csv_CBO,csv_CURSOS,primeirosCbos[0],titulo3,NaoGraduados[0],curso_num,curso_nome,primeirosCbos_Nome)
+    # Cursos_CBO(csv_estado,csv_CBO,csv_CURSOS,primeirosCbos[0],titulo3,NaoGraduados[0],curso_num,curso_nome,primeirosCbos_Nome)
+
        
     return
