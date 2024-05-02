@@ -754,7 +754,7 @@ def CBOs_Curso_v6(csv_estado,csv_CBO,curso_num,curso_nome,titulo10,titulo3,porce
         ax = A_cbo_10_sort.plot(x,y,kind='barh',title=titulo3,legend=False)
         ax.bar_label(ax.containers[0])
         plt.xlabel("Porcentagem")
-        string = str(curso_num) + " - " + curso_nome + ".pdf"
+        string = str(curso_num) + " - " + curso_nome + "_" + str(porcent_param) +".pdf"
         plt.savefig(save_results_to + string)
         # plt.show()
     else:
@@ -905,7 +905,7 @@ def Cursos_CBO_14_10(csv_estado,csv_CBO,csv_CURSOS,cbo_num,titulo3,NaoGraduados_
       ax = A_Curso_11_sort.plot(x,y,kind='barh',title=tituloalterado,color=colors,legend=False)
       ax.bar_label(ax.containers[0])
       plt.xlabel("Porcentagem")
-      string = str(curso_num) + " - " + curso_nome + " : " + primeirosCbos_Nome[numero] +".pdf"
+      string = str(curso_num) + " - " + curso_nome + " : " + primeirosCbos_Nome[numero] + "_" + str(porcent_param) +".pdf"
       save_results_to = 'graficos/'  
       plt.savefig(save_results_to + string)
       volta = 'Volta'
@@ -1087,7 +1087,7 @@ def Cursos_CBO_13_10(csv_estado,csv_CBO,csv_CURSOS,cbo_num,titulo3,NaoGraduados_
         ax.bar_label(ax.containers[0])
         plt.xlabel("Porcentagem")
         
-        string = str(curso_num) + " - " + curso_nome + " : " + primeirosCbos_Nome[numero] +".pdf"
+        string = str(curso_num) + " - " + curso_nome + " : " + primeirosCbos_Nome[numero] + "_" + str(porcent_param) +".pdf"
         # save_results_to = 'graficos/'  
         plt.savefig(save_results_to + string)        
     else:
