@@ -428,7 +428,7 @@ def CBOs_Curso(csv_estado,csv_CBO,curso_num,curso_nome,titulo10,titulo3,save_res
     plt.rcParams["figure.autolayout"] = True
     A_cbo_10_sort.plot(kind='barh',title=titulo10)
     plt.xlabel("")
-    string = str(curso_num) + " - " + curso_nome + "_10.pdf"
+    string ="_" + str(curso_num) + " - " + curso_nome + "_10.pdf"
     plt.savefig(save_results_to + string)
     # plt.show()
     #...
@@ -437,7 +437,7 @@ def CBOs_Curso(csv_estado,csv_CBO,curso_num,curso_nome,titulo10,titulo3,save_res
     plt.rcParams["figure.autolayout"] = True
     A_cbo_10_sort.plot(kind='barh',title=titulo3)
     plt.xlabel("")
-    string = str(curso_num) + " - " + curso_nome + "_3.pdf"
+    string = "_" + str(curso_num) + " - " + curso_nome + "_3.pdf"
     plt.savefig(save_results_to + string)
     # plt.show()
     return tresprimeiros,tresnomes,curso_num,curso_nome
@@ -603,7 +603,7 @@ def Cursos_CBO(csv_estado,csv_CBO,csv_CURSOS,cbo_num,titulo3,NaoGraduados_qtdade
     x='Curso_Nome'
     y='Curso_Repet'
     A_Curso_11_sort.plot(x,y,kind='barh',title=tituloalterado,color=colors,legend=False)
-    string = str(curso_num) + " - " + curso_nome + " : " + primeirosCbos_Nome[numero] +".pdf"
+    string = "_" + str(curso_num) + " - " + curso_nome + " : " + primeirosCbos_Nome[numero] +".pdf"
     save_results_to = 'graficos/'  
     plt.savefig(save_results_to + string)
     # plt.show()
@@ -1094,7 +1094,7 @@ def Cursos_CBO_13_10(csv_estado,csv_CBO,csv_CURSOS,cbo_num,titulo3,NaoGraduados_
        print("Não existe cursos para esse CBO")
     return cbo_num,curso_nome,primeirosCbos_Nome,intensidade,plt,string, cursos, nomes, porcentagens
 
-
+# https://colab.research.google.com/drive/1UCEDMTAdZqIRaNGpXHN66pqq_IwHyAe7?authuser=1#scrollTo=vC50rzZCwdHj
 def relacionamentos_fortes_naofortes_cursos_profissoes_plot1(path,name,path1,name1):
     csv_estado = os.path.join(path[0],name[0]) # arquivo do censo do Brasil inteiro (somente graduados)
     path1 = ibge_variable.paths(12)
@@ -1129,7 +1129,7 @@ def relacionamentos_fortes_naofortes_cursos_profissoes_plot1(path,name,path1,nam
     Curso,PrimeirosCbos_Nome,intensidade = Plot_Cursos_CBOs_11(csv_estado,csv_CBO,csv_CURSOS,primeirosCbos_Nome,primeirosCbos,NaoGraduados,curso_num,curso_nome)
        
     
-
+# https://colab.research.google.com/drive/1UCEDMTAdZqIRaNGpXHN66pqq_IwHyAe7?authuser=1#scrollTo=vC50rzZCwdHj
 def relacionamentos_fortes_naofortes_cursos_profissoes_plot2(path,name,path1,name1):
     csv_estado = os.path.join(path[0],name[0]) # arquivo do censo do Brasil inteiro (somente graduados)
     path1 = ibge_variable.paths(12)
