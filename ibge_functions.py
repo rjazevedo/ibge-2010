@@ -195,7 +195,28 @@ def ibge_relacionamentos_cursos_profissoes():
     name = ibge_variable.names(7)
     path1 = ibge_variable.paths(12)
     name1 = ibge_variable.names(6)
-    ibge_functions_descriptiveanalysis.relacionamentos_fortes_naofortes_cursos_profissoes(path,name,path1,name1)
+
+    # Usar essa função para obter os primeiros plots sem porcentagem
+        # Plota os 10 maiores CBOs Curso ...
+        # Plota os 3 maiores CBOs por curso
+        # Validação para chamar somente os CBOs da Familia 1 e 2
+        # Retorna os três primeiros CBOs, os três primeiros CBOs acompanhado dos respectivos nomes, o numero do Curso, e o nome do Curso 
+        # Acha CBOs por Curso ...
+        # Define forte ou Fraco via Código
+        # Plota Não-Graduados em Cor Diferente - Verde (3 primeiros cursos plotando Não-Graduados)
+    # ibge_functions_descriptiveanalysis.relacionamentos_fortes_naofortes_cursos_profissoes_plot1(path,name,path1,name1)
+
+    # Usar essa função para obter os primeiros plots com porcentagem (7% ou 10%)     
+        # Plota os 3 maiores CBOs por curso
+        # Validação para chamar somente os CBOs da Familia 1 e 2
+        # Retorna os três primeiros CBOs, os três primeiros CBOs acompanhado dos respectivos nomes, o numero do Curso, e o nome do Curso
+        # salva os plots ...
+        # Acha CBOs por Curso ...
+        # Define forte ou Fraco via Código
+        # Plota Não-Graduados em Cor Diferente - Vermelho
+        # salva os plots ... 
+    ibge_functions_descriptiveanalysis.relacionamentos_fortes_naofortes_cursos_profissoes_plot2(path,name,path1,name1)
+
     return
 
 def ibge_corte_CBO():
