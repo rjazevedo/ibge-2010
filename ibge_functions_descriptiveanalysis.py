@@ -1170,6 +1170,65 @@ def relacionamentos_fortes_naofortes_cursos_profissoes_plot2(path,name,path1,nam
             # Define forte ou Fraco via Código
             # Plota Não-Graduados em Cor Diferente - Verde
             # save_results_to
+            CBO,Curso,tresprimeirosCursos,intensidade,fig,string,cursos_vol, nomes_vol, porcentagens_vol=Cursos_CBO_14_10(csv_estado,csv_CBO,csv_CURSOS,primeirosCbos[i],titulo3,NaoGraduados[i],curso_num,curso_nome,primeirosCbos_Nome,i,0.07)
+            Intensidade.append(intensidade)
+            Porcentagens_vol.append(porcentagens_vol)
+            CBO_vol.append(CBO)
+            Cursos_vol.append(cursos_vol)
+            Nomes_vol.append(nomes_vol)
+        else:
+            # Acha CBOs por Curso
+            # Define forte ou Fraco via Código
+            # Plota Não-Graduados em Cor Diferente - Verde
+            # save_results_to
+            CBO,Curso,tresprimeirosCursos,intensidade,fig,string,cursos_vol, nomes_vol, porcentagens_vol=Cursos_CBO_13_10(csv_estado,csv_CBO,csv_CURSOS,primeirosCbos[i],titulo3,NaoGraduados[i],Graduados_Nao[i],curso_num,curso_nome,primeirosCbos_Nome,i,0.07,save_results_to)
+            Intensidade.append(intensidade)
+            Porcentagens_vol.append(porcentagens_vol)
+            CBO_vol.append(CBO)
+            Cursos_vol.append(cursos_vol)
+            Nomes_vol.append(nomes_vol)    
+
+    # https://colab.research.google.com/drive/1UCEDMTAdZqIRaNGpXHN66pqq_IwHyAe7?authuser=1#scrollTo=vC50rzZCwdHj
+def relacionamentos_fortes_naofortes_cursos_profissoes_plot10(path,name,path1,name1):
+    csv_estado = os.path.join(path[0],name[0]) # arquivo do censo do Brasil inteiro (somente graduados)
+    path1 = ibge_variable.paths(12)
+    name1 = ibge_variable.names(6)
+    csv_CBO = os.path.join(path1[0],name1[1]) # Tabela de CBOs
+    csv_CURSOS = os.path.join(path1[0],name1[2]) # Tabela de Cursos
+    path2 = ibge_variable.paths(8)
+    name2 = ibge_variable.names(8)         
+    csv_PivotTableFinal =  os.path.join(path2[0],name2[0]) #Pivo Table Final
+
+    CursosCenso = ibge_cursos_filter(path1[0],name1[2])
+    curso_num  = float(CursosCenso.curso_num.iloc[43])
+    curso_nome = CursosCenso.curso_nome.iloc[43]
+    titulo10 =  "Curso:  " +  str(curso_num) + ": " + curso_nome + " - Os 10 maiores"
+    titulo3  =  "Curso:  " +  str(curso_num) + ": " + curso_nome + " - Os 3 maiores"
+    save_results_to = 'graficos/'  
+
+           
+    # 28/04/2024 ==================================================================   
+    # Plota os 3 maiores CBOs por curso
+    # Validação para chamar somente os CBOs da Familia 1 e 2
+    # Retorna os três primeiros CBOs, os três primeiros CBOs acompanhado dos respectivos nomes, o numero do Curso, e o nome do Curso
+    # save_results_to
+    primeirosCbos,primeirosCbos_Nome,Porcentagens,CURSO_NUM,CURSO_NOME=CBOs_Curso_v6(csv_estado,csv_CBO,curso_num,curso_nome,titulo10,titulo3,0.1,save_results_to)
+    # CBOs_Curso_v6(csv_estado,csv_CBO,curso_num,curso_nome,titulo10,titulo3,0.1,save_results_to)
+    # NaoGraduados_PivotTable_2(primeirosCbos, csv_PivotTableFinal)
+    primeirosCbos,NaoGraduados,Graduados_Nao,Graduados = NaoGraduados_PivotTable_2(primeirosCbos, csv_PivotTableFinal)
+    #=====================================================Plotando os cursos de determinado cbo, sem função e salvando os plots ...
+    Intensidade = []
+    Porcentagens_vol = []
+    CBO_vol = []
+    Cursos_vol = []
+    Nomes_vol  = []
+    for i in range (len(primeirosCbos)):
+        titulo3=primeirosCbos_Nome[i]
+        if(int(float(primeirosCbos[i]))>=2000):
+            # Acha CBOs por Curso
+            # Define forte ou Fraco via Código
+            # Plota Não-Graduados em Cor Diferente - Verde
+            # save_results_to
             CBO,Curso,tresprimeirosCursos,intensidade,fig,string,cursos_vol, nomes_vol, porcentagens_vol=Cursos_CBO_14_10(csv_estado,csv_CBO,csv_CURSOS,primeirosCbos[i],titulo3,NaoGraduados[i],curso_num,curso_nome,primeirosCbos_Nome,i,0.1)
             Intensidade.append(intensidade)
             Porcentagens_vol.append(porcentagens_vol)
@@ -1187,4 +1246,8 @@ def relacionamentos_fortes_naofortes_cursos_profissoes_plot2(path,name,path1,nam
             CBO_vol.append(CBO)
             Cursos_vol.append(cursos_vol)
             Nomes_vol.append(nomes_vol)    
+
+        
+
+
             
