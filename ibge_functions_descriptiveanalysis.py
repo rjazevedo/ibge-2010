@@ -1357,10 +1357,9 @@ def Tabela_Censo_CbosFortes_Fracos_Familia1_Familia2(path,name,path1,name1):
         Tabela_Certa.loc[j] = [curso_nome, '-','-', '-','-', '-','-']
         Tabela =  tabela(i,j,nomes_Fortes,cbos_Fortes,nomes_Fracos,cbos_Fracos,Tabela_Certa)
         # display(Tabela)
+        Tabela.to_excel(save_results_to + 'OndeTrabalhamAsPessoasDeCadaCursoDoCenso.xlsx')
     return 
-    # # Tabela.to_excel("/content/OndeTrabalhamAsPessoasDeCadaCursoDoCenso.xlsx")
-    # Tabela.to_excel("/content/drive/MyDrive/Orientacao_Rodolfo/Doutorado_Elisangela/Experimentos/Experimentos_25_09_a_02_09/10Porcento-Todos-IdaVolta/Tabela_Censo/OndeTrabalhamAsPessoasDeCadaCursoDoCenso_10.xlsx")
-        
+           
 
 
             
