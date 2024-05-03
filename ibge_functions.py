@@ -214,19 +214,20 @@ def ibge_corte_CBO():
     return
 
 def ibge_idas_voltas_cursos_profissoes():
+    # path = ibge_variable.paths(11)
+    # name = ibge_variable.names(7)
+    # path1 = ibge_variable.paths(12)
+    # name1 = ibge_variable.names(6)
     return
 
 def ibge_trabalho_recenseados():
+    path = ibge_variable.paths(11)
+    name = ibge_variable.names(7)
+    path1 = ibge_variable.paths(12)
+    name1 = ibge_variable.names(6)
+    # ...
+    ibge_functions_descriptiveanalysis.Tabela_Censo_CbosFortes_Fracos_Familia1_Familia2(path,name,path1,name1)
     return
-
-# def ibge_ida_Voltas_7Porcento():
-#     return
-
-# def ibge_ida_Voltas_10Porcento():
-#     return
-
-# def ibge_ida_Voltas_100Porcento():
-#     return
 
 
 # Fase 20: Análise Exploratória ...

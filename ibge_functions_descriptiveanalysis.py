@@ -1187,7 +1187,6 @@ def relacionamentos_fortes_naofortes_cursos_profissoes_plot2(path,name,path1,nam
             CBO_vol.append(CBO)
             Cursos_vol.append(cursos_vol)
             Nomes_vol.append(nomes_vol)    
-
     # https://colab.research.google.com/drive/1UCEDMTAdZqIRaNGpXHN66pqq_IwHyAe7?authuser=1#scrollTo=vC50rzZCwdHj
 def relacionamentos_fortes_naofortes_cursos_profissoes_plot10(path,name,path1,name1):
     csv_estado = os.path.join(path[0],name[0]) # arquivo do censo do Brasil inteiro (somente graduados)
@@ -1245,8 +1244,122 @@ def relacionamentos_fortes_naofortes_cursos_profissoes_plot10(path,name,path1,na
             Porcentagens_vol.append(porcentagens_vol)
             CBO_vol.append(CBO)
             Cursos_vol.append(cursos_vol)
-            Nomes_vol.append(nomes_vol)    
+            Nomes_vol.append(nomes_vol)   
 
+def AcharFortes_Fracos(Curso,PrimeirosCbos_Nome,intensidade):
+    nomes_Fortes=[]
+    nomes_Fracos=[]
+    cbos_Fortes=[]
+    cbos_Fracos=[]
+    for i in range(len(PrimeirosCbos_Nome)):
+        if (intensidade[i] == 'Forte'):
+            tupla=(PrimeirosCbos_Nome[i])
+            nomes_Fortes.append(tupla)
+            cbos_Fortes.append(intensidade[i])
+        if (intensidade[i] == 'Fraco'):
+            tupla_fraca =(PrimeirosCbos_Nome[i])
+            nomes_Fracos.append(tupla_fraca)
+            cbos_Fracos.append(intensidade[i])
+    return nomes_Fortes,cbos_Fortes,nomes_Fracos,cbos_Fracos   
+
+def tabela(i,j,nomes_Fortes,cbos_Fortes,nomes_Fracos,cbos_Fracos,Tabela_Certa):
+    if (len(cbos_Fortes)>=1):
+        if (cbos_Fortes[i] == 'Forte'):
+            Tabela_Certa.Forte1.loc[j] = nomes_Fortes[i]
+        if (len(cbos_Fortes)>1):
+            if (cbos_Fortes[i+1] == 'Forte'):
+                Tabela_Certa.Forte2.loc[j] = nomes_Fortes[i+1]
+            if (len(cbos_Fortes)>2):
+                if (cbos_Fortes[i+2] == 'Forte'):
+                    Tabela_Certa.Forte3.loc[j] = nomes_Fortes[i+2]
+
+    #i= 0 #Fracos ...
+    if (len(cbos_Fracos)>=1):
+        if (cbos_Fracos[i] == 'Fraco'):
+            Tabela_Certa.Fraco1.loc[j] = nomes_Fracos[i]
+        if (len(cbos_Fracos)>1):
+            if (cbos_Fracos[i+1] == 'Fraco'):
+                Tabela_Certa.Fraco2.loc[j] = nomes_Fracos[i+1]
+            if (len(cbos_Fracos)>2):
+                if (cbos_Fracos[i+2] == 'Fraco'):
+                    Tabela_Certa.Fraco3.loc[j] = nomes_Fracos[i+2]
+    # print("")
+    # Tabela_Certa
+
+    left_aligned_df = Tabela_Certa.style.set_properties(**{'text-align': 'center'})
+    left_aligned_df = left_aligned_df.set_table_styles([dict(selector = 'th', props=[('text-align', 'left')])])
+
+    left_aligned_df
+    return left_aligned_df
+
+
+def Tabela_Censo_CbosFortes_Fracos_Familia1_Familia2(path,name,path1,name1):
+    csv_estado = os.path.join(path[0],name[0]) # arquivo do censo do Brasil inteiro (somente graduados)
+    path1 = ibge_variable.paths(12)
+    name1 = ibge_variable.names(6)
+    csv_CBO = os.path.join(path1[0],name1[1]) # Tabela de CBOs
+    csv_CURSOS = os.path.join(path1[0],name1[2]) # Tabela de Cursos
+    path2 = ibge_variable.paths(8)
+    name2 = ibge_variable.names(8)         
+    csv_PivotTableFinal =  os.path.join(path2[0],name2[0]) #Pivo Table Final
+
+    CursosCenso = ibge_cursos_filter(path1[0],name1[2])
+    curso_num  = float(CursosCenso.curso_num.iloc[43])
+    curso_nome = CursosCenso.curso_nome.iloc[43]
+    titulo10 =  "Curso:  " +  str(curso_num) + ": " + curso_nome + " - Os 10 maiores"
+    titulo3  =  "Curso:  " +  str(curso_num) + ": " + curso_nome + " - Os 3 maiores"
+    save_results_to = 'graficos/'  
+
+    for j in range(0, 5):
+        curso_num= float(CursosCenso.curso_num.iloc[j])
+        curso_nome= CursosCenso.curso_nome.iloc[j]
+        titulo10= "Curso " +  CursosCenso.curso_num.iloc[j] + ": " + CursosCenso.curso_nome.iloc[j] + " - 10% "
+        titulo3=  "Curso " +  CursosCenso.curso_num.iloc[j] + ": " + CursosCenso.curso_nome.iloc[j] + " - 10%"
+        
+
+        #======================================================Plotando os cbos de determinado curso, usando função ...
+        primeirosCbos,primeirosCbos_Nome,Porcentagens,CURSO_NUM,CURSO_NOME=CBOs_Curso_v6(csv_estado,csv_CBO,curso_num,curso_nome,titulo10,titulo3,0.1,save_results_to)
+        #======================================================Achando a quantidade de Não-Graduados na PivotTable
+        primeirosCbos,NaoGraduados,Graduados_Nao,Graduados = NaoGraduados_PivotTable_2(primeirosCbos, csv_PivotTableFinal)
+        #=====================================================Plotando os cursos de determinado cbo, sem função e salvando os plots ...
+        Intensidade = []
+        Porcentagens_vol = []
+        CBO_vol = []
+        Cursos_vol = []
+        Nomes_vol  = []
+        for i in range (len(primeirosCbos)):
+            titulo3=primeirosCbos_Nome[i]
+            if(int(float(primeirosCbos[i]))>=2000):
+                CBO,Curso,tresprimeirosCursos,intensidade,fig,string,cursos_vol, nomes_vol, porcentagens_vol=Cursos_CBO_14_10(csv_estado,csv_CBO,csv_CURSOS,primeirosCbos[i],titulo3,NaoGraduados[i],curso_num,curso_nome,primeirosCbos_Nome,i,0.1)
+                Intensidade.append(intensidade)
+                Porcentagens_vol.append(porcentagens_vol)
+                CBO_vol.append(CBO)
+                Cursos_vol.append(cursos_vol)
+                Nomes_vol.append(nomes_vol)
+            else:
+                CBO,Curso,tresprimeirosCursos,intensidade,fig,string,cursos_vol, nomes_vol, porcentagens_vol=Cursos_CBO_13_10(csv_estado,csv_CBO,csv_CURSOS,primeirosCbos[i],titulo3,NaoGraduados[i],Graduados_Nao[i],curso_num,curso_nome,primeirosCbos_Nome,i,0.1)
+                Intensidade.append(intensidade)
+                Porcentagens_vol.append(porcentagens_vol)
+                CBO_vol.append(CBO)
+                Cursos_vol.append(cursos_vol)
+                Nomes_vol.append(nomes_vol)                
+
+
+        #==================================================================Colocando Ida e Volta no mesmo grafico
+        # ...
+        if(j==0): #Se for imprimindo desde o inicio
+            data = pd.DataFrame()
+            Tabela_Certa = pd.DataFrame(data, columns=['Curso','Forte1','Forte2','Forte3','Fraco1','Fraco2','Fraco3'])
+            
+        PrimeirosCbos_Nome = tresprimeirosCursos
+        nomes_Fortes,cbos_Fortes,nomes_Fracos,cbos_Fracos = AcharFortes_Fracos(Curso,PrimeirosCbos_Nome,Intensidade)
+        i=0
+        Tabela_Certa.loc[j] = [curso_nome, '-','-', '-','-', '-','-']
+        Tabela =  tabela(i,j,nomes_Fortes,cbos_Fortes,nomes_Fracos,cbos_Fracos,Tabela_Certa)
+        # display(Tabela)
+    return 
+    # # Tabela.to_excel("/content/OndeTrabalhamAsPessoasDeCadaCursoDoCenso.xlsx")
+    # Tabela.to_excel("/content/drive/MyDrive/Orientacao_Rodolfo/Doutorado_Elisangela/Experimentos/Experimentos_25_09_a_02_09/10Porcento-Todos-IdaVolta/Tabela_Censo/OndeTrabalhamAsPessoasDeCadaCursoDoCenso_10.xlsx")
         
 
 
