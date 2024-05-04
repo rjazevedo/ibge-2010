@@ -22,6 +22,8 @@ import matplotlib.pyplot as plt
 import warnings
 import sys
 import ibge_functions
+import logging
+
 
 def ibge_cnae(path,name,i):
     #...
@@ -650,116 +652,139 @@ def CBOs_Curso_v6(csv_estado,csv_CBO,curso_num,curso_nome,titulo10,titulo3,porce
     1:"Ocupação_Código",
     }
     X_CURSO_CBO.rename(columns=dict,inplace=True)
+    # print(X_CURSO_CBO)
     #...
     #CBOs por curso
     #Indice ===========================================================================================================
+    # dir = X_CURSO_CBO.index[X_CURSO_CBO['Curso_Superior_Graduação_Código'] == curso_num].tolist()
     dir = X_CURSO_CBO.index[X_CURSO_CBO['Curso_Superior_Graduação_Código'] == curso_num].tolist()
-    Curso_dir = []
-    Cbo_dir = []
-    for i in range(len(dir)):
-        curso = X_CURSO_CBO._get_value(dir[i],'Curso_Superior_Graduação_Código')
-        cbo = X_CURSO_CBO._get_value(dir[i],'Ocupação_Código')
-        Curso_dir.append(curso)
-        Cbo_dir.append(cbo)
-    resultados_dir=[]
-    for i in range(len(Curso_dir)):
-      tupla=(Curso_dir[i],Cbo_dir[i])
-      resultados_dir.append(tupla)
-    Curso_Cbo_dir = pd.DataFrame(resultados_dir)
-    dict = {0:"Curso", 1:"Cbo",}
-    Curso_Cbo_dir.rename(columns=dict,inplace=True)
-    #CBOs Unicos ============================================================
-    Curso_Cbo_dir_unique = np.unique(Curso_Cbo_dir.Cbo)
-    A = Curso_Cbo_dir['Cbo'].value_counts().sort_index()
-    A = pd.DataFrame(A)
-    A_cbo = A.sort_values("Cbo",ascending=False)
-    Total = A_cbo["Cbo"].sum() #==========================================================================================================
-    #====================================================================================================================================
-    porcento = Total*porcent_param
-    porcento_10 = round(porcento/Total * 100, 2)
-    # print(porcento_10)
-    ...
-    Porcentagem = []
-    Porcentagem = round(A_cbo['Cbo']/Total * 100, 2)
-    # Adicionar a coluna Nome no dataframe A_cbo_10
-    A_cbo['Porcentagem'] = Porcentagem
-    qtdade = 0
-    for i in A_cbo.index:
-        if (A_cbo.Porcentagem[i]>= porcento_10):
-            qtdade = qtdade+1
-    A_cbo_10 = A_cbo.head(qtdade) #Alterado 29/09/2023   =========================
-    # print(A_cbo_10)
-    if(len(A_cbo_10>=1)):
-        #Coletando o nome do CBOs ...
-        NomeCbo = []
-        for i in range(len(A_cbo_10)):
-            cbo = str(int(float(A_cbo_10.index[i])))
-            for i in range(len(CBO)):
-                if (str(int(CBO['Cod_CBO'].iloc[i])) == cbo):
-                    NomeCbo.append(CBO['Nome_CBO'].iloc[i])      
-        NomeCbo = pd.DataFrame(NomeCbo, columns=['Nome_CBO'])
-        #...
-        A_cbo_10["Nome"] = 1
-        #...
-        #import warnings
-        for i in range(len(A_cbo_10)):
-            A_cbo_10['Nome'].iloc[i]= NomeCbo['Nome_CBO'].iloc[i]
-        #A_cbo_10
-        A_cbo_10.reset_index(inplace=True)
-        A_cbo_10 = A_cbo_10.rename(columns = {'index':'Cod_CBO'})
-        # print(A_cbo_10)
-        #A_cbo_10
-        #...
-        A_cbo_10['Cod_CBO'] = A_cbo_10['Cod_CBO'].astype("float").astype('str')
-        A_cbo_10['CBO_Nome'] = A_cbo_10['Cod_CBO'].str.cat(A_cbo_10['Nome'], sep =" ")
-        #print(A_cbo_10)
+    # print("curso_num",type(curso_num))
+    # print("len(dir)",len(dir))
+    if(len(dir)>=1):
+        Curso_dir = []
+        Cbo_dir = []
+        for i in range(len(dir)):
+            curso = X_CURSO_CBO._get_value(dir[i],'Curso_Superior_Graduação_Código')
+            cbo = X_CURSO_CBO._get_value(dir[i],'Ocupação_Código')
+            Curso_dir.append(curso)
+            Cbo_dir.append(cbo)
+        # print("Curso_dir",Curso_dir)  
+        # print("Cbo_dir",Cbo_dir)
+        resultados_dir=[]
+        for i in range(len(Curso_dir)):
+            tupla=(Curso_dir[i],Cbo_dir[i])
+            resultados_dir.append(tupla)
+        Curso_Cbo_dir = pd.DataFrame(resultados_dir)
+        # print("Curso_Cbo_dir[0]", Curso_Cbo_dir[0])
+        dict = {0:"Curso", 1:"Cbo",}
+        Curso_Cbo_dir.rename(columns=dict,inplace=True)
+        # print("Curso_Cbo_dir",Curso_Cbo_dir)
+        #CBOs Unicos ============================================================
+        Curso_Cbo_dir_unique = np.unique(Curso_Cbo_dir.Cbo)
+        A = Curso_Cbo_dir['Cbo'].value_counts().sort_index()
+        A = pd.DataFrame(A)
+        A_cbo = A.sort_values("Cbo",ascending=False)
+        Total = A_cbo["Cbo"].sum() #==========================================================================================================
+        #====================================================================================================================================
+        porcento = Total*porcent_param
+        porcento_10 = round(porcento/Total * 100, 2)
+        # print(porcento_10)
+        ...
+        Porcentagem = []
+        Porcentagem = round(A_cbo['Cbo']/Total * 100, 2)
+        # Adicionar a coluna Nome no dataframe A_cbo_10
+        A_cbo['Porcentagem'] = Porcentagem
+        print(A_cbo)
+        qtdade = 0
+        for i in A_cbo.index:
+            if (A_cbo.Porcentagem[i]>= porcento_10):
+                qtdade = qtdade+1
+        A_cbo_10 = A_cbo.head(qtdade) #Alterado 29/09/2023   =========================
+        print("A_cbo_10",A_cbo_10)
+        if(len(A_cbo_10>=1)):
+        # # Validação para testar se existem cbos para deteminado curso
+        # if(len(A_cbo_10>=1)):
+            #Coletando o nome do CBOs ...
+            NomeCbo = []
+            for i in range(len(A_cbo_10)):
+                cbo = str(int(float(A_cbo_10.index[i])))
+                for i in range(len(CBO)):
+                    if (str(int(CBO['Cod_CBO'].iloc[i])) == cbo):
+                        NomeCbo.append(CBO['Nome_CBO'].iloc[i])      
+            NomeCbo = pd.DataFrame(NomeCbo, columns=['Nome_CBO'])
+            #...
+            A_cbo_10["Nome"] = 1
+            #...
+            #import warnings
+            for i in range(len(A_cbo_10)):
+                A_cbo_10['Nome'].iloc[i]= NomeCbo['Nome_CBO'].iloc[i]
+            #A_cbo_10
+            A_cbo_10.reset_index(inplace=True)
+            A_cbo_10 = A_cbo_10.rename(columns = {'index':'Cod_CBO'})
+            # print(A_cbo_10)
+            #A_cbo_10
+            #...
+            A_cbo_10['Cod_CBO'] = A_cbo_10['Cod_CBO'].astype("float").astype('str')
+            A_cbo_10['CBO_Nome'] = A_cbo_10['Cod_CBO'].str.cat(A_cbo_10['Nome'], sep =" ")
+            #print(A_cbo_10)
 
-        # tresprimeiros Cbos
-        primeiros = [] # Alterado em 29/09/2023
-        if (len(A_cbo_10)<1):
-            print("Não existe CBOs para este curso")
-            sys.exit() #===============================================================================================
-        else:
-            for i in range(len(A_cbo_10)):
-                primeiros.append(str(int(float(A_cbo_10['Cod_CBO'].iloc[i]))))
-                # primeiros.append(int(float(A_cbo_10.Cod_CBO[i])))
-        #...
-        #Deletar coluna
-        del A_cbo_10["Cod_CBO"]
-        del A_cbo_10["Nome"]
-        # A_cbo_10
+            # tresprimeiros Cbos
+            primeiros = [] # Alterado em 29/09/2023
+            if (len(A_cbo_10)<1):
+                print("Não existe CBOs para este curso")
+                # sys.exit() #===============================================================================================
+            else:
+                for i in range(len(A_cbo_10)):
+                    primeiros.append(str(int(float(A_cbo_10['Cod_CBO'].iloc[i]))))
+                    # primeiros.append(int(float(A_cbo_10.Cod_CBO[i])))
+            #...
+            #Deletar coluna
+            del A_cbo_10["Cod_CBO"]
+            del A_cbo_10["Nome"]
+            # A_cbo_10
 
-        #  Nomes dos três primeiros cbos
-        nomes = [] # Alterado em 26/09/2023
-        if (len(A_cbo_10)<1):
-            print("Não existe CBOs para este curso")
-            sys.exit() #===============================================================================================
+            #  Nomes dos três primeiros cbos
+            nomes = [] # Alterado em 26/09/2023
+            if (len(A_cbo_10)<1):
+                print("Não existe CBOs para este curso")
+                # sys.exit() #===============================================================================================
+            else:
+                for i in range(len(A_cbo_10)):
+                    nomes.append(A_cbo_10.CBO_Nome[i])
+            porcentagens = []
+            if (len(A_cbo_10)<1):
+                print("Não existe CBOs para este curso")
+                # sys.exit() #===============================================================================================
+            else:
+                for i in range(len(A_cbo_10)):
+                    porcentagens.append(A_cbo_10.Porcentagem[i])
+            #...
+            x='CBO_Nome'
+            y='Porcentagem'
+            #Plotando ... Alterado em 06/09/23 ... tirei o plot dos dez maiores #07/09/2023 voltei o plot dos dez maiores ...
+            A_cbo_10_sort = A_cbo_10.iloc[0:3].sort_values("Porcentagem",ascending=True)
+            plt.rcParams["figure.figsize"] = (18, 8)
+            plt.rcParams["figure.autolayout"] = True
+            ax = A_cbo_10_sort.plot(x,y,kind='barh',title=titulo3,legend=False)
+            ax.bar_label(ax.containers[0])
+            plt.xlabel("Porcentagem")
+            string = str(curso_num) + " - " + curso_nome + "_" + str(porcent_param) +".pdf"
+            plt.savefig(save_results_to + string)
+            # plt.show()
         else:
-            for i in range(len(A_cbo_10)):
-                nomes.append(A_cbo_10.CBO_Nome[i])
-        porcentagens = []
-        if (len(A_cbo_10)<1):
-            print("Não existe CBOs para este curso")
-            sys.exit() #===============================================================================================
-        else:
-            for i in range(len(A_cbo_10)):
-                porcentagens.append(A_cbo_10.Porcentagem[i])
-        #...
-        x='CBO_Nome'
-        y='Porcentagem'
-        #Plotando ... Alterado em 06/09/23 ... tirei o plot dos dez maiores #07/09/2023 voltei o plot dos dez maiores ...
-        A_cbo_10_sort = A_cbo_10.iloc[0:3].sort_values("Porcentagem",ascending=True)
-        plt.rcParams["figure.figsize"] = (18, 8)
-        plt.rcParams["figure.autolayout"] = True
-        ax = A_cbo_10_sort.plot(x,y,kind='barh',title=titulo3,legend=False)
-        ax.bar_label(ax.containers[0])
-        plt.xlabel("Porcentagem")
-        string = str(curso_num) + " - " + curso_nome + "_" + str(porcent_param) +".pdf"
-        plt.savefig(save_results_to + string)
-        # plt.show()
+            print("As porcentagens dos CBOs são menores que o parâmetro de porcentagem")
+            #  sys.exit() #===============================================================================================
+            primeiros=0
+            nomes=0
+            porcentagens=0
+            return primeiros,nomes,porcentagens,curso_num,curso_nome                
     else:
          print("Não existe CBOs para este curso")
-         sys.exit() #===============================================================================================
+         #  sys.exit() #===============================================================================================
+         primeiros=0
+         nomes=0
+         porcentagens=0
+         return primeiros,nomes,porcentagens,curso_num,curso_nome
     return primeiros,nomes,porcentagens,curso_num,curso_nome
 
 
@@ -880,21 +905,21 @@ def Cursos_CBO_14_10(csv_estado,csv_CBO,csv_CURSOS,cbo_num,titulo3,NaoGraduados_
       cursos = [] # Alterado em 26/09/2023
       if (len(A_Curso_11)<1):
          print("Não existe CBOs para este curso")
-         sys.exit() #===============================================================================================
+        #  sys.exit() #===============================================================================================
       else:
           for i in range(len(A_Curso_11)):
               cursos.append(A_Curso_11.Curso[i])
       nomes = [] # Alterado em 26/09/2023
       if (len(A_Curso_11)<1):
           print("Não existe CBOs para este curso")
-          sys.exit() #===============================================================================================
+        #   sys.exit() #===============================================================================================
       else:
           for i in range(len(A_Curso_11)):
               nomes.append(A_Curso_11.Nome[i])
       porcentagens = []
       if (len(A_Curso_11)<1):
           print("Não existe CBOs para este curso")
-          sys.exit() #===============================================================================================
+        #   sys.exit() #===============================================================================================
       else:
           for i in range(len(A_Curso_11)):
               porcentagens.append(A_Curso_11.Porcentagem[i])
@@ -1055,7 +1080,7 @@ def Cursos_CBO_13_10(csv_estado,csv_CBO,csv_CURSOS,cbo_num,titulo3,NaoGraduados_
               #for i in range(len(A_cbo_10)):
               #    nomes.append(A_cbo_10.CBO_Nome[i])
               print("Não existe CBOs para este curso")
-              sys.exit() #===============================================================================================
+            #   sys.exit() #===============================================================================================
             else:
                 for i in range(len(A_Curso_11)):
                     cursos.append(A_Curso_11.Curso[i])
@@ -1064,7 +1089,7 @@ def Cursos_CBO_13_10(csv_estado,csv_CBO,csv_CURSOS,cbo_num,titulo3,NaoGraduados_
                 #for i in range(len(A_cbo_10)):
                 #    nomes.append(A_cbo_10.CBO_Nome[i])
                 print("Não existe CBOs para este curso")
-                sys.exit() #===============================================================================================
+                # sys.exit() #===============================================================================================
             else:
                 for i in range(len(A_Curso_11)):
                     nomes.append(A_Curso_11.Nome[i])
@@ -1074,7 +1099,7 @@ def Cursos_CBO_13_10(csv_estado,csv_CBO,csv_CURSOS,cbo_num,titulo3,NaoGraduados_
                 #for i in range(len(A_cbo_10)):
                 #    nomes.append(A_cbo_10.CBO_Nome[i])
                 print("Não existe CBOs para este curso")
-                sys.exit() #===============================================================================================
+                # sys.exit() #===============================================================================================
             else:
                 for i in range(len(A_Curso_11)):
                     porcentagens.append(A_Curso_11.Porcentagem[i])
@@ -1108,8 +1133,8 @@ def relacionamentos_fortes_naofortes_cursos_profissoes_plot1(path,name,path1,nam
     CursosCenso = ibge_cursos_filter(path1[0],name1[2])
     # print(CursosCenso.head(50))
     # 33 ... direito // 43 ... computação
-    curso_num  = float(CursosCenso.curso_num.iloc[43])
-    curso_nome = CursosCenso.curso_nome.iloc[43]
+    curso_num  = float(CursosCenso.curso_num.iloc[74])
+    curso_nome = CursosCenso.curso_nome.iloc[74]
     titulo10 =  "Curso:  " +  str(curso_num) + ": " + curso_nome + " - Os 10 maiores"
     titulo3  =  "Curso:  " +  str(curso_num) + ": " + curso_nome + " - Os 3 maiores"
     save_results_to = 'graficos/'  
@@ -1294,6 +1319,7 @@ def tabela(i,j,nomes_Fortes,cbos_Fortes,nomes_Fracos,cbos_Fracos,Tabela_Certa):
 
 
 def Tabela_Censo_CbosFortes_Fracos_Familia1_Familia2(path,name,path1,name1):
+    logging.info(" Gerando a tabela de onde trabalham as pessoas recenseadas")   
     csv_estado = os.path.join(path[0],name[0]) # arquivo do censo do Brasil inteiro (somente graduados)
     path1 = ibge_variable.paths(12)
     name1 = ibge_variable.names(6)
@@ -1304,60 +1330,63 @@ def Tabela_Censo_CbosFortes_Fracos_Familia1_Familia2(path,name,path1,name1):
     csv_PivotTableFinal =  os.path.join(path2[0],name2[0]) #Pivo Table Final
 
     CursosCenso = ibge_cursos_filter(path1[0],name1[2])
+    print(len(CursosCenso))
     curso_num  = float(CursosCenso.curso_num.iloc[43])
     curso_nome = CursosCenso.curso_nome.iloc[43]
     titulo10 =  "Curso:  " +  str(curso_num) + ": " + curso_nome + " - Os 10 maiores"
     titulo3  =  "Curso:  " +  str(curso_num) + ": " + curso_nome + " - Os 3 maiores"
     save_results_to = 'graficos/'  
 
-    for j in range(0, 5):
+    for j in range(0,88):
         curso_num= float(CursosCenso.curso_num.iloc[j])
         curso_nome= CursosCenso.curso_nome.iloc[j]
         titulo10= "Curso " +  CursosCenso.curso_num.iloc[j] + ": " + CursosCenso.curso_nome.iloc[j] + " - 10% "
         titulo3=  "Curso " +  CursosCenso.curso_num.iloc[j] + ": " + CursosCenso.curso_nome.iloc[j] + " - 10%"
-        
-
+        print("curso_num:", curso_num, "curso_nome:",curso_nome)
+        print(j)
+        print("")
         #======================================================Plotando os cbos de determinado curso, usando função ...
         primeirosCbos,primeirosCbos_Nome,Porcentagens,CURSO_NUM,CURSO_NOME=CBOs_Curso_v6(csv_estado,csv_CBO,curso_num,curso_nome,titulo10,titulo3,0.1,save_results_to)
-        #======================================================Achando a quantidade de Não-Graduados na PivotTable
-        primeirosCbos,NaoGraduados,Graduados_Nao,Graduados = NaoGraduados_PivotTable_2(primeirosCbos, csv_PivotTableFinal)
-        #=====================================================Plotando os cursos de determinado cbo, sem função e salvando os plots ...
-        Intensidade = []
-        Porcentagens_vol = []
-        CBO_vol = []
-        Cursos_vol = []
-        Nomes_vol  = []
-        for i in range (len(primeirosCbos)):
-            titulo3=primeirosCbos_Nome[i]
-            if(int(float(primeirosCbos[i]))>=2000):
-                CBO,Curso,tresprimeirosCursos,intensidade,fig,string,cursos_vol, nomes_vol, porcentagens_vol=Cursos_CBO_14_10(csv_estado,csv_CBO,csv_CURSOS,primeirosCbos[i],titulo3,NaoGraduados[i],curso_num,curso_nome,primeirosCbos_Nome,i,0.1)
-                Intensidade.append(intensidade)
-                Porcentagens_vol.append(porcentagens_vol)
-                CBO_vol.append(CBO)
-                Cursos_vol.append(cursos_vol)
-                Nomes_vol.append(nomes_vol)
-            else:
-                CBO,Curso,tresprimeirosCursos,intensidade,fig,string,cursos_vol, nomes_vol, porcentagens_vol=Cursos_CBO_13_10(csv_estado,csv_CBO,csv_CURSOS,primeirosCbos[i],titulo3,NaoGraduados[i],Graduados_Nao[i],curso_num,curso_nome,primeirosCbos_Nome,i,0.1)
-                Intensidade.append(intensidade)
-                Porcentagens_vol.append(porcentagens_vol)
-                CBO_vol.append(CBO)
-                Cursos_vol.append(cursos_vol)
-                Nomes_vol.append(nomes_vol)                
+        if (primeirosCbos!=0)&(primeirosCbos!=0)&(Porcentagens!=0):
+            #======================================================Achando a quantidade de Não-Graduados na PivotTable
+            primeirosCbos,NaoGraduados,Graduados_Nao,Graduados = NaoGraduados_PivotTable_2(primeirosCbos, csv_PivotTableFinal)
+            #=====================================================Plotando os cursos de determinado cbo, sem função e salvando os plots ...
+            Intensidade = []
+            Porcentagens_vol = []
+            CBO_vol = []
+            Cursos_vol = []
+            Nomes_vol  = []
+            for i in range (len(primeirosCbos)):
+                titulo3=primeirosCbos_Nome[i]
+                if(int(float(primeirosCbos[i]))>=2000):
+                    CBO,Curso,tresprimeirosCursos,intensidade,fig,string,cursos_vol, nomes_vol, porcentagens_vol=Cursos_CBO_14_10(csv_estado,csv_CBO,csv_CURSOS,primeirosCbos[i],titulo3,NaoGraduados[i],curso_num,curso_nome,primeirosCbos_Nome,i,0.1)
+                    Intensidade.append(intensidade)
+                    Porcentagens_vol.append(porcentagens_vol)
+                    CBO_vol.append(CBO)
+                    Cursos_vol.append(cursos_vol)
+                    Nomes_vol.append(nomes_vol)
+                else:
+                    CBO,Curso,tresprimeirosCursos,intensidade,fig,string,cursos_vol, nomes_vol, porcentagens_vol=Cursos_CBO_13_10(csv_estado,csv_CBO,csv_CURSOS,primeirosCbos[i],titulo3,NaoGraduados[i],Graduados_Nao[i],curso_num,curso_nome,primeirosCbos_Nome,i,0.1,save_results_to)
+                    Intensidade.append(intensidade)
+                    Porcentagens_vol.append(porcentagens_vol)
+                    CBO_vol.append(CBO)
+                    Cursos_vol.append(cursos_vol)
+                    Nomes_vol.append(nomes_vol)                
 
 
-        #==================================================================Colocando Ida e Volta no mesmo grafico
-        # ...
-        if(j==0): #Se for imprimindo desde o inicio
-            data = pd.DataFrame()
-            Tabela_Certa = pd.DataFrame(data, columns=['Curso','Forte1','Forte2','Forte3','Fraco1','Fraco2','Fraco3'])
-            
-        PrimeirosCbos_Nome = tresprimeirosCursos
-        nomes_Fortes,cbos_Fortes,nomes_Fracos,cbos_Fracos = AcharFortes_Fracos(Curso,PrimeirosCbos_Nome,Intensidade)
-        i=0
-        Tabela_Certa.loc[j] = [curso_nome, '-','-', '-','-', '-','-']
-        Tabela =  tabela(i,j,nomes_Fortes,cbos_Fortes,nomes_Fracos,cbos_Fracos,Tabela_Certa)
-        # display(Tabela)
-        Tabela.to_excel(save_results_to + 'OndeTrabalhamAsPessoasDeCadaCursoDoCenso.xlsx')
+            #==================================================================Colocando Ida e Volta no mesmo grafico
+            # ...
+            if(j==0): #Se for imprimindo desde o inicio
+                data = pd.DataFrame()
+                Tabela_Certa = pd.DataFrame(data, columns=['Curso','Forte1','Forte2','Forte3','Fraco1','Fraco2','Fraco3'])
+                
+            PrimeirosCbos_Nome = tresprimeirosCursos
+            nomes_Fortes,cbos_Fortes,nomes_Fracos,cbos_Fracos = AcharFortes_Fracos(Curso,PrimeirosCbos_Nome,Intensidade)
+            i=0
+            Tabela_Certa.loc[j] = [curso_nome, '-','-', '-','-', '-','-']
+            Tabela =  tabela(i,j,nomes_Fortes,cbos_Fortes,nomes_Fracos,cbos_Fracos,Tabela_Certa)
+            # display(Tabela)
+    Tabela.to_excel(save_results_to + 'OndeTrabalhamAsPessoasDeCadaCursoDoCenso.xlsx')
     return 
            
 

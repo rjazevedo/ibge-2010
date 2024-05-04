@@ -200,7 +200,7 @@ def ibge_relacionamentos_cursos_profissoes():
     # ibge_functions_descriptiveanalysis.relacionamentos_fortes_naofortes_cursos_profissoes_plot1(path,name,path1,name1)
 
     # Usar essa função para obter os primeiros plots com porcentagem (7% ou 10%)     
-    ibge_functions_descriptiveanalysis.relacionamentos_fortes_naofortes_cursos_profissoes_plot2(path,name,path1,name1)
+    # ibge_functions_descriptiveanalysis.relacionamentos_fortes_naofortes_cursos_profissoes_plot2(path,name,path1,name1)
     return
 
 def ibge_corte_CBO():
