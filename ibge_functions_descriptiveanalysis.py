@@ -694,13 +694,13 @@ def CBOs_Curso_v6(csv_estado,csv_CBO,curso_num,curso_nome,titulo10,titulo3,porce
         Porcentagem = round(A_cbo['Cbo']/Total * 100, 2)
         # Adicionar a coluna Nome no dataframe A_cbo_10
         A_cbo['Porcentagem'] = Porcentagem
-        print(A_cbo)
+        # print(A_cbo)
         qtdade = 0
         for i in A_cbo.index:
             if (A_cbo.Porcentagem[i]>= porcento_10):
                 qtdade = qtdade+1
         A_cbo_10 = A_cbo.head(qtdade) #Alterado 29/09/2023   =========================
-        print("A_cbo_10",A_cbo_10)
+        # print("A_cbo_10",A_cbo_10)
         if(len(A_cbo_10>=1)):
         # # Validação para testar se existem cbos para deteminado curso
         # if(len(A_cbo_10>=1)):
@@ -768,8 +768,8 @@ def CBOs_Curso_v6(csv_estado,csv_CBO,curso_num,curso_nome,titulo10,titulo3,porce
             ax = A_cbo_10_sort.plot(x,y,kind='barh',title=titulo3,legend=False)
             ax.bar_label(ax.containers[0])
             plt.xlabel("Porcentagem")
-            string = str(curso_num) + " - " + curso_nome + "_" + str(porcent_param) +".pdf"
-            plt.savefig(save_results_to + string)
+            # string = str(curso_num) + " - " + curso_nome + "_" + str(porcent_param) +".pdf"
+            # plt.savefig(save_results_to + string)
             # plt.show()
         else:
             print("As porcentagens dos CBOs são menores que o parâmetro de porcentagem")
@@ -931,8 +931,8 @@ def Cursos_CBO_14_10(csv_estado,csv_CBO,csv_CURSOS,cbo_num,titulo3,NaoGraduados_
       ax.bar_label(ax.containers[0])
       plt.xlabel("Porcentagem")
       string = str(curso_num) + " - " + curso_nome + " : " + primeirosCbos_Nome[numero] + "_" + str(porcent_param) +".pdf"
-      save_results_to = 'graficos/'  
-      plt.savefig(save_results_to + string)
+    #   save_results_to = 'graficos/'  
+    #   plt.savefig(save_results_to + string)
       volta = 'Volta'
     else:
        print("Não existe cursos para esse CBO")
@@ -1114,7 +1114,7 @@ def Cursos_CBO_13_10(csv_estado,csv_CBO,csv_CURSOS,cbo_num,titulo3,NaoGraduados_
         
         string = str(curso_num) + " - " + curso_nome + " : " + primeirosCbos_Nome[numero] + "_" + str(porcent_param) +".pdf"
         # save_results_to = 'graficos/'  
-        plt.savefig(save_results_to + string)        
+        # plt.savefig(save_results_to + string)        
     else:
        print("Não existe cursos para esse CBO")
     return cbo_num,curso_nome,primeirosCbos_Nome,intensidade,plt,string, cursos, nomes, porcentagens
@@ -1389,6 +1389,210 @@ def Tabela_Censo_CbosFortes_Fracos_Familia1_Familia2(path,name,path1,name1):
     Tabela.to_excel(save_results_to + 'OndeTrabalhamAsPessoasDeCadaCursoDoCenso.xlsx')
     return 
            
+#Função para achar os pontos da Ida
+def Ida(primeirosCbos,CURSO_NUM,Porcentagens,comeco,x_,y_,z_,v_):
+    if (comeco ==1):
+        x = []
+        y = []
+        z = []
+        v = []
+        #print(x,y,z)
+        #sys.exit()
+        for i in range(len(primeirosCbos)):
+              x.append(primeirosCbos[i])
+              y.append(CURSO_NUM)
+              z.append(Porcentagens[i])
+              v.append(0)
+    else:
+         x = x_
+         y = y_
+         z = z_
+         v = v_
+         for i in range(len(primeirosCbos)):
+              x.append(primeirosCbos[i])
+              y.append(CURSO_NUM)
+              z.append(Porcentagens[i])
+              v.append(0)
+    return x,y,z,v
+
+#Função para achar os pontos da volta
+def Volta(cursos_vol,CBO,porcentagens_vol, comeco,x_,y_,z_,v_):
+    if (comeco ==1):
+        x = []
+        y = []
+        z = []
+        v = []
+        for i in range(len(cursos_vol)):
+            x.append(CBO)
+            y.append(cursos_vol[i])
+            z.append(0)
+            v.append(porcentagens_vol[i])
+    else:
+         x = x_
+         y = y_
+         z = z_
+         v = v_
+         for i in range(len(cursos_vol)):
+              x.append(CBO)
+              y.append(cursos_vol[i])
+              z.append(0)
+              v.append(porcentagens_vol[i])
+
+    return x,y,z,v
+
+# Função para passar os pontos para o dataframe
+def x_y_z_v_df(x,y,z,v):
+    result=[]
+    for i in range(len(x)):
+      tupla=(x[i],y[i],z[i],v[i])
+      result.append(tupla)
+    #...
+    df = pd.DataFrame(result)
+    #Curso_Cbo_dir_curso_cbos.shape
+    dicion = {0:"CB",
+        1:"CR",
+        2:"Ida",
+        3:"Volta",
+        }
+    df.rename(columns=dicion,inplace=True)
+    return df
+
+def Jun_Ida_Volta(X_,Y_,Z_,V_,CBO_VOL,CURSO_NUM):
+    for i in range(len(V_)):
+        #print("")
+        #print('i', i)
+        j=i+1
+        #print("j:",j)
+        if (X_[i]==CBO_VOL) and (Y_[i] == CURSO_NUM) and (V_[i]==0):
+            #print(X_[i],Y_[i],Z_[i],V_[i])
+            CB = CBO_VOL
+            CR = CURSO_NUM
+            for j in range(j, len(V_)):
+                  if (X_[j]== CB) and (float(Y_[j]) == CR) and (int(Z_[j])==0):
+                        #print(X_[j],Y_[j],Z_[j],V_[j])
+                        #print('V[i] = V[j]',V_[i],V_[j])
+                        #print('Z[j] = Z[i]',Z_[j],Z_[i])
+                        V_[i] = V_[j]
+                        Z_[j] = Z_[i]
+                        #return
+                        break
+    return
+
+def Ida_Volta(path,name,path1,name1):
+
+    logging.info(" Gerando as idas e voltas")   
+    csv_estado = os.path.join(path[0],name[0]) # arquivo do censo do Brasil inteiro (somente graduados)
+    path1 = ibge_variable.paths(12)
+    name1 = ibge_variable.names(6)
+    csv_CBO = os.path.join(path1[0],name1[1]) # Tabela de CBOs
+    csv_CURSOS = os.path.join(path1[0],name1[2]) # Tabela de Cursos
+    path2 = ibge_variable.paths(8)
+    name2 = ibge_variable.names(8)         
+    csv_PivotTableFinal =  os.path.join(path2[0],name2[0]) #Pivo Table Final
+
+    CursosCenso = ibge_cursos_filter(path1[0],name1[2])
+    # print(len(CursosCenso))
+    # curso_num  = float(CursosCenso.curso_num.iloc[43])
+    # curso_nome = CursosCenso.curso_nome.iloc[43]
+    # titulo10 =  "Curso:  " +  str(curso_num) + ": " + curso_nome + " - Os 10 maiores"
+    # titulo3  =  "Curso:  " +  str(curso_num) + ": " + curso_nome + " - Os 3 maiores"
+    save_results_to = 'graficos/'  
+
+    for f in range(0, 88):
+
+        curso_num= float(CursosCenso.curso_num.iloc[f])
+        curso_nome= CursosCenso.curso_nome.iloc[f]
+        titulo10= "Curso " +  CursosCenso.curso_num.iloc[f] + ": " + CursosCenso.curso_nome.iloc[f] + " - 10% "
+        titulo3=  "Curso " +  CursosCenso.curso_num.iloc[f] + ": " + CursosCenso.curso_nome.iloc[f] + " - 10%"
+        print("curso_num:", curso_num, "curso_nome:",curso_nome)
+        print(f)
+        print("=================================================================================================")
+        
+        #======================================================Plotando os cbos de determinado curso, usando função ...
+        primeirosCbos,primeirosCbos_Nome,Porcentagens,CURSO_NUM,CURSO_NOME=CBOs_Curso_v6(csv_estado,csv_CBO,curso_num,curso_nome,titulo10,titulo3,0.1,save_results_to)
+        #======================================================Achando a quantidade de Não-Graduados na PivotTable
+        primeirosCbos,NaoGraduados,Graduados_Nao,Graduados = NaoGraduados_PivotTable_2(primeirosCbos, csv_PivotTableFinal)
+        #=====================================================Plotando os cursos de determinado cbo, sem função e salvando os plots ...
+        Intensidade = []
+        Porcentagens_vol = []
+        CBO_vol = []
+        Cursos_vol = []
+        Nomes_vol  = []
+        for i in range (len(primeirosCbos)):
+            titulo3=primeirosCbos_Nome[i]
+            if(int(float(primeirosCbos[i]))>=2000):
+                CBO,Curso,tresprimeirosCursos,intensidade,fig,string,cursos_vol, nomes_vol, porcentagens_vol=Cursos_CBO_14_10(csv_estado,csv_CBO,csv_CURSOS,primeirosCbos[i],titulo3,NaoGraduados[i],curso_num,curso_nome,primeirosCbos_Nome,i,0.1)
+                Intensidade.append(intensidade)
+                # print(intensidade)
+                Porcentagens_vol.append(porcentagens_vol)
+                CBO_vol.append(CBO)
+                Cursos_vol.append(cursos_vol)
+                Nomes_vol.append(nomes_vol)
+            else:
+                CBO,Curso,tresprimeirosCursos,intensidade,fig,string,cursos_vol, nomes_vol, porcentagens_vol=Cursos_CBO_13_10(csv_estado,csv_CBO,csv_CURSOS,primeirosCbos[i],titulo3,NaoGraduados[i],Graduados_Nao[i],curso_num,curso_nome,primeirosCbos_Nome,i,0.1)
+                Intensidade.append(intensidade)
+                Porcentagens_vol.append(porcentagens_vol)
+                CBO_vol.append(CBO)
+                Cursos_vol.append(cursos_vol)
+                Nomes_vol.append(nomes_vol)
 
 
-            
+
+        #==================================================================Colocando Ida e Volta no mesmo grafico
+        if(f==0):
+            # Se for a primeira execução, tem que criar as listas ... e o paramentro da ida é 1
+            #Recuperando as idas e voltas ...
+            x_ = []
+            y_ = []
+            z_ = []
+            v_ = []
+            X_,Y_,Z_,V_= Ida(primeirosCbos,CURSO_NUM,Porcentagens,1,x_,y_,z_,v_)
+            x_= X_
+            y_= Y_
+            z_= Z_
+            v_= V_
+            for i in range(len(primeirosCbos)):
+                X_,Y_,Z_,V_= Volta(Cursos_vol[i],primeirosCbos[i],Porcentagens_vol[i], 0,x_,y_,z_,v_)
+
+            x_= X_
+            y_= Y_
+            z_= Z_
+            v_= V_
+            #df1 = x_y_z_v_df(X_,Y_,Z_,V_)
+            #print(df1)
+            #Juntando as idas e voltas ...
+            for l in range(len(CBO_vol)):
+                Jun_Ida_Volta(X_,Y_,Z_,V_, CBO_vol[l],CURSO_NUM)
+            #atribuição
+            x_= X_
+            y_= Y_
+            z_= Z_
+            v_= V_
+        else:
+            #Recuperando as idas e voltas ...
+            X_,Y_,Z_,V_= Ida(primeirosCbos,CURSO_NUM,Porcentagens,0,x_,y_,z_,v_)
+            x_= X_
+            y_= Y_
+            z_= Z_
+            v_= V_
+            for i in range(len(primeirosCbos)):
+                X_,Y_,Z_,V_= Volta(Cursos_vol[i],primeirosCbos[i],Porcentagens_vol[i], 0,x_,y_,z_,v_)
+
+            x_= X_
+            y_= Y_
+            z_= Z_
+            v_= V_
+            #df1 = x_y_z_v_df(X_,Y_,Z_,V_)
+            #print(df1)
+            #Juntando as idas e voltas ...
+            for l in range(len(CBO_vol)):
+                Jun_Ida_Volta(X_,Y_,Z_,V_, CBO_vol[l],CURSO_NUM)
+            #atribuição
+            x_= X_
+            y_= Y_
+            z_= Z_
+            v_= V_
+
+        df = x_y_z_v_df(x_,y_,z_,v_)    
+        df.to_csv(save_results_to + '10Porcent_DF.csv')
+        return           

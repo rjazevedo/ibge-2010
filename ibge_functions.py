@@ -214,10 +214,13 @@ def ibge_corte_CBO():
     return
 
 def ibge_idas_voltas_cursos_profissoes():
-    # path = ibge_variable.paths(11)
-    # name = ibge_variable.names(7)
-    # path1 = ibge_variable.paths(12)
-    # name1 = ibge_variable.names(6)
+    path = ibge_variable.paths(11)
+    name = ibge_variable.names(7)
+    path1 = ibge_variable.paths(12)
+    name1 = ibge_variable.names(6)
+    # ...
+    ibge_functions_descriptiveanalysis.Ida_Volta(path,name,path1,name1)
+    
     return
 
 def ibge_trabalho_recenseados():
