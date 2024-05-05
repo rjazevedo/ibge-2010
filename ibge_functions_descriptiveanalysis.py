@@ -768,8 +768,8 @@ def CBOs_Curso_v6(csv_estado,csv_CBO,curso_num,curso_nome,titulo10,titulo3,porce
             ax = A_cbo_10_sort.plot(x,y,kind='barh',title=titulo3,legend=False)
             ax.bar_label(ax.containers[0])
             plt.xlabel("Porcentagem")
-            # string = str(curso_num) + " - " + curso_nome + "_" + str(porcent_param) +".pdf"
-            # plt.savefig(save_results_to + string)
+            string = str(curso_num) + " - " + curso_nome + "_" + str(porcent_param) +".pdf"
+            plt.savefig(save_results_to + string)
             # plt.show()
         else:
             print("As porcentagens dos CBOs são menores que o parâmetro de porcentagem")
@@ -931,8 +931,8 @@ def Cursos_CBO_14_10(csv_estado,csv_CBO,csv_CURSOS,cbo_num,titulo3,NaoGraduados_
       ax.bar_label(ax.containers[0])
       plt.xlabel("Porcentagem")
       string = str(curso_num) + " - " + curso_nome + " : " + primeirosCbos_Nome[numero] + "_" + str(porcent_param) +".pdf"
-    #   save_results_to = 'graficos/'  
-    #   plt.savefig(save_results_to + string)
+      save_results_to = 'graficos/'  
+      plt.savefig(save_results_to + string)
       volta = 'Volta'
     else:
        print("Não existe cursos para esse CBO")
@@ -1113,8 +1113,8 @@ def Cursos_CBO_13_10(csv_estado,csv_CBO,csv_CURSOS,cbo_num,titulo3,NaoGraduados_
         plt.xlabel("Porcentagem")
         
         string = str(curso_num) + " - " + curso_nome + " : " + primeirosCbos_Nome[numero] + "_" + str(porcent_param) +".pdf"
-        # save_results_to = 'graficos/'  
-        # plt.savefig(save_results_to + string)        
+        save_results_to = 'graficos/'  
+        plt.savefig(save_results_to + string)        
     else:
        print("Não existe cursos para esse CBO")
     return cbo_num,curso_nome,primeirosCbos_Nome,intensidade,plt,string, cursos, nomes, porcentagens
