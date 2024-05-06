@@ -976,9 +976,7 @@ def Cursos_CBO_13_10(csv_estado,csv_CBO,csv_CURSOS,cbo_num,titulo3,NaoGraduados_
     #...
     Curso_Cbo_dir_curso_cbos = pd.DataFrame(resultados_dir_curso_cbos)
     #Curso_Cbo_dir_curso_cbos.shape
-    dict = {0:"Curso_Repet",
-        1:"Cbo_Repet",
-        }
+    dict = {0:"Curso_Repet",1:"Cbo_Repet",}
     Curso_Cbo_dir_curso_cbos.rename(columns=dict,inplace=True)
     #Cursos Únicos por CBO ====================================================================================
     Curso_Cbo_dir_curso_cbos_unique = np.unique(Curso_Cbo_dir_curso_cbos.Curso_Repet)
@@ -1004,7 +1002,10 @@ def Cursos_CBO_13_10(csv_estado,csv_CBO,csv_CURSOS,cbo_num,titulo3,NaoGraduados_
         if (A_Curso.Porcentagem[i]>= porcento_10):
             qtdade = qtdade+1
     A_Curso_11 = A_Curso.head(qtdade) #Alterado 29/09/2023   =========================
-    
+    # print("A_Curso_11================================================================")
+    # print(A_Curso_11)
+
+
     if(len(A_Curso_11)>=1):
         NomeCurso = []
         for i in range(len(A_Curso_11)):
@@ -1014,6 +1015,8 @@ def Cursos_CBO_13_10(csv_estado,csv_CBO,csv_CURSOS,cbo_num,titulo3,NaoGraduados_
                 #if(row['Cod_Curso'] == A_Curso_10.index[i]):
                     NomeCurso.append(row['Nome_Curso'])
                     #print(row['Cod_Curso'],":",row['Nome_Curso'])
+        # print("NomeCurso ================================================================")
+        # print(NomeCurso)            
         #...
         #import pandas as pd
         #list_name = ['item_1', 'item_2', 'item_3', ...]
@@ -1032,6 +1035,8 @@ def Cursos_CBO_13_10(csv_estado,csv_CBO,csv_CURSOS,cbo_num,titulo3,NaoGraduados_
         A_Curso_11['Curso'] = A_Curso_11['Curso'].astype("float").astype('str')
         #type(A_Curso_11.Curso )
         A_Curso_11['Curso_Nome'] = A_Curso_11['Curso'].str.cat(A_Curso_11['Nome'], sep =" ")
+        # print("A_Curso_11 ================================================================")
+        # print(A_Curso_11)  
 
         qtdadenv=qtdade
         
@@ -1043,37 +1048,45 @@ def Cursos_CBO_13_10(csv_estado,csv_CBO,csv_CURSOS,cbo_num,titulo3,NaoGraduados_
         A_Curso_11['Curso_Nome'].iloc[qtdade]= "Não-Graduados"
         
         A_Curso_11['Porcentagem'].iloc[qtdade]= round(NaoGraduados_qtdade/Graduados_Nao_Total * 100, 2) #26/09
-        
+        # print("A_Curso_11 ================================================================")
+        # print(A_Curso_11)  
+
         primeiros = []
         if (len(A_Curso_11)<1):
             print("Não existem cursos para este CBO")
         else:
             for i in range(len(A_Curso_11)): #Alterado em 09/09/2023 para pegar o 4º Elemento
                 primeiros.append(int(float(A_Curso_11.Curso[i])))
+        # print("primeiros ================================================================")
+        # print(primeiros)        
         #...
         
         A_Curso_11_sort = A_Curso_11.iloc[0:qtdadenv+1].sort_values("Porcentagem",ascending=True)  #26/09
         
         index =  A_Curso_11_sort.index
-        
+        # print("index")
+        # print(len(index))
+
         colors = []
         for i in range(len(index)):
             if (A_Curso_11_sort['Curso'].iloc[i]==0):
                 colors.append('red')
             else:
                 colors.append('black')
+        # print("colors ================================================================")
+        # print(colors)
 
         tituloalterado = titulo3 + " : " + "Cbo fraco"
         curso_num = str(float(curso_num))
         
         intensidade = 'Fraco'
-        
         for i in range(len(index)):
+            print("index =================================================================",index)
             if ((A_Curso_11_sort.index[i]==0)and(A_Curso_11_sort['Curso'].iloc[i]==str(curso_num))): #curso_num
                 #colors = ['blue', 'blue', 'blue','green'] #1ª posição
                 tituloalterado = titulo3 + " : " + "Cbo forte"
                 intensidade ='Forte'
-                break
+                # break
 
             cursos = [] # Alterado em 26/09/2023
             if (len(A_Curso_11)<1):
@@ -1084,6 +1097,9 @@ def Cursos_CBO_13_10(csv_estado,csv_CBO,csv_CURSOS,cbo_num,titulo3,NaoGraduados_
             else:
                 for i in range(len(A_Curso_11)):
                     cursos.append(A_Curso_11.Curso[i])
+            # print("cursos ================================================================")
+            # print(cursos)      
+
             nomes = [] # Alterado em 26/09/2023
             if (len(A_Curso_11)<1):
                 #for i in range(len(A_cbo_10)):
@@ -1093,6 +1109,8 @@ def Cursos_CBO_13_10(csv_estado,csv_CBO,csv_CURSOS,cbo_num,titulo3,NaoGraduados_
             else:
                 for i in range(len(A_Curso_11)):
                     nomes.append(A_Curso_11.Nome[i])
+            # print("nomes ================================================================")
+            # print(nomes)
 
             porcentagens = []
             if (len(A_Curso_11)<1):
@@ -1103,6 +1121,9 @@ def Cursos_CBO_13_10(csv_estado,csv_CBO,csv_CURSOS,cbo_num,titulo3,NaoGraduados_
             else:
                 for i in range(len(A_Curso_11)):
                     porcentagens.append(A_Curso_11.Porcentagem[i])
+            # print("porcentagens ================================================================")
+            # print(porcentagens)     
+       
 
         x='Curso_Nome'
         y='Porcentagem'
@@ -1117,6 +1138,10 @@ def Cursos_CBO_13_10(csv_estado,csv_CBO,csv_CURSOS,cbo_num,titulo3,NaoGraduados_
         plt.savefig(save_results_to + string)        
     else:
        print("Não existe cursos para esse CBO")
+       cursos=0
+       nomes=0
+       porcentagens=0
+       return cbo_num,curso_nome,primeirosCbos_Nome,intensidade,plt,string, cursos, nomes, 
     return cbo_num,curso_nome,primeirosCbos_Nome,intensidade,plt,string, cursos, nomes, porcentagens
 
 # https://colab.research.google.com/drive/1UCEDMTAdZqIRaNGpXHN66pqq_IwHyAe7?authuser=1#scrollTo=vC50rzZCwdHj
@@ -1496,13 +1521,14 @@ def Ida_Volta(path,name,path1,name1):
     # curso_nome = CursosCenso.curso_nome.iloc[88]
     # titulo10 =  "Curso:  " +  str(curso_num) + ": " + curso_nome + " - Os 10 maiores"
     # titulo3  =  "Curso:  " +  str(curso_num) + ": " + curso_nome + " - Os 3 maiores"
-    print(curso_num)
-    print(curso_nome)
-    print(titulo10)
-    print(titulo3)
+    # print(curso_num)
+    # print(curso_nome)
+    # print(titulo10)
+    # print(titulo3)
     save_results_to = 'graficos/'  
 
-    for f in range(0, 89):
+# Testar curso 79,80,85...
+    for f in range(0,89):
 
         curso_num= float(CursosCenso.curso_num.iloc[f])
         curso_nome= CursosCenso.curso_nome.iloc[f]
@@ -1534,12 +1560,16 @@ def Ida_Volta(path,name,path1,name1):
                     Cursos_vol.append(cursos_vol)
                     Nomes_vol.append(nomes_vol)
                 else:
+                    print(primeirosCbos[i])
                     CBO,Curso,tresprimeirosCursos,intensidade,fig,string,cursos_vol, nomes_vol, porcentagens_vol=Cursos_CBO_13_10(csv_estado,csv_CBO,csv_CURSOS,primeirosCbos[i],titulo3,NaoGraduados[i],Graduados_Nao[i],curso_num,curso_nome,primeirosCbos_Nome,i,0.1,save_results_to)
-                    Intensidade.append(intensidade)
-                    Porcentagens_vol.append(porcentagens_vol)
-                    CBO_vol.append(CBO)
-                    Cursos_vol.append(cursos_vol)
-                    Nomes_vol.append(nomes_vol)
+                    if (cursos_vol!=0)&(nomes_vol!=0)&(porcentagens_vol!=0):
+                        Intensidade.append(intensidade)
+                        Porcentagens_vol.append(porcentagens_vol)
+                        CBO_vol.append(CBO)
+                        Cursos_vol.append(cursos_vol)
+                        Nomes_vol.append(nomes_vol)
+                    else:
+                        print("Não existe cursos para esse CBO")  
 
             # ======================================================Plotando os cbos de determinado curso, usando função ...
         
