@@ -28,6 +28,8 @@ def paths(opcao):
        path = ['processados/CSVs_ArquivoFinalGraduados/','processados/CSVs_ArquivoFinalGraduados_NaoGraduados/']
     if opcao == 12: 
        path = ['microdados-ibge/documentacao/']      
+    if opcao == 13: 
+       path = ['graficos/']        
     return path
 
 def names(opcao):
@@ -46,7 +48,9 @@ def names(opcao):
    if opcao == 7:       
       names = ['Brasil_Graduados.csv','Brasil_Não-Graduados.csv']   
    if opcao == 8:       
-      names = ['Brasil_PivotFinal.csv','Brasil_PivotFinalMasculina.csv','Brasil_PivotFinalFeminina.csv']      
+      names = ['Brasil_PivotFinal.csv','Brasil_PivotFinalMasculina.csv','Brasil_PivotFinalFeminina.csv']   
+   if opcao == 9:       
+      names = ['OndeTrabalhamAsPessoasDeCadaCursoDoCenso.xlsx','10Porcent_DF.csv']       
 
    return names
 

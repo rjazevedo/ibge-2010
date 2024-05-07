@@ -1631,3 +1631,28 @@ def Ida_Volta(path,name,path1,name1):
     df = x_y_z_v_df(x_,y_,z_,v_)    
     df.to_csv(save_results_to + '10Porcent_DF.csv')
     return           
+
+def Tabela_Ida_Volta(path2,name2):
+    df =  os.path.join(path2[0],name2[1])
+    df1 = pd.read_csv(df)    
+    save_results_to = 'graficos/'  
+
+
+    # Remover_Voltas_semIdas_e_Idas_semVoltas
+    # tive que passar tudo pra float porque tem valores menores do que 0 ...
+    for i in range(len(df1)):
+        if (df1['Ida'][i].astype('float')==0.00) & (df1['Volta'][i].astype('float')!=0.00):
+            df1 = df1.drop(i)
+        else:
+            if (df1['Ida'][i].astype('float')!=0.00) & (df1['Volta'][i].astype('float')==0.00):
+                df1 = df1.drop(i)
+            else:
+                if (df1['Ida'][i].astype('float')==0.00) & (df1['Volta'][i].astype('float')==0.00):
+                    df1 = df1.drop(i)
+    # Remover_Duplicados
+    df1 = df1.drop_duplicates(subset=['Ida','Volta'])
+    # Reset_Indice
+    df1 = df1.reset_index(drop=True)
+    # Salvar_Tabela
+    df1.to_csv(save_results_to + '10Porcent_DF_Limpo.csv')
+    return
