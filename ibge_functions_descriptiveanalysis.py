@@ -23,6 +23,8 @@ import warnings
 import sys
 import ibge_functions
 import logging
+import sklearn
+from sklearn.cluster import KMeans
 
 
 def ibge_cnae(path,name,i):
@@ -768,8 +770,8 @@ def CBOs_Curso_v6(csv_estado,csv_CBO,curso_num,curso_nome,titulo10,titulo3,porce
             ax = A_cbo_10_sort.plot(x,y,kind='barh',title=titulo3,legend=False)
             ax.bar_label(ax.containers[0])
             plt.xlabel("Porcentagem")
-            string = str(curso_num) + " - " + curso_nome + "_" + str(porcent_param) +".pdf"
-            plt.savefig(save_results_to + string)
+            # string = str(curso_num) + " - " + curso_nome + "_" + str(porcent_param) +".pdf"
+            # plt.savefig(save_results_to + string)
             # plt.show()
         else:
             print("As porcentagens dos CBOs são menores que o parâmetro de porcentagem")
@@ -930,9 +932,9 @@ def Cursos_CBO_14_10(csv_estado,csv_CBO,csv_CURSOS,cbo_num,titulo3,NaoGraduados_
       ax = A_Curso_11_sort.plot(x,y,kind='barh',title=tituloalterado,color=colors,legend=False)
       ax.bar_label(ax.containers[0])
       plt.xlabel("Porcentagem")
-      string = str(curso_num) + " - " + curso_nome + " : " + primeirosCbos_Nome[numero] + "_" + str(porcent_param) +".pdf"
-      save_results_to = 'graficos/'  
-      plt.savefig(save_results_to + string)
+    #   string = str(curso_num) + " - " + curso_nome + " : " + primeirosCbos_Nome[numero] + "_" + str(porcent_param) +".pdf"
+    #   save_results_to =  'graficos/'   
+    #   plt.savefig(save_results_to + string)
       volta = 'Volta'
     else:
        print("Não existe cursos para esse CBO")
@@ -1133,9 +1135,9 @@ def Cursos_CBO_13_10(csv_estado,csv_CBO,csv_CURSOS,cbo_num,titulo3,NaoGraduados_
         ax.bar_label(ax.containers[0])
         plt.xlabel("Porcentagem")
         
-        string = str(curso_num) + " - " + curso_nome + " : " + primeirosCbos_Nome[numero] + "_" + str(porcent_param) +".pdf"
-        save_results_to = 'graficos/'  
-        plt.savefig(save_results_to + string)        
+        # string = str(curso_num) + " - " + curso_nome + " : " + primeirosCbos_Nome[numero] + "_" + str(porcent_param) +".pdf"
+        # save_results_to = 'graficos/'  
+        # plt.savefig(save_results_to + string)        
     else:
        print("Não existe cursos para esse CBO")
        cursos=0
@@ -1525,6 +1527,7 @@ def Ida_Volta(path,name,path1,name1):
     # print(curso_nome)
     # print(titulo10)
     # print(titulo3)
+    # Inserir comando para criar a pasta ida
     save_results_to = 'graficos/'  
 
 # Testar curso 79,80,85...
@@ -1671,19 +1674,40 @@ def Profissoes_Cursos(path2,name2):
     X = X.drop(columns=['CB'])
     X = X.drop(columns=['CR'])
 
-    # Plotagem dos Dados Originais
-    # print(X.iloc[:,0])
-    plt.figure(figsize=(6, 4))
-    plt.title("10%  - Todos os Cursos - Clusterização ")
-    plt.xlabel('Ida')
-    plt.ylabel('Volta')
-    plt.ylim(0, 100) # definir limite do eixo
-    plt.xlim(0, 100) # definir limite do eixo
-    plt.grid()
-    plt.scatter(X.iloc[:,0],X.iloc[:,1],marker = '*')
+    # # Plotagem dos Dados Originais
+    # # print(X.iloc[:,0])
+    # plt.figure(figsize=(6, 4))
+    # plt.title("10%  - Todos os Cursos - Clusterização ")
+    # plt.xlabel('Ida')
+    # plt.ylabel('Volta')
+    # plt.ylim(0, 100) # definir limite do eixo
+    # plt.xlim(0, 100) # definir limite do eixo
+    # plt.grid()
+    # plt.scatter(X.iloc[:,0],X.iloc[:,1],marker = '*')
+    # # plt.show()
+    # string = "10%  - Todos os Cursos - Dados Originais " +".pdf"
+    # save_results_to = 'graficos/'  
+    # plt.savefig(save_results_to + string)    
+
+    # The Elbow Method Graph
+    wcss=[]
+    for i in range(1,11):
+        kmeans = KMeans(n_clusters=i, init ='k-means++', max_iter=300,  n_init=10,random_state=0 )
+        kmeans.fit(X)
+        wcss.append(kmeans.inertia_)
+    plt.plot(range(1,11),wcss,'bx-')
+    plt.title('The Elbow Method Graph')
+    plt.xlabel('Number of clusters')
+    plt.ylabel('WCSS')
     # plt.show()
-    string = "10%  - Todos os Cursos - Dados Originais " +".pdf"
+    string1 = "10%  - The Elbow Method Graph " +".pdf"
     save_results_to = 'graficos/'  
-    plt.savefig(save_results_to + string)    
+    plt.savefig(save_results_to + string1)  
+
+    # De acordo com o Metodo Elbow, determinar o numero de clusters
+    kmeans = KMeans(n_clusters=3, init ='k-means++', max_iter=300, n_init=10,random_state=0 )
+    y_kmeans = kmeans.fit_predict(X)
+
+    
     return
 
