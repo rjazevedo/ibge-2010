@@ -75,7 +75,7 @@ if fase == 2:
 # Fase 10: Análise Descritiva ... ...
 #if fase >= 10:
 if fase == 10:
-    # ibge_functions.ibge_cursos_profissoes() #https://colab.research.google.com/drive/1_Nx4oOzrgCQvSolh9XG-UgWTQ508Md1M?authuser=1#scrollTo=o9GsbqjctkkL
+    ibge_functions.ibge_cursos_profissoes() #https://colab.research.google.com/drive/1_Nx4oOzrgCQvSolh9XG-UgWTQ508Md1M?authuser=1#scrollTo=o9GsbqjctkkL
    
     # ibge_functions.ibge_relacionamentos_cursos_profissoes()
 
@@ -83,16 +83,16 @@ if fase == 10:
 
     ibge_functions.ibge_idas_voltas_cursos_profissoes()
 
-    # ibge_functions.ibge_trabalho_recenseados()
+    ibge_functions.ibge_trabalho_recenseados()
     pass
     
 
 # Fase 20: Análise Exploratória ...
 if fase == 20:
      
-    #  ibge_functions.Profissoes_Cursos()
+    ibge_functions.Profissoes_Cursos()
      
-   pass
+    pass
 
 # Fase 30: Resultados da Análise ...
 if fase == 30: 
