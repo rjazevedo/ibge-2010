@@ -37,7 +37,10 @@ else:
 # Fase 0: Download dos dados do IBGE da web
 #if fase >= 0:
 if fase == 0:
-    for p in ["microdados-ibge/original", "microdados-ibge/processados", "microdados-ibge/graficos"]:
+    # for p in ["microdados-ibge/original", "microdados-ibge/processados", "microdados-ibge/graficos"]:
+    #   if not os.path.exists(p):
+    #       os.makedirs(p)
+    for p in ["microdados-ibge/original", "processados", "graficos"]:
       if not os.path.exists(p):
           os.makedirs(p)
 

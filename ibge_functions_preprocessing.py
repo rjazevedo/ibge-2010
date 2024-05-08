@@ -211,15 +211,15 @@ def Reduzir(pivot_final,estado,gender):
         os.makedirs(pathh[0])
 
     if gender ==1:
-       name_path = str(pathh[0]) + estado + '_PivotFinalMasculina_.csv'
+       name_path = str(pathh[0]) + estado + '_PivotFinalMasculina.csv'
        pivotfinal.to_csv(name_path)    
     else:
          if gender ==2:
-            name_path = str(pathh[0]) + estado + '_PivotFinalFeminina_.csv'
+            name_path = str(pathh[0]) + estado + '_PivotFinalFeminina.csv'
             pivotfinal.to_csv(name_path)   
          else:
               if gender ==3:
-                 name_path = str(pathh[0]) + estado + '_PivotFinal_.csv'
+                 name_path = str(pathh[0]) + estado + '_PivotFinal.csv'
                  pivotfinal.to_csv(name_path)          
     return
 

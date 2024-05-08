@@ -27,7 +27,7 @@ def paths(opcao):
     if opcao ==11:
        path = ['processados/CSVs_ArquivoFinalGraduados/','processados/CSVs_ArquivoFinalGraduados_NaoGraduados/']
     if opcao == 12: 
-       path = ['microdados-ibge/documentacao/']      
+       path = ['documentacao/']      
     if opcao == 13: 
        path = ['graficos/']        
     return path
