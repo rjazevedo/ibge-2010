@@ -90,9 +90,9 @@ if fase == 10:
 # Fase 20: Análise Exploratória ...
 if fase == 20:
      
-    #  ibge_functions.Profissoes_Cursos()
+    ibge_functions.Profissoes_Cursos()
      
-   pass
+    pass
 
 # Fase 30: Resultados da Análise ...
 if fase == 30: 

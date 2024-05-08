@@ -1655,4 +1655,35 @@ def Tabela_Ida_Volta(path2,name2):
     df1 = df1.reset_index(drop=True)
     # Salvar_Tabela
     df1.to_csv(save_results_to + '10Porcent_DF_Limpo.csv')
+    df1.to_excel(save_results_to + '10Porcent_DF_Limpo.xlsx')
     return
+
+def Profissoes_Cursos(path2,name2):
+
+    # Leitura
+    df =  os.path.join(path2[0],name2[2])
+    X = pd.read_csv(df)    
+    save_results_to = 'graficos/' 
+    X = X.drop(columns=['Unnamed: 0'])
+    X = X.drop(columns=['Unnamed: 0.1'])
+
+    # Remoção de Features 
+    X = X.drop(columns=['CB'])
+    X = X.drop(columns=['CR'])
+
+    # Plotagem dos Dados Originais
+    # print(X.iloc[:,0])
+    plt.figure(figsize=(6, 4))
+    plt.title("10%  - Todos os Cursos - Clusterização ")
+    plt.xlabel('Ida')
+    plt.ylabel('Volta')
+    plt.ylim(0, 100) # definir limite do eixo
+    plt.xlim(0, 100) # definir limite do eixo
+    plt.grid()
+    plt.scatter(X.iloc[:,0],X.iloc[:,1],marker = '*')
+    # plt.show()
+    string = "10%  - Todos os Cursos - Dados Originais " +".pdf"
+    save_results_to = 'graficos/'  
+    plt.savefig(save_results_to + string)    
+    return
+

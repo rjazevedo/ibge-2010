@@ -237,8 +237,12 @@ def ibge_trabalho_recenseados():
 
 # Fase 20: Análise Exploratória ...
 
-# def Profissoes_Cursos():
-#     return
+def Profissoes_Cursos():
+    path2 = ibge_variable.paths(13)
+    name2 = ibge_variable.names(9)
+    ibge_functions_descriptiveanalysis.Profissoes_Cursos(path2,name2)    
+
+    return
 
 
 
