@@ -1689,25 +1689,45 @@ def Profissoes_Cursos(path2,name2):
     # save_results_to = 'graficos/'  
     # plt.savefig(save_results_to + string)    
 
-    # The Elbow Method Graph
-    wcss=[]
-    for i in range(1,11):
-        kmeans = KMeans(n_clusters=i, init ='k-means++', max_iter=300,  n_init=10,random_state=0 )
-        kmeans.fit(X)
-        wcss.append(kmeans.inertia_)
-    plt.plot(range(1,11),wcss,'bx-')
-    plt.title('The Elbow Method Graph')
-    plt.xlabel('Number of clusters')
-    plt.ylabel('WCSS')
-    # plt.show()
-    string1 = "10%  - The Elbow Method Graph " +".pdf"
-    save_results_to = 'graficos/'  
-    plt.savefig(save_results_to + string1)  
+    # # The Elbow Method Graph
+    # wcss=[]
+    # for i in range(1,11):
+    #     kmeans = KMeans(n_clusters=i, init ='k-means++', max_iter=300,  n_init=10,random_state=0 )
+    #     kmeans.fit(X)
+    #     wcss.append(kmeans.inertia_)
+    # plt.plot(range(1,11),wcss,'bx-')
+    # plt.title('The Elbow Method Graph')
+    # plt.xlabel('Number of clusters')
+    # plt.ylabel('WCSS')
+    # # plt.show()
+    # string1 = "10%  - The Elbow Method Graph " +".pdf"
+    # save_results_to = 'graficos/'  
+    # plt.savefig(save_results_to + string1)  
 
     # De acordo com o Metodo Elbow, determinar o numero de clusters
     kmeans = KMeans(n_clusters=3, init ='k-means++', max_iter=300, n_init=10,random_state=0 )
     y_kmeans = kmeans.fit_predict(X)
+    # print(y_kmeans)
+    print(kmeans.labels_)
 
+    #Clusterização
+    plt.figure(figsize=(6, 4))
+    plt.title("10%  - Todos os Cursos - Clusterização ")
+    plt.xlabel('Ida')
+    plt.ylabel('Volta')
+    plt.ylim(0, 100) # definir limite do eixo
+    plt.xlim(0, 100) # definir limite do eixo
+    plt.grid()
+    #6 Visualising the clusters
+    plt.scatter(X.iloc[y_kmeans==0, 0], X.iloc[y_kmeans==0, 1], s=100, c='red', label ='Cluster 1', marker = '*')
+    plt.scatter(X.iloc[y_kmeans==1, 0], X.iloc[y_kmeans==1, 1], s=100, c='blue', label ='Cluster 2', marker = '*')
+    plt.scatter(X.iloc[y_kmeans==2, 0], X.iloc[y_kmeans==2, 1], s=100, c='green', label ='Cluster 3', marker = '*')
+    plt.scatter(kmeans.cluster_centers_[:, 0], kmeans.cluster_centers_[:, 1], s=300, c='yellow', label = 'Centroids', marker = '*')
+    plt.legend()
+    # plt.show()
+    string1 = "10%  - Todos os Cursos - Clusterização " +".pdf"
+    save_results_to = 'graficos/'  
+    plt.savefig(save_results_to + string1)  
     
     return
 
