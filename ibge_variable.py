@@ -46,11 +46,11 @@ def names(opcao):
    if opcao == 6:       
       names = ['CNAE_CSV.csv','CBO_CSV.csv','Curso_CSV.csv']
    if opcao == 7:       
-      names = ['Brasil_Graduados.csv','Brasil_Não-Graduados.csv']   
+      names = ['Brasil_Graduados.csv','Brasil_Não-Graduados.csv','Brasil_Graduados_Fem.csv', 'Brasil_Graduados_Masc.csv']   
    if opcao == 8:       
       names = ['Brasil_PivotFinal.csv','Brasil_PivotFinalMasculina.csv','Brasil_PivotFinalFeminina.csv']   
    if opcao == 9:       
-      names = ['OndeTrabalhamAsPessoasDeCadaCursoDoCenso.xlsx','10Porcent_DF.csv','10Porcent_DF_Limpo.csv']       
+      names = ['OndeTrabalhamAsPessoasDeCadaCursoDoCenso.xlsx','10Porcent_DF.csv','10Porcent_DF_Limpo.csv', '10Porcent_DF_Fem.csv', '10Porcent_DF_Masc.csv','10Porcent_DF_Fem_Limpo.csv', '10Porcent_DF_Masc_Limpo.csv' ]       
 
    return names
 

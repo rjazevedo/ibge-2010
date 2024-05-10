@@ -96,9 +96,10 @@ if fase == 20:
 
 # Fase 30: Resultados da Análise ...
 if fase == 30: 
-     
-    #  ibge_functions.Profissoes_Cursos_Masculino()
-    #  ibge_functions.Profissoes_Cursos_Feminino()     
+    # ibge_functions.Filtro_Masculino_Feminino() 
+    # ibge_functions.Ida_Volta_Masculino_Feminino()
+    # ibge_functions.Tabela_Ida_Volta_Masculino_Feminino()  
+    ibge_functions.Profissoes_Cursos_Masculino_Feminino()   
     pass
 
 if fase == 31:

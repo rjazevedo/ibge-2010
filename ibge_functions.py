@@ -248,11 +248,40 @@ def Profissoes_Cursos():
 
 
 
-# Fase 30: Resultados da Análise ...    
-def Profissoes_Cursos_Masculino():
+# Fase 30: Resultados da Análise ...   
+
+# def Filtro_Masculino_Feminino():
+#     path = ibge_variable.paths(11)
+#     name = ibge_variable.names(7)
+#     ibge_functions_descriptiveanalysis.Filtro_Masculino_Feminino(path,name,'F') 
+#     ibge_functions_descriptiveanalysis.Filtro_Masculino_Feminino(path,name,'M')    
+#     return
+
+# def Ida_Volta_Masculino_Feminino():
+#     path = ibge_variable.paths(11)
+#     name = ibge_variable.names(7)
+#     path1 = ibge_variable.paths(12)
+#     name1 = ibge_variable.names(6)
+#     ibge_functions_descriptiveanalysis.Ida_Volta_Masculino_Feminino(path,name,path1,name1,'F')
+#     ibge_functions_descriptiveanalysis.Ida_Volta_Masculino_Feminino(path,name,path1,name1,'M')
+#     return
+
+# def Tabela_Ida_Volta_Masculino_Feminino(): 
+#     path2 = ibge_variable.paths(13)
+#     name2 = ibge_variable.names(9)
+#     ibge_functions_descriptiveanalysis.Tabela_Ida_Volta_Masculino_Feminino(path2,name2,'F')
+#     ibge_functions_descriptiveanalysis.Tabela_Ida_Volta_Masculino_Feminino(path2,name2,'M')
+#     return
+
+def Profissoes_Cursos_Masculino_Feminino(): 
+    path1 = ibge_variable.paths(12)
+    name1 = ibge_variable.names(6)
+    path2 = ibge_variable.paths(13)
+    name2 = ibge_variable.names(9)
+    ibge_functions_descriptiveanalysis.Profissoes_Cursos_Masculino_Feminino(path1,name1,path2,name2,'F')
+    ibge_functions_descriptiveanalysis.Profissoes_Cursos_Masculino_Feminino(path1,name1,path2,name2,'M')
     return
-def Profissoes_Cursos_Feminino():  
-    return
+
 # Fase 31
 # ...
 
