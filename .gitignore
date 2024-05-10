@@ -4,5 +4,7 @@ processados
 graficos
 logs
 __pycache__
+__pycache__/
 microdados-ibge
 *.pyc
+*.xls
