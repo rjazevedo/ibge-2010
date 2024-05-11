@@ -19,6 +19,7 @@ from ibgeparser.microdados import Microdados
 from ibgeparser.enums import Anos, Estados, Modalidades
 import ibge_variable
 import ibge_functions
+import ibge_functions_descriptive_analysis
 from sklearn.cluster import KMeans
 import matplotlib.pyplot as plt
 
@@ -35,7 +36,7 @@ def Profissoes_Cursos(path1,name1,path2,name2): # https://colab.research.google.
     X = X.drop(columns=['CB'])
     X = X.drop(columns=['CR'])
 
-    CursosCenso = ibge_functions.ibge_cursos_filter(path1[0],name1[2])
+    CursosCenso = ibge_functions_descriptive_analysis.ibge_cursos_filter(path1[0],name1[2])
     csv_CBO = os.path.join(path1[0],name1[1]) # Tabela de CBOs
     CBO = pd.read_csv(csv_CBO)
 
