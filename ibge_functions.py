@@ -18,7 +18,8 @@ from ibgeparser.microdados import Microdados
 from ibgeparser.enums import Anos, Estados, Modalidades
 import ibge_variable
 import ibge_functions_preprocessing
-import ibge_functions_descriptiveanalysis
+import ibge_functions_descriptive_analysis
+import ibge_functions_exploratory_analysis
 import ibge_functions_results
 import logging
 import io
@@ -158,13 +159,13 @@ def ibge_cursos_profissoes():
     # Cursos e Profissões do Censo ...
     path = ibge_variable.paths(12)
     name = ibge_variable.names(5)
-    ibge_functions_descriptiveanalysis.ibge_cnae(path[0],name[0],0)
-    ibge_functions_descriptiveanalysis.ibge_cbo(path[0],name[1],0)
-    ibge_functions_descriptiveanalysis.ibge_cursos(path[0],name[2],0)
+    ibge_functions_descriptive_analysis.ibge_cnae(path[0],name[0],0)
+    ibge_functions_descriptive_analysis.ibge_cbo(path[0],name[1],0)
+    ibge_functions_descriptive_analysis.ibge_cursos(path[0],name[2],0)
     name  = ibge_variable.names(6)
-    QuantidadeCursosCenso = ibge_functions_descriptiveanalysis.ibge_qtdadeCursos(path[0],name[2])
+    QuantidadeCursosCenso = ibge_functions_descriptive_analysis.ibge_qtdadeCursos(path[0],name[2])
     print(" Quantidade de Cursos do Censo:", QuantidadeCursosCenso) 
-    QuantidadeProfissoesCenso = ibge_functions_descriptiveanalysis.ibge_qtdadeProfissoes(path[0],name[1])
+    QuantidadeProfissoesCenso = ibge_functions_descriptive_analysis.ibge_qtdadeProfissoes(path[0],name[1])
     print(" Quantidade de Profissões do Censo:", QuantidadeProfissoesCenso)
     print(" ")
 
@@ -172,20 +173,20 @@ def ibge_cursos_profissoes():
     path1 = ibge_variable.paths(11)
     name1 = ibge_variable.names(7)
     # QuantidadeCursosRecenseados= ibge_functions_descriptiveanalysis.ibge_qtdadeCursos_recenseados(path[0],name[2],0,path1[0],name1[0])
-    QuantidadeCursosRecenseados = ibge_functions_descriptiveanalysis.ibge_qtdadeCursos_recenseados(path1[0],name1[0])
+    QuantidadeCursosRecenseados = ibge_functions_descriptive_analysis.ibge_qtdadeCursos_recenseados(path1[0],name1[0])
     print(" Quantidade de Cursos associados a população Recenseada e graduada:",QuantidadeCursosRecenseados)
-    QuantidadeProfissoesRecenseados = ibge_functions_descriptiveanalysis.ibge_qtdadeProfissoes_recenseados(path1[0],name1[0])
+    QuantidadeProfissoesRecenseados = ibge_functions_descriptive_analysis.ibge_qtdadeProfissoes_recenseados(path1[0],name1[0])
     print(" Quantidade de Profissões associadas a população Recenseada e graduada:",QuantidadeProfissoesRecenseados)
     print(" ")
     # Cursos e Profissões associadas ao Gênero Feminino
-    QuantidadeCursosRecenseadosFemininos = ibge_functions_descriptiveanalysis.ibge_qtdadeCursos_recenseados_feminino(path1[0],name1[0])
+    QuantidadeCursosRecenseadosFemininos = ibge_functions_descriptive_analysis.ibge_qtdadeCursos_recenseados_feminino(path1[0],name1[0])
     print(" Quantidade de Cursos associadas a população Feminina Recenseada e graduada:",QuantidadeCursosRecenseadosFemininos)
-    QuantidadeProfissoesRecenseadosFemininos =  ibge_functions_descriptiveanalysis.ibge_qtdadeProfissoes_recenseados_feminino(path1[0],name1[0])
+    QuantidadeProfissoesRecenseadosFemininos =  ibge_functions_descriptive_analysis.ibge_qtdadeProfissoes_recenseados_feminino(path1[0],name1[0])
     print(" Quantidade de Profissões associadas a população Feminina Recenseada e graduada:",QuantidadeProfissoesRecenseadosFemininos)
     # Cursos e Profissões associadas ao Gênero Masculino
-    QuantidadeCursosRecenseadosMasculinos = ibge_functions_descriptiveanalysis.ibge_qtdadeCursos_recenseados_masculino(path1[0],name1[0])
+    QuantidadeCursosRecenseadosMasculinos = ibge_functions_descriptive_analysis.ibge_qtdadeCursos_recenseados_masculino(path1[0],name1[0])
     print(" Quantidade de Cursos associadas a população Masculina Recenseada e graduada:",QuantidadeCursosRecenseadosMasculinos)
-    QuantidadeProfissoesRecenseadosMasculinos =  ibge_functions_descriptiveanalysis.ibge_qtdadeProfissoes_recenseados_masculino(path1[0],name1[0])
+    QuantidadeProfissoesRecenseadosMasculinos =  ibge_functions_descriptive_analysis.ibge_qtdadeProfissoes_recenseados_masculino(path1[0],name1[0])
     print(" Quantidade de Profissões associadas a população Masculina Recenseada e graduada:",QuantidadeProfissoesRecenseadosMasculinos)
     return
 
@@ -218,11 +219,11 @@ def ibge_idas_voltas_cursos_profissoes():
     name = ibge_variable.names(7)
     path1 = ibge_variable.paths(12)
     name1 = ibge_variable.names(6)
-    ibge_functions_descriptiveanalysis.Ida_Volta(path,name,path1,name1)
+    ibge_functions_descriptive_analysis.Ida_Volta(path,name,path1,name1)
 
     path2 = ibge_variable.paths(13)
     name2 = ibge_variable.names(9)
-    ibge_functions_descriptiveanalysis.Tabela_Ida_Volta(path2,name2)    
+    ibge_functions_descriptive_analysis.Tabela_Ida_Volta(path2,name2)    
     return
 
 def ibge_trabalho_recenseados():
@@ -231,7 +232,7 @@ def ibge_trabalho_recenseados():
     path1 = ibge_variable.paths(12)
     name1 = ibge_variable.names(6)
     # ...
-    ibge_functions_descriptiveanalysis.Tabela_Censo_CbosFortes_Fracos_Familia1_Familia2(path,name,path1,name1)
+    ibge_functions_descriptive_analysis.Tabela_Censo_CbosFortes_Fracos_Familia1_Familia2(path,name,path1,name1)
     return
 
 
@@ -242,7 +243,7 @@ def Profissoes_Cursos():
     name1 = ibge_variable.names(6)
     path2 = ibge_variable.paths(13)
     name2 = ibge_variable.names(9)
-    ibge_functions_descriptiveanalysis.Profissoes_Cursos(path1,name1,path2,name2)    
+    ibge_functions_exploratory_analysis.Profissoes_Cursos(path1,name1,path2,name2)    
 
     return
 
@@ -253,8 +254,8 @@ def Profissoes_Cursos():
 def Filtro_Masculino_Feminino():
     path = ibge_variable.paths(11)
     name = ibge_variable.names(7)
-    ibge_functions_descriptiveanalysis.Filtro_Masculino_Feminino(path,name,'F') 
-    ibge_functions_descriptiveanalysis.Filtro_Masculino_Feminino(path,name,'M')    
+    ibge_functions_results.Filtro_Masculino_Feminino(path,name,'F') 
+    ibge_functions_results.Filtro_Masculino_Feminino(path,name,'M')    
     return
 
 def Ida_Volta_Masculino_Feminino():
@@ -262,15 +263,15 @@ def Ida_Volta_Masculino_Feminino():
     name = ibge_variable.names(7)
     path1 = ibge_variable.paths(12)
     name1 = ibge_variable.names(6)
-    ibge_functions_descriptiveanalysis.Ida_Volta_Masculino_Feminino(path,name,path1,name1,'F')
-    ibge_functions_descriptiveanalysis.Ida_Volta_Masculino_Feminino(path,name,path1,name1,'M')
+    ibge_functions_results.Ida_Volta_Masculino_Feminino(path,name,path1,name1,'F')
+    ibge_functions_results.Ida_Volta_Masculino_Feminino(path,name,path1,name1,'M')
     return
 
 def Tabela_Ida_Volta_Masculino_Feminino(): 
     path2 = ibge_variable.paths(13)
     name2 = ibge_variable.names(9)
-    ibge_functions_descriptiveanalysis.Tabela_Ida_Volta_Masculino_Feminino(path2,name2,'F')
-    ibge_functions_descriptiveanalysis.Tabela_Ida_Volta_Masculino_Feminino(path2,name2,'M')
+    ibge_functions_results.Tabela_Ida_Volta_Masculino_Feminino(path2,name2,'F')
+    ibge_functions_results.Tabela_Ida_Volta_Masculino_Feminino(path2,name2,'M')
     return
 
 def Profissoes_Cursos_Masculino_Feminino(): 
@@ -278,8 +279,8 @@ def Profissoes_Cursos_Masculino_Feminino():
     name1 = ibge_variable.names(6)
     path2 = ibge_variable.paths(13)
     name2 = ibge_variable.names(9)
-    ibge_functions_descriptiveanalysis.Profissoes_Cursos_Masculino_Feminino(path1,name1,path2,name2,'F')
-    ibge_functions_descriptiveanalysis.Profissoes_Cursos_Masculino_Feminino(path1,name1,path2,name2,'M')
+    ibge_functions_results.Profissoes_Cursos_Masculino_Feminino(path1,name1,path2,name2,'F')
+    ibge_functions_results.Profissoes_Cursos_Masculino_Feminino(path1,name1,path2,name2,'M')
     return
 
 # Fase 31
