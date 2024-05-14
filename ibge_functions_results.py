@@ -280,3 +280,124 @@ def Profissoes_Cursos_Masculino_Feminino(path1,name1,path2,name2,sx):
        save_results_to = 'graficos/'  
        plt.savefig(save_results_to + string)      
     return
+
+def PlotOriginal_AdicionaColunaGenero(path1,name1,path2,name2,G):
+
+    # Leitura do arquivo df original, masculino ou feminino
+    if G == 'O':
+       logging.info(" Adicionando a coluna Gênero ao arquivo original")   
+       # df =  os.path.join(path2[0],name2[2])
+       df =  os.path.join(path2[0],name2[7])
+       X = pd.read_csv(df)    
+       # X = X.drop(columns=['Unnamed: 0'])
+       # X = X.drop(columns=['Unnamed: 0.1'])
+    else:
+        if G == 'F':
+           logging.info(" Adicionando a coluna Gênero ao arquivo feminino")   
+           df =  os.path.join(path2[0],name2[5])
+           X = pd.read_csv(df)    
+           X = X.drop(columns=['Unnamed: 0'])
+           X = X.drop(columns=['Unnamed: 0.1'])
+        else:
+            if G == 'M':
+               logging.info(" Adicionando a coluna Gênero ao arquivo masculino")   
+               df =  os.path.join(path2[0],name2[6])
+               X = pd.read_csv(df)    
+               X = X.drop(columns=['Unnamed: 0'])
+               X = X.drop(columns=['Unnamed: 0.1'])
+    # df =  os.path.join(path2[0],name2[2])
+    # X = pd.read_csv(df)    
+    save_results_to = 'graficos/' 
+    # X = X.drop(columns=['Unnamed: 0'])
+    # X = X.drop(columns=['Unnamed: 0.1'])
+
+    # # Remoção de Features 
+    # X = X.drop(columns=['CB'])
+    # X = X.drop(columns=['CR'])
+
+    CursosCenso = ibge_functions_descriptive_analysis.ibge_cursos_filter(path1[0],name1[2])
+    csv_CBO = os.path.join(path1[0],name1[1]) # Tabela de CBOs
+    CBO = pd.read_csv(csv_CBO)
+
+    # Pontos do Gráfico na côr Preta (c = 'k')
+    x= X['Ida']
+    y= X['Volta']
+    plt.xlabel("Cursos")
+    plt.ylabel("Profissões")
+    plt.title("10%  - Cursos e Profissões do Censo_" + G)
+    plt.ylim(0, 100) # definir limite do eixo
+    plt.xlim(0, 100) # definir limite do eixo
+    plt.grid()
+    plt.scatter(x,y,marker = '*')
+    string1 = "10%  - Cursos e Profissões do Censo_" + G + ".pdf"
+    save_results_to = 'graficos/'  
+    plt.savefig(save_results_to + string1)  
+
+
+    # Leitura do arquivo df original, masculino ou feminino
+    if G == 'O':
+       X['Genero'] = "O"    
+       X.to_csv(save_results_to +'Resultados_T_Original.csv')  
+    else:
+          # ...
+        CursoNome =[]
+        for i in range (len(X['CR'])):
+            for index, row in CursosCenso.iterrows():
+                if (str(X['CR'][i]) == CursosCenso['curso_num'][index]):
+                    CursoNome.append(CursosCenso['curso_nome'][index])
+
+        # CursoNome
+        CboNome =[]
+        for i in range (len(X['CB'])):
+            for index, row in CBO.iterrows():
+                if (int(X['CB'][i]) == CBO['Cod_CBO'][index]):
+                    CboNome.append(CBO['Nome_CBO'][index])  
+        if G == 'F':
+             # Adicionando coluna
+            resultados_T=[]
+            cluster=""
+            # X['Cluster'][i]
+            for i in range(len(X['CR'])):
+                tupla=(X['Ida'][i],X['Volta'][i],cluster, X['CR'][i],CursoNome[i],X['CB'][i],CboNome[i],"F")
+                resultados_T.append(tupla)
+            #...
+            Resultados_T= pd.DataFrame(resultados_T)
+            #...
+            dict = {0:"Ida",
+                    1:"Volta",
+                    2:"Cluster",
+                    3:"Curso",
+                    4:"Curso_Nome",
+                    5:"Cbo",
+                    6:"Cbo_Nome",
+                    7:"Genero"
+            }
+            Resultados_T.rename(columns=dict,inplace=True)   
+            Resultados_T.to_csv(save_results_to +'Resultados_T_Fem.csv')         
+        else:
+              if G == 'M':
+                  # Adicionando coluna
+                resultados_T=[]
+                cluster=""
+                # X['Cluster'][i]
+                for i in range(len(X['CR'])):
+                    tupla=(X['Ida'][i],X['Volta'][i],cluster, X['CR'][i],CursoNome[i],X['CB'][i],CboNome[i],"M")
+                    resultados_T.append(tupla)
+                #...
+                Resultados_T= pd.DataFrame(resultados_T)
+                #...
+                dict = {0:"Ida",
+                        1:"Volta",
+                        2:"Cluster",
+                        3:"Curso",
+                        4:"Curso_Nome",
+                        5:"Cbo",
+                        6:"Cbo_Nome",
+                        7:"Genero"
+                }
+                Resultados_T.rename(columns=dict,inplace=True)   
+                Resultados_T.to_csv(save_results_to +'Resultados_T_Masc.csv')          
+                 
+   
+                         
+    return

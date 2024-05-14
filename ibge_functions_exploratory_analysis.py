@@ -85,7 +85,7 @@ def Profissoes_Cursos(path1,name1,path2,name2): # https://colab.research.google.
     plt.ylim(0, 100) # definir limite do eixo
     plt.xlim(0, 100) # definir limite do eixo
     plt.grid()
-    #6 Visualising the clusters
+    # Visualising the clusters
     plt.scatter(X.iloc[y_kmeans==0, 0], X.iloc[y_kmeans==0, 1], s=100, c='red', label ='Cluster 1', marker = '*')
     plt.scatter(X.iloc[y_kmeans==1, 0], X.iloc[y_kmeans==1, 1], s=100, c='blue', label ='Cluster 2', marker = '*')
     plt.scatter(X.iloc[y_kmeans==2, 0], X.iloc[y_kmeans==2, 1], s=100, c='green', label ='Cluster 3', marker = '*')

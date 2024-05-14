@@ -298,6 +298,17 @@ def Profissoes_Cursos_Masculino_Feminino():
 #     ibge_functions_results.Genero_Profissoes_Masc_Fem_Grupo2()
 #     ibge_functions_results.Genero_Profissoes_Masc_Fem_Grupo3()
 #     return
+def PlotOriginal_AdicionaColunaGenero():
+    path1 = ibge_variable.paths(12)
+    name1 = ibge_variable.names(6)
+    path2 = ibge_variable.paths(13)
+    name2 = ibge_variable.names(9)
+    # ibge_functions_results.PlotOriginal_AdicionaColunaGenero(path1,name1,path2,name2,'F') # name2[5]
+    # ibge_functions_results.PlotOriginal_AdicionaColunaGenero(path1,name1,path2,name2,'M') # name2[6]
+    ibge_functions_results.PlotOriginal_AdicionaColunaGenero(path1,name1,path2,name2,'O') # name2[2]/[7]
+    return
+
+
 
 # def Genero_Profissoes_Desequilibradas():
 #     ibge_functions_results.Genero_Profissoes_Desequilibradas_Deslocamentos()

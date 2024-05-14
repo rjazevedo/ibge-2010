@@ -108,6 +108,8 @@ if fase == 32:
     pass 
 if fase == 33:   
     #  #QP3
+    ibge_functions.PlotOriginal_AdicionaColunaGenero()
+    #  ibge_functions.JuntaTabelas()
     #  ibge_functions.Genero_Profissoes_Masc_Fem()
     #  ibge_functions.Genero_Profissoes_Masc_Fem_Grupos()
     #  ibge_functions.Genero_Profissoes_Desequilibradas()
