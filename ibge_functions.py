@@ -347,10 +347,10 @@ def Ida_Volta_Idade():
     path1 = ibge_variable.paths(12)
     name1 = ibge_variable.names(6)
     ibge_functions_results.Ida_Volta_Idade(I29,path1,name1,'29')
-    ibge_functions_results.Ida_Volta_Idade(I30_39,path1,name1,'30-39')
-    ibge_functions_results.Ida_Volta_Idade(I40_49,path1,name1,'40-49')
-    ibge_functions_results.Ida_Volta_Idade(I50_59,path1,name1,'50-59')
-    ibge_functions_results.Ida_Volta_Idade(I60,path1,name1,'60')
+    # ibge_functions_results.Ida_Volta_Idade(I30_39,path1,name1,'30-39')
+    # ibge_functions_results.Ida_Volta_Idade(I40_49,path1,name1,'40-49')
+    # ibge_functions_results.Ida_Volta_Idade(I50_59,path1,name1,'50-59')
+    # ibge_functions_results.Ida_Volta_Idade(I60,path1,name1,'60')
     return
 # def Tabela_Ida_Volta_Idade():
 #     return
