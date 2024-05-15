@@ -1210,6 +1210,12 @@ def Ida_Volta_Idade(df,path1,name1,idade):
     # df.to_csv(save_results_to + '10Porcent_DF.csv')
     if idade == '29':
        df.to_csv(save_results_to + '100Porcent_DF_29.csv')
-    # if idade == 'M':
-    #    df.to_csv(save_results_to + '10Porcent_DF_Masc.csv')    
+    if idade == '30-39':
+       df.to_csv(save_results_to + '100Porcent_DF_30-39.csv')    
+    if idade == '40-49':
+       df.to_csv(save_results_to + '100Porcent_DF_40-49.csv')  
+    if idade == '50-59':
+       df.to_csv(save_results_to + '100Porcent_DF_50-59.csv') 
+    if idade == '60':
+       df.to_csv(save_results_to + '100Porcent_DF_60.csv')       
     return
