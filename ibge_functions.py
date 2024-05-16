@@ -291,24 +291,33 @@ def Profissoes_Cursos_Masculino_Feminino():
 
 # Fase 33
 # QP3
-# def Genero_Profissoes_Masc_Fem_Grupos():
+# def Genero_Profissoes_Masc_Fem_Grupos(): # Rascunho ...
 #     # Ler dataframes
 #     # Chamar funções com os dataframes como parâmetros
 #     ibge_functions_results.Genero_Profissoes_Masc_Fem_Grupo1()
 #     ibge_functions_results.Genero_Profissoes_Masc_Fem_Grupo2()
 #     ibge_functions_results.Genero_Profissoes_Masc_Fem_Grupo3()
 #     return
-def PlotOriginal_AdicionaColunaGenero():
+# def PlotOriginal_AdicionaColunaGenero(): # Funciona, mas salva csvs. Comentei para usar como dataframes!
+#     path1 = ibge_variable.paths(12)
+#     name1 = ibge_variable.names(6)
+#     path2 = ibge_variable.paths(13)
+#     name2 = ibge_variable.names(9)
+#     ibge_functions_results.PlotOriginal_AdicionaColunaGenero(path1,name1,path2,name2,'F') # name2[5]
+#     ibge_functions_results.PlotOriginal_AdicionaColunaGenero(path1,name1,path2,name2,'M') # name2[6]
+#     ibge_functions_results.PlotOriginal_AdicionaColunaGenero(path1,name1,path2,name2,'O') # name2[2]/[7]
+    return
+def JuntaTabelas():
     path1 = ibge_variable.paths(12)
     name1 = ibge_variable.names(6)
     path2 = ibge_variable.paths(13)
     name2 = ibge_variable.names(9)
-    ibge_functions_results.PlotOriginal_AdicionaColunaGenero(path1,name1,path2,name2,'F') # name2[5]
-    ibge_functions_results.PlotOriginal_AdicionaColunaGenero(path1,name1,path2,name2,'M') # name2[6]
-    ibge_functions_results.PlotOriginal_AdicionaColunaGenero(path1,name1,path2,name2,'O') # name2[2]/[7]
+    Original =      ibge_functions_results.PlotOriginal_AdicionaColunaGenero(path1,name1,path2,name2,'O') # name2[2]/[7]
+    Masc =          ibge_functions_results.PlotOriginal_AdicionaColunaGenero(path1,name1,path2,name2,'M') # name2[6]
+    Fem =           ibge_functions_results.PlotOriginal_AdicionaColunaGenero(path1,name1,path2,name2,'F') # name2[5]
+
+    ibge_functions_results.JuntaTabelas(Original,Masc,Fem)
     return
-# def JuntaTabelas():
-#     return
 
 
 # def Genero_Profissoes_Desequilibradas():
@@ -326,7 +335,7 @@ def PlotOriginal_AdicionaColunaGenero():
  
 # Fase 34
 
-# def Filtro_Idade():
+# def Filtro_Idade():  # Funciona, mas salva csvs. Comentei para usar como dataframes!
 #     path = ibge_variable.paths(11)
 #     name = ibge_variable.names(7)
 #     ibge_functions_results.Filtro_Idade(path,name,'29') 

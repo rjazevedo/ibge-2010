@@ -927,7 +927,8 @@ def PlotOriginal_AdicionaColunaGenero(path1,name1,path2,name2,G):
     # Leitura do arquivo df original, masculino ou feminino
     if G == 'O':
        X['Genero'] = "O"    
-       X.to_csv(save_results_to +'Resultados_T_Original.csv')  
+       # X.to_csv(save_results_to +'Resultados_T_Original.csv')  
+       return X
     else:
           # ...
         CursoNome =[]
@@ -963,7 +964,8 @@ def PlotOriginal_AdicionaColunaGenero(path1,name1,path2,name2,G):
                     7:"Genero"
             }
             Resultados_T.rename(columns=dict,inplace=True)   
-            Resultados_T.to_csv(save_results_to +'Resultados_T_Fem.csv')         
+            # Resultados_T.to_csv(save_results_to +'Resultados_T_Fem.csv')   
+            return Resultados_T          
         else:
               if G == 'M':
                   # Adicionando coluna
@@ -986,11 +988,12 @@ def PlotOriginal_AdicionaColunaGenero(path1,name1,path2,name2,G):
                         7:"Genero"
                 }
                 Resultados_T.rename(columns=dict,inplace=True)   
-                Resultados_T.to_csv(save_results_to +'Resultados_T_Masc.csv')          
+                # Resultados_T.to_csv(save_results_to +'Resultados_T_Masc.csv')   
+                return Resultados_T       
                  
    
                          
-    return
+    return 
 
 def Filtro_Idade(path, name, idade):
     csv_estado = os.path.join(path[0],name[0]) # arquivo do censo do Brasil inteiro (somente graduados)
@@ -1218,4 +1221,20 @@ def Ida_Volta_Idade(df,path1,name1,idade):
        df.to_csv(save_results_to + '100Porcent_DF_50-59.csv') 
     if idade == '60':
        df.to_csv(save_results_to + '100Porcent_DF_60.csv')       
+    return
+
+def JuntaTabelas(Original,Masc,Fem):
+
+    save_results_to = 'graficos/'  
+    df_row = pd.concat([Original, Masc, Fem])
+    # print(df_row)
+    df_row = pd.concat([Original, Masc, Fem], ignore_index=True)
+    df_row1 = df_row.sort_values(["Curso", "Cbo"], ascending=True)
+    # print(df_row1)
+    # df_row2 = df_row1.sort_values(["Curso", "Cbo"], ascending=True)
+    # print(df_row2)
+    # pd.set_option('display.max_rows', None)
+    # pd.set_option('display.max_columns', None)
+    # print(df_row2)
+    df_row1.to_csv(save_results_to +'Tabela_Orig_Masc_Fem_10Porcento.csv')  
     return
