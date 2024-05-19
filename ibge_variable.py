@@ -50,7 +50,7 @@ def names(opcao):
    if opcao == 8:       
       names = ['Brasil_PivotFinal.csv','Brasil_PivotFinalMasculina.csv','Brasil_PivotFinalFeminina.csv']   
    if opcao == 9:       
-      names = ['OndeTrabalhamAsPessoasDeCadaCursoDoCenso.xlsx','10Porcent_DF.csv','10Porcent_DF_Limpo.csv', '10Porcent_DF_Fem.csv', '10Porcent_DF_Masc.csv','10Porcent_DF_Fem_Limpo.csv', '10Porcent_DF_Masc_Limpo.csv','Kmeans3_T.csv']       
+      names = ['OndeTrabalhamAsPessoasDeCadaCursoDoCenso.xlsx','10Porcent_DF.csv','10Porcent_DF_Limpo.csv', '10Porcent_DF_Fem.csv', '10Porcent_DF_Masc.csv','10Porcent_DF_Fem_Limpo.csv', '10Porcent_DF_Masc_Limpo.csv','Kmeans3_T.csv','100Porcent_DF_Fem.csv','100Porcent_DF_Masc.csv','100Porcent_DF_Fem_Limpo.csv','100Porcent_DF_Masc_Limpo.csv','df_row2.csv','Resultados_T_Filtrados_Kmeans3_T.csv']       
 
    return names
 

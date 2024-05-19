@@ -19,6 +19,7 @@ from ibgeparser.enums import Anos, Estados, Modalidades
 import ibge_functions
 import ibge_variable
 import ibge_functions_preprocessing
+import ibge_functions_results
 import logging
 
 # Esse arquivo não pode conter código que não seja chamada de funções e verificação de parâmetros
@@ -88,16 +89,27 @@ if fase == 10:
     
 
 # Fase 20: Análise Exploratória ...
-if fase == 20:     
+if fase == 20:  
+    # Função para:
+    # - clusterização com k=3, 
+    # - geração do gráfico K-Means com K=3 (10% - Todos os Cursos - Clusterização) 
+    # - geração do arquivo Kmeans3_T.csv   
     ibge_functions.Profissoes_Cursos()     
     pass
 
 # Fase 30: Resultados da Análise ...
 if fase == 30: 
+    # Funções para 10%  
+    # Geração do dataframes femininos e masculinos
     ibge_functions.Filtro_Masculino_Feminino() 
+    # Geração dos Arquivos de idas e voltas Femininas e Masculinas
     ibge_functions.Ida_Volta_Masculino_Feminino()
-    ibge_functions.Tabela_Ida_Volta_Masculino_Feminino()  
-    ibge_functions.Profissoes_Cursos_Masculino_Feminino()   
+    # Limpeza dos arquivos  de idas e voltas Femininas e Masculinas
+    ibge_functions.Tabela_Ida_Volta_Masculino_Feminino() 
+    # Geração dos gráficos:
+    #  - Profissões e Cursos-Masculino (10%-Cursos e Profissões do Censo-Masculino)
+    #  - Profissões e Cursos-Feminino  (10%-Cursos e Profissões do Censo-Feminino)   
+    ibge_functions.Profissoes_Cursos_Masculino_Feminino() 
     pass
 
 if fase == 31:
@@ -107,21 +119,37 @@ if fase == 32:
     #QP2
     pass 
 if fase == 33:   
-    #  #QP3
+    #QP3
+    ibge_functions.Ida_Volta_Masculino_Feminino_100()
+    ibge_functions.Tabela_Ida_Volta_Masculino_Feminino_100()
+    ibge_functions.PlotOriginal_AdicionaColunaGenero_100()
+    ibge_functions.Filtra_10Porcento()
+    ibge_functions_results.filtrar_Tabela_10Porcento()
+    # geração do gráfico: 
+    # - Pontos originais, masculinos e femininos (10%-Visualização dos três gráficos - Genero - Kmeans3)
+    ibge_functions_results.Kmeans3_T_Grafico_Genero()
+    # Não utilizadas ...
+    # ibge_functions.Profissoes_Cursos_Masculino_Feminino_100()  
+
+    # Funções para 10% ... comentadas 
+    # Funciona, mas salva csvs. Comentei para usar como dataframes!
     # ibge_functions.PlotOriginal_AdiciconaColunaGenero()
-    ibge_functions.JuntaTabelas()
+    # ibge_functions.JuntaTabelas()
     
+    #  Rascunhos ...
     #  ibge_functions.Genero_Profissoes_Masc_Fem()
     #  ibge_functions.Genero_Profissoes_Masc_Fem_Grupos()
     #  ibge_functions.Genero_Profissoes_Desequilibradas()
     #  ibge_functions.Genero_Profissoes_Equilibradas()
-    pass
+    # pass
+
 if fase == 34:
-    #  #QP4
+    # #QP4
     # ibge_functions.Filtro_Idade()
     ibge_functions.Ida_Volta_Idade()
     # ibge_functions.Tabela_Ida_Volta_Idade()
     # ibge_functions.Adiciona_Coluna_Idade()
+    # ibge_functions.JuntaTabelas_Idade()
 
     #  ibge_functions.Idade_Profissoes_Cursos()
     #  ibge_functions.Idade_Profissoes_Cursos_Grupos()

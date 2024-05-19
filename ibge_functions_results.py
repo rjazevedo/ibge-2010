@@ -430,8 +430,9 @@ def Cursos_CBO_13_10_sn(csv_estado,csv_CBO,csv_CURSOS,cbo_num,titulo3,NaoGraduad
     return cbo_num,curso_nome,primeirosCbos_Nome,intensidade,plt, cursos, nomes, porcentagens
 
 def Cursos_CBO_14_10_sn(csv_estado,csv_CBO,csv_CURSOS,cbo_num,titulo3,NaoGraduados_qtdade,curso_num,curso_nome,primeirosCbos_Nome,i,porcent_param):
-    numero = i
+    import pandas as pd
 
+    numero = i
     # X = pd.read_csv(csv_estado)
     X = csv_estado
     CBO = pd.read_csv(csv_CBO, dtype ='str')
@@ -533,6 +534,8 @@ def Cursos_CBO_14_10_sn(csv_estado,csv_CBO,csv_CURSOS,cbo_num,titulo3,NaoGraduad
       # ...
       A_Curso_11["Nome"] = 1
       import warnings
+      import pandas as pd
+      import pandas as pd
       for i in range(len(A_Curso_11)):
         #   A_Curso_11['Nome'][i] = NomeCurso.Nome_Curso[i]
           A_Curso_11['Nome'].iloc[i]= NomeCurso['Nome_Curso'].iloc[i]
@@ -608,7 +611,7 @@ def Cursos_CBO_14_10_sn(csv_estado,csv_CBO,csv_CURSOS,cbo_num,titulo3,NaoGraduad
       #plt.savefig(save_results_to + string)
       #volta = 'Volta'
     else:
-       print("Não existe cursos para esse CBO")
+         print("Não existe cursos para esse CBO")
 
     #return cbo_num,curso_nome,primeirosCbos_Nome,intensidade,plt,string,cursos,nomes,porcentagens
     return cbo_num,curso_nome,primeirosCbos_Nome,intensidade,plt,cursos,nomes,porcentagens
@@ -626,7 +629,7 @@ def Filtro_Masculino_Feminino(path, name, sx):
        #print("")
        Estado = Estado.reset_index(drop=True)
        Estado = Estado.drop(columns=['Unnamed: 0'])
-       Estado.to_csv(path[0] + 'Brasil_Graduados_Fem.csv')
+       # Estado.to_csv(path[0] + 'Brasil_Graduados_Fem.csv')
     else: 
          if sx == "M":  
             # Novo Filtro
@@ -635,9 +638,9 @@ def Filtro_Masculino_Feminino(path, name, sx):
             #print("")
             Estado = Estado.reset_index(drop=True)
             Estado = Estado.drop(columns=['Unnamed: 0'])
-            Estado.to_csv(path[0] + 'Brasil_Graduados_Masc.csv') 
+            # Estado.to_csv(path[0] + 'Brasil_Graduados_Masc.csv') 
              
-    return
+    return Estado
 
 def Ida_Volta_Masculino_Feminino(path,name,path1,name1,sx):
 
@@ -1128,7 +1131,7 @@ def Ida_Volta_Idade(df,path1,name1,idade):
                     #fig.savefig(string)
                 #print(tresprimeirosCursos)
                 #print(NaoGraduados[i])
-                print("============================================================================================================================================")
+                #print("============================================================================================================================================")
 
 
             #==================================================================Colocando Ida e Volta no mesmo grafico
@@ -1237,4 +1240,472 @@ def JuntaTabelas(Original,Masc,Fem):
     # pd.set_option('display.max_columns', None)
     # print(df_row2)
     df_row1.to_csv(save_results_to +'Tabela_Orig_Masc_Fem_10Porcento.csv')  
+    return
+
+def Ida_Volta_Masculino_Feminino_100(df,path1,name1,sx):
+
+    # if sx == 'F':
+       # logging.info(" Gerando as idas e voltas Femininas")   
+       # csv_estado = os.path.join(path[0],name[2]) # arquivo do censo do Brasil inteiro (somente graduados)
+    # if sx == 'M':
+       # logging.info(" Gerando as idas e voltas Masculinas")   
+       # csv_estado = os.path.join(path[0],name[3]) # arquivo do censo do Brasil inteiro (somente graduados)       
+    path1 = ibge_variable.paths(12)
+    name1 = ibge_variable.names(6)
+    csv_CBO = os.path.join(path1[0],name1[1]) # Tabela de CBOs
+    csv_CURSOS = os.path.join(path1[0],name1[2]) # Tabela de Cursos
+    path2 = ibge_variable.paths(8)
+    name2 = ibge_variable.names(8)         
+    csv_PivotTableFinal =  os.path.join(path2[0],name2[0]) #Pivo Table Final
+
+    CursosCenso = ibge_functions_descriptive_analysis.ibge_cursos_filter(path1[0],name1[2])
+    # print(len(CursosCenso))
+    # curso_num  = float(CursosCenso.curso_num.iloc[88])
+    # curso_nome = CursosCenso.curso_nome.iloc[88]
+    # titulo10 =  "Curso:  " +  str(curso_num) + ": " + curso_nome + " - Os 10 maiores"
+    # titulo3  =  "Curso:  " +  str(curso_num) + ": " + curso_nome + " - Os 3 maiores"
+    # print(curso_num)
+    # print(curso_nome)
+    # print(titulo10)
+    # print(titulo3)
+    # Inserir comando para criar a pasta ida
+    save_results_to = 'graficos/'  
+
+    # Testar curso 79,80,85...
+    for f in range(0,89):
+
+        curso_num= float(CursosCenso.curso_num.iloc[f])
+        curso_nome= CursosCenso.curso_nome.iloc[f]
+        titulo10= "Curso " +  CursosCenso.curso_num.iloc[f] + ": " + CursosCenso.curso_nome.iloc[f] + " - 10% "
+        titulo3=  "Curso " +  CursosCenso.curso_num.iloc[f] + ": " + CursosCenso.curso_nome.iloc[f] + " - 10%"
+        print("curso_num:", curso_num, "curso_nome:",curso_nome)
+        print(f)
+        print("=================================================================================================")
+        
+        #======================================================Plotando os cbos de determinado curso, usando função ...
+        #primeirosCbos,primeirosCbos_Nome,Porcentagens,CURSO_NUM,CURSO_NOME=ibge_functions_descriptive_analysis.CBOs_Curso_v6(csv_estado,csv_CBO,curso_num,curso_nome,titulo10,titulo3,0.1,save_results_to)
+        primeirosCbos,primeirosCbos_Nome,Porcentagens,CURSO_NUM,CURSO_NOME=CBOs_Curso_v6_sn2(df,csv_CBO,curso_num,curso_nome,titulo10,titulo3,1)
+        if (primeirosCbos!=0)&(primeirosCbos!=0)&(Porcentagens!=0):
+            #======================================================Achando a quantidade de Não-Graduados na PivotTable
+            primeirosCbos,NaoGraduados,Graduados_Nao,Graduados = ibge_functions_descriptive_analysis.NaoGraduados_PivotTable_2(primeirosCbos, csv_PivotTableFinal)
+            #=====================================================Plotando os cursos de determinado cbo, sem função e salvando os plots ...
+            Intensidade = []
+            Porcentagens_vol = []
+            CBO_vol = []
+            Cursos_vol = []
+            Nomes_vol  = []
+            for i in range (len(primeirosCbos)):
+                titulo3=primeirosCbos_Nome[i]
+                if(int(float(primeirosCbos[i]))>=2000):
+                    #CBO,Curso,tresprimeirosCursos,intensidade,fig,string,cursos_vol, nomes_vol, porcentagens_vol=ibge_functions_descriptive_analysis.Cursos_CBO_14_10(csv_estado,csv_CBO,csv_CURSOS,primeirosCbos[i],titulo3,NaoGraduados[i],curso_num,curso_nome,primeirosCbos_Nome,i,0.1)
+                    CBO,Curso,tresprimeirosCursos,intensidade,fig,cursos_vol, nomes_vol, porcentagens_vol=Cursos_CBO_14_10_sn(df,csv_CBO,csv_CURSOS,primeirosCbos[i],titulo3,NaoGraduados[i],curso_num,curso_nome,primeirosCbos_Nome,i,1)
+                    Intensidade.append(intensidade)
+                    # print(intensidade)
+                    Porcentagens_vol.append(porcentagens_vol)
+                    CBO_vol.append(CBO)
+                    Cursos_vol.append(cursos_vol)
+                    Nomes_vol.append(nomes_vol)
+                else:
+                    print(primeirosCbos[i])
+                    #CBO,Curso,tresprimeirosCursos,intensidade,fig,string,cursos_vol, nomes_vol, porcentagens_vol=ibge_functions_descriptive_analysis.Cursos_CBO_13_10(csv_estado,csv_CBO,csv_CURSOS,primeirosCbos[i],titulo3,NaoGraduados[i],Graduados_Nao[i],curso_num,curso_nome,primeirosCbos_Nome,i,0.1,save_results_to)
+                    CBO,Curso,tresprimeirosCursos,intensidade,fig,cursos_vol, nomes_vol, porcentagens_vol=Cursos_CBO_13_10_sn(df,csv_CBO,csv_CURSOS,primeirosCbos[i],titulo3,NaoGraduados[i],Graduados_Nao[i],curso_num,curso_nome,primeirosCbos_Nome,i,1)
+                    if (cursos_vol!=0)&(nomes_vol!=0)&(porcentagens_vol!=0):
+                        Intensidade.append(intensidade)
+                        Porcentagens_vol.append(porcentagens_vol)
+                        CBO_vol.append(CBO)
+                        Cursos_vol.append(cursos_vol)
+                        Nomes_vol.append(nomes_vol)
+                    else:
+                        print("Não existe cursos para esse CBO")  
+
+            # ======================================================Plotando os cbos de determinado curso, usando função ...
+        
+            # ==================================================================Colocando Ida e Volta no mesmo grafico
+            if(f==0):
+                # Se for a primeira execução, tem que criar as listas ... e o paramentro da ida é 1
+                #Recuperando as idas e voltas ...
+                x_ = []
+                y_ = []
+                z_ = []
+                v_ = []
+                X_,Y_,Z_,V_= ibge_functions_descriptive_analysis.Ida(primeirosCbos,CURSO_NUM,Porcentagens,1,x_,y_,z_,v_)
+                x_= X_
+                y_= Y_
+                z_= Z_
+                v_= V_
+                for i in range(len(primeirosCbos)):
+                    X_,Y_,Z_,V_= ibge_functions_descriptive_analysis.Volta(Cursos_vol[i],primeirosCbos[i],Porcentagens_vol[i], 0,x_,y_,z_,v_)
+
+                x_= X_
+                y_= Y_
+                z_= Z_
+                v_= V_
+                #df1 = x_y_z_v_df(X_,Y_,Z_,V_)
+                #print(df1)
+                #Juntando as idas e voltas ...
+                for l in range(len(CBO_vol)):
+                    ibge_functions_descriptive_analysis.Jun_Ida_Volta(X_,Y_,Z_,V_, CBO_vol[l],CURSO_NUM)
+                #atribuição
+                x_= X_
+                y_= Y_
+                z_= Z_
+                v_= V_
+            else:
+                #Recuperando as idas e voltas ...
+                X_,Y_,Z_,V_= ibge_functions_descriptive_analysis.Ida(primeirosCbos,CURSO_NUM,Porcentagens,0,x_,y_,z_,v_)
+                x_= X_
+                y_= Y_
+                z_= Z_
+                v_= V_
+                for i in range(len(primeirosCbos)):
+                    X_,Y_,Z_,V_= ibge_functions_descriptive_analysis.Volta(Cursos_vol[i],primeirosCbos[i],Porcentagens_vol[i], 0,x_,y_,z_,v_)
+
+                x_= X_
+                y_= Y_
+                z_= Z_
+                v_= V_
+                #df1 = x_y_z_v_df(X_,Y_,Z_,V_)
+                #print(df1)
+                #Juntando as idas e voltas ...
+                for l in range(len(CBO_vol)):
+                    ibge_functions_descriptive_analysis.Jun_Ida_Volta(X_,Y_,Z_,V_, CBO_vol[l],CURSO_NUM)
+                #atribuição
+                x_= X_
+                y_= Y_
+                z_= Z_
+                v_= V_
+
+    df = ibge_functions_descriptive_analysis.x_y_z_v_df(x_,y_,z_,v_)    
+    # df.to_csv(save_results_to + '10Porcent_DF.csv')
+  
+    if sx == 'F':
+       # df['CR'] = pd.to_numeric(df['CR'])
+       # df['CR'] = df['CR'].astype(float)
+       # df['CR'] = df['CR'].values.astype(int)
+       df.to_csv(save_results_to + '100Porcent_DF_Fem.csv')
+    if sx == 'M':
+       # df['CR'] = pd.to_numeric(df['CR'])
+       # df['CR'] = df['CR'].astype(float)
+       # df['CR'] = df['CR'].values.astype(int)
+       df.to_csv(save_results_to + '100Porcent_DF_Masc.csv')
+    return  
+
+def Tabela_Ida_Volta_Masculino_Feminino_100(path2,name2,sx):
+
+    if sx == 'F':
+       logging.info(" Gerando a Tabela de idas e voltas Femininas")   
+       df =  os.path.join(path2[0],name2[8])
+       df1 = pd.read_csv(df)  
+    if sx == 'M':
+       logging.info(" Gerando a Tabela de idas e voltas Masculinas")   
+       df =  os.path.join(path2[0],name2[9])
+       df1 = pd.read_csv(df)    
+    save_results_to = 'graficos/'  
+
+
+    # Remover_Voltas_semIdas_e_Idas_semVoltas
+    # tive que passar tudo pra float porque tem valores menores do que 0 ...
+    for i in range(len(df1)):
+        if (df1['Ida'][i].astype('float')==0.00) & (df1['Volta'][i].astype('float')!=0.00):
+            df1 = df1.drop(i)
+        else:
+            if (df1['Ida'][i].astype('float')!=0.00) & (df1['Volta'][i].astype('float')==0.00):
+                df1 = df1.drop(i)
+            else:
+                if (df1['Ida'][i].astype('float')==0.00) & (df1['Volta'][i].astype('float')==0.00):
+                    df1 = df1.drop(i)
+    # Remover_Duplicados
+    df1 = df1.drop_duplicates(subset=['Ida','Volta'])
+    # Reset_Indice
+    df1 = df1.reset_index(drop=True)
+    #df1['CR'] = pd.to_numeric(df1['CR'])
+    #df1['CR'] = df1['CR'].values.astype(np.int64)
+
+
+    # Salvar_Tabela
+    # df1.to_csv(save_results_to + '10Porcent_DF_Limpo.csv')
+    # df1.to_excel(save_results_to + '10Porcent_DF_Limpo.xlsx')
+    if sx == 'F':
+       # df.to_csv(save_results_to + '10Porcent_DF_Fem.csv')
+       # Transformar as colunas( Cluster, Curso e Cbo) para inteiro ...
+       # df1['CR'] = df1['CR'].astype(float)
+       # df1['CR'] = df1['CR'].values.astype(int)
+       df1.to_csv(save_results_to + '100Porcent_DF_Fem_Limpo.csv')
+       df1.to_excel(save_results_to + '100Porcent_DF_Fem_Limpo.xlsx')
+    if sx == 'M':
+       # df.to_csv(save_results_to + '10Porcent_DF_Masc.csv')
+       # df1['CR'] = df1['CR'].astype(float)
+       # df1['CR'] = df1['CR'].values.astype(int)
+       df1.to_csv(save_results_to + '100Porcent_DF_Masc_Limpo.csv')
+       df1.to_excel(save_results_to + '100Porcent_DF_Masc_Limpo.xlsx')
+    return   
+
+
+# def Profissoes_Cursos_Masculino_Feminino_100(path1,name1,path2,name2,sx): 
+#     # Leitura
+#     if sx == 'F':
+#        logging.info(" Gerando o gráfico de profissões e cursos Femininos")   
+#        df =  os.path.join(path2[0],name2[10])
+#        X = pd.read_csv(df)    
+#        X = X.drop(columns=['Unnamed: 0'])
+#        X = X.drop(columns=['Unnamed: 0.1'])  
+#     if sx == 'M':
+#        logging.info(" Gerando o gráfico de profissões e cursos Masculinos")   
+#        df =  os.path.join(path2[0],name2[11])
+#        X = pd.read_csv(df)    
+#        X = X.drop(columns=['Unnamed: 0'])
+#        X = X.drop(columns=['Unnamed: 0.1'])
+#     save_results_to = 'graficos/'   
+#     # Remoção de Features 
+#     X = X.drop(columns=['CB'])
+#     X = X.drop(columns=['CR'])
+#     CursosCenso = ibge_functions_descriptive_analysis.ibge_cursos_filter(path1[0],name1[2])
+#     csv_CBO = os.path.join(path1[0],name1[1]) # Tabela de CBOs
+#     CBO = pd.read_csv(csv_CBO)
+#     # Plotagem dos Dados Originais
+#     # print(X.iloc[:,0])
+#     plt.figure(figsize=(6, 4))
+#     # plt.title("10%  - Todos os Cursos - Clusterização ")
+#     plt.xlabel('Ida')
+#     plt.ylabel('Volta')
+#     plt.ylim(0, 100) # definir limite do eixo
+#     plt.xlim(0, 100) # definir limite do eixo
+#     plt.grid()
+#     plt.scatter(X.iloc[:,0],X.iloc[:,1],marker = '*')
+#     # plt.show()
+#     # string = "10%  - Todos os Cursos - Dados Originais " +".pdf"
+#     # save_results_to = 'graficos/'  
+#     # plt.savefig(save_results_to + string) 
+#     if sx == 'F':
+#        plt.title("100%  - Cursos e Profissões - Femininos ")
+#        string = "100%  - Todos os Cursos - Dados Originais Femininos" +".pdf"
+#        save_results_to = 'graficos/'  
+#        plt.savefig(save_results_to + string) 
+#     if sx == 'M':
+#        plt.title("100%  - Cursos e Profissões - Masculinos ")
+#        string = "100%  - Todos os Cursos - Dados Originais Masculinos" +".pdf"
+#        save_results_to = 'graficos/'  
+#        plt.savefig(save_results_to + string)      
+#     return
+
+def PlotOriginal_AdicionaColunaGenero_100(path1,name1,path2,name2,G):
+    # Leitura do arquivo df original, masculino ou feminino
+    if G == 'O':
+       logging.info(" Adicionando a coluna Gênero ao arquivo original")   
+       # df =  os.path.join(path2[0],name2[2])
+       df =  os.path.join(path2[0],name2[7])
+       X = pd.read_csv(df)    
+       # X = X.drop(columns=['Unnamed: 0'])
+       # X = X.drop(columns=['Unnamed: 0.1'])
+    else:
+        if G == 'F':
+           logging.info(" Adicionando a coluna Gênero ao arquivo feminino")   
+           df =  os.path.join(path2[0],name2[10])
+           X = pd.read_csv(df)    
+           X = X.drop(columns=['Unnamed: 0'])
+           X = X.drop(columns=['Unnamed: 0.1'])
+        else:
+            if G == 'M':
+               logging.info(" Adicionando a coluna Gênero ao arquivo masculino")   
+               df =  os.path.join(path2[0],name2[11])
+               X = pd.read_csv(df)    
+               X = X.drop(columns=['Unnamed: 0'])
+               X = X.drop(columns=['Unnamed: 0.1'])
+    # df =  os.path.join(path2[0],name2[2])
+    # X = pd.read_csv(df)    
+    save_results_to = 'graficos/' 
+    # X = X.drop(columns=['Unnamed: 0'])
+    # X = X.drop(columns=['Unnamed: 0.1'])
+    # # Remoção de Features 
+    # X = X.drop(columns=['CB'])
+    # X = X.drop(columns=['CR'])
+    CursosCenso = ibge_functions_descriptive_analysis.ibge_cursos_filter(path1[0],name1[2])
+    csv_CBO = os.path.join(path1[0],name1[1]) # Tabela de CBOs
+    CBO = pd.read_csv(csv_CBO)
+    # Pontos do Gráfico na côr Preta (c = 'k')
+    x= X['Ida']
+    y= X['Volta']
+    plt.xlabel("Cursos")
+    plt.ylabel("Profissões")
+    plt.title("10%  - Cursos e Profissões do Censo_" + G)
+    plt.ylim(0, 100) # definir limite do eixo
+    plt.xlim(0, 100) # definir limite do eixo
+    plt.grid()
+    plt.scatter(x,y,marker = '*')
+    string1 = "10%  - Cursos e Profissões do Censo_" + G + ".pdf"
+    save_results_to = 'graficos/'  
+    plt.savefig(save_results_to + string1)  
+    # Leitura do arquivo df original, masculino ou feminino
+    if G == 'O':
+       X['Genero'] = "O"    
+       X.to_csv(save_results_to +'Resultados_T_Original.csv')  
+       return X
+    else:
+          # ...
+        CursoNome =[]
+        for i in range (len(X['CR'])):
+            for index, row in CursosCenso.iterrows():
+                if (str(X['CR'][i]) == CursosCenso['curso_num'][index]):
+                    CursoNome.append(CursosCenso['curso_nome'][index])
+        # CursoNome
+        CboNome =[]
+        for i in range (len(X['CB'])):
+            for index, row in CBO.iterrows():
+                if (int(X['CB'][i]) == CBO['Cod_CBO'][index]):
+                    CboNome.append(CBO['Nome_CBO'][index])  
+        if G == 'F':
+             # Adicionando coluna
+            resultados_T=[]
+            cluster=""
+            # X['Cluster'][i]
+            for i in range(len(X['CR'])):
+                tupla=(X['Ida'][i],X['Volta'][i],cluster, X['CR'][i],CursoNome[i],X['CB'][i],CboNome[i],"F")
+                resultados_T.append(tupla)
+            #...
+            Resultados_T= pd.DataFrame(resultados_T)
+            #...
+            dict = {0:"Ida",
+                    1:"Volta",
+                    2:"Cluster",
+                    3:"Curso",
+                    4:"Curso_Nome",
+                    5:"Cbo",
+                    6:"Cbo_Nome",
+                    7:"Genero"
+            }
+            Resultados_T.rename(columns=dict,inplace=True)   
+            Resultados_T.to_csv(save_results_to +'Resultados_T_Fem.csv')   
+            return Resultados_T          
+        else:
+              if G == 'M':
+                  # Adicionando coluna
+                resultados_T=[]
+                cluster=""
+                # X['Cluster'][i]
+                for i in range(len(X['CR'])):
+                    tupla=(X['Ida'][i],X['Volta'][i],cluster, X['CR'][i],CursoNome[i],X['CB'][i],CboNome[i],"M")
+                    resultados_T.append(tupla)
+                #...
+                Resultados_T= pd.DataFrame(resultados_T)
+                #...
+                dict = {0:"Ida",
+                        1:"Volta",
+                        2:"Cluster",
+                        3:"Curso",
+                        4:"Curso_Nome",
+                        5:"Cbo",
+                        6:"Cbo_Nome",
+                        7:"Genero"
+                }
+                Resultados_T.rename(columns=dict,inplace=True)   
+                Resultados_T.to_csv(save_results_to +'Resultados_T_Masc.csv')   
+                return Resultados_T            
+    return 
+
+
+def Filtra_10Porcento(path1,name1, path2,name2):
+    path1 = ibge_variable.paths(12)
+    name1 = ibge_variable.names(6)
+    path2 = ibge_variable.paths(13)
+    name2 = ibge_variable.names(9)
+    Porcent_DF_Limpo =       PlotOriginal_AdicionaColunaGenero_100(path1,name1,path2,name2,'O') # name2[2]/[7]
+    Porcent_DF_Fem_Limpo  =  PlotOriginal_AdicionaColunaGenero_100(path1,name1,path2,name2,'F') # name2[5]
+    Porcent_DF_Masc_Limpo =  PlotOriginal_AdicionaColunaGenero_100(path1,name1,path2,name2,'M') # name2[6]
+    save_results_to = 'graficos/'  
+     
+    df_limpo = Porcent_DF_Limpo
+    df_fem_limpo = Porcent_DF_Fem_Limpo
+    df_masc_limpo = Porcent_DF_Masc_Limpo  
+
+    df_row = pd.concat([df_limpo, df_fem_limpo, df_masc_limpo], ignore_index=True)
+    df_row1 = df_row.sort_values(["Curso", "Cbo"], ascending=True)
+    df_row2 = df_row1.sort_values(["Curso", "Cbo"], ascending=True)
+    df_row2.to_csv(save_results_to + 'df_row2.csv') 
+    return    
+
+def filtrar_Tabela_10Porcento():
+ 
+    path2 = ibge_variable.paths(13)
+    name2 = ibge_variable.names(9)
+    save_results_to = 'graficos/'  
+    df =  os.path.join(path2[0],name2[7])
+    X = pd.read_csv(df) 
+    df2 =  os.path.join(path2[0],name2[12])
+    df_row2 = pd.read_csv(df2) 
+
+    resultados_T=[]
+    for j in range(len(df_row2)):
+        for i in range(len(X)):        
+            if (int(float(X['Curso'][i])) == int(float(df_row2['Curso'][j])))&(int(float(X['Cbo'][i])) == int(float(df_row2['Cbo'][j]))):
+                tupla=(df_row2['Ida'][j],df_row2['Volta'][j],df_row2['Cluster'][j], df_row2['Curso'][j],df_row2['Curso_Nome'][j],df_row2['Cbo'][j],df_row2['Cbo_Nome'][j],df_row2['Genero'][j])
+                resultados_T.append(tupla)
+                # ...         
+         
+    Resultados_T= pd.DataFrame(resultados_T)
+    #...
+    dict = {0:"Ida",
+            1:"Volta",
+            2:"Cluster",
+            3:"Curso",
+            4:"Curso_Nome",
+            5:"Cbo",
+            6:"Cbo_Nome",
+            7:"Genero"
+            }
+    Resultados_T.rename(columns=dict,inplace=True)   
+    Resultados_T.to_csv(save_results_to +'Resultados_T_Filtrados_Kmeans3_T.csv')   
+    return
+
+def Kmeans3_T_Grafico_Genero():
+    path2 = ibge_variable.paths(13)
+    name2 = ibge_variable.names(9)
+    save_results_to = 'graficos/'
+    df =  os.path.join(path2[0],name2[13])
+    Resultados_T = pd.read_csv(df) 
+
+    Resultados_T = Resultados_T.drop(columns=['Unnamed: 0'])
+    # print(len(Resultados_T['Genero']))
+
+    fem   = []
+    masc  = []
+    orig  = []
+    for i in range(0, 150):
+        if(str(Resultados_T['Genero'][i]) == 'F'):
+            fem.append(Resultados_T['Ida'][i])
+            fem.append(Resultados_T['Volta'][i])
+        if(str(Resultados_T['Genero'][i]) == 'M'):
+            masc.append(Resultados_T['Ida'][i])
+            masc.append(Resultados_T['Volta'][i])
+        if(str(Resultados_T['Genero'][i]) == 'O'):
+            orig.append(Resultados_T['Ida'][i])
+            orig.append(Resultados_T['Volta'][i])
+    # print(len(fem))
+    # print(len(masc))
+    # print(len(orig))   
+
+    i=0
+    import matplotlib.pyplot as plt
+    fig, ax = plt.subplots()
+
+
+    while i<98:
+        j = i+1
+        #print(i)
+        ax.scatter([orig[i], fem[i], masc[i]], [orig[j], fem[j], masc[j]], color=['black', 'pink', 'blue'])
+        ax.annotate("", xy=(fem[i], fem[j]), xytext=(orig[i], orig[j]),arrowprops=dict(arrowstyle="->", color='pink'))
+        ax.annotate("", xy=(masc[i], masc[j]), xytext=(orig[i], orig[j]),arrowprops=dict(arrowstyle="->", color='blue'))
+        #print(fem[i],fem[j])
+        #print(masc[i],masc[j])
+        #print(orig[i],orig[j])
+        #print("")
+        i = i+2
+    plt.xlabel("Cursos")
+    plt.ylabel("Profissões")
+    plt.title("10%  -  Visualização dos três gráficos - Genero - Kmeans3")
+    plt.xlim(0.0, 100.0)
+    plt.ylim(0.0, 100.0)
+    # plt.show()    
+    string1 = "10%  -  Visualização dos três gráficos - Genero - Kmeans3_" + ".pdf"
+    save_results_to = 'graficos/'  
+    plt.savefig(save_results_to + string1)          
     return
