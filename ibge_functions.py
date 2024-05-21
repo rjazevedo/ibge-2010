@@ -331,12 +331,12 @@ def PlotOriginal_AdicionaColunaGenero_100():
     ibge_functions_results.PlotOriginal_AdicionaColunaGenero_100(path1,name1,path2,name2,'O') # name2[2]/[7]
     return
 
-def  Filtra_10Porcento(): 
+def  Juntar_10Porcento_Genero(): 
     path1 = ibge_variable.paths(12)
     name1 = ibge_variable.names(6)
     path2 = ibge_variable.paths(13)
     name2 = ibge_variable.names(9)
-    ibge_functions_results.Filtra_10Porcento(path1,name1, path2,name2) 
+    ibge_functions_results.Juntar_10Porcento_Genero(path1,name1, path2,name2) 
     return
 # Não utilizada ...
 # def Profissoes_Cursos_Masculino_Feminino_100(): 
@@ -415,10 +415,39 @@ def Ida_Volta_Idade():
     ibge_functions_results.Ida_Volta_Idade(I50_59,path1,name1,'50-59')
     ibge_functions_results.Ida_Volta_Idade(I60,path1,name1,'60')
     return
-# def Tabela_Ida_Volta_Idade():
-#     return
-# def Adiciona_Coluna_Idade():
-#     return
+
+def Tabela_Ida_Volta_Idade():
+    path2 = ibge_variable.paths(13)
+    name2 = ibge_variable.names(10)
+    ibge_functions_results.Tabela_Ida_Volta_Idade(path2,name2,'29')
+    ibge_functions_results.Tabela_Ida_Volta_Idade(path2,name2,'30-39')
+    ibge_functions_results.Tabela_Ida_Volta_Idade(path2,name2,'40-49')
+    ibge_functions_results.Tabela_Ida_Volta_Idade(path2,name2,'50-59')
+    ibge_functions_results.Tabela_Ida_Volta_Idade(path2,name2,'60')
+    return
+
+def Adiciona_Coluna_Idade():
+    path1 = ibge_variable.paths(12)
+    name1 = ibge_variable.names(6)
+    path2 = ibge_variable.paths(13)
+    name2 = ibge_variable.names(9)
+    name3 = ibge_variable.names(10)
+    ibge_functions_results.Adiciona_Coluna_Idade(path1,name1,path2,name2,name3,'O') 
+    ibge_functions_results.Adiciona_Coluna_Idade(path1,name1,path2,name2,'29')
+    ibge_functions_results.Adiciona_Coluna_Idade(path1,name1,path2,name2,'30-39') 
+    ibge_functions_results.Adiciona_Coluna_Idade(path1,name1,path2,name2,'40-49') 
+    ibge_functions_results.Adiciona_Coluna_Idade(path1,name1,path2,name2,'50-59') 
+    ibge_functions_results.Adiciona_Coluna_Idade(path1,name1,path2,name2,'60') 
+    return
+
+def Kmeans3_T_Grafico_Idade():
+    path2 = ibge_variable.paths(13)
+    name3 = ibge_variable.names(10)
+    # ibge_functions_results.Kmeans3_T_Grafico_Idade(path2,name3,0)
+    # ibge_functions_results.Kmeans3_T_Grafico_Idade(path2,name3,1)
+    ibge_functions_results.Kmeans3_T_Grafico_Idade(path2,name3,2)
+    return
+
 
 # Fase 35
 # ...

@@ -122,12 +122,14 @@ if fase == 33:
     #QP3
     ibge_functions.Ida_Volta_Masculino_Feminino_100()
     ibge_functions.Tabela_Ida_Volta_Masculino_Feminino_100()
-    ibge_functions.PlotOriginal_AdicionaColunaGenero_100()
-    ibge_functions.Filtra_10Porcento()
-    ibge_functions_results.filtrar_Tabela_10Porcento()
+    # Funciona, mas salva csvs. Comentei para usar como dataframes!
+    # ibge_functions.PlotOriginal_AdicionaColunaGenero_100()
+    ibge_functions.Juntar_10Porcento_Genero()
+    ibge_functions_results.Filtrar_Tabela_10Porcento_Genero()
     # geração do gráfico: 
     # - Pontos originais, masculinos e femininos (10%-Visualização dos três gráficos - Genero - Kmeans3)
     ibge_functions_results.Kmeans3_T_Grafico_Genero()
+
     # Não utilizadas ...
     # ibge_functions.Profissoes_Cursos_Masculino_Feminino_100()  
 
@@ -145,11 +147,17 @@ if fase == 33:
 
 if fase == 34:
     # #QP4
+    # Funciona, mas salva csvs. Comentei para usar como dataframes!
     # ibge_functions.Filtro_Idade()
-    ibge_functions.Ida_Volta_Idade()
-    # ibge_functions.Tabela_Ida_Volta_Idade()
-    # ibge_functions.Adiciona_Coluna_Idade()
-    # ibge_functions.JuntaTabelas_Idade()
+
+    # ibge_functions.Ida_Volta_Idade()
+    # ibge_functions.Tabela_Ida_Volta_Idade()   
+    # Funciona, mas salva csvs. Comentei para usar como dataframes! 
+    # ibge_functions.Adiciona_Coluna_Idade()     
+    # ibge_functions_results.Juntar_10Porcento_Idade() 
+    #ibge_functions_results.Filtrar_Tabela_10Porcento_Idade() 
+    # Separar manualmente os clusters e depois rodar o codigo abaixo para gerar os gráficos ...
+    ibge_functions.Kmeans3_T_Grafico_Idade()       
 
     #  ibge_functions.Idade_Profissoes_Cursos()
     #  ibge_functions.Idade_Profissoes_Cursos_Grupos()
