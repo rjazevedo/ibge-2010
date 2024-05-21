@@ -158,14 +158,14 @@ if fase == 34:
     # Funciona, mas salva csvs. Comentei para usar como dataframes!
     # ibge_functions.Filtro_Idade()
 
-    # ibge_functions.Ida_Volta_Idade()
-    # ibge_functions.Tabela_Ida_Volta_Idade()   
-    # # Funciona, mas salva csvs. Comentei para usar como dataframes! 
-    # # ibge_functions.Adiciona_Coluna_Idade()     
-    # ibge_functions_results.Juntar_10Porcento_Idade() 
-    # ibge_functions_results.Filtrar_Tabela_10Porcento_Idade() 
-    # # Separar manualmente os clusters e depois rodar o codigo abaixo para gerar os gráficos de idades separados pr clusters...
-    # ibge_functions.Kmeans3_T_Grafico_Idade()       
+    ibge_functions.Ida_Volta_Idade()
+    ibge_functions.Tabela_Ida_Volta_Idade()   
+    # Funciona, mas salva csvs. Comentei para usar como dataframes! 
+    # ibge_functions.Adiciona_Coluna_Idade()     
+    ibge_functions_results.Juntar_10Porcento_Idade() 
+    ibge_functions_results.Filtrar_Tabela_10Porcento_Idade() 
+    # Separar manualmente os clusters e depois rodar o codigo abaixo para gerar os gráficos de idades separados pr clusters...
+    ibge_functions.Kmeans3_T_Grafico_Idade()       
     
      #  Funções que faltam ...
      # 1- Idade - Alguns pontos selecionados 
