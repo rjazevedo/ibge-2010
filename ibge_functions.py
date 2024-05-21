@@ -244,7 +244,6 @@ def Profissoes_Cursos():
     path2 = ibge_variable.paths(13)
     name2 = ibge_variable.names(9)
     ibge_functions_exploratory_analysis.Profissoes_Cursos(path1,name1,path2,name2)    
-
     return
 
 
@@ -448,6 +447,11 @@ def Kmeans3_T_Grafico_Idade():
     ibge_functions_results.Kmeans3_T_Grafico_Idade(path2,name3,2)
     return
 
+def Aposentados_maior80():
+    path = ibge_variable.paths(11)
+    name = ibge_variable.names(7)
+    ibge_functions_results.Aposentados_maior80(path,name)
+    return
 
 # Fase 35
 # ...

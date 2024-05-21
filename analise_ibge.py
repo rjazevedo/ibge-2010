@@ -138,11 +138,19 @@ if fase == 33:
     # ibge_functions.PlotOriginal_AdiciconaColunaGenero()
     # ibge_functions.JuntaTabelas()
     
-    #  Rascunhos ...
-    #  ibge_functions.Genero_Profissoes_Masc_Fem()
-    #  ibge_functions.Genero_Profissoes_Masc_Fem_Grupos()
-    #  ibge_functions.Genero_Profissoes_Desequilibradas()
-    #  ibge_functions.Genero_Profissoes_Equilibradas()
+    #  Funções que faltam ...
+    #  1-  Gráfico dos gêneros separados por clusters
+    #  2-  Profissões desequilibradas 
+       # - Profissões desequilibradas - Pontos Selecionados(Grandes Desloamentos) 
+       # - Profissões desequilibradas - Quais as profissões onde homens e mulheres estão em clusters diferentes?
+       # - Profissões desequlibradas  - Gráfico com os pontos que mudaram de cluster e diagrama de Voronoi
+    #  3-  Profissões equilibradas - 40%-60% ...
+       # - Tabela com os pontos clusterizados contendo as porcentagens de masculinos e femininos
+       # - Tabela com os pontos selecionados(40%-60%)
+       # - Gráfico com os ponto selecionados(40%-60%)
+       # - Plotar o gráfico das idades, usando o arquivo de femininos e masculinos! Com isso poderemos ver a distribuição das idades para o masculino e para o feminino!
+    #  4-  Gráfico dos vetores centrados em(0,0)
+    
     # pass
 
 if fase == 34:
@@ -150,37 +158,31 @@ if fase == 34:
     # Funciona, mas salva csvs. Comentei para usar como dataframes!
     # ibge_functions.Filtro_Idade()
 
-    ibge_functions.Ida_Volta_Idade()
-    ibge_functions.Tabela_Ida_Volta_Idade()   
-    # Funciona, mas salva csvs. Comentei para usar como dataframes! 
-    # ibge_functions.Adiciona_Coluna_Idade()     
-    ibge_functions_results.Juntar_10Porcento_Idade() 
-    ibge_functions_results.Filtrar_Tabela_10Porcento_Idade() 
-    # Separar manualmente os clusters e depois rodar o codigo abaixo para gerar os gráficos de idades separados pr clusters...
-    ibge_functions.Kmeans3_T_Grafico_Idade()       
+    # ibge_functions.Ida_Volta_Idade()
+    # ibge_functions.Tabela_Ida_Volta_Idade()   
+    # # Funciona, mas salva csvs. Comentei para usar como dataframes! 
+    # # ibge_functions.Adiciona_Coluna_Idade()     
+    # ibge_functions_results.Juntar_10Porcento_Idade() 
+    # ibge_functions_results.Filtrar_Tabela_10Porcento_Idade() 
+    # # Separar manualmente os clusters e depois rodar o codigo abaixo para gerar os gráficos de idades separados pr clusters...
+    # ibge_functions.Kmeans3_T_Grafico_Idade()       
     
-    #  Rascunhos
-    #  ibge_functions.Idade_Profissoes_Cursos()
-    #  ibge_functions.Idade_Profissoes_Cursos_Grupos()
-    #  ibge_functions.Idade_Profissoes_Cursos_Aposentados()
-    #  ibge_functions.Idade_Profissoes_Cursos_Administrativos()
-    #  ibge_functions.Idade_Profissoes_Cursos_Administrativos_Fem()
-    #  ibge_functions.Idade_Profissoes_Cursos_Administrativos_Masc()
+     #  Funções que faltam ...
+     # 1- Idade - Alguns pontos selecionados 
+       # - Cluster 1
+       # - Cluster 2
+     # 2- Idade - Selecionar somente os que tem mais de 80 anos
+       # - Aposentados -  Formados em Medicina e com CBO (2211)  Médicos Gerais
+    ibge_functions.Aposentados_maior80()
+     # 3- Idade - Casos Administrativos: Descobrir quando alguém vira gerente gestor
+       # - Olhar todos os médicos e ver na carreira deles, quando começam a pegar o código 1. Comparar com: 1342 - 1345 - 1348 - 1349
+       # - Homens gestores e Mulheres gestoras (Homem e mulher, muda faixa de idade para virar gestores?)
+       
+    #  Rascunhos ...
     pass
-
-if fase == 35:     
-    #  #QP5
-    #  ibge_functions.Salario_Grupos()
-    #  ibge_functions.Salario_Idade_Grupos()
-    #  ibge_functions.Salario_Genero_Grupos()
-    #  ibge_functions.Salario_MaxMinMed_Grupos()
-    #  ibge_functions.Salario_CBO_Idade_TresProf()
-    #  ibge_functions.Salario_Profissoes_Genero()
-    #  ibge_functions.Salario_Median_TresProf()
-    #  ibge_functions.Salario_Plato_TresProf()
-    #  ibge_functions.Salario_Analise_Porcent_IdaVolta()
-    pass
-
+if fase == 35:
+   # #QP5
+   pass
 # Fase 99: Aqui você pode explorar coisas novas que não afetam os dados anteriores.
 #if fase >= 99:
 #if fase == 99:

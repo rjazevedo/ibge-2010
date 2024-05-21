@@ -2239,3 +2239,27 @@ def Kmeans3_T_Grafico_Idade(path2,name3,cluster):
                     save_results_to = 'graficos/'  
                     plt.savefig(save_results_to + string1)                                      
     return
+
+def Aposentados_maior80(path,name):
+    save_results_to = 'graficos/'
+    df =  os.path.join(path[0],name[0])
+    Final = pd.read_csv(df) 
+
+    Final = Final.drop(columns=['Unnamed: 0'])
+     
+    # Removendo todos que tem menos de 80 anos
+    Final.drop(Final[(Final['Idade_em_Anos'] <=80)].index, inplace=True)
+    # removendo todos que tem o campo aposentaria igual 0
+    Final.drop(Final[(Final['rendimento_aposentadoria_pensao'] !=1)].index, inplace=True)
+    # Removendo todos que sao aposentados mas nao são graduados em Medicina
+    Final.drop(Final[(Final['Curso_Superior_Graduação_Código'] !=721)].index, inplace=True)
+    # Aposentados que são formados em Medicina e são Médicos Gerais
+    # Removendo todos que sao aposentados mas nao são graduados em Medicina
+    Final.drop(Final[(Final['Ocupação_Código'] !=2211)].index, inplace=True)    
+    
+    # Filtrar apenas as colunas desejadas
+    Final = Final[['gênero', 'Idade_em_Anos', 'Nível_instrução', 'Curso_Superior_Graduação_Código', 'Ocupação_Código', 'rendimento_aposentadoria_pensao']]
+    Final_Filtrado = Final.head(10)
+    print(Final_Filtrado)
+    Final_Filtrado.to_excel(save_results_to + 'Final_Filtrado_Aposentados_maior80.xlsx')
+    return
