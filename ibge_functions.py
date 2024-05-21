@@ -454,4 +454,10 @@ def Aposentados_maior80():
     return
 
 # Fase 35
-# ...
+def Salarios_CBO_Idade():
+    path = ibge_variable.paths(11)
+    name = ibge_variable.names(7)
+    path1 = ibge_variable.paths(13)
+    name1 = ibge_variable.names(11)
+    ibge_functions_results.Salarios_CBO_Idade(path,name,path1,name1,0)
+    return

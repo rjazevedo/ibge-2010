@@ -2240,6 +2240,7 @@ def Kmeans3_T_Grafico_Idade(path2,name3,cluster):
                     plt.savefig(save_results_to + string1)                                      
     return
 
+# https://colab.research.google.com/drive/1TQdNxD0AM4_3Dr-En_qAXbYBUzTLSCie?authuser=1#scrollTo=UhKVZtPjJhj8
 def Aposentados_maior80(path,name):
     save_results_to = 'graficos/'
     df =  os.path.join(path[0],name[0])
@@ -2262,4 +2263,85 @@ def Aposentados_maior80(path,name):
     Final_Filtrado = Final.head(10)
     print(Final_Filtrado)
     Final_Filtrado.to_excel(save_results_to + 'Final_Filtrado_Aposentados_maior80.xlsx')
+    return
+
+# Fase 35
+#https://colab.research.google.com/drive/1_SXpQ6j3mwa8EjlHT3jYgcE7cY08WvJF?authuser=1#scrollTo=uo_mK_xg8jMW#
+def Salarios_CBO_Idade(path,name,path1,name1,cluster):
+    # Final sem Zeros
+    save_results_to = 'graficos/'
+    df =  os.path.join(path[0],name[0])
+    Final = pd.read_csv(df) 
+    Final = Final.drop(columns=['Unnamed: 0'])
+    FinalSemZero = Final.loc[((Final['Valor_rend_bruto_M']!= 0))]
+    FinalSemZero = FinalSemZero.reset_index(drop=True)
+
+    if cluster == 0:
+        #Filtrados ... Cluster 0 ... Ciência da Computação/Analistas de Sistemas(481/2511)
+        save_results_to = 'graficos/'
+        df =  os.path.join(path1[0],name1[0])
+        Resultados_T_Filtrados_Kmeans3_Idade_Editado = pd.read_csv(df) 
+        filtrados = Resultados_T_Filtrados_Kmeans3_Idade_Editado.query('Cluster == 0.0')
+        filtrados = Resultados_T_Filtrados_Kmeans3_Idade_Editado.query('Curso == 481')
+        Resultados_T_Filtrados_Kmeans3_Idade_Editado = filtrados
+        Resultados_T_Filtrados_Kmeans3_Idade_Editado = Resultados_T_Filtrados_Kmeans3_Idade_Editado.reset_index(drop=True) 
+        Resultados_T_Filtrados_Kmeans3_Idade_Editado = Resultados_T_Filtrados_Kmeans3_Idade_Editado.drop(5)
+        CBO = []
+        CURSO = []
+        IDADE = []
+        for i in range(len(Resultados_T_Filtrados_Kmeans3_Idade_Editado)):
+            CBO.append(Resultados_T_Filtrados_Kmeans3_Idade_Editado.Cbo[i])
+            CURSO.append(Resultados_T_Filtrados_Kmeans3_Idade_Editado.Curso[i])
+            IDADE.append(Resultados_T_Filtrados_Kmeans3_Idade_Editado.Idade[i])
+        # print(CBO)    
+        # print(CURSO)
+        # print(IDADE)
+        dados_1 = []
+        dados_2 = []
+        dados_3 = []
+        dados_4 = []
+        dados_5 = []
+        dados = [dados_1,dados_2,dados_3,dados_4,dados_5] 
+        for i in range(len(CBO)):
+            for j in range(len(FinalSemZero)):
+                if str(IDADE[i]) == '29':
+                   # print(str(FinalSemZero.Ocupação_Código[j]), str(int(float(CBO[i]))),str(FinalSemZero.Curso_Superior_Graduação_Código[j]),str(int(float(CURSO[i]))),(FinalSemZero.Idade_em_Anos[j]))  
+                    if((str(FinalSemZero.Ocupação_Código[j])==str(int(float(CBO[i]))))&(str(FinalSemZero.Curso_Superior_Graduação_Código[j])== str(int(float(CURSO[i]))))& (FinalSemZero.Idade_em_Anos[j]) <= 29):
+                        dados[i].append(FinalSemZero.Qtdade_Salario[j]/100)
+                if str(IDADE[i]) == '30-39':
+                    if (str(FinalSemZero.Ocupação_Código[j])==str(int(float(CBO[i]))))&(str(FinalSemZero.Curso_Superior_Graduação_Código[j])== str(int(float(CURSO[i]))))& (FinalSemZero.Idade_em_Anos[j] >=30)& (FinalSemZero.Idade_em_Anos[j] <=39):
+                        dados[i].append(FinalSemZero.Qtdade_Salario[j]/100)
+                if str(IDADE[i]) == '40-49':
+                    if (str(FinalSemZero.Ocupação_Código[j])==str(int(float(CBO[i]))))&(str(FinalSemZero.Curso_Superior_Graduação_Código[j])== str(int(float(CURSO[i]))))& (FinalSemZero.Idade_em_Anos[j] >=40)& (FinalSemZero.Idade_em_Anos[j] <=49):
+                        dados[i].append(FinalSemZero.Qtdade_Salario[j]/100)
+                if str(IDADE[i]) == '50-59':
+                    if (str(FinalSemZero.Ocupação_Código[j])==str(int(float(CBO[i]))))&(str(FinalSemZero.Curso_Superior_Graduação_Código[j])== str(int(float(CURSO[i]))))& (FinalSemZero.Idade_em_Anos[j] >=50)& (FinalSemZero.Idade_em_Anos[j] <=59):
+                        dados[i].append(FinalSemZero.Qtdade_Salario[j]/100)
+                if str(IDADE[i]) == '60':
+                    if (str(FinalSemZero.Ocupação_Código[j])==str(int(float(CBO[i]))))&(str(FinalSemZero.Curso_Superior_Graduação_Código[j])== str(int(float(CURSO[i]))))& (FinalSemZero.Idade_em_Anos[j] >= 60):
+                        dados[i].append(FinalSemZero.Qtdade_Salario[j]/100)
+        # print(dados)                
+        xticks = []
+        for z in range(len(IDADE)):
+            xticks.append(str(IDADE[z]))
+        # for i in range(len(CBO)):
+        #     print(xticks[i])
+        import matplotlib.pyplot as plt
+        import numpy as np
+        plt.rcParams.update({'font.size':20})      
+        DADOS = dados
+        fig, ax = plt.subplots(figsize=(20,10))
+        ax.boxplot(DADOS)
+        ax.set_yscale('log')
+        ax.set_title('Gráfico de Boxplot - Salários: Ciência da Computação/Analistas de Sistemas(481/2511) - Cluster 0 - KMeans3')
+        ax.set_xlabel('Idade')
+        ax.set_ylabel('Quantidade de Salários')
+        ax.set_xticklabels(xticks)
+        string1 = "Grafico_Boxplot_Salarios_CienciaComputacao_AnalistasSistemas_481_2511_Cluster0_KMeans3" + ".pdf"
+        plt.savefig(save_results_to + string1)   
+        # plt.show()
+    if cluster == 1:
+       print("...")
+    if cluster == 2:
+       print("...")   
     return

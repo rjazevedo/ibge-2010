@@ -177,11 +177,27 @@ if fase == 34:
      # 3- Idade - Casos Administrativos: Descobrir quando alguém vira gerente gestor
        # - Olhar todos os médicos e ver na carreira deles, quando começam a pegar o código 1. Comparar com: 1342 - 1345 - 1348 - 1349
        # - Homens gestores e Mulheres gestoras (Homem e mulher, muda faixa de idade para virar gestores?)
-       
-    #  Rascunhos ...
-    pass
+    pass    
+    
 if fase == 35:
    # #QP5
+   # Funções que faltam ...
+   # BoxPlot de salários separados por clusters
+   # BoxPlot de salários separados por faixa etária (idades)  - Idades por Cluster (Grupos)
+   # BoxPlot de salários separados por gênero                 - Gênero por Clusters (Grupos)	
+   # Tabela: O maior e o menor de cada um dos pontos dentro de cada cluster	
+     # Tabela: Mediana de cada um dos pontos dentro de cada cluster  
+   # BoxPlot de salários para um determinado CBO por idade	
+     # Preencher o arquivo Resultados_T_Filtrados_Kmeans3_Idade.csv manualmente ...
+   ibge_functions.Salarios_CBO_Idade()
+   # Análise  de salário por gênero (Ser homem ou mulher implica em diferença salarial?)
+     # Tabela - Mediana  Feminina 
+     # Tabela - Mediana Masculina 	
+     # BoxPlot da Mediana de três  profissões 
+   # Platô 
+   # 20% ida e 80% volta 
+
+
    pass
 # Fase 99: Aqui você pode explorar coisas novas que não afetam os dados anteriores.
 #if fase >= 99:
