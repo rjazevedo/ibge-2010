@@ -459,5 +459,7 @@ def Salarios_CBO_Idade():
     name = ibge_variable.names(7)
     path1 = ibge_variable.paths(13)
     name1 = ibge_variable.names(11)
-    ibge_functions_results.Salarios_CBO_Idade(path,name,path1,name1,0)
+    # ibge_functions_results.Salarios_CBO_Idade(path,name,path1,name1,0)
+    # ibge_functions_results.Salarios_CBO_Idade(path,name,path1,name1,1)
+    ibge_functions_results.Salarios_CBO_Idade(path,name,path1,name1,2)
     return
