@@ -442,8 +442,8 @@ def Adiciona_Coluna_Idade():
 def Kmeans3_T_Grafico_Idade():
     path2 = ibge_variable.paths(13)
     name3 = ibge_variable.names(10)
-    # ibge_functions_results.Kmeans3_T_Grafico_Idade(path2,name3,0)
-    # ibge_functions_results.Kmeans3_T_Grafico_Idade(path2,name3,1)
+    ibge_functions_results.Kmeans3_T_Grafico_Idade(path2,name3,0)
+    ibge_functions_results.Kmeans3_T_Grafico_Idade(path2,name3,1)
     ibge_functions_results.Kmeans3_T_Grafico_Idade(path2,name3,2)
     return
 
