@@ -171,7 +171,7 @@ if fase == 34:
      # 1- Idade - Alguns pontos selecionados 
        # - Cluster 1
        # - Cluster 2
-     # 2- Idade - Selecionar somente os que tem mais de 80 anos
+     # Okay # 2- Idade - Selecionar somente os que tem mais de 80 anos
        # - Aposentados -  Formados em Medicina e com CBO (2211)  Médicos Gerais
     ibge_functions.Aposentados_maior80()
      # 3- Idade - Casos Administrativos: Descobrir quando alguém vira gerente gestor
@@ -187,7 +187,7 @@ if fase == 35:
    # 3- BoxPlot de salários separados por gênero                 - Gênero por Clusters (Grupos)	
    # 4- Tabela: O maior e o menor de cada um dos pontos dentro de cada cluster	
      # Tabela: Mediana de cada um dos pontos dentro de cada cluster  
-   # 5- BoxPlot de salários para um determinado CBO por idade	
+   # Okay # 5- BoxPlot de salários para um determinado CBO por idade	
      # Preencher o arquivo Resultados_T_Filtrados_Kmeans3_Idade.csv manualmente ...
    ibge_functions.Salarios_CBO_Idade()
    # 6- Análise  de salário por gênero (Ser homem ou mulher implica em diferença salarial?)
