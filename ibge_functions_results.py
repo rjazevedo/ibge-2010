@@ -852,8 +852,10 @@ def Profissoes_Cursos_Masculino_Feminino(path1,name1,path2,name2,sx):
     # print(X.iloc[:,0])
     plt.figure(figsize=(6, 4))
     # plt.title("10%  - Todos os Cursos - Clusterização ")
-    plt.xlabel('Ida')
-    plt.ylabel('Volta')
+    #plt.xlabel('Ida')
+    #plt.ylabel('Volta')
+    plt.xlabel('Outbound')
+    plt.ylabel('Backward')
     plt.ylim(0, 100) # definir limite do eixo
     plt.xlim(0, 100) # definir limite do eixo
     plt.grid()
@@ -863,13 +865,17 @@ def Profissoes_Cursos_Masculino_Feminino(path1,name1,path2,name2,sx):
     # save_results_to = 'graficos/'  
     # plt.savefig(save_results_to + string) 
     if sx == 'F':
-       plt.title("10%  - Cursos e Profissões - Femininos ")
-       string = "10%  - Todos os Cursos - Dados Originais Femininos" +".pdf"
+       #plt.title("10%  - Cursos e Profissões - Femininos ")
+       #string = "10%  - Todos os Cursos - Dados Originais Femininos" +".pdf"
+       plt.title("10% - Courses and Professions - Female ")
+       string = "10% - All Courses - Original Female Data" +".png"
        save_results_to = 'graficos/'  
        plt.savefig(save_results_to + string) 
     if sx == 'M':
-       plt.title("10%  - Cursos e Profissões - Masculinos ")
-       string = "10%  - Todos os Cursos - Dados Originais Masculinos" +".pdf"
+       #plt.title("10%  - Cursos e Profissões - Masculinos ")
+       #string = "10%  - Todos os Cursos - Dados Originais Masculinos" +".pdf"
+       plt.title("10% - Courses and Professions - Male ")
+       string = "10% - All Courses - Original Male Data" +".png"
        save_results_to = 'graficos/'  
        plt.savefig(save_results_to + string)      
     return
@@ -1009,7 +1015,7 @@ def Filtro_Idade(path, name, idade):
         #print("")
         Estado = Estado.reset_index(drop=True)
         Estado = Estado.drop(columns=['Unnamed: 0'])
-        # Estado.to_csv(path[0] + 'Brasil_Graduados_29.csv')
+        #Estado.to_csv(path[0] + 'Brasil_Graduados_29.csv')
     else: 
          if idade == "30-39":  
             # Novo Filtro
@@ -1017,7 +1023,7 @@ def Filtro_Idade(path, name, idade):
             Estado.drop(Estado[(Estado['Idade_em_Anos'] >=39)].index, inplace=True)
             Estado = Estado.reset_index(drop=True)
             Estado = Estado.drop(columns=['Unnamed: 0'])
-            # Estado.to_csv(path[0] + 'Brasil_Graduados_30_39.csv') 
+            #Estado.to_csv(path[0] + 'Brasil_Graduados_30_39.csv') 
          else:   
            if idade == "40-49":  
                 # Novo Filtro
@@ -1025,7 +1031,7 @@ def Filtro_Idade(path, name, idade):
                 Estado.drop(Estado[(Estado['Idade_em_Anos'] >=49)].index, inplace=True)                
                 Estado = Estado.reset_index(drop=True)
                 Estado = Estado.drop(columns=['Unnamed: 0'])
-                # Estado.to_csv(path[0] + 'Brasil_Graduados_40_49.csv') 
+                #Estado.to_csv(path[0] + 'Brasil_Graduados_40_49.csv') 
            else:
                if idade == "50-59":  
                     # Novo Filtro
@@ -1033,14 +1039,14 @@ def Filtro_Idade(path, name, idade):
                     Estado.drop(Estado[(Estado['Idade_em_Anos'] >=59)].index, inplace=True)         
                     Estado = Estado.reset_index(drop=True)
                     Estado = Estado.drop(columns=['Unnamed: 0'])
-                    # Estado.to_csv(path[0] + 'Brasil_Graduados_50_59.csv') 
+                    #Estado.to_csv(path[0] + 'Brasil_Graduados_50_59.csv') 
                else: 
                     if idade == "60":  
                         # Novo Filtro
                         Estado.drop(Estado[(Estado['Idade_em_Anos'] <=60)].index, inplace=True)
                         Estado = Estado.reset_index(drop=True)
                         Estado = Estado.drop(columns=['Unnamed: 0'])
-                        # Estado.to_csv(path[0] + 'Brasil_Graduados_60.csv')   
+                        #Estado.to_csv(path[0] + 'Brasil_Graduados_60.csv')   
                    
     return Estado
 
@@ -1699,13 +1705,17 @@ def Kmeans3_T_Grafico_Genero():
         #print(orig[i],orig[j])
         #print("")
         i = i+2
-    plt.xlabel("Cursos")
-    plt.ylabel("Profissões")
-    plt.title("10%  -  Visualização dos três gráficos - Genero - Kmeans3")
+    #plt.xlabel("Cursos")
+    #plt.ylabel("Profissões")
+    #plt.title("10%  -  Visualização dos três gráficos - Genero - Kmeans3")
+    plt.xlabel("Courses")
+    plt.ylabel("Professions")
+    plt.title("10% - View of the three graphs - Gender - Kmeans3")
     plt.xlim(0.0, 100.0)
     plt.ylim(0.0, 100.0)
     # plt.show()    
-    string1 = "10%  -  Visualização dos três gráficos - Genero - Kmeans3_" + ".pdf"
+    #string1 = "10%  -  Visualização dos três gráficos - Genero - Kmeans3_" + ".pdf"
+    string1 = "10% - View of the three graphs - Gender - Kmeans3_" + ".png"
     save_results_to = 'graficos/'  
     plt.savefig(save_results_to + string1)          
     return
@@ -2103,13 +2113,17 @@ def Kmeans3_T_Grafico_Idade(path2,name3,cluster):
             i = i+2
 
 
-        plt.xlabel("Cursos")
-        plt.ylabel("Profissões")
-        plt.title("10%  -  Visualização dos três gráficos - Idade - Cluster 0")
+        # plt.xlabel("Cursos")
+        # plt.ylabel("Profissões")
+        # plt.title("10%  -  Visualização dos três gráficos - Idade - Cluster 0")
+        plt.xlabel("Courses")
+        plt.ylabel("Professions")
+        plt.title("10% - View of the three graphs - Age - Cluster 0")    
         plt.xlim(0.0, 100.0)
         plt.ylim(0.0, 100.0)
         # plt.show()
-        string1 = "10%  -  Visualização dos três gráficos - Idade - Cluster 0" + ".pdf"
+        # string1 = "10%  -  Visualização dos três gráficos - Idade - Cluster 0" + ".pdf"
+        string1 = "10% - View of the three graphs - Age - Cluster 0" + ".png"
         save_results_to = 'graficos/'  
         plt.savefig(save_results_to + string1)   
     else:   
@@ -2166,13 +2180,17 @@ def Kmeans3_T_Grafico_Idade(path2,name3,cluster):
                 i = i+2
 
 
-            plt.xlabel("Cursos")
-            plt.ylabel("Profissões")
-            plt.title("10%  -  Visualização dos três gráficos - Idade - Cluster 1")
+            # plt.xlabel("Cursos")
+            # plt.ylabel("Profissões")
+            # plt.title("10%  -  Visualização dos três gráficos - Idade - Cluster 1")
+            plt.xlabel("Courses")
+            plt.ylabel("Professions")
+            plt.title("10% - View of the three graphs - Age - Cluster 1")
             plt.xlim(0.0, 100.0)
             plt.ylim(0.0, 100.0)
             # plt.show()
-            string1 = "10%  -  Visualização dos três gráficos - Idade - Cluster 1" + ".pdf"
+            # string1 = "10%  -  Visualização dos três gráficos - Idade - Cluster 1" + ".pdf"
+            string1 = "10% - View of the three graphs - Age - Cluster 1" + ".png"
             save_results_to = 'graficos/'  
             plt.savefig(save_results_to + string1)     
          else:   
@@ -2229,13 +2247,17 @@ def Kmeans3_T_Grafico_Idade(path2,name3,cluster):
                         i = i+2
 
 
-                    plt.xlabel("Cursos")
-                    plt.ylabel("Profissões")
-                    plt.title("10%  -  Visualização dos três gráficos - Idade - Cluster 2")
+                    # plt.xlabel("Cursos")
+                    # plt.ylabel("Profissões")
+                    # plt.title("10%  -  Visualização dos três gráficos - Idade - Cluster 2")
+                    plt.xlabel("Courses")
+                    plt.ylabel("Professions")
+                    plt.title("10% - View of the three graphs - Age - Cluster 2")    
                     plt.xlim(0.0, 100.0)
                     plt.ylim(0.0, 100.0)
                     # plt.show()   
-                    string1 = "10%  -  Visualização dos três gráficos - Idade - Cluster 2" + ".pdf"
+                    # string1 = "10%  -  Visualização dos três gráficos - Idade - Cluster 2" + ".pdf"
+                    string1 = "10% - View of the three graphs - Age - Cluster 2" + ".png"
                     save_results_to = 'graficos/'  
                     plt.savefig(save_results_to + string1)                                      
     return
@@ -2333,11 +2355,15 @@ def Salarios_CBO_Idade(path,name,path1,name1,cluster):
         fig, ax = plt.subplots(figsize=(20,10))
         ax.boxplot(DADOS)
         ax.set_yscale('log')
-        ax.set_title('Gráfico de Boxplot - Salários: Ciência da Computação/Analistas de Sistemas(481/2511) - Cluster 0 - KMeans3')
-        ax.set_xlabel('Idade')
-        ax.set_ylabel('Quantidade de Salários')
+        #ax.set_title('Gráfico de Boxplot - Salários: Ciência da Computação/Analistas de Sistemas(481/2511) - Cluster 0 - KMeans3')
+        #ax.set_xlabel('Idade')
+        #ax.set_ylabel('Quantidade de Salários')
+        ax.set_title('Boxplot Chart - Salaries: Ciência da Computação/Analistas de Sistemas(481/2511) - Cluster 0 - KMeans3')
+        ax.set_xlabel('Age')
+        ax.set_ylabel('Number of Salaries')
         ax.set_xticklabels(xticks)
-        string1 = "Grafico_Boxplot_Salarios_CienciaComputacao_AnalistasSistemas_481_2511_Cluster0_KMeans3" + ".pdf"
+        #string1 = "Grafico_Boxplot_Salarios_CienciaComputacao_AnalistasSistemas_481_2511_Cluster0_KMeans3" + ".pdf"
+        string1 = "Grafico_Boxplot_Salarios_CienciaComputacao_AnalistasSistemas_481_2511_Cluster0_KMeans3" + ".png"
         plt.savefig(save_results_to + string1)   
         # plt.show()        
     if cluster == 1:       
@@ -2397,11 +2423,15 @@ def Salarios_CBO_Idade(path,name,path1,name1,cluster):
         fig, ax = plt.subplots(figsize=(20,10))
         ax.boxplot(DADOS)
         ax.set_yscale('log')
-        ax.set_title('Gráfico de Boxplot - Salários: Medicina/Médicos Gerais(721/2211) - Cluster 1 - KMeans3 ')
-        ax.set_xlabel('Idade')
-        ax.set_ylabel('Quantidade de Salários')
+        #ax.set_title('Gráfico de Boxplot - Salários: Medicina/Médicos Gerais(721/2211) - Cluster 1 - KMeans3 ')
+        #ax.set_xlabel('Idade')
+        #ax.set_ylabel('Quantidade de Salários')
+        ax.set_title('Boxplot Chart - Salaries: Medicina/Médicos Gerais(721/2211) - Cluster 1 - KMeans3 ')
+        ax.set_xlabel('Age')
+        ax.set_ylabel('Number of Salaries')
         ax.set_xticklabels(xticks)
-        string1 = "Grafico_Boxplot_Salarios_Medicina_MédicosGerais_721_2511_Cluster1_KMeans3" + ".pdf"
+        #string1 = "Grafico_Boxplot_Salarios_Medicina_MédicosGerais_721_2511_Cluster1_KMeans3" + ".pdf"
+        string1 = "Grafico_Boxplot_Salarios_Medicina_MédicosGerais_721_2511_Cluster1_KMeans3" + ".png"
         plt.savefig(save_results_to + string1)   
         # plt.show()  
     if cluster == 2:
@@ -2461,11 +2491,15 @@ def Salarios_CBO_Idade(path,name,path1,name1,cluster):
         fig, ax = plt.subplots(figsize=(20,10))
         ax.boxplot(DADOS)
         ax.set_yscale('log')
-        ax.set_title('Gráfico de Boxplot - Salários: Medicina/Médicos Especialistas(721/2212) - Cluster 2 - KMeans3 ')
-        ax.set_xlabel('Idade')
-        ax.set_ylabel('Quantidade de Salários')
+        #ax.set_title('Gráfico de Boxplot - Salários: Medicina/Médicos Especialistas(721/2212) - Cluster 2 - KMeans3 ')
+        #ax.set_xlabel('Idade')
+        #ax.set_ylabel('Quantidade de Salários')
+        ax.set_title('Boxplot Chart - Salaries: Medicina/Médicos Especialistas(721/2212) - Cluster 2 - KMeans3 ')
+        ax.set_xlabel('Age')
+        ax.set_ylabel('Number of Salaries')
         ax.set_xticklabels(xticks)
-        string1 = "Grafico_Boxplot_Salarios_Medicina_Médicos Especialistas_721_2512_Cluster2_KMeans3" + ".pdf"
+        #string1 = "Grafico_Boxplot_Salarios_Medicina_Médicos Especialistas_721_2512_Cluster2_KMeans3" + ".pdf"
+        string1 = "Grafico_Boxplot_Salarios_Medicina_Médicos Especialistas_721_2512_Cluster2_KMeans3" + ".png"
         plt.savefig(save_results_to + string1)   
         # plt.show()    
     return

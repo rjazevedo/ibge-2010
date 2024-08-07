@@ -78,9 +78,9 @@ if fase == 2:
 if fase == 10:
     ibge_functions.ibge_cursos_profissoes() #https://colab.research.google.com/drive/1_Nx4oOzrgCQvSolh9XG-UgWTQ508Md1M?authuser=1#scrollTo=o9GsbqjctkkL
    
-    # ibge_functions.ibge_relacionamentos_cursos_profissoes()
+    ## ibge_functions.ibge_relacionamentos_cursos_profissoes()
 
-    # ibge_functions.ibge_corte_CBO()
+    ## ibge_functions.ibge_corte_CBO()
 
     ibge_functions.ibge_idas_voltas_cursos_profissoes()
 
@@ -99,16 +99,16 @@ if fase == 20:
 
 # Fase 30: Resultados da Análise ...
 if fase == 30: 
-    # Funções para 10%  
-    # Geração do dataframes femininos e masculinos
+    ## Funções para 10%  
+    ## Geração do dataframes femininos e masculinos
     ibge_functions.Filtro_Masculino_Feminino() 
-    # Geração dos Arquivos de idas e voltas Femininas e Masculinas
+    ## Geração dos Arquivos de idas e voltas Femininas e Masculinas
     ibge_functions.Ida_Volta_Masculino_Feminino()
-    # Limpeza dos arquivos  de idas e voltas Femininas e Masculinas
+    ## Limpeza dos arquivos  de idas e voltas Femininas e Masculinas
     ibge_functions.Tabela_Ida_Volta_Masculino_Feminino() 
-    # Geração dos gráficos:
-    #  - Profissões e Cursos-Masculino (10%-Cursos e Profissões do Censo-Masculino)
-    #  - Profissões e Cursos-Feminino  (10%-Cursos e Profissões do Censo-Feminino)   
+    ## Geração dos gráficos:
+    ##  - Profissões e Cursos-Masculino (10%-Cursos e Profissões do Censo-Masculino)
+    ##  - Profissões e Cursos-Feminino  (10%-Cursos e Profissões do Censo-Feminino)   
     ibge_functions.Profissoes_Cursos_Masculino_Feminino() 
     pass
 
@@ -119,7 +119,7 @@ if fase == 32:
     #QP2
     pass 
 if fase == 33:   
-    #QP3
+    ##QP3
     ibge_functions.Ida_Volta_Masculino_Feminino_100()
     ibge_functions.Tabela_Ida_Volta_Masculino_Feminino_100()
     # Funciona, mas salva csvs. Comentei para usar como dataframes!
@@ -140,6 +140,7 @@ if fase == 33:
     
     #  Funções que faltam ...
     #  1-  Gráfico dos gêneros separados por clusters
+       # https://colab.research.google.com/drive/1znpX4cXQTDgCsiZYS9kNl1UbgL3RudAB?authuser=1
     #  2-  Profissões desequilibradas 
        # - Profissões desequilibradas - Pontos Selecionados(Grandes Desloamentos) 
        # - Profissões desequilibradas - Quais as profissões onde homens e mulheres estão em clusters diferentes?
@@ -188,7 +189,7 @@ if fase == 35:
    # 4- Tabela: O maior e o menor de cada um dos pontos dentro de cada cluster	
      # Tabela: Mediana de cada um dos pontos dentro de cada cluster  
    # Okay # 5- BoxPlot de salários para um determinado CBO por idade	
-     # Preencher o arquivo Resultados_T_Filtrados_Kmeans3_Idade.csv manualmente ...
+   # Preencher o arquivo Resultados_T_Filtrados_Kmeans3_Idade.csv manualmente ...
    ibge_functions.Salarios_CBO_Idade()
    # 6- Análise  de salário por gênero (Ser homem ou mulher implica em diferença salarial?)
      # Tabela - Mediana  Feminina 

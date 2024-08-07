@@ -78,10 +78,13 @@ def Profissoes_Cursos(path1,name1,path2,name2): # https://colab.research.google.
     # print(kmeans.labels_)
 
     #Clusterização
-    plt.figure(figsize=(6, 4))
-    plt.title("10%  - Todos os Cursos - Clusterização ")
-    plt.xlabel('Cursos')
-    plt.ylabel('Profissões')
+    #plt.figure(figsize=(6, 4))
+    #plt.title("10%  - Todos os Cursos - Clusterização ")
+    #plt.xlabel('Cursos')
+    #plt.ylabel('Profissões')
+    plt.title("10% - All Courses - Clustering")
+    plt.xlabel('Courses')
+    plt.ylabel('Professions')
     plt.ylim(0, 100) # definir limite do eixo
     plt.xlim(0, 100) # definir limite do eixo
     plt.grid()
@@ -92,7 +95,9 @@ def Profissoes_Cursos(path1,name1,path2,name2): # https://colab.research.google.
     plt.scatter(kmeans.cluster_centers_[:, 0], kmeans.cluster_centers_[:, 1], s=300, c='yellow', label = 'Centroids', marker = '*')
     plt.legend()
     # plt.show()
-    string1 = "10%  - Todos os Cursos - Clusterização " +".pdf"
+    # string1 = "10%  - Todos os Cursos - Clusterização " +".pdf"
+    # string1 = "10% - All Courses - Clustering" +".pdf"
+    string1 = "10% - All Courses - Clustering" +".png"
     save_results_to = 'graficos/'  
     plt.savefig(save_results_to + string1)  
 

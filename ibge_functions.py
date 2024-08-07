@@ -198,10 +198,11 @@ def ibge_relacionamentos_cursos_profissoes():
     name1 = ibge_variable.names(6)
 
     # Usar essa função para obter os primeiros plots sem porcentagem
-    # ibge_functions_descriptiveanalysis.relacionamentos_fortes_naofortes_cursos_profissoes_plot1(path,name,path1,name1)
+    # ibge_functions_descriptive_analysis.relacionamentos_fortes_naofortes_cursos_profissoes_plot1(path,name,path1,name1)
 
     # Usar essa função para obter os primeiros plots com porcentagem (7% ou 10%)     
-    # ibge_functions_descriptiveanalysis.relacionamentos_fortes_naofortes_cursos_profissoes_plot2(path,name,path1,name1)
+    #
+    ibge_functions_descriptive_analysis.relacionamentos_fortes_naofortes_cursos_profissoes_plot2(path,name,path1,name1)
     return
 
 def ibge_corte_CBO():
@@ -211,7 +212,7 @@ def ibge_corte_CBO():
     name1 = ibge_variable.names(6)
 
     # Usar essa função para obter os primeiros plots com porcentagem ( 10%)     
-    # ibge_functions_descriptiveanalysis.relacionamentos_fortes_naofortes_cursos_profissoes_plot10(path,name,path1,name1)
+    # ibge_functions_descriptive_analysis.relacionamentos_fortes_naofortes_cursos_profissoes_plot10(path,name,path1,name1)
     return
 
 def ibge_idas_voltas_cursos_profissoes():
@@ -387,7 +388,7 @@ def  Juntar_10Porcento_Genero():
  
 # Fase 34 
 # Funciona, mas salva csvs. Comentei para usar como dataframes!
-# def Filtro_Idade():  
+#def Filtro_Idade():  
 #     path = ibge_variable.paths(11)
 #     name = ibge_variable.names(7)
 #     ibge_functions_results.Filtro_Idade(path,name,'29') 

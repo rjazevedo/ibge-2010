@@ -597,11 +597,13 @@ def Cursos_CBO(csv_estado,csv_CBO,csv_CURSOS,cbo_num,titulo3,NaoGraduados_qtdade
             colors = ['blue', 'blue', 'blue','green'] #1ª posição
             break
     tituloalterado = titulo3 + " : " + "Cbo fraco"
+    tituloalterado = titulo3 + " : " + "Weak Cbo"
     curso_num = str(float(curso_num))
     intensidade = 'Fraco'
     for i in range(len(index)):
         if ((i==3)and(A_Curso_11_sort['Curso'].iloc[i]==str(curso_num))): #curso_num
             tituloalterado = titulo3 + " : " + "Cbo forte"
+            tituloalterado = titulo3 + " : " + "Strong Cbo"
             intensidade ='Forte'
             break
     x='Curso_Nome'
@@ -763,15 +765,20 @@ def CBOs_Curso_v6(csv_estado,csv_CBO,curso_num,curso_nome,titulo10,titulo3,porce
             #...
             x='CBO_Nome'
             y='Porcentagem'
+            # x='CBO_Name'
+            # y='Percentage'
             #Plotando ... Alterado em 06/09/23 ... tirei o plot dos dez maiores #07/09/2023 voltei o plot dos dez maiores ...
             A_cbo_10_sort = A_cbo_10.iloc[0:3].sort_values("Porcentagem",ascending=True)
             plt.rcParams["figure.figsize"] = (18, 8)
             plt.rcParams["figure.autolayout"] = True
             ax = A_cbo_10_sort.plot(x,y,kind='barh',title=titulo3,legend=False)
             ax.bar_label(ax.containers[0])
-            plt.xlabel("Porcentagem")
+            # plt.xlabel("Porcentagem")
+            plt.xlabel("Percentage")
+            plt.ylabel("CBO_Name")
             # string = str(curso_num) + " - " + curso_nome + "_" + str(porcent_param) +".pdf"
-            # plt.savefig(save_results_to + string)
+            string = str(curso_num) + " - " + curso_nome + "_" + str(porcent_param) +".png"
+            plt.savefig(save_results_to + string)
             # plt.show()
         else:
             print("As porcentagens dos CBOs são menores que o parâmetro de porcentagem")
@@ -895,13 +902,15 @@ def Cursos_CBO_14_10(csv_estado,csv_CBO,csv_CURSOS,cbo_num,titulo3,NaoGraduados_
       for i in range(len(index)):
           colors.append('black')
             
-      tituloalterado = titulo3 + " : " + "Cbo fraco"
+      # tituloalterado = titulo3 + " : " + "Cbo fraco"
+      tituloalterado = titulo3 + " : " + "Weak CBO"    
       curso_num = str(float(curso_num))
       
       intensidade = 'Fraco'     
       for i in range(len(index)):
           if ((A_Curso_11_sort.index[i]==0)and(A_Curso_11_sort['Curso'].iloc[i]==str(curso_num))): #curso_num
-              tituloalterado = titulo3 + " : " + "Cbo forte"
+              # tituloalterado = titulo3 + " : " + "Cbo forte"
+              tituloalterado = titulo3 + " : " + "Strong Cbo"
               intensidade ='Forte'
               break
       cursos = [] # Alterado em 26/09/2023
@@ -931,10 +940,13 @@ def Cursos_CBO_14_10(csv_estado,csv_CBO,csv_CURSOS,cbo_num,titulo3,NaoGraduados_
       plt.rcParams["figure.autolayout"] = True
       ax = A_Curso_11_sort.plot(x,y,kind='barh',title=tituloalterado,color=colors,legend=False)
       ax.bar_label(ax.containers[0])
-      plt.xlabel("Porcentagem")
-    #   string = str(curso_num) + " - " + curso_nome + " : " + primeirosCbos_Nome[numero] + "_" + str(porcent_param) +".pdf"
-    #   save_results_to =  'graficos/'   
-    #   plt.savefig(save_results_to + string)
+      # plt.xlabel("Porcentagem")
+      plt.xlabel("Percentage")
+      plt.ylabel("CBO_Name")
+      # string = str(curso_num) + " - " + curso_nome + " : " + primeirosCbos_Nome[numero] + "_" + str(porcent_param) +".pdf"
+      string = str(curso_num) + " - " + curso_nome + " : " + primeirosCbos_Nome[numero] + "_" + str(porcent_param) +".png"
+      save_results_to =  'graficos/'   
+      plt.savefig(save_results_to + string)
       volta = 'Volta'
     else:
        print("Não existe cursos para esse CBO")
@@ -1078,7 +1090,8 @@ def Cursos_CBO_13_10(csv_estado,csv_CBO,csv_CURSOS,cbo_num,titulo3,NaoGraduados_
         # print("colors ================================================================")
         # print(colors)
 
-        tituloalterado = titulo3 + " : " + "Cbo fraco"
+        #tituloalterado = titulo3 + " : " + "Cbo fraco"
+        tituloalterado = titulo3 + " : " + "Weak Cbo"
         curso_num = str(float(curso_num))
         
         intensidade = 'Fraco'
@@ -1086,7 +1099,8 @@ def Cursos_CBO_13_10(csv_estado,csv_CBO,csv_CURSOS,cbo_num,titulo3,NaoGraduados_
             print("index =================================================================",index)
             if ((A_Curso_11_sort.index[i]==0)and(A_Curso_11_sort['Curso'].iloc[i]==str(curso_num))): #curso_num
                 #colors = ['blue', 'blue', 'blue','green'] #1ª posição
-                tituloalterado = titulo3 + " : " + "Cbo forte"
+                #tituloalterado = titulo3 + " : " + "Cbo forte"
+                tituloalterado = titulo3 + " : " + "Strong Cbo"
                 intensidade ='Forte'
                 # break
 
@@ -1133,11 +1147,14 @@ def Cursos_CBO_13_10(csv_estado,csv_CBO,csv_CURSOS,cbo_num,titulo3,NaoGraduados_
         ax = A_Curso_11_sort.plot(x,y,kind='barh',title=tituloalterado,color=colors,legend=False)
 
         ax.bar_label(ax.containers[0])
-        plt.xlabel("Porcentagem")
+        # plt.xlabel("Porcentagem")
+        plt.xlabel("Percentage")
+        plt.ylabel("CBO_Name")
         
         # string = str(curso_num) + " - " + curso_nome + " : " + primeirosCbos_Nome[numero] + "_" + str(porcent_param) +".pdf"
-        # save_results_to = 'graficos/'  
-        # plt.savefig(save_results_to + string)        
+        string = str(curso_num) + " - " + curso_nome + " : " + primeirosCbos_Nome[numero] + "_" + str(porcent_param) +".png"
+        save_results_to = 'graficos/'  
+        plt.savefig(save_results_to + string)        
     else:
        print("Não existe cursos para esse CBO")
        cursos=0
@@ -1195,8 +1212,10 @@ def relacionamentos_fortes_naofortes_cursos_profissoes_plot2(path,name,path1,nam
     CursosCenso = ibge_cursos_filter(path1[0],name1[2])
     curso_num  = float(CursosCenso.curso_num.iloc[43])
     curso_nome = CursosCenso.curso_nome.iloc[43]
-    titulo10 =  "Curso:  " +  str(curso_num) + ": " + curso_nome + " - Os 10 maiores"
-    titulo3  =  "Curso:  " +  str(curso_num) + ": " + curso_nome + " - Os 3 maiores"
+    titulo10 =  "Course:  " +  str(curso_num) + ": " + curso_nome + " - Os 10 maiores"
+    # titulo3  =  "Curso:  " +  str(curso_num) + ": " + curso_nome + " - Os 3 maiores"
+    titulo3  =  "Course:  " +  str(curso_num) + ": " + curso_nome 
+
     save_results_to = 'graficos/'  
 
            
@@ -1239,7 +1258,7 @@ def relacionamentos_fortes_naofortes_cursos_profissoes_plot2(path,name,path1,nam
             CBO_vol.append(CBO)
             Cursos_vol.append(cursos_vol)
             Nomes_vol.append(nomes_vol)    
-    # https://colab.research.google.com/drive/1UCEDMTAdZqIRaNGpXHN66pqq_IwHyAe7?authuser=1#scrollTo=vC50rzZCwdHj
+# https://colab.research.google.com/drive/1UCEDMTAdZqIRaNGpXHN66pqq_IwHyAe7?authuser=1#scrollTo=vC50rzZCwdHj
 def relacionamentos_fortes_naofortes_cursos_profissoes_plot10(path,name,path1,name1):
     csv_estado = os.path.join(path[0],name[0]) # arquivo do censo do Brasil inteiro (somente graduados)
     path1 = ibge_variable.paths(12)
@@ -1254,7 +1273,8 @@ def relacionamentos_fortes_naofortes_cursos_profissoes_plot10(path,name,path1,na
     curso_num  = float(CursosCenso.curso_num.iloc[43])
     curso_nome = CursosCenso.curso_nome.iloc[43]
     titulo10 =  "Curso:  " +  str(curso_num) + ": " + curso_nome + " - Os 10 maiores"
-    titulo3  =  "Curso:  " +  str(curso_num) + ": " + curso_nome + " - Os 3 maiores"
+    # titulo3  =  "Curso:  " +  str(curso_num) + ": " + curso_nome + " - Os 3 maiores"
+    titulo3  =  "Course:  " +  str(curso_num) + ": " + curso_nome    
     save_results_to = 'graficos/'  
 
            
@@ -1535,8 +1555,8 @@ def Ida_Volta(path,name,path1,name1):
 
         curso_num= float(CursosCenso.curso_num.iloc[f])
         curso_nome= CursosCenso.curso_nome.iloc[f]
-        titulo10= "Curso " +  CursosCenso.curso_num.iloc[f] + ": " + CursosCenso.curso_nome.iloc[f] + " - 10% "
-        titulo3=  "Curso " +  CursosCenso.curso_num.iloc[f] + ": " + CursosCenso.curso_nome.iloc[f] + " - 10%"
+        titulo10= "Course " +  CursosCenso.curso_num.iloc[f] + ": " + CursosCenso.curso_nome.iloc[f] + " - 10% "
+        titulo3=  "Course " +  CursosCenso.curso_num.iloc[f] + ": " + CursosCenso.curso_nome.iloc[f] + " - 10%"
         print("curso_num:", curso_num, "curso_nome:",curso_nome)
         print(f)
         print("=================================================================================================")
