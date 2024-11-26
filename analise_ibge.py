@@ -89,7 +89,7 @@ if fase == 10:
     
 
 # Fase 20: Análise Exploratória ...
-if fase == 20:  
+if fase == 20:  #QP1
     # Função para:
     # - clusterização com k=3, 
     # - geração do gráfico K-Means com K=3 (10% - Todos os Cursos - Clusterização) 
@@ -98,7 +98,7 @@ if fase == 20:
     pass
 
 # Fase 30: Resultados da Análise ...
-if fase == 30: 
+if fase == 30:  #QP2
     ## Funções para 10%  
     ## Geração do dataframes femininos e masculinos
     ibge_functions.Filtro_Masculino_Feminino() 
@@ -113,10 +113,10 @@ if fase == 30:
     pass
 
 if fase == 31:
-    #QP1
+    #QP1 é a fase 20
     pass 
 if fase == 32:
-    #QP2
+    #QP2 é a fase 30
     pass 
 if fase == 33:   
     ##QP3
