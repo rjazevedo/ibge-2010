@@ -2236,9 +2236,22 @@ def Kmeans3_T_Grafico_Idade(path2,name3,cluster):
                     save_results_to = 'graficos/'
                     df =  os.path.join(path2[0],name3[13])
                     Resultados_T = pd.read_csv(df) 
-                    # Resultados_T = Resultados_T.drop(columns=['Unnamed: 0'])
-                    # print(len(Resultados_T['Idade']))
-            
+                    # Sequência desejada
+                    sequencia_desejada = ["O", "29", "30-39", "40-49", "50-59", "60"]
+
+                    # Identificar blocos válidos
+                    indices_validos = []
+                    for i in range(len(Resultados_T) - len(sequencia_desejada) + 1):
+                        if list(Resultados_T['Idade'].iloc[i:i + len(sequencia_desejada)]) == sequencia_desejada:
+                            indices_validos.extend(range(i, i + len(sequencia_desejada)))
+
+                    # Criar um novo DataFrame com apenas as linhas válidas
+                    novo_df = Resultados_T.iloc[indices_validos].copy()
+                    # Salvar o resultado em um novo arquivo CSV
+                    novo_df.to_csv('graficos/Resultados_T_Filtrados_Kmeans3_Idade_Cluster2_Filtrados.csv', index=False)     
+
+                    df =  os.path.join(path2[0],name3[14])
+                    Resultados_T = pd.read_csv(df)                 
                     #CursoNome =[]
                     I_25_29 = []
                     I_30_39 = []
