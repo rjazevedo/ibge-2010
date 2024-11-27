@@ -2038,9 +2038,13 @@ def Filtrar_Tabela_10Porcento_Idade():
 
     resultados_T=[]
     for j in range(len(df_row2)):
+        if pd.isnull(df_row2['Cluster'][j]):
+            df_row2['Cluster'][j] = ''   
+        else:    
+            df_row2['Cluster'][j] = int(float(df_row2['Cluster'][j]))  
         for i in range(len(X)):        
-            if (int(float(X['Curso'][i])) == int(float(df_row2['Curso'][j])))&(int(float(X['Cbo'][i])) == int(float(df_row2['Cbo'][j]))):
-                tupla=(df_row2['Ida'][j],df_row2['Volta'][j],df_row2['Cluster'][j], df_row2['Curso'][j],df_row2['Curso_Nome'][j],df_row2['Cbo'][j],df_row2['Cbo_Nome'][j],df_row2['Idade'][j])
+            if (int(float(X['Curso'][i])) == int(float(df_row2['Curso'][j]))) & (int(float(X['Cbo'][i])) == int(float(df_row2['Cbo'][j]))):
+                tupla=(df_row2['Ida'][j],df_row2['Volta'][j],df_row2['Cluster'][j], df_row2['Curso'][j].astype(int),df_row2['Curso_Nome'][j],df_row2['Cbo'][j].astype(int),df_row2['Cbo_Nome'][j],df_row2['Idade'][j])
                 resultados_T.append(tupla)
                 # ...         
          

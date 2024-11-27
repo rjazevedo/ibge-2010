@@ -440,6 +440,23 @@ def Adiciona_Coluna_Idade():
     ibge_functions_results.Adiciona_Coluna_Idade(path1,name1,path2,name2,'60') 
     return
 
+# Criar uma função que leia o arquivo Resultados_T_Filtrados_Kmeans3_Idade.csv e formatar a coluna Cluster/Cbo
+# desse arquivo. Essa coluna é do tipo float, mas precisa ser int. Após isso, devera salvar o nome arquivo no formato csv
+import pandas as pd
+def format_cluster_column(file_path,save_path):
+    # Leitura do arquivo Resultados_T_Filtrados_Kmeans3_Idade.csv
+    df = pd.read_csv(file_path)
+
+    # Formatar a coluna Cluster para o tipo int
+    df['Cluster'] = df['Cluster'].astype(int)
+
+    # Salvar o arquivo no formato csv
+    save_path = 'formatted_results.csv'
+    df.to_csv(save_path, index=False)
+
+    return 
+
+
 def Kmeans3_T_Grafico_Idade():
     path2 = ibge_variable.paths(13)
     name3 = ibge_variable.names(10)

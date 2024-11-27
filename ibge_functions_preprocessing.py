@@ -241,6 +241,24 @@ def SomaPivotTable(path,name,i):
 
 # def Soma_PivotTableFinal():
 #      return
+def filtrar_por_genero(path):
+    # Ler o arquivo Brasil_Graduados.csv
+    file_path = os.path.join(path, "Brasil_Graduados.csv")
+    df = pd.read_csv(file_path)
+
+    # Filtrar por gênero feminino
+    df_fem = df[df['gênero'] == 2] 
+
+    # Filtrar por gênero masculino
+    df_masc = df[df['gênero'] == 1]
+
+    # Salvar os arquivos filtrados
+    pathh = ibge_variable.paths(11)
+    name_path_fem = os.path.join(pathh[0], "Brasil_Graduados_Fem.csv")
+    name_path_masc = os.path.join(pathh[0], "Brasil_Graduados_Masc.csv")
+    df_fem.to_csv(name_path_fem, index=False, encoding='utf-8-sig')
+    df_masc.to_csv(name_path_masc, index=False, encoding='utf-8-sig')
+    return
 
 #def JuntarCSVs(path,opcao,dir):
 def JuntarCSVs(path,opcao):
@@ -272,23 +290,6 @@ def JuntarCSVs(path,opcao):
     combined_csv.to_csv(name_path, index=False, encoding='utf-8-sig')   
     return 
 
-def filtrar_por_genero(path):
-    # Ler o arquivo Brasil_Graduados.csv
-    file_path = os.path.join(path, "Brasil_Graduados.csv")
-    df = pd.read_csv(file_path)
 
-    # Filtrar por gênero feminino
-    df_fem = df[df['gênero'] == 2] 
-
-    # Filtrar por gênero masculino
-    df_masc = df[df['gênero'] == 1]
-
-    # Salvar os arquivos filtrados
-    pathh = ibge_variable.paths(11)
-    name_path_fem = os.path.join(pathh[0], "Brasil_Graduados_Fem.csv")
-    name_path_masc = os.path.join(pathh[0], "Brasil_Graduados_Masc.csv")
-    df_fem.to_csv(name_path_fem, index=False, encoding='utf-8-sig')
-    df_masc.to_csv(name_path_masc, index=False, encoding='utf-8-sig')
-    return
 
 
