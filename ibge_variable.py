@@ -55,6 +55,6 @@ def names(opcao):
    #   names = ['100Porcent_DF_29.csv','100Porcent_DF_30-39.csv','100Porcent_DF_40-49.csv','100Porcent_DF_50-59.csv','100Porcent_DF_60.csv','100Porcent_DF_29_Limpo.csv','100Porcent_DF_30-39_Limpo.csv','100Porcent_DF_40-49_Limpo.csv','100Porcent_DF_50-59_Limpo.csv','100Porcent_DF_60_Limpo.csv','Resultados_T_Filtrados_Kmeans3_Idade.csv','Resultados_T_Filtrados_Kmeans3_Idade_Cluster0.csv','Resultados_T_Filtrados_Kmeans3_Idade_Cluster1.csv','Resultados_T_Filtrados_Kmeans3_Idade_Cluster2_I.csv']       
        names = ['100Porcent_DF_29.csv','100Porcent_DF_30-39.csv','100Porcent_DF_40-49.csv','100Porcent_DF_50-59.csv','100Porcent_DF_60.csv','100Porcent_DF_29_Limpo.csv','100Porcent_DF_30-39_Limpo.csv','100Porcent_DF_40-49_Limpo.csv','100Porcent_DF_50-59_Limpo.csv','100Porcent_DF_60_Limpo.csv','Resultados_T_Filtrados_Kmeans3_Idade.csv','Resultados_T_Filtrados_Kmeans3_Idade_Cluster0.csv','Resultados_T_Filtrados_Kmeans3_Idade_Cluster1.csv','Resultados_T_Filtrados_Kmeans3_Idade_Cluster2.csv','Resultados_T_Filtrados_Kmeans3_Idade_Cluster2_Filtrados.csv']       
    if opcao == 11:
-      names = ['Resultados_T_Filtrados_Kmeans3_Idade_Editado.csv']
+      names = ['Resultados_T_Filtrados_Kmeans3_Idade_Editado.csv', 'Resultados_T_Filtrados_Kmeans3_Idade_Preenchido.csv']
    return names
                                                                                                                                      

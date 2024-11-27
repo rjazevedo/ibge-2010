@@ -2352,7 +2352,8 @@ def Salarios_CBO_Idade(path,name,path1,name1,cluster):
     if cluster == 0:  
         #Filtrados ... Cluster 0 ... Ciência da Computação/Analistas de Sistemas(481/2511)
         save_results_to = 'graficos/'
-        df =  os.path.join(path1[0],name1[0])
+        # df =  os.path.join(path1[0],name1[0])
+        df =  os.path.join(path1[0],name1[1])
         Resultados_T_Filtrados_Kmeans3_Idade_Editado = pd.read_csv(df) 
         filtrados = Resultados_T_Filtrados_Kmeans3_Idade_Editado.query('Cluster == 0.0')
         filtrados = Resultados_T_Filtrados_Kmeans3_Idade_Editado.query('Curso == 481')
@@ -2420,7 +2421,7 @@ def Salarios_CBO_Idade(path,name,path1,name1,cluster):
     if cluster == 1:       
         #Filtrados ... Cluster 0 ... Ciência da Computação/Analistas de Sistemas(481/2511)
         save_results_to = 'graficos/'
-        df =  os.path.join(path1[0],name1[0])
+        df =  os.path.join(path1[0],name1[1])
         Resultados_T_Filtrados_Kmeans3_Idade_Editado = pd.read_csv(df) 
         filtrados = Resultados_T_Filtrados_Kmeans3_Idade_Editado.query('Cluster == 1.0')
         filtrados = Resultados_T_Filtrados_Kmeans3_Idade_Editado.query('Curso == 721 & Cbo == 2211')
@@ -2488,7 +2489,7 @@ def Salarios_CBO_Idade(path,name,path1,name1,cluster):
     if cluster == 2:
        #Filtrados ... Cluster 0 ... Ciência da Computação/Analistas de Sistemas(481/2511)
         save_results_to = 'graficos/'
-        df =  os.path.join(path1[0],name1[0])
+        df =  os.path.join(path1[0],name1[1])
         Resultados_T_Filtrados_Kmeans3_Idade_Editado = pd.read_csv(df) 
         filtrados = Resultados_T_Filtrados_Kmeans3_Idade_Editado.query('Cluster == 2.0')
         filtrados = Resultados_T_Filtrados_Kmeans3_Idade_Editado.query('Curso == 721 & Cbo == 2212')
