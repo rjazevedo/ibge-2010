@@ -2063,6 +2063,40 @@ def Filtrar_Tabela_10Porcento_Idade():
     Resultados_T.to_csv(save_results_to +'Resultados_T_Filtrados_Kmeans3_Idade.csv')   
     return
 
+import pandas as pd
+
+def fill_cluster_column(path,name):
+    save_results_to = 'graficos/'  
+    file_path = os.path.join(path[0],name[10])
+    df = pd.read_csv(file_path)
+    
+    cluster_values = df['Cluster'].values
+    filled_cluster_values = []
+
+    current_cluster = None
+    for value in cluster_values:
+        if pd.notnull(value):
+            current_cluster = int(value)
+        filled_cluster_values.append(current_cluster)
+
+    df['Cluster'] = filled_cluster_values
+    df.to_csv(save_results_to +'Resultados_T_Filtrados_Kmeans3_Idade_Preenchido.csv')
+
+   
+import pandas as pd
+
+def separate_clusters():
+    file_path = 'graficos/Resultados_T_Filtrados_Kmeans3_Idade_Preenchido.csv'
+    df = pd.read_csv(file_path)
+    
+    cluster0 = df[df['Cluster'] == 0]
+    cluster1 = df[df['Cluster'] == 1]
+    cluster2 = df[df['Cluster'] == 2]
+    
+    cluster0.to_csv('graficos/Resultados_T_Filtrados_Kmeans3_Idade_Cluster0.csv', index=False)
+    cluster1.to_csv('graficos/Resultados_T_Filtrados_Kmeans3_Idade_Cluster1.csv', index=False)
+    cluster2.to_csv('graficos/Resultados_T_Filtrados_Kmeans3_Idade_Cluster2.csv', index=False)
+
 def Kmeans3_T_Grafico_Idade(path2,name3,cluster):  
     if cluster==0:
         save_results_to = 'graficos/'

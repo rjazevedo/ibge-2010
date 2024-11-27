@@ -159,13 +159,15 @@ if fase == 34:
     # Funciona, mas salva csvs. Comentei para usar como dataframes!
     # ibge_functions.Filtro_Idade()
 
-    ibge_functions.Ida_Volta_Idade()
-    ibge_functions.Tabela_Ida_Volta_Idade()   
+    ################# ------------------------- ibge_functions.Ida_Volta_Idade()
+    ################# ------------------------- ibge_functions.Tabela_Ida_Volta_Idade()   
     # Funciona, mas salva csvs. Comentei para usar como dataframes! 
     # ibge_functions.Adiciona_Coluna_Idade()     
-    ibge_functions_results.Juntar_10Porcento_Idade() 
-    ibge_functions_results.Filtrar_Tabela_10Porcento_Idade() 
+    ################# ------------------------- ibge_functions_results.Juntar_10Porcento_Idade() 
+    ################# ------------------------- ibge_functions_results.Filtrar_Tabela_10Porcento_Idade() 
     # Separar manualmente os clusters e depois rodar o codigo abaixo para gerar os gráficos de idades separados os clusters...
+    ################# ------------------------- ibge_functions.fill_cluster_column()
+    ################# ------------------------- ibge_functions_results.separate_clusters()
     ibge_functions.Kmeans3_T_Grafico_Idade()       
     
      #  Funções que faltam ...
@@ -174,7 +176,7 @@ if fase == 34:
        # - Cluster 2
      # Okay # 2- Idade - Selecionar somente os que tem mais de 80 anos
        # - Aposentados -  Formados em Medicina e com CBO (2211)  Médicos Gerais
-    ibge_functions.Aposentados_maior80()
+    ################# ------------------------- ibge_functions.Aposentados_maior80()
      # 3- Idade - Casos Administrativos: Descobrir quando alguém vira gerente gestor
        # - Olhar todos os médicos e ver na carreira deles, quando começam a pegar o código 1. Comparar com: 1342 - 1345 - 1348 - 1349
        # - Homens gestores e Mulheres gestoras (Homem e mulher, muda faixa de idade para virar gestores?)

@@ -456,6 +456,11 @@ def format_cluster_column(file_path,save_path):
 
     return 
 
+def fill_cluster_column():
+    path2 = ibge_variable.paths(13)
+    name3 = ibge_variable.names(10)
+    ibge_functions_results.fill_cluster_column(path2,name3)
+    return
 
 def Kmeans3_T_Grafico_Idade():
     path2 = ibge_variable.paths(13)
