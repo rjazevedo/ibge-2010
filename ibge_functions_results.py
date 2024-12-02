@@ -2125,6 +2125,196 @@ def separate_clusters_Genero():
     cluster1.to_csv('graficos/Resultados_T_Filtrados_Kmeans3_T_Preenchido_Cluster1.csv', index=False)
     cluster2.to_csv('graficos/Resultados_T_Filtrados_Kmeans3_T_Preenchido_Cluster2.csv', index=False)
 
+def Kmeans3_T_Grafico_Genero_Clusters(path2,name3,cluster):
+    if cluster==0:
+       
+       #import pandas as pd
+
+        # X = pd.read_csv("/content/drive/MyDrive/Orientacao_Rodolfo/Doutorado_Elisangela/Experimentos/11_12_23_a_22_01_24/Cluster1_Pontos_100_Genero_df_row2.csv", sep=",")
+        # X = pd.read_csv("/content/drive/MyDrive/Orientacao_Rodolfo/Doutorado_Elisangela/Experimentos/11_12_23_a_22_01_24/Kmeans3_T_100_Genero_df_row2_49_alt - Cluster1_Kmeans3_T_100_Genero_df_row2_49.csv", sep=",")
+        # X = pd.read_csv("/content/drive/MyDrive/Orientacao_Rodolfo/Doutorado_Elisangela/Experimentos/11_12_23_a_22_01_24/Cluster1_Kmeans3_T_100_Genero_df_row2_49.csv", sep=",")
+        save_results_to = 'graficos/'
+        file_path = os.path.join(path2[0],name3[15])
+        df = pd.read_csv(file_path)
+        X = df.drop(columns=['Unnamed: 0'])
+
+        # x
+
+        # print(len(X))
+
+        fem  = []
+        masc = []
+        orig = []
+
+        for i in range(0,len(X)):
+            if(X['Genero'][i] == 'F'):
+                 fem.append(X['Ida'][i])
+                 fem.append(X['Volta'][i])
+            if(X['Genero'][i] == 'M'):
+                 masc.append(X['Ida'][i])
+                 masc.append(X['Volta'][i])
+            if(X['Genero'][i] == 'O'):
+                 orig.append(X['Ida'][i])
+                 orig.append(X['Volta'][i])
+	  
+        print(len(fem))
+        print(len(masc))
+        print(len(orig))	  
+
+        print(len(X))
+
+        i=0
+
+        import matplotlib.pyplot as plt
+        fig, ax = plt.subplots()
+
+        while i<len(fem):
+            j = i+1
+            print(i)
+            ax.scatter([orig[i], fem[i], masc[i]], [orig[j], fem[j], masc[j]], color=['black', 'pink', 'blue'])
+            ax.annotate("", xy=(fem[i], fem[j]), xytext=(orig[i], orig[j]),arrowprops=dict(arrowstyle="->", color='pink'))
+            ax.annotate("", xy=(masc[i], masc[j]), xytext=(orig[i], orig[j]),arrowprops=dict(arrowstyle="->", color='blue'))
+            #print(fem[i],fem[j])
+            #print(masc[i],masc[j])
+            #print(orig[i],orig[j])
+            #print("")
+            i = i+2
+        # plt.xlabel("Cursos")
+        # plt.ylabel("Profissões")
+        #plt.title("10%  -  Visualização dos três gráficos - Genero - Cluster 0 - Kmeans3")
+        plt.xlabel("Courses")
+        plt.ylabel("Professions")
+        plt.title("10% - View of the three graphs - Gender - Cluster 0 - Kmeans3")
+        plt.xlim(0.0, 100.0)
+        plt.ylim(0.0, 100.0)
+        plt.show()
+    else:
+         if cluster==1:
+            save_results_to = 'graficos/'
+            #import pandas as pd
+
+            # X = pd.read_csv("/content/drive/MyDrive/Orientacao_Rodolfo/Doutorado_Elisangela/Experimentos/11_12_23_a_22_01_24/Cluster1_Pontos_100_Genero_df_row2.csv", sep=",")
+            # X = pd.read_csv("/content/drive/MyDrive/Orientacao_Rodolfo/Doutorado_Elisangela/Experimentos/11_12_23_a_22_01_24/Kmeans3_T_100_Genero_df_row2_49_alt - Cluster1_Kmeans3_T_100_Genero_df_row2_49.csv", sep=",")
+            # X = pd.read_csv("/content/drive/MyDrive/Orientacao_Rodolfo/Doutorado_Elisangela/Experimentos/11_12_23_a_22_01_24/Cluster1_Kmeans3_T_100_Genero_df_row2_49.csv", sep=",")
+            save_results_to = 'graficos/'
+            file_path = os.path.join(path2[0],name3[16])
+            df = pd.read_csv(file_path)
+            X = df.drop(columns=['Unnamed: 0'])
+
+            # x
+
+            # print(len(X))
+
+            fem  = []
+            masc = []
+            orig = []
+
+            for i in range(0,len(X)):
+                if(X['Genero'][i] == 'F'):
+                    fem.append(X['Ida'][i])
+                    fem.append(X['Volta'][i])
+                if(X['Genero'][i] == 'M'):
+                    masc.append(X['Ida'][i])
+                    masc.append(X['Volta'][i])
+                if(X['Genero'][i] == 'O'):
+                    orig.append(X['Ida'][i])
+                    orig.append(X['Volta'][i])
+        
+            print(len(fem))
+            print(len(masc))
+            print(len(orig))	  
+
+            print(len(X))
+
+            i=0
+
+            import matplotlib.pyplot as plt
+            fig, ax = plt.subplots()
+
+            while i<len(fem):
+                j = i+1
+                print(i)
+                ax.scatter([orig[i], fem[i], masc[i]], [orig[j], fem[j], masc[j]], color=['black', 'pink', 'blue'])
+                ax.annotate("", xy=(fem[i], fem[j]), xytext=(orig[i], orig[j]),arrowprops=dict(arrowstyle="->", color='pink'))
+                ax.annotate("", xy=(masc[i], masc[j]), xytext=(orig[i], orig[j]),arrowprops=dict(arrowstyle="->", color='blue'))
+                #print(fem[i],fem[j])
+                #print(masc[i],masc[j])
+                #print(orig[i],orig[j])
+                #print("")
+                i = i+2
+            # plt.xlabel("Cursos")
+            # plt.ylabel("Profissões")
+            #plt.title("10%  -  Visualização dos três gráficos - Genero - Cluster 0 - Kmeans3")
+            plt.xlabel("Courses")
+            plt.ylabel("Professions")
+            plt.title("10% - View of the three graphs - Gender - Cluster 1 - Kmeans3")
+            plt.xlim(0.0, 100.0)
+            plt.ylim(0.0, 100.0)
+            plt.show()
+         else:
+                if cluster==2:
+                    #import pandas as pd
+
+                    # X = pd.read_csv("/content/drive/MyDrive/Orientacao_Rodolfo/Doutorado_Elisangela/Experimentos/11_12_23_a_22_01_24/Cluster1_Pontos_100_Genero_df_row2.csv", sep=",")
+                    # X = pd.read_csv("/content/drive/MyDrive/Orientacao_Rodolfo/Doutorado_Elisangela/Experimentos/11_12_23_a_22_01_24/Kmeans3_T_100_Genero_df_row2_49_alt - Cluster1_Kmeans3_T_100_Genero_df_row2_49.csv", sep=",")
+                    # X = pd.read_csv("/content/drive/MyDrive/Orientacao_Rodolfo/Doutorado_Elisangela/Experimentos/11_12_23_a_22_01_24/Cluster1_Kmeans3_T_100_Genero_df_row2_49.csv", sep=",")
+                    save_results_to = 'graficos/'
+                    file_path = os.path.join(path2[0],name3[17])
+                    df = pd.read_csv(file_path)
+                    X = df.drop(columns=['Unnamed: 0'])
+
+                    # x
+
+                    # print(len(X))
+
+                    fem  = []
+                    masc = []
+                    orig = []
+
+                    for i in range(0,len(X)):
+                        if(X['Genero'][i] == 'F'):
+                            fem.append(X['Ida'][i])
+                            fem.append(X['Volta'][i])
+                        if(X['Genero'][i] == 'M'):
+                            masc.append(X['Ida'][i])
+                            masc.append(X['Volta'][i])
+                        if(X['Genero'][i] == 'O'):
+                            orig.append(X['Ida'][i])
+                            orig.append(X['Volta'][i])
+                
+                    print(len(fem))
+                    print(len(masc))
+                    print(len(orig))	  
+
+                    print(len(X))
+
+                    i=0
+
+                    import matplotlib.pyplot as plt
+                    fig, ax = plt.subplots()
+
+                    while i<len(fem):
+                        j = i+1
+                        print(i)
+                        ax.scatter([orig[i], fem[i], masc[i]], [orig[j], fem[j], masc[j]], color=['black', 'pink', 'blue'])
+                        ax.annotate("", xy=(fem[i], fem[j]), xytext=(orig[i], orig[j]),arrowprops=dict(arrowstyle="->", color='pink'))
+                        ax.annotate("", xy=(masc[i], masc[j]), xytext=(orig[i], orig[j]),arrowprops=dict(arrowstyle="->", color='blue'))
+                        #print(fem[i],fem[j])
+                        #print(masc[i],masc[j])
+                        #print(orig[i],orig[j])
+                        #print("")
+                        i = i+2
+                    # plt.xlabel("Cursos")
+                    # plt.ylabel("Profissões")
+                    #plt.title("10%  -  Visualização dos três gráficos - Genero - Cluster 0 - Kmeans3")
+                    plt.xlabel("Courses")
+                    plt.ylabel("Professions")
+                    plt.title("10% - View of the three graphs - Gender - Cluster 2 - Kmeans3")
+                    plt.xlim(0.0, 100.0)
+                    plt.ylim(0.0, 100.0)
+                    plt.show()
+
+    return
 
 def Kmeans3_T_Grafico_Idade(path2,name3,cluster):  
     if cluster==0:

@@ -385,7 +385,13 @@ def  Juntar_10Porcento_Genero():
 #     ibge_functions_results.Genero_Profissoes_Equilibradas_Gen_Idade_Fem()
 #     ibge_functions_results.Genero_Profissoes_Equilibradas_Gen_Idade_Masc()
 #     return
- 
+def Kmeans3_T_Grafico_Genero_Clusters():
+    path2 = ibge_variable.paths(13)
+    name3 = ibge_variable.names(9)
+    ibge_functions_results.Kmeans3_T_Grafico_Genero_Clusters(path2,name3,0)
+    ibge_functions_results.Kmeans3_T_Grafico_Genero_Clusters(path2,name3,1)
+    ibge_functions_results.Kmeans3_T_Grafico_Genero_Clusters(path2,name3,2)
+    return
 # Fase 34 
 # Funciona, mas salva csvs. Comentei para usar como dataframes!
 #def Filtro_Idade():  
