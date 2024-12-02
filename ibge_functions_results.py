@@ -2082,6 +2082,22 @@ def fill_cluster_column(path,name):
     df['Cluster'] = filled_cluster_values
     df.to_csv(save_results_to +'Resultados_T_Filtrados_Kmeans3_Idade_Preenchido.csv')
 
+def fill_cluster_column_Genero(path,name):
+    save_results_to = 'graficos/'  
+    file_path = os.path.join(path[0],name[13])
+    df = pd.read_csv(file_path)
+    
+    cluster_values = df['Cluster'].values
+    filled_cluster_values = []
+
+    current_cluster = None
+    for value in cluster_values:
+        if pd.notnull(value):
+            current_cluster = int(value)
+        filled_cluster_values.append(current_cluster)
+
+    df['Cluster'] = filled_cluster_values
+    df.to_csv(save_results_to +'Resultados_T_Filtrados_Kmeans3_T_Preenchido.csv')
    
 import pandas as pd
 

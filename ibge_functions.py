@@ -461,6 +461,13 @@ def fill_cluster_column():
     name3 = ibge_variable.names(10)
     ibge_functions_results.fill_cluster_column(path2,name3)
     return
+    
+def fill_cluster_column_Genero():
+    path2 = ibge_variable.paths(13)
+    name3 = ibge_variable.names(9)
+    ibge_functions_results.fill_cluster_column_Genero(path2,name3)
+    return
+
 
 def Kmeans3_T_Grafico_Idade():
     path2 = ibge_variable.paths(13)
