@@ -120,20 +120,15 @@ if fase == 32:
     pass 
 if fase == 33:   
     ##QP3
-    ################# ------------------------- 
-    ibge_functions.Ida_Volta_Masculino_Feminino_100()
-    ################# ------------------------- 
-    ibge_functions.Tabela_Ida_Volta_Masculino_Feminino_100()
+    ################# -------------------------     ibge_functions.Ida_Volta_Masculino_Feminino_100()
+    ################# -------------------------     ibge_functions.Tabela_Ida_Volta_Masculino_Feminino_100()
     # Funciona, mas salva csvs. Comentei para usar como dataframes!
     # ibge_functions.PlotOriginal_AdicionaColunaGenero_100()
-    ################# ------------------------- 
-    ibge_functions.Juntar_10Porcento_Genero()
-    ################# ------------------------- 
-    ibge_functions_results.Filtrar_Tabela_10Porcento_Genero()
+    ################# -------------------------     ibge_functions.Juntar_10Porcento_Genero()
+    ################# -------------------------     ibge_functions_results.Filtrar_Tabela_10Porcento_Genero()
     # geração do gráfico: 
     # - Pontos originais, masculinos e femininos (10%-Visualização dos três gráficos - Genero - Kmeans3)
-    ################# ------------------------- 
-    ibge_functions_results.Kmeans3_T_Grafico_Genero()
+    ################# -------------------------     ibge_functions_results.Kmeans3_T_Grafico_Genero()
 
     # Não utilizadas ...
     # ibge_functions.Profissoes_Cursos_Masculino_Feminino_100()  
@@ -146,8 +141,8 @@ if fase == 33:
     #  Funções que faltam ...
     #  1-  Gráfico dos gêneros separados por clusters
        # https://colab.research.google.com/drive/1znpX4cXQTDgCsiZYS9kNl1UbgL3RudAB?authuser=1
-    ################# -------------------------
-    ibge_functions.fill_cluster_column_Genero()
+    ################# -------------------------    ibge_functions.fill_cluster_column_Genero()
+    ibge_functions_results.separate_clusters_Genero()
     #  2-  Profissões desequilibradas 
        # - Profissões desequilibradas - Pontos Selecionados(Grandes Desloamentos) 
        # - Profissões desequilibradas - Quais as profissões onde homens e mulheres estão em clusters diferentes?

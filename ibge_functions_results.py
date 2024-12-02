@@ -2113,6 +2113,19 @@ def separate_clusters():
     cluster1.to_csv('graficos/Resultados_T_Filtrados_Kmeans3_Idade_Cluster1.csv', index=False)
     cluster2.to_csv('graficos/Resultados_T_Filtrados_Kmeans3_Idade_Cluster2.csv', index=False)
 
+def separate_clusters_Genero():
+    file_path = 'graficos/Resultados_T_Filtrados_Kmeans3_T_Preenchido.csv'
+    df = pd.read_csv(file_path)
+    
+    cluster0 = df[df['Cluster'] == 0]
+    cluster1 = df[df['Cluster'] == 1]
+    cluster2 = df[df['Cluster'] == 2]
+    
+    cluster0.to_csv('graficos/Resultados_T_Filtrados_Kmeans3_T_Preenchido_Cluster0.csv', index=False)
+    cluster1.to_csv('graficos/Resultados_T_Filtrados_Kmeans3_T_Preenchido_Cluster1.csv', index=False)
+    cluster2.to_csv('graficos/Resultados_T_Filtrados_Kmeans3_T_Preenchido_Cluster2.csv', index=False)
+
+
 def Kmeans3_T_Grafico_Idade(path2,name3,cluster):  
     if cluster==0:
         save_results_to = 'graficos/'
