@@ -146,7 +146,8 @@ if fase == 33:
     #  Funções que faltam ...
     #  1-  Gráfico dos gêneros separados por clusters
        # https://colab.research.google.com/drive/1znpX4cXQTDgCsiZYS9kNl1UbgL3RudAB?authuser=1
-    ################# -------------------------    ibge_functions.fill_cluster_column_Genero()
+    ################# -------------------------    
+    ibge_functions.fill_cluster_column_Genero()
     ibge_functions_results.separate_clusters_Genero()
     #  2-  Profissões desequilibradas 
        # - Profissões desequilibradas - Pontos Selecionados(Grandes Desloamentos) 
