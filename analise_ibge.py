@@ -120,15 +120,20 @@ if fase == 32:
     pass 
 if fase == 33:   
     ##QP3
-    ################# -------------------------        ibge_functions.Ida_Volta_Masculino_Feminino_100()
-    ################# -------------------------        ibge_functions.Tabela_Ida_Volta_Masculino_Feminino_100()
+    ################# -------------------------        
+    ibge_functions.Ida_Volta_Masculino_Feminino_100()
+    ################# -------------------------        
+    ibge_functions.Tabela_Ida_Volta_Masculino_Feminino_100()
     # Funciona, mas salva csvs. Comentei para usar como dataframes!
     # ibge_functions.PlotOriginal_AdicionaColunaGenero_100()
-    ################# -------------------------        ibge_functions.Juntar_10Porcento_Genero()
-    ################# -------------------------        ibge_functions_results.Filtrar_Tabela_10Porcento_Genero()
+    ################# -------------------------        
+    ibge_functions.Juntar_10Porcento_Genero()
+    ################# -------------------------        
+    ibge_functions_results.Filtrar_Tabela_10Porcento_Genero()
     # geração do gráfico: 
     # - Pontos originais, masculinos e femininos (10%-Visualização dos três gráficos - Genero - Kmeans3)
-    ################# -------------------------         ibge_functions_results.Kmeans3_T_Grafico_Genero()
+    ################# -------------------------         
+    ibge_functions_results.Kmeans3_T_Grafico_Genero()
 
     # Não utilizadas ...
     # ibge_functions.Profissoes_Cursos_Masculino_Feminino_100()  
@@ -141,8 +146,10 @@ if fase == 33:
     #  Funções que faltam ...
     #  1-  Gráfico dos gêneros separados por clusters
        # https://colab.research.google.com/drive/1znpX4cXQTDgCsiZYS9kNl1UbgL3RudAB?authuser=1
-    ################# -------------------------        ibge_functions.fill_cluster_column_Genero()
-     ################# -------------------------       ibge_functions_results.separate_clusters_Genero()
+    ################# -------------------------        
+    ibge_functions.fill_cluster_column_Genero()
+    ################# -------------------------       
+    ibge_functions_results.separate_clusters_Genero()
     ibge_functions.Kmeans3_T_Grafico_Genero_Clusters()
     #  2-  Profissões desequilibradas 
        # - Profissões desequilibradas - Pontos Selecionados(Grandes Desloamentos) 
@@ -162,20 +169,20 @@ if fase == 34:
     # Funciona, mas salva csvs. Comentei para usar como dataframes!
     # ibge_functions.Filtro_Idade()
 
-    ################# ------------------------- 
+    ################# -------------------------     
     ibge_functions.Ida_Volta_Idade()
-    ################# ------------------------- 
+    ################# -------------------------     
     ibge_functions.Tabela_Ida_Volta_Idade()   
     # Funciona, mas salva csvs. Comentei para usar como dataframes! 
     # ibge_functions.Adiciona_Coluna_Idade()     
-    ################# ------------------------- 
+    ################# -------------------------     
     ibge_functions_results.Juntar_10Porcento_Idade() 
     ################# ------------------------- 
     ibge_functions_results.Filtrar_Tabela_10Porcento_Idade() 
     # Separar manualmente os clusters e depois rodar o codigo abaixo para gerar os gráficos de idades separados os clusters...
-    ################# ------------------------- 
+    ################# -------------------------     
     ibge_functions.fill_cluster_column()
-    ################# ------------------------- 
+    ################# -------------------------     
     ibge_functions_results.separate_clusters()
     ibge_functions.Kmeans3_T_Grafico_Idade()       
     
@@ -185,7 +192,7 @@ if fase == 34:
        # - Cluster 2
      # Okay # 2- Idade - Selecionar somente os que tem mais de 80 anos
        # - Aposentados -  Formados em Medicina e com CBO (2211)  Médicos Gerais
-    ################# ------------------------- 
+    ################# -------------------------     
     ibge_functions.Aposentados_maior80()
      # 3- Idade - Casos Administrativos: Descobrir quando alguém vira gerente gestor
        # - Olhar todos os médicos e ver na carreira deles, quando começam a pegar o código 1. Comparar com: 1342 - 1345 - 1348 - 1349
