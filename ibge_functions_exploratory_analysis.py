@@ -341,10 +341,24 @@ def Empregabilidade_Salario(path1,name1,path2,name2):
     # Configurar o gráfico de dispersão usando as colunas 'Ida', 'Volta' e 'Cluster'
     plt.figure(figsize=(6, 4))    
 
-    # Criar o scatter plot para os clusters
-    for cluster in data['Cluster'].unique():
+    # Lista de cores para os clusters
+    cores_personalizadas = ['red', 'blue', 'green']  # Adicione mais cores, se necessário
+
+    # Ordenar os clusters antes de criar o gráfico
+    clusters_ordenados = sorted(filtered_data['Cluster'].unique())
+
+
+    # Criar o scatter plot para os clusters com cores personalizadas
+    for i, cluster in enumerate(clusters_ordenados):
         cluster_data = filtered_data[data['Cluster'] == cluster]
-        plt.scatter(cluster_data['Ida'], cluster_data['Volta'], label=f'Cluster {int(cluster)}')
+        plt.scatter(
+            cluster_data['Ida'], 
+            cluster_data['Volta'], 
+            label=f'Cluster {int(cluster)}', 
+            marker='*',  # Define o marcador como estrela
+            color=cores_personalizadas[i % len(cores_personalizadas)],  # Escolhe a cor da lista
+            s=100  # Define o tamanho dos marcadores
+        )    
 
     # Personalizar o gráfico
     plt.title('Cursos e Profissões que mudam de Clusters')
