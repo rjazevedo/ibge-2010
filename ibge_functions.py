@@ -212,7 +212,8 @@ def ibge_corte_CBO():
     name1 = ibge_variable.names(6)
 
     # Usar essa função para obter os primeiros plots com porcentagem ( 10%)     
-    # ibge_functions_descriptive_analysis.relacionamentos_fortes_naofortes_cursos_profissoes_plot10(path,name,path1,name1)
+    # 
+    ibge_functions_descriptive_analysis.relacionamentos_fortes_naofortes_cursos_profissoes_plot10(path,name,path1,name1)
     return
 
 def ibge_idas_voltas_cursos_profissoes():

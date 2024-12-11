@@ -1270,8 +1270,19 @@ def relacionamentos_fortes_naofortes_cursos_profissoes_plot10(path,name,path1,na
     csv_PivotTableFinal =  os.path.join(path2[0],name2[0]) #Pivo Table Final
 
     CursosCenso = ibge_cursos_filter(path1[0],name1[2])
-    curso_num  = float(CursosCenso.curso_num.iloc[43])
+    # 
+    curso_num  = float(CursosCenso.curso_num.iloc[43]) # Ciência da Computação
+    # 
     curso_nome = CursosCenso.curso_nome.iloc[43]
+    # curso_num  = float(CursosCenso.curso_num.iloc[19]) #Psicologia
+    # curso_nome = CursosCenso.curso_nome.iloc[19]
+    # curso_num  = float(CursosCenso.curso_num.iloc[68]) #Odontologia
+    # curso_nome = CursosCenso.curso_nome.iloc[68]
+    # curso_num  = float(CursosCenso.curso_num.iloc[2])  #FORMAÇÃO DE PROFESSORES DE EDUCAÇÃO INFANTIL
+    # curso_nome = CursosCenso.curso_nome.iloc[2]
+    curso_num  = float(CursosCenso.curso_num.iloc[70]) # 
+    curso_nome = CursosCenso.curso_nome.iloc[70]
+
     titulo10 =  "Curso:  " +  str(curso_num) + ": " + curso_nome + " - Os 10 maiores"
     # titulo3  =  "Curso:  " +  str(curso_num) + ": " + curso_nome + " - Os 3 maiores"
     titulo3  =  "Course:  " +  str(curso_num) + ": " + curso_nome    
@@ -1283,7 +1294,7 @@ def relacionamentos_fortes_naofortes_cursos_profissoes_plot10(path,name,path1,na
     # Validação para chamar somente os CBOs da Familia 1 e 2
     # Retorna os três primeiros CBOs, os três primeiros CBOs acompanhado dos respectivos nomes, o numero do Curso, e o nome do Curso
     # save_results_to
-    primeirosCbos,primeirosCbos_Nome,Porcentagens,CURSO_NUM,CURSO_NOME=CBOs_Curso_v6(csv_estado,csv_CBO,curso_num,curso_nome,titulo10,titulo3,0.1,save_results_to)
+    primeirosCbos,primeirosCbos_Nome,Porcentagens,CURSO_NUM,CURSO_NOME=CBOs_Curso_v6(csv_estado,csv_CBO,curso_num,curso_nome,titulo10,titulo3,0.07,save_results_to)
     # CBOs_Curso_v6(csv_estado,csv_CBO,curso_num,curso_nome,titulo10,titulo3,0.1,save_results_to)
     # NaoGraduados_PivotTable_2(primeirosCbos, csv_PivotTableFinal)
     primeirosCbos,NaoGraduados,Graduados_Nao,Graduados = NaoGraduados_PivotTable_2(primeirosCbos, csv_PivotTableFinal)
@@ -1300,7 +1311,7 @@ def relacionamentos_fortes_naofortes_cursos_profissoes_plot10(path,name,path1,na
             # Define forte ou Fraco via Código
             # Plota Não-Graduados em Cor Diferente - Verde
             # save_results_to
-            CBO,Curso,tresprimeirosCursos,intensidade,fig,string,cursos_vol, nomes_vol, porcentagens_vol=Cursos_CBO_14_10(csv_estado,csv_CBO,csv_CURSOS,primeirosCbos[i],titulo3,NaoGraduados[i],curso_num,curso_nome,primeirosCbos_Nome,i,0.1)
+            CBO,Curso,tresprimeirosCursos,intensidade,fig,string,cursos_vol, nomes_vol, porcentagens_vol=Cursos_CBO_14_10(csv_estado,csv_CBO,csv_CURSOS,primeirosCbos[i],titulo3,NaoGraduados[i],curso_num,curso_nome,primeirosCbos_Nome,i,0.07)
             Intensidade.append(intensidade)
             Porcentagens_vol.append(porcentagens_vol)
             CBO_vol.append(CBO)
@@ -1311,7 +1322,7 @@ def relacionamentos_fortes_naofortes_cursos_profissoes_plot10(path,name,path1,na
             # Define forte ou Fraco via Código
             # Plota Não-Graduados em Cor Diferente - Verde
             # save_results_to
-            CBO,Curso,tresprimeirosCursos,intensidade,fig,string,cursos_vol, nomes_vol, porcentagens_vol=Cursos_CBO_13_10(csv_estado,csv_CBO,csv_CURSOS,primeirosCbos[i],titulo3,NaoGraduados[i],Graduados_Nao[i],curso_num,curso_nome,primeirosCbos_Nome,i,0.1,save_results_to)
+            CBO,Curso,tresprimeirosCursos,intensidade,fig,string,cursos_vol, nomes_vol, porcentagens_vol=Cursos_CBO_13_10(csv_estado,csv_CBO,csv_CURSOS,primeirosCbos[i],titulo3,NaoGraduados[i],Graduados_Nao[i],curso_num,curso_nome,primeirosCbos_Nome,i,0.07,save_results_to)
             Intensidade.append(intensidade)
             Porcentagens_vol.append(porcentagens_vol)
             CBO_vol.append(CBO)
