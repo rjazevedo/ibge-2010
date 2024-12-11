@@ -314,3 +314,52 @@ def Profissoes_Cursos(path1,name1,path2,name2): # https://colab.research.google.
     # Kmeans3_T
     Kmeans3_T.to_csv(save_results_to +'Kmeans3_T.csv')
     return
+
+def Empregabilidade_Salario(path1,name1,path2,name2):
+    import pandas as pd
+    import numpy as np
+    import matplotlib.pyplot as plt
+    from sklearn.cluster import KMeans
+    import pandas as pd
+    import numpy as np
+    from sklearn.cluster import KMeans
+
+    # Carregar o arquivo CSV
+    file_path = "graficos/Kmeans3_T.csv"  # Substitua pelo caminho do arquivo
+    data = pd.read_csv(file_path)
+    save_results_to = 'graficos/' 
+    
+    # Filtrar as linhas com CR: 214, 342, 520, 721, 726
+    cr_values = [214, 342, 520, 721, 726]
+    filtered_data = data[data['Curso'].isin(cr_values)]
+       
+    # Salvar o novo arquivo
+    filtered_file_path = save_results_to + 'Kmeans3_T.csv_Empregabilidade.csv'
+    filtered_data.to_csv(filtered_file_path, index=False)
+    
+   
+    # Configurar o gráfico de dispersão usando as colunas 'Ida', 'Volta' e 'Cluster'
+    plt.figure(figsize=(6, 4))    
+
+    # Criar o scatter plot para os clusters
+    for cluster in data['Cluster'].unique():
+        cluster_data = filtered_data[data['Cluster'] == cluster]
+        plt.scatter(cluster_data['Ida'], cluster_data['Volta'], label=f'Cluster {int(cluster)}')
+
+    # Personalizar o gráfico
+    plt.title('Cursos e Profissões que mudam de Clusters')
+    plt.xlabel('Cursos')
+    plt.ylabel('Profissões')
+    plt.ylim(0, 100) # definir limite do eixo
+    plt.xlim(0, 100) # definir limite do eixo
+    plt.legend(title="Clusters", loc='lower right')
+    plt.grid()
+
+    # Mostrar o gráfico
+    # plt.show()
+    string1 = "Cursos e Profissões que mudam de Clusters" +".png"
+    save_results_to = 'graficos/'  
+    plt.savefig(save_results_to + string1)  
+
+    return
+

@@ -248,7 +248,13 @@ def Profissoes_Cursos():
     ibge_functions_exploratory_analysis.Profissoes_Cursos(path1,name1,path2,name2)    
     return
 
-
+def Empregabilidade_Salario():
+    path1 = ibge_variable.paths(12)
+    name1 = ibge_variable.names(6)
+    path2 = ibge_variable.paths(13)
+    name2 = ibge_variable.names(9)
+    ibge_functions_exploratory_analysis.Empregabilidade_Salario(path1,name1,path2,name2)    
+    return
 
 # Fase 30: Resultados da Análise ...   
 
@@ -282,7 +288,7 @@ def Profissoes_Cursos_Masculino_Feminino():
     name2 = ibge_variable.names(9)
     ibge_functions_results.Profissoes_Cursos_Masculino_Feminino(path1,name1,path2,name2,'F')
     ibge_functions_results.Profissoes_Cursos_Masculino_Feminino(path1,name1,path2,name2,'M')
-    return
+    return  
 
 # Fase 31
 # ...

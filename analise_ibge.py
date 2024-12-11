@@ -17,6 +17,7 @@ from ibgeparser.microdados import Microdados
 from ibgeparser.enums import Anos, Estados, Modalidades
 #import original.ibge_functions
 import ibge_functions
+import ibge_functions_descriptive_analysis
 import ibge_variable
 import ibge_functions_preprocessing
 import ibge_functions_results
@@ -99,7 +100,9 @@ if fase == 20:  #QP1
     # - clusterização com k=3, 
     # - geração do gráfico K-Means com K=3 (10% - Todos os Cursos - Clusterização) 
     # - geração do arquivo Kmeans3_T.csv   
-    ibge_functions.Profissoes_Cursos()     
+    ################## ------------------------ ibge_functions.Profissoes_Cursos()    
+    ## Empregabilidade x Salario
+    ibge_functions.Empregabilidade_Salario() 
     pass
 
 # Fase 30: Resultados da Análise ...
@@ -114,7 +117,7 @@ if fase == 30:  #QP2
     ## Geração dos gráficos:
     ##  - Profissões e Cursos-Masculino (10%-Cursos e Profissões do Censo-Masculino)
     ##  - Profissões e Cursos-Feminino  (10%-Cursos e Profissões do Censo-Feminino)   
-    ibge_functions.Profissoes_Cursos_Masculino_Feminino() 
+    ibge_functions.Profissoes_Cursos_Masculino_Feminino()     
     pass
 
 if fase == 31:
