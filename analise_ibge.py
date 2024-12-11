@@ -100,7 +100,8 @@ if fase == 20:  #QP1
     # - clusterização com k=3, 
     # - geração do gráfico K-Means com K=3 (10% - Todos os Cursos - Clusterização) 
     # - geração do arquivo Kmeans3_T.csv   
-    ################## ------------------------ ibge_functions.Profissoes_Cursos()    
+    ################## ------------------------ 
+    ibge_functions.Profissoes_Cursos()    
     ## Empregabilidade x Salario
     ibge_functions.Empregabilidade_Salario() 
     pass

@@ -348,41 +348,53 @@ def Empregabilidade_Salario(path1,name1,path2,name2):
     cr_values = [214, 342, 520, 721, 726]
     filtered_data = data[data['Curso'].isin(cr_values)]
 
-
+    ##### -------------------------------- Gráfico separado por cursos 
     # Configurar o gráfico de dispersão usando as colunas 'Ida', 'Volta' e 'Cluster'
     plt.figure(figsize=(6, 4))    
 
-    # Lista de cores para os clusters
-    cores_personalizadas = ['red', 'blue', 'green']  # Adicione mais cores, se necessário
+    # # Lista de cores para os clusters
+    cores_personalizadas = ['red', 'blue', 'green', 'black', 'pink']  # Adicione mais cores, se necessário
 
-    # Ordenar os clusters antes de criar o gráfico
-    clusters_ordenados = sorted(filtered_data['Cluster'].unique())
+    # # Ordenar os clusters antes de criar o gráfico
+    clusters_ordenados = sorted(filtered_data['Curso'].unique())
 
 
-    # Criar o scatter plot para os clusters com cores personalizadas
+    # # Criar o scatter plot para os clusters com cores personalizadas
     for i, cluster in enumerate(clusters_ordenados):
-         cluster_data = filtered_data[data['Cluster'] == cluster]
-         plt.scatter(
-             cluster_data['Ida'], 
-             cluster_data['Volta'], 
-             label=f'Cluster {int(cluster)}', 
-             marker='*',  # Define o marcador como estrela
-             color=cores_personalizadas[i % len(cores_personalizadas)],  # Escolhe a cor da lista
-            #  s=100  # Define o tamanho dos marcadores
-            s=cluster_data['Empregabilidade'] * 20,  # Define o tamanho dos pontos com base na empregabilidade (ajuste o fator de multiplicação conforme necessário)
-         )   
+          cluster_data = filtered_data[data['Curso'] == cluster]
+          plt.scatter(
+              cluster_data['Ida'], 
+              cluster_data['Volta'], 
+              label=f'Curso {int(cluster)}', 
+              marker='.',  # Define o marcador como estrela
+              color=cores_personalizadas[i % len(cores_personalizadas)],  # Escolhe a cor da lista
+             #  s=100  # Define o tamanho dos marcadores
+             s=cluster_data['Empregabilidade'] * 20,  # Define o tamanho dos pontos com base na empregabilidade (ajuste o fator de multiplicação conforme necessário)
+          )     
 
+    # ##### -------------------------------- Gráfico separado por Clusters
+    # # Configurar o gráfico de dispersão usando as colunas 'Ida', 'Volta' e 'Cluster'
+    # plt.figure(figsize=(6, 4))    
+
+    # # Lista de cores para os clusters
+    # cores_personalizadas = ['red', 'blue', 'green', 'black', 'pink']  # Adicione mais cores, se necessário
+
+    # # Ordenar os clusters antes de criar o gráfico
+    # clusters_ordenados = sorted(filtered_data['Cluster'].unique())
+
+
+    # # Criar o scatter plot para os clusters com cores personalizadas
     # for i, cluster in enumerate(clusters_ordenados):
-    #     cluster_data = filtered_data[data['Cluster'] == cluster]
-    #     plt.scatter(
-    #         cluster_data['Ida'], 
-    #         cluster_data['Volta'], 
-    #         label=f'Cluster {int(cluster)}', 
-    #         marker='*',  # Define o marcador como estrela
-    #         color=cores_personalizadas[i % len(cores_personalizadas)],  # Escolhe a cor da lista
+    #      cluster_data = filtered_data[data['Cluster'] == cluster]
+    #      plt.scatter(
+    #          cluster_data['Ida'], 
+    #          cluster_data['Volta'], 
+    #          label=f'Cluster {int(cluster)}', 
+    #          marker='.',  # Define o marcador como estrela
+    #          color=cores_personalizadas[i % len(cores_personalizadas)],  # Escolhe a cor da lista
+    #         #  s=100  # Define o tamanho dos marcadores
     #         s=cluster_data['Empregabilidade'] * 20,  # Define o tamanho dos pontos com base na empregabilidade (ajuste o fator de multiplicação conforme necessário)
-    #         alpha=0.6  # Transparência para melhor visualização
-    #     )     
+    #      )   
 
     # Personalizar o gráfico
     plt.title('Cursos e Profissões que mudam de Clusters')
@@ -390,7 +402,7 @@ def Empregabilidade_Salario(path1,name1,path2,name2):
     plt.ylabel('Profissões')
     plt.ylim(0, 100) # definir limite do eixo
     plt.xlim(0, 100) # definir limite do eixo
-    plt.legend(title="Clusters", loc='lower right')
+    plt.legend(title="Cursos", loc='lower right')
     plt.grid()
 
     # Mostrar o gráfico
