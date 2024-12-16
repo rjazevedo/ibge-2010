@@ -315,7 +315,134 @@ def Profissoes_Cursos(path1,name1,path2,name2): # https://colab.research.google.
     Kmeans3_T.to_csv(save_results_to +'Kmeans3_T.csv')
     return
 
-def Empregabilidade_Salario(path1,name1,path2,name2):
+def median_salario(path1,name1):
+    ##### -------------------------------- Usar um arquivo de teste para empregabilidade
+    # Carregar o arquivo CSV
+    file_path = "graficos/Kmeans3_T.csv"  # Substitua pelo caminho do arquivo
+    Kmeans3_T = pd.read_csv(file_path)
+    save_results_to = 'graficos/' 
+    
+    #Kmeans3_T = Kmeans3_T.drop(columns=['Unnamed: 0'])
+
+    Final = pd.read_csv("processados/CSVs_ArquivoFinalGraduados/Brasil_Graduados.csv", sep=",")
+    #Final = Final.drop(columns=['Unnamed: 0'])
+
+    #Remove Zeros
+    FinalSemZero = Final.loc[((Final['Valor_rend_bruto_M']!= 0))]
+    FinalSemZero = Final.loc[((Final['Qtdade_Salario']> 0.0))]
+
+    FinalSemZero.shape
+    FinalSemZero = FinalSemZero.reset_index(drop=True)
+
+    # Filtra Zeros
+    FinalZero = Final[(Final['Valor_rend_bruto_M'] == 0)]
+    FinalZero.shape
+    FinalZero = Final[(Final['Qtdade_Salario'] == 0)]
+    FinalZero.shape
+
+    # Adicionando os campos Min e Max
+    resultados_T=[]
+    minvalue =""
+    maxvalue =""
+    medianavalue = ""
+    for i in range(len(Kmeans3_T['Curso'])):
+        tupla=(Kmeans3_T['Ida'][i],Kmeans3_T['Volta'][i],Kmeans3_T['Cluster'][i], Kmeans3_T['Curso'][i],Kmeans3_T['Curso_Nome'][i],Kmeans3_T['Cbo'][i],Kmeans3_T['Cbo_Nome'][i],minvalue,maxvalue,medianavalue)
+        resultados_T.append(tupla)
+    #...
+    Kmeans3_Sal= pd.DataFrame(resultados_T)
+    #...
+    dict = {
+            0:"Ida",
+            1:"Volta",
+            2:"Cluster",
+            3:"Curso",
+            4:"Curso_Nome",
+            5:"Cbo",
+            6:"Cbo_Nome",
+            7:"Max",
+            8:"Min",
+            9:"Median"
+    }
+    Kmeans3_Sal.rename(columns=dict,inplace=True)
+    #================================================================================================================================================
+     
+    # Achando Max e Min 
+    for j in range(len(Kmeans3_T)):
+        gênero                                  = []
+        Idade_em_Anos                           = []
+        Nível_instrução                         = []
+        Curso_Superior_Graduação_Código	        = []
+        Curso_Mestrado_Código                   = []
+        Curso_Doutorado_Código                  = []
+        Ocupação_Código                         = []
+        Atividade_Código                        = []
+        Valor_rend_bruto_M                      = []
+        Qtdade_Salario                          = []
+        #CNAE_Domiciliar                        = []
+        #Sal_Novo                               = []
+        QtdadeTemp                              =[]
+        for i in range(len(FinalSemZero)):
+            if (str(FinalSemZero.Ocupação_Código[i])== str(Kmeans3_T.Cbo[j])) & (str(FinalSemZero.Curso_Superior_Graduação_Código[i]) == str(Kmeans3_T.Curso[j])):
+                gênero.append(FinalSemZero.gênero[i])
+                Idade_em_Anos.append(FinalSemZero.Idade_em_Anos[i])
+                Nível_instrução.append(FinalSemZero.Nível_instrução[i])
+                Curso_Superior_Graduação_Código.append(FinalSemZero.Curso_Superior_Graduação_Código[i])
+                Curso_Mestrado_Código. append(FinalSemZero.Curso_Mestrado_Código[i])
+                Curso_Doutorado_Código.append(FinalSemZero.Curso_Doutorado_Código[i])
+                Ocupação_Código.append(FinalSemZero.Ocupação_Código[i])
+                Atividade_Código.append(FinalSemZero.Atividade_Código[i])
+                Valor_rend_bruto_M.append(FinalSemZero.Valor_rend_bruto_M[i])
+                Qtdade_Salario.append(FinalSemZero.Qtdade_Salario[i]/100)
+                #QtdadeTemp = FinalSemZero.Qtdade_Salario[i]/100
+                #if(QtdadeTemp >=1):
+                #   Qtdade_Salario.append(QtdadeTemp)
+                #CNAE_Domiciliar.append(Final.CNAE-Domiciliar[i])
+                #Sal_Novo.append(FinalSemZero.Valor_rend_bruto_M[i]/FinalSemZero.Qtdade_Salario[i])
+        #============================================================================================================================================================
+        Final_Filter=[]
+        for i in range(len(Curso_Superior_Graduação_Código)):
+            #tupla=(gênero[i],Idade_em_Anos[i],Nível_instrução[i],Curso_Superior_Graduação_Código[i],Curso_Mestrado_Código[i],Curso_Doutorado_Código[i],Ocupação_Código[i],Atividade_Código[i],Valor_rend_bruto_M[i],Qtdade_Salario[i],CNAE_Domiciliar[i])
+            #tupla=(gênero[i],Idade_em_Anos[i],Nível_instrução[i],Curso_Superior_Graduação_Código[i],Curso_Mestrado_Código[i],Curso_Doutorado_Código[i],Ocupação_Código[i],Atividade_Código[i],Valor_rend_bruto_M[i],Qtdade_Salario[i],Sal_Novo[i])
+            tupla=(gênero[i],Idade_em_Anos[i],Nível_instrução[i],Curso_Superior_Graduação_Código[i],Curso_Mestrado_Código[i],Curso_Doutorado_Código[i],Ocupação_Código[i],Atividade_Código[i],Valor_rend_bruto_M[i],Qtdade_Salario[i])
+            Final_Filter.append(tupla)
+        #===============================================================================================================================================
+        Final2 = pd.DataFrame(Final_Filter)
+        #Final2.shape
+        dict = {
+        0:"gênero",
+        1:"Idade_em_Anos",
+        2:"Nível_instrução",
+        3:"Curso_Superior_Graduação_Código",
+        4:"Curso_Mestrado_Código",
+        5:"Curso_Doutorado_Código",
+        6:"Ocupação_Código",
+        7:"Atividade_Código",
+        8:"Valor_rend_bruto_M",
+        9:"Qtdade_Salario"
+        #10:"Sal_Novo"
+        }
+        Final2.rename(columns=dict,inplace=True)
+        #===============================================================================================================================================
+        #Final2.head(2)
+        #===============================================================================================================================================
+        for i in range(len(Kmeans3_Sal)):
+            if (str(Kmeans3_Sal.Cbo[i])== str(Kmeans3_T.Cbo[j])) & (str(Kmeans3_Sal.Curso[i]) == str(Kmeans3_T.Curso[j])):
+                #Kmeans5_Sal.Max[i] = Final2['Valor_rend_bruto_M'].max()
+                #Kmeans5_Sal.Min[i] = Final2['Valor_rend_bruto_M'].min()
+                #Kmeans5_Sal.Max[i] = round(Final2['Sal_Novo'].max(),0)
+                #Kmeans5_Sal.Min[i] = round(Final2['Sal_Novo'].min(),0)
+                Kmeans3_Sal.Max[i] = round(Final2['Qtdade_Salario'].max(),0)
+                Kmeans3_Sal.Min[i] = Final2['Qtdade_Salario'].min()
+                Kmeans3_Sal.Median[i] = Final2['Qtdade_Salario'].median()
+                break
+   
+    Kmeans3_Sal2 = Kmeans3_Sal.sort_values(["Cluster","Median" ], ascending=[True, True])
+    Kmeans3_Sal2(save_results_to +'Kmeans3_T_Empregabilidade.csv')   
+    # Kmeans3_Sal2        
+        
+    return
+
+def Empregabilidade_Salario_teste(path1,name1,path2,name2):
     import pandas as pd
     import numpy as np
     import matplotlib.pyplot as plt
@@ -340,7 +467,7 @@ def Empregabilidade_Salario(path1,name1,path2,name2):
     
     ##### -------------------------------- Usar um arquivo de teste para empregabilidade
     # Carregar o arquivo CSV
-    file_path = "graficos/Kmeans3_T.csv_Empregabilidade.csv"  # Substitua pelo caminho do arquivo
+    file_path = "graficos/Kmeans3_T_Empregabilidade.csv"  # Substitua pelo caminho do arquivo
     data = pd.read_csv(file_path)
     save_results_to = 'graficos/' 
     

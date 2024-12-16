@@ -248,12 +248,18 @@ def Profissoes_Cursos():
     ibge_functions_exploratory_analysis.Profissoes_Cursos(path1,name1,path2,name2)    
     return
 
-def Empregabilidade_Salario():
+def Empregabilidade_Salario_teste():
     path1 = ibge_variable.paths(12)
     name1 = ibge_variable.names(6)
     path2 = ibge_variable.paths(13)
     name2 = ibge_variable.names(9)
-    ibge_functions_exploratory_analysis.Empregabilidade_Salario(path1,name1,path2,name2)    
+    ibge_functions_exploratory_analysis.Empregabilidade_Salario_teste(path1,name1,path2,name2)    
+    return
+
+def median_salario():
+    path2 = ibge_variable.paths(13)
+    name2 = ibge_variable.names(9) #5
+    ibge_functions_exploratory_analysis.median_salario(path2,name2)    
     return
 
 # Fase 30: Resultados da Análise ...   

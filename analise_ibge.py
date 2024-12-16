@@ -103,7 +103,8 @@ if fase == 20:  #QP1
     ################## ------------------------ 
     ibge_functions.Profissoes_Cursos()    
     ## Empregabilidade x Salario
-    ibge_functions.Empregabilidade_Salario() 
+    ibge_functions.Empregabilidade_Salario_teste() 
+    ibge_functions.median_salario()
     pass
 
 # Fase 30: Resultados da Análise ...
