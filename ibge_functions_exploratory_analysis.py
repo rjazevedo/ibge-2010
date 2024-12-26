@@ -479,7 +479,8 @@ def Empregabilidade_Salario_teste(path1,name1,path2,name2):
     
     ##### -------------------------------- Usar um arquivo de teste para empregabilidade
     # Carregar o arquivo CSV
-    file_path = "graficos/Kmeans3_T_Empregabilidade.csv"  # Substitua pelo caminho do arquivo
+    # file_path = "graficos/Kmeans3_T_Empregabilidade.csv"  # Substitua pelo caminho do arquivo
+    file_path = "graficos/Kmeans3_T_Empregabilidade_certo.csv"  # Substitua pelo caminho do arquivo
     data = pd.read_csv(file_path)
     save_results_to = 'graficos/' 
     
@@ -508,7 +509,9 @@ def Empregabilidade_Salario_teste(path1,name1,path2,name2):
               marker='.',  # Define o marcador como estrela
               color=cores_personalizadas[i % len(cores_personalizadas)],  # Escolhe a cor da lista
              #  s=100  # Define o tamanho dos marcadores
-             s=cluster_data['Empregabilidade'] * 20,  # Define o tamanho dos pontos com base na empregabilidade (ajuste o fator de multiplicação conforme necessário)
+             #  s=cluster_data['Empregabilidade'] * 20,  # Define o tamanho dos pontos com base na empregabilidade (ajuste o fator de multiplicação conforme necessário)
+              s=cluster_data['Median'] * 20,  # Define o tamanho dos pontos com base na empregabilidade (ajuste o fator de multiplicação conforme necessário)
+
           )     
 
     # ##### -------------------------------- Gráfico separado por Clusters
@@ -546,7 +549,8 @@ def Empregabilidade_Salario_teste(path1,name1,path2,name2):
 
     # Mostrar o gráfico
     # plt.show()
-    string1 = "Cursos e Profissões que mudam de Clusters" +".png"
+    # string1 = "Cursos e Profissões que mudam de Clusters" +".png"
+    string1 = "Empregabilidade: Cursos e Profissões que mudam de Clusters" +".png"
     save_results_to = 'graficos/'  
     plt.savefig(save_results_to + string1)  
 
