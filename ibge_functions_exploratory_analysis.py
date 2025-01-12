@@ -82,7 +82,7 @@ def Profissoes_Cursos(path1,name1,path2,name2): # https://colab.research.google.
     #plt.title("10%  - Todos os Cursos - Clusterização ")
     #plt.xlabel('Cursos')
     #plt.ylabel('Profissões')
-    plt.title("10% - All Courses - Clustering")
+    # plt.title("10% - All Courses - Clustering") # Diversos  ( Explicações e correções) e Estilo de texto 
     plt.xlabel('Courses')
     plt.ylabel('Professions')
     plt.ylim(0, 100) # definir limite do eixo
@@ -92,7 +92,7 @@ def Profissoes_Cursos(path1,name1,path2,name2): # https://colab.research.google.
     plt.scatter(X.iloc[y_kmeans==0, 0], X.iloc[y_kmeans==0, 1], s=100, c='red', label ='Cluster 0', marker = '*')
     plt.scatter(X.iloc[y_kmeans==1, 0], X.iloc[y_kmeans==1, 1], s=100, c='blue', label ='Cluster 1', marker = '*')
     plt.scatter(X.iloc[y_kmeans==2, 0], X.iloc[y_kmeans==2, 1], s=100, c='green', label ='Cluster 2', marker = '*')
-    plt.scatter(kmeans.cluster_centers_[:, 0], kmeans.cluster_centers_[:, 1], s=300, c='yellow', label = 'Centroids', marker = '*')
+    # plt.scatter(kmeans.cluster_centers_[:, 0], kmeans.cluster_centers_[:, 1], s=300, c='yellow', label = 'Centroids', marker = '*') # Diversos  ( Explicações e correções) e Estilo de texto 
     plt.legend()
     # plt.show()
     # string1 = "10%  - Todos os Cursos - Clusterização " +".pdf"
