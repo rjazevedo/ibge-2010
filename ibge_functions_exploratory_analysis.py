@@ -454,7 +454,7 @@ def median_salario(path1,name1):
         
     return
 
-def Empregabilidade_Salario_teste(path1,name1,path2,name2):
+def Salarios(path1,name1,path2,name2):
     import pandas as pd
     import numpy as np
     import matplotlib.pyplot as plt

@@ -253,7 +253,7 @@ def Empregabilidade_Salario_teste():
     name1 = ibge_variable.names(6)
     path2 = ibge_variable.paths(13)
     name2 = ibge_variable.names(9)
-    ibge_functions_exploratory_analysis.Empregabilidade_Salario_teste(path1,name1,path2,name2)    
+    ibge_functions_exploratory_analysis.Salarios(path1,name1,path2,name2)    
     return
 
 def median_salario():
