@@ -449,7 +449,7 @@ def median_salario(path1,name1):
                 break
        
     Kmeans3_Sal2 = Kmeans3_Sal.sort_values(["Cluster","Median"], ascending=[True, True])
-    Kmeans3_Sal2.to_csv(save_results_to +'Kmeans3_T_Empregabilidade_certo.csv')   
+    Kmeans3_Sal2.to_csv(save_results_to +'Kmeans3_T_Salarios_certo.csv')   
     print(Kmeans3_Sal2.head(3))        
         
     return
@@ -480,7 +480,7 @@ def Salarios(path1,name1,path2,name2):
     ##### -------------------------------- Usar um arquivo de teste para empregabilidade
     # Carregar o arquivo CSV
     # file_path = "graficos/Kmeans3_T_Empregabilidade.csv"  # Substitua pelo caminho do arquivo
-    file_path = "graficos/Kmeans3_T_Empregabilidade_certo.csv"  # Substitua pelo caminho do arquivo
+    file_path = "graficos/Kmeans3_T_Salarios_certo.csv"  # Substitua pelo caminho do arquivo
     data = pd.read_csv(file_path)
     save_results_to = 'graficos/' 
     
@@ -550,7 +550,7 @@ def Salarios(path1,name1,path2,name2):
     # Mostrar o gráfico
     # plt.show()
     # string1 = "Cursos e Profissões que mudam de Clusters" +".png"
-    string1 = "Empregabilidade: Cursos e Profissões que mudam de Clusters" +".png"
+    string1 = "Salários: Cursos e Profissões que mudam de Clusters" +".png"
     save_results_to = 'graficos/'  
     plt.savefig(save_results_to + string1)  
 
