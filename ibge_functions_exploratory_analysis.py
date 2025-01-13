@@ -315,6 +315,27 @@ def Profissoes_Cursos(path1,name1,path2,name2): # https://colab.research.google.
     Kmeans3_T.to_csv(save_results_to +'Kmeans3_T.csv')
     return
 
+def Soma_PivotTable(path1,name1):
+    ##### -------------------------------- Usar um arquivo de teste para empregabilidade
+    # Carregar o arquivo CSV
+    file_path = "graficos/Kmeans3_T.csv"  # Substitua pelo caminho do arquivo
+    Kmeans3_T = pd.read_csv(file_path)
+    save_results_to = 'graficos/' 
+    
+    #Kmeans3_T = Kmeans3_T.drop(columns=['Unnamed: 0'])
+
+    Pivot = pd.read_csv("processados/CSVs_PivotTableFinal/Brasil_PivotFinal.csv", sep=",")
+    # Pivot = Pivot.drop(columns=['Unnamed: 0'])
+    
+    # Somar as colunas 1, 2, 3, 4, 5 para cada ocupação
+    Pivot['Soma'] = Pivot.iloc[:, 1:6].sum(axis=1)
+    
+    # Gerar um novo arquivo somente com as ocupações e a soma
+    novo_arquivo = Pivot[['Ocupação_Código', 'Soma']]
+    novo_arquivo.to_csv("processados/CSVs_PivotTableFinal/Soma_Ocupacao.csv", index=False)
+    
+    return    
+
 def median_salario(path1,name1):
     ##### -------------------------------- Usar um arquivo de teste para empregabilidade
     # Carregar o arquivo CSV

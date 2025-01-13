@@ -262,8 +262,13 @@ def median_salario():
     ibge_functions_exploratory_analysis.median_salario(path2,name2)    
     return
 
-# Fase 30: Resultados da Análise ...   
+def Soma_PivotTable():
+    path2 = ibge_variable.paths(13)
+    name2 = ibge_variable.names(9)
+    ibge_functions_exploratory_analysis.Soma_PivotTable(path2,name2)    
+    return
 
+# Fase 30: Resultados da Análise ...   
 def Filtro_Masculino_Feminino():
     path = ibge_variable.paths(11)
     name = ibge_variable.names(7)
