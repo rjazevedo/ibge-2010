@@ -106,6 +106,7 @@ if fase == 20:  #QP1
     # ibge_functions.median_salario()  
     # ibge_functions.Salarios() 
     ibge_functions.Soma_PivotTable()
+    ibge_functions.Coluna_Empregabilidade()
     pass
 
 # Fase 30: Resultados da Análise ...

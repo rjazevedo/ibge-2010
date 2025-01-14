@@ -333,8 +333,27 @@ def Soma_PivotTable(path1,name1):
     # Gerar um novo arquivo somente com as ocupações e a soma
     novo_arquivo = Pivot[['Ocupação_Código', 'Soma']]
     novo_arquivo.to_csv("processados/CSVs_PivotTableFinal/Soma_Ocupacao.csv", index=False)
-    
     return    
+
+def Coluna_Empregabilidade(path2,name2):
+    ##### -------------------------------- Usar um arquivo de teste para empregabilidade
+    # Carregar o arquivo CSV
+    file_path = "graficos/Kmeans3_T.csv"  # Substitua pelo caminho do arquivo
+    Kmeans3_T = pd.read_csv(file_path)
+    save_results_to = 'graficos/' 
+    
+    #Kmeans3_T = Kmeans3_T.drop(columns=['Unnamed: 0'])
+
+    Empregabilidade = pd.read_csv("processados/CSVs_PivotTableFinal/Soma_Ocupacao.csv", sep=",")
+    # Pivot = Pivot.drop(columns=['Unnamed: 0'])
+    
+    # Juntar as colunas de Kmeans3_T e a coluna Soma de Empregabilidade
+    Kmeans3_T['Soma_Empregabilidade'] = Empregabilidade['Soma']
+    
+    # Salvar o novo arquivo
+    novo_arquivo = "graficos/Kmeans3_T_Empregabilidade_teste.csv"
+    Kmeans3_T.to_csv(novo_arquivo, index=False)    
+    return
 
 def median_salario(path1,name1):
     ##### -------------------------------- Usar um arquivo de teste para empregabilidade
