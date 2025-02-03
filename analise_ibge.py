@@ -102,14 +102,14 @@ if fase == 20:  #QP1
     # - geração do gráfico K-Means com K=3 (10% - Todos os Cursos - Clusterização) 
     # - geração do arquivo Kmeans3_T.csv   
     ################## ------------------------ 
-    ibge_functions.Profissoes_Cursos()    
+    # ibge_functions.Profissoes_Cursos()    
     # ## Empregabilidade x Salario
-    ibge_functions.median_salario()  
-    ibge_functions.Salarios() 
+    # ibge_functions.median_salario()  
+    # ibge_functions.Salarios() 
 
-    ibge_functions.Soma_PivotTable()
-    ibge_functions.Coluna_Empregabilidade()
-    ibge_functions.Empregabilidade() 
+    # ibge_functions.Soma_PivotTable()
+    # ibge_functions.Coluna_Empregabilidade()
+    # ibge_functions.Empregabilidade() 
 
     ibge_functions_exploratory_analysis.plot_selected_courses()
     pass

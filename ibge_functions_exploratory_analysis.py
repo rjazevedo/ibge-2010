@@ -637,7 +637,7 @@ def plot_selected_courses():
 
     plt.xlabel('Cursos')
     plt.ylabel('Profissões')
-    plt.title('Selected Courses')
+    # plt.title('Selected Courses')
     plt.legend(loc='lower right')
     plt.ylim(0, 100) # definir limite do eixo
     plt.xlim(0, 100) # definir limite do eixo    
@@ -787,7 +787,7 @@ def Empregabilidade(path1,name1,path2,name2):
     # plt.figure(figsize=(100, 80))  # Aumentar o tamanho do gráfico
     plt.legend(title="Cursos", loc='lower right', prop={'size': 7})  # Reduzir o tamanho da legenda
     # plt.legend(markerscale=1)
-    plt.title('Cursos e Profissões que mudam de Clusters')
+    # plt.title('Empregabilidade ')
     plt.xlabel('Cursos')
     plt.ylabel('Profissões')
     plt.ylim(0, 100) # definir limite do eixo
@@ -1028,7 +1028,7 @@ def Salarios(path1,name1,path2,name2):
     #      )   
 
     # Personalizar o gráfico
-    plt.title('Cursos e Profissões que mudam de Clusters')
+    # plt.title('Salarios')
     plt.xlabel('Cursos')
     plt.ylabel('Profissões')
     plt.ylim(0, 100) # definir limite do eixo
