@@ -612,39 +612,7 @@ def Profissoes_Cursos(path1,name1,path2,name2): # https://colab.research.google.
     Kmeans3_T.to_csv(save_results_to +'Kmeans3_T.csv')
     return
 
-import pandas as pd
-import matplotlib.pyplot as plt
 
-def plot_selected_courses():
-    # Read the Kmeans3_T.csv file
-    file_path = "graficos/Kmeans3_T.csv"  # Replace with the actual file path
-    Kmeans3_T = pd.read_csv(file_path)
-    Kmeans3_T['Cluster'] = Kmeans3_T['Cluster'].astype(int)
-    Kmeans3_T['Curso'] = Kmeans3_T['Curso'].astype(int)
-
-        
-    # Filter the data for the selected courses
-    selected_courses = [214, 342, 520, 721, 726]
-    selected_data = Kmeans3_T[Kmeans3_T['Curso'].isin(selected_courses)]
-
-    # Plot the selected data
-    clusters = selected_data['Cluster'].unique()
-    colors = ['red', 'blue', 'green']
-    for cluster in clusters:
-        cluster_data = selected_data[selected_data['Cluster'] == cluster]
-        color = colors[cluster]
-        plt.scatter(cluster_data['Ida'], cluster_data['Volta'], label=f'Cluster {cluster}', marker='*', color=color)
-
-    plt.xlabel('Cursos')
-    plt.ylabel('Profissões')
-    # plt.title('Selected Courses')
-    plt.legend(loc='lower right')
-    plt.ylim(0, 100) # definir limite do eixo
-    plt.xlim(0, 100) # definir limite do eixo    
-    plt.grid()
-    plt.savefig("graficos/selected_courses_plot.png")
-    plt.show()
-   
 
 
 
@@ -1045,3 +1013,36 @@ def Salarios(path1,name1,path2,name2):
 
     return
 
+def plot_selected_courses():
+    # Read the Kmeans3_T.csv file
+    file_path = "graficos/Kmeans3_T.csv"  # Replace with the actual file path
+    Kmeans3_T = pd.read_csv(file_path)
+    Kmeans3_T['Cluster'] = Kmeans3_T['Cluster'].astype(int)
+    Kmeans3_T['Curso'] = Kmeans3_T['Curso'].astype(int)
+
+        
+    # Filter the data for the selected courses
+    selected_courses = [214, 342, 520, 721, 726]
+    selected_data = Kmeans3_T[Kmeans3_T['Curso'].isin(selected_courses)]
+
+    # Plot the selected data
+    clusters = selected_data['Cluster'].unique()
+    colors = ['red', 'blue', 'green']
+    for cluster in clusters:
+        cluster_data = selected_data[selected_data['Cluster'] == cluster]
+        color = colors[cluster]
+        plt.scatter(cluster_data['Ida'], cluster_data['Volta'], label=f'Cluster {cluster}', marker='*', color=color)
+
+    plt.xlabel('Cursos')
+    plt.ylabel('Profissões')
+    # plt.title('Selected Courses')
+    plt.legend(loc='lower right')
+    plt.ylim(0, 100) # definir limite do eixo
+    plt.xlim(0, 100) # definir limite do eixo    
+    plt.grid()
+    # plt.savefig("graficos/selected_courses_plot.png")
+    # plt.show()
+    string1 = "selected_courses_plot" +".png"
+    save_results_to = 'graficos/'  
+    plt.savefig(save_results_to + string1)  
+    return  
