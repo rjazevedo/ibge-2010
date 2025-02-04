@@ -919,6 +919,7 @@ def Salarios(path1,name1,path2,name2):
     import pandas as pd
     import numpy as np
     from sklearn.cluster import KMeans
+    import pandas as pd
 
     ##### ---------------------------------- Gerar o arquivo de empregabilidade
     # # Carregar o arquivo CSV
@@ -1046,3 +1047,108 @@ def plot_selected_courses():
     save_results_to = 'graficos/'  
     plt.savefig(save_results_to + string1)  
     return  
+
+
+
+def plot_selected_courses_1(path1,name1,path2,name2):
+    import pandas as pd
+    import numpy as np
+    import matplotlib.pyplot as plt
+    from sklearn.cluster import KMeans
+    import pandas as pd
+    import numpy as np
+    from sklearn.cluster import KMeans
+    import pandas as pd
+
+    ##### ---------------------------------- Gerar o arquivo de empregabilidade
+    # # Carregar o arquivo CSV
+    # file_path = "graficos/Kmeans3_T.csv"  # Substitua pelo caminho do arquivo
+    # data = pd.read_csv(file_path)
+    # save_results_to = 'graficos/' 
+    
+    # # Filtrar as linhas com CR: 214, 342, 520, 721, 726
+    # cr_values = [214, 342, 520, 721, 726]
+    # filtered_data = data[data['Curso'].isin(cr_values)]
+       
+    # # Salvar o novo arquivo
+    # filtered_file_path = save_results_to + 'Kmeans3_T.csv_Empregabilidade.csv'
+    # filtered_data.to_csv(filtered_file_path, index=False)
+    
+    ##### -------------------------------- Usar um arquivo de teste para empregabilidade
+    # Carregar o arquivo CSV
+    # file_path = "graficos/Kmeans3_T_Empregabilidade.csv"  # Substitua pelo caminho do arquivo
+    file_path = "graficos/Kmeans3_T_Salarios_certo.csv"  # Substitua pelo caminho do arquivo
+    data = pd.read_csv(file_path)
+    save_results_to = 'graficos/' 
+    
+    # Filtrar as linhas com CR: 214, 342, 520, 721, 726
+    cr_values = [214, 342, 520, 721, 726]
+    filtered_data = data[data['Curso'].isin(cr_values)]
+
+    ##### -------------------------------- Gráfico separado por cursos 
+    # Configurar o gráfico de dispersão usando as colunas 'Ida', 'Volta' e 'Cluster'
+    plt.figure(figsize=(6, 4))    
+
+    # # Lista de cores para os clusters
+    cores_personalizadas = ['red', 'blue', 'green', 'black', 'pink']  # Adicione mais cores, se necessário
+
+    # # Ordenar os clusters antes de criar o gráfico
+    clusters_ordenados = sorted(filtered_data['Curso'].unique())
+
+
+    # # Criar o scatter plot para os clusters com cores personalizadas
+    for i, cluster in enumerate(clusters_ordenados):
+          cluster_data = filtered_data[data['Curso'] == cluster]
+          plt.scatter(
+              cluster_data['Ida'], 
+              cluster_data['Volta'], 
+              label=f'Curso {int(cluster)}', 
+              marker='.',  # Define o marcador como estrela
+              color=cores_personalizadas[i % len(cores_personalizadas)],  # Escolhe a cor da lista
+             #  s=100  # Define o tamanho dos marcadores
+             #  s=cluster_data['Empregabilidade'] * 20,  # Define o tamanho dos pontos com base na empregabilidade (ajuste o fator de multiplicação conforme necessário)
+             #  s=cluster_data['Median'] * 20,  # Define o tamanho dos pontos com base na empregabilidade (ajuste o fator de multiplicação conforme necessário)
+              s=100 
+          )     
+
+    # ##### -------------------------------- Gráfico separado por Clusters
+    # # Configurar o gráfico de dispersão usando as colunas 'Ida', 'Volta' e 'Cluster'
+    # plt.figure(figsize=(6, 4))    
+
+    # # Lista de cores para os clusters
+    # cores_personalizadas = ['red', 'blue', 'green', 'black', 'pink']  # Adicione mais cores, se necessário
+
+    # # Ordenar os clusters antes de criar o gráfico
+    # clusters_ordenados = sorted(filtered_data['Cluster'].unique())
+
+
+    # # Criar o scatter plot para os clusters com cores personalizadas
+    # for i, cluster in enumerate(clusters_ordenados):
+    #      cluster_data = filtered_data[data['Cluster'] == cluster]
+    #      plt.scatter(
+    #          cluster_data['Ida'], 
+    #          cluster_data['Volta'], 
+    #          label=f'Cluster {int(cluster)}', 
+    #          marker='.',  # Define o marcador como estrela
+    #          color=cores_personalizadas[i % len(cores_personalizadas)],  # Escolhe a cor da lista
+    #         #  s=100  # Define o tamanho dos marcadores
+    #         s=cluster_data['Empregabilidade'] * 20,  # Define o tamanho dos pontos com base na empregabilidade (ajuste o fator de multiplicação conforme necessário)
+    #      )   
+
+    # Personalizar o gráfico
+    # plt.title('Salarios')
+    plt.xlabel('Cursos')
+    plt.ylabel('Profissões')
+    plt.ylim(0, 100) # definir limite do eixo
+    plt.xlim(0, 100) # definir limite do eixo
+    plt.legend(title="Cursos", loc='lower right')
+    plt.grid()
+
+    # Mostrar o gráfico
+    # plt.show()
+    # string1 = "Cursos e Profissões que mudam de Clusters" +".png"
+    string1 = "Cursos e Profissões que mudam de Clusters" +".png"
+    save_results_to = 'graficos/'  
+    plt.savefig(save_results_to + string1)  
+
+    return

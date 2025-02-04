@@ -264,6 +264,14 @@ def Salarios():
     ibge_functions_exploratory_analysis.Salarios(path1,name1,path2,name2)    
     return
 
+def plot_selected_courses_1():
+    path1 = ibge_variable.paths(12)
+    name1 = ibge_variable.names(6)
+    path2 = ibge_variable.paths(13)
+    name2 = ibge_variable.names(9)
+    ibge_functions_exploratory_analysis.plot_selected_courses_1(path1,name1,path2,name2)    
+    return
+
 def Empregabilidade():
     path1 = ibge_variable.paths(12)
     name1 = ibge_variable.names(6)
