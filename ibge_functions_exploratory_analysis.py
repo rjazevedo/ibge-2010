@@ -1103,7 +1103,7 @@ def plot_selected_courses_1(path1,name1,path2,name2):
               cluster_data['Ida'], 
               cluster_data['Volta'], 
               label=f'Curso {int(cluster)}', 
-              marker='.',  # Define o marcador como estrela
+              marker='*',  # Define o marcador como estrela
               color=cores_personalizadas[i % len(cores_personalizadas)],  # Escolhe a cor da lista
              #  s=100  # Define o tamanho dos marcadores
              #  s=cluster_data['Empregabilidade'] * 20,  # Define o tamanho dos pontos com base na empregabilidade (ajuste o fator de multiplicação conforme necessário)
