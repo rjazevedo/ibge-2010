@@ -74,7 +74,7 @@ if fase == 2:
     
     ibge_functions.ibge_JuntarCSVs()    
       
-    ibge_functions_preprocessing.filtrar_por_genero()    # parei aqui ...
+    ibge_functions_preprocessing.filtrar_por_genero()    
     
 # Fase 10: Essa é a primeira fase que você faz no dia a dia. Aqui você começa a fazer a análise dos dados
 # Fase 10: Análise Descritiva ... ...
