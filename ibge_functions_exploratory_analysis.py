@@ -1045,6 +1045,7 @@ def plot_selected_courses():
     # plt.show()
     string1 = "selected_courses_plot" +".png"
     save_results_to = 'graficos/'  
+    
     plt.savefig(save_results_to + string1)  
     return  
 
@@ -1150,5 +1151,165 @@ def plot_selected_courses_1(path1,name1,path2,name2):
     string1 = "Cursos e Profissões que mudam de Clusters" +".png"
     save_results_to = 'graficos/'  
     plt.savefig(save_results_to + string1)  
+
+    return
+
+def correlacao_empregabilidade_salario():   
+    
+    # import pandas as pd
+    # import matplotlib.pyplot as plt
+
+    # # Dados de empregabilidade
+    # empregabilidade_data = {
+    #     "Curso": [214.0, 214.0, 342.0, 342.0, 520.0, 520.0, 721.0, 721.0, 726.0, 726.0],
+    #     "Cbo": [2163.0, 2166.0, 2431.0, 1221.0, 2142.0, 2141.0, 2211.0, 2212.0, 2264.0, 2265.0],
+    #     "Empregabilidade": [1367.65, 172.45, 278.1, 32.7, 4084.65, 181.3, 43.3, 79.7, 59.2, 23.8]
+    # }
+
+    # # Dados de salário
+    # salario_data = {
+    #     "Curso": [214.0, 214.0, 342.0, 342.0, 520.0, 520.0, 721.0, 721.0, 726.0, 726.0],
+    #     "Cbo": [2163.0, 2166.0, 2431.0, 1221.0, 2141.0, 2142.0, 2211.0, 2212.0, 2264.0, 2265.0],
+    #     "Salario_Mediano": [2.94, 3.14, 3.92, 6.86, 8.24, 9.8, 11.76, 12.16, 2.94, 2.94]
+    # }
+
+    # # Criando dataframes
+    # df_empregabilidade = pd.DataFrame(empregabilidade_data)
+    # df_salario = pd.DataFrame(salario_data)
+
+    # # Mesclar os dataframes com base nos campos "Curso" e "Cbo"
+    # df_merged = pd.merge(df_empregabilidade, df_salario, on=["Curso", "Cbo"])
+
+    # # Criar gráfico de dispersão
+    # plt.figure(figsize=(8, 6))
+    # plt.scatter(df_merged["Empregabilidade"], df_merged["Salario_Mediano"], color="blue", alpha=0.6)
+    # plt.xlabel("Empregabilidade")
+    # plt.ylabel("Salário Mediano")
+    # plt.title("Relação entre Empregabilidade e Salário Mediano")
+    # plt.grid(True)
+
+    # # Exibir gráfico
+    # plt.show()
+    ###########################################################################################################
+    # import pandas as pd
+    # import matplotlib.pyplot as plt
+
+    # # Dados de empregabilidade
+    # empregabilidade_data = {
+    #     "Curso": [214.0, 214.0, 342.0, 342.0, 520.0, 520.0, 721.0, 721.0, 726.0, 726.0],
+    #     "Cbo": [2163.0, 2166.0, 2431.0, 1221.0, 2142.0, 2141.0, 2211.0, 2212.0, 2264.0, 2265.0],
+    #     "Empregabilidade": [1367.65, 172.45, 278.1, 32.7, 4084.65, 181.3, 43.3, 79.7, 59.2, 23.8],
+    #     "Cbo_Nome": [
+    #         "DESENHISTAS DE PRODUTOS E VESTUÁRIO",
+    #         "DESENHISTAS GRÁFICOS E DE MULTIMÍDIA",
+    #         "PROFISSIONAIS DA PUBLICIDADE",
+    #         "DIRIGENTES DE VENDAS",
+    #         "ENGENHEIROS CIVIS",
+    #         "ENGENHEIROS INDUSTRIAIS",
+    #         "MÉDICOS GERAIS",
+    #         "MÉDICOS ESPECIALISTAS",
+    #         "FISIOTERAPEUTAS",
+    #         "DIETISTAS E NUTRICIONISTAS",
+    #     ]
+    # }
+
+    # # Dados de salário
+    # salario_data = {
+    #     "Curso": [214.0, 214.0, 342.0, 342.0, 520.0, 520.0, 721.0, 721.0, 726.0, 726.0],
+    #     "Cbo": [2163.0, 2166.0, 2431.0, 1221.0, 2141.0, 2142.0, 2211.0, 2212.0, 2264.0, 2265.0],
+    #     "Salario_Mediano": [2.94, 3.14, 3.92, 6.86, 8.24, 9.8, 11.76, 12.16, 2.94, 2.94]
+    # }
+
+    # # Criando dataframes
+    # df_empregabilidade = pd.DataFrame(empregabilidade_data)
+    # df_salario = pd.DataFrame(salario_data)
+
+    # # Mesclar os dataframes com base nos campos "Curso" e "Cbo"
+    # df_merged = pd.merge(df_empregabilidade, df_salario, on=["Curso", "Cbo"])
+
+    # # Criar gráfico de dispersão com nomes das profissões
+    # plt.figure(figsize=(10, 6))
+    # plt.scatter(df_merged["Empregabilidade"], df_merged["Salario_Mediano"], color="blue", alpha=0.6)
+
+    # # Adicionar rótulos com os nomes das profissões
+    # for i, row in df_merged.iterrows():
+    #     plt.text(row["Empregabilidade"], row["Salario_Mediano"], row["Cbo_Nome"], fontsize=8, ha='left', va='bottom')
+
+    # plt.xlabel("Empregabilidade")
+    # plt.ylabel("Salário Mediano")
+    # plt.title("Relação entre Empregabilidade e Salário Mediano (com Nomes das Profissões)")
+    # plt.grid(True)
+
+    # # Exibir gráfico
+    # plt.show()
+    ###########################################################################################################################
+    import pandas as pd
+    import matplotlib.pyplot as plt
+    import numpy as np
+    
+    # # Dados de empregabilidade
+    empregabilidade_data = {
+         "Curso": [214.0, 214.0, 342.0, 342.0, 520.0, 520.0, 721.0, 721.0, 726.0, 726.0],
+         "Cbo": [2163.0, 2166.0, 2431.0, 1221.0, 2142.0, 2141.0, 2211.0, 2212.0, 2264.0, 2265.0],
+         "Empregabilidade": [1367.65, 172.45, 278.1, 32.7, 4084.65, 181.3, 43.3, 79.7, 59.2, 23.8],
+         "Cbo_Nome": [
+             "DESENHISTAS DE PRODUTOS E VESTUÁRIO",
+             "DESENHISTAS GRÁFICOS E DE MULTIMÍDIA",
+             "PROFISSIONAIS DA PUBLICIDADE",
+             "DIRIGENTES DE VENDAS",
+             "ENGENHEIROS CIVIS",
+             "ENGENHEIROS INDUSTRIAIS",
+             "MÉDICOS GERAIS",
+             "MÉDICOS ESPECIALISTAS",
+             "FISIOTERAPEUTAS",
+             "DIETISTAS E NUTRICIONISTAS",
+         ]
+     }
+
+
+    # # Dados de salário
+    salario_data = {
+        "Curso": [214.0, 214.0, 342.0, 342.0, 520.0, 520.0, 721.0, 721.0, 726.0, 726.0],
+        "Cbo": [2163.0, 2166.0, 2431.0, 1221.0, 2141.0, 2142.0, 2211.0, 2212.0, 2264.0, 2265.0],
+        "Salario_Mediano": [2.94, 3.14, 3.92, 6.86, 8.24, 9.8, 11.76, 12.16, 2.94, 2.94]
+    }
+    # Criando dataframes
+    df_empregabilidade = pd.DataFrame(empregabilidade_data)
+    df_salario = pd.DataFrame(salario_data)
+
+    # Mesclar os dataframes com base nos campos "Curso" e "Cbo"
+    df_merged = pd.merge(df_empregabilidade, df_salario, on=["Curso", "Cbo"])
+
+    # Calcular correlação de Pearson
+    correlacao = np.corrcoef(df_merged["Empregabilidade"], df_merged["Salario_Mediano"])[0, 1]
+
+    # Criar gráfico de dispersão
+    plt.figure(figsize=(10, 6))
+    plt.scatter(df_merged["Empregabilidade"], df_merged["Salario_Mediano"], color="blue", alpha=0.6)
+
+    # Adicionar rótulos com os nomes das profissões
+    for i, row in df_merged.iterrows():
+        plt.text(row["Empregabilidade"], row["Salario_Mediano"], row["Cbo_Nome"], fontsize=8, ha='left', va='bottom')
+
+    # Exibir a correlação no gráfico
+    # plt.text(
+    #     max(df_merged["Empregabilidade"]) * 0.6,  # Posição X
+    #     max(df_merged["Salario_Mediano"]) * 0.9,  # Posição Y
+    #     f"Correlação: {correlacao:.2f}",
+    #     fontsize=12,
+    #     color="red",
+    #     bbox=dict(facecolor="white", alpha=0.5)
+    # )
+
+    plt.xlabel("Empregabilidade")
+    plt.ylabel("Salário Mediano")
+    plt.title("Relação entre Empregabilidade e Salário Mediano ")
+    plt.grid(True)
+
+    # Exibir gráfico
+    plt.show()
+
+
+
 
     return

@@ -95,6 +95,7 @@ if fase == 10:
     ################# ------------------------- 
     ibge_functions.ibge_trabalho_recenseados()
     pass
+
     
 
 # Fase 20: Análise Exploratória ...
@@ -112,6 +113,7 @@ if fase == 20:  #QP1
     ibge_functions.Soma_PivotTable()
     ibge_functions.Coluna_Empregabilidade()
     ibge_functions.Empregabilidade() 
+    ibge_functions_exploratory_analysis.correlacao_empregabilidade_salario()
 
     ibge_functions_exploratory_analysis.plot_selected_courses()
     ibge_functions.plot_selected_courses_1()
@@ -121,14 +123,18 @@ if fase == 20:  #QP1
 if fase == 30:  #QP2
     ## Funções para 10%  
     ## Geração do dataframes femininos e masculinos
+    #
     ibge_functions.Filtro_Masculino_Feminino() 
     ## Geração dos Arquivos de idas e voltas Femininas e Masculinas
+    # 
     ibge_functions.Ida_Volta_Masculino_Feminino()
     ## Limpeza dos arquivos  de idas e voltas Femininas e Masculinas
+    # 
     ibge_functions.Tabela_Ida_Volta_Masculino_Feminino() 
     ## Geração dos gráficos:
     ##  - Profissões e Cursos-Masculino (10%-Cursos e Profissões do Censo-Masculino)
     ##  - Profissões e Cursos-Feminino  (10%-Cursos e Profissões do Censo-Feminino)   
+    # 
     ibge_functions.Profissoes_Cursos_Masculino_Feminino()     
     pass
 
