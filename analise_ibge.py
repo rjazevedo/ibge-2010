@@ -109,12 +109,15 @@ if fase == 20:  #QP1
     # # ## Empregabilidade x Salario
     # ibge_functions.median_salario()  
     # ibge_functions.Salarios() 
+    # 
+    ibge_functions.Salarios_cursos_commaisprofissoes() 
 
     # ibge_functions.Soma_PivotTable()
     # ibge_functions.Coluna_Empregabilidade()
+    
     # ibge_functions.Empregabilidade() 
-    ibge_functions.Empregabilidade_2() 
-    # # ibge_functions_exploratory_analysis.correlacao_empregabilidade_salario()
+    # ibge_functions.Empregabilidade_cursos_commaisprofissoes() 
+    # # ibge_functions_exploratory_analysis.correlacao_empregabilidade_salario() ...Gráfico 
 
     # ibge_functions_exploratory_analysis.plot_selected_courses()
     # ibge_functions.plot_selected_courses_1()

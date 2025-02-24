@@ -636,6 +636,31 @@ def Soma_PivotTable(path1,name1):
     novo_arquivo.to_csv("processados/CSVs_PivotTableFinal/Soma_Ocupacao.csv", index=False)
     return    
 
+# def Coluna_Empregabilidade(path2,name2):
+#     ##### -------------------------------- Usar um arquivo de teste para empregabilidade
+#     # Carregar o arquivo CSV
+#     file_path = "graficos/Kmeans3_T.csv"  # Substitua pelo caminho do arquivo
+#     Kmeans3_T = pd.read_csv(file_path)
+#     save_results_to = 'graficos/' 
+    
+#     #Kmeans3_T = Kmeans3_T.drop(columns=['Unnamed: 0'])
+
+#     Empregabilidade = pd.read_csv("processados/CSVs_PivotTableFinal/Soma_Ocupacao.csv", sep=",")
+#     # Pivot = Pivot.drop(columns=['Unnamed: 0'])
+    
+#     # Juntar as colunas de Kmeans3_T e a coluna Soma de Empregabilidade
+#     Kmeans3_T['Soma_Empregabilidade'] = Empregabilidade['Soma']
+    
+#     # Se Kmeans3_T .Curso == 520, então Empregabilidade['Soma']/500
+#     Kmeans3_T.loc[Kmeans3_T['Curso'] == 214, 'Soma_Empregabilidade'] = Empregabilidade['Soma'] / 40
+#     Kmeans3_T.loc[Kmeans3_T['Curso'] == 342, 'Soma_Empregabilidade'] = Empregabilidade['Soma'] / 40
+#     Kmeans3_T.loc[Kmeans3_T['Curso'] == 520, 'Soma_Empregabilidade'] = Empregabilidade['Soma'] / 40
+#     Kmeans3_T.loc[Kmeans3_T['Curso'] == 721, 'Soma_Empregabilidade'] = Empregabilidade['Soma'] / 40
+#     Kmeans3_T.loc[Kmeans3_T['Curso'] == 726, 'Soma_Empregabilidade'] = Empregabilidade['Soma'] / 40
+#     # Kmeans3_T.loc[Kmeans3_T['Soma_Empregabilidade'] > 4000, 'Soma_Empregabilidade'] = Empregabilidade['Soma'] / 30
+
+
+
 def Coluna_Empregabilidade(path2,name2):
     ##### -------------------------------- Usar um arquivo de teste para empregabilidade
     # Carregar o arquivo CSV
@@ -652,14 +677,17 @@ def Coluna_Empregabilidade(path2,name2):
     Kmeans3_T['Soma_Empregabilidade'] = Empregabilidade['Soma']
     
     # Se Kmeans3_T .Curso == 520, então Empregabilidade['Soma']/500
-    Kmeans3_T.loc[Kmeans3_T['Curso'] == 214, 'Soma_Empregabilidade'] = Empregabilidade['Soma'] / 40
-    Kmeans3_T.loc[Kmeans3_T['Curso'] == 342, 'Soma_Empregabilidade'] = Empregabilidade['Soma'] / 40
-    Kmeans3_T.loc[Kmeans3_T['Curso'] == 520, 'Soma_Empregabilidade'] = Empregabilidade['Soma'] / 40
-    Kmeans3_T.loc[Kmeans3_T['Curso'] == 721, 'Soma_Empregabilidade'] = Empregabilidade['Soma'] / 40
-    Kmeans3_T.loc[Kmeans3_T['Curso'] == 726, 'Soma_Empregabilidade'] = Empregabilidade['Soma'] / 40
+    Kmeans3_T.loc[Kmeans3_T['Curso'] == 142, 'Soma_Empregabilidade'] = np.log(Empregabilidade['Soma'] + 1) * 10  # Multiplicando para ajustar a escala
+    Kmeans3_T.loc[Kmeans3_T['Curso'] == 145, 'Soma_Empregabilidade'] = np.log(Empregabilidade['Soma'] + 1) * 10  # Multiplicando para ajustar a escala
+    Kmeans3_T.loc[Kmeans3_T['Curso'] == 211, 'Soma_Empregabilidade'] = np.log(Empregabilidade['Soma'] + 1) * 10  # Multiplicando para ajustar a escala
+    Kmeans3_T.loc[Kmeans3_T['Curso'] == 212, 'Soma_Empregabilidade'] = np.log(Empregabilidade['Soma'] + 1) * 10  # Multiplicando para ajustar a escala
+    Kmeans3_T.loc[Kmeans3_T['Curso'] == 214, 'Soma_Empregabilidade'] = np.log(Empregabilidade['Soma'] + 1) * 10  # Multiplicando para ajustar a escala
+    Kmeans3_T.loc[Kmeans3_T['Curso'] == 223, 'Soma_Empregabilidade'] = np.log(Empregabilidade['Soma'] + 1) * 10  # Multiplicando para ajustar a escala
+    Kmeans3_T.loc[Kmeans3_T['Curso'] == 342, 'Soma_Empregabilidade'] = np.log(Empregabilidade['Soma'] + 1) * 10  # Multiplicando para ajustar a escala
+    Kmeans3_T.loc[Kmeans3_T['Curso'] == 520, 'Soma_Empregabilidade'] = np.log(Empregabilidade['Soma'] + 1) * 10  # Multiplicando para ajustar a escala
+    Kmeans3_T.loc[Kmeans3_T['Curso'] == 721, 'Soma_Empregabilidade'] = np.log(Empregabilidade['Soma'] + 1) * 10  # Multiplicando para ajustar a escala
+    Kmeans3_T.loc[Kmeans3_T['Curso'] == 726, 'Soma_Empregabilidade'] = np.log(Empregabilidade['Soma'] + 1) * 10  # Multiplicando para ajustar a escala
     # Kmeans3_T.loc[Kmeans3_T['Soma_Empregabilidade'] > 4000, 'Soma_Empregabilidade'] = Empregabilidade['Soma'] / 30
-
-
 
     
     # Salvar o novo arquivo
@@ -772,7 +800,7 @@ def Empregabilidade(path1,name1,path2,name2):
     plt.savefig(save_results_to + string1)  
     return
 
-def Empregabilidade_2(path1,name1,path2,name2):
+def Empregabilidade_cursos_commaisprofissoes(path1,name1,path2,name2):
     import pandas as pd
     import numpy as np
     import matplotlib.pyplot as plt
@@ -1121,6 +1149,114 @@ def Salarios(path1,name1,path2,name2):
 
     return
 
+def  Salarios_cursos_commaisprofissoes(path1,name1,path2,name2):
+    import pandas as pd
+    import numpy as np
+    import matplotlib.pyplot as plt
+    from sklearn.cluster import KMeans
+    import pandas as pd
+    import numpy as np
+    from sklearn.cluster import KMeans
+    import pandas as pd
+
+    ##### ---------------------------------- Gerar o arquivo de empregabilidade
+    # # Carregar o arquivo CSV
+    # file_path = "graficos/Kmeans3_T.csv"  # Substitua pelo caminho do arquivo
+    # data = pd.read_csv(file_path)
+    # save_results_to = 'graficos/' 
+    
+    # # Filtrar as linhas com CR: 214, 342, 520, 721, 726
+    # cr_values = [214, 342, 520, 721, 726]
+    # filtered_data = data[data['Curso'].isin(cr_values)]
+       
+    # # Salvar o novo arquivo
+    # filtered_file_path = save_results_to + 'Kmeans3_T.csv_Empregabilidade.csv'
+    # filtered_data.to_csv(filtered_file_path, index=False)
+    
+    ##### -------------------------------- Usar um arquivo de teste para empregabilidade
+    # Carregar o arquivo CSV
+    # file_path = "graficos/Kmeans3_T_Empregabilidade.csv"  # Substitua pelo caminho do arquivo
+    file_path = "graficos/Kmeans3_T_Salarios_certo.csv"  # Substitua pelo caminho do arquivo
+    data = pd.read_csv(file_path)
+    save_results_to = 'graficos/' 
+    
+    # Filtrar as linhas com CR: 214, 342, 520, 721, 726
+    # cr_values = [214, 342, 520, 721, 726]
+    cr_values = [142, 145, 211, 212, 214, 223, 342, 520, 721, 726]
+    filtered_data = data[data['Curso'].isin(cr_values)]
+
+    ##### -------------------------------- Gráfico separado por cursos 
+    # Configurar o gráfico de dispersão usando as colunas 'Ida', 'Volta' e 'Cluster'
+    plt.figure(figsize=(6, 4))    
+
+    # # Lista de cores para os clusters
+    # cores_personalizadas = ['red', 'blue', 'green', 'black', 'pink']  # Adicione mais cores, se necessário
+    cores_personalizadas = ['DarkViolet', 'DarkMagenta', 'DeepPink', 'Crimson',
+                            'red', 'Yellow',
+                            'blue', 'brown', 'black', 'green']  # Adicione mais cores, se necessário
+
+    # # Ordenar os clusters antes de criar o gráfico
+    clusters_ordenados = sorted(filtered_data['Curso'].unique())
+
+
+    # # Criar o scatter plot para os clusters com cores personalizadas
+    for i, cluster in enumerate(clusters_ordenados):
+          cluster_data = filtered_data[data['Curso'] == cluster]
+          plt.scatter(
+              cluster_data['Ida'], 
+              cluster_data['Volta'], 
+              label=f'Curso {int(cluster)}', 
+              marker='.',  # Define o marcador como estrela
+              color=cores_personalizadas[i % len(cores_personalizadas)],  # Escolhe a cor da lista
+             #  s=100  # Define o tamanho dos marcadores
+             #  s=cluster_data['Empregabilidade'] * 20,  # Define o tamanho dos pontos com base na empregabilidade (ajuste o fator de multiplicação conforme necessário)
+              s=cluster_data['Median'] * 20,  # Define o tamanho dos pontos com base na empregabilidade (ajuste o fator de multiplicação conforme necessário)
+
+          )     
+
+    # ##### -------------------------------- Gráfico separado por Clusters
+    # # Configurar o gráfico de dispersão usando as colunas 'Ida', 'Volta' e 'Cluster'
+    # plt.figure(figsize=(6, 4))    
+
+    # # Lista de cores para os clusters
+    # cores_personalizadas = ['red', 'blue', 'green', 'black', 'pink']  # Adicione mais cores, se necessário
+
+    # # Ordenar os clusters antes de criar o gráfico
+    # clusters_ordenados = sorted(filtered_data['Cluster'].unique())
+
+
+    # # Criar o scatter plot para os clusters com cores personalizadas
+    # for i, cluster in enumerate(clusters_ordenados):
+    #      cluster_data = filtered_data[data['Cluster'] == cluster]
+    #      plt.scatter(
+    #          cluster_data['Ida'], 
+    #          cluster_data['Volta'], 
+    #          label=f'Cluster {int(cluster)}', 
+    #          marker='.',  # Define o marcador como estrela
+    #          color=cores_personalizadas[i % len(cores_personalizadas)],  # Escolhe a cor da lista
+    #         #  s=100  # Define o tamanho dos marcadores
+    #         s=cluster_data['Empregabilidade'] * 20,  # Define o tamanho dos pontos com base na empregabilidade (ajuste o fator de multiplicação conforme necessário)
+    #      )   
+
+    # Personalizar o gráfico
+    # plt.title('Salarios')
+    plt.xlabel('Cursos')
+    plt.ylabel('Profissões')
+    plt.ylim(0, 100) # definir limite do eixo
+    plt.xlim(0, 100) # definir limite do eixo
+    plt.legend(title="Cursos", loc='lower right')
+    plt.grid()
+
+    # Mostrar o gráfico
+    # plt.show()
+    # string1 = "Cursos e Profissões que mudam de Clusters" +".png"
+    string1 = "Salários: cursos e profissões que tem profissionais atuando em mais de uma profissão" +".png"
+    save_results_to = 'graficos/'  
+    plt.savefig(save_results_to + string1)  
+
+    return
+
+
 def plot_selected_courses():
     # Read the Kmeans3_T.csv file
     file_path = "graficos/Kmeans3_T.csv"  # Replace with the actual file path
@@ -1294,9 +1430,9 @@ def correlacao_empregabilidade_salario():
     # plt.ylabel("Salário Mediano")
     # plt.title("Relação entre Empregabilidade e Salário Mediano")
     # plt.grid(True)
-
     # # Exibir gráfico
     # plt.show()
+    
     ###########################################################################################################
     # import pandas as pd
     # import matplotlib.pyplot as plt
@@ -1346,9 +1482,9 @@ def correlacao_empregabilidade_salario():
     # plt.ylabel("Salário Mediano")
     # plt.title("Relação entre Empregabilidade e Salário Mediano (com Nomes das Profissões)")
     # plt.grid(True)
-
     # # Exibir gráfico
     # plt.show()
+    
     ###########################################################################################################################
     import pandas as pd
     import matplotlib.pyplot as plt
