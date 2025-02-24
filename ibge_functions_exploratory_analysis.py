@@ -1046,6 +1046,31 @@ def median_salario(path1,name1):
         
     return
 
+def separar_cursos_por_clusters():
+        # Ler o arquivo CSV
+        file_path = "graficos/Kmeans3_T_Salarios_certo.csv"
+        data = pd.read_csv(file_path)
+        
+        # Obter os clusters únicos
+        clusters_unicos = data['Cluster'].unique()
+        
+        # Salvar um arquivo para cada cluster
+        for cluster in clusters_unicos:
+            cluster_data = data[data['Cluster'] == cluster]
+            cluster_file_path = f"graficos/Kmeans3_T_Salarios_cluster_{cluster}.csv"
+            cluster_data.to_csv(cluster_file_path, index=False)
+        
+        return  
+  
+def medianas_por_clusters():
+            clusters = [0.0, 1.0, 2.0]
+            for cluster in clusters:
+                file_path = f"graficos/Kmeans3_T_Salarios_cluster_{cluster}.csv"
+                data = pd.read_csv(file_path)
+                median_of_medians = data['Median'].median()
+                print(f"Cluster {cluster}: Mediana das medianas = {median_of_medians}")        
+            return
+          
 def Salarios(path1,name1,path2,name2):
     import pandas as pd
     import numpy as np
