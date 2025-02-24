@@ -100,27 +100,26 @@ if fase == 10:
 
 # Fase 20: Análise Exploratória ...
 if fase == 20:  #QP1
-    # # Função para:
-    # # - clusterização com k=3, 
-    # # - geração do gráfico K-Means com K=3 (10% - Todos os Cursos - Clusterização) 
-    # # - geração do arquivo Kmeans3_T.csv   
-    # ################## ------------------------ 
-    # ibge_functions.Profissoes_Cursos()    
-    # # ## Empregabilidade x Salario
-    # ibge_functions.median_salario()  
-    # ibge_functions.Salarios() 
-    # 
+    # Função para:
+    # - clusterização com k=3, 
+    # - geração do gráfico K-Means com K=3 (10% - Todos os Cursos - Clusterização) 
+    # - geração do arquivo Kmeans3_T.csv   
+    ################## ------------------------ 
+    ibge_functions.Profissoes_Cursos()    
+    # ## Empregabilidade x Salario
+    ibge_functions.median_salario()  
+    ibge_functions.Salarios() 
     ibge_functions.Salarios_cursos_commaisprofissoes() 
 
-    # ibge_functions.Soma_PivotTable()
-    # ibge_functions.Coluna_Empregabilidade()
+    ibge_functions.Soma_PivotTable()
+    ibge_functions.Coluna_Empregabilidade()
     
-    # ibge_functions.Empregabilidade() 
-    # ibge_functions.Empregabilidade_cursos_commaisprofissoes() 
-    # # ibge_functions_exploratory_analysis.correlacao_empregabilidade_salario() ...Gráfico 
+    ibge_functions.Empregabilidade() 
+    ibge_functions.Empregabilidade_cursos_commaisprofissoes() 
+    # ibge_functions_exploratory_analysis.correlacao_empregabilidade_salario() ...Gráfico 
 
-    # ibge_functions_exploratory_analysis.plot_selected_courses()
-    # ibge_functions.plot_selected_courses_1()
+    ibge_functions_exploratory_analysis.plot_selected_courses()
+    ibge_functions.plot_selected_courses_1()
     pass
 
 # Fase 30: Resultados da Análise ...
