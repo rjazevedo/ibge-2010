@@ -854,8 +854,8 @@ def Profissoes_Cursos_Masculino_Feminino(path1,name1,path2,name2,sx):
     # plt.title("10%  - Todos os Cursos - Clusterização ")
     #plt.xlabel('Ida')
     #plt.ylabel('Volta')
-    plt.xlabel('Outbound')
-    plt.ylabel('Backward')
+    plt.xlabel('Courses')
+    plt.ylabel('Professions')
     plt.ylim(0, 100) # definir limite do eixo
     plt.xlim(0, 100) # definir limite do eixo
     plt.grid()
@@ -865,16 +865,16 @@ def Profissoes_Cursos_Masculino_Feminino(path1,name1,path2,name2,sx):
     # save_results_to = 'graficos/'  
     # plt.savefig(save_results_to + string) 
     if sx == 'F':
-       #plt.title("10%  - Cursos e Profissões - Femininos ")
+       # plt.title("10%  - Cursos e Profissões - Femininos ")
        #string = "10%  - Todos os Cursos - Dados Originais Femininos" +".pdf"
-       plt.title("10% - Courses and Professions - Female ")
+       # plt.title("10% - Courses and Professions - Female ")
        string = "10% - All Courses - Original Female Data" +".png"
        save_results_to = 'graficos/'  
        plt.savefig(save_results_to + string) 
     if sx == 'M':
-       #plt.title("10%  - Cursos e Profissões - Masculinos ")
+       # plt.title("10%  - Cursos e Profissões - Masculinos ")
        #string = "10%  - Todos os Cursos - Dados Originais Masculinos" +".pdf"
-       plt.title("10% - Courses and Professions - Male ")
+       # plt.title("10% - Courses and Professions - Male ")
        string = "10% - All Courses - Original Male Data" +".png"
        save_results_to = 'graficos/'  
        plt.savefig(save_results_to + string)      
