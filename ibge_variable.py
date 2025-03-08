@@ -3,6 +3,7 @@ from ibgeparser.enums import Estados
 def estados():
     estados = [[Estados.TODOS]]
     return estados
+
 def paths(opcao):
     if opcao == 1:
        path = ['microdados-ibge/original/']

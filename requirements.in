@@ -1,7 +1,8 @@
 # python==3.10.6
 ibge_parser==1.0.2
+matplotlib==3.8.0
 numpy==1.21.5
 pandas==1.3.5
-matplotlib==3.8.0
 requests==2.31.0
 scikit-learn==1.4.2
+xlrd==2.0.1
