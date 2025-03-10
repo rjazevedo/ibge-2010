@@ -2187,7 +2187,7 @@ def Kmeans3_T_Grafico_Genero_Clusters(path2,name3,cluster):
         plt.title("10% - View of the three graphs - Gender - Cluster 0 - Kmeans3")
         plt.xlim(0.0, 100.0)
         plt.ylim(0.0, 100.0)
-        #plt.show()
+        ##plt.show()
         string1 = "10% - View of the three graphs - Gender - Cluster 0 - Kmeans3_" + ".png"
         save_results_to = 'graficos/'  
         plt.savefig(save_results_to + string1)           
@@ -2254,7 +2254,7 @@ def Kmeans3_T_Grafico_Genero_Clusters(path2,name3,cluster):
             plt.title("10% - View of the three graphs - Gender - Cluster 1 - Kmeans3")
             plt.xlim(0.0, 100.0)
             plt.ylim(0.0, 100.0)
-            # plt.show()
+            ## plt.show()
             string1 = "10% - View of the three graphs - Gender - Cluster 1 - Kmeans3_" + ".png"
             save_results_to = 'graficos/'  
             plt.savefig(save_results_to + string1)  
@@ -2319,7 +2319,7 @@ def Kmeans3_T_Grafico_Genero_Clusters(path2,name3,cluster):
                     plt.title("10% - View of the three graphs - Gender - Cluster 2 - Kmeans3")
                     plt.xlim(0.0, 100.0)
                     plt.ylim(0.0, 100.0)
-                    # plt.show()
+                    ## plt.show()
                     string1 = "10% - View of the three graphs - Gender - Cluster 2 - Kmeans3_" + ".png"
                     save_results_to = 'graficos/'  
                     plt.savefig(save_results_to + string1)  
