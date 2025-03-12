@@ -2784,3 +2784,20 @@ def Salarios_CBO_Idade(path,name,path1,name1,cluster):
         plt.savefig(save_results_to + string1)   
         # plt.show()    
     return
+
+
+def deslocamento_clusters():
+    save_results_to = 'graficos/'
+    file_path = save_results_to + 'Deslocamento_Geral.csv'
+    df = pd.read_csv(file_path)
+    
+    cluster_0 = df[df['Cluster'] == 0]
+    cluster_0.to_csv(save_results_to + 'Deslocamento_Geral_cluster 0.csv', index=False)
+
+    cluster_1 = df[df['Cluster'] == 1]
+    cluster_1.to_csv(save_results_to + 'Deslocamento_Geral_cluster 1.csv', index=False)
+
+    cluster_2 = df[df['Cluster'] == 2]
+    cluster_2.to_csv(save_results_to + 'Deslocamento_Geral_cluster 2.csv', index=False)
+    
+    return
