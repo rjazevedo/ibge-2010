@@ -2878,3 +2878,20 @@ def deslocamento_clusters():
     
     return
 
+def  deslocamentos_maioresdistancias_clusters():
+     save_results_to = 'graficos/'
+     # file_path = save_results_to + 'Deslocamento_Geral.csv'
+     file_path = save_results_to + 'Maiores_Distancias.csv'
+     df = pd.read_csv(file_path)
+     
+    
+     cluster_0 = df[df['Cluster'] == 0]
+     cluster_0.to_csv(save_results_to + 'Maiores_Distancias_cluster 0.csv', index=False)
+
+     cluster_1 = df[df['Cluster'] == 1]
+     cluster_1.to_csv(save_results_to + 'Maiores_Distancias_cluster 1.csv', index=False)
+
+     cluster_2 = df[df['Cluster'] == 2]
+     cluster_2.to_csv(save_results_to + 'Maiores_Distancias_cluster 2.csv', index=False)
+    
+     return
