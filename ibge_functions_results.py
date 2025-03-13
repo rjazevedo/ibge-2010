@@ -2786,10 +2786,73 @@ def Salarios_CBO_Idade(path,name,path1,name1,cluster):
     return
 
 
+def deslocamento():
+    from math import sqrt
+    # save_results_to = 'graficos/'
+    # file_path = save_results_to + 'Resultados_T_Filtrados_Kmeans3_T_Preenchido.csv'
+    # df = pd.read_csv(file_path)
+
+    # distances = []
+
+    # for i in range(0, len(df), 3):
+    #     if i + 2 < len(df):
+    #         x1, y1 = df.iloc[i]['Ida'], df.iloc[i]['Volta']
+    #         x2, y2 = df.iloc[i + 1]['Ida'], df.iloc[i + 1]['Volta']
+    #         x3, y3 = df.iloc[i + 2]['Ida'], df.iloc[i + 2]['Volta']
+
+    #         distance1 = sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2)
+    #         distance2 = sqrt((x3 - x1) ** 2 + (y3 - y1) ** 2)
+
+    #         distances.append([x1, y1, x2, y2, distance1])
+    #         distances.append([x1, y1, x3, y3, distance2])
+
+    # distances_df = pd.DataFrame(distances, columns=['x1', 'y1', 'x2', 'y2', 'Distance'])
+    # distances_df.to_csv(save_results_to + 'Deslocamento_Geral.csv', index=False)
+    save_results_to = 'graficos/'
+    file_path = save_results_to + 'Resultados_T_Filtrados_Kmeans3_T_Preenchido.csv'
+    df = pd.read_csv(file_path)
+
+    distances = []
+
+    for i in range(0, len(df), 3):
+        if i + 2 < len(df):
+            x1, y1 = df.iloc[i]['Ida'], df.iloc[i]['Volta']
+            x2, y2 = df.iloc[i + 1]['Ida'], df.iloc[i + 1]['Volta']
+            x3, y3 = df.iloc[i + 2]['Ida'], df.iloc[i + 2]['Volta']
+
+            distance1 = sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2)
+            distance2 = sqrt((x3 - x1) ** 2 + (y3 - y1) ** 2)
+
+            distances.append([x1, y1, x2, y2, distance1])
+            distances.append([x1, y1, x3, y3, distance2])
+
+    distances_df = pd.DataFrame(distances, columns=['x1', 'y1', 'x2', 'y2', 'Distance'])
+    distances_df.to_csv(save_results_to + 'Deslocamento_Geral.csv', index=False)
+
+    # Adicionar coluna de distância ao DataFrame original
+    df['Distance'] = None
+    for i in range(0, len(df), 3):
+        if i + 2 < len(df):
+            x1, y1 = df.iloc[i]['Ida'], df.iloc[i]['Volta']
+            x2, y2 = df.iloc[i + 1]['Ida'], df.iloc[i + 1]['Volta']
+            x3, y3 = df.iloc[i + 2]['Ida'], df.iloc[i + 2]['Volta']
+
+            distance1 = sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2)
+            distance2 = sqrt((x3 - x1) ** 2 + (y3 - y1) ** 2)
+
+            df.at[i + 1, 'Distance'] = distance1
+            df.at[i + 2, 'Distance'] = distance2
+
+    df.to_csv(save_results_to + 'Resultados_T_Filtrados_Kmeans3_T_Preenchido_com_Distancia.csv', index=False)
+    
+    return
+
 def deslocamento_clusters():
     save_results_to = 'graficos/'
-    file_path = save_results_to + 'Deslocamento_Geral.csv'
+    # file_path = save_results_to + 'Deslocamento_Geral.csv'
+    file_path = save_results_to + 'Resultados_T_Filtrados_Kmeans3_T_Preenchido_com_Distancia.csv'
     df = pd.read_csv(file_path)
+    
     
     cluster_0 = df[df['Cluster'] == 0]
     cluster_0.to_csv(save_results_to + 'Deslocamento_Geral_cluster 0.csv', index=False)
@@ -2801,3 +2864,4 @@ def deslocamento_clusters():
     cluster_2.to_csv(save_results_to + 'Deslocamento_Geral_cluster 2.csv', index=False)
     
     return
+

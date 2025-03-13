@@ -184,6 +184,8 @@ if fase == 33:
     # ibge_functions.Kmeans3_T_Grafico_Genero_Clusters()
     # 
     ibge_functions_results.deslocamento_clusters()
+    #
+    ibge_functions_results.deslocamento()
     # #  2-  Profissões desequilibradas 
     #    # - Profissões desequilibradas - Pontos Selecionados(Grandes Desloamentos) 
     #    # - Profissões desequilibradas - Quais as profissões onde homens e mulheres estão em clusters diferentes?
