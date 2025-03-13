@@ -2847,6 +2847,19 @@ def deslocamento():
     
     return
 
+def  deslocamentos_maioresdistancias():
+        save_results_to = 'graficos/'
+        file_path = save_results_to + 'Resultados_T_Filtrados_Kmeans3_T_Preenchido_com_Distancia.csv'
+        df = pd.read_csv(file_path)
+ 
+        # Encontrar as maiores distâncias
+        max_distances = df.nlargest(10, 'Distance')
+
+        # Salvar as maiores distâncias em um novo arquivo CSV
+        max_distances.to_csv(save_results_to + 'Maiores_Distancias.csv', index=False)
+
+        return
+   
 def deslocamento_clusters():
     save_results_to = 'graficos/'
     # file_path = save_results_to + 'Deslocamento_Geral.csv'
