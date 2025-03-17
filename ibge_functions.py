@@ -562,3 +562,8 @@ def Salarios_CBO_Idade():
     ibge_functions_results.Salarios_CBO_Idade(path,name,path1,name1,1)
     ibge_functions_results.Salarios_CBO_Idade(path,name,path1,name1,2)
     return
+
+def dadosoriginais_resultados():
+    ibge_functions_results.dadosoriginais_resultados("F")
+    ibge_functions_results.dadosoriginais_resultados("M")
+    return
