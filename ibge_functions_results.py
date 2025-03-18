@@ -3003,3 +3003,145 @@ def dadosoriginais_resultados(sx):
             Resultados_T.rename(columns=dict,inplace=True)       
             Resultados_T.to_csv(save_results_to + 'Resultados_T_Masc_100.csv', index=False)    
         return
+
+def resultados_filtragem_10_100():
+    save_results_to = 'graficos/'
+    file_path = save_results_to + 'Kmeans3_T.csv'
+    file_path1 =  save_results_to + 'Resultados_T_Masc_100.csv'
+    file_path2 =  save_results_to + 'Resultados_T_Fem_100.csv'
+
+    Kmeans3_T = pd.read_csv(file_path)
+    Kmeans3_T = Kmeans3_T.drop(columns=['Unnamed: 0'])
+    Resultados_T_Masc_100 = pd.read_csv(file_path1)
+    # Resultados_T_Masc_100 = Resultados_T_Masc_100.drop(columns=['Unnamed: 0'])
+    Resultados_T_Fem_100  = pd.read_csv(file_path2)
+    # Resultados_T_Fem_100 = Resultados_T_Fem_100.drop(columns=['Unnamed: 0'])
+
+
+    Kmeans3_T['Genero'] = 'O'
+    Kmeans3_T['C1'] = ''
+    Kmeans3_T['C2'] = ''
+    Kmeans3_T['C3'] = ''
+    Kmeans3_T.to_csv(save_results_to + 'Kmeans3_T_O.csv', index=False) 
+
+    file_path3 = save_results_to + 'Kmeans3_T_O.csv'
+    Kmeans3_T_O = pd.read_csv(file_path3)
+    # Kmeans3_T_O = Kmeans3_T_O.drop(columns=['Unnamed: 0'])
+
+    ## 10% de 100% Masculino
+    ## https://colab.research.google.com/drive/1cZx_GBJ-z18Ji4JrTZGTqzmfw-PuAcZl?authuser=1#scrollTo=kY71WzkoNmGS
+    Resultados_T_Masc_100['C1'] = ''
+    Resultados_T_Masc_100['C2'] = ''
+    Resultados_T_Masc_100['C3'] = ''
+
+    Ida          = []
+    Volta        = []
+    Cluster      = []
+    Curso        = []
+    Curso_Nome   = []
+    Cbo          = []
+    Cbo_Nome     = []
+    Genero       = []
+    C1           = []
+    C2           = []
+    C3           = []
+
+    #for i in range(0,1):
+    for i in range(len(Kmeans3_T_O)):
+        for j in range(len(Resultados_T_Masc_100)):
+            #if ((str(Resultados_T_Masc_100.Cbo[j])== '2341') & ( str(Resultados_T_Masc_100.Curso[j])== '142.0')):
+            if ((str(Resultados_T_Masc_100.Cbo[j])== str(int(Kmeans3_T_O.Cbo[i]))) & ( str(Resultados_T_Masc_100.Curso[j])== str(Kmeans3_T_O.Curso[i]))):
+                Ida.append(Resultados_T_Masc_100.Ida[j])
+                Volta.append(Resultados_T_Masc_100.Volta[j])
+                Cluster.append(Resultados_T_Masc_100.Cluster[j])
+                Curso.append(Resultados_T_Masc_100.Curso[j])
+                Curso_Nome. append(Resultados_T_Masc_100.Curso_Nome[j])
+                Cbo.append(Resultados_T_Masc_100.Cbo[j])
+                Cbo_Nome.append(Resultados_T_Masc_100.Cbo_Nome[j])
+                Genero.append(Resultados_T_Masc_100.Genero[j])
+                C1.append(Resultados_T_Masc_100.C1[j])
+                C2.append(Resultados_T_Masc_100.C2[j])
+                C3.append(Resultados_T_Masc_100.C3[j])
+
+    Resultados_T_Masc_100_F = []
+    for i in range(len(Ida)):
+        tupla=(Ida[i],Volta[i],Cluster[i], Curso[i],Curso_Nome[i],Cbo[i],Cbo_Nome[i], Genero[i],C1[i],C2[i],C3[i])
+
+        Resultados_T_Masc_100_F.append(tupla)
+    #...
+    Resultados_T_Masc_100_49 = pd.DataFrame(Resultados_T_Masc_100_F)
+
+    #...
+    dict = {0:"Ida",
+            1:"Volta",
+            2:"Cluster",
+            3:"Curso",
+            4:"Curso_Nome",
+            5:"Cbo",
+            6:"Cbo_Nome",
+            7:"Genero",
+            8:"C1",
+            9:"C2",
+            10:"C3"
+    }
+    Resultados_T_Masc_100_49.rename(columns=dict,inplace=True)     
+    Resultados_T_Masc_100_49.to_csv(save_results_to + 'Resultados_T_Masc_100_49.csv', index=False) 
+       
+    ## 10% de 100% Feminino
+    Resultados_T_Fem_100['C1'] = ''
+    Resultados_T_Fem_100['C2'] = ''
+    Resultados_T_Fem_100['C3'] = ''
+
+    Ida          = []
+    Volta        = []
+    Cluster      = []
+    Curso        = []
+    Curso_Nome   = []
+    Cbo          = []
+    Cbo_Nome     = []
+    Genero       = []
+    C1           = []
+    C2           = []
+    C3           = []
+
+    #for i in range(0,1):
+    for i in range(len(Kmeans3_T_O)):
+        for j in range(len(Resultados_T_Fem_100)):
+            #if ((str(Resultados_T_Masc_100.Cbo[j])== '2341') & ( str(Resultados_T_Masc_100.Curso[j])== '142.0')):
+            if ((str(Resultados_T_Fem_100.Cbo[j])== str(int(Kmeans3_T_O.Cbo[i]))) & ( str(Resultados_T_Fem_100.Curso[j])== str(Kmeans3_T_O.Curso[i]))):
+                Ida.append(Resultados_T_Fem_100.Ida[j])
+                Volta.append(Resultados_T_Fem_100.Volta[j])
+                Cluster.append(Resultados_T_Fem_100.Cluster[j])
+                Curso.append(Resultados_T_Fem_100.Curso[j])
+                Curso_Nome. append(Resultados_T_Fem_100.Curso_Nome[j])
+                Cbo.append(Resultados_T_Fem_100.Cbo[j])
+                Cbo_Nome.append(Resultados_T_Fem_100.Cbo_Nome[j])
+                Genero.append(Resultados_T_Fem_100.Genero[j])
+                C1.append(Resultados_T_Fem_100.C1[j])
+                C2.append(Resultados_T_Fem_100.C2[j])
+                C3.append(Resultados_T_Fem_100.C3[j])
+
+    Resultados_T_Fem_100_F = []
+    for i in range(len(Ida)):
+        tupla=(Ida[i],Volta[i],Cluster[i], Curso[i],Curso_Nome[i],Cbo[i],Cbo_Nome[i], Genero[i],C1[i],C2[i],C3[i])
+
+        Resultados_T_Fem_100_F.append(tupla)
+    #...
+    Resultados_T_Fem_100_49 = pd.DataFrame(Resultados_T_Fem_100_F)
+
+    #...
+    dict = {0:"Ida",
+            1:"Volta",
+            2:"Cluster",
+            3:"Curso",
+            4:"Curso_Nome",
+            5:"Cbo",
+            6:"Cbo_Nome",
+            7:"Genero",
+            8:"C1",
+            9:"C2",
+            10:"C3"
+    }
+    Resultados_T_Fem_100_49.rename(columns=dict,inplace=True)      
+    Resultados_T_Fem_100_49.to_csv(save_results_to + 'Resultados_T_Fem_100_49.csv', index=False) 
+    return
