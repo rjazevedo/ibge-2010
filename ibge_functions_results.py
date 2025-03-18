@@ -3146,6 +3146,14 @@ def resultados_filtragem_10_100():
     Resultados_T_Fem_100_49.to_csv(save_results_to + 'Resultados_T_Fem_100_49.csv', index=False) 
     return
 
+import math
+# função que permite calcular a distância  entre dois pontos
+def distancia2d(x1, y1, x2, y2):
+  a = x2 - x1
+  b = y2 - y1
+  c = math.sqrt(math.pow(a, 2) + math.pow(b, 2))
+  return c
+
 def resultados_distancia():
     # https://colab.research.google.com/drive/1cZx_GBJ-z18Ji4JrTZGTqzmfw-PuAcZl?authuser=1#scrollTo=WOd24Bbxa4kI
     save_results_to = 'graficos/'
@@ -3153,8 +3161,100 @@ def resultados_distancia():
     file_path1 =  save_results_to + 'Resultados_T_Masc_100_49.csv'
     file_path2 =  save_results_to + 'Resultados_T_Fem_100_49.csv'
 
+    Kmeans3_T_O = pd.read_csv(file_path)
+    Resultados_T_Masc_100_49 = pd.read_csv(file_path1)
+    Resultados_T_Fem_100_49  = pd.read_csv(file_path2)
+
     # Kmeans3_T_O = Kmeans3_T_O.drop(columns=['Unnamed: 0'])
     # Resultados_T_Fem_100_49 = Resultados_T_Fem_100_49.drop(columns=['Unnamed: 0'])
     # Resultados_T_Masc_100_49 = Resultados_T_Masc_100_49.drop(columns=['Unnamed: 0'])
+
+    file_path3 =  save_results_to + 'centroids.csv'
+
+    centroids = pd.read_csv(file_path3)
+    x0 = centroids.iloc[0, 0]
+    y0 = centroids.iloc[0, 1]
+    x1 = centroids.iloc[1, 0]
+    y1 = centroids.iloc[1, 1]
+    x2 = centroids.iloc[2, 0]
+    y2 = centroids.iloc[2, 1]
+
+    # print("Centroid 0: ", x0, y0)
+    # print("Centroid 0: ", x1, y1)
+    # print("Centroid 0: ", x2, y2)
+    # Feminino =============================================================================
+    # Cluster 1 ...
+    # x1 = 27.00526316
+    # y1 = 21.78263158
+    for j in range(len(Resultados_T_Fem_100_49)):
+        x = Resultados_T_Fem_100_49.Ida[j]
+        y = Resultados_T_Fem_100_49.Volta[j]
+        # vamos obter a distância entre eles
+        distancia = distancia2d(x0, y0, x, y)
+        #print("Distância entre os dois pontos: %0.2f" % distancia);
+        Resultados_T_Fem_100_49.C1[j] = distancia
+
+    # Cluster 2 ...
+    # x1 = 66.464375
+    # y1 = 77.656875    
+    for j in range(len(Resultados_T_Fem_100_49)):
+        x = Resultados_T_Fem_100_49.Ida[j]
+        y = Resultados_T_Fem_100_49.Volta[j]
+        # vamos obter a distância entre eles
+        distancia = distancia2d(x1, y1, x, y)
+        #print("Distância entre os dois pontos: %0.2f" % distancia);
+        Resultados_T_Fem_100_49.C2[j] = distancia    
+
+    # Cluster 3 ...
+    # x1 = 25.76357143
+    # y1 = 62.88071429
+    for j in range(len(Resultados_T_Fem_100_49)):
+        x = Resultados_T_Fem_100_49.Ida[j]
+        y = Resultados_T_Fem_100_49.Volta[j]
+        # vamos obter a distância entre eles
+        distancia = distancia2d(x2, y2, x, y)
+        #print("Distância entre os dois pontos: %0.2f" % distancia);
+        Resultados_T_Fem_100_49.C3[j] = distancia    
+
+    # Masculino =============================================================================
+    # Cluster 1 ...
+    # x1 = 27.00526316
+    # y1 = 21.78263158
+    for j in range(len(Resultados_T_Masc_100_49)):
+        x = Resultados_T_Masc_100_49.Ida[j]
+        y = Resultados_T_Masc_100_49.Volta[j]
+        # vamos obter a distância entre eles
+        distancia = distancia2d(x0, y0, x, y)
+        #print("Distância entre os dois pontos: %0.2f" % distancia);
+        Resultados_T_Masc_100_49.C1[j] = distancia
+
+    # Cluster 2 ...
+    # x1 = 66.464375
+    # y1 = 77.656875    
+    for j in range(len(Resultados_T_Masc_100_49)):
+        x = Resultados_T_Masc_100_49.Ida[j]
+        y = Resultados_T_Masc_100_49.Volta[j]
+        # vamos obter a distância entre eles
+        distancia = distancia2d(x1, y1, x, y)
+        #print("Distância entre os dois pontos: %0.2f" % distancia);
+        Resultados_T_Masc_100_49.C2[j] = distancia    
+
+    # Cluster 3 ...
+    # x1 = 25.76357143
+    # y1 = 62.88071429
+    for j in range(len(Resultados_T_Masc_100_49)):
+        x = Resultados_T_Masc_100_49.Ida[j]
+        y = Resultados_T_Masc_100_49.Volta[j]
+        # vamos obter a distância entre eles
+        distancia = distancia2d(x2, y2, x, y)
+        #print("Distância entre os dois pontos: %0.2f" % distancia);
+        Resultados_T_Masc_100_49.C3[j] = distancia    
     
+    
+    distancia_mudanca_clusters = pd.concat([Resultados_T_Fem_100_49, Resultados_T_Masc_100_49, Kmeans3_T_O])
+    distancia_mudanca_clusters = pd.concat([Resultados_T_Fem_100_49, Resultados_T_Masc_100_49, Kmeans3_T_O], ignore_index=True)
+    distancia_mudanca_clusters = distancia_mudanca_clusters.sort_values(["Curso", "Cbo"], ascending=True)
+
+    distancia_mudanca_clusters.to_csv(save_results_to + 'distancia_mudanca_clusters.csv', index=False)
+
     return
