@@ -150,29 +150,29 @@ if fase == 32:
     #QP2 é a fase 30
     pass 
 if fase == 33:   
-    # ##QP3
-    # ################# -------------------------        
-    # ibge_functions.Ida_Volta_Masculino_Feminino_100()
-    # ################# -------------------------        
-    # ibge_functions.Tabela_Ida_Volta_Masculino_Feminino_100()
-    # # Funciona, mas salva csvs. Comentei para usar como dataframes!
-    # # ibge_functions.PlotOriginal_AdicionaColunaGenero_100()
-    # ################# -------------------------        
-    # ibge_functions.Juntar_10Porcento_Genero()
-    # ################# -------------------------        
-    # ibge_functions_results.Filtrar_Tabela_10Porcento_Genero()
-    # # geração do gráfico: 
-    # # - Pontos originais, masculinos e femininos (10%-Visualização dos três gráficos - Genero - Kmeans3)
-    # ################# -------------------------         
-    # ibge_functions_results.Kmeans3_T_Grafico_Genero()
+    ##QP3
+    ################# -------------------------        
+    ibge_functions.Ida_Volta_Masculino_Feminino_100()
+    ################# -------------------------        
+    ibge_functions.Tabela_Ida_Volta_Masculino_Feminino_100()
+    # Funciona, mas salva csvs. Comentei para usar como dataframes!
+    # ibge_functions.PlotOriginal_AdicionaColunaGenero_100()
+    ################# -------------------------        
+    ibge_functions.Juntar_10Porcento_Genero()
+    ################# -------------------------        
+    ibge_functions_results.Filtrar_Tabela_10Porcento_Genero()
+    # geração do gráfico: 
+    # - Pontos originais, masculinos e femininos (10%-Visualização dos três gráficos - Genero - Kmeans3)
+    ################# -------------------------         
+    ibge_functions_results.Kmeans3_T_Grafico_Genero()
 
-    # # Não utilizadas ...
-    # # ibge_functions.Profissoes_Cursos_Masculino_Feminino_100()  
+    # Não utilizadas ...
+    # ibge_functions.Profissoes_Cursos_Masculino_Feminino_100()  
 
-    # # Funções para 10% ... comentadas 
-    # # Funciona, mas salva csvs. Comentei para usar como dataframes!
-    # # ibge_functions.PlotOriginal_AdiciconaColunaGenero()
-    # # ibge_functions.JuntaTabelas()
+    # Funções para 10% ... comentadas 
+    # Funciona, mas salva csvs. Comentei para usar como dataframes!
+    # ibge_functions.PlotOriginal_AdiciconaColunaGenero()
+    # ibge_functions.JuntaTabelas()
     
     # #  Funções que faltam ...
     # #  1-  Gráfico dos gêneros separados por clusters
@@ -182,11 +182,10 @@ if fase == 33:
     # ################# -------------------------       
     # ibge_functions_results.separate_clusters_Genero()
     # ibge_functions.Kmeans3_T_Grafico_Genero_Clusters()
-    # ibge_functions_results.deslocamento_clusters()
+    # 
+    ibge_functions_results.deslocamento_clusters()
     # #  2-  Profissões desequilibradas 
     #    # - Profissões desequilibradas - Pontos Selecionados(Grandes Desloamentos) 
-    # 
-    ibge_functions.dadosoriginais_resultados()
     #    # - Profissões desequilibradas - Quais as profissões onde homens e mulheres estão em clusters diferentes?
     #    # - Profissões desequlibradas  - Gráfico com os pontos que mudaram de cluster e diagrama de Voronoi
     # #  3-  Profissões equilibradas - 40%-60% ...
@@ -196,7 +195,7 @@ if fase == 33:
     #    # - Plotar o gráfico das idades, usando o arquivo de femininos e masculinos! Com isso poderemos ver a distribuição das idades para o masculino e para o feminino!
     # #  4-  Gráfico dos vetores centrados em(0,0)
     
-    # # pass
+    # pass
 
 if fase == 34:
     # #QP4

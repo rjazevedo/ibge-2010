@@ -2786,10 +2786,86 @@ def Salarios_CBO_Idade(path,name,path1,name1,cluster):
     return
 
 
+def deslocamento():
+    from math import sqrt
+    # save_results_to = 'graficos/'
+    # file_path = save_results_to + 'Resultados_T_Filtrados_Kmeans3_T_Preenchido.csv'
+    # df = pd.read_csv(file_path)
+
+    # distances = []
+
+    # for i in range(0, len(df), 3):
+    #     if i + 2 < len(df):
+    #         x1, y1 = df.iloc[i]['Ida'], df.iloc[i]['Volta']
+    #         x2, y2 = df.iloc[i + 1]['Ida'], df.iloc[i + 1]['Volta']
+    #         x3, y3 = df.iloc[i + 2]['Ida'], df.iloc[i + 2]['Volta']
+
+    #         distance1 = sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2)
+    #         distance2 = sqrt((x3 - x1) ** 2 + (y3 - y1) ** 2)
+
+    #         distances.append([x1, y1, x2, y2, distance1])
+    #         distances.append([x1, y1, x3, y3, distance2])
+
+    # distances_df = pd.DataFrame(distances, columns=['x1', 'y1', 'x2', 'y2', 'Distance'])
+    # distances_df.to_csv(save_results_to + 'Deslocamento_Geral.csv', index=False)
+    save_results_to = 'graficos/'
+    file_path = save_results_to + 'Resultados_T_Filtrados_Kmeans3_T_Preenchido.csv'
+    df = pd.read_csv(file_path)
+
+    distances = []
+
+    for i in range(0, len(df), 3):
+        if i + 2 < len(df):
+            x1, y1 = df.iloc[i]['Ida'], df.iloc[i]['Volta']
+            x2, y2 = df.iloc[i + 1]['Ida'], df.iloc[i + 1]['Volta']
+            x3, y3 = df.iloc[i + 2]['Ida'], df.iloc[i + 2]['Volta']
+
+            distance1 = sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2)
+            distance2 = sqrt((x3 - x1) ** 2 + (y3 - y1) ** 2)
+
+            distances.append([x1, y1, x2, y2, distance1])
+            distances.append([x1, y1, x3, y3, distance2])
+
+    distances_df = pd.DataFrame(distances, columns=['x1', 'y1', 'x2', 'y2', 'Distance'])
+    distances_df.to_csv(save_results_to + 'Deslocamento_Geral.csv', index=False)
+
+    # Adicionar coluna de distância ao DataFrame original
+    df['Distance'] = None
+    for i in range(0, len(df), 3):
+        if i + 2 < len(df):
+            x1, y1 = df.iloc[i]['Ida'], df.iloc[i]['Volta']
+            x2, y2 = df.iloc[i + 1]['Ida'], df.iloc[i + 1]['Volta']
+            x3, y3 = df.iloc[i + 2]['Ida'], df.iloc[i + 2]['Volta']
+
+            distance1 = sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2)
+            distance2 = sqrt((x3 - x1) ** 2 + (y3 - y1) ** 2)
+
+            df.at[i + 1, 'Distance'] = distance1
+            df.at[i + 2, 'Distance'] = distance2
+
+    df.to_csv(save_results_to + 'Resultados_T_Filtrados_Kmeans3_T_Preenchido_com_Distancia.csv', index=False)
+    
+    return
+
+def  deslocamentos_maioresdistancias():
+        save_results_to = 'graficos/'
+        file_path = save_results_to + 'Resultados_T_Filtrados_Kmeans3_T_Preenchido_com_Distancia.csv'
+        df = pd.read_csv(file_path)
+ 
+        # Encontrar as maiores distâncias
+        max_distances = df.nlargest(10, 'Distance')
+
+        # Salvar as maiores distâncias em um novo arquivo CSV
+        max_distances.to_csv(save_results_to + 'Maiores_Distancias.csv', index=False)
+
+        return
+   
 def deslocamento_clusters():
     save_results_to = 'graficos/'
-    file_path = save_results_to + 'Deslocamento_Geral.csv'
+    # file_path = save_results_to + 'Deslocamento_Geral.csv'
+    file_path = save_results_to + 'Resultados_T_Filtrados_Kmeans3_T_Preenchido_com_Distancia.csv'
     df = pd.read_csv(file_path)
+    
     
     cluster_0 = df[df['Cluster'] == 0]
     cluster_0.to_csv(save_results_to + 'Deslocamento_Geral_cluster 0.csv', index=False)
@@ -2802,110 +2878,20 @@ def deslocamento_clusters():
     
     return
 
-def dadosoriginais_resultados(sx):
-    #https://colab.research.google.com/drive/1iLmL2_RNZNwhhYxoKEYwgy0LWoh7ri-g?authuser=1#scrollTo=RXn_W3SM374X
-        if sx == 'F':
-            save_results_to = 'graficos/'
-            file_path = save_results_to + '100Porcent_DF_Fem_Limpo.csv'
-            file_path1 = 'documentacao/' + 'Curso_Censo.csv'
-            file_path2 = 'documentacao/' + 'CBO_CSV.csv'
+def  deslocamentos_maioresdistancias_clusters():
+     save_results_to = 'graficos/'
+     # file_path = save_results_to + 'Deslocamento_Geral.csv'
+     file_path = save_results_to + 'Maiores_Distancias.csv'
+     df = pd.read_csv(file_path)
+     
+    
+     cluster_0 = df[df['Cluster'] == 0]
+     cluster_0.to_csv(save_results_to + 'Maiores_Distancias_cluster 0.csv', index=False)
 
+     cluster_1 = df[df['Cluster'] == 1]
+     cluster_1.to_csv(save_results_to + 'Maiores_Distancias_cluster 1.csv', index=False)
 
-            X_Original = pd.read_csv(file_path)
-            X_Original = X_Original.drop(columns=['Unnamed: 0'])
-
-            CursosCenso = pd.read_csv(file_path1)
-            CursosCenso = CursosCenso.drop(columns=['Unnamed: 0'])
-
-            CursoNome =[]
-            for i in range (len(X_Original['CR'])):
-                for index, row in CursosCenso.iterrows():
-                    if (X_Original['CR'][i] == CursosCenso['curso_num'][index]):
-                        CursoNome.append(CursosCenso['curso_nome'][index])
-
-            CBO = pd.read_csv(file_path2)
-            CBO = CBO.drop(columns=['Unnamed: 0'])
-            
-            CboNome =[]
-            for i in range (len(X_Original['CB'])):
-                for index, row in CBO.iterrows():
-                    if (int(X_Original['CB'][i]) == CBO['Cod_CBO'][index]):
-                        CboNome.append(CBO['Nome_CBO'][index])
-
-            # print(len(X_Original))             
-            # print(len(CursoNome)) 
-            # print(len(CboNome))
-
-            resultados_T=[]
-            cluster=""
-            for i in range(len(X_Original)):
-                tupla=(X_Original['Ida'][i],X_Original['Volta'][i],cluster, X_Original['CR'][i],CursoNome[i],X_Original['CB'][i],CboNome[i],"F")
-                resultados_T.append(tupla)
-            #...
-            Resultados_T= pd.DataFrame(resultados_T)
-
-            #...
-            dict = {0:"Ida",
-                    1:"Volta",
-                    2:"Cluster",
-                    3:"Curso",
-                    4:"Curso_Nome",
-                    5:"Cbo",
-                    6:"Cbo_Nome",
-                    7:"Genero"
-            }
-            Resultados_T.rename(columns=dict,inplace=True)       
-            Resultados_T.to_csv(save_results_to + 'Resultados_T_Fem_100.csv', index=False)
-        if sx == 'M':
-            save_results_to = 'graficos/'
-            file_path = save_results_to + '100Porcent_DF_Masc_Limpo.csv'
-            file_path1 = 'documentacao/' + 'Curso_Censo.csv'
-            file_path2 = 'documentacao/' + 'CBO_CSV.csv'
-
-
-            X_Original = pd.read_csv(file_path)
-            X_Original = X_Original.drop(columns=['Unnamed: 0'])
-
-            CursosCenso = pd.read_csv(file_path1)
-            CursosCenso = CursosCenso.drop(columns=['Unnamed: 0'])
-
-            CursoNome =[]
-            for i in range (len(X_Original['CR'])):
-                for index, row in CursosCenso.iterrows():
-                    if (X_Original['CR'][i] == CursosCenso['curso_num'][index]):
-                        CursoNome.append(CursosCenso['curso_nome'][index])
-
-            CBO = pd.read_csv(file_path2)
-            CBO = CBO.drop(columns=['Unnamed: 0'])
-            
-            CboNome =[]
-            for i in range (len(X_Original['CB'])):
-                for index, row in CBO.iterrows():
-                    if (int(X_Original['CB'][i]) == CBO['Cod_CBO'][index]):
-                        CboNome.append(CBO['Nome_CBO'][index])
-
-            # print(len(X_Original))             
-            # print(len(CursoNome)) 
-            # print(len(CboNome))
-
-            resultados_T=[]
-            cluster=""
-            for i in range(len(X_Original)):
-                tupla=(X_Original['Ida'][i],X_Original['Volta'][i],cluster, X_Original['CR'][i],CursoNome[i],X_Original['CB'][i],CboNome[i],"M")
-                resultados_T.append(tupla)
-            #...
-            Resultados_T= pd.DataFrame(resultados_T)
-
-            #...
-            dict = {0:"Ida",
-                    1:"Volta",
-                    2:"Cluster",
-                    3:"Curso",
-                    4:"Curso_Nome",
-                    5:"Cbo",
-                    6:"Cbo_Nome",
-                    7:"Genero"
-            }
-            Resultados_T.rename(columns=dict,inplace=True)       
-            Resultados_T.to_csv(save_results_to + 'Resultados_T_Masc_100.csv', index=False)    
-        return
+     cluster_2 = df[df['Cluster'] == 2]
+     cluster_2.to_csv(save_results_to + 'Maiores_Distancias_cluster 2.csv', index=False)
+    
+     return
