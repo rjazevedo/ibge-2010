@@ -189,7 +189,8 @@ if fase == 33:
     # #  2-  Profissões desequilibradas 
     #    # - Profissões desequilibradas - Pontos Selecionados(Grandes Desloamentos) 
     # ibge_functions.dadosoriginais_resultados()
-    # ibge_functions_results.resultados_filtragem_10_100()
+    # 
+    ibge_functions_results.resultados_filtragem_10_100()
     #
     ibge_functions_results.resultados_distancia()
     #    # - Profissões desequilibradas - Quais as profissões onde homens e mulheres estão em clusters diferentes?

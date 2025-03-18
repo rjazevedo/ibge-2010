@@ -3019,9 +3019,9 @@ def resultados_filtragem_10_100():
 
 
     Kmeans3_T['Genero'] = 'O'
+    Kmeans3_T['C0'] = ''
     Kmeans3_T['C1'] = ''
     Kmeans3_T['C2'] = ''
-    Kmeans3_T['C3'] = ''
     Kmeans3_T.to_csv(save_results_to + 'Kmeans3_T_O.csv', index=False) 
 
     file_path3 = save_results_to + 'Kmeans3_T_O.csv'
@@ -3030,9 +3030,9 @@ def resultados_filtragem_10_100():
 
     ## 10% de 100% Masculino
     ## https://colab.research.google.com/drive/1cZx_GBJ-z18Ji4JrTZGTqzmfw-PuAcZl?authuser=1#scrollTo=kY71WzkoNmGS
+    Resultados_T_Masc_100['C0'] = ''
     Resultados_T_Masc_100['C1'] = ''
     Resultados_T_Masc_100['C2'] = ''
-    Resultados_T_Masc_100['C3'] = ''
 
     Ida          = []
     Volta        = []
@@ -3059,9 +3059,9 @@ def resultados_filtragem_10_100():
                 Cbo.append(Resultados_T_Masc_100.Cbo[j])
                 Cbo_Nome.append(Resultados_T_Masc_100.Cbo_Nome[j])
                 Genero.append(Resultados_T_Masc_100.Genero[j])
-                C1.append(Resultados_T_Masc_100.C1[j])
-                C2.append(Resultados_T_Masc_100.C2[j])
-                C3.append(Resultados_T_Masc_100.C3[j])
+                C1.append(Resultados_T_Masc_100.C0[j])
+                C2.append(Resultados_T_Masc_100.C1[j])
+                C3.append(Resultados_T_Masc_100.C2[j])
 
     Resultados_T_Masc_100_F = []
     for i in range(len(Ida)):
@@ -3080,17 +3080,17 @@ def resultados_filtragem_10_100():
             5:"Cbo",
             6:"Cbo_Nome",
             7:"Genero",
-            8:"C1",
-            9:"C2",
-            10:"C3"
+            8:"C0",
+            9:"C1",
+            10:"C2"
     }
     Resultados_T_Masc_100_49.rename(columns=dict,inplace=True)     
     Resultados_T_Masc_100_49.to_csv(save_results_to + 'Resultados_T_Masc_100_49.csv', index=False) 
        
     ## 10% de 100% Feminino
+    Resultados_T_Fem_100['C0'] = ''
     Resultados_T_Fem_100['C1'] = ''
     Resultados_T_Fem_100['C2'] = ''
-    Resultados_T_Fem_100['C3'] = ''
 
     Ida          = []
     Volta        = []
@@ -3117,9 +3117,9 @@ def resultados_filtragem_10_100():
                 Cbo.append(Resultados_T_Fem_100.Cbo[j])
                 Cbo_Nome.append(Resultados_T_Fem_100.Cbo_Nome[j])
                 Genero.append(Resultados_T_Fem_100.Genero[j])
-                C1.append(Resultados_T_Fem_100.C1[j])
-                C2.append(Resultados_T_Fem_100.C2[j])
-                C3.append(Resultados_T_Fem_100.C3[j])
+                C1.append(Resultados_T_Fem_100.C0[j])
+                C2.append(Resultados_T_Fem_100.C1[j])
+                C3.append(Resultados_T_Fem_100.C2[j])
 
     Resultados_T_Fem_100_F = []
     for i in range(len(Ida)):
@@ -3138,9 +3138,9 @@ def resultados_filtragem_10_100():
             5:"Cbo",
             6:"Cbo_Nome",
             7:"Genero",
-            8:"C1",
-            9:"C2",
-            10:"C3"
+            8:"C0",
+            9:"C1",
+            10:"C2"
     }
     Resultados_T_Fem_100_49.rename(columns=dict,inplace=True)      
     Resultados_T_Fem_100_49.to_csv(save_results_to + 'Resultados_T_Fem_100_49.csv', index=False) 
@@ -3154,8 +3154,15 @@ def distancia2d(x1, y1, x2, y2):
   c = math.sqrt(math.pow(a, 2) + math.pow(b, 2))
   return c
 
+
+
 def resultados_distancia():
     # https://colab.research.google.com/drive/1cZx_GBJ-z18Ji4JrTZGTqzmfw-PuAcZl?authuser=1#scrollTo=WOd24Bbxa4kI
+
+    # https://colab.research.google.com/drive/1cZx_GBJ-z18Ji4JrTZGTqzmfw-PuAcZl?authuser=1#scrollTo=jV2mGZbHZp3N
+    # https://colab.research.google.com/drive/1cTpvuIkd7FGZbzEkScU4xKGFb6sSbGog?authuser=1#scrollTo=QXtm_sUoN3nB
+    # https://colab.research.google.com/drive/1a-okMAgV1-pdXjzSq4y83SJjhnpAiVP2?authuser=1#scrollTo=bRvFa5Coi222
+    
     save_results_to = 'graficos/'
     file_path = save_results_to + 'Kmeans3_T_O.csv'
     file_path1 =  save_results_to + 'Resultados_T_Masc_100_49.csv'
@@ -3192,7 +3199,7 @@ def resultados_distancia():
         # vamos obter a distância entre eles
         distancia = distancia2d(x0, y0, x, y)
         #print("Distância entre os dois pontos: %0.2f" % distancia);
-        Resultados_T_Fem_100_49.C1[j] = distancia
+        Resultados_T_Fem_100_49.C0[j] = distancia
 
     # Cluster 2 ...
     # x1 = 66.464375
@@ -3203,7 +3210,7 @@ def resultados_distancia():
         # vamos obter a distância entre eles
         distancia = distancia2d(x1, y1, x, y)
         #print("Distância entre os dois pontos: %0.2f" % distancia);
-        Resultados_T_Fem_100_49.C2[j] = distancia    
+        Resultados_T_Fem_100_49.C1[j] = distancia    
 
     # Cluster 3 ...
     # x1 = 25.76357143
@@ -3214,7 +3221,7 @@ def resultados_distancia():
         # vamos obter a distância entre eles
         distancia = distancia2d(x2, y2, x, y)
         #print("Distância entre os dois pontos: %0.2f" % distancia);
-        Resultados_T_Fem_100_49.C3[j] = distancia    
+        Resultados_T_Fem_100_49.C2[j] = distancia    
 
     # Masculino =============================================================================
     # Cluster 1 ...
@@ -3226,7 +3233,7 @@ def resultados_distancia():
         # vamos obter a distância entre eles
         distancia = distancia2d(x0, y0, x, y)
         #print("Distância entre os dois pontos: %0.2f" % distancia);
-        Resultados_T_Masc_100_49.C1[j] = distancia
+        Resultados_T_Masc_100_49.C0[j] = distancia
 
     # Cluster 2 ...
     # x1 = 66.464375
@@ -3237,7 +3244,7 @@ def resultados_distancia():
         # vamos obter a distância entre eles
         distancia = distancia2d(x1, y1, x, y)
         #print("Distância entre os dois pontos: %0.2f" % distancia);
-        Resultados_T_Masc_100_49.C2[j] = distancia    
+        Resultados_T_Masc_100_49.C1[j] = distancia    
 
     # Cluster 3 ...
     # x1 = 25.76357143
@@ -3248,7 +3255,7 @@ def resultados_distancia():
         # vamos obter a distância entre eles
         distancia = distancia2d(x2, y2, x, y)
         #print("Distância entre os dois pontos: %0.2f" % distancia);
-        Resultados_T_Masc_100_49.C3[j] = distancia    
+        Resultados_T_Masc_100_49.C2[j] = distancia    
     
     
     distancia_mudanca_clusters = pd.concat([Resultados_T_Fem_100_49, Resultados_T_Masc_100_49, Kmeans3_T_O])
