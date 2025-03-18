@@ -100,29 +100,30 @@ if fase == 10:
 
 # Fase 20: Análise Exploratória ...
 if fase == 20:  #QP1
-    # Função para:
-    # - clusterização com k=3, 
-    # - geração do gráfico K-Means com K=3 (10% - Todos os Cursos - Clusterização) 
-    # - geração do arquivo Kmeans3_T.csv   
-    ################## ------------------------ 
+    # # Função para:
+    # # - clusterização com k=3, 
+    # # - geração do gráfico K-Means com K=3 (10% - Todos os Cursos - Clusterização) 
+    # # - geração do arquivo Kmeans3_T.csv   
+    # ################## ------------------------ 
+    #
     ibge_functions.Profissoes_Cursos()    
-    # ## Empregabilidade x Salario
-    ibge_functions.median_salario() 
-    ibge_functions_exploratory_analysis.separar_cursos_por_clusters()
-    ibge_functions_exploratory_analysis.medianas_por_clusters()
-    ibge_functions.Salarios() 
-    ibge_functions.Salarios_cursos_commaisprofissoes() 
+    # # ## Empregabilidade x Salario
+    # ibge_functions.median_salario() 
+    # ibge_functions_exploratory_analysis.separar_cursos_por_clusters()
+    # ibge_functions_exploratory_analysis.medianas_por_clusters()
+    # ibge_functions.Salarios() 
+    # ibge_functions.Salarios_cursos_commaisprofissoes() 
 
-    ibge_functions.Soma_PivotTable()
-    ibge_functions.Coluna_Empregabilidade()
+    # ibge_functions.Soma_PivotTable()
+    # ibge_functions.Coluna_Empregabilidade()
     
-    ibge_functions.Empregabilidade() 
-    ibge_functions.Empregabilidade_cursos_commaisprofissoes() 
-    # ibge_functions_exploratory_analysis.correlacao_empregabilidade_salario() ...Gráfico 
+    # ibge_functions.Empregabilidade() 
+    # ibge_functions.Empregabilidade_cursos_commaisprofissoes() 
+    # # ibge_functions_exploratory_analysis.correlacao_empregabilidade_salario() ...Gráfico 
 
-    ibge_functions_exploratory_analysis.plot_selected_courses()
-    ibge_functions.plot_selected_courses_1()
-    pass
+    # ibge_functions_exploratory_analysis.plot_selected_courses()
+    # ibge_functions.plot_selected_courses_1()
+    # pass
 
 # Fase 30: Resultados da Análise ...
 if fase == 30:  #QP2
@@ -189,8 +190,9 @@ if fase == 33:
     # #  2-  Profissões desequilibradas 
     #    # - Profissões desequilibradas - Pontos Selecionados(Grandes Desloamentos) 
     # ibge_functions.dadosoriginais_resultados()
-    # 
-    ibge_functions_results.resultados_filtragem_10_100()
+    # ibge_functions_results.resultados_filtragem_10_100()
+    #
+    ibge_functions_results.resultados_distancia()
     #    # - Profissões desequilibradas - Quais as profissões onde homens e mulheres estão em clusters diferentes?
     #    # - Profissões desequlibradas  - Gráfico com os pontos que mudaram de cluster e diagrama de Voronoi
     # #  3-  Profissões equilibradas - 40%-60% ...

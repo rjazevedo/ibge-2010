@@ -3145,3 +3145,16 @@ def resultados_filtragem_10_100():
     Resultados_T_Fem_100_49.rename(columns=dict,inplace=True)      
     Resultados_T_Fem_100_49.to_csv(save_results_to + 'Resultados_T_Fem_100_49.csv', index=False) 
     return
+
+def resultados_distancia():
+    # https://colab.research.google.com/drive/1cZx_GBJ-z18Ji4JrTZGTqzmfw-PuAcZl?authuser=1#scrollTo=WOd24Bbxa4kI
+    save_results_to = 'graficos/'
+    file_path = save_results_to + 'Kmeans3_T_O.csv'
+    file_path1 =  save_results_to + 'Resultados_T_Masc_100_49.csv'
+    file_path2 =  save_results_to + 'Resultados_T_Fem_100_49.csv'
+
+    # Kmeans3_T_O = Kmeans3_T_O.drop(columns=['Unnamed: 0'])
+    # Resultados_T_Fem_100_49 = Resultados_T_Fem_100_49.drop(columns=['Unnamed: 0'])
+    # Resultados_T_Masc_100_49 = Resultados_T_Masc_100_49.drop(columns=['Unnamed: 0'])
+    
+    return
