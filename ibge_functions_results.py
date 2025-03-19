@@ -3267,7 +3267,7 @@ def resultados_distancia():
     return
 
 def voronoi():
-
+    # https://colab.research.google.com/drive/1ZP-z62wJWWM3zr52MYMjO_-brdvThb88?authuser=1#scrollTo=-oDzCfNi5PK0
     import numpy as np
     import matplotlib.pyplot as plt
     from scipy.spatial import Voronoi, voronoi_plot_2d

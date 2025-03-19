@@ -187,13 +187,13 @@ if fase == 33:
     ibge_functions_results.deslocamento_clusters()
     ibge_functions_results.deslocamentos_maioresdistancias_clusters()
     #  2-  Profissões desequilibradas 
-       # - Profissões desequilibradas - Pontos Selecionados(Grandes Desloamentos) 
+       # - Profissões desequilibradas - Pontos Selecionados(Grandes Desloamentos)     
+       # - Profissões desequilibradas - Quais as profissões onde homens e mulheres estão em clusters diferentes?
     ibge_functions.dadosoriginais_resultados()
     ibge_functions_results.resultados_filtragem_10_100()
     ibge_functions_results.resultados_distancia()
-    ibge_functions_results.voronoi()
-       # - Profissões desequilibradas - Quais as profissões onde homens e mulheres estão em clusters diferentes?
        # - Profissões desequlibradas  - Gráfico com os pontos que mudaram de cluster e diagrama de Voronoi
+    ibge_functions_results.voronoi()
     #  3-  Profissões equilibradas - 40%-60% ...
        # - Tabela com os pontos clusterizados contendo as porcentagens de masculinos e femininos
        # - Tabela com os pontos selecionados(40%-60%)
