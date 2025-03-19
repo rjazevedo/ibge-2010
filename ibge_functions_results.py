@@ -3162,7 +3162,7 @@ def resultados_distancia():
     # https://colab.research.google.com/drive/1cZx_GBJ-z18Ji4JrTZGTqzmfw-PuAcZl?authuser=1#scrollTo=jV2mGZbHZp3N
     # https://colab.research.google.com/drive/1cTpvuIkd7FGZbzEkScU4xKGFb6sSbGog?authuser=1#scrollTo=QXtm_sUoN3nB
     # https://colab.research.google.com/drive/1a-okMAgV1-pdXjzSq4y83SJjhnpAiVP2?authuser=1#scrollTo=bRvFa5Coi222
-    
+
     save_results_to = 'graficos/'
     file_path = save_results_to + 'Kmeans3_T_O.csv'
     file_path1 =  save_results_to + 'Resultados_T_Masc_100_49.csv'
@@ -3264,4 +3264,99 @@ def resultados_distancia():
 
     distancia_mudanca_clusters.to_csv(save_results_to + 'distancia_mudanca_clusters.csv', index=False)
 
+    return
+
+def voronoi():
+
+    import numpy as np
+    import matplotlib.pyplot as plt
+    from scipy.spatial import Voronoi, voronoi_plot_2d
+    # Create a set of points for the example:
+    # rng = np.random.default_rng()
+    # points = rng.random((10,2))
+
+    # plot
+    # Generate the Voronoi diagram for the points:
+    # cluster 1 : 27.00526316,21.78263158  ... Vermelho
+    # cluster 2 : 66.464375,  77.656875    ... Azul
+    # cluster 3:  25.76357143,62.88071429  ... Verde
+    # xpoints = np.array([20.09, 34.66, 28.31])
+    # ypoints = np.array([32.74, 43.11, 39.27])
+    fem=  [20.09, 32.74,49.52, 52.32,18.86, 62.32,11.87,71.31,41.75,47.08,13.23,37.01,73.32, 43.39,27.49, 39.83,34.08, 70.54,31.97, 69.25,77.99, 69.72]
+    masc= [34.66, 43.11,42.23, 21.82,11.40, 24.06, 8.58, 35.28,25.13,25.90,68.44,64.93,50.82, 45.37,44.66, 67.29,48.45, 77.56,48.40, 81.73,46.05, 25.99]
+    orig= [28.31, 39.27,49.00, 48.17,18.42, 58.22,11.63, 67.67,36.51,39.98,53.81,61.88,68.94, 43.67,43.95, 66.11,47.35, 77.14,45.94, 80.22,76.28, 66.06]
+
+    points = np.array([[27.00526316,21.78263158], [66.464375,77.656875], [25.76357143,62.88071429]])
+    vor = Voronoi(points)
+
+    #Use voronoi_plot_2d to plot the diagram:
+    #fig = voronoi_plot_2d(vor)
+    # fig, ax = plt.subplots(20,10)
+    voronoi_plot_2d(vor)
+    #plt.plot(xpoints[0], ypoints[1], 'o', color='pink')
+    #plt.plot(xpoints[0], ypoints[1], 'o', color='blue')
+    #plt.plot(xpoints[0], ypoints[1], 'o', color='black')
+    # 442: Química  / 2113: Químicos
+    plt.scatter([orig[0], fem[0], masc[0]], [orig[1], fem[1], masc[1]], color=['black', 'pink', 'blue'])
+    plt.annotate("", xy=(fem[0], fem[1]), xytext=(orig[0], orig[1]),arrowprops=dict(arrowstyle="->", color='pink'))
+    plt.annotate("", xy=(masc[0], masc[1]), xytext=(orig[0], orig[1]),arrowprops=dict(arrowstyle="->", color='blue'))
+    # 142: Ciências da Educação / 2341: Professores do Ensino Fundamental
+    plt.scatter([orig[2], fem[2], masc[2]], [orig[3], fem[3], masc[3]], color=['black', 'pink', 'blue'])
+    plt.annotate("", xy=(fem[2], fem[3]), xytext=(orig[2], orig[3]),arrowprops=dict(arrowstyle="->", color='pink'))
+    plt.annotate("", xy=(masc[2], masc[3]), xytext=(orig[2], orig[3]),arrowprops=dict(arrowstyle="->", color='blue'))
+    #142: Ciências da Educação / 2342: Professores do Ensino Pré-Escolar
+    plt.scatter([orig[4], fem[4], masc[4]], [orig[5], fem[5], masc[5]], color=['black', 'pink', 'blue'])
+    plt.annotate("", xy=(fem[4], fem[5]), xytext=(orig[4], orig[5]),arrowprops=dict(arrowstyle="->", color='pink'))
+    plt.annotate("", xy=(masc[4], masc[5]), xytext=(orig[4], orig[5]),arrowprops=dict(arrowstyle="->", color='blue'))
+    #142: Ciências da Educação / 2351: Especialistas em Métodos Pedagógicos
+    plt.scatter([orig[6], fem[6], masc[6]], [orig[7], fem[7], masc[7]], color=['black', 'pink', 'blue'])
+    plt.annotate("", xy=(fem[6], fem[7]), xytext=(orig[6], orig[7]),arrowprops=dict(arrowstyle="->", color='pink'))
+    plt.annotate("", xy=(masc[6], masc[7]), xytext=(orig[6], orig[7]),arrowprops=dict(arrowstyle="->", color='blue'))
+    #214: Design e estilismo / 2163: Desenhistas de Produtos e Vestuário
+    plt.scatter([orig[8], fem[8], masc[8]], [orig[9], fem[9], masc[9]], color=['black', 'pink', 'blue'])
+    plt.annotate("", xy=(fem[8], fem[9]), xytext=(orig[8], orig[9]),arrowprops=dict(arrowstyle="->", color='pink'))
+    plt.annotate("", xy=(masc[8], masc[9]), xytext=(orig[8], orig[9]),arrowprops=dict(arrowstyle="->", color='blue'))
+    #221: Religião /  2636: Ministros de Cultos Religiosos, Missionários e
+    plt.scatter([orig[10], fem[10], masc[10]], [orig[11], fem[11], masc[11]], color=['black', 'pink', 'blue'])
+    plt.annotate("", xy=(fem[10], fem[11]), xytext=(orig[10], orig[11]),arrowprops=dict(arrowstyle="->", color='pink'))
+    plt.annotate("", xy=(masc[10], masc[11]), xytext=(orig[10], orig[11]),arrowprops=dict(arrowstyle="->", color='blue'))
+    #322:Biblioteconomia, informação, arquivos 2622: Bibliotecários, documentaristas e Afins
+    plt.scatter([orig[12], fem[12], masc[12]], [orig[13], fem[13], masc[13]], color=['black', 'pink', 'blue'])
+    plt.annotate("", xy=(fem[12], fem[13]), xytext=(orig[12], orig[13]),arrowprops=dict(arrowstyle="->", color='pink'))
+    plt.annotate("", xy=(masc[12], masc[13]), xytext=(orig[12], orig[13]),arrowprops=dict(arrowstyle="->", color='blue'))
+    #521: Engenharia Mecânica e Metalurgia / 2144:Engenheiros Mecânicos
+    plt.scatter([orig[14], fem[14], masc[14]], [orig[15], fem[15], masc[15]], color=['black', 'pink', 'blue'])
+    plt.annotate("", xy=(fem[14], fem[15]), xytext=(orig[14], orig[15]),arrowprops=dict(arrowstyle="->", color='pink'))
+    plt.annotate("", xy=(masc[14], masc[15]), xytext=(orig[14], orig[15]),arrowprops=dict(arrowstyle="->", color='blue'))
+    #522: Elericidade e Energia / 2151:Engenheiros Eletricistas
+    plt.scatter([orig[16], fem[16], masc[16]], [orig[17], fem[17], masc[17]], color=['black', 'pink', 'blue'])
+    plt.annotate("", xy=(fem[16], fem[17]), xytext=(orig[16], orig[17]),arrowprops=dict(arrowstyle="->", color='pink'))
+    plt.annotate("", xy=(masc[16], masc[17]), xytext=(orig[16], orig[17]),arrowprops=dict(arrowstyle="->", color='blue'))
+    #621: Produção Agrícola e Pecuária / 2132:Agrônomos e Afins
+    plt.scatter([orig[18], fem[18], masc[18]], [orig[19], fem[19], masc[19]], color=['black', 'pink', 'blue'])
+    plt.annotate("", xy=(fem[18], fem[19]), xytext=(orig[18], orig[19]),arrowprops=dict(arrowstyle="->", color='pink'))
+    plt.annotate("", xy=(masc[18], masc[19]), xytext=(orig[18], orig[19]),arrowprops=dict(arrowstyle="->", color='blue'))
+    #762: Serviço Social e Orientação / 2635: Assistentes Sociais
+    plt.scatter([orig[20], fem[20], masc[20]], [orig[21], fem[21], masc[21]], color=['black', 'pink', 'blue'])
+    plt.annotate("", xy=(fem[20], fem[21]), xytext=(orig[20], orig[21]),arrowprops=dict(arrowstyle="->", color='pink'))
+    plt.annotate("", xy=(masc[20], masc[21]), xytext=(orig[20], orig[21]),arrowprops=dict(arrowstyle="->", color='blue'))
+
+    plt.xlim(0.0, 100.0)
+    plt.ylim(0.0, 100.0)
+    # plt.show()
+    string1 = "voronoi" + ".png"
+    save_results_to = 'graficos/'  
+    plt.savefig(save_results_to + string1)  
+
+    #fig, ax = plt.subplots()
+    ##Use voronoi_plot_2d to plot the diagram again, with some settings customized:
+    ##fig = voronoi_plot_2d(vor, show_vertices=False, line_colors='orange', line_width=2, line_alpha=0.6, point_size=2)
+    #voronoi_plot_2d(vor, show_vertices=False, line_colors='orange', line_width=2, line_alpha=0.6, point_size=2)
+    #plt.plot(xpoints[0], ypoints[0], 'o', color='pink')
+    #plt.plot(xpoints[1], ypoints[1], 'o', color='blue')
+    #plt.plot(xpoints[2], ypoints[2], 'o', color='black')
+    #plt.xlim(0.0, 100.0)
+    #plt.ylim(0.0, 100.0)
+    #plt.show()    
+    
     return
