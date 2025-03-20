@@ -3360,3 +3360,53 @@ def voronoi():
     #plt.show()    
     
     return
+
+def Juntar_40_60Porcento_Genero():
+    # https://colab.research.google.com/drive/1y-78aFKxXgt60VIyjhBmM6pn6XzcXZUC?authuser=1#scrollTo=1s_bOT2Q6QTU
+    save_results_to = 'graficos/'
+    save_results_too = 'processados/CSVs_ArquivoFinalGraduados/'
+
+    save_results_to = 'graficos/'
+    file_path = save_results_to + 'Kmeans3_T.csv'
+    file_path1 =  save_results_too + 'Brasil_Graduados_Fem.csv'
+    file_path2 =  save_results_too + 'Brasil_Graduados_Masc.csv'
+    file_path3 =  save_results_too + 'Brasil_Graduados.csv'
+
+    
+    Kmeans3_T         = pd.read_csv(file_path)
+    Final_Fem_CSV     = pd.read_csv(file_path1)
+    Final_Masc_CSV    = pd.read_csv(file_path2 )
+    Final             = pd.read_csv(file_path3)
+
+    #...
+    Kmeans3_T       = Kmeans3_T.drop(columns=['Unnamed: 0'])
+    Final_Fem_CSV   = Final_Fem_CSV.drop(columns=['Unnamed: 0'])
+    Final_Masc_CSV  = Final_Masc_CSV.drop(columns=['Unnamed: 0'])
+    Final           = Final.drop(columns=['Unnamed: 0'])
+    # ...
+    Kmeans3_T.head(3)
+    Final_Fem_CSV.head(3)
+    Final_Masc_CSV.head(3)
+    Final.head(3)
+
+    Kmeans3_T['M'] = ''
+    Kmeans3_T['F'] = ''
+    Kmeans3_T['Total'] = ''
+    Kmeans3_T['MP'] = ''
+    Kmeans3_T['FP'] = ''
+    Kmeans3_T.head(3)
+
+    for i in range(0,1): 
+    # for i in range(len(Kmeans3_T)): 
+        Qtdade = 0
+        for j in range(len(Final_Fem_CSV)):
+            # if (str(Final_Fem_CSV.Ocupação_Código[i])== '2341.0') & (str(Final_Fem_CSV.Curso_Superior_Graduação_Código[i]) == '142.0'):
+            if ((str(Final_Fem_CSV.Ocupação_Código[j]))== (str(Kmeans3_T.Cbo[i]))) & (str(Final_Fem_CSV.Curso_Superior_Graduação_Código[j]) == str(Kmeans3_T.Curso[i])):
+                Qtdade = Qtdade + 1
+            Kmeans3_T.F[i] = Qtdade
+    Kmeans3_T.to_csv(save_results_to + 'Kmeans3_T_F_45_55.csv')        
+    # -----------------------------------------------------------------------------------
+
+    # Kmeans3_T  = pd.read_csv(save_results_to + 'Kmeans3_T_F_45_55.csv')
+
+    return

@@ -196,12 +196,13 @@ if fase == 33:
     ibge_functions_results.voronoi()
     #  3-  Profissões equilibradas - 40%-60% ...
        # - Tabela com os pontos clusterizados contendo as porcentagens de masculinos e femininos
+    ibge_functions_results.Juntar_40_60Porcento_Genero()
        # - Tabela com os pontos selecionados(40%-60%)
        # - Gráfico com os ponto selecionados(40%-60%)
        # - Plotar o gráfico das idades, usando o arquivo de femininos e masculinos! Com isso poderemos ver a distribuição das idades para o masculino e para o feminino!
     #  4-  Gráfico dos vetores centrados em(0,0)
     
-    # pass
+    pass
 
 if fase == 34:
     # #QP4
