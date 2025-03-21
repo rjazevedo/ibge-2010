@@ -3503,12 +3503,14 @@ def graf_selecionados_40_60():
     ax.annotate("", xy=(fem[16], fem[17]), xytext=(orig[16], orig[17]),arrowprops=dict(arrowstyle="->", color='pink'))
     ax.annotate("", xy=(masc[16], masc[17]), xytext=(orig[16], orig[17]),arrowprops=dict(arrowstyle="->", color='blue'))
 
-
     plt.xlabel("Cursos")
     plt.ylabel("Profissões")
     plt.title("10%  -  Visualização dos três gráficos - Gênero - 40-60%")
     plt.xlim(0.0, 100.0)
     plt.ylim(0.0, 100.0)
-    plt.show()
+    # plt.show()
+    string1 = "Pontos_Selecionados_40_60" + ".png"
+    save_results_to = 'graficos/'  
+    plt.savefig(save_results_to + string1)  
 
     return
