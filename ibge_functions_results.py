@@ -3391,31 +3391,46 @@ def Juntar_40_60Porcento_Genero():
     Kmeans3_T['MP'] = ''
     Kmeans3_T['FP'] = ''
 
-    # for i in range(0,1): 
-    for i in range(len(Kmeans3_T)): 
-        Qtdade = 0
-        for j in range(len(Final_Fem_CSV)):
-            # if (str(Final_Fem_CSV.Ocupação_Código[i])== '2341.0') & (str(Final_Fem_CSV.Curso_Superior_Graduação_Código[i]) == '142.0'):
-            if ((str(Final_Fem_CSV.Ocupação_Código[j]))== (str(int(Kmeans3_T.Cbo[i])))) & (str(Final_Fem_CSV.Curso_Superior_Graduação_Código[j]) == str(int(Kmeans3_T.Curso[i]))):
-                Qtdade = Qtdade + 1
-        Kmeans3_T.F[i] = Qtdade 
-            
-    Kmeans3_T.to_csv(save_results_to + 'Kmeans3_T_F_45_55.csv')     
-       
-    # -----------------------------------------------------------------------------------
-    # -----------------------------------------------------------------------------------
-    Kmeans3_T  = pd.read_csv(save_results_to + 'Kmeans3_T_F_45_55.csv')
+    # # for i in range(0,1): 
+    # for i in range(len(Kmeans3_T)): 
+    #     Qtdade = 0
+    #     for j in range(len(Final_Fem_CSV)):
+    #         # if (str(Final_Fem_CSV.Ocupação_Código[i])== '2341.0') & (str(Final_Fem_CSV.Curso_Superior_Graduação_Código[i]) == '142.0'):
+    #         if ((str(Final_Fem_CSV.Ocupação_Código[j]))== (str(int(Kmeans3_T.Cbo[i])))) & (str(Final_Fem_CSV.Curso_Superior_Graduação_Código[j]) == str(int(Kmeans3_T.Curso[i]))):
+    #             Qtdade = Qtdade + 1
+    #     Kmeans3_T.F[i] = int(Qtdade)            
+    # Kmeans3_T.to_csv(save_results_to + 'Kmeans3_T_F_45_55.csv')       
+    # # -----------------------------------------------------------------------------------
+    # # -----------------------------------------------------------------------------------
+
+    # Kmeans3_T  = pd.read_csv(save_results_to + 'Kmeans3_T_F_45_55.csv')
+    # for i in range(len(Kmeans3_T)):
+    #     Qtdade = 0
+    #     for j in range(len(Final_Masc_CSV)):
+    #         if ((str(Final_Masc_CSV.Ocupação_Código[j]))== (str(int(Kmeans3_T.Cbo[i])))) & (str(Final_Masc_CSV.Curso_Superior_Graduação_Código[j]) == str(int(Kmeans3_T.Curso[i]))):
+    #             Qtdade = Qtdade + 1
+    #     Kmeans3_T.M[i] = int(Qtdade)
+    # Kmeans3_T.to_csv(save_results_to + 'Kmeans3_T_FM_45_55.csv')      
+    # # -----------------------------------------------------------------------------------    
+    # # -----------------------------------------------------------------------------------
+
+    # Kmeans3_T  = pd.read_csv(save_results_to + 'Kmeans3_T_FM_45_55.csv')
+    # for i in range(len(Kmeans3_T)):
+    #     Qtdade = 0
+    #     for j in range(len(Final)):
+    #         if ((str(Final.Ocupação_Código[j]))== (str(int(Kmeans3_T.Cbo[i])))) & (str(Final.Curso_Superior_Graduação_Código[j]) == str(int(Kmeans3_T.Curso[i]))):
+    #             Qtdade = Qtdade + 1
+    #     Kmeans3_T.Total[i] = int(Qtdade)
+    # Kmeans3_T.to_csv(save_results_to + 'Kmeans3_T_TFM_45_55.csv')  
+    # # -----------------------------------------------------------------------------------    
+    # # -----------------------------------------------------------------------------------   
+
+    Kmeans3_T  = pd.read_csv(save_results_to + 'Kmeans3_T_TFM_45_55.csv')
     for i in range(len(Kmeans3_T)):
-        Qtdade = 0
-        for j in range(len(Final_Masc_CSV)):
-            if ((str(Final_Masc_CSV.Ocupação_Código[j]))== (str(int(Kmeans3_T.Cbo[i])))) & (str(Final_Masc_CSV.Curso_Superior_Graduação_Código[j]) == str(int(Kmeans3_T.Curso[i]))):
-                Qtdade = Qtdade + 1
-        Kmeans3_T.M[i] = Qtdade
-
-    Kmeans3_T.to_csv(save_results_to + 'Kmeans3_T_FM_45_55.csv')      
+        Kmeans3_T.MP[i] = round(Kmeans3_T.M[i]/Kmeans3_T.Total[i],2)
+        Kmeans3_T.FP[i] = round(Kmeans3_T.F[i]/Kmeans3_T.Total[i],2)
+    Kmeans3_T.to_csv(save_results_to + 'Kmeans3_T_FMT_MPFP_45_55.csv')     
     # -----------------------------------------------------------------------------------    
-    # -----------------------------------------------------------------------------------
-
-    Kmeans3_T  = pd.read_csv(save_results_to + 'Kmeans3_T_FM_45_55.csv')
- 
+    # -----------------------------------------------------------------------------------   
+        
     return
