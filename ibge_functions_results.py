@@ -3448,3 +3448,67 @@ def pt_selecionados_40_60():
             print("")
     return
 
+def graf_selecionados_40_60():
+# https://colab.research.google.com/drive/1nMcfas4gH8ci_Rwb96xAqQOW65bCw_oK?authuser=1#scrollTo=9v3iLoWpJIRk
+# Gráfico com os pontos selecionados(40% á 60%)     
+    import matplotlib.pyplot as plt
+    fig, ax = plt.subplots()
+
+    fem = [23.55,35.32,6.28,19.0,40.62,76.53,24.26,46.14,13.23,14.61,58.08,65.4,67.71,90.34,74.96,89.98,93.47,89.51]
+    masc= [22.81,36.36,19.52,13.08,42.89,71.77,25.66,51.68,15.32,10.76,59.42,64.88,69.18,92.22,68.2,87.3,92.88,88.84]
+    orig = [23.21,35.79,10.46,15.01,41.63,74.28,24.99,48.96,14.32,12.17,58.87,65.09,68.58,91.44,72.02,88.86,93.2,89.21]
+
+    #212.0 MÚSICA E ARTES CÊNICAS 2354.0 OUTROS PROFESSORES DE MÚSICA
+    ax.scatter([orig[0], fem[0], masc[0]], [orig[1], fem[1], masc[1]], color=['black', 'pink', 'blue'])
+    ax.annotate("", xy=(fem[0], fem[1]), xytext=(orig[0], orig[1]),arrowprops=dict(arrowstyle="->", color='pink'))
+    ax.annotate("", xy=(masc[0], masc[1]), xytext=(orig[0], orig[1]),arrowprops=dict(arrowstyle="->", color='blue'))
+
+    #214.0 DESIGN E ESTILISMO 2166.0 DESENHISTAS GRÁFICOS E DE MULTIMÍDIA
+    ax.scatter([orig[2], fem[2], masc[2]], [orig[3], fem[3], masc[3]], color=['black', 'pink', 'blue'])
+    ax.annotate("", xy=(fem[2], fem[3]), xytext=(orig[2], orig[3]),arrowprops=dict(arrowstyle="->", color='pink'))
+    ax.annotate("", xy=(masc[2], masc[3]), xytext=(orig[2], orig[3]),arrowprops=dict(arrowstyle="->", color='blue'))
+
+    #321.0 JORNALISMO E REPORTAGEM 2642.0 JORNALISTAS
+    ax.scatter([orig[4], fem[4], masc[4]], [orig[5], fem[5], masc[5]], color=['black', 'pink', 'blue'])
+    ax.annotate("", xy=(fem[4], fem[5]), xytext=(orig[4], orig[5]),arrowprops=dict(arrowstyle="->", color='pink'))
+    ax.annotate("", xy=(masc[4], masc[5]), xytext=(orig[4], orig[5]),arrowprops=dict(arrowstyle="->", color='blue'))
+
+    #342.0 MARKETING E PUBLICIDADE 2431.0 PROFISSIONAIS DA PUBLICIDADE E DA COMERCIALIZAÇÃO
+    ax.scatter([orig[6], fem[6], masc[6]], [orig[7], fem[7], masc[7]], color=['black', 'pink', 'blue'])
+    ax.annotate("", xy=(fem[6], fem[7]), xytext=(orig[6], orig[7]),arrowprops=dict(arrowstyle="->", color='pink'))
+    ax.annotate("", xy=(masc[6], masc[7]), xytext=(orig[6], orig[7]),arrowprops=dict(arrowstyle="->", color='blue'))
+
+    #342.0 MARKETING E PUBLICIDADE 1221.0 DIRIGENTES DE VENDAS E  COMERCIALIZAÇÃO
+    ax.scatter([orig[8], fem[8], masc[8]], [orig[9], fem[9], masc[9]], color=['black', 'pink', 'blue'])
+    ax.annotate("", xy=(fem[8], fem[9]), xytext=(orig[8], orig[9]),arrowprops=dict(arrowstyle="->", color='pink'))
+    ax.annotate("", xy=(masc[8], masc[9]), xytext=(orig[8], orig[9]),arrowprops=dict(arrowstyle="->", color='blue'))
+
+    #344.0 CONTABILIDADE E TRIBUTAÇÃO 2411.0 CONTADORES
+    ax.scatter([orig[10], fem[10], masc[10]], [orig[11], fem[11], masc[11]], color=['black', 'pink', 'blue'])
+    ax.annotate("", xy=(fem[10], fem[11]), xytext=(orig[10], orig[11]),arrowprops=dict(arrowstyle="->", color='pink'))
+    ax.annotate("", xy=(masc[10], masc[11]), xytext=(orig[10], orig[11]),arrowprops=dict(arrowstyle="->", color='blue'))
+
+    #380.0 DIREITO 2611.0 ADVOGADOS E JURISTAS
+    ax.scatter([orig[12], fem[12], masc[12]], [orig[13], fem[13], masc[13]], color=['black', 'pink', 'blue'])
+    ax.annotate("", xy=(fem[12], fem[13]), xytext=(orig[12], orig[13]),arrowprops=dict(arrowstyle="->", color='pink'))
+    ax.annotate("", xy=(masc[12], masc[13]), xytext=(orig[12], orig[13]),arrowprops=dict(arrowstyle="->", color='blue'))
+
+    #581.0 ARQUITETURA E URBANISMO 2161.0 ARQUITETOS DE EDIFICAÇÕES
+    ax.scatter([orig[14], fem[14], masc[14]], [orig[15], fem[15], masc[15]], color=['black', 'pink', 'blue'])
+    ax.annotate("", xy=(fem[14], fem[15]), xytext=(orig[14], orig[15]),arrowprops=dict(arrowstyle="->", color='pink'))
+    ax.annotate("", xy=(masc[14], masc[15]), xytext=(orig[14], orig[15]),arrowprops=dict(arrowstyle="->", color='blue'))
+
+    #724.0 ODONTOLOGIA 2261.0 DENTISTAS
+    ax.scatter([orig[16], fem[16], masc[16]], [orig[17], fem[17], masc[17]], color=['black', 'pink', 'blue'])
+    ax.annotate("", xy=(fem[16], fem[17]), xytext=(orig[16], orig[17]),arrowprops=dict(arrowstyle="->", color='pink'))
+    ax.annotate("", xy=(masc[16], masc[17]), xytext=(orig[16], orig[17]),arrowprops=dict(arrowstyle="->", color='blue'))
+
+
+    plt.xlabel("Cursos")
+    plt.ylabel("Profissões")
+    plt.title("10%  -  Visualização dos três gráficos - Gênero - 40-60%")
+    plt.xlim(0.0, 100.0)
+    plt.ylim(0.0, 100.0)
+    plt.show()
+
+    return
