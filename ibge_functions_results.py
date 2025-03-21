@@ -3391,39 +3391,39 @@ def Juntar_40_60Porcento_Genero():
     Kmeans3_T['MP'] = ''
     Kmeans3_T['FP'] = ''
 
-    # # for i in range(0,1): 
-    # for i in range(len(Kmeans3_T)): 
-    #     Qtdade = 0
-    #     for j in range(len(Final_Fem_CSV)):
-    #         # if (str(Final_Fem_CSV.Ocupação_Código[i])== '2341.0') & (str(Final_Fem_CSV.Curso_Superior_Graduação_Código[i]) == '142.0'):
-    #         if ((str(Final_Fem_CSV.Ocupação_Código[j]))== (str(int(Kmeans3_T.Cbo[i])))) & (str(Final_Fem_CSV.Curso_Superior_Graduação_Código[j]) == str(int(Kmeans3_T.Curso[i]))):
-    #             Qtdade = Qtdade + 1
-    #     Kmeans3_T.F[i] = int(Qtdade)            
-    # Kmeans3_T.to_csv(save_results_to + 'Kmeans3_T_F_45_55.csv')       
-    # # -----------------------------------------------------------------------------------
-    # # -----------------------------------------------------------------------------------
+    # for i in range(0,1): 
+    for i in range(len(Kmeans3_T)): 
+        Qtdade = 0
+        for j in range(len(Final_Fem_CSV)):
+            # if (str(Final_Fem_CSV.Ocupação_Código[i])== '2341.0') & (str(Final_Fem_CSV.Curso_Superior_Graduação_Código[i]) == '142.0'):
+            if ((str(Final_Fem_CSV.Ocupação_Código[j]))== (str(int(Kmeans3_T.Cbo[i])))) & (str(Final_Fem_CSV.Curso_Superior_Graduação_Código[j]) == str(int(Kmeans3_T.Curso[i]))):
+                Qtdade = Qtdade + 1
+        Kmeans3_T.F[i] = int(Qtdade)            
+    Kmeans3_T.to_csv(save_results_to + 'Kmeans3_T_F_45_55.csv')       
+    # -----------------------------------------------------------------------------------
+    # -----------------------------------------------------------------------------------
 
-    # Kmeans3_T  = pd.read_csv(save_results_to + 'Kmeans3_T_F_45_55.csv')
-    # for i in range(len(Kmeans3_T)):
-    #     Qtdade = 0
-    #     for j in range(len(Final_Masc_CSV)):
-    #         if ((str(Final_Masc_CSV.Ocupação_Código[j]))== (str(int(Kmeans3_T.Cbo[i])))) & (str(Final_Masc_CSV.Curso_Superior_Graduação_Código[j]) == str(int(Kmeans3_T.Curso[i]))):
-    #             Qtdade = Qtdade + 1
-    #     Kmeans3_T.M[i] = int(Qtdade)
-    # Kmeans3_T.to_csv(save_results_to + 'Kmeans3_T_FM_45_55.csv')      
-    # # -----------------------------------------------------------------------------------    
-    # # -----------------------------------------------------------------------------------
+    Kmeans3_T  = pd.read_csv(save_results_to + 'Kmeans3_T_F_45_55.csv')
+    for i in range(len(Kmeans3_T)):
+        Qtdade = 0
+        for j in range(len(Final_Masc_CSV)):
+            if ((str(Final_Masc_CSV.Ocupação_Código[j]))== (str(int(Kmeans3_T.Cbo[i])))) & (str(Final_Masc_CSV.Curso_Superior_Graduação_Código[j]) == str(int(Kmeans3_T.Curso[i]))):
+                Qtdade = Qtdade + 1
+        Kmeans3_T.M[i] = int(Qtdade)
+    Kmeans3_T.to_csv(save_results_to + 'Kmeans3_T_FM_45_55.csv')      
+    # -----------------------------------------------------------------------------------    
+    # -----------------------------------------------------------------------------------
 
-    # Kmeans3_T  = pd.read_csv(save_results_to + 'Kmeans3_T_FM_45_55.csv')
-    # for i in range(len(Kmeans3_T)):
-    #     Qtdade = 0
-    #     for j in range(len(Final)):
-    #         if ((str(Final.Ocupação_Código[j]))== (str(int(Kmeans3_T.Cbo[i])))) & (str(Final.Curso_Superior_Graduação_Código[j]) == str(int(Kmeans3_T.Curso[i]))):
-    #             Qtdade = Qtdade + 1
-    #     Kmeans3_T.Total[i] = int(Qtdade)
-    # Kmeans3_T.to_csv(save_results_to + 'Kmeans3_T_TFM_45_55.csv')  
-    # # -----------------------------------------------------------------------------------    
-    # # -----------------------------------------------------------------------------------   
+    Kmeans3_T  = pd.read_csv(save_results_to + 'Kmeans3_T_FM_45_55.csv')
+    for i in range(len(Kmeans3_T)):
+        Qtdade = 0
+        for j in range(len(Final)):
+            if ((str(Final.Ocupação_Código[j]))== (str(int(Kmeans3_T.Cbo[i])))) & (str(Final.Curso_Superior_Graduação_Código[j]) == str(int(Kmeans3_T.Curso[i]))):
+                Qtdade = Qtdade + 1
+        Kmeans3_T.Total[i] = int(Qtdade)
+    Kmeans3_T.to_csv(save_results_to + 'Kmeans3_T_TFM_45_55.csv')  
+    # -----------------------------------------------------------------------------------    
+    # -----------------------------------------------------------------------------------   
 
     Kmeans3_T  = pd.read_csv(save_results_to + 'Kmeans3_T_TFM_45_55.csv')
     for i in range(len(Kmeans3_T)):
@@ -3434,3 +3434,17 @@ def Juntar_40_60Porcento_Genero():
     # -----------------------------------------------------------------------------------   
         
     return
+
+# https://colab.research.google.com/drive/1y-78aFKxXgt60VIyjhBmM6pn6XzcXZUC?authuser=1
+# Pontos selecionados(40% á 60%) 
+def pt_selecionados_40_60():
+    save_results_to = 'graficos/'
+    file_path = save_results_to + 'Kmeans3_T_FMT_MPFP_45_55.csv'     
+    Kmeans3_T         = pd.read_csv(file_path)
+   
+    for i in range(len(Kmeans3_T)):
+        if ((Kmeans3_T.MP[i]>= 0.40) & (Kmeans3_T.MP[i]<= 0.60)) & ((Kmeans3_T.FP[i]>= 0.40) & (Kmeans3_T.FP[i]<= 0.60)):
+            print(Kmeans3_T.index[i], Kmeans3_T.Ida[i],Kmeans3_T.Volta[i],Kmeans3_T.Cluster[i],Kmeans3_T.Curso[i],Kmeans3_T.Curso_Nome[i],Kmeans3_T.Cbo[i],Kmeans3_T.Cbo_Nome[i],Kmeans3_T.M[i],Kmeans3_T.F[i],Kmeans3_T.Total[i],Kmeans3_T.MP[i],Kmeans3_T.FP[i])
+            print("")
+    return
+
