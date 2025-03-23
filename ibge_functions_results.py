@@ -3514,3 +3514,6 @@ def graf_selecionados_40_60():
     plt.savefig(save_results_to + string1)  
 
     return
+ 
+def genero_faixa_etaria():
+    return
