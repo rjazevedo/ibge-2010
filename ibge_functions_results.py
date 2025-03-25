@@ -2123,6 +2123,136 @@ def Tabela_Ida_Volta_Idade(path2,name2,id):
        df1.to_csv(save_results_to + '100Porcent_DF_60_Limpo.csv')
        df1.to_excel(save_results_to + '100Porcent_DF_60_Limpo.xlsx')         
     return   
+#----------------------------------------------------------------------------------------
+#def Tabela_Ida_Volta_Idade_Gen(path2,name2,id):
+def Tabela_Ida_Volta_Idade_Gen(id,sx):
+
+    if sx =='F':   
+        if id == '29':
+            logging.info(" Gerando a Tabela de idas e voltas idade 29")   
+            df =  os.path.join('graficos/','100Porcent_DF_29_F.csv')
+            df1 = pd.read_csv(df)  
+        if id == '30-39':
+            logging.info(" Gerando a Tabela de idas e voltas idade 30-39")   
+            df =  os.path.join('graficos/','100Porcent_DF_30-39_F.csv')
+            df1 = pd.read_csv(df)   
+        if id == '40-49':
+            logging.info(" Gerando a Tabela de idas e voltas idade 40-49")   
+            df =  os.path.join('graficos/','100Porcent_DF_40-49_F.csv')
+            df1 = pd.read_csv(df)  
+        if id == '50-59':
+            logging.info(" Gerando a Tabela de idas e voltas idade 50-59")   
+            df =  os.path.join('graficos/','100Porcent_DF_50-59_F.csv')
+            df1 = pd.read_csv(df)   
+        if id == '60':
+            logging.info(" Gerando a Tabela de idas e voltas idade 60")   
+            df =  os.path.join('graficos/' ,'100Porcent_DF_60_F.csv')
+            df1 = pd.read_csv(df)          
+        save_results_to = 'graficos/'  
+
+        # Remover_Voltas_semIdas_e_Idas_semVoltas
+        # tive que passar tudo pra float porque tem valores menores do que 0 ...
+        for i in range(len(df1)):
+            if (df1['Ida'][i].astype('float')==0.00) & (df1['Volta'][i].astype('float')!=0.00):
+                df1 = df1.drop(i)
+            else:
+                if (df1['Ida'][i].astype('float')!=0.00) & (df1['Volta'][i].astype('float')==0.00):
+                    df1 = df1.drop(i)
+                else:
+                    if (df1['Ida'][i].astype('float')==0.00) & (df1['Volta'][i].astype('float')==0.00):
+                        df1 = df1.drop(i)
+        # Remover_Duplicados
+        df1 = df1.drop_duplicates(subset=['Ida','Volta'])
+        # Reset_Indice
+        df1 = df1.reset_index(drop=True)
+        # Salvar_Tabela
+        # df1.to_csv(save_results_to + '10Porcent_DF_Limpo.csv')
+        # df1.to_excel(save_results_to + '10Porcent_DF_Limpo.xlsx')
+        if id == '29':
+        # df.to_csv(save_results_to + '10Porcent_DF_Fem.csv')
+        # Transformar as colunas( Cluster, Curso e Cbo) para inteiro ...
+            df1.to_csv(save_results_to + '100Porcent_DF_29_Limpo_F.csv')
+            df1.to_excel(save_results_to + '100Porcent_DF_29_Limpo_F.xlsx')
+        if id == '30-39':
+        # df.to_csv(save_results_to + '10Porcent_DF_Masc.csv')
+            df1.to_csv(save_results_to + '100Porcent_DF_30-39_Limpo_F.csv')
+            df1.to_excel(save_results_to + '100Porcent_DF_30-39_Limpo_F.xlsx')
+        if id == '40-49':
+        # df.to_csv(save_results_to + '10Porcent_DF_Masc.csv')
+            df1.to_csv(save_results_to + '100Porcent_DF_40-49_Limpo_F.csv')
+            df1.to_excel(save_results_to + '100Porcent_DF_40-49_Limpo_F.xlsx') 
+        if id == '50-59':
+        # df.to_csv(save_results_to + '10Porcent_DF_Masc.csv')
+            df1.to_csv(save_results_to + '100Porcent_DF_50-59_Limpo_F.csv')
+            df1.to_excel(save_results_to + '100Porcent_DF_50-59_Limpo_F.xlsx')  
+        if id == '60':
+        # df.to_csv(save_results_to + '10Porcent_DF_Masc.csv')
+            df1.to_csv(save_results_to + '100Porcent_DF_60_Limpo_F.csv')
+            df1.to_excel(save_results_to + '100Porcent_DF_60_Limpo_F.xlsx')     
+    else:
+        if sx=='M':
+           if id == '29':
+                logging.info(" Gerando a Tabela de idas e voltas idade 29")   
+                df =  os.path.join('graficos/','100Porcent_DF_29_M.csv')
+                df1 = pd.read_csv(df)  
+           if id == '30-39':
+                logging.info(" Gerando a Tabela de idas e voltas idade 30-39")   
+                df =  os.path.join('graficos/','100Porcent_DF_30-39_M.csv')
+                df1 = pd.read_csv(df)   
+           if id == '40-49':
+                logging.info(" Gerando a Tabela de idas e voltas idade 40-49")   
+                df =  os.path.join('graficos/','100Porcent_DF_40-49_M.csv')
+                df1 = pd.read_csv(df)  
+           if id == '50-59':
+                logging.info(" Gerando a Tabela de idas e voltas idade 50-59")   
+                df =  os.path.join('graficos/','100Porcent_DF_50-59_M.csv')
+                df1 = pd.read_csv(df)   
+           if id == '60':
+                logging.info(" Gerando a Tabela de idas e voltas idade 60")   
+                df =  os.path.join('graficos/' ,'100Porcent_DF_60_M.csv')
+                df1 = pd.read_csv(df)          
+           save_results_to = 'graficos/'  
+
+            # Remover_Voltas_semIdas_e_Idas_semVoltas
+            # tive que passar tudo pra float porque tem valores menores do que 0 ...
+           for i in range(len(df1)):
+                if (df1['Ida'][i].astype('float')==0.00) & (df1['Volta'][i].astype('float')!=0.00):
+                    df1 = df1.drop(i)
+                else:
+                    if (df1['Ida'][i].astype('float')!=0.00) & (df1['Volta'][i].astype('float')==0.00):
+                        df1 = df1.drop(i)
+                    else:
+                        if (df1['Ida'][i].astype('float')==0.00) & (df1['Volta'][i].astype('float')==0.00):
+                            df1 = df1.drop(i)
+            # Remover_Duplicados
+           df1 = df1.drop_duplicates(subset=['Ida','Volta'])
+            # Reset_Indice
+           df1 = df1.reset_index(drop=True)
+            # Salvar_Tabela
+            # df1.to_csv(save_results_to + '10Porcent_DF_Limpo.csv')
+            # df1.to_excel(save_results_to + '10Porcent_DF_Limpo.xlsx')
+           if id == '29':
+                # df.to_csv(save_results_to + '10Porcent_DF_Fem.csv')
+                # Transformar as colunas( Cluster, Curso e Cbo) para inteiro ...
+                df1.to_csv(save_results_to + '100Porcent_DF_29_Limpo_M.csv')
+                df1.to_excel(save_results_to + '100Porcent_DF_29_Limpo_M.xlsx')
+           if id == '30-39':
+                # df.to_csv(save_results_to + '10Porcent_DF_Masc.csv')
+                df1.to_csv(save_results_to + '100Porcent_DF_30-39_Limpo_M.csv')
+                df1.to_excel(save_results_to + '100Porcent_DF_30-39_Limpo_M.xlsx')
+           if id == '40-49':
+                # df.to_csv(save_results_to + '10Porcent_DF_Masc.csv')
+                df1.to_csv(save_results_to + '100Porcent_DF_40-49_Limpo_M.csv')
+                df1.to_excel(save_results_to + '100Porcent_DF_40-49_Limpo_M.xlsx') 
+           if id == '50-59':
+               # df.to_csv(save_results_to + '10Porcent_DF_Masc.csv')
+                df1.to_csv(save_results_to + '100Porcent_DF_50-59_Limpo_M.csv')
+                df1.to_excel(save_results_to + '100Porcent_DF_50-59_Limpo_M.xlsx')  
+           if id == '60':
+                # df.to_csv(save_results_to + '10Porcent_DF_Masc.csv')
+                df1.to_csv(save_results_to + '100Porcent_DF_60_Limpo_M.csv')
+                df1.to_excel(save_results_to + '100Porcent_DF_60_Limpo_M.xlsx')    
+    return   
 
 # Terminar ...
 def Adiciona_Coluna_Idade(path1,name1,path2,name2,name3,id):
