@@ -535,11 +535,21 @@ def Ida_Volta_Idade_Gen():
 def Tabela_Ida_Volta_Idade_Gen():
     # path2 = ibge_variable.paths(13)
     # name2 = ibge_variable.names(10)
-    # ibge_functions_results.Tabela_Ida_Volta_Idade(path2,name2,'29')
-    # ibge_functions_results.Tabela_Ida_Volta_Idade(path2,name2,'30-39')
-    # ibge_functions_results.Tabela_Ida_Volta_Idade(path2,name2,'40-49')
-    # ibge_functions_results.Tabela_Ida_Volta_Idade(path2,name2,'50-59')
-    # ibge_functions_results.Tabela_Ida_Volta_Idade(path2,name2,'60')
+
+    # Feminino
+    ibge_functions_results.Tabela_Ida_Volta_Idade_Gen('29','F')
+    ibge_functions_results.Tabela_Ida_Volta_Idade_Gen('30-39','F')
+    ibge_functions_results.Tabela_Ida_Volta_Idade_Gen('40-49','F')
+    ibge_functions_results.Tabela_Ida_Volta_Idade_Gen('50-59','F')
+    ibge_functions_results.Tabela_Ida_Volta_Idade_Gen('60','F')
+
+    # Masculino 
+    ibge_functions_results.Tabela_Ida_Volta_Idade_Gen('29','M')
+    ibge_functions_results.Tabela_Ida_Volta_Idade_Gen('30-39','M')
+    ibge_functions_results.Tabela_Ida_Volta_Idade_Gen('40-49','M')
+    ibge_functions_results.Tabela_Ida_Volta_Idade_Gen('50-59','M')
+    ibge_functions_results.Tabela_Ida_Volta_Idade_Gen('60','M')
+
     return
 
 #--------------------------------------------------------------------
