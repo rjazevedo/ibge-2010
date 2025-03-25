@@ -2254,6 +2254,424 @@ def Tabela_Ida_Volta_Idade_Gen(id,sx):
                 df1.to_excel(save_results_to + '100Porcent_DF_60_Limpo_M.xlsx')    
     return   
 
+def Adiciona_Coluna_Idade_Gen(path1,name1,path2,name2,name3,id, sx):
+    if sx=='F':
+        # Leitura do arquivo df original, masculino ou feminino
+        if id == 'O':
+            logging.info(" Adicionando a coluna Idade ao arquivo original")   
+            # df =  os.path.join(path2[0],name2[2])
+            df =  os.path.join('graficos/','Kmeans3_T.csv')
+            X = pd.read_csv(df)    
+            # X = X.drop(columns=['Unnamed: 0'])
+            # X = X.drop(columns=['Unnamed: 0.1'])
+        else:
+            if id == '29':
+                logging.info(" Adicionando a coluna Idade ao arquivo Idade 29")   
+                # df =  os.path.join(path2[0],name2[2])
+                df =  os.path.join('graficos/','100Porcent_DF_29_Limpo_F.csv')
+                X = pd.read_csv(df)    
+                # X = X.drop(columns=['Unnamed: 0'])
+                # X = X.drop(columns=['Unnamed: 0.1'])
+            else:
+                if id == '30-39':
+                    logging.info(" Adicionando a coluna Idade ao arquivo Idade 30-39")   
+                    df =  os.path.join('graficos/','100Porcent_DF_30-39_Limpo_F.csv')
+                    X = pd.read_csv(df)    
+                    X = X.drop(columns=['Unnamed: 0'])
+                    # X = X.drop(columns=['Unnamed: 0.1'])
+                else:
+                    if id == '40-49':
+                        logging.info(" Adicionando a coluna Idade ao arquivo Idade 40-49")   
+                        df =  os.path.join('graficos/','100Porcent_DF_40-49_Limpo_F.csv')
+                        X = pd.read_csv(df)    
+                        X = X.drop(columns=['Unnamed: 0'])
+                        # X = X.drop(columns=['Unnamed: 0.1'])
+                    else: 
+                        if id == '50-59':
+                            logging.info(" Adicionando a coluna Idade ao arquivo Idade 50-59")   
+                            df =  os.path.join('graficos/','100Porcent_DF_50-59_Limpo_F.csv')
+                            X = pd.read_csv(df)    
+                            X = X.drop(columns=['Unnamed: 0'])
+                            # X = X.drop(columns=['Unnamed: 0.1'])  
+                        else: 
+                            if id == '60':
+                                logging.info(" Adicionando a coluna Idade ao arquivo Idade 60")   
+                                df =  os.path.join('graficos/','100Porcent_DF_60_Limpo_F.csv')
+                                X = pd.read_csv(df)    
+                                X = X.drop(columns=['Unnamed: 0'])
+                                # X = X.drop(columns=['Unnamed: 0.1'])  
+        # df =  os.path.join(path2[0],name2[2])
+        # X = pd.read_csv(df)    
+        save_results_to = 'graficos/' 
+        # X = X.drop(columns=['Unnamed: 0'])
+        # X = X.drop(columns=['Unnamed: 0.1'])
+        # # Remoção de Features 
+        # X = X.drop(columns=['CB'])
+        # X = X.drop(columns=['CR'])
+        CursosCenso = ibge_functions_descriptive_analysis.ibge_cursos_filter(path1[0],name1[2])
+        csv_CBO = os.path.join(path1[0],name1[1]) # Tabela de CBOs
+        CBO = pd.read_csv(csv_CBO)
+        # Pontos do Gráfico na côr Preta (c = 'k')
+        # x= X['Ida']
+        # y= X['Volta']
+        # plt.xlabel("Cursos")
+        # plt.ylabel("Profissões")
+        # plt.title("10%  - Cursos e Profissões do Censo_" + G)
+        # plt.ylim(0, 100) # definir limite do eixo
+        # plt.xlim(0, 100) # definir limite do eixo
+        # plt.grid()
+        # plt.scatter(x,y,marker = '*')
+        # string1 = "10%  - Cursos e Profissões do Censo_" + G + ".pdf"
+        # save_results_to = 'graficos/'  
+        # plt.savefig(save_results_to + string1)  
+        # Leitura do arquivo df original, masculino ou feminino
+        if id == 'O':
+            X['Idade'] = "O"    
+            # X.to_csv(save_results_to +'Resultados_T_Original_Idade.csv')  
+            return X
+        else:
+            # ...
+            CursoNome =[]
+            for i in range (len(X['CR'])):
+                for index, row in CursosCenso.iterrows():
+                    if (str(X['CR'][i]) == CursosCenso['curso_num'][index]):
+                        CursoNome.append(CursosCenso['curso_nome'][index])
+            # CursoNome
+            CboNome =[]
+            for i in range (len(X['CB'])):
+                for index, row in CBO.iterrows():
+                    if (int(X['CB'][i]) == CBO['Cod_CBO'][index]):
+                        CboNome.append(CBO['Nome_CBO'][index])  
+            if id == '29':
+                # Adicionando coluna
+                resultados_T=[]
+                cluster=""
+                # X['Cluster'][i]
+                for i in range(len(X['CR'])):
+                    tupla=(X['Ida'][i],X['Volta'][i],cluster, X['CR'][i],CursoNome[i],X['CB'][i],CboNome[i],"29")
+                    resultados_T.append(tupla)
+                #...
+                Resultados_T= pd.DataFrame(resultados_T)
+                #...
+                dict = {0:"Ida",
+                        1:"Volta",
+                        2:"Cluster",
+                        3:"Curso",
+                        4:"Curso_Nome",
+                        5:"Cbo",
+                        6:"Cbo_Nome",
+                        7:"Idade"
+                }
+                Resultados_T.rename(columns=dict,inplace=True)   
+                # Resultados_T.to_csv(save_results_to +'Resultados_T_29.csv')   
+                return Resultados_T          
+            else:
+                if id == '30-39':
+                    # Adicionando coluna
+                    resultados_T=[]
+                    cluster=""
+                    # X['Cluster'][i]
+                    for i in range(len(X['CR'])):
+                        tupla=(X['Ida'][i],X['Volta'][i],cluster, X['CR'][i],CursoNome[i],X['CB'][i],CboNome[i],"30-39")
+                        resultados_T.append(tupla)
+                    #...
+                    Resultados_T= pd.DataFrame(resultados_T)
+                    #...
+                    dict = {0:"Ida",
+                            1:"Volta",
+                            2:"Cluster",
+                            3:"Curso",
+                            4:"Curso_Nome",
+                            5:"Cbo",
+                            6:"Cbo_Nome",
+                            7:"Idade"
+                    }
+                    Resultados_T.rename(columns=dict,inplace=True)   
+                    # Resultados_T.to_csv(save_results_to +'Resultados_T_30_39.csv')   
+                    return Resultados_T      
+                else:  
+                    if id == '40-49':
+                        # Adicionando coluna
+                        resultados_T=[]
+                        cluster=""
+                        # X['Cluster'][i]
+                        for i in range(len(X['CR'])):
+                            tupla=(X['Ida'][i],X['Volta'][i],cluster, X['CR'][i],CursoNome[i],X['CB'][i],CboNome[i],"40-49")
+                            resultados_T.append(tupla)
+                        #...
+                        Resultados_T= pd.DataFrame(resultados_T)
+                        #...
+                        dict = {0:"Ida",
+                                1:"Volta",
+                                2:"Cluster",
+                                3:"Curso",
+                                4:"Curso_Nome",
+                                5:"Cbo",
+                                6:"Cbo_Nome",
+                                7:"Idade"
+                        }
+                        Resultados_T.rename(columns=dict,inplace=True)   
+                        # Resultados_T.to_csv(save_results_to +'Resultados_T_40_49.csv')   
+                        return Resultados_T   
+                    else:
+                            if id == '50-59':
+                                # Adicionando coluna
+                                resultados_T=[]
+                                cluster=""
+                                # X['Cluster'][i]
+                                for i in range(len(X['CR'])):
+                                    tupla=(X['Ida'][i],X['Volta'][i],cluster, X['CR'][i],CursoNome[i],X['CB'][i],CboNome[i],"50-59")
+                                    resultados_T.append(tupla)
+                                #...
+                                Resultados_T= pd.DataFrame(resultados_T)
+                                #...
+                                dict = {0:"Ida",
+                                        1:"Volta",
+                                        2:"Cluster",
+                                        3:"Curso",
+                                        4:"Curso_Nome",
+                                        5:"Cbo",
+                                        6:"Cbo_Nome",
+                                        7:"Idade"
+                                }
+                                Resultados_T.rename(columns=dict,inplace=True)   
+                                # Resultados_T.to_csv(save_results_to +'Resultados_T_50_59.csv')   
+                                return Resultados_T 
+                            else:  
+                                if id == '60':
+                                    # Adicionando coluna
+                                    resultados_T=[]
+                                    cluster=""
+                                    # X['Cluster'][i]
+                                    for i in range(len(X['CR'])):
+                                        tupla=(X['Ida'][i],X['Volta'][i],cluster, X['CR'][i],CursoNome[i],X['CB'][i],CboNome[i],"60")
+                                        resultados_T.append(tupla)
+                                    #...
+                                    Resultados_T= pd.DataFrame(resultados_T)
+                                    #...
+                                    dict = {0:"Ida",
+                                            1:"Volta",
+                                            2:"Cluster",
+                                            3:"Curso",
+                                            4:"Curso_Nome",
+                                            5:"Cbo",
+                                            6:"Cbo_Nome",
+                                            7:"Idade"
+                                    }
+                                    Resultados_T.rename(columns=dict,inplace=True)   
+                                    # Resultados_T.to_csv(save_results_to +'Resultados_T_60.csv')   
+                                    return Resultados_T 
+
+    if sx=='M':
+        # Leitura do arquivo df original, masculino ou feminino
+        if id == 'O':
+            logging.info(" Adicionando a coluna Idade ao arquivo original")   
+            # df =  os.path.join(path2[0],name2[2])
+            df =  os.path.join('graficos/','Kmeans3_T.csv')
+            X = pd.read_csv(df)    
+            # X = X.drop(columns=['Unnamed: 0'])
+            # X = X.drop(columns=['Unnamed: 0.1'])
+        else:
+            if id == '29':
+                logging.info(" Adicionando a coluna Idade ao arquivo Idade 29")   
+                # df =  os.path.join(path2[0],name2[2])
+                df =  os.path.join('graficos/','100Porcent_DF_29_Limpo_M.csv')
+                X = pd.read_csv(df)    
+                # X = X.drop(columns=['Unnamed: 0'])
+                # X = X.drop(columns=['Unnamed: 0.1'])
+            else:
+                if id == '30-39':
+                    logging.info(" Adicionando a coluna Idade ao arquivo Idade 30-39")   
+                    df =  os.path.join('graficos/','100Porcent_DF_30-39_Limpo_M.csv')
+                    X = pd.read_csv(df)    
+                    X = X.drop(columns=['Unnamed: 0'])
+                    # X = X.drop(columns=['Unnamed: 0.1'])
+                else:
+                    if id == '40-49':
+                        logging.info(" Adicionando a coluna Idade ao arquivo Idade 40-49")   
+                        df =  os.path.join('graficos/','100Porcent_DF_40-49_Limpo_M.csv')
+                        X = pd.read_csv(df)    
+                        X = X.drop(columns=['Unnamed: 0'])
+                        # X = X.drop(columns=['Unnamed: 0.1'])
+                    else: 
+                        if id == '50-59':
+                            logging.info(" Adicionando a coluna Idade ao arquivo Idade 50-59")   
+                            df =  os.path.join('graficos/','100Porcent_DF_50-59_Limpo_M.csv')
+                            X = pd.read_csv(df)    
+                            X = X.drop(columns=['Unnamed: 0'])
+                            # X = X.drop(columns=['Unnamed: 0.1'])  
+                        else: 
+                            if id == '60':
+                                logging.info(" Adicionando a coluna Idade ao arquivo Idade 60")   
+                                df =  os.path.join('graficos/','100Porcent_DF_60_Limpo_M.csv')
+                                X = pd.read_csv(df)    
+                                X = X.drop(columns=['Unnamed: 0'])
+                                # X = X.drop(columns=['Unnamed: 0.1'])  
+        # df =  os.path.join(path2[0],name2[2])
+        # X = pd.read_csv(df)    
+        save_results_to = 'graficos/' 
+        # X = X.drop(columns=['Unnamed: 0'])
+        # X = X.drop(columns=['Unnamed: 0.1'])
+        # # Remoção de Features 
+        # X = X.drop(columns=['CB'])
+        # X = X.drop(columns=['CR'])
+        CursosCenso = ibge_functions_descriptive_analysis.ibge_cursos_filter(path1[0],name1[2])
+        csv_CBO = os.path.join(path1[0],name1[1]) # Tabela de CBOs
+        CBO = pd.read_csv(csv_CBO)
+        # Pontos do Gráfico na côr Preta (c = 'k')
+        # x= X['Ida']
+        # y= X['Volta']
+        # plt.xlabel("Cursos")
+        # plt.ylabel("Profissões")
+        # plt.title("10%  - Cursos e Profissões do Censo_" + G)
+        # plt.ylim(0, 100) # definir limite do eixo
+        # plt.xlim(0, 100) # definir limite do eixo
+        # plt.grid()
+        # plt.scatter(x,y,marker = '*')
+        # string1 = "10%  - Cursos e Profissões do Censo_" + G + ".pdf"
+        # save_results_to = 'graficos/'  
+        # plt.savefig(save_results_to + string1)  
+        # Leitura do arquivo df original, masculino ou feminino
+        if id == 'O':
+            X['Idade'] = "O"    
+            # X.to_csv(save_results_to +'Resultados_T_Original_Idade.csv')  
+            return X
+        else:
+            # ...
+            CursoNome =[]
+            for i in range (len(X['CR'])):
+                for index, row in CursosCenso.iterrows():
+                    if (str(X['CR'][i]) == CursosCenso['curso_num'][index]):
+                        CursoNome.append(CursosCenso['curso_nome'][index])
+            # CursoNome
+            CboNome =[]
+            for i in range (len(X['CB'])):
+                for index, row in CBO.iterrows():
+                    if (int(X['CB'][i]) == CBO['Cod_CBO'][index]):
+                        CboNome.append(CBO['Nome_CBO'][index])  
+            if id == '29':
+                # Adicionando coluna
+                resultados_T=[]
+                cluster=""
+                # X['Cluster'][i]
+                for i in range(len(X['CR'])):
+                    tupla=(X['Ida'][i],X['Volta'][i],cluster, X['CR'][i],CursoNome[i],X['CB'][i],CboNome[i],"29")
+                    resultados_T.append(tupla)
+                #...
+                Resultados_T= pd.DataFrame(resultados_T)
+                #...
+                dict = {0:"Ida",
+                        1:"Volta",
+                        2:"Cluster",
+                        3:"Curso",
+                        4:"Curso_Nome",
+                        5:"Cbo",
+                        6:"Cbo_Nome",
+                        7:"Idade"
+                }
+                Resultados_T.rename(columns=dict,inplace=True)   
+                # Resultados_T.to_csv(save_results_to +'Resultados_T_29.csv')   
+                return Resultados_T          
+            else:
+                if id == '30-39':
+                    # Adicionando coluna
+                    resultados_T=[]
+                    cluster=""
+                    # X['Cluster'][i]
+                    for i in range(len(X['CR'])):
+                        tupla=(X['Ida'][i],X['Volta'][i],cluster, X['CR'][i],CursoNome[i],X['CB'][i],CboNome[i],"30-39")
+                        resultados_T.append(tupla)
+                    #...
+                    Resultados_T= pd.DataFrame(resultados_T)
+                    #...
+                    dict = {0:"Ida",
+                            1:"Volta",
+                            2:"Cluster",
+                            3:"Curso",
+                            4:"Curso_Nome",
+                            5:"Cbo",
+                            6:"Cbo_Nome",
+                            7:"Idade"
+                    }
+                    Resultados_T.rename(columns=dict,inplace=True)   
+                    # Resultados_T.to_csv(save_results_to +'Resultados_T_30_39.csv')   
+                    return Resultados_T      
+                else:  
+                    if id == '40-49':
+                        # Adicionando coluna
+                        resultados_T=[]
+                        cluster=""
+                        # X['Cluster'][i]
+                        for i in range(len(X['CR'])):
+                            tupla=(X['Ida'][i],X['Volta'][i],cluster, X['CR'][i],CursoNome[i],X['CB'][i],CboNome[i],"40-49")
+                            resultados_T.append(tupla)
+                        #...
+                        Resultados_T= pd.DataFrame(resultados_T)
+                        #...
+                        dict = {0:"Ida",
+                                1:"Volta",
+                                2:"Cluster",
+                                3:"Curso",
+                                4:"Curso_Nome",
+                                5:"Cbo",
+                                6:"Cbo_Nome",
+                                7:"Idade"
+                        }
+                        Resultados_T.rename(columns=dict,inplace=True)   
+                        # Resultados_T.to_csv(save_results_to +'Resultados_T_40_49.csv')   
+                        return Resultados_T   
+                    else:
+                            if id == '50-59':
+                                # Adicionando coluna
+                                resultados_T=[]
+                                cluster=""
+                                # X['Cluster'][i]
+                                for i in range(len(X['CR'])):
+                                    tupla=(X['Ida'][i],X['Volta'][i],cluster, X['CR'][i],CursoNome[i],X['CB'][i],CboNome[i],"50-59")
+                                    resultados_T.append(tupla)
+                                #...
+                                Resultados_T= pd.DataFrame(resultados_T)
+                                #...
+                                dict = {0:"Ida",
+                                        1:"Volta",
+                                        2:"Cluster",
+                                        3:"Curso",
+                                        4:"Curso_Nome",
+                                        5:"Cbo",
+                                        6:"Cbo_Nome",
+                                        7:"Idade"
+                                }
+                                Resultados_T.rename(columns=dict,inplace=True)   
+                                # Resultados_T.to_csv(save_results_to +'Resultados_T_50_59.csv')   
+                                return Resultados_T 
+                            else:  
+                                if id == '60':
+                                    # Adicionando coluna
+                                    resultados_T=[]
+                                    cluster=""
+                                    # X['Cluster'][i]
+                                    for i in range(len(X['CR'])):
+                                        tupla=(X['Ida'][i],X['Volta'][i],cluster, X['CR'][i],CursoNome[i],X['CB'][i],CboNome[i],"60")
+                                        resultados_T.append(tupla)
+                                    #...
+                                    Resultados_T= pd.DataFrame(resultados_T)
+                                    #...
+                                    dict = {0:"Ida",
+                                            1:"Volta",
+                                            2:"Cluster",
+                                            3:"Curso",
+                                            4:"Curso_Nome",
+                                            5:"Cbo",
+                                            6:"Cbo_Nome",
+                                            7:"Idade"
+                                    }
+                                    Resultados_T.rename(columns=dict,inplace=True)   
+                                    # Resultados_T.to_csv(save_results_to +'Resultados_T_60.csv')   
+                                    return Resultados_T                             
+                          
+                           
+    return 
+#------------------------------------------------------------------------------
 # Terminar ...
 def Adiciona_Coluna_Idade(path1,name1,path2,name2,name3,id):
     # Leitura do arquivo df original, masculino ou feminino
@@ -2493,6 +2911,61 @@ def Juntar_10Porcento_Idade():
     df_row2.to_csv(save_results_to + 'Resultados_T_29_30-39_40-49_50-59_60Kmeans3_Idade.csv')   
     return
 
+def Juntar_10Porcento_Idade_Gen():
+    # Feminino
+    path1 = ibge_variable.paths(12)
+    name1 = ibge_variable.names(6)
+    path2 = ibge_variable.paths(13)
+    name2 = ibge_variable.names(9)
+    name3 = ibge_variable.names(10)
+    Porcent_DF_Limpo_Idade = Adiciona_Coluna_Idade_Gen(path1,name1,path2,name2,name3,'O','F') 
+    Porcent_DF_29_Limpo    = Adiciona_Coluna_Idade_Gen(path1,name1,path2,name2,name3,'29','F') 
+    Porcent_DF_30_39_Limpo = Adiciona_Coluna_Idade_Gen(path1,name1,path2,name2,name3,'30-39','F') 
+    Porcent_DF_40_49_Limpo = Adiciona_Coluna_Idade_Gen(path1,name1,path2,name2,name3,'40-49','F')  
+    Porcent_DF_50_59_Limpo = Adiciona_Coluna_Idade_Gen(path1,name1,path2,name2,name3,'50-59','F') 
+    Porcent_DF_60_Limpo    = Adiciona_Coluna_Idade_Gen(path1,name1,path2,name2,name3,'60','F') 
+    save_results_to = 'graficos/'  
+     
+    df_limpo = Porcent_DF_Limpo_Idade
+    df_29_limpo = Porcent_DF_29_Limpo
+    df_30_39_limpo = Porcent_DF_30_39_Limpo  
+    df_40_49_limpo = Porcent_DF_40_49_Limpo
+    df_50_59_limpo = Porcent_DF_50_59_Limpo
+    df_60_limpo = Porcent_DF_60_Limpo
+
+
+    df_row = pd.concat([df_limpo, df_29_limpo,df_30_39_limpo, df_40_49_limpo,df_50_59_limpo,df_60_limpo], ignore_index=True)
+    df_row1 = df_row.sort_values(["Curso", "Cbo"], ascending=True)
+    df_row2 = df_row1.sort_values(["Curso", "Cbo"], ascending=True)
+    df_row2.to_csv(save_results_to + 'Resultados_T_29_30-39_40-49_50-59_60Kmeans3_Idade_F.csv')   
+
+    # Masculino
+    path1 = ibge_variable.paths(12)
+    name1 = ibge_variable.names(6)
+    path2 = ibge_variable.paths(13)
+    name2 = ibge_variable.names(9)
+    name3 = ibge_variable.names(10)
+    Porcent_DF_Limpo_Idade = Adiciona_Coluna_Idade_Gen(path1,name1,path2,name2,name3,'O','M') 
+    Porcent_DF_29_Limpo    = Adiciona_Coluna_Idade_Gen(path1,name1,path2,name2,name3,'29','M') 
+    Porcent_DF_30_39_Limpo = Adiciona_Coluna_Idade_Gen(path1,name1,path2,name2,name3,'30-39','M') 
+    Porcent_DF_40_49_Limpo = Adiciona_Coluna_Idade_Gen(path1,name1,path2,name2,name3,'40-49','M') 
+    Porcent_DF_50_59_Limpo = Adiciona_Coluna_Idade_Gen(path1,name1,path2,name2,name3,'50-59','M') 
+    Porcent_DF_60_Limpo    = Adiciona_Coluna_Idade_Gen(path1,name1,path2,name2,name3,'60','M') 
+    save_results_to = 'graficos/'  
+     
+    df_limpo = Porcent_DF_Limpo_Idade
+    df_29_limpo = Porcent_DF_29_Limpo
+    df_30_39_limpo = Porcent_DF_30_39_Limpo  
+    df_40_49_limpo = Porcent_DF_40_49_Limpo
+    df_50_59_limpo = Porcent_DF_50_59_Limpo
+    df_60_limpo = Porcent_DF_60_Limpo
+
+
+    df_row = pd.concat([df_limpo, df_29_limpo,df_30_39_limpo, df_40_49_limpo,df_50_59_limpo,df_60_limpo], ignore_index=True)
+    df_row1 = df_row.sort_values(["Curso", "Cbo"], ascending=True)
+    df_row2 = df_row1.sort_values(["Curso", "Cbo"], ascending=True)
+    df_row2.to_csv(save_results_to + 'Resultados_T_29_30-39_40-49_50-59_60Kmeans3_Idade_M.csv')   
+    return
 
 def Filtrar_Tabela_10Porcento_Idade(): 
     path2 = ibge_variable.paths(13)
