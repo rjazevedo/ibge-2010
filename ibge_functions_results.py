@@ -1050,6 +1050,344 @@ def Filtro_Idade(path, name, idade):
                    
     return Estado
 
+# def Filtro_Idade(path, name, idade):
+#     csv_estado = os.path.join(path[0],name[0]) # arquivo do censo do Brasil inteiro (somente graduados)
+#     Estado = pd.read_csv(csv_estado)
+#     # print(path[0])
+
+#     if idade == "29":
+#         # Novo Filtro
+#         Estado.drop(Estado[(Estado['Idade_em_Anos'] >29)].index, inplace=True)
+#         #print("")
+#         Estado = Estado.reset_index(drop=True)
+#         Estado = Estado.drop(columns=['Unnamed: 0'])
+#         #Estado.to_csv(path[0] + 'Brasil_Graduados_29.csv')
+#     else: 
+#          if idade == "30-39":  
+#             # Novo Filtro
+#             Estado.drop(Estado[(Estado['Idade_em_Anos'] <=30)].index, inplace=True)
+#             Estado.drop(Estado[(Estado['Idade_em_Anos'] >=39)].index, inplace=True)
+#             Estado = Estado.reset_index(drop=True)
+#             Estado = Estado.drop(columns=['Unnamed: 0'])
+#             #Estado.to_csv(path[0] + 'Brasil_Graduados_30_39.csv') 
+#          else:   
+#            if idade == "40-49":  
+#                 # Novo Filtro
+#                 Estado.drop(Estado[(Estado['Idade_em_Anos'] <=40)].index, inplace=True)
+#                 Estado.drop(Estado[(Estado['Idade_em_Anos'] >=49)].index, inplace=True)                
+#                 Estado = Estado.reset_index(drop=True)
+#                 Estado = Estado.drop(columns=['Unnamed: 0'])
+#                 #Estado.to_csv(path[0] + 'Brasil_Graduados_40_49.csv') 
+#            else:
+#                if idade == "50-59":  
+#                     # Novo Filtro
+#                     Estado.drop(Estado[(Estado['Idade_em_Anos'] <=50)].index, inplace=True)
+#                     Estado.drop(Estado[(Estado['Idade_em_Anos'] >=59)].index, inplace=True)         
+#                     Estado = Estado.reset_index(drop=True)
+#                     Estado = Estado.drop(columns=['Unnamed: 0'])
+#                     #Estado.to_csv(path[0] + 'Brasil_Graduados_50_59.csv') 
+#                else: 
+#                     if idade == "60":  
+#                         # Novo Filtro
+#                         Estado.drop(Estado[(Estado['Idade_em_Anos'] <=60)].index, inplace=True)
+#                         Estado = Estado.reset_index(drop=True)
+#                         Estado = Estado.drop(columns=['Unnamed: 0'])
+#                         #Estado.to_csv(path[0] + 'Brasil_Graduados_60.csv')   
+                   
+#     return Estado
+# --------------------------------------------------------------------------------
+def Filtro_Idade_Gen(path, name, idade, sx):
+    # csv_estado = os.path.join(path[0],name[0]) # arquivo do censo do Brasil inteiro (somente graduados)
+    # Estado = pd.read_csv(csv_estado)
+    # # print(path[0])
+    if sx == "M":
+         logging.info(" Gerando o filtro de idade Masculino")   
+         csv_estado = os.path.join(path[0],name[3]) # arquivo do censo do Brasil inteiro - Masculinos(somente graduados)
+         Estado = pd.read_csv(csv_estado)
+         if idade == "29":
+            # Novo Filtro
+            Estado.drop(Estado[(Estado['Idade_em_Anos'] >29)].index, inplace=True)
+            #print("")
+            Estado = Estado.reset_index(drop=True)
+            Estado = Estado.drop(columns=['Unnamed: 0'])
+            #Estado.to_csv(path[0] + 'Brasil_Graduados_29.csv')
+         else: 
+                if idade == "30-39":  
+                    # Novo Filtro
+                    Estado.drop(Estado[(Estado['Idade_em_Anos'] <=30)].index, inplace=True)
+                    Estado.drop(Estado[(Estado['Idade_em_Anos'] >=39)].index, inplace=True)
+                    Estado = Estado.reset_index(drop=True)
+                    Estado = Estado.drop(columns=['Unnamed: 0'])
+                    #Estado.to_csv(path[0] + 'Brasil_Graduados_30_39.csv')
+                else:   
+                    if idade == "40-49":  
+                            # Novo Filtro
+                            Estado.drop(Estado[(Estado['Idade_em_Anos'] <=40)].index, inplace=True)
+                            Estado.drop(Estado[(Estado['Idade_em_Anos'] >=49)].index, inplace=True)                
+                            Estado = Estado.reset_index(drop=True)
+                            Estado = Estado.drop(columns=['Unnamed: 0'])
+                            #Estado.to_csv(path[0] + 'Brasil_Graduados_40_49.csv')  
+                    else:
+                        if idade == "50-59":  
+                                # Novo Filtro
+                                Estado.drop(Estado[(Estado['Idade_em_Anos'] <=50)].index, inplace=True)
+                                Estado.drop(Estado[(Estado['Idade_em_Anos'] >=59)].index, inplace=True)         
+                                Estado = Estado.reset_index(drop=True)
+                                Estado = Estado.drop(columns=['Unnamed: 0'])
+                                #Estado.to_csv(path[0] + 'Brasil_Graduados_50_59.csv') 
+                        else: 
+                                if idade == "60":  
+                                    # Novo Filtro
+                                    Estado.drop(Estado[(Estado['Idade_em_Anos'] <=60)].index, inplace=True)
+                                    Estado = Estado.reset_index(drop=True)
+                                    Estado = Estado.drop(columns=['Unnamed: 0'])
+                                    #Estado.to_csv(path[0] + 'Brasil_Graduados_60.csv')     
+    else: 
+         if sx == "F": 
+            logging.info(" Gerando o filtro de idade Feminino")
+            csv_estado = os.path.join(path[0],name[2]) # arquivo do censo do Brasil inteiro - Femininos(somente graduados)
+            Estado = pd.read_csv(csv_estado)
+            if idade == "29":
+                # Novo Filtro
+                Estado.drop(Estado[(Estado['Idade_em_Anos'] >29)].index, inplace=True)
+                #print("")
+                Estado = Estado.reset_index(drop=True)
+                Estado = Estado.drop(columns=['Unnamed: 0'])
+                #Estado.to_csv(path[0] + 'Brasil_Graduados_29.csv')
+            else: 
+                if idade == "30-39":  
+                    # Novo Filtro
+                    Estado.drop(Estado[(Estado['Idade_em_Anos'] <=30)].index, inplace=True)
+                    Estado.drop(Estado[(Estado['Idade_em_Anos'] >=39)].index, inplace=True)
+                    Estado = Estado.reset_index(drop=True)
+                    Estado = Estado.drop(columns=['Unnamed: 0'])
+                    #Estado.to_csv(path[0] + 'Brasil_Graduados_30_39.csv') 
+                else:   
+                    if idade == "40-49":  
+                            # Novo Filtro
+                            Estado.drop(Estado[(Estado['Idade_em_Anos'] <=40)].index, inplace=True)
+                            Estado.drop(Estado[(Estado['Idade_em_Anos'] >=49)].index, inplace=True)                
+                            Estado = Estado.reset_index(drop=True)
+                            Estado = Estado.drop(columns=['Unnamed: 0'])
+                            #Estado.to_csv(path[0] + 'Brasil_Graduados_40_49.csv') 
+                    else:
+                        if idade == "50-59":  
+                                # Novo Filtro
+                                Estado.drop(Estado[(Estado['Idade_em_Anos'] <=50)].index, inplace=True)
+                                Estado.drop(Estado[(Estado['Idade_em_Anos'] >=59)].index, inplace=True)         
+                                Estado = Estado.reset_index(drop=True)
+                                Estado = Estado.drop(columns=['Unnamed: 0'])
+                                #Estado.to_csv(path[0] + 'Brasil_Graduados_50_59.csv') 
+                        else: 
+                                if idade == "60":  
+                                    # Novo Filtro
+                                    Estado.drop(Estado[(Estado['Idade_em_Anos'] <=60)].index, inplace=True)
+                                    Estado = Estado.reset_index(drop=True)
+                                    Estado = Estado.drop(columns=['Unnamed: 0'])
+                                    #Estado.to_csv(path[0] + 'Brasil_Graduados_60.csv')   
+                    
+    return Estado
+
+def Ida_Volta_Idade_Gen(df,path1,name1,idade, sx):   
+    
+    # if idade == '29':
+    #    logging.info(" Gerando as idas e voltas Femininas")   
+    #    csv_estado = os.path.join(path[0],name[2]) # arquivo do censo do Brasil inteiro (somente graduados)
+    # if sx == 'M':
+    #    logging.info(" Gerando as idas e voltas Masculinas")   
+    #    csv_estado = os.path.join(path[0],name[3]) # arquivo do censo do Brasil inteiro (somente graduados)
+    # path1 = ibge_variable.paths(12)
+    # name1 = ibge_variable.names(6)
+    csv_CBO = os.path.join(path1[0],name1[1]) # Tabela de CBOs
+    csv_CURSOS = os.path.join(path1[0],name1[2]) # Tabela de Cursos
+    path2 = ibge_variable.paths(8)
+    if sx == "M": 
+       name2 = ibge_variable.names(8) 
+       csv_PivotTableFinal =  os.path.join(path2[0],name2[0]) #Pivo Table Final      
+    else:
+        if sx == "F":
+           name2 = ibge_variable.names(8) 
+           csv_PivotTableFinal =  os.path.join(path2[0],name2[0]) #Pivo Table Final
+
+    CursosCenso = ibge_functions_descriptive_analysis.ibge_cursos_filter(path1[0],name1[2])
+    # print(len(CursosCenso))
+    # curso_num  = float(CursosCenso.curso_num.iloc[88])
+    # curso_nome = CursosCenso.curso_nome.iloc[88]
+    # titulo10 =  "Curso:  " +  str(curso_num) + ": " + curso_nome + " - Os 10 maiores"
+    # titulo3  =  "Curso:  " +  str(curso_num) + ": " + curso_nome + " - Os 3 maiores"
+    # print(curso_num)
+    # print(curso_nome)
+    # print(titulo10)
+    # print(titulo3)
+    # Inserir comando para criar a pasta ida
+    save_results_to = 'graficos/'   
+    # print(df.head(5)) 
+    # print("")
+    for f in range(0,89):  
+
+        curso_num= float(CursosCenso.curso_num.iloc[f])
+        curso_nome= CursosCenso.curso_nome.iloc[f]
+        titulo10= "Curso " +  CursosCenso.curso_num.iloc[f] + ": " + CursosCenso.curso_nome.iloc[f] + " - 100% "
+        titulo3=  "Curso " +  CursosCenso.curso_num.iloc[f] + ": " + CursosCenso.curso_nome.iloc[f] + " - 100%"
+        print("curso_num:", curso_num, "curso_nome:",curso_nome)
+        print(f)
+        print("=================================================================================================")
+        #======================================================Plotando os cbos de determinado curso, usando função ...
+        #primeirosCbos,primeirosCbos_Nome,CURSO_NUM,CURSO_NOME=CBOs_Curso_v5(csv_estado,csv_CBO,curso_num,curso_nome,titulo10,titulo3)
+        #primeirosCbos,primeirosCbos_Nome,CURSO_NUM,CURSO_NOME=CBOs_Curso_v6(csv_estado,csv_CBO,curso_num,curso_nome,titulo10,titulo3)
+        #primeirosCbos,primeirosCbos_Nome,Porcentagens,CURSO_NUM,CURSO_NOME=CBOs_Curso_v6_sn(csv_estado,csv_CBO,curso_num,curso_nome,titulo10,titulo3,0.07)
+        primeirosCbos,primeirosCbos_Nome,Porcentagens,CURSO_NUM,CURSO_NOME=CBOs_Curso_v6_sn2(df,csv_CBO,curso_num,curso_nome,titulo10,titulo3,1)
+        if (primeirosCbos!=0)&(primeirosCbos!=0)&(Porcentagens!=0):
+            #======================================================Achando a quantidade de Não-Graduados na PivotTable
+            #NaoGraduados = NaoGraduados_PivotTable(primeirosCbos, csv_PivotTableFinal)
+            primeirosCbos,NaoGraduados,Graduados_Nao,Graduados = ibge_functions_descriptive_analysis.NaoGraduados_PivotTable_2(primeirosCbos, csv_PivotTableFinal)
+            #primeirosCbos,NaoGraduados,Graduados_Nao,Graduados = NaoGraduados_PivotTable(primeirosCbos, csv_PivotTableFinalFem)
+            #=====================================================Plotando os cursos de determinado cbo, sem função e salvando os plots ...
+            Intensidade = []
+            Porcentagens_vol = []
+            CBO_vol = []
+            Cursos_vol = []
+            Nomes_vol  = []
+            for i in range (len(primeirosCbos)):
+                #if(i==1):
+                #   break
+                #titulo3= primeirosCursos[i] #Alterado em 09/09/2023 para plotar os Não-Graduados
+                titulo3=primeirosCbos_Nome[i]
+                #print(type(int(float(primeirosCbos[i]))))
+                #sys.exit() #=======================================================================================================
+                #tresprimeirosCursos=Cursos_CBO_10(csv_estado,csv_CBO,csv_CURSOS,primeirosCbos[i],titulo3)
+                #tresprimeirosCursos=Cursos_CBO_12(csv_estado,csv_CBO,csv_CURSOS,primeirosCbos[i],titulo3,NaoGraduados[i],curso_num)
+                if(int(float(primeirosCbos[i]))>=2000):
+                    #CBO,Curso,tresprimeirosCursos,intensidade,fig,string,cursos_vol, nomes_vol, porcentagens_vol=Cursos_CBO_14_10_sn(csv_estado,csv_CBO,csv_CURSOS,primeirosCbos[i],titulo3,NaoGraduados[i],curso_num,curso_nome,primeirosCbos_Nome,i,0.07)
+                    CBO,Curso,tresprimeirosCursos,intensidade,fig,cursos_vol, nomes_vol, porcentagens_vol=Cursos_CBO_14_10_sn(df,csv_CBO,csv_CURSOS,primeirosCbos[i],titulo3,NaoGraduados[i],curso_num,curso_nome,primeirosCbos_Nome,i,1)
+                    Intensidade.append(intensidade)
+                    #print(intensidade)
+                    Porcentagens_vol.append(porcentagens_vol)
+                    #print(porcentagens_vol)
+                    CBO_vol.append(CBO)
+                    Cursos_vol.append(cursos_vol)
+                    Nomes_vol.append(nomes_vol)
+                    #fig.savefig(string)
+                else:
+                    #CBO,Curso,tresprimeirosCursos,intensidade,fig,string,cursos_vol, nomes_vol, porcentagens_vol=Cursos_CBO_13_10_sn(csv_estado,csv_CBO,csv_CURSOS,primeirosCbos[i],titulo3,NaoGraduados[i],Graduados_Nao[i],curso_num,curso_nome,primeirosCbos_Nome,i,0.07)
+                    CBO,Curso,tresprimeirosCursos,intensidade,fig,cursos_vol, nomes_vol, porcentagens_vol=Cursos_CBO_13_10_sn(df,csv_CBO,csv_CURSOS,primeirosCbos[i],titulo3,NaoGraduados[i],Graduados_Nao[i],curso_num,curso_nome,primeirosCbos_Nome,i,1)
+                    Intensidade.append(intensidade)
+                    Porcentagens_vol.append(porcentagens_vol)
+                    CBO_vol.append(CBO)
+                    Cursos_vol.append(cursos_vol)
+                    Nomes_vol.append(nomes_vol)
+                    #fig.savefig(string)
+                #print(tresprimeirosCursos)
+                #print(NaoGraduados[i])
+                #print("============================================================================================================================================")
+
+
+            #==================================================================Colocando Ida e Volta no mesmo grafico
+            #print(primeirosCbos)
+            #print("")
+            #print(primeirosCbos_Nome)
+            #print("")
+            #print(Porcentagens)
+            #print("")
+            #print(CURSO_NUM)
+            #print("")
+            #print(CURSO_NOME)
+            #print("")
+            #primeirosCursos[0] + " -  Os 3 maiores Cursos"
+
+            ##print(CBO)
+            ##print(CBO_vol)
+            #print(Curso)
+            #print(tresprimeirosCursos)
+            #print(Intensidade)
+            #print("")
+            #print(CBO_vol)
+            #print(cursos_vol)
+            #print(nomes_vol)
+            #print(Porcentagens_vol)
+
+            if(f==0):
+                # Se for a primeira execução, tem que criar as listas ... e o paramentro da ida é 1
+                #Recuperando as idas e voltas ...
+                x_ = []
+                y_ = []
+                z_ = []
+                v_ = []
+                X_,Y_,Z_,V_= ibge_functions_descriptive_analysis.Ida(primeirosCbos,CURSO_NUM,Porcentagens,1,x_,y_,z_,v_)
+                x_= X_
+                y_= Y_
+                z_= Z_
+                v_= V_
+                for i in range(len(primeirosCbos)):
+                    X_,Y_,Z_,V_= ibge_functions_descriptive_analysis.Volta(Cursos_vol[i],primeirosCbos[i],Porcentagens_vol[i], 0,x_,y_,z_,v_)
+
+                x_= X_
+                y_= Y_
+                z_= Z_
+                v_= V_
+                #df1 = x_y_z_v_df(X_,Y_,Z_,V_)
+                #print(df1)
+                #Juntando as idas e voltas ...
+                for l in range(len(CBO_vol)):
+                    ibge_functions_descriptive_analysis.Jun_Ida_Volta(X_,Y_,Z_,V_, CBO_vol[l],CURSO_NUM)
+                #atribuição
+                x_= X_
+                y_= Y_
+                z_= Z_
+                v_= V_
+            else:
+                #Recuperando as idas e voltas ...
+                X_,Y_,Z_,V_= ibge_functions_descriptive_analysis.Ida(primeirosCbos,CURSO_NUM,Porcentagens,0,x_,y_,z_,v_)
+                x_= X_
+                y_= Y_
+                z_= Z_
+                v_= V_
+                for i in range(len(primeirosCbos)):
+                    X_,Y_,Z_,V_= ibge_functions_descriptive_analysis.Volta(Cursos_vol[i],primeirosCbos[i],Porcentagens_vol[i], 0,x_,y_,z_,v_)
+
+                x_= X_
+                y_= Y_
+                z_= Z_
+                v_= V_
+                #df1 = x_y_z_v_df(X_,Y_,Z_,V_)
+                #print(df1)
+                #Juntando as idas e voltas ...
+                for l in range(len(CBO_vol)):
+                    ibge_functions_descriptive_analysis.Jun_Ida_Volta(X_,Y_,Z_,V_, CBO_vol[l],CURSO_NUM)
+                #atribuição
+                x_= X_
+                y_= Y_
+                z_= Z_
+                v_= V_
+    
+    df = ibge_functions_descriptive_analysis.x_y_z_v_df(x_,y_,z_,v_)    
+    # df.to_csv(save_results_to + '10Porcent_DF.csv')
+    if sx == "M":
+        if idade == '29':
+            df.to_csv(save_results_to + '100Porcent_DF_29_F.csv')
+        if idade == '30-39':
+            df.to_csv(save_results_to + '100Porcent_DF_30-39_F.csv')    
+        if idade == '40-49':
+            df.to_csv(save_results_to + '100Porcent_DF_40-49_F.csv')  
+        if idade == '50-59':
+            df.to_csv(save_results_to + '100Porcent_DF_50-59_F.csv') 
+        if idade == '60':
+            df.to_csv(save_results_to + '100Porcent_DF_60_F.csv')     
+    else:
+        if sx == "F":
+            if idade == '29':
+                df.to_csv(save_results_to + '100Porcent_DF_29_M.csv')
+            if idade == '30-39':
+                df.to_csv(save_results_to + '100Porcent_DF_30-39_M.csv')
+            if idade == '40-49':    
+                df.to_csv(save_results_to + '100Porcent_DF_40-49_M.csv')
+            if idade == '50-59':    
+                df.to_csv(save_results_to + '100Porcent_DF_50-59_M.csv')
+            if idade == '60':
+                df.to_csv(save_results_to + '100Porcent_DF_60_M.csv')            
+    return
+
+# --------------------------------------------------------------------------------
 def Ida_Volta_Idade(df,path1,name1,idade):   
     
     # if idade == '29':
