@@ -2801,7 +2801,7 @@ def Filtrar_Tabela_10Porcento_Idade_Gen():
     Resultados_T.to_csv(save_results_to +'Resultados_T_Filtrados_Kmeans3_Idade_M.csv') 
 
     return
-def Analise_gênero_faixaetaria():
+def Analise_Genero_FaixaEtaria():
     return
 #------------------------------------------------------------------------------
 #------------------------------------------------------------------------------
