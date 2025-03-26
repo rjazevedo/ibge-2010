@@ -2671,6 +2671,62 @@ def Adiciona_Coluna_Idade_Gen(path1,name1,path2,name2,name3,id, sx):
                           
                            
     return 
+def Juntar_10Porcento_Idade_Gen():
+    # Feminino
+    path1 = ibge_variable.paths(12)
+    name1 = ibge_variable.names(6)
+    path2 = ibge_variable.paths(13)
+    name2 = ibge_variable.names(9)
+    name3 = ibge_variable.names(10)
+    Porcent_DF_Limpo_Idade = Adiciona_Coluna_Idade_Gen(path1,name1,path2,name2,name3,'O','F') 
+    Porcent_DF_29_Limpo    = Adiciona_Coluna_Idade_Gen(path1,name1,path2,name2,name3,'29','F') 
+    Porcent_DF_30_39_Limpo = Adiciona_Coluna_Idade_Gen(path1,name1,path2,name2,name3,'30-39','F') 
+    Porcent_DF_40_49_Limpo = Adiciona_Coluna_Idade_Gen(path1,name1,path2,name2,name3,'40-49','F')  
+    Porcent_DF_50_59_Limpo = Adiciona_Coluna_Idade_Gen(path1,name1,path2,name2,name3,'50-59','F') 
+    Porcent_DF_60_Limpo    = Adiciona_Coluna_Idade_Gen(path1,name1,path2,name2,name3,'60','F') 
+    save_results_to = 'graficos/'  
+     
+    df_limpo = Porcent_DF_Limpo_Idade
+    df_29_limpo = Porcent_DF_29_Limpo
+    df_30_39_limpo = Porcent_DF_30_39_Limpo  
+    df_40_49_limpo = Porcent_DF_40_49_Limpo
+    df_50_59_limpo = Porcent_DF_50_59_Limpo
+    df_60_limpo = Porcent_DF_60_Limpo
+
+
+    df_row = pd.concat([df_limpo, df_29_limpo,df_30_39_limpo, df_40_49_limpo,df_50_59_limpo,df_60_limpo], ignore_index=True)
+    df_row1 = df_row.sort_values(["Curso", "Cbo"], ascending=True)
+    df_row2 = df_row1.sort_values(["Curso", "Cbo"], ascending=True)
+    df_row2.to_csv(save_results_to + 'Resultados_T_29_30-39_40-49_50-59_60Kmeans3_Idade_F.csv')   
+
+    # Masculino
+    path1 = ibge_variable.paths(12)
+    name1 = ibge_variable.names(6)
+    path2 = ibge_variable.paths(13)
+    name2 = ibge_variable.names(9)
+    name3 = ibge_variable.names(10)
+    Porcent_DF_Limpo_Idade = Adiciona_Coluna_Idade_Gen(path1,name1,path2,name2,name3,'O','M') 
+    Porcent_DF_29_Limpo    = Adiciona_Coluna_Idade_Gen(path1,name1,path2,name2,name3,'29','M') 
+    Porcent_DF_30_39_Limpo = Adiciona_Coluna_Idade_Gen(path1,name1,path2,name2,name3,'30-39','M') 
+    Porcent_DF_40_49_Limpo = Adiciona_Coluna_Idade_Gen(path1,name1,path2,name2,name3,'40-49','M') 
+    Porcent_DF_50_59_Limpo = Adiciona_Coluna_Idade_Gen(path1,name1,path2,name2,name3,'50-59','M') 
+    Porcent_DF_60_Limpo    = Adiciona_Coluna_Idade_Gen(path1,name1,path2,name2,name3,'60','M') 
+    save_results_to = 'graficos/'  
+     
+    df_limpo = Porcent_DF_Limpo_Idade
+    df_29_limpo = Porcent_DF_29_Limpo
+    df_30_39_limpo = Porcent_DF_30_39_Limpo  
+    df_40_49_limpo = Porcent_DF_40_49_Limpo
+    df_50_59_limpo = Porcent_DF_50_59_Limpo
+    df_60_limpo = Porcent_DF_60_Limpo
+
+
+    df_row = pd.concat([df_limpo, df_29_limpo,df_30_39_limpo, df_40_49_limpo,df_50_59_limpo,df_60_limpo], ignore_index=True)
+    df_row1 = df_row.sort_values(["Curso", "Cbo"], ascending=True)
+    df_row2 = df_row1.sort_values(["Curso", "Cbo"], ascending=True)
+    df_row2.to_csv(save_results_to + 'Resultados_T_29_30-39_40-49_50-59_60Kmeans3_Idade_M.csv')   
+    return
+
 #------------------------------------------------------------------------------
 # Terminar ...
 def Adiciona_Coluna_Idade(path1,name1,path2,name2,name3,id):
@@ -2911,61 +2967,7 @@ def Juntar_10Porcento_Idade():
     df_row2.to_csv(save_results_to + 'Resultados_T_29_30-39_40-49_50-59_60Kmeans3_Idade.csv')   
     return
 
-def Juntar_10Porcento_Idade_Gen():
-    # Feminino
-    path1 = ibge_variable.paths(12)
-    name1 = ibge_variable.names(6)
-    path2 = ibge_variable.paths(13)
-    name2 = ibge_variable.names(9)
-    name3 = ibge_variable.names(10)
-    Porcent_DF_Limpo_Idade = Adiciona_Coluna_Idade_Gen(path1,name1,path2,name2,name3,'O','F') 
-    Porcent_DF_29_Limpo    = Adiciona_Coluna_Idade_Gen(path1,name1,path2,name2,name3,'29','F') 
-    Porcent_DF_30_39_Limpo = Adiciona_Coluna_Idade_Gen(path1,name1,path2,name2,name3,'30-39','F') 
-    Porcent_DF_40_49_Limpo = Adiciona_Coluna_Idade_Gen(path1,name1,path2,name2,name3,'40-49','F')  
-    Porcent_DF_50_59_Limpo = Adiciona_Coluna_Idade_Gen(path1,name1,path2,name2,name3,'50-59','F') 
-    Porcent_DF_60_Limpo    = Adiciona_Coluna_Idade_Gen(path1,name1,path2,name2,name3,'60','F') 
-    save_results_to = 'graficos/'  
-     
-    df_limpo = Porcent_DF_Limpo_Idade
-    df_29_limpo = Porcent_DF_29_Limpo
-    df_30_39_limpo = Porcent_DF_30_39_Limpo  
-    df_40_49_limpo = Porcent_DF_40_49_Limpo
-    df_50_59_limpo = Porcent_DF_50_59_Limpo
-    df_60_limpo = Porcent_DF_60_Limpo
 
-
-    df_row = pd.concat([df_limpo, df_29_limpo,df_30_39_limpo, df_40_49_limpo,df_50_59_limpo,df_60_limpo], ignore_index=True)
-    df_row1 = df_row.sort_values(["Curso", "Cbo"], ascending=True)
-    df_row2 = df_row1.sort_values(["Curso", "Cbo"], ascending=True)
-    df_row2.to_csv(save_results_to + 'Resultados_T_29_30-39_40-49_50-59_60Kmeans3_Idade_F.csv')   
-
-    # Masculino
-    path1 = ibge_variable.paths(12)
-    name1 = ibge_variable.names(6)
-    path2 = ibge_variable.paths(13)
-    name2 = ibge_variable.names(9)
-    name3 = ibge_variable.names(10)
-    Porcent_DF_Limpo_Idade = Adiciona_Coluna_Idade_Gen(path1,name1,path2,name2,name3,'O','M') 
-    Porcent_DF_29_Limpo    = Adiciona_Coluna_Idade_Gen(path1,name1,path2,name2,name3,'29','M') 
-    Porcent_DF_30_39_Limpo = Adiciona_Coluna_Idade_Gen(path1,name1,path2,name2,name3,'30-39','M') 
-    Porcent_DF_40_49_Limpo = Adiciona_Coluna_Idade_Gen(path1,name1,path2,name2,name3,'40-49','M') 
-    Porcent_DF_50_59_Limpo = Adiciona_Coluna_Idade_Gen(path1,name1,path2,name2,name3,'50-59','M') 
-    Porcent_DF_60_Limpo    = Adiciona_Coluna_Idade_Gen(path1,name1,path2,name2,name3,'60','M') 
-    save_results_to = 'graficos/'  
-     
-    df_limpo = Porcent_DF_Limpo_Idade
-    df_29_limpo = Porcent_DF_29_Limpo
-    df_30_39_limpo = Porcent_DF_30_39_Limpo  
-    df_40_49_limpo = Porcent_DF_40_49_Limpo
-    df_50_59_limpo = Porcent_DF_50_59_Limpo
-    df_60_limpo = Porcent_DF_60_Limpo
-
-
-    df_row = pd.concat([df_limpo, df_29_limpo,df_30_39_limpo, df_40_49_limpo,df_50_59_limpo,df_60_limpo], ignore_index=True)
-    df_row1 = df_row.sort_values(["Curso", "Cbo"], ascending=True)
-    df_row2 = df_row1.sort_values(["Curso", "Cbo"], ascending=True)
-    df_row2.to_csv(save_results_to + 'Resultados_T_29_30-39_40-49_50-59_60Kmeans3_Idade_M.csv')   
-    return
 
 def Filtrar_Tabela_10Porcento_Idade(): 
     path2 = ibge_variable.paths(13)
