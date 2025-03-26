@@ -2801,8 +2801,103 @@ def Filtrar_Tabela_10Porcento_Idade_Gen():
     Resultados_T.to_csv(save_results_to +'Resultados_T_Filtrados_Kmeans3_Idade_M.csv') 
 
     return
-def Analise_Genero_FaixaEtaria():
+def Analise_Genero_FaixaEtaria(sx):
+    if sx == 'F':
+       import pandas as pd
+
+       # df_row2 = pd.read_csv("/content/drive/MyDrive/Orientacao_Rodolfo/Doutorado_Elisangela/Experimentos/11_12_23_a_22_01_24/df_row2_Feminino.csv", sep=",")
+       # df_row2 = df_row2.drop(columns=['Unnamed: 0'])
+       # df_row2.drop(df_row2[(df_row2['Curso'] !=342)].index, inplace=True)
+       # df_row2.drop(df_row2[(df_row2['Cbo'] !=1221)].index, inplace=True)
+       # # df_row2.shape
+       # df_row2 = df_row2.reset_index(drop=True)
+       # # df_row2
+       
+       # csv_idade = "/content/drive/MyDrive/Orientacao_Rodolfo/Doutorado_Elisangela/Experimentos/11_12_23_a_22_01_24/Resultados_Idades.csv"
+       # csv_idade = "/content/drive/MyDrive/Orientacao_Rodolfo/Doutorado_Elisangela/Experimentos/11_12_23_a_22_01_24/Resultados_Idades_Kmeans3_T_Idade.csv"
+       # csv_idade = "/content/drive/MyDrive/Orientacao_Rodolfo/Doutorado_Elisangela/Experimentos/11_12_23_a_22_01_24/df_row2_Feminino.csv"
+       # csv_idade = "/content/drive/MyDrive/Orientacao_Rodolfo/Doutorado_Elisangela/Experimentos/11_12_23_a_22_01_24/df_row2_Masculino.csv"
+       csv_idade = "/graficos/Resultados_T_Filtrados_Kmeans3_Idade_F.csv"
+       # Curso = "724" #"581" #"380" #"344" #"342"  #"342"  #"321" #"214.0"  
+       Curso = "212.0"
+       # CBO = "2261" #"2161" #"2611" #"2411"  #"1221" #2431" #"2642"#"2166.0" 
+       CBO = "2354.0"
+       Idade_Plot(csv_idade,CBO,Curso)
+
     return
+
+
+def Idade_Plot(csv_idade,CBO,Curso):
+    import pandas as pd
+    #Leitura de Arquivos CSVs ...
+    X = pd.read_csv(csv_idade, sep=",")
+    X = X.drop(columns=['Unnamed: 0'])
+    #...
+
+    I_25_29 = []
+    I_30_39 = []
+    I_40_49 = []
+    I_50_59 = []
+    I_60    = []
+    #orig    = []
+
+
+    for i in range (len(X['Curso'])):
+        if (X['Curso'][i] == float(Curso) and X['Cbo'][i] == float(CBO)):
+            if(X['Idade'][i] == "25-29"):
+                I_25_29.append(X['Ida'][i])
+                I_25_29.append(X['Volta'][i])
+            if(X['Idade'][i] == "30-39"):
+                I_30_39.append(X['Ida'][i])
+                I_30_39.append(X['Volta'][i])
+            if(X['Idade'][i] == "40-49"):
+                I_40_49.append(X['Ida'][i])
+                I_40_49.append(X['Volta'][i])
+            if(X['Idade'][i] == "50-59"):
+                I_50_59.append(X['Ida'][i])
+                I_50_59.append(X['Volta'][i])
+            if(X['Idade'][i] == "60+"):
+                I_60.append(X['Ida'][i])
+                I_60.append(X['Volta'][i])
+            #if(X['Idade'][i] == "O"):
+            #    orig.append(X['Ida'][i])
+            #    orig.append(X['Volta'][i]),'black'
+
+    import matplotlib.pyplot as plt
+
+    fig, ax = plt.subplots()
+
+    #Se não tiver pessoas com 60 anos ...
+    #ax.scatter([ I_25_29[0], I_30_39[0],I_40_49[0], I_50_59[0]], [ I_25_29[1], I_30_39[1],I_40_49[1], I_50_59[1]], color=['blue','magenta','Darkgreen','red'])
+    # ...
+    ax.scatter([ I_25_29[0], I_30_39[0],I_40_49[0], I_50_59[0], I_60[0]], [ I_25_29[1], I_30_39[1],I_40_49[1], I_50_59[1], I_60[1]], color=['blue','magenta','Darkgreen','red','black'])
+    ax.annotate("", xy=(I_25_29[0], I_25_29[1]), xytext=(I_30_39[0], I_30_39[1]), arrowprops=dict(arrowstyle="<-", color='blue'))
+    ax.annotate("", xy=(I_30_39[0], I_30_39[1]), xytext=(I_40_49[0], I_40_49[1]), arrowprops=dict(arrowstyle="<-", color='magenta'))
+    ax.annotate("", xy=(I_40_49[0], I_40_49[1]), xytext=(I_50_59[0], I_50_59[1]), arrowprops=dict(arrowstyle="<-", color='Darkgreen'))
+    ax.annotate("", xy=(I_50_59[0], I_50_59[1]), xytext=(I_60[0], I_60[1]), arrowprops=dict(arrowstyle="<-", color='red'))
+    #ax.annotate("", xy=(I_60[0], I_60[1]), xytext=(I_60[0], I_60[1]), arrowprops=dict(arrowstyle="->", color='black'))
+
+
+
+    plt.xlabel("Cursos")
+    plt.ylabel("Profissões")
+    #plt.title("Idade - Feminino -  212/2354")
+    #plt.title("Idade - Feminino -   214/2166")
+    #plt.title("Idade - Feminino -   321/2642")
+    #plt.title("Idade - Feminino -   342/2431")
+    #plt.title("Idade - Feminino -   344/2411")
+    #plt.title("Idade - Feminino -   380/2611")
+    #plt.title("Idade - Feminino -   581/2161")
+    #plt.title("Idade - Feminino -   724/2261")
+    #plt.legend(['blue','magenta','Darkgreen','red','black'])
+    plt.xlim(0.0, 100.0)
+    plt.ylim(0.0, 100.0)
+    plt.show()
+
+    return
+       
+
+    
 #------------------------------------------------------------------------------
 #------------------------------------------------------------------------------
 
@@ -4264,7 +4359,7 @@ def resultados_distancia():
         y = Resultados_T_Masc_100_49.Volta[j]
         # vamos obter a distância entre eles
         distancia = distancia2d(x1, y1, x, y)
-        #print("Distância entre os dois pontos: %0.2f" % distancia);
+        #print("Distância entre os dsave_results_to = 'graficos/'  ois pontos: %0.2f" % distancia);
         Resultados_T_Masc_100_49.C1[j] = distancia    
 
     # Cluster 3 ...
