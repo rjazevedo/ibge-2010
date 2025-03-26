@@ -203,8 +203,11 @@ if fase == 33:
     #    # - Gráfico com os ponto selecionados(40%-60%)
     # ibge_functions_results.graf_selecionados_40_60()
     #    # - Plotar o gráfico das idades, usando o arquivo de femininos e masculinos! Com isso poderemos ver a distribuição das idades para o masculino e para o feminino!
-    # ibge_functions.Ida_Volta_Idade_Gen()       
-    # ibge_functions.Tabela_Ida_Volta_Idade_Gen()         
+    # 
+    ibge_functions.Ida_Volta_Idade_Gen()       
+    # 
+    # 
+    ibge_functions.Tabela_Ida_Volta_Idade_Gen()         
     # 
     ibge_functions_results.Juntar_10Porcento_Idade_Gen() 
     # ibge_functions_results.Filtrar_Tabela_10Porcento_Idade_Gen()    
