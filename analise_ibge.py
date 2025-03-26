@@ -206,8 +206,9 @@ if fase == 33:
     # ibge_functions.Ida_Volta_Idade_Gen()       
     # ibge_functions.Tabela_Ida_Volta_Idade_Gen()         
     # ibge_functions_results.Juntar_10Porcento_Idade_Gen() 
+    # ibge_functions_results.Filtrar_Tabela_10Porcento_Idade_Gen()   
     # 
-    ibge_functions_results.Filtrar_Tabela_10Porcento_Idade_Gen()    
+    ibge_functions_results.Analise_gênero_faixaetaria()
     # #  4-  Gráfico dos vetores centrados em(0,0)    
     pass
 
