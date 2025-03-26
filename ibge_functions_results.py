@@ -2727,7 +2727,84 @@ def Juntar_10Porcento_Idade_Gen():
     df_row2.to_csv(save_results_to + 'Resultados_T_29_30-39_40-49_50-59_60Kmeans3_Idade_M.csv')   
     return
 
+def Filtrar_Tabela_10Porcento_Idade_Gen(): 
+    # Feminino
+    path2 = ibge_variable.paths(13)
+    name2 = ibge_variable.names(9)
+    name3 = ibge_variable.names(10)
+    save_results_to = 'graficos/'  
+    Kmeans3_T =  os.path.join(path2[0],name2[7])
+    X = pd.read_csv(Kmeans3_T) 
+    Resultados_T_29_30_39_40_49_50_59_60Kmeans3_Idade =  os.path.join('graficos/','Resultados_T_29_30-39_40-49_50-59_60Kmeans3_Idade_F.csv')
+    df_row2 = pd.read_csv(Resultados_T_29_30_39_40_49_50_59_60Kmeans3_Idade) 
+
+    resultados_T=[]
+    for j in range(len(df_row2)):
+        if pd.isnull(df_row2['Cluster'][j]):
+            df_row2['Cluster'][j] = ''   
+        else:    
+            df_row2['Cluster'][j] = int(float(df_row2['Cluster'][j]))  
+        for i in range(len(X)):        
+            if (int(float(X['Curso'][i])) == int(float(df_row2['Curso'][j]))) & (int(float(X['Cbo'][i])) == int(float(df_row2['Cbo'][j]))):
+                tupla=(df_row2['Ida'][j],df_row2['Volta'][j],df_row2['Cluster'][j], df_row2['Curso'][j].astype(int),df_row2['Curso_Nome'][j],df_row2['Cbo'][j].astype(int),df_row2['Cbo_Nome'][j],df_row2['Idade'][j])
+                resultados_T.append(tupla)
+                # ...         
+         
+    Resultados_T= pd.DataFrame(resultados_T)
+    #...
+    dict = {0:"Ida",
+            1:"Volta",
+            2:"Cluster",
+            3:"Curso",
+            4:"Curso_Nome",
+            5:"Cbo",
+            6:"Cbo_Nome",
+            7:"Idade"
+            }
+    Resultados_T.rename(columns=dict,inplace=True)   
+    Resultados_T.to_csv(save_results_to +'Resultados_T_Filtrados_Kmeans3_Idade_F.csv')   
+
+    # Masculino
+    path2 = ibge_variable.paths(13)
+    name2 = ibge_variable.names(9)
+    name3 = ibge_variable.names(10)
+    save_results_to = 'graficos/'  
+    Kmeans3_T =  os.path.join(path2[0],name2[7])
+    X = pd.read_csv(Kmeans3_T) 
+    Resultados_T_29_30_39_40_49_50_59_60Kmeans3_Idade =  os.path.join('graficos/','Resultados_T_29_30-39_40-49_50-59_60Kmeans3_Idade_M.csv')
+    df_row2 = pd.read_csv(Resultados_T_29_30_39_40_49_50_59_60Kmeans3_Idade) 
+
+    resultados_T=[]
+    for j in range(len(df_row2)):
+        if pd.isnull(df_row2['Cluster'][j]):
+            df_row2['Cluster'][j] = ''   
+        else:    
+            df_row2['Cluster'][j] = int(float(df_row2['Cluster'][j]))  
+        for i in range(len(X)):        
+            if (int(float(X['Curso'][i])) == int(float(df_row2['Curso'][j]))) & (int(float(X['Cbo'][i])) == int(float(df_row2['Cbo'][j]))):
+                tupla=(df_row2['Ida'][j],df_row2['Volta'][j],df_row2['Cluster'][j], df_row2['Curso'][j].astype(int),df_row2['Curso_Nome'][j],df_row2['Cbo'][j].astype(int),df_row2['Cbo_Nome'][j],df_row2['Idade'][j])
+                resultados_T.append(tupla)
+                # ...         
+         
+    Resultados_T= pd.DataFrame(resultados_T)
+    #...
+    dict = {0:"Ida",
+            1:"Volta",
+            2:"Cluster",
+            3:"Curso",
+            4:"Curso_Nome",
+            5:"Cbo",
+            6:"Cbo_Nome",
+            7:"Idade"
+            }
+    Resultados_T.rename(columns=dict,inplace=True)   
+    Resultados_T.to_csv(save_results_to +'Resultados_T_Filtrados_Kmeans3_Idade_M.csv') 
+
+    return
+
 #------------------------------------------------------------------------------
+#------------------------------------------------------------------------------
+
 # Terminar ...
 def Adiciona_Coluna_Idade(path1,name1,path2,name2,name3,id):
     # Leitura do arquivo df original, masculino ou feminino
