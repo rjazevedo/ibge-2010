@@ -2801,6 +2801,7 @@ def Filtrar_Tabela_10Porcento_Idade_Gen():
     Resultados_T.to_csv(save_results_to +'Resultados_T_Filtrados_Kmeans3_Idade_M.csv') 
 
     return
+# https://colab.research.google.com/drive/1Oxj69ukEFJ-lxw09fqGi-k5ym1uKJoXP?authuser=1#scrollTo=AG_wj961fUbc
 def Analise_Genero_FaixaEtaria(sx):
     if sx == 'M':
        import pandas as pd
@@ -2827,6 +2828,7 @@ def Analise_Genero_FaixaEtaria(sx):
        CBO =   ["2354", "2261", "2161", "2611", "2411", "1221", "2431", "2642", "2166"]
 
        # Iterando
+       # https://colab.research.google.com/drive/1Oxj69ukEFJ-lxw09fqGi-k5ym1uKJoXP?authuser=1#scrollTo=AG_wj961fUbc
        for i in range(len(Curso)):       
            Idade_Plot(csv_idade,CBO[i],Curso[i])
        # Idade_Plot(csv_idade,CBO[0],Curso[0])
