@@ -4642,5 +4642,5 @@ def graf_selecionados_40_60():
 
     return
  
-def genero_faixa_etaria():
-    return
+# def genero_faixa_etaria():
+#     return
