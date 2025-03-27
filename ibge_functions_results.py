@@ -4745,5 +4745,78 @@ def graf_selecionados_40_60():
 #     return
 
 def  vetores():
-     
+     X = 'graficos/Resultados_T_Filtrados_Kmeans3_T_Preenchido.csv'
+     X = pd.read_csv(X, sep=",")
+
+     # len(X['Genero'])
+     fem   = []
+     masc  = []
+     orig  = []
+     for i in range(0, 150):
+     #for i in range(len(X['Genero'])):
+        if(str(X['Genero'][i]) == 'F'):
+            fem.append(X['Ida'][i])
+            fem.append(X['Volta'][i])
+            #print(i)
+        if(str(X['Genero'][i]) == 'M'):
+            masc.append(X['Ida'][i])
+            masc.append(X['Volta'][i])
+            #print(i)
+        if(str(X['Genero'][i]) == 'O'):
+            orig.append(X['Ida'][i])
+            orig.append(X['Volta'][i])
+            #print(X['Ida'][i],X['Volta'][i])
+
+        # print(len(fem))
+        # print(len(masc))
+        # print(len(orig))    
+
+        # Kmeans3 - Copilot - Setas + Pontos    
+        import matplotlib.pyplot as plt
+
+        fig, ax = plt.subplots()
+        #while i<12:
+        while i<98:
+            j = i+1
+            ##print(i)
+            #ax.scatter([orig[i], fem[i], masc[i]], [orig[j], fem[j], masc[j]], color=['black', 'pink', 'blue'])
+            #ax.annotate("", xy=(fem[i], fem[j]), xytext=(orig[i], orig[j]),arrowprops=dict(arrowstyle="->", color='pink'))
+            #ax.annotate("", xy=(masc[i], masc[j]), xytext=(orig[i], orig[j]),arrowprops=dict(arrowstyle="->", color='blue'))
+
+            #ax.scatter([0, fem[i], masc[i]], [0, fem[j], masc[j]], color=['black', 'pink', 'blue'])
+            #ax.annotate("", xy=(fem[i],fem[j] ), xytext=(0, 0),arrowprops=dict(arrowstyle="->", color='pink'))
+            #ax.annotate("", xy=(masc[i], masc[j]), xytext=(0, 0),arrowprops=dict(arrowstyle="->", color='blue'))
+
+            #a= fem[i]-orig[i]
+            #b= fem[j]- orig[j]
+            #c= masc[i]-orig[i]
+            #d= masc[j]- orig[j]
+            #ax.scatter([0, fem[i], masc[i]], [0, fem[j], masc[j]], color=['black', 'pink', 'blue'])
+            #ax.annotate("", xy=(a,b), xytext=(0,0),arrowprops=dict(arrowstyle="->", color='pink'))
+            #ax.annotate("", xy=(c,d), xytext=(0,0),arrowprops=dict(arrowstyle="->", color='blue'))
+
+
+            a= fem[i]-orig[i]
+            b= fem[j]- orig[j]
+            c= masc[i]-orig[i]
+            d= masc[j]- orig[j]
+            ax.scatter([0, fem[i], masc[i]], [0, fem[j], masc[j]], color=['black', 'pink', 'blue'])
+            #ax.scatter([0, 0, 0], [0, 0, 0], color=['black', 'pink', 'blue'])
+            ax.annotate("", xy=(a,b), xytext=(0,0),arrowprops=dict(arrowstyle="->", color='pink'))
+            ax.annotate("", xy=(c,d), xytext=(0,0),arrowprops=dict(arrowstyle="->", color='blue'))
+
+            ##print(fem[i],fem[j])
+            ##print(masc[i],masc[j])
+            ##print(orig[i],orig[j])
+            ##print("")
+            i = i+2
+
+        plt.xlabel("Cursos")
+        plt.ylabel("Profissões")
+        plt.title("Gráfico dos vetores centrados em zero(0,0)")
+        plt.xlim(-50.0, 100.0)
+        plt.ylim(-50.0, 100.0)
+        plt.show()  
+
+
      return
