@@ -118,7 +118,7 @@ if fase == 20:  #QP1
     
     ibge_functions.Empregabilidade() 
     ibge_functions.Empregabilidade_cursos_commaisprofissoes() 
-    # ibge_functions_exploratory_analysis.correlacao_empregabilidade_salario() ...Gráfico 
+    ibge_functions_exploratory_analysis.correlacao_empregabilidade_salario() #...Gráfico 
 
     ibge_functions_exploratory_analysis.plot_selected_courses()
     ibge_functions.plot_selected_courses_1()
