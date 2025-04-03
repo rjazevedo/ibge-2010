@@ -172,8 +172,13 @@ if fase == 33:
     # Funções para 10% ... comentadas 
     # Funciona, mas salva csvs. Comentei para usar como dataframes!
     # ibge_functions.PlotOriginal_AdiciconaColunaGenero()
-    # ibge_functions.JuntaTabelas()
+    # ibge_functions.JuntaTabelas() 
     
+    
+    pass
+
+if fase == 34:
+    ## QP4 continuação
     #  Funções que faltam ...
     #  1-  Gráfico dos gêneros separados por clusters
        # https://colab.research.google.com/drive/1znpX4cXQTDgCsiZYS9kNl1UbgL3RudAB?authuser=1
@@ -186,6 +191,10 @@ if fase == 33:
     ibge_functions_results.deslocamentos_maioresdistancias()
     ibge_functions_results.deslocamento_clusters()
     ibge_functions_results.deslocamentos_maioresdistancias_clusters()
+    pass
+
+if fase == 35:
+    ## QP4 continuação
     #  2-  Profissões desequilibradas 
        # - Profissões desequilibradas - Pontos Selecionados(Grandes Desloamentos)  
     # ...   
@@ -195,6 +204,7 @@ if fase == 33:
     ibge_functions_results.resultados_distancia()
        # - Profissões desequlibradas  - Gráfico com os pontos que mudaram de cluster e diagrama de Voronoi
     ibge_functions_results.voronoi()
+
     #  3-  Profissões equilibradas - 40%-60% ...
        # - Tabela com os pontos clusterizados contendo as porcentagens de masculinos e femininos
     ibge_functions_results.Juntar_40_60Porcento_Genero()    
@@ -208,11 +218,12 @@ if fase == 33:
     ibge_functions_results.Juntar_10Porcento_Idade_Gen() 
     ibge_functions_results.Filtrar_Tabela_10Porcento_Idade_Gen()   
     ibge_functions.Analise_Genero_FaixaEtaria()
+    
     #  4-  Gráfico dos vetores centrados em(0,0)    
     ibge_functions_results.vetores()
     pass
 
-if fase == 34:
+if fase == 40:
     # #QP4
     # Funciona, mas salva csvs. Comentei para usar como dataframes!
     # ibge_functions.Filtro_Idade()
@@ -245,7 +256,7 @@ if fase == 34:
        # - Homens gestores e Mulheres gestoras (Homem e mulher, muda faixa de idade para virar gestores?)
     pass    
     
-if fase == 35:
+if fase == 50:
    # #QP5
    # Funções que faltam ...
    # 1- BoxPlot de salários separados por clusters
