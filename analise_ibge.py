@@ -178,7 +178,7 @@ if fase == 33:
     pass
 
 if fase == 34:
-    ## QP4 continuação
+    ## QP3 continuação
     #  Funções que faltam ...
     #  1-  Gráfico dos gêneros separados por clusters
        # https://colab.research.google.com/drive/1znpX4cXQTDgCsiZYS9kNl1UbgL3RudAB?authuser=1
@@ -194,7 +194,7 @@ if fase == 34:
     pass
 
 if fase == 35:
-    ## QP4 continuação
+    ## QP3 continuação
     #  2-  Profissões desequilibradas 
        # - Profissões desequilibradas - Pontos Selecionados(Grandes Desloamentos)  
     # ...   
@@ -218,7 +218,7 @@ if fase == 35:
     ibge_functions_results.Juntar_10Porcento_Idade_Gen() 
     ibge_functions_results.Filtrar_Tabela_10Porcento_Idade_Gen()   
     ibge_functions.Analise_Genero_FaixaEtaria()
-    
+
     #  4-  Gráfico dos vetores centrados em(0,0)    
     ibge_functions_results.vetores()
     pass
