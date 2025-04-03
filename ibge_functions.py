@@ -298,7 +298,10 @@ def Empregabilidade_cursos_commaisprofissoes():
 def median_salario():
     path2 = ibge_variable.paths(13)
     name2 = ibge_variable.names(9) #5
-    ibge_functions_exploratory_analysis.median_salario(path2,name2)    
+    ibge_functions_exploratory_analysis.median_salario(path2,name2,'O')    
+    ibge_functions_exploratory_analysis.median_salario(path2,name2,'M')    
+    ibge_functions_exploratory_analysis.median_salario(path2,name2,'F')    
+
     return
 
 def Soma_PivotTable():
