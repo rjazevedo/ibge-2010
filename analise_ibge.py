@@ -194,30 +194,30 @@ if fase == 34:
     pass
 
 if fase == 35:
-    ## QP3 continuação
-    #  2-  Profissões desequilibradas 
-       # - Profissões desequilibradas - Pontos Selecionados(Grandes Desloamentos)  
-    # ...   
-       # - Profissões desequilibradas - Quais as profissões onde homens e mulheres estão em clusters diferentes?
-    ibge_functions.dadosoriginais_resultados()
-    ibge_functions_results.resultados_filtragem_10_100()
-    ibge_functions_results.resultados_distancia()
-       # - Profissões desequlibradas  - Gráfico com os pontos que mudaram de cluster e diagrama de Voronoi
-    ibge_functions_results.voronoi()
+    # ## QP3 continuação
+    # #  2-  Profissões desequilibradas 
+    #    # - Profissões desequilibradas - Pontos Selecionados(Grandes Desloamentos)  
+    # # ...   
+    #    # - Profissões desequilibradas - Quais as profissões onde homens e mulheres estão em clusters diferentes?
+    # ibge_functions.dadosoriginais_resultados()
+    # ibge_functions_results.resultados_filtragem_10_100()
+    # ibge_functions_results.resultados_distancia()
+    #    # - Profissões desequlibradas  - Gráfico com os pontos que mudaram de cluster e diagrama de Voronoi
+    # ibge_functions_results.voronoi()
 
-    #  3-  Profissões equilibradas - 40%-60% ...
-       # - Tabela com os pontos clusterizados contendo as porcentagens de masculinos e femininos
-    ibge_functions_results.Juntar_40_60Porcento_Genero()    
-       # - Tabela com os pontos selecionados(40%-60%)
-    ibge_functions_results. pt_selecionados_40_60()
-       # - Gráfico com os ponto selecionados(40%-60%)
-    ibge_functions_results.graf_selecionados_40_60()
-       # - Plotar o gráfico das idades, usando o arquivo de femininos e masculinos! Com isso poderemos ver a distribuição das idades para o masculino e para o feminino!
-    ibge_functions.Ida_Volta_Idade_Gen()       
-    ibge_functions.Tabela_Ida_Volta_Idade_Gen()         
-    ibge_functions_results.Juntar_10Porcento_Idade_Gen() 
-    ibge_functions_results.Filtrar_Tabela_10Porcento_Idade_Gen()   
-    ibge_functions.Analise_Genero_FaixaEtaria()
+    # #  3-  Profissões equilibradas - 40%-60% ...
+    #    # - Tabela com os pontos clusterizados contendo as porcentagens de masculinos e femininos
+    # ibge_functions_results.Juntar_40_60Porcento_Genero()    
+    #    # - Tabela com os pontos selecionados(40%-60%)
+    # ibge_functions_results. pt_selecionados_40_60()
+    #    # - Gráfico com os ponto selecionados(40%-60%)
+    # ibge_functions_results.graf_selecionados_40_60()
+    #    # - Plotar o gráfico das idades, usando o arquivo de femininos e masculinos! Com isso poderemos ver a distribuição das idades para o masculino e para o feminino!
+    # ibge_functions.Ida_Volta_Idade_Gen()       
+    # ibge_functions.Tabela_Ida_Volta_Idade_Gen()         
+    # ibge_functions_results.Juntar_10Porcento_Idade_Gen() 
+    # ibge_functions_results.Filtrar_Tabela_10Porcento_Idade_Gen()   
+    # ibge_functions.Analise_Genero_FaixaEtaria()
 
     #  4-  Gráfico dos vetores centrados em(0,0)    
     ibge_functions_results.vetores()
