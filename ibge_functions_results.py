@@ -4898,7 +4898,11 @@ def  vetores_Setas_Masc_Fem():
     plt.title("Gráfico dos vetores centrados em zero(0,0)")
     plt.xlim(-40.0, 40.0)
     plt.ylim(-40.0, 40.0)
-    plt.show()
+    # plt.show()
+    string1 = "vetores_Setas_Masc_Fem" + ".png"
+    save_results_to = 'graficos/'  
+    plt.savefig(save_results_to + string1)  
+
      
     return
 
@@ -4976,7 +4980,10 @@ def vetores_Setas_Setas_Masculino():
     plt.title("Gráfico dos vetores centrados em zero(0,0)")
     plt.xlim(-40.0, 40.0)
     plt.ylim(-40.0, 40.0)
-    plt.show()
+    # plt.show()
+    string1 = "vetores_Setas_Setas_Masculino" + ".png"
+    save_results_to = 'graficos/'  
+    plt.savefig(save_results_to + string1)  
     return
 
 def vetores_Setas_Setas_Feminino():
@@ -5053,6 +5060,8 @@ def vetores_Setas_Setas_Feminino():
     plt.title("Gráfico dos vetores centrados em zero(0,0)")
     plt.xlim(-40.0, 40.0)
     plt.ylim(-40.0, 40.0)
-    plt.show()
-
+    # plt.show()
+    string1 = "vetores_Setas_Setas_Feminino" + ".png"
+    save_results_to = 'graficos/'  
+    plt.savefig(save_results_to + string1) 
     return
