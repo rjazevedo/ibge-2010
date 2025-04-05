@@ -220,7 +220,12 @@ if fase == 35:
     # ibge_functions.Analise_Genero_FaixaEtaria()
 
     #  4-  Gráfico dos vetores centrados em(0,0)    
-    ibge_functions_results.vetores()
+    # ibge_functions_results.vetores_Setas_Pontos()
+    ibge_functions_results.vetores_Setas_Masc_Fem()
+    ibge_functions_results.vetores_Setas_Setas_Masculino()
+    ibge_functions_results.vetores_Setas_Setas_Feminino()
+
+
     pass
 
 if fase == 40:
