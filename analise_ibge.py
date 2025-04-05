@@ -225,6 +225,9 @@ if fase == 35:
     ibge_functions_results.vetores_Setas_Setas_Masculino()
     ibge_functions_results.vetores_Setas_Setas_Feminino()
 
+    # https://colab.research.google.com/drive/1znpX4cXQTDgCsiZYS9kNl1UbgL3RudAB?authuser=1#scrollTo=NTzZhdz0uo4g
+    # Kmeans3 - Copilot - Soma dos vetores(setas) femininos
+
 
     pass
 
