@@ -177,7 +177,7 @@ if fase == 33:
     
     pass
 
-if fase == 34:
+if fase == 34: #...
     ## QP3 continuação
     #  Funções que faltam ...
     #  1-  Gráfico dos gêneros separados por clusters
