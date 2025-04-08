@@ -208,8 +208,7 @@ if fase == 35:
     # #  3-  Profissões equilibradas - 40%-60% ...
     #    # - Tabela com os pontos clusterizados contendo as porcentagens de masculinos e femininos
     # ibge_functions_results.Juntar_40_60Porcento_Genero()   
-    # 
-    ibge_functions_results.tabela() 
+    # ibge_functions_results.tabela() 
     #    # - Tabela com os pontos selecionados(40%-60%)
     # ibge_functions_results. pt_selecionados_40_60()
     #    # - Gráfico com os ponto selecionados(40%-60%)

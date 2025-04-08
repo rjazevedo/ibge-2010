@@ -2853,8 +2853,8 @@ def Analise_Genero_FaixaEtaria(sx):
        
 
        # Criando lista
-       Curso = ["212",  "724",  "581",  "380",  "344",  "342",  "342",  "321",  "214"]
-       CBO =   ["2354", "2261", "2161", "2611", "2411", "1221", "2431", "2642", "2166"]
+       Curso = ["212",  "724",  "581",  "380",  "344",  "342",  "342",  "321"]#,  "214"]
+       CBO =   ["2354", "2261", "2161", "2611", "2411", "1221", "2431", "2642"]#, "2166"]
 
        # Iterando
        # https://colab.research.google.com/drive/1Oxj69ukEFJ-lxw09fqGi-k5ym1uKJoXP?authuser=1#scrollTo=AG_wj961fUbc
@@ -4658,8 +4658,8 @@ def Juntar_40_60Porcento_Genero():
     Kmeans3_T.to_csv(save_results_to + 'Kmeans3_T_FMT_MPFP_45_55.csv')     
     # -----------------------------------------------------------------------------------    
     # -----------------------------------------------------------------------------------   
-        
     return
+
 def tabela():
     import pandas as pd
 
@@ -4672,9 +4672,6 @@ def tabela():
     df = df.drop(columns=['Curso_Nome'])
     df = df.drop(columns=['Cbo_Nome'])
 
-
-
-
     # Converter para código LaTeX
     latex_code = df.to_latex(index=False, caption="Porcentagens de Masculinos e Femininos", label="tab:Fem_Masc")
 
@@ -4682,6 +4679,7 @@ def tabela():
     with open("tabela.tex", "w") as f:
         f.write(latex_code)
     return
+
 # https://colab.research.google.com/drive/1y-78aFKxXgt60VIyjhBmM6pn6XzcXZUC?authuser=1
 # Pontos selecionados(40% á 60%) 
 def pt_selecionados_40_60():

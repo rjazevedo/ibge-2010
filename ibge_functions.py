@@ -556,7 +556,7 @@ def Tabela_Ida_Volta_Idade_Gen():
     return
 def Analise_Genero_FaixaEtaria():
     ibge_functions_results.Analise_Genero_FaixaEtaria('F')
-    ibge_functions_results.Analise_Genero_FaixaEtaria('M')
+    # ibge_functions_results.Analise_Genero_FaixaEtaria('M')
     return
 #--------------------------------------------------------------------
 
