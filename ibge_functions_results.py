@@ -2824,8 +2824,8 @@ def Analise_Genero_FaixaEtaria(sx):
        
 
        # Criando lista
-       Curso = ["212",  "724",  "581",  "380",  "344",  "342",  "342",  "321",  "214"]
-       CBO =   ["2354", "2261", "2161", "2611", "2411", "1221", "2431", "2642", "2166"]
+       Curso = ["212",  "724",  "581",  "380",  "344",  "342",  "342",  "321"]#,  "214"]
+       CBO =   ["2354", "2261", "2161", "2611", "2411", "1221", "2431", "2642"]#, "2166"]
 
        # Iterando
        # https://colab.research.google.com/drive/1Oxj69ukEFJ-lxw09fqGi-k5ym1uKJoXP?authuser=1#scrollTo=AG_wj961fUbc
@@ -2866,6 +2866,7 @@ def Analise_Genero_FaixaEtaria(sx):
 
 def Idade_Plot(csv_idade,CBO,Curso,sx):
     import pandas as pd
+
     if sx == 'M':
         #Leitura de Arquivos CSVs ...
         X = pd.read_csv(csv_idade, sep=",")
