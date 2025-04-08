@@ -2982,7 +2982,7 @@ def Idade_Plot(csv_idade,CBO,Curso,sx):
         ax.annotate("", xy=(I_30_39[0], I_30_39[1]), xytext=(I_40_49[0], I_40_49[1]), arrowprops=dict(arrowstyle="<-", color='magenta'))
         ax.annotate("", xy=(I_40_49[0], I_40_49[1]), xytext=(I_50_59[0], I_50_59[1]), arrowprops=dict(arrowstyle="<-", color='Darkgreen'))
         ax.annotate("", xy=(I_50_59[0], I_50_59[1]), xytext=(I_60[0], I_60[1]), arrowprops=dict(arrowstyle="<-", color='red'))
-        # ax.annotate("", xy=(I_60[0], I_60[1]), xytext=(I_60[0], I_60[1]), arrowprops=dict(arrowstyle="->", color='black'))
+        #ax.annotate("", xy=(I_60[0], I_60[1]), xytext=(I_60[0], I_60[1]), arrowprops=dict(arrowstyle="->", color='black'))
 
 
 
@@ -4660,7 +4660,28 @@ def Juntar_40_60Porcento_Genero():
     # -----------------------------------------------------------------------------------   
         
     return
+def tabela():
+    import pandas as pd
 
+    # Carregar o CSV
+    df = pd.read_csv("graficos/Kmeans3_T_FMT_MPFP_45_55.csv")
+    df = df.drop(columns=['Unnamed: 0'])
+    df = df.drop(columns=['Unnamed: 0.1'])
+    df = df.drop(columns=['Unnamed: 0.1.1'])
+    df = df.drop(columns=['Unnamed: 0.1.1.1'])
+    df = df.drop(columns=['Curso_Nome'])
+    df = df.drop(columns=['Cbo_Nome'])
+
+
+
+
+    # Converter para código LaTeX
+    latex_code = df.to_latex(index=False, caption="Porcentagens de Masculinos e Femininos", label="tab:Fem_Masc")
+
+    # Salvar em um arquivo .tex
+    with open("tabela.tex", "w") as f:
+        f.write(latex_code)
+    return
 # https://colab.research.google.com/drive/1y-78aFKxXgt60VIyjhBmM6pn6XzcXZUC?authuser=1
 # Pontos selecionados(40% á 60%) 
 def pt_selecionados_40_60():

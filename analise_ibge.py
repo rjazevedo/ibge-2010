@@ -207,7 +207,9 @@ if fase == 35:
 
     # #  3-  Profissões equilibradas - 40%-60% ...
     #    # - Tabela com os pontos clusterizados contendo as porcentagens de masculinos e femininos
-    # ibge_functions_results.Juntar_40_60Porcento_Genero()    
+    # ibge_functions_results.Juntar_40_60Porcento_Genero()   
+    # 
+    ibge_functions_results.tabela() 
     #    # - Tabela com os pontos selecionados(40%-60%)
     # ibge_functions_results. pt_selecionados_40_60()
     #    # - Gráfico com os ponto selecionados(40%-60%)
@@ -221,9 +223,9 @@ if fase == 35:
 
     #  4-  Gráfico dos vetores centrados em(0,0)    
     # ibge_functions_results.vetores_Setas_Pontos()
-    ibge_functions_results.vetores_Setas_Masc_Fem()
-    ibge_functions_results.vetores_Setas_Setas_Masculino()
-    ibge_functions_results.vetores_Setas_Setas_Feminino()
+    # ibge_functions_results.vetores_Setas_Masc_Fem()
+    # ibge_functions_results.vetores_Setas_Setas_Masculino()
+    # ibge_functions_results.vetores_Setas_Setas_Feminino()
 
     # https://colab.research.google.com/drive/1znpX4cXQTDgCsiZYS9kNl1UbgL3RudAB?authuser=1#scrollTo=NTzZhdz0uo4g
     # Kmeans3 - Copilot - Soma dos vetores(setas) femininos
