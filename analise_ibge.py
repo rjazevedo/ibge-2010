@@ -210,7 +210,9 @@ if fase == 35:
     # ibge_functions_results.Juntar_40_60Porcento_Genero()   
     # ibge_functions_results.tabela() 
     #    # - Tabela com os pontos selecionados(40%-60%)
-    # ibge_functions_results. pt_selecionados_40_60()
+    # 
+    ibge_functions_results. pt_selecionados_40_60()
+    ibge_functions_results.tabela_40_60()
     #    # - Gráfico com os ponto selecionados(40%-60%)
     # ibge_functions_results.graf_selecionados_40_60()
     #    # - Plotar o gráfico das idades, usando o arquivo de femininos e masculinos! Com isso poderemos ver a distribuição das idades para o masculino e para o feminino!
@@ -218,8 +220,7 @@ if fase == 35:
     # ibge_functions.Tabela_Ida_Volta_Idade_Gen()         
     # ibge_functions_results.Juntar_10Porcento_Idade_Gen() 
     # ibge_functions_results.Filtrar_Tabela_10Porcento_Idade_Gen()   
-    # 
-    ibge_functions.Analise_Genero_FaixaEtaria()
+    # ibge_functions.Analise_Genero_FaixaEtaria()
 
     #  4-  Gráfico dos vetores centrados em(0,0)    
     # ibge_functions_results.vetores_Setas_Pontos()

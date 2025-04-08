@@ -4688,10 +4688,57 @@ def pt_selecionados_40_60():
     file_path = save_results_to + 'Kmeans3_T_FMT_MPFP_45_55.csv'     
     Kmeans3_T         = pd.read_csv(file_path)
    
+    # for i in range(len(Kmeans3_T)):
+    #     if ((Kmeans3_T.MP[i]>= 0.40) & (Kmeans3_T.MP[i]<= 0.60)) & ((Kmeans3_T.FP[i]>= 0.40) & (Kmeans3_T.FP[i]<= 0.60)):
+    #         print(Kmeans3_T.index[i], Kmeans3_T.Ida[i],Kmeans3_T.Volta[i],Kmeans3_T.Cluster[i],Kmeans3_T.Curso[i],Kmeans3_T.Curso_Nome[i],Kmeans3_T.Cbo[i],Kmeans3_T.Cbo_Nome[i],Kmeans3_T.M[i],Kmeans3_T.F[i],Kmeans3_T.Total[i],Kmeans3_T.MP[i],Kmeans3_T.FP[i])
+    #         print("")
+
+    # import pandas as pd
+
+    # Lista para armazenar os dados filtrados
+    filtered_data = []
+
     for i in range(len(Kmeans3_T)):
-        if ((Kmeans3_T.MP[i]>= 0.40) & (Kmeans3_T.MP[i]<= 0.60)) & ((Kmeans3_T.FP[i]>= 0.40) & (Kmeans3_T.FP[i]<= 0.60)):
-            print(Kmeans3_T.index[i], Kmeans3_T.Ida[i],Kmeans3_T.Volta[i],Kmeans3_T.Cluster[i],Kmeans3_T.Curso[i],Kmeans3_T.Curso_Nome[i],Kmeans3_T.Cbo[i],Kmeans3_T.Cbo_Nome[i],Kmeans3_T.M[i],Kmeans3_T.F[i],Kmeans3_T.Total[i],Kmeans3_T.MP[i],Kmeans3_T.FP[i])
-            print("")
+        if ((Kmeans3_T.MP[i] >= 0.40) & (Kmeans3_T.MP[i] <= 0.60) & (Kmeans3_T.FP[i] >= 0.40) & (Kmeans3_T.FP[i] <= 0.60)):
+            # Adiciona os dados à lista
+            filtered_data.append({
+                "index": Kmeans3_T.index[i],
+                "Ida": Kmeans3_T.Ida[i],
+                "Volta": Kmeans3_T.Volta[i],
+                "Cluster": Kmeans3_T.Cluster[i],
+                "Curso": Kmeans3_T.Curso[i],
+                "Curso_Nome": Kmeans3_T.Curso_Nome[i],
+                "Cbo": Kmeans3_T.Cbo[i],
+                "Cbo_Nome": Kmeans3_T.Cbo_Nome[i],
+                "M": Kmeans3_T.M[i],
+                "F": Kmeans3_T.F[i],
+                "Total": Kmeans3_T.Total[i],
+                "MP": Kmeans3_T.MP[i],
+                "FP": Kmeans3_T.FP[i]
+            })  
+    df_filtered = pd.DataFrame(filtered_data)
+    df_filtered.to_csv("Kmeans3_T_FMT_MPFP_40_60.csv", index=False)
+          
+    return
+
+def tabela_40_60():
+    # import pandas as pd
+
+    # Carregar o CSV
+    df = pd.read_csv("graficos/Kmeans3_T_FMT_MPFP_40_60.csv")
+    df = df.drop(columns=['Unnamed: 0'])
+    df = df.drop(columns=['Unnamed: 0.1'])
+    df = df.drop(columns=['Unnamed: 0.1.1'])
+    df = df.drop(columns=['Unnamed: 0.1.1.1'])
+    df = df.drop(columns=['Curso_Nome'])
+    df = df.drop(columns=['Cbo_Nome'])
+
+    # Converter para código LaTeX
+    latex_code = df.to_latex(index=False, caption="Porcentagens de Masculinos e Femininos entre 40% e 60%", label="tab:Fem_Masc")
+
+    # Salvar em um arquivo .tex
+    with open("tabela_40_60.tex", "w") as f:
+        f.write(latex_code)
     return
 
 def graf_selecionados_40_60():
