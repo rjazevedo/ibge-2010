@@ -2932,7 +2932,7 @@ def Idade_Plot(csv_idade,CBO,Curso,sx):
         plt.xlim(0.0, 100.0)
         plt.ylim(0.0, 100.0)
         # plt.show()
-        string1 = "Analise_Genero_FaixaEtaria_M" + "_" + Curso + "_" + CBO + ".pdf"
+        string1 = "Analise_Genero_FaixaEtaria_M" + "_" + Curso + "_" + CBO + ".png"
         save_results_to = 'graficos/'  
         plt.savefig(save_results_to + string1)  
 
@@ -3001,7 +3001,7 @@ def Idade_Plot(csv_idade,CBO,Curso,sx):
         plt.xlim(0.0, 100.0)
         plt.ylim(0.0, 100.0)
         # plt.show()
-        string1 = "Analise_Genero_FaixaEtaria_F" + "_" + Curso + "_" + CBO + ".pdf"
+        string1 = "Analise_Genero_FaixaEtaria_F" + "_" + Curso + "_" + CBO + ".png"
         save_results_to = 'graficos/'  
         plt.savefig(save_results_to + string1)      
 
@@ -4717,7 +4717,8 @@ def pt_selecionados_40_60():
                 "FP": Kmeans3_T.FP[i]
             })  
     df_filtered = pd.DataFrame(filtered_data)
-    df_filtered.to_csv("Kmeans3_T_FMT_MPFP_40_60.csv", index=False)
+    df_filtered.to_csv(save_results_to + 'Kmeans3_T_FMT_MPFP_40_60.csv')     
+
           
     return
 
@@ -4727,9 +4728,10 @@ def tabela_40_60():
     # Carregar o CSV
     df = pd.read_csv("graficos/Kmeans3_T_FMT_MPFP_40_60.csv")
     df = df.drop(columns=['Unnamed: 0'])
-    df = df.drop(columns=['Unnamed: 0.1'])
-    df = df.drop(columns=['Unnamed: 0.1.1'])
-    df = df.drop(columns=['Unnamed: 0.1.1.1'])
+    # df = df.drop(columns=['Unnamed: 0.1'])
+    # df = df.drop(columns=['Unnamed: 0.1.1'])
+    # df = df.drop(columns=['Unnamed: 0.1.1.1'])
+    df = df.drop(columns=['index'])
     df = df.drop(columns=['Curso_Nome'])
     df = df.drop(columns=['Cbo_Nome'])
 
