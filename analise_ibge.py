@@ -108,20 +108,20 @@ if fase == 20:  #QP1
     ibge_functions.Profissoes_Cursos()    
     # ## Empregabilidade x Salario
     ibge_functions.median_salario() 
-    ibge_functions_exploratory_analysis.separar_cursos_por_clusters()
-    ibge_functions_exploratory_analysis.medianas_por_clusters()
-    ibge_functions.Salarios() 
-    ibge_functions.Salarios_cursos_commaisprofissoes() 
+    # ibge_functions_exploratory_analysis.separar_cursos_por_clusters()
+    # ibge_functions_exploratory_analysis.medianas_por_clusters()
+    # ibge_functions.Salarios() 
+    # ibge_functions.Salarios_cursos_commaisprofissoes() 
 
-    ibge_functions.Soma_PivotTable()
-    ibge_functions.Coluna_Empregabilidade()
+    # ibge_functions.Soma_PivotTable()
+    # ibge_functions.Coluna_Empregabilidade()
     
-    ibge_functions.Empregabilidade() 
-    ibge_functions.Empregabilidade_cursos_commaisprofissoes() 
-    ibge_functions_exploratory_analysis.correlacao_empregabilidade_salario() #...Gráfico 
+    # ibge_functions.Empregabilidade() 
+    # ibge_functions.Empregabilidade_cursos_commaisprofissoes() 
+    # ibge_functions_exploratory_analysis.correlacao_empregabilidade_salario() #...Gráfico 
 
-    ibge_functions_exploratory_analysis.plot_selected_courses()
-    ibge_functions.plot_selected_courses_1()
+    # ibge_functions_exploratory_analysis.plot_selected_courses()
+    # ibge_functions.plot_selected_courses_1()
     pass
 
 # Fase 30: Resultados da Análise ...
@@ -192,7 +192,9 @@ if fase == 34: #...
     # ibge_functions_results.deslocamento_clusters()
     # ibge_functions_results.deslocamentos_maioresdistancias_clusters()
     ibge_functions_results.extract_courses_F()
+    ibge_functions_results.extract_courses_Correspondentes_F()
     ibge_functions_results.extract_courses_M()
+    ibge_functions_results.extract_courses_Correspondentes_M()
     pass
 
 if fase == 35:

@@ -5176,6 +5176,29 @@ def extract_courses_F():
 
     return 
 
+def extract_courses_Correspondentes_F():
+    # Read the CSV file
+    data = pd.read_csv("graficos/Kmeans3_T_Salarios_certo_M.csv")
+    data = data.drop(columns=['Unnamed: 0'])
+    data = data.drop(columns=['Curso_Nome'])
+    data = data.drop(columns=['Cbo_Nome'])
+
+    Curso = [863, 221, 521]
+    Cbo   = [110, 2636, 2144]
+
+    # Filter the records based on the specified Courses and Cbos
+    filtered_data = data[data['Curso'].isin(Curso) & data['Cbo'].isin(Cbo)]
+
+    # Save the records in a LaTeX table
+    latex_table = filtered_data.to_latex(index=False, caption="Masculinos: correspondentes aos deslocamentos femininos", label="tab:Salarios_Desequlibrio_F")
+    
+    # Salvar em um arquivo .tex
+    with open("Kmeans3_T_Salarios_certo_FM_latex.tex", "w") as f:
+        f.write(latex_table)
+
+    return 
+
+
 def extract_courses_M():
     # Read the CSV file
     data = pd.read_csv("graficos/Kmeans3_T_Salarios_certo_M.csv")
@@ -5197,6 +5220,28 @@ def extract_courses_M():
         f.write(latex_table)
 
     return	
+
+def extract_courses_Correspondentes_M():
+    # Read the CSV file
+    data = pd.read_csv("graficos/Kmeans3_T_Salarios_certo_M.csv")
+    data = data.drop(columns=['Unnamed: 0'])
+    data = data.drop(columns=['Curso_Nome'])
+    data = data.drop(columns=['Cbo_Nome'])
+
+    Curso = [762, 142, 142, 725, 142, 726, 214]
+    Cbo   = [2635, 2342, 2351, 2226, 2341, 2265, 2163]
+
+    # Filter the records based on the specified Courses and Cbos
+    filtered_data = data[data['Curso'].isin(Curso) & data['Cbo'].isin(Cbo)]
+
+    # Save the records in a LaTeX table
+    latex_table = filtered_data.to_latex(index=False, caption="Femininos: correspondentes aos deslocamentos masculinos", label="tab:Salarios_Desequlibrio_F")
+    
+    # Salvar em um arquivo .tex
+    with open("Kmeans3_T_Salarios_certo_MF_latex.tex", "w") as f:
+        f.write(latex_table)
+
+    return 
 
 
  

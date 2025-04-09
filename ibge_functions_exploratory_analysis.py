@@ -1201,7 +1201,7 @@ def median_salario(path1,name1,sx):
         
         #Kmeans3_T = Kmeans3_T.drop(columns=['Unnamed: 0'])
 
-        Final = pd.read_csv("processados/CSVs_ArquivoFinalGraduados/Brasil_Graduados_Fem.csv", sep=",")
+        Final = pd.read_csv("processados/CSVs_ArquivoFinalGraduados/Brasil_Graduados_Masc.csv", sep=",")
         Final = Final.drop(columns=['Unnamed: 0'])
         #print(Final.head(3))
         # #Remove Zeros
