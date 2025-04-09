@@ -4492,7 +4492,26 @@ def resultados_distancia():
     distancia_mudanca_clusters.to_csv(save_results_to + 'distancia_mudanca_clusters.csv', index=False)
 
     return
+def tabela_clusters_diferentes():
+    # import pandas as pd
 
+    # Carregar o CSV
+    df = pd.read_csv("graficos/distancia_mudanca_clusters_filtrados.csv")
+    # df = df.drop(columns=['Unnamed: 0'])
+    # df = df.drop(columns=['Unnamed: 0.1'])
+    # df = df.drop(columns=['Unnamed: 0.1.1'])
+    # df = df.drop(columns=['Unnamed: 0.1.1.1'])
+    # df = df.drop(columns=['index'])
+    df = df.drop(columns=['Curso_Nome'])
+    df = df.drop(columns=['Cbo_Nome'])
+
+    # Converter para código LaTeX
+    latex_code = df.to_latex(index=False, caption="Profissões onde homens e mulheres estão em clusters diferentes", label="tab:Clusters_Diferentes")
+
+    # Salvar em um arquivo .tex
+    with open("distancia_mudanca_clusters_filtrados.tex", "w") as f:
+        f.write(latex_code)
+    return
 def voronoi():
     # https://colab.research.google.com/drive/1ZP-z62wJWWM3zr52MYMjO_-brdvThb88?authuser=1#scrollTo=-oDzCfNi5PK0
     import numpy as np
@@ -4736,7 +4755,7 @@ def tabela_40_60():
     df = df.drop(columns=['Cbo_Nome'])
 
     # Converter para código LaTeX
-    latex_code = df.to_latex(index=False, caption="Porcentagens de Masculinos e Femininos entre 40% e 60%", label="tab:Fem_Masc")
+    latex_code = df.to_latex(index=False, caption="Porcentagens de Masculinos e Femininos entre 40\% e 60\%", label="tab:Fem_Masc")
 
     # Salvar em um arquivo .tex
     with open("tabela_40_60.tex", "w") as f:

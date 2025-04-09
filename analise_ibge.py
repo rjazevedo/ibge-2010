@@ -202,7 +202,8 @@ if fase == 35:
     # ibge_functions.dadosoriginais_resultados()
     # ibge_functions_results.resultados_filtragem_10_100()
     # ibge_functions_results.resultados_distancia()
-    #    # - Profissões desequlibradas  - Gráfico com os pontos que mudaram de cluster e diagrama de Voronoi
+    ibge_functions_results.tabela_clusters_diferentes()
+    # # - Profissões desequlibradas  - Gráfico com os pontos que mudaram de cluster e diagrama de Voronoi
     # ibge_functions_results.voronoi()
 
     # #  3-  Profissões equilibradas - 40%-60% ...
@@ -219,8 +220,7 @@ if fase == 35:
     # ibge_functions.Tabela_Ida_Volta_Idade_Gen()         
     # ibge_functions_results.Juntar_10Porcento_Idade_Gen() 
     # ibge_functions_results.Filtrar_Tabela_10Porcento_Idade_Gen()   
-    # 
-    ibge_functions.Analise_Genero_FaixaEtaria()
+    # ibge_functions.Analise_Genero_FaixaEtaria()
 
     #  4-  Gráfico dos vetores centrados em(0,0)    
     # ibge_functions_results.vetores_Setas_Pontos()
