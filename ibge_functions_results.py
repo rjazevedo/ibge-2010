@@ -5153,3 +5153,46 @@ def vetores_Setas_Setas_Feminino():
     save_results_to = 'graficos/'  
     plt.savefig(save_results_to + string1) 
     return
+
+def extract_courses_F():
+    # Read the CSV file
+    data = pd.read_csv("graficos/Kmeans3_T_Salarios_certo_F.csv")
+
+    Curso = [863, 221, 521]
+    Cbo   = [110, 2636, 2144]
+
+    # Filter the records based on the specified Courses and Cbos
+    filtered_data = data[data['Curso'].isin(Curso) & data['Cbo'].isin(Cbo)]
+
+    # Save the records in a LaTeX table
+    latex_table = filtered_data.to_latex(index=False, caption="...", label="tab:Salarios_Desequlibrio_F")
+    
+    # Salvar em um arquivo .tex
+    with open("Kmeans3_T_Salarios_certo_F_latex.tex", "w") as f:
+        f.write(latex_table)
+
+    return 
+
+def extract_courses_M():
+    # Read the CSV file
+    data = pd.read_csv("graficos/Kmeans3_T_Salarios_certo_M.csv")
+
+    Curso = [762, 142, 142, 725, 142, 726, 214]
+    Cbo   = [2635, 2342, 2351, 2226, 2341, 2265, 2163]
+
+    # Filter the records based on the specified Courses and Cbos
+    filtered_data = data[data['Curso'].isin(Curso) & data['Cbo'].isin(Cbo)]
+
+    # Save the records in a LaTeX table
+    latex_table = filtered_data.to_latex(index=False, caption="...", label="tab:Salarios_Desequlibrio_M")
+    
+    # Salvar em um arquivo .tex
+    with open("Kmeans3_T_Salarios_certo_M_latex.tex", "w") as f:
+        f.write(latex_table)
+
+    return	
+
+
+ 
+   
+
