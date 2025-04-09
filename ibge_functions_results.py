@@ -5157,6 +5157,8 @@ def vetores_Setas_Setas_Feminino():
 def extract_courses_F():
     # Read the CSV file
     data = pd.read_csv("graficos/Kmeans3_T_Salarios_certo_F.csv")
+    data = data.drop(columns=['Curso_Nome'])
+    data = data.drop(columns=['Cbo_Nome'])
 
     Curso = [863, 221, 521]
     Cbo   = [110, 2636, 2144]
@@ -5176,6 +5178,8 @@ def extract_courses_F():
 def extract_courses_M():
     # Read the CSV file
     data = pd.read_csv("graficos/Kmeans3_T_Salarios_certo_M.csv")
+    data = data.drop(columns=['Curso_Nome'])
+    data = data.drop(columns=['Cbo_Nome'])
 
     Curso = [762, 142, 142, 725, 142, 726, 214]
     Cbo   = [2635, 2342, 2351, 2226, 2341, 2265, 2163]
