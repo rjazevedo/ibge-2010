@@ -5244,6 +5244,53 @@ def extract_courses_Correspondentes_M():
     return 
 
 
- 
+def extract_courses_transicao():
+    # Read the CSV file
+    data = pd.read_csv("graficos/Kmeans3_T_FMT_MPFP_45_55.csv")
+    data = data.drop(columns=['Unnamed: 0'])
+    data = data.drop(columns=['Unnamed: 0.1'])
+    data = data.drop(columns=['Unnamed: 0.1.1'])
+    data = data.drop(columns=['Unnamed: 0.1.1.1'])
+    data = data.drop(columns=['Curso_Nome'])
+    data = data.drop(columns=['Cbo_Nome'])
+
+    Curso = [481, 483, 723]
+    Cbo   = [2511, 2611, 2221]
+
+    # Filter the records based on the specified Courses and Cbos
+    filtered_data = data[data['Curso'].isin(Curso) & data['Cbo'].isin(Cbo)]
+
+    # Save the records in a LaTeX table
+    latex_table = filtered_data.to_latex(index=False, caption="Profissôes em transição de gênero", label="tab:Salarios_transicao")
+    
+    # Salvar em um arquivo .tex
+    with open("Kmeans3_T_Salarios_certo_MF_transição.tex", "w") as f:
+        f.write(latex_table)
+
+    return  
+   
+def extract_courses_equidade():
+    # Read the CSV file
+    data = pd.read_csv("graficos/Kmeans3_T_FMT_MPFP_45_55.csv")
+    data = data.drop(columns=['Unnamed: 0'])
+    data = data.drop(columns=['Unnamed: 0.1'])
+    data = data.drop(columns=['Unnamed: 0.1.1'])
+    data = data.drop(columns=['Unnamed: 0.1.1.1'])
+    data = data.drop(columns=['Curso_Nome'])
+    data = data.drop(columns=['Cbo_Nome'])
+
+    Curso = [520, 520, 721, 721]
+    Cbo   = [2142, 2141, 2211, 2212]
    
 
+    # Filter the records based on the specified Courses and Cbos
+    filtered_data = data[data['Curso'].isin(Curso) & data['Cbo'].isin(Cbo)]
+
+    # Save the records in a LaTeX table
+    latex_table = filtered_data.to_latex(index=False, caption="Equilibrio de Gênero versus Equidade de Oportunidades", label="tab:Salarios_Equidade")
+    
+    # Salvar em um arquivo .tex
+    with open("Kmeans3_T_Salarios_certo_MF_equidade.tex", "w") as f:
+        f.write(latex_table)
+
+    return  

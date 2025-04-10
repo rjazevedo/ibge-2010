@@ -234,6 +234,8 @@ if fase == 35:
     # https://colab.research.google.com/drive/1znpX4cXQTDgCsiZYS9kNl1UbgL3RudAB?authuser=1#scrollTo=NTzZhdz0uo4g
     # Kmeans3 - Copilot - Soma dos vetores(setas) femininos
 
+    # ibge_functions_results.extract_courses_transicao()
+    ibge_functions_results.extract_courses_equidade()
 
     pass
 
