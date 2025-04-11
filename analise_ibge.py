@@ -255,6 +255,7 @@ if fase == 40:
     ################# ------------------------- 
     ibge_functions_results.Filtrar_Tabela_10Porcento_Idade() 
     # Separar manualmente os clusters e depois rodar o codigo abaixo para gerar os gráficos de idades separados os clusters...
+    # 11/04 ainda esta seperando manualmente? Não, ja foi automatizado!
     ibge_functions.fill_cluster_column()
     ibge_functions_results.separate_clusters()
     ibge_functions.Kmeans3_T_Grafico_Idade()       
