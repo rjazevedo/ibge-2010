@@ -5168,10 +5168,10 @@ def extract_courses_F():
     filtered_data = data[data['Curso'].isin(Curso) & data['Cbo'].isin(Cbo)]
 
     # Save the records in a LaTeX table
-    latex_table = filtered_data.to_latex(index=False, caption="...", label="tab:Salarios_Desequlibrio_F")
+    latex_table = filtered_data.to_latex(index=False, caption="Deslocamentos signficativos femininos", label="tab:Salarios_Desequlibrio_F")
     
     # Salvar em um arquivo .tex
-    with open("Kmeans3_T_Salarios_certo_F_latex.tex", "w") as f:
+    with open("Kmeans3_T_Salarios_certo_F.tex", "w") as f:
         f.write(latex_table)
 
     return 
@@ -5193,7 +5193,7 @@ def extract_courses_Correspondentes_F():
     latex_table = filtered_data.to_latex(index=False, caption="Masculinos: correspondentes aos deslocamentos femininos", label="tab:Salarios_Desequlibrio_F")
     
     # Salvar em um arquivo .tex
-    with open("Kmeans3_T_Salarios_certo_FM_latex.tex", "w") as f:
+    with open("Kmeans3_T_Salarios_certo_Correspondentes_F.tex", "w") as f:
         f.write(latex_table)
 
     return 
@@ -5213,10 +5213,10 @@ def extract_courses_M():
     filtered_data = data[data['Curso'].isin(Curso) & data['Cbo'].isin(Cbo)]
 
     # Save the records in a LaTeX table
-    latex_table = filtered_data.to_latex(index=False, caption="...", label="tab:Salarios_Desequlibrio_M")
+    latex_table = filtered_data.to_latex(index=False, caption="Deslocamentos signficativos masculinos", label="tab:Salarios_Desequlibrio_M")
     
     # Salvar em um arquivo .tex
-    with open("Kmeans3_T_Salarios_certo_M_latex.tex", "w") as f:
+    with open("Kmeans3_T_Salarios_certo_M.tex", "w") as f:
         f.write(latex_table)
 
     return	
@@ -5238,7 +5238,7 @@ def extract_courses_Correspondentes_M():
     latex_table = filtered_data.to_latex(index=False, caption="Femininos: correspondentes aos deslocamentos masculinos", label="tab:Salarios_Desequlibrio_F")
     
     # Salvar em um arquivo .tex
-    with open("Kmeans3_T_Salarios_certo_MF_latex.tex", "w") as f:
+    with open("Kmeans3_T_Salarios_certo_Correspondentes_M.tex", "w") as f:
         f.write(latex_table)
 
     return 
