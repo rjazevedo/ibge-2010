@@ -5276,8 +5276,14 @@ def extract_courses_equidade():
     data = data.drop(columns=['Unnamed: 0.1'])
     data = data.drop(columns=['Unnamed: 0.1.1'])
     data = data.drop(columns=['Unnamed: 0.1.1.1'])
-    data = data.drop(columns=['Curso_Nome'])
-    data = data.drop(columns=['Cbo_Nome'])
+    data = data.drop(columns=['Ida'])
+    data = data.drop(columns=['Volta'])
+    data['Cluster'] = data['Cluster'].astype(int)
+    data['Curso'] = data['Curso'].astype(int)
+    data['Cbo'] = data['Cbo'].astype(int)
+    data['M'] = data['M'].astype(int)
+    data['F'] = data['F'].astype(int)
+    data['Total'] = data['Total'].astype(int)
 
     Curso = [520, 520, 721, 721]
     Cbo   = [2142, 2141, 2211, 2212]
