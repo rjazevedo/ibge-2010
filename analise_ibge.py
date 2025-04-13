@@ -255,7 +255,8 @@ if fase == 40:
     # # 11/04 ainda esta seperando manualmente? Não, ja foi automatizado!
     # ibge_functions.fill_cluster_column()
     # ibge_functions_results.separate_clusters()
-    # ibge_functions.Kmeans3_T_Grafico_Idade()       
+    # 
+    ibge_functions.Kmeans3_T_Grafico_Idade()       
     
     #  #  Funções que faltam ...
     #  # 1- Idade - Alguns pontos selecionados 
