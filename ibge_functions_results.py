@@ -3607,12 +3607,12 @@ def Kmeans3_T_Grafico_Idade(path2,name3,cluster):
             i = i+2
 
 
-        # plt.xlabel("Cursos")
-        # plt.ylabel("Profissões")
+        plt.xlabel("Cursos")
+        plt.ylabel("Profissões")
         # plt.title("10%  -  Visualização dos três gráficos - Idade - Cluster 0")
-        plt.xlabel("Courses")
-        plt.ylabel("Professions")
-        plt.title("10% - View of the three graphs - Age - Cluster 0")    
+        # plt.xlabel("Courses")
+        # plt.ylabel("Professions")
+        # plt.title("10% - View of the three graphs - Age - Cluster 0")    
         plt.xlim(0.0, 100.0)
         plt.ylim(0.0, 100.0)
         # plt.show()
@@ -3674,12 +3674,12 @@ def Kmeans3_T_Grafico_Idade(path2,name3,cluster):
                 i = i+2
 
 
-            # plt.xlabel("Cursos")
-            # plt.ylabel("Profissões")
+            plt.xlabel("Cursos")
+            plt.ylabel("Profissões")
             # plt.title("10%  -  Visualização dos três gráficos - Idade - Cluster 1")
-            plt.xlabel("Courses")
-            plt.ylabel("Professions")
-            plt.title("10% - View of the three graphs - Age - Cluster 1")
+            # plt.xlabel("Courses")
+            # plt.ylabel("Professions")
+            # plt.title("10% - View of the three graphs - Age - Cluster 1")
             plt.xlim(0.0, 100.0)
             plt.ylim(0.0, 100.0)
             # plt.show()
@@ -3754,12 +3754,12 @@ def Kmeans3_T_Grafico_Idade(path2,name3,cluster):
                         i = i+2
 
 
-                    # plt.xlabel("Cursos")
-                    # plt.ylabel("Profissões")
+                    plt.xlabel("Cursos")
+                    plt.ylabel("Profissões")
                     # plt.title("10%  -  Visualização dos três gráficos - Idade - Cluster 2")
-                    plt.xlabel("Courses")
-                    plt.ylabel("Professions")
-                    plt.title("10% - View of the three graphs - Age - Cluster 2")    
+                    # plt.xlabel("Courses")
+                    # plt.ylabel("Professions")
+                    # plt.title("10% - View of the three graphs - Age - Cluster 2")    
                     plt.xlim(0.0, 100.0)
                     plt.ylim(0.0, 100.0)
                     # plt.show()   
