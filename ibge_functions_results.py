@@ -4689,8 +4689,15 @@ def tabela():
     df = df.drop(columns=['Unnamed: 0.1'])
     df = df.drop(columns=['Unnamed: 0.1.1'])
     df = df.drop(columns=['Unnamed: 0.1.1.1'])
-    df = df.drop(columns=['Curso_Nome'])
-    df = df.drop(columns=['Cbo_Nome'])
+    df = df.drop(columns=['Ida'])
+    df = df.drop(columns=['Volta'])
+    df['Cluster'] = df['Cluster'].astype(int)
+    df['Curso'] = df['Curso'].astype(int)
+    df['Cbo'] = df['Cbo'].astype(int)
+    df['M'] = df['M'].astype(int)
+    df['F'] = df['F'].astype(int)
+    df['Total'] = df['Total'].astype(int)
+
 
     # Converter para código LaTeX
     latex_code = df.to_latex(index=False, caption="Porcentagens de Masculinos e Femininos", label="tab:Fem_Masc")
