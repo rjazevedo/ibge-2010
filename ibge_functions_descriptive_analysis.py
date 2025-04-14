@@ -703,7 +703,7 @@ def CBOs_Curso_v6(csv_estado,csv_CBO,curso_num,curso_nome,titulo10,titulo3,porce
         for i in A_cbo.index:
             if (A_cbo.Porcentagem[i]>= porcento_10):
                 qtdade = qtdade+1
-        A_cbo_10 = A_cbo.head(qtdade) #Alterado 29/09/2023   =========================
+        A_cbo_10 = A_cbo.iloc[:qtdade].copy()  # Ensure a copy of the top 'qtdade' rows for further modifications
         # print("A_cbo_10",A_cbo_10)
         if(len(A_cbo_10>=1)):
         # # Validação para testar se existem cbos para deteminado curso
@@ -717,11 +717,10 @@ def CBOs_Curso_v6(csv_estado,csv_CBO,curso_num,curso_nome,titulo10,titulo3,porce
                         NomeCbo.append(CBO['Nome_CBO'].iloc[i])      
             NomeCbo = pd.DataFrame(NomeCbo, columns=['Nome_CBO'])
             #...
-            A_cbo_10["Nome"] = 1
+            # A_cbo_10["Nome"] = 1
             #...
             #import warnings
-            for i in range(len(A_cbo_10)):
-                A_cbo_10['Nome'].iloc[i]= NomeCbo['Nome_CBO'].iloc[i]
+            A_cbo_10['Nome'] = NomeCbo['Nome_CBO'].values
             #A_cbo_10
             A_cbo_10.reset_index(inplace=True)
             A_cbo_10 = A_cbo_10.rename(columns = {'index':'Cod_CBO'})
@@ -794,6 +793,7 @@ def CBOs_Curso_v6(csv_estado,csv_CBO,curso_num,curso_nome,titulo10,titulo3,porce
          nomes=0
          porcentagens=0
          return primeiros,nomes,porcentagens,curso_num,curso_nome
+    
     return primeiros,nomes,porcentagens,curso_num,curso_nome
 
 
@@ -810,7 +810,8 @@ def Cursos_CBO_14_10(csv_estado,csv_CBO,csv_CURSOS,cbo_num,titulo3,NaoGraduados_
     CURSOS = CURSOS.drop(columns=['Unnamed: 0'])
   
     #Cbos -> Cursos ... criar um novo dataframe somente com cursos e cbos para facilitar
-    X_CURSO_CBO = X[['Curso_Superior_Graduação_Código','Ocupação_Código']]
+    # Filter only the relevant columns for courses and occupations
+    X_CURSO_CBO = X.loc[:, ['Curso_Superior_Graduação_Código', 'Ocupação_Código']]
     X_CURSO_CBO.shape
 
     #Cursos por CBO
@@ -865,7 +866,8 @@ def Cursos_CBO_14_10(csv_estado,csv_CBO,csv_CURSOS,cbo_num,titulo3,NaoGraduados_
     for i in range(len(A_Curso)):
         if (A_Curso.Porcentagem[i]>= porcento_10):
             qtdade = qtdade+1
-    A_Curso_11 = A_Curso.head(qtdade)
+
+    A_Curso_11 = A_Curso.iloc[:qtdade].copy()  # Garante uma cópia das 'qtdade' primeiras linhas para modificações posteriores
     if(len(A_Curso_11)>=1):
       #...
       #Coletando o nome dos Cursos ...
@@ -880,10 +882,9 @@ def Cursos_CBO_14_10(csv_estado,csv_CBO,csv_CURSOS,cbo_num,titulo3,NaoGraduados_
       #...
       NomeCurso = pd.DataFrame(NomeCurso, columns=['Nome_Curso'])
       # ...
-      A_Curso_11["Nome"] = 1
+    #   A_Curso_11["Nome"] = 1
       import warnings
-      for i in range(len(A_Curso_11)):
-          A_Curso_11['Nome'].iloc[i]= NomeCurso['Nome_Curso'].iloc[i]
+      A_Curso_11['Nome'] = NomeCurso['Nome_Curso'].values
         #...
       A_Curso_11.reset_index(inplace=True)
       A_Curso_11 = A_Curso_11.rename(columns = {'index':'Curso'})

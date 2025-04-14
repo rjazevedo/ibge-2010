@@ -24,6 +24,9 @@ import ibge_functions_preprocessing
 import ibge_functions_results
 import logging
 
+# Modificando o comportamento do pandas para mostrar os erros de atribuição para eliminar os warnings - Rafael 20250413
+# pd.options.mode.chained_assignment = 'raise'
+
 # Esse arquivo não pode conter código que não seja chamada de funções e verificação de parâmetros
 parser = argparse.ArgumentParser()
 parser.add_argument('-f', '--fase', type=int, help='Indica a fase do fluxo para começar a execução')
