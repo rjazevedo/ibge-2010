@@ -4496,7 +4496,7 @@ def tabela_clusters_diferentes():
     # import pandas as pd
 
     # Carregar o CSV
-    df = pd.read_csv("graficos/distancia_mudanca_clusters_filtrados.csv")
+    df = pd.read_csv("graficos/distancia_mudanca_clusters.csv")
     # df = df.drop(columns=['Unnamed: 0'])
     # df = df.drop(columns=['Unnamed: 0.1'])
     # df = df.drop(columns=['Unnamed: 0.1.1'])
@@ -4762,7 +4762,7 @@ def tabela_40_60():
     df = df.drop(columns=['Cbo_Nome'])
 
     # Converter para código LaTeX
-    latex_code = df.to_latex(index=False, caption="Porcentagens de Masculinos e Femininos entre 40\% e 60\%", label="tab:Fem_Masc")
+    latex_code = df.to_latex(index=False, caption="Porcentagens de Masculinos e Femininos entre 40\\% e 60\%", label="tab:Fem_Masc")
 
     # Salvar em um arquivo .tex
     with open("tabela_40_60.tex", "w") as f:
