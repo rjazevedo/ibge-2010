@@ -3790,8 +3790,9 @@ def Aposentados_maior80(path,name):
     # Filtrar apenas as colunas desejadas
     Final = Final[['gênero', 'Idade_em_Anos', 'Nível_instrução', 'Curso_Superior_Graduação_Código', 'Ocupação_Código', 'rendimento_aposentadoria_pensao']]
     Final_Filtrado = Final.head(10)
-    print(Final_Filtrado)
-    Final_Filtrado.to_excel(save_results_to + 'Final_Filtrado_Aposentados_maior80.xlsx')
+    # print(Final_Filtrado)
+    # Final_Filtrado.to_excel(save_results_to + 'Final_Filtrado_Aposentados_maior80.xlsx')
+    Final_Filtrado.to_csv(save_results_to + 'Final_Filtrado_Aposentados_maior80.csv', index=False)
     return
 
 # Fase 35
