@@ -254,12 +254,13 @@ if fase == 40:
     # ibge_functions.Kmeans3_T_Grafico_Idade()     
     # #  Funções que faltam ...
     # # 1- Idade - Alguns pontos selecionados 
+    # # - Cluster 0
     # # - Cluster 1
     # # - Cluster 2
+    ibge_functions.selecionados()  
     # # Okay # 2- Idade - Selecionar somente os que tem mais de 80 anos
     # # - Aposentados -  Formados em Medicina e com CBO (2211)  Médicos Gerais
-    # 
-    ibge_functions.Aposentados_maior80()
+    # ibge_functions.Aposentados_maior80()
     # # 3- Idade - Casos Administrativos: Descobrir quando alguém vira gerente gestor
     # # - Olhar todos os médicos e ver na carreira deles, quando começam a pegar o código 1. Comparar com: 1342 - 1345 - 1348 - 1349
     # # - Homens gestores e Mulheres gestoras (Homem e mulher, muda faixa de idade para virar gestores?)

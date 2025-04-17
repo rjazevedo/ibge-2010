@@ -21,6 +21,7 @@ import ibge_functions_preprocessing
 import ibge_functions_descriptive_analysis
 import ibge_functions_exploratory_analysis
 import ibge_functions_results
+import ibge_functions_results_1
 import logging
 import io
 import shutil
@@ -631,4 +632,10 @@ def Salarios_CBO_Idade():
 def dadosoriginais_resultados():
     ibge_functions_results.dadosoriginais_resultados("F")
     ibge_functions_results.dadosoriginais_resultados("M")
+    return
+
+def selecionados():
+    ibge_functions_results_1.selecionados(0)
+    ibge_functions_results_1.selecionados(1)
+    ibge_functions_results_1.selecionados(2)
     return
