@@ -22,6 +22,7 @@ import ibge_functions_descriptive_analysis
 import ibge_variable
 import ibge_functions_preprocessing
 import ibge_functions_results
+import ibge_functions_results_1
 import logging
 
 # Modificando o comportamento do pandas para mostrar os erros de atribuição para eliminar os warnings - Rafael 20250413

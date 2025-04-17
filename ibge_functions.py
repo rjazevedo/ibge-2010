@@ -634,8 +634,9 @@ def dadosoriginais_resultados():
     ibge_functions_results.dadosoriginais_resultados("M")
     return
 
-def selecionados():
+# Fase 40 
+def Cursos_CBOs_selecionados():
     ibge_functions_results_1.selecionados(0)
-    ibge_functions_results_1.selecionados(1)
-    ibge_functions_results_1.selecionados(2)
+    # ibge_functions_results_1.selecionados(1)
+    # ibge_functions_results_1.selecionados(2)
     return
