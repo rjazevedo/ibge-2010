@@ -1087,7 +1087,8 @@ def median_salario(path1,name1,sx):
         minvalue =""
         maxvalue =""
         medianavalue = ""
-        for i in range(len(Kmeans3_T['Curso'])):
+        #for i in range(len(Kmeans3_T['Curso'])):
+        for i in range(10):
             if Kmeans3_T['Genero'][i] == "F":
                tupla=(Kmeans3_T['Ida'][i],Kmeans3_T['Volta'][i],Kmeans3_T['Cluster'][i], Kmeans3_T['Curso'][i],Kmeans3_T['Curso_Nome'][i],Kmeans3_T['Cbo'][i],Kmeans3_T['Cbo_Nome'][i],minvalue,maxvalue,medianavalue)
                resultados_T.append(tupla)
@@ -1108,11 +1109,13 @@ def median_salario(path1,name1,sx):
         }
         Kmeans3_Sal.rename(columns=dict,inplace=True)
 
-        # print(len(Kmeans3_Sal))
+        print("len(Kmeans3_Sal)", len(Kmeans3_Sal))
+        print("")
         #================================================================================================================================================
         
         # Achando Max e Min 
         for j in range(len(Kmeans3_T)):
+        # for j in range(10):
             gênero                                  = []
             Idade_em_Anos                           = []
             Nível_instrução                         = []
@@ -1127,6 +1130,7 @@ def median_salario(path1,name1,sx):
             #Sal_Novo                               = []
             QtdadeTemp                              = []
             for i in range(len(FinalSemZero)):
+            # for i in range(10):
                 # print('str(FinalSemZero.Ocupação_Código[i]):', str(FinalSemZero.Ocupação_Código[i]))
                 # print('str(Kmeans3_T.Cbo[j]):', str(int(Kmeans3_T.Cbo[j])))
                 # print('str(FinalSemZero.Curso_Superior_Graduação_Código[i]):', str(FinalSemZero.Curso_Superior_Graduação_Código[i]))
@@ -1153,11 +1157,13 @@ def median_salario(path1,name1,sx):
             #============================================================================================================================================================
             Final_Filter=[]
             for i in range(len(Curso_Superior_Graduação_Código)):
+            # for i in range(10):
                 #tupla=(gênero[i],Idade_em_Anos[i],Nível_instrução[i],Curso_Superior_Graduação_Código[i],Curso_Mestrado_Código[i],Curso_Doutorado_Código[i],Ocupação_Código[i],Atividade_Código[i],Valor_rend_bruto_M[i],Qtdade_Salario[i],CNAE_Domiciliar[i])
                 #tupla=(gênero[i],Idade_em_Anos[i],Nível_instrução[i],Curso_Superior_Graduação_Código[i],Curso_Mestrado_Código[i],Curso_Doutorado_Código[i],Ocupação_Código[i],Atividade_Código[i],Valor_rend_bruto_M[i],Qtdade_Salario[i],Sal_Novo[i])
                 tupla=(gênero[i],Idade_em_Anos[i],Nível_instrução[i],Curso_Superior_Graduação_Código[i],Curso_Mestrado_Código[i],Curso_Doutorado_Código[i],Ocupação_Código[i],Atividade_Código[i],Valor_rend_bruto_M[i],Qtdade_Salario[i])
                 Final_Filter.append(tupla)
-            #print(len(Final_Filter))      
+            print("len(Final_Filter)",len(Final_Filter))   
+            print("")   
             #===============================================================================================================================================
             Final2 = pd.DataFrame(Final_Filter)
             # Final2.shape
@@ -1177,9 +1183,11 @@ def median_salario(path1,name1,sx):
             }
             Final2.rename(columns=dict,inplace=True)
             #===============================================================================================================================================
-            # Final2.head(2)
+            print(Final2.head(2))
+            print("")
             #===============================================================================================================================================
             for i in range(len(Kmeans3_Sal)):
+            # for i in range(10):
                 if (str(Kmeans3_Sal.Cbo[i])== str(Kmeans3_T.Cbo[j])) & (str(Kmeans3_Sal.Curso[i]) == str(Kmeans3_T.Curso[j])):
                     #Kmeans5_Sal.Max[i] = Final2['Valor_rend_bruto_M'].max()
                     #Kmeans5_Sal.Min[i] = Final2['Valor_rend_bruto_M'].min()
