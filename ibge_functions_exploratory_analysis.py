@@ -1109,8 +1109,8 @@ def median_salario(path1,name1,sx):
         }
         Kmeans3_Sal.rename(columns=dict,inplace=True)
 
-        print("len(Kmeans3_Sal)", len(Kmeans3_Sal))
-        print("")
+        # print("len(Kmeans3_Sal)", len(Kmeans3_Sal))
+        # print("")
         #================================================================================================================================================
         
         # Achando Max e Min 
@@ -1162,8 +1162,8 @@ def median_salario(path1,name1,sx):
                 #tupla=(gênero[i],Idade_em_Anos[i],Nível_instrução[i],Curso_Superior_Graduação_Código[i],Curso_Mestrado_Código[i],Curso_Doutorado_Código[i],Ocupação_Código[i],Atividade_Código[i],Valor_rend_bruto_M[i],Qtdade_Salario[i],Sal_Novo[i])
                 tupla=(gênero[i],Idade_em_Anos[i],Nível_instrução[i],Curso_Superior_Graduação_Código[i],Curso_Mestrado_Código[i],Curso_Doutorado_Código[i],Ocupação_Código[i],Atividade_Código[i],Valor_rend_bruto_M[i],Qtdade_Salario[i])
                 Final_Filter.append(tupla)
-            print("len(Final_Filter)",len(Final_Filter))   
-            print("")   
+            # print("len(Final_Filter)",len(Final_Filter))   
+            # print("")   
             #===============================================================================================================================================
             Final2 = pd.DataFrame(Final_Filter)
             # Final2.shape
@@ -1183,8 +1183,8 @@ def median_salario(path1,name1,sx):
             }
             Final2.rename(columns=dict,inplace=True)
             #===============================================================================================================================================
-            print(Final2.head(2))
-            print("")
+            # print(Final2.head(2))
+            # print("")
             #===============================================================================================================================================
             for i in range(len(Kmeans3_Sal)):
             # for i in range(10):
