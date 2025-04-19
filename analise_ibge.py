@@ -175,23 +175,25 @@ if fase == 33:
     pass
 
 if fase == 34: #...
-    # QP3 continuação
-    #  Funções que faltam ...
-    #  1-  Gráfico dos gêneros separados por clusters
-    #    https://colab.research.google.com/drive/1znpX4cXQTDgCsiZYS9kNl1UbgL3RudAB?authuser=1
-    ################# -------------------------        
-    ibge_functions.fill_cluster_column_Genero()
-    ################# -------------------------       
-    ibge_functions_results.separate_clusters_Genero()
-    ibge_functions.Kmeans3_T_Grafico_Genero_Clusters()
-    ibge_functions_results.deslocamento()
-    ibge_functions_results.deslocamentos_maioresdistancias()
-    ibge_functions_results.deslocamento_clusters()
-    ibge_functions_results.deslocamentos_maioresdistancias_clusters()
+    # # QP3 continuação
+    # #  Funções que faltam ...
+    # #  1-  Gráfico dos gêneros separados por clusters
+    # #    https://colab.research.google.com/drive/1znpX4cXQTDgCsiZYS9kNl1UbgL3RudAB?authuser=1
+    # ################# -------------------------        
+    # ibge_functions.fill_cluster_column_Genero()
+    # ################# -------------------------       
+    # ibge_functions_results.separate_clusters_Genero()
+    # ibge_functions.Kmeans3_T_Grafico_Genero_Clusters()
+    # ibge_functions_results.deslocamento()
+    # ibge_functions_results.deslocamentos_maioresdistancias()
+    # ibge_functions_results.deslocamento_clusters()
+    # ibge_functions_results.deslocamentos_maioresdistancias_clusters()
+    # 
     ibge_functions_results.extract_courses_F()
+    # 
     ibge_functions_results.extract_courses_Correspondentes_F()
-    ibge_functions_results.extract_courses_M()
-    ibge_functions_results.extract_courses_Correspondentes_M()
+    # ibge_functions_results.extract_courses_M()
+    # ibge_functions_results.extract_courses_Correspondentes_M()
     pass
 
 if fase == 35:
