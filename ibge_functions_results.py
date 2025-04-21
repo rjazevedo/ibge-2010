@@ -4704,8 +4704,72 @@ def tabela():
     latex_code = df.to_latex(index=False, caption="Porcentagens de Masculinos e Femininos", label="tab:Fem_Masc")
 
     # Salvar em um arquivo .tex
-    with open("tabela.tex", "w") as f:
+    with open("tabelas/tabela.tex", "w") as f:
         f.write(latex_code)
+    return
+
+def separar_registros_por_cluster():
+    import pandas as pd
+
+    # Carregar o CSV
+    df = pd.read_csv("graficos/Kmeans3_T_FMT_MPFP_45_55.csv")
+    df = df.drop(columns=['Unnamed: 0'])
+    df = df.drop(columns=['Unnamed: 0.1'])
+    df = df.drop(columns=['Unnamed: 0.1.1'])
+    df = df.drop(columns=['Unnamed: 0.1.1.1'])
+    df = df.drop(columns=['Ida'])
+    df = df.drop(columns=['Volta'])
+    df['Cluster'] = df['Cluster'].astype(int)
+    df['Curso'] = df['Curso'].astype(int)
+    df['Cbo'] = df['Cbo'].astype(int)
+    df['M'] = df['M'].astype(int)
+    df['F'] = df['F'].astype(int)
+    df['Total'] = df['Total'].astype(int)
+
+    # Separate the DataFrame into three parts
+    part1 = df[df['Cluster'] == 0]
+    part2 = df[df['Cluster'] == 1]
+    part3 = df[df['Cluster'] == 2]
+
+    # Save each part into a separate .tex file
+    part1.to_latex("tabelas/tabela_part0.tex", index=False)
+    part2.to_latex("tabelas/tabela_part1.tex", index=False)
+    part3.to_latex("tabelas/tabela_part2.tex", index=False)
+
+    # # # Converter para código LaTeX
+    # # latex_code = df.to_latex(index=False, caption="Porcentagens de Masculinos e Femininos", label="tab:Fem_Masc")
+
+    # # # Salvar em um arquivo .tex
+    # # with open("tabela.tex", "w") as f:
+    # #     f.write(latex_code)
+   
+    # # # Read the tabela.tex file
+    # # df = pd.read_csv("tabelas/cluster0.tex")
+
+    # # Separate the records based on the cluster
+    # cluster0 = df[df['Cluster'] == 0]
+    # cluster1 = df[df['Cluster'] == 1]
+    # cluster2 = df[df['Cluster'] == 2]
+
+    # # Save the records into separate files  
+    # cluster0 = cluster0.to_latex(index=False)  
+    # cluster1 = cluster1.to_latex(index=False)  
+    # cluster =  cluster2.to_latex(index=False)  
+    # # cluster0.to_latex("tabelas/cluster0.tex", index=False)
+    # # cluster1.to_latex("tabelas/cluster1.tex", index=False)
+    # # cluster2.to_latex("tabelas/cluster2.tex", index=False) # Salvar em um arquivo .tex
+    
+    # with open("tabelas/cluster0.tex", "w") as f:
+    #     f.write(cluster0)
+    
+    #  # Salvar em um arquivo .tex
+    # with open("tabelas/cluster1.tex", "w") as f:
+    #     f.write(cluster1)
+
+    #  # Salvar em um arquivo .tex
+    # with open("tabelas/cluster2.tex", "w") as f:
+    #     f.write(cluster2)    
+
     return
 
 # https://colab.research.google.com/drive/1y-78aFKxXgt60VIyjhBmM6pn6XzcXZUC?authuser=1
@@ -5172,14 +5236,27 @@ def extract_courses_F():
     Curso = [863, 221, 521]
     Cbo   = [110, 2636, 2144]
 
+
     # Filter the records based on the specified Courses and Cbos
     filtered_data = data[data['Curso'].isin(Curso) & data['Cbo'].isin(Cbo)]
 
+    data_863 = pd.read_csv("graficos/Deslocamento_Geral_cluster 2.csv")
+    filtered_863 = data_863[(data_863['Curso'] == 863) & (data_863['Cbo'] == 110) & (data_863['Genero'] == 'F')]      
+    data_221 = pd.read_csv("graficos/Deslocamento_Geral_cluster 1.csv")
+    filtered_221 = data_221[(data_221['Curso'] == 221) & (data_221['Cbo'] == 2636) & (data_221['Genero'] == 'F')]     
+    data_521 = pd.read_csv("graficos/Deslocamento_Geral_cluster 0.csv")
+    filtered_521 = data_521[(data_521['Curso'] == 521) & (data_521['Cbo'] == 2144) & (data_521['Genero'] == 'F')]      
+
+   
+   # Adicionar uma nova coluna em filtered_data
+    filtered_data['Deslocamento'] = [filtered_863['Distance'].values[0],filtered_221['Distance'].values[0], filtered_521['Distance'].values[0]]  # Substitua [1, 2, 3] pelos valores desejados
+    
     # Save the records in a LaTeX table
-    latex_table = filtered_data.to_latex(index=False, caption="Deslocamentos signficativos femininos", label="tab:Salarios_Desequlibrio_F")
+    latex_table = filtered_data.to_latex(index=False, caption="Deslocamentos signficativos femininos", label="tab:Salarios_Desequlibrio_F") 
+    
     
     # Salvar em um arquivo .tex
-    with open("Kmeans3_T_Salarios_certo_F.tex", "w") as f:
+    with open("tabelas/Kmeans3_T_Salarios_certo_F.tex", "w") as f:
         f.write(latex_table)
 
     return 
