@@ -5230,9 +5230,12 @@ def extract_courses_F():
     # Read the CSV file
     data = pd.read_csv("graficos/Kmeans3_T_Salarios_certo_F.csv")
     data = data.drop(columns=['Unnamed: 0'])
-    data = data.drop(columns=['Curso_Nome'])
-    data = data.drop(columns=['Cbo_Nome'])
+    # data = data.drop(columns=['Curso_Nome'])
+    # data = data.drop(columns=['Cbo_Nome'])
+    data = data.drop(columns=['Ida'])
+    data = data.drop(columns=['Volta'])
 
+    
     Curso = [863, 221, 521]
     Cbo   = [110, 2636, 2144]
 
@@ -5250,7 +5253,21 @@ def extract_courses_F():
    
    # Adicionar uma nova coluna em filtered_data
     filtered_data['Deslocamento'] = [filtered_863['Distance'].values[0],filtered_221['Distance'].values[0], filtered_521['Distance'].values[0]]  # Substitua [1, 2, 3] pelos valores desejados
+    filtered_data['Cluster'] = [filtered_863['Cluster'].values[0],filtered_221['Cluster'].values[0], filtered_521['Cluster'].values[0]]  # Substitua [1, 2, 3] pelos valores desejados
     
+    # filtered_data['Deslocamento'] = filtered_data['Deslocamento'].astype(int)
+    filtered_data['Deslocamento'] = round(filtered_data['Deslocamento'],2)
+    filtered_data['Cluster'] = filtered_data['Cluster'].astype(int)
+    filtered_data['Curso'] = filtered_data['Curso'].astype(int)
+    filtered_data['Cbo'] = filtered_data['Cbo'].astype(int)
+    # filtered_data['Max'] = filtered_data['Max'].astype(int)
+    # filtered_data['Min'] = filtered_data['Min'].astype(int)
+    #filtered_data['Median'] = filtered_data['Median'].astype(int)
+    filtered_data['Median'] = round(filtered_data['Median'],2)
+
+
+
+
     # Save the records in a LaTeX table
     latex_table = filtered_data.to_latex(index=False, caption="Deslocamentos signficativos femininos", label="tab:Salarios_Desequlibrio_F") 
     
