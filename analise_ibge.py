@@ -189,8 +189,9 @@ if fase == 34: #...
     # ibge_functions_results.deslocamento_clusters()
     # ibge_functions_results.deslocamentos_maioresdistancias_clusters()
     # ibge_functions_results.extract_courses_F()
+    # 
     ibge_functions_results.extract_courses_Cluster0()
-    ibge_functions_results. extract_courses_Cluster0_Correspondente()
+    # ibge_functions_results. extract_courses_Cluster0_Correspondente()
     # ibge_functions_results.extract_courses_Correspondentes_F()
     # ibge_functions_results.extract_courses_M()
     # ibge_functions_results.extract_courses_Correspondentes_M()
@@ -211,9 +212,7 @@ if fase == 35:
     # #  3-  Profissões equilibradas - 40%-60% ...
     #    # - Tabela com os pontos clusterizados contendo as porcentagens de masculinos e femininos
     # ibge_functions_results.Juntar_40_60Porcento_Genero()   
-    # 
     ibge_functions_results.tabela() 
-    # 
     ibge_functions_results.separar_registros_por_cluster()
     #    # - Tabela com os pontos selecionados(40%-60%)
     # ibge_functions_results. pt_selecionados_40_60()

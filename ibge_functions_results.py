@@ -5236,7 +5236,8 @@ def extract_courses_Cluster0():
     data = data.drop(columns=['Ida'])
     data = data.drop(columns=['Volta'])
     data = data.drop(columns=['Cluster'])
-
+    data = data.drop(columns=['Min'])
+    data = data.drop(columns=['Max'])
 
     data2 = data2.drop(columns=['Unnamed: 0'])
     # data = data.drop(columns=['Curso_Nome'])
@@ -5244,6 +5245,8 @@ def extract_courses_Cluster0():
     data2 = data2.drop(columns=['Ida'])
     data2 = data2.drop(columns=['Volta'])
     data2 = data2.drop(columns=['Cluster'])
+    data2 = data2.drop(columns=['Min'])
+    data2 = data2.drop(columns=['Max'])
 
     
     Curso = [142,  142,  726, 142, 214]
@@ -5266,28 +5269,59 @@ def extract_courses_Cluster0():
 #     filtered_data['Deslocamento'] = [filtered_863['Distance'].values[0],filtered_221['Distance'].values[0], filtered_521['Distance'].values[0]]  # Substitua [1, 2, 3] pelos valores desejados
 #     filtered_data['Cluster'] = [filtered_863['Cluster'].values[0],filtered_221['Cluster'].values[0], filtered_521['Cluster'].values[0]]  # Substitua [1, 2, 3] pelos valores desejados
     
-    # filtered_data['Deslocamento'] = filtered_data['Deslocamento'].astype(int)
-    # filtered_data['Deslocamento'] = round(filtered_data['Deslocamento'],2)
-    # filtered_data['Cluster'] = filtered_data['Cluster'].astype(int)
-    filtered_data['Curso'] = filtered_data['Curso'].astype(int)
-    filtered_data['Cbo'] = filtered_data['Cbo'].astype(int)
-    # filtered_data['Max'] = filtered_data['Max'].astype(int)
-    # filtered_data['Min'] = filtered_data['Min'].astype(int)
-    #filtered_data['Median'] = filtered_data['Median'].astype(int)
-    filtered_data['Median'] = round(filtered_data['Median'],2)
+    # # filtered_data['Deslocamento'] = filtered_data['Deslocamento'].astype(int)
+    # # filtered_data['Deslocamento'] = round(filtered_data['Deslocamento'],2)
+    # # filtered_data['Cluster'] = filtered_data['Cluster'].astype(int)
+    # filtered_data['Curso'] = filtered_data['Curso'].astype(int)
+    # filtered_data['Cbo'] = filtered_data['Cbo'].astype(int)
+    # # filtered_data['Max'] = filtered_data['Max'].astype(int)
+    # # filtered_data['Min'] = filtered_data['Min'].astype(int)
+    # #filtered_data['Median'] = filtered_data['Median'].astype(int)
+    # filtered_data['Median'] = round(filtered_data['Median'],2)
 
  
+    # # filtered_data['Deslocamento'] = filtered_data['Deslocamento'].astype(int)
+    # # filtered_data['Deslocamento'] = round(filtered_data['Deslocamento'],2)
+    # # filtered_data['Cluster'] = filtered_data['Cluster'].astype(int)
+    # filtered_data_2['Curso'] = filtered_data_2['Curso'].astype(int)
+    # filtered_data_2['Cbo'] = filtered_data_2['Cbo'].astype(int)
+    # # filtered_data['Max'] = filtered_data['Max'].astype(int)
+    # # filtered_data['Min'] = filtered_data['Min'].astype(int)
+    # #filtered_data['Median'] = filtered_data['Median'].astype(int)
+    # filtered_data_2['Median'] = round(filtered_data_2['Median'],2)
+
+    filtered_data_all = pd.concat([filtered_data, filtered_data_2], ignore_index=True)
+
+    data_3 = pd.read_csv("graficos/Deslocamento_Geral_cluster 0.csv")
+    filtered_1 = data_3[(data_3['Curso'] == 142) & (data_3['Cbo'] == 2341) & (data_3['Genero'] == 'M')]  
+    filtered_2 = data_3[(data_3['Curso'] == 142) & (data_3['Cbo'] == 2342) & (data_3['Genero'] == 'M')]      
+    filtered_3 = data_3[(data_3['Curso'] == 142) & (data_3['Cbo'] == 2351) & (data_3['Genero'] == 'M')]      
+    filtered_4 = data_3[(data_3['Curso'] == 726) & (data_3['Cbo'] == 2265) & (data_3['Genero'] == 'M')]      
+    filtered_5 = data_3[(data_3['Curso'] == 214) & (data_3['Cbo'] == 2163) & (data_3['Genero'] == 'M')]      
+    filtered_6 = data_3[(data_3['Curso'] == 520) & (data_3['Cbo'] == 2141) & (data_3['Genero'] == 'F')]      
+    filtered_7 = data_3[(data_3['Curso'] == 521) & (data_3['Cbo'] == 2144) & (data_3['Genero'] == 'F')]      
+
+    # Adicionar uma nova coluna em filtered_data
+    filtered_data_all['Deslocamento'] = [filtered_1['Distance'].values[0],filtered_2['Distance'].values[0], filtered_3['Distance'].values[0],
+                                    filtered_4['Distance'].values[0],filtered_5['Distance'].values[0], filtered_6['Distance'].values[0], 
+                                    filtered_7['Distance'].values[0]
+                                     ] 
+    filtered_data_all['Cluster'] = [filtered_1['Cluster'].values[0],filtered_2['Cluster'].values[0], filtered_3['Cluster'].values[0],
+                                     filtered_4['Cluster'].values[0],filtered_5['Cluster'].values[0], filtered_6['Cluster'].values[0], 
+                                     filtered_7['Cluster'].values[0]
+                                     ] 
+
+    filtered_data_all['Deslocamento'] = round(filtered_data_all['Deslocamento'],2)
+    filtered_data_all['Cluster'] = filtered_data_all['Cluster'].astype(int)
     # filtered_data['Deslocamento'] = filtered_data['Deslocamento'].astype(int)
     # filtered_data['Deslocamento'] = round(filtered_data['Deslocamento'],2)
     # filtered_data['Cluster'] = filtered_data['Cluster'].astype(int)
-    filtered_data_2['Curso'] = filtered_data_2['Curso'].astype(int)
-    filtered_data_2['Cbo'] = filtered_data_2['Cbo'].astype(int)
+    filtered_data_all['Curso'] = filtered_data_all['Curso'].astype(int)
+    filtered_data_all['Cbo'] = filtered_data_all['Cbo'].astype(int)
     # filtered_data['Max'] = filtered_data['Max'].astype(int)
     # filtered_data['Min'] = filtered_data['Min'].astype(int)
     #filtered_data['Median'] = filtered_data['Median'].astype(int)
-    filtered_data_2['Median'] = round(filtered_data_2['Median'],2)
-
-    filtered_data_all = pd.concat([filtered_data, filtered_data_2], ignore_index=True)
+    filtered_data_all['Median'] = round(filtered_data_all['Median'],2)
 
     # Save the records in a LaTeX table
     latex_table = filtered_data_all.to_latex(index=False, caption="Cluster0 deslocamentos signficativos ", label="tab:Salarios_Cluster0") 
@@ -5309,6 +5343,8 @@ def extract_courses_Cluster0_Correspondente():
     data = data.drop(columns=['Ida'])
     data = data.drop(columns=['Volta'])
     data = data.drop(columns=['Cluster'])
+    # data = data.drop(columns=['Min'])
+    # data = data.drop(columns=['Max'])
 
 
     data2 = data2.drop(columns=['Unnamed: 0'])
@@ -5317,6 +5353,8 @@ def extract_courses_Cluster0_Correspondente():
     data2 = data2.drop(columns=['Ida'])
     data2 = data2.drop(columns=['Volta'])
     data2 = data2.drop(columns=['Cluster'])
+    # data2 = data2.drop(columns=['Min'])
+    # data2 = data2.drop(columns=['Max'])
 
     
     Curso = [142,  142,  726, 142, 214]
