@@ -189,11 +189,11 @@ if fase == 34: #...
     # ibge_functions_results.deslocamento_clusters()
     # ibge_functions_results.deslocamentos_maioresdistancias_clusters()
     # ibge_functions_results.extract_courses_F()
-    # 
-    ibge_functions_results.extract_courses_Cluster0()
+    # ibge_functions_results.extract_courses_Cluster0()
     # ibge_functions_results. extract_courses_Cluster0_Correspondente()
     # ibge_functions_results.extract_courses_Correspondentes_F()
     # ibge_functions_results.extract_courses_M()
+    ibge_functions_results_1.extract_courses_M_1()
     # ibge_functions_results.extract_courses_Correspondentes_M()
     pass
 
