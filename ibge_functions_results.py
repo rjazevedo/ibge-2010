@@ -4503,14 +4503,25 @@ def tabela_clusters_diferentes():
     # df = df.drop(columns=['Unnamed: 0.1.1'])
     # df = df.drop(columns=['Unnamed: 0.1.1.1'])
     # df = df.drop(columns=['index'])
-    df = df.drop(columns=['Curso_Nome'])
-    df = df.drop(columns=['Cbo_Nome'])
+    # df = df.drop(columns=['Curso_Nome'])
+    # df = df.drop(columns=['Cbo_Nome'])
+    df = df.drop(columns=['Ida'])
+    df = df.drop(columns=['Volta'])
+
+    Curso = [142 , 142,   142,  214 ,  221,   322,   442,   521,  522,  621,  762]
+    Cbo   = [2341, 2341,  2351, 2163,  2636,  2622,  2113,  2144, 2151, 2132, 2635]
+
+    filtered_data = df[df['Curso'].isin(Curso) & df['Cbo'].isin(Cbo)]
+    filtered_data['C0'] = round(filtered_data['C0'],2)
+    filtered_data['C1'] = round(filtered_data['C1'],2)
+    filtered_data['C2'] = round(filtered_data['C2'],2)
+
 
     # Converter para código LaTeX
-    latex_code = df.to_latex(index=False, caption="Profissões onde homens e mulheres estão em clusters diferentes", label="tab:Clusters_Diferentes")
+    latex_code = filtered_data.to_latex(index=False, caption="Profissões onde homens e mulheres estão em clusters diferentes", label="tab:Clusters_Diferentes")
 
     # Salvar em um arquivo .tex
-    with open("distancia_mudanca_clusters_filtrados.tex", "w") as f:
+    with open("tabelas/distancia_mudanca_clusters_filtrados.tex", "w") as f:
         f.write(latex_code)
     return
 def voronoi():

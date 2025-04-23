@@ -175,26 +175,26 @@ if fase == 33:
     pass
 
 if fase == 34: #...
-    # # QP3 continuação
-    # #  Funções que faltam ...
-    # #  1-  Gráfico dos gêneros separados por clusters
-    # #    https://colab.research.google.com/drive/1znpX4cXQTDgCsiZYS9kNl1UbgL3RudAB?authuser=1
-    # ################# -------------------------        
-    # ibge_functions.fill_cluster_column_Genero()
-    # ################# -------------------------       
-    # ibge_functions_results.separate_clusters_Genero()
-    # ibge_functions.Kmeans3_T_Grafico_Genero_Clusters()
-    # ibge_functions_results.deslocamento()
-    # ibge_functions_results.deslocamentos_maioresdistancias()
-    # ibge_functions_results.deslocamento_clusters()
-    # ibge_functions_results.deslocamentos_maioresdistancias_clusters()
-    # ibge_functions_results.extract_courses_F()
-    # ibge_functions_results.extract_courses_Cluster0()
-    # ibge_functions_results. extract_courses_Cluster0_Correspondente()
-    # ibge_functions_results.extract_courses_Correspondentes_F()
-    # ibge_functions_results.extract_courses_M()
+    # QP3 continuação
+    #  Funções que faltam ...
+    #  1-  Gráfico dos gêneros separados por clusters
+    #    https://colab.research.google.com/drive/1znpX4cXQTDgCsiZYS9kNl1UbgL3RudAB?authuser=1
+    ################# -------------------------        
+    ibge_functions.fill_cluster_column_Genero()
+    ################# -------------------------       
+    ibge_functions_results.separate_clusters_Genero()
+    ibge_functions.Kmeans3_T_Grafico_Genero_Clusters()
+    ibge_functions_results.deslocamento()
+    ibge_functions_results.deslocamentos_maioresdistancias()
+    ibge_functions_results.deslocamento_clusters()
+    ibge_functions_results.deslocamentos_maioresdistancias_clusters()
+    ibge_functions_results.extract_courses_F()
+    ibge_functions_results.extract_courses_Cluster0()
+    ibge_functions_results. extract_courses_Cluster0_Correspondente()
+    ibge_functions_results.extract_courses_Correspondentes_F()
+    ibge_functions_results.extract_courses_M()
     ibge_functions_results_1.extract_courses_M_1()
-    # ibge_functions_results.extract_courses_Correspondentes_M()
+    ibge_functions_results.extract_courses_Correspondentes_M()
     pass
 
 if fase == 35:
@@ -206,14 +206,15 @@ if fase == 35:
     # ibge_functions.dadosoriginais_resultados()
     # ibge_functions_results.resultados_filtragem_10_100()
     # ibge_functions_results.resultados_distancia()
-    # ibge_functions_results.tabela_clusters_diferentes()
+    # 
+    ibge_functions_results.tabela_clusters_diferentes()
     # # - Profissões desequlibradas  - Gráfico com os pontos que mudaram de cluster e diagrama de Voronoi
     # ibge_functions_results.voronoi()
     # #  3-  Profissões equilibradas - 40%-60% ...
     #    # - Tabela com os pontos clusterizados contendo as porcentagens de masculinos e femininos
     # ibge_functions_results.Juntar_40_60Porcento_Genero()   
-    ibge_functions_results.tabela() 
-    ibge_functions_results.separar_registros_por_cluster()
+    # ibge_functions_results.tabela() 
+    # ibge_functions_results.separar_registros_por_cluster()
     #    # - Tabela com os pontos selecionados(40%-60%)
     # ibge_functions_results. pt_selecionados_40_60()
     # ibge_functions_results.tabela_40_60()
