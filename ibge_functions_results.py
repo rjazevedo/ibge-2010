@@ -5236,6 +5236,114 @@ def vetores_Setas_Setas_Feminino():
     save_results_to = 'graficos/'  
     plt.savefig(save_results_to + string1) 
     return
+# def extract_courses_Cluster2():
+#     # Read the CSV file
+#     data = pd.read_csv("graficos/Kmeans3_T_Salarios_certo_M.csv")
+#     data2 = pd.read_csv("graficos/Kmeans3_T_Salarios_certo_F.csv")
+
+#     data = data.drop(columns=['Unnamed: 0'])
+#     # data = data.drop(columns=['Curso_Nome'])
+#     # data = data.drop(columns=['Cbo_Nome'])
+#     data = data.drop(columns=['Ida'])
+#     data = data.drop(columns=['Volta'])
+#     data = data.drop(columns=['Cluster'])
+#     data = data.drop(columns=['Min'])
+#     data = data.drop(columns=['Max'])
+
+#     data2 = data2.drop(columns=['Unnamed: 0'])
+#     # data = data.drop(columns=['Curso_Nome'])
+#     # data = data.drop(columns=['Cbo_Nome'])
+#     data2 = data2.drop(columns=['Ida'])
+#     data2 = data2.drop(columns=['Volta'])
+#     data2 = data2.drop(columns=['Cluster'])
+#     data2 = data2.drop(columns=['Min'])
+#     data2 = data2.drop(columns=['Max'])
+
+    
+#     Curso = [725]
+#     Cbo   = [226]
+
+#     Curso2 = [863]
+#     Cbo2   = [110]
+
+
+#     # Filter the records based on the specified Courses and Cbos
+#     filtered_data = data[data['Curso'].isin(Curso) & data['Cbo'].isin(Cbo)]
+#     filtered_data_2 = data2[data2['Curso'].isin(Curso2) & data2['Cbo'].isin(Cbo2)]
+
+
+# #     data_521 = pd.read_csv("graficos/Deslocamento_Geral_cluster 0.csv")
+# #     filtered_521 = data_521[(data_521['Curso'] == 521) & (data_521['Cbo'] == 2144) & (data_521['Genero'] == 'F')]      
+
+   
+# #    # Adicionar uma nova coluna em filtered_data
+# #     filtered_data['Deslocamento'] = [filtered_863['Distance'].values[0],filtered_221['Distance'].values[0], filtered_521['Distance'].values[0]]  # Substitua [1, 2, 3] pelos valores desejados
+# #     filtered_data['Cluster'] = [filtered_863['Cluster'].values[0],filtered_221['Cluster'].values[0], filtered_521['Cluster'].values[0]]  # Substitua [1, 2, 3] pelos valores desejados
+    
+#     # # filtered_data['Deslocamento'] = filtered_data['Deslocamento'].astype(int)
+#     # # filtered_data['Deslocamento'] = round(filtered_data['Deslocamento'],2)
+#     # # filtered_data['Cluster'] = filtered_data['Cluster'].astype(int)
+#     # filtered_data['Curso'] = filtered_data['Curso'].astype(int)
+#     # filtered_data['Cbo'] = filtered_data['Cbo'].astype(int)
+#     # # filtered_data['Max'] = filtered_data['Max'].astype(int)
+#     # # filtered_data['Min'] = filtered_data['Min'].astype(int)
+#     # #filtered_data['Median'] = filtered_data['Median'].astype(int)
+#     # filtered_data['Median'] = round(filtered_data['Median'],2)
+
+ 
+#     # # filtered_data['Deslocamento'] = filtered_data['Deslocamento'].astype(int)
+#     # # filtered_data['Deslocamento'] = round(filtered_data['Deslocamento'],2)
+#     # # filtered_data['Cluster'] = filtered_data['Cluster'].astype(int)
+#     # filtered_data_2['Curso'] = filtered_data_2['Curso'].astype(int)
+#     # filtered_data_2['Cbo'] = filtered_data_2['Cbo'].astype(int)
+#     # # filtered_data['Max'] = filtered_data['Max'].astype(int)
+#     # # filtered_data['Min'] = filtered_data['Min'].astype(int)
+#     # #filtered_data['Median'] = filtered_data['Median'].astype(int)
+#     # filtered_data_2['Median'] = round(filtered_data_2['Median'],2)
+
+#     filtered_data_all = pd.concat([filtered_data, filtered_data_2], ignore_index=True)
+
+#     data_3 = pd.read_csv("graficos/Deslocamento_Geral_cluster 0.csv")
+#     filtered_1 = data_3[(data_3['Curso'] == 142) & (data_3['Cbo'] == 2341) & (data_3['Genero'] == 'M')]  
+#     filtered_2 = data_3[(data_3['Curso'] == 142) & (data_3['Cbo'] == 2342) & (data_3['Genero'] == 'M')]      
+#     # filtered_3 = data_3[(data_3['Curso'] == 142) & (data_3['Cbo'] == 2351) & (data_3['Genero'] == 'M')]      
+#     # filtered_4 = data_3[(data_3['Curso'] == 726) & (data_3['Cbo'] == 2265) & (data_3['Genero'] == 'M')]      
+#     # filtered_5 = data_3[(data_3['Curso'] == 214) & (data_3['Cbo'] == 2163) & (data_3['Genero'] == 'M')]      
+#     # filtered_6 = data_3[(data_3['Curso'] == 520) & (data_3['Cbo'] == 2141) & (data_3['Genero'] == 'F')]      
+#     # filtered_7 = data_3[(data_3['Curso'] == 521) & (data_3['Cbo'] == 2144) & (data_3['Genero'] == 'F')]      
+
+#     # Adicionar uma nova coluna em filtered_data
+#     filtered_data_all['Deslocamento'] = [filtered_1['Distance'].values[0],filtered_2['Distance'].values[0]#, filtered_3['Distance'].values[0],
+#                                     #filtered_4['Distance'].values[0],filtered_5['Distance'].values[0], filtered_6['Distance'].values[0], 
+#                                     #filtered_7['Distance'].values[0]
+#                                      ] 
+#     filtered_data_all['Cluster'] = [filtered_1['Cluster'].values[0],filtered_2['Cluster'].values[0]#, filtered_3['Cluster'].values[0],
+#                                      #filtered_4['Cluster'].values[0],filtered_5['Cluster'].values[0], filtered_6['Cluster'].values[0], 
+#                                      #filtered_7['Cluster'].values[0]
+#                                      ] 
+
+#     filtered_data_all['Deslocamento'] = round(filtered_data_all['Deslocamento'],2)
+#     filtered_data_all['Cluster'] = filtered_data_all['Cluster'].astype(int)
+#     # filtered_data['Deslocamento'] = filtered_data['Deslocamento'].astype(int)
+#     # filtered_data['Deslocamento'] = round(filtered_data['Deslocamento'],2)
+#     # filtered_data['Cluster'] = filtered_data['Cluster'].astype(int)
+#     filtered_data_all['Curso'] = filtered_data_all['Curso'].astype(int)
+#     filtered_data_all['Cbo'] = filtered_data_all['Cbo'].astype(int)
+#     # filtered_data['Max'] = filtered_data['Max'].astype(int)
+#     # filtered_data['Min'] = filtered_data['Min'].astype(int)
+#     #filtered_data['Median'] = filtered_data['Median'].astype(int)
+#     filtered_data_all['Median'] = round(filtered_data_all['Median'],2)
+
+#     # Save the records in a LaTeX table
+#     latex_table = filtered_data_all.to_latex(index=False, caption="Cluster1 deslocamentos signficativos ", label="tab:Salarios_Cluster1") 
+    
+    
+#     # Salvar em um arquivo .tex
+#     with open("tabelas/Kmeans3_T_Salarios_Cluster1.tex", "w") as f:
+#         f.write(latex_table)
+#     return
+
+
 def extract_courses_Cluster0():
     # Read the CSV file
     data = pd.read_csv("graficos/Kmeans3_T_Salarios_certo_M.csv")

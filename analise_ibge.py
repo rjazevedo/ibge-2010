@@ -100,29 +100,28 @@ if fase == 10:
 
 # Fase 20: Análise Exploratória ...
 if fase == 20:  #QP1
-    # # Função para:
-    # # - clusterização com k=3, 
-    # # - geração do gráfico K-Means com K=3 (10% - Todos os Cursos - Clusterização) 
-    # # - geração do arquivo Kmeans3_T.csv   
-    # ################## ------------------------ 
-    # ibge_functions.Profissoes_Cursos()    
-    # ## Empregabilidade x Salario
-    # 
+    # Função para:
+    # - clusterização com k=3, 
+    # - geração do gráfico K-Means com K=3 (10% - Todos os Cursos - Clusterização) 
+    # - geração do arquivo Kmeans3_T.csv   
+    ################## ------------------------ 
+    ibge_functions.Profissoes_Cursos()    
+    ## Empregabilidade x Salario
     ibge_functions.median_salario() 
-    # ibge_functions_exploratory_analysis.separar_cursos_por_clusters()
-    # ibge_functions_exploratory_analysis.medianas_por_clusters()
-    # ibge_functions.Salarios() 
-    # ibge_functions.Salarios_cursos_commaisprofissoes() 
+    ibge_functions_exploratory_analysis.separar_cursos_por_clusters()
+    ibge_functions_exploratory_analysis.medianas_por_clusters()
+    ibge_functions.Salarios() 
+    ibge_functions.Salarios_cursos_commaisprofissoes() 
 
-    # ibge_functions.Soma_PivotTable()
-    # ibge_functions.Coluna_Empregabilidade()
+    ibge_functions.Soma_PivotTable()
+    ibge_functions.Coluna_Empregabilidade()
     
-    # ibge_functions.Empregabilidade() 
-    # ibge_functions.Empregabilidade_cursos_commaisprofissoes() 
-    # ibge_functions_exploratory_analysis.correlacao_empregabilidade_salario() #...Gráfico 
+    ibge_functions.Empregabilidade() 
+    ibge_functions.Empregabilidade_cursos_commaisprofissoes() 
+    ibge_functions_exploratory_analysis.correlacao_empregabilidade_salario() #...Gráfico 
 
-    # ibge_functions_exploratory_analysis.plot_selected_courses()
-    # ibge_functions.plot_selected_courses_1()
+    ibge_functions_exploratory_analysis.plot_selected_courses()
+    ibge_functions.plot_selected_courses_1()
     pass
 
 # Fase 30: Resultados da Análise ...
@@ -175,69 +174,72 @@ if fase == 33:
     pass
 
 if fase == 34: #...
-    # QP3 continuação
-    #  Funções que faltam ...
-    #  1-  Gráfico dos gêneros separados por clusters
+    # # QP3 continuação
+    # #  Funções que faltam ...
+    # #  1-  Gráfico dos gêneros separados por clusters
     #    https://colab.research.google.com/drive/1znpX4cXQTDgCsiZYS9kNl1UbgL3RudAB?authuser=1
     ################# -------------------------        
     ibge_functions.fill_cluster_column_Genero()
     ################# -------------------------       
-    ibge_functions_results.separate_clusters_Genero()
-    ibge_functions.Kmeans3_T_Grafico_Genero_Clusters()
-    ibge_functions_results.deslocamento()
-    ibge_functions_results.deslocamentos_maioresdistancias()
-    ibge_functions_results.deslocamento_clusters()
-    ibge_functions_results.deslocamentos_maioresdistancias_clusters()
-    ibge_functions_results.extract_courses_F()
-    ibge_functions_results.extract_courses_Cluster0()
-    ibge_functions_results. extract_courses_Cluster0_Correspondente()
-    ibge_functions_results.extract_courses_Correspondentes_F()
-    ibge_functions_results.extract_courses_M()
-    ibge_functions_results_1.extract_courses_M_1()
-    ibge_functions_results.extract_courses_Correspondentes_M()
+    # ibge_functions_results.separate_clusters_Genero()
+    # ibge_functions.Kmeans3_T_Grafico_Genero_Clusters()
+    # ibge_functions_results.deslocamento()
+    # ibge_functions_results.deslocamentos_maioresdistancias()
+    # ibge_functions_results.deslocamento_clusters()
+    # ibge_functions_results.deslocamentos_maioresdistancias_clusters()
+    # ibge_functions_results.extract_courses_F()
+    # ibge_functions_results.extract_courses_Cluster0()
+    # ibge_functions_results_1.extract_courses_Cluster1()
+    # ibge_functions_results_1.extract_courses_Cluster2()
+    # ibge_functions_results. extract_courses_Cluster0_Correspondente()
+    # ibge_functions_results.extract_courses_Correspondentes_F()
+    # 
+    ibge_functions_results_1.extract_courses_Correspondentes_F_1()
+    # ibge_functions_results.extract_courses_M()
+    # ibge_functions_results_1.extract_courses_M_1()
+    # ibge_functions_results.extract_courses_Correspondentes_M()
     pass
 
 if fase == 35:
-    # ## QP3 continuação
-    # #  2-  Profissões desequilibradas 
-    #    # - Profissões desequilibradas - Pontos Selecionados(Grandes Desloamentos)  
-    # # ...   
-    #    # - Profissões desequilibradas - Quais as profissões onde homens e mulheres estão em clusters diferentes?
-    # ibge_functions.dadosoriginais_resultados()
-    # ibge_functions_results.resultados_filtragem_10_100()
-    # ibge_functions_results.resultados_distancia()
-    # 
+    ## QP3 continuação
+    #  2-  Profissões desequilibradas 
+       # - Profissões desequilibradas - Pontos Selecionados(Grandes Desloamentos)  
+    # ...   
+       # - Profissões desequilibradas - Quais as profissões onde homens e mulheres estão em clusters diferentes?
+    ibge_functions.dadosoriginais_resultados()
+    ibge_functions_results.resultados_filtragem_10_100()
+    ibge_functions_results.resultados_distancia()
     ibge_functions_results.tabela_clusters_diferentes()
-    # # - Profissões desequlibradas  - Gráfico com os pontos que mudaram de cluster e diagrama de Voronoi
-    # ibge_functions_results.voronoi()
-    # #  3-  Profissões equilibradas - 40%-60% ...
-    #    # - Tabela com os pontos clusterizados contendo as porcentagens de masculinos e femininos
-    # ibge_functions_results.Juntar_40_60Porcento_Genero()   
-    # ibge_functions_results.tabela() 
-    # ibge_functions_results.separar_registros_por_cluster()
-    #    # - Tabela com os pontos selecionados(40%-60%)
-    # ibge_functions_results. pt_selecionados_40_60()
-    # ibge_functions_results.tabela_40_60()
-    #    # - Gráfico com os ponto selecionados(40%-60%)
-    # ibge_functions_results.graf_selecionados_40_60()
-    #    # - Plotar o gráfico das idades, usando o arquivo de femininos e masculinos! Com isso poderemos ver a distribuição das idades para o masculino e para o feminino!
-    # ibge_functions.Ida_Volta_Idade_Gen()       
-    # ibge_functions.Tabela_Ida_Volta_Idade_Gen()         
-    # ibge_functions_results.Juntar_10Porcento_Idade_Gen() 
-    # ibge_functions_results.Filtrar_Tabela_10Porcento_Idade_Gen()   
-    # ibge_functions.Analise_Genero_FaixaEtaria()
+    # - Profissões desequlibradas  - Gráfico com os pontos que mudaram de cluster e diagrama de Voronoi
+    ibge_functions_results.voronoi()
+    #  3-  Profissões equilibradas - 40%-60% ...
+       # - Tabela com os pontos clusterizados contendo as porcentagens de masculinos e femininos
+    ibge_functions_results.Juntar_40_60Porcento_Genero()   
+    ibge_functions_results.tabela() 
+    ibge_functions_results.separar_registros_por_cluster()
+       # - Tabela com os pontos selecionados(40%-60%)
+    ibge_functions_results. pt_selecionados_40_60()
+    ibge_functions_results.tabela_40_60()
+       # - Gráfico com os ponto selecionados(40%-60%)
+    ibge_functions_results.graf_selecionados_40_60()
+       # - Plotar o gráfico das idades, usando o arquivo de femininos e masculinos! Com isso poderemos ver a distribuição das idades para o masculino e para o feminino!
+    ibge_functions.Ida_Volta_Idade_Gen()       
+    ibge_functions.Tabela_Ida_Volta_Idade_Gen()         
+    ibge_functions_results.Juntar_10Porcento_Idade_Gen() 
+    ibge_functions_results.Filtrar_Tabela_10Porcento_Idade_Gen()   
+    ibge_functions.Analise_Genero_FaixaEtaria()
 
-    # # 4-  Gráfico dos vetores centrados em(0,0)    
-    # # ibge_functions_results.vetores_Setas_Pontos()
-    # ibge_functions_results.vetores_Setas_Masc_Fem()
-    # ibge_functions_results.vetores_Setas_Setas_Masculino()
-    # ibge_functions_results.vetores_Setas_Setas_Feminino()
+    # 4-  Gráfico dos vetores centrados em(0,0)    
+    # ibge_functions_results.vetores_Setas_Pontos()
+    ibge_functions_results.vetores_Setas_Masc_Fem()
+    ibge_functions_results.vetores_Setas_Setas_Masculino()
+    ibge_functions_results.vetores_Setas_Setas_Feminino()
 
-    # #https://colab.research.google.com/drive/1znpX4cXQTDgCsiZYS9kNl1UbgL3RudAB?authuser=1#scrollTo=NTzZhdz0uo4g
-    # #Kmeans3 - Copilot - Soma dos vetores(setas) femininos
+    #https://colab.research.google.com/drive/1znpX4cXQTDgCsiZYS9kNl1UbgL3RudAB?authuser=1#scrollTo=NTzZhdz0uo4g
+    #Kmeans3 - Copilot - Soma dos vetores(setas) femininos
 
-    # ibge_functions_results.extract_courses_transicao()
-    # ibge_functions_results.extract_courses_equidade()
+    ibge_functions_results.extract_courses_transicao()
+    ibge_functions_results.extract_courses_equidade()
 
     pass
 
