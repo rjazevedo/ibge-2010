@@ -296,3 +296,7 @@ if fase == 50:
 #if fase >= 99:
 #if fase == 99:
 #     pass
+ 
+if fase == 100: # aqui é só de teste
+    ibge_functions_results_1.plot_age_distribution_for_course_cbo()
+    pass

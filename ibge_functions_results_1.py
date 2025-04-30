@@ -465,3 +465,31 @@ def extract_courses_Correspondentes_F_1():
     with open("tabelas/Kmeans3_T_Salarios_certo_Correspondentes_F_1.tex", "w") as f:
         f.write(latex_table)
     return    
+
+def plot_age_distribution_for_course_cbo():
+        import matplotlib.pyplot as plt
+
+        # Leitura do arquivo
+        file_path = 'graficos/Resultados_T_Filtrados_Kmeans3_Idade_M.csv'
+        df = pd.read_csv(file_path)
+
+        # Filtrar pelo curso 212 e CBO 2354
+        filtered_df = df[(df['Curso'] == 212) & (df['Cbo'] == 2354)]
+
+        # Contar a quantidade de pessoas por faixa etária
+        age_counts = filtered_df['Idade'].value_counts().reindex(['29', '30-39', '40-49', '50-59', '60'], fill_value=0)
+
+        # Criar o gráfico de barras
+        plt.figure(figsize=(8, 6))
+        age_counts.plot(kind='bar', color='skyblue', edgecolor='black')
+        plt.title('Distribuição de Idades para Curso 212 e CBO 2354', fontsize=14)
+        plt.xlabel('Faixa Etária', fontsize=12)
+        plt.ylabel('Quantidade de Pessoas', fontsize=12)
+        plt.xticks(rotation=0)
+        plt.grid(axis='y', linestyle='--', alpha=0.7)
+        plt.tight_layout()
+
+        # Salvar o gráfico
+        save_results_to = 'graficos/'
+        plt.savefig(save_results_to + 'Distribuicao_Idades_Curso212_CBO2354.png')
+        plt.show()
