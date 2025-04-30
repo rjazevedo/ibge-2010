@@ -466,30 +466,124 @@ def extract_courses_Correspondentes_F_1():
         f.write(latex_table)
     return    
 
-def plot_age_distribution_for_course_cbo():
-        import matplotlib.pyplot as plt
+# def plot_age_distribution_for_course_cbo():
+#         import matplotlib.pyplot as plt
 
+#         # Leitura do arquivo
+#         file_path = 'graficos/Resultados_T_Filtrados_Kmeans3_Idade_M.csv'
+#         df = pd.read_csv(file_path)
+
+#         # Filtrar pelo curso 212 e CBO 2354
+#         filtered_df = df[(df['Curso'] == 724) & (df['Cbo'] == 2261)]
+
+#         # Contar a quantidade de pessoas por faixa etária
+#         age_counts = filtered_df['Idade'].value_counts().reindex(['29', '30-39', '40-49', '50-59', '60'], fill_value=0)
+
+#         # Criar o gráfico de barras
+#         plt.figure(figsize=(8, 6))
+#         age_counts.plot(kind='bar', color='skyblue', edgecolor='black')
+#         plt.title('Distribuição de Idades para Curso 212 e CBO 2354', fontsize=14)
+#         plt.xlabel('Faixa Etária', fontsize=12)
+#         plt.ylabel('Quantidade de Pessoas', fontsize=12)
+#         plt.xticks(rotation=0)
+#         plt.grid(axis='y', linestyle='--', alpha=0.7)
+#         plt.tight_layout()
+
+#         # Salvar o gráfico
+#         save_results_to = 'graficos/'
+#         plt.savefig(save_results_to + 'Distribuicao_Idades_Curso212_CBO2354.png')
+#         plt.show()
+def plot_ida_volta_distribution_for_course_cbo(sx):
+    import matplotlib.pyplot as plt
+
+    if sx== "F":
+        # Leitura do arquivo
+        file_path = 'graficos/Resultados_T_Filtrados_Kmeans3_Idade_F.csv'
+        df = pd.read_csv(file_path)
+
+        # Filtrar pelo curso 724 e CBO 2261
+        filtered_df = df[(df['Curso'] == 212) & (df['Cbo'] == 2354)]
+
+        # Inicializar dicionários para ida e volta
+        ida_counts = {'29': 0, '30-39': 0, '40-49': 0, '50-59': 0, '60': 0}
+        volta_counts = {'29': 0, '30-39': 0, '40-49': 0, '50-59': 0, '60': 0}
+
+        # Contar ida e volta por faixa etária
+        for _, row in filtered_df.iterrows():
+            if row['Idade'] in ida_counts:
+                ida_counts[row['Idade']] += row['Ida']
+                volta_counts[row['Idade']] += row['Volta']
+
+        # Criar o gráfico de barras
+        labels = list(ida_counts.keys())
+        ida_values = list(ida_counts.values())
+        volta_values = list(volta_counts.values())
+
+        x = range(len(labels))
+        width = 0.35
+
+        plt.figure(figsize=(10, 6))
+        plt.bar(x, ida_values, width, label='Ida', color='skyblue', edgecolor='black')
+        plt.bar([p + width for p in x], volta_values, width, label='Volta', color='orange', edgecolor='black')
+
+        plt.xlabel('Faixa Etária', fontsize=12)
+        plt.ylabel('Quantidade', fontsize=12)
+        plt.title('Distribuição de Ida e Volta para Curso 724 e CBO 2261 -  -  Feminino', fontsize=14)
+        plt.xticks([p + width / 2 for p in x], labels)
+        plt.legend()
+        plt.grid(axis='y', linestyle='--', alpha=0.7)
+        plt.tight_layout()
+        # plt.xlim(0.0, 100.0)
+        # plt.ylim(0.0, 100.0)
+
+        # Salvar o gráfico
+        save_results_to = 'graficos/'
+        plt.savefig(save_results_to + 'Distribuicao_Ida_Volta_Curso724_CBO2261_F.png')
+        # plt.show()
+
+    if sx== "M":
         # Leitura do arquivo
         file_path = 'graficos/Resultados_T_Filtrados_Kmeans3_Idade_M.csv'
         df = pd.read_csv(file_path)
 
-        # Filtrar pelo curso 212 e CBO 2354
+        # Filtrar pelo curso 724 e CBO 2261
         filtered_df = df[(df['Curso'] == 212) & (df['Cbo'] == 2354)]
 
-        # Contar a quantidade de pessoas por faixa etária
-        age_counts = filtered_df['Idade'].value_counts().reindex(['29', '30-39', '40-49', '50-59', '60'], fill_value=0)
+        # Inicializar dicionários para ida e volta
+        ida_counts = {'29': 0, '30-39': 0, '40-49': 0, '50-59': 0, '60': 0}
+        volta_counts = {'29': 0, '30-39': 0, '40-49': 0, '50-59': 0, '60': 0}
+
+        # Contar ida e volta por faixa etária
+        for _, row in filtered_df.iterrows():
+            if row['Idade'] in ida_counts:
+                ida_counts[row['Idade']] += row['Ida']
+                volta_counts[row['Idade']] += row['Volta']
 
         # Criar o gráfico de barras
-        plt.figure(figsize=(8, 6))
-        age_counts.plot(kind='bar', color='skyblue', edgecolor='black')
-        plt.title('Distribuição de Idades para Curso 212 e CBO 2354', fontsize=14)
+        labels = list(ida_counts.keys())
+        ida_values = list(ida_counts.values())
+        volta_values = list(volta_counts.values())
+
+        x = range(len(labels))
+        width = 0.35
+
+        plt.figure(figsize=(10, 6))
+        plt.bar(x, ida_values, width, label='Ida', color='skyblue', edgecolor='black')
+        plt.bar([p + width for p in x], volta_values, width, label='Volta', color='orange', edgecolor='black')
+
         plt.xlabel('Faixa Etária', fontsize=12)
-        plt.ylabel('Quantidade de Pessoas', fontsize=12)
-        plt.xticks(rotation=0)
+        plt.ylabel('Quantidade', fontsize=12)
+        plt.title('Distribuição de Ida e Volta para Curso 724 e CBO 2261 - Masculino', fontsize=14)
+        plt.xticks([p + width / 2 for p in x], labels)
+        plt.legend()
         plt.grid(axis='y', linestyle='--', alpha=0.7)
         plt.tight_layout()
+        # plt.xlim(0.0, 100.0)
+        # plt.ylim(0.0, 100.0)
 
         # Salvar o gráfico
         save_results_to = 'graficos/'
-        plt.savefig(save_results_to + 'graficos/Distribuicao_Idades_Curso212_CBO2354.png')
-        plt.show()
+        plt.savefig(save_results_to + 'Distribuicao_Ida_Volta_Curso724_CBO2261_M.png')
+        # plt.show()
+
+    return

@@ -559,6 +559,10 @@ def Analise_Genero_FaixaEtaria():
     ibge_functions_results.Analise_Genero_FaixaEtaria('F')
     ibge_functions_results.Analise_Genero_FaixaEtaria('M')
     return
+def plot_ida_volta_distribution_for_course_cbo():
+    ibge_functions_results_1.plot_ida_volta_distribution_for_course_cbo("F")
+    ibge_functions_results_1.plot_ida_volta_distribution_for_course_cbo("M")
+    return
 #--------------------------------------------------------------------
 
 def Adiciona_Coluna_Idade():
