@@ -491,5 +491,5 @@ def plot_age_distribution_for_course_cbo():
 
         # Salvar o gráfico
         save_results_to = 'graficos/'
-        plt.savefig(save_results_to + 'Distribuicao_Idades_Curso212_CBO2354.png')
+        plt.savefig(save_results_to + 'graficos/Distribuicao_Idades_Curso212_CBO2354.png')
         plt.show()
