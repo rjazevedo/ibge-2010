@@ -32,7 +32,7 @@ def function_obterdados_especificacao_coluna(ano_ac, estados_ac, modalidades_ac)
 def Filtrar_Dados_Censo(path,name,i):
 
     file = path + name
-    X = pd.read_csv(file, usecols=["V6036", "V6400", "V6352", "V6354", "V6356", "V6461",  "V6471", "V6462", "V6472","V6511","V6514","V0601","V0656"], sep=",")    
+    X = pd.read_csv(file, usecols=["V6036", "V6400", "V6352", "V6354", "V6356", "V6461",  "V6471", "V6462", "V6472","V6511","V6514","V0601","V0656","V0648"], sep=",")    
     dict = {
             "V6036":"Idade_em_Anos",
             "V6400":"Nível_instrução",
@@ -48,7 +48,7 @@ def Filtrar_Dados_Censo(path,name,i):
             "V0601":"gênero",
             "V0656":"rendimento_aposentadoria_pensao",
             "V0648":"categoria do emprego"
-            
+
             }
     X.rename(columns=dict,inplace=True)
         
@@ -90,7 +90,7 @@ def Limpeza_Arquivo_Censo_Graduados_NaoGraduados_1_2(path,name,i):
     # Modifica cada coluna para tipo inteiro 19/04/2024 Werneck 
     for c in X.columns:
         X[c] = X[c].astype(int)
-
+  
     # Crie o diretório de destino se ele não existir
     if not os.path.exists(path_proc[0]):
         os.makedirs(path_proc[0])
