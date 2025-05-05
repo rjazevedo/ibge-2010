@@ -528,7 +528,7 @@ def plot_ida_volta_distribution_for_course_cbo(sx):
 
         plt.xlabel('Faixa Etária', fontsize=12)
         plt.ylabel('Quantidade', fontsize=12)
-        plt.title('Distribuição de Ida e Volta para Curso 724 e CBO 2261 -  -  Feminino', fontsize=14)
+        plt.title('Distribuição de Ida e Volta para Curso 212 e CBO 2354 - Feminino', fontsize=14)
         plt.xticks([p + width / 2 for p in x], labels)
         plt.legend()
         plt.grid(axis='y', linestyle='--', alpha=0.7)
@@ -538,7 +538,7 @@ def plot_ida_volta_distribution_for_course_cbo(sx):
 
         # Salvar o gráfico
         save_results_to = 'graficos/'
-        plt.savefig(save_results_to + 'Distribuicao_Ida_Volta_Curso724_CBO2261_F.png')
+        plt.savefig(save_results_to + 'Distribuicao_Ida_Volta_Curso212_CBO2354_F.png')
         # plt.show()
 
     if sx== "M":
@@ -573,7 +573,7 @@ def plot_ida_volta_distribution_for_course_cbo(sx):
 
         plt.xlabel('Faixa Etária', fontsize=12)
         plt.ylabel('Quantidade', fontsize=12)
-        plt.title('Distribuição de Ida e Volta para Curso 724 e CBO 2261 - Masculino', fontsize=14)
+        plt.title('Distribuição de Ida e Volta para Curso 212 e CBO 2354 - Masculino', fontsize=14)
         plt.xticks([p + width / 2 for p in x], labels)
         plt.legend()
         plt.grid(axis='y', linestyle='--', alpha=0.7)
@@ -583,7 +583,7 @@ def plot_ida_volta_distribution_for_course_cbo(sx):
 
         # Salvar o gráfico
         save_results_to = 'graficos/'
-        plt.savefig(save_results_to + 'Distribuicao_Ida_Volta_Curso724_CBO2261_M.png')
+        plt.savefig(save_results_to + 'Distribuicao_Ida_Volta_Curso212_CBO2354_M.png')
         # plt.show()
 
     return
