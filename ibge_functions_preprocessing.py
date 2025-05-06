@@ -47,7 +47,7 @@ def Filtrar_Dados_Censo(path,name,i):
             "V6514":"Qtdade_Salario",
             "V0601":"gênero",
             "V0656":"rendimento_aposentadoria_pensao",
-            "V0648":"categoria do emprego"
+            "V0648":"Categoria_Emprego"
 
             }
     X.rename(columns=dict,inplace=True)
