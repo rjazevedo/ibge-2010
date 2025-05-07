@@ -298,6 +298,7 @@ if fase == 50:
 #     pass
  
 if fase == 100: # aqui é só de teste
-    # ibge_functions_results_1.plot_age_distribution_for_course_cbo()
-    ibge_functions. plot_ida_volta_distribution_for_course_cbo()
+    # # ibge_functions_results_1.plot_age_distribution_for_course_cbo()
+    # ibge_functions. plot_ida_volta_distribution_for_course_cbo()
+    ibge_functions_results_1.Analise_Genero_FaixaEtaria()
     pass
