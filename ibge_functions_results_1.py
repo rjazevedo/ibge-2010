@@ -632,51 +632,63 @@ def Analise_Genero_FaixaEtaria():
             # if (str(Final_Fem_CSV.Ocupação_Código[i])== '2341.0') & (str(Final_Fem_CSV.Curso_Superior_Graduação_Código[i]) == '142.0'):
             if ((str(Final_Fem_CSV.Ocupação_Código[j]))== (str(int(Kmeans3_T.Cbo[i])))) & (str(Final_Fem_CSV.Curso_Superior_Graduação_Código[j]) == str(int(Kmeans3_T.Curso[i])))& Final_Fem_CSV.Idade_em_Anos[j] <=29:
                 Qtdade = Qtdade + 1
-        Kmeans3_T.F29[i] = int(Qtdade)            
-    Kmeans3_T.to_csv(save_results_to + 'Kmeans3_T_IdadeCursoCBO.csv')       
-    # # # -----------------------------------------------------------------------------------
-    # # -------------------------------------------------------------------------------------     
-    # for i in range(0,10): 
-    for i in range(len(Kmeans3_T)): 
-        Qtdade = 0
-        for j in range(len(Final_Fem_CSV)):
-            # if (str(Final_Fem_CSV.Ocupação_Código[i])== '2341.0') & (str(Final_Fem_CSV.Curso_Superior_Graduação_Código[i]) == '142.0'):
+        Kmeans3_T.F29[i] = int(Qtdade)      
             if ((str(Final_Fem_CSV.Ocupação_Código[j]))== (str(int(Kmeans3_T.Cbo[i])))) & (str(Final_Fem_CSV.Curso_Superior_Graduação_Código[j]) == str(int(Kmeans3_T.Curso[i]))) & Final_Fem_CSV.Idade_em_Anos[j] >30 & Final_Fem_CSV.Idade_em_Anos[j] <=39:
                 Qtdade = Qtdade + 1
-        Kmeans3_T.F30[i] = int(Qtdade)            
-    Kmeans3_T.to_csv(save_results_to + 'Kmeans3_T_IdadeCursoCBO.csv')     
-    # # -----------------------------------------------------------------------------------    
-    # # ----------------------------------------------------------------------------------- 
-    # for i in range(0,10): 
-    for i in range(len(Kmeans3_T)): 
-        Qtdade = 0
-        for j in range(len(Final_Fem_CSV)):
-            # if (str(Final_Fem_CSV.Ocupação_Código[i])== '2341.0') & (str(Final_Fem_CSV.Curso_Superior_Graduação_Código[i]) == '142.0'):
+        Kmeans3_T.F30[i] = int(Qtdade)  
             if ((str(Final_Fem_CSV.Ocupação_Código[j]))== (str(int(Kmeans3_T.Cbo[i])))) & (str(Final_Fem_CSV.Curso_Superior_Graduação_Código[j]) == str(int(Kmeans3_T.Curso[i]))) & Final_Fem_CSV.Idade_em_Anos[j] >40 & Final_Fem_CSV.Idade_em_Anos[j] <=49:
                 Qtdade = Qtdade + 1
-        Kmeans3_T.F40[i] = int(Qtdade)            
-    Kmeans3_T.to_csv(save_results_to + 'Kmeans3_T_IdadeCursoCBO.csv')    
-    # # -----------------------------------------------------------------------------------    
-    # # ----------------------------------------------------------------------------------- 
-    # for i in range(0,10): 
-    for i in range(len(Kmeans3_T)): 
-        Qtdade = 0
-        for j in range(len(Final_Fem_CSV)):
-            # if (str(Final_Fem_CSV.Ocupação_Código[i])== '2341.0') & (str(Final_Fem_CSV.Curso_Superior_Graduação_Código[i]) == '142.0'):
+        Kmeans3_T.F40[i] = int(Qtdade)    
             if ((str(Final_Fem_CSV.Ocupação_Código[j]))== (str(int(Kmeans3_T.Cbo[i])))) & (str(Final_Fem_CSV.Curso_Superior_Graduação_Código[j]) == str(int(Kmeans3_T.Curso[i]))) & Final_Fem_CSV.Idade_em_Anos[j] >50 & Final_Fem_CSV.Idade_em_Anos[j] <=59:
                 Qtdade = Qtdade + 1
-        Kmeans3_T.F50[i] = int(Qtdade)            
-    Kmeans3_T.to_csv(save_results_to + 'Kmeans3_T_IdadeCursoCBO.csv')     
-    # # ----------------------------------------------------------------------------------- 
-    # for i in range(0,10): 
-    for i in range(len(Kmeans3_T)): 
-        Qtdade = 0
-        for j in range(len(Final_Fem_CSV)):
-            # if (str(Final_Fem_CSV.Ocupação_Código[i])== '2341.0') & (str(Final_Fem_CSV.Curso_Superior_Graduação_Código[i]) == '142.0'):
+        Kmeans3_T.F50[i] = int(Qtdade)    
             if ((str(Final_Fem_CSV.Ocupação_Código[j]))== (str(int(Kmeans3_T.Cbo[i])))) & (str(Final_Fem_CSV.Curso_Superior_Graduação_Código[j]) == str(int(Kmeans3_T.Curso[i]))) & Final_Fem_CSV.Idade_em_Anos[j] >=60:
                 Qtdade = Qtdade + 1
         Kmeans3_T.F60[i] = int(Qtdade)            
-    Kmeans3_T.to_csv(save_results_to + 'Kmeans3_T_IdadeCursoCBO.csv')     
+    Kmeans3_T.to_csv(save_results_to + 'Kmeans3_T_IdadeCursoCBO.csv')       
+    # # -----------------------------------------------------------------------------------
+    # # -------------------------------------------------------------------------------------     
+    # # for i in range(0,10): 
+    # for i in range(len(Kmeans3_T)): 
+    #     Qtdade = 0
+    #     for j in range(len(Final_Fem_CSV)):
+    #         # if (str(Final_Fem_CSV.Ocupação_Código[i])== '2341.0') & (str(Final_Fem_CSV.Curso_Superior_Graduação_Código[i]) == '142.0'):
+    #         if ((str(Final_Fem_CSV.Ocupação_Código[j]))== (str(int(Kmeans3_T.Cbo[i])))) & (str(Final_Fem_CSV.Curso_Superior_Graduação_Código[j]) == str(int(Kmeans3_T.Curso[i]))) & Final_Fem_CSV.Idade_em_Anos[j] >30 & Final_Fem_CSV.Idade_em_Anos[j] <=39:
+    #             Qtdade = Qtdade + 1
+    #     Kmeans3_T.F30[i] = int(Qtdade)            
+    # Kmeans3_T.to_csv(save_results_to + 'Kmeans3_T_IdadeCursoCBO.csv')     
+    # # -----------------------------------------------------------------------------------    
+    # # ----------------------------------------------------------------------------------- 
+    # # for i in range(0,10): 
+    # for i in range(len(Kmeans3_T)): 
+    #     Qtdade = 0
+    #     for j in range(len(Final_Fem_CSV)):
+    #         # if (str(Final_Fem_CSV.Ocupação_Código[i])== '2341.0') & (str(Final_Fem_CSV.Curso_Superior_Graduação_Código[i]) == '142.0'):
+    #         if ((str(Final_Fem_CSV.Ocupação_Código[j]))== (str(int(Kmeans3_T.Cbo[i])))) & (str(Final_Fem_CSV.Curso_Superior_Graduação_Código[j]) == str(int(Kmeans3_T.Curso[i]))) & Final_Fem_CSV.Idade_em_Anos[j] >40 & Final_Fem_CSV.Idade_em_Anos[j] <=49:
+    #             Qtdade = Qtdade + 1
+    #     Kmeans3_T.F40[i] = int(Qtdade)            
+    # Kmeans3_T.to_csv(save_results_to + 'Kmeans3_T_IdadeCursoCBO.csv')    
+    # # -----------------------------------------------------------------------------------    
+    # # ----------------------------------------------------------------------------------- 
+    # # for i in range(0,10): 
+    # for i in range(len(Kmeans3_T)): 
+    #     Qtdade = 0
+    #     for j in range(len(Final_Fem_CSV)):
+    #         # if (str(Final_Fem_CSV.Ocupação_Código[i])== '2341.0') & (str(Final_Fem_CSV.Curso_Superior_Graduação_Código[i]) == '142.0'):
+    #         if ((str(Final_Fem_CSV.Ocupação_Código[j]))== (str(int(Kmeans3_T.Cbo[i])))) & (str(Final_Fem_CSV.Curso_Superior_Graduação_Código[j]) == str(int(Kmeans3_T.Curso[i]))) & Final_Fem_CSV.Idade_em_Anos[j] >50 & Final_Fem_CSV.Idade_em_Anos[j] <=59:
+    #             Qtdade = Qtdade + 1
+    #     Kmeans3_T.F50[i] = int(Qtdade)            
+    # Kmeans3_T.to_csv(save_results_to + 'Kmeans3_T_IdadeCursoCBO.csv')     
+    # # ----------------------------------------------------------------------------------- 
+    # # for i in range(0,10): 
+    # for i in range(len(Kmeans3_T)): 
+    #     Qtdade = 0
+    #     for j in range(len(Final_Fem_CSV)):
+    #         # if (str(Final_Fem_CSV.Ocupação_Código[i])== '2341.0') & (str(Final_Fem_CSV.Curso_Superior_Graduação_Código[i]) == '142.0'):
+    #         if ((str(Final_Fem_CSV.Ocupação_Código[j]))== (str(int(Kmeans3_T.Cbo[i])))) & (str(Final_Fem_CSV.Curso_Superior_Graduação_Código[j]) == str(int(Kmeans3_T.Curso[i]))) & Final_Fem_CSV.Idade_em_Anos[j] >=60:
+    #             Qtdade = Qtdade + 1
+    #     Kmeans3_T.F60[i] = int(Qtdade)            
+    # Kmeans3_T.to_csv(save_results_to + 'Kmeans3_T_IdadeCursoCBO.csv')     
 
     # Masculino ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     # for i in range(0,10): 
@@ -686,49 +698,61 @@ def Analise_Genero_FaixaEtaria():
             # if (str(Final_Fem_CSV.Ocupação_Código[i])== '2341.0') & (str(Final_Fem_CSV.Curso_Superior_Graduação_Código[i]) == '142.0'):
             if ((str(Final_Masc_CSV.Ocupação_Código[j]))== (str(int(Kmeans3_T.Cbo[i])))) & (str(Final_Masc_CSV.Curso_Superior_Graduação_Código[j]) == str(int(Kmeans3_T.Curso[i])))& Final_Masc_CSV.Idade_em_Anos[j] <=29:
                 Qtdade = Qtdade + 1
-        Kmeans3_T.M29[i] = int(Qtdade)            
-    Kmeans3_T.to_csv(save_results_to + 'Kmeans3_T_IdadeCursoCBO.csv')       
-    # # # -----------------------------------------------------------------------------------
-    # # -------------------------------------------------------------------------------------     
-    # for i in range(0,10): 
-    for i in range(len(Kmeans3_T)): 
-        Qtdade = 0
-        for j in range(len(Final_Masc_CSV)):
-            # if (str(Final_Fem_CSV.Ocupação_Código[i])== '2341.0') & (str(Final_Fem_CSV.Curso_Superior_Graduação_Código[i]) == '142.0'):
+        Kmeans3_T.M29[i] = int(Qtdade)    
             if ((str(Final_Masc_CSV.Ocupação_Código[j]))== (str(int(Kmeans3_T.Cbo[i])))) & (str(Final_Masc_CSV.Curso_Superior_Graduação_Código[j]) == str(int(Kmeans3_T.Curso[i]))) & Final_Masc_CSV.Idade_em_Anos[j] >30 & Final_Masc_CSV.Idade_em_Anos[j] <=39:
                 Qtdade = Qtdade + 1
-        Kmeans3_T.M30[i] = int(Qtdade)            
-    Kmeans3_T.to_csv(save_results_to + 'Kmeans3_T_IdadeCursoCBO.csv')     
-    # -----------------------------------------------------------------------------------    
-    # # ----------------------------------------------------------------------------------- 
-    # for i in range(0,10): 
-    for i in range(len(Kmeans3_T)): 
-        Qtdade = 0
-        for j in range(len(Final_Masc_CSV)):
-            # if (str(Final_Fem_CSV.Ocupação_Código[i])== '2341.0') & (str(Final_Fem_CSV.Curso_Superior_Graduação_Código[i]) == '142.0'):
+        Kmeans3_T.M30[i] = int(Qtdade) 
             if ((str(Final_Masc_CSV.Ocupação_Código[j]))== (str(int(Kmeans3_T.Cbo[i])))) & (str(Final_Masc_CSV.Curso_Superior_Graduação_Código[j]) == str(int(Kmeans3_T.Curso[i]))) & Final_Masc_CSV.Idade_em_Anos[j] >40 & Final_Masc_CSV.Idade_em_Anos[j] <=49:
                 Qtdade = Qtdade + 1
-        Kmeans3_T.M40[i] = int(Qtdade)            
-    Kmeans3_T.to_csv(save_results_to + 'Kmeans3_T_IdadeCursoCBO.csv')    
-    # -----------------------------------------------------------------------------------    
-    # ----------------------------------------------------------------------------------- 
-    # for i in range(0,10): 
-    for i in range(len(Kmeans3_T)): 
-        Qtdade = 0
-        for j in range(len(Final_Masc_CSV)):
-            # if (str(Final_Fem_CSV.Ocupação_Código[i])== '2341.0') & (str(Final_Fem_CSV.Curso_Superior_Graduação_Código[i]) == '142.0'):
+        Kmeans3_T.M40[i] = int(Qtdade)         
             if ((str(Final_Masc_CSV.Ocupação_Código[j]))== (str(int(Kmeans3_T.Cbo[i])))) & (str(Final_Masc_CSV.Curso_Superior_Graduação_Código[j]) == str(int(Kmeans3_T.Curso[i]))) & Final_Masc_CSV.Idade_em_Anos[j] >50 & Final_Masc_CSV.Idade_em_Anos[j] <=59:
                 Qtdade = Qtdade + 1
-        Kmeans3_T.M50[i] = int(Qtdade)            
-    Kmeans3_T.to_csv(save_results_to + 'Kmeans3_T_IdadeCursoCBO.csv')     
-    # ----------------------------------------------------------------------------------- 
-    # for i in range(0,10): 
-    for i in range(len(Kmeans3_T)): 
-        Qtdade = 0
-        for j in range(len(Final_Masc_CSV)):
-            # if (str(Final_Fem_CSV.Ocupação_Código[i])== '2341.0') & (str(Final_Fem_CSV.Curso_Superior_Graduação_Código[i]) == '142.0'):
+        Kmeans3_T.M50[i] = int(Qtdade)    
             if ((str(Final_Masc_CSV.Ocupação_Código[j]))== (str(int(Kmeans3_T.Cbo[i])))) & (str(Final_Masc_CSV.Curso_Superior_Graduação_Código[j]) == str(int(Kmeans3_T.Curso[i]))) & Final_Masc_CSV.Idade_em_Anos[j] >=60:
                 Qtdade = Qtdade + 1
-        Kmeans3_T.M60[i] = int(Qtdade)            
-    Kmeans3_T.to_csv(save_results_to + 'Kmeans3_T_IdadeCursoCBO.csv')    
+        Kmeans3_T.M60[i] = int(Qtdade) 
+    Kmeans3_T.to_csv(save_results_to + 'Kmeans3_T_IdadeCursoCBO.csv')       
+    # # # # -----------------------------------------------------------------------------------
+    # # # -------------------------------------------------------------------------------------     
+    # # for i in range(0,10): 
+    # for i in range(len(Kmeans3_T)): 
+    #     Qtdade = 0
+    #     for j in range(len(Final_Masc_CSV)):
+    #         # if (str(Final_Fem_CSV.Ocupação_Código[i])== '2341.0') & (str(Final_Fem_CSV.Curso_Superior_Graduação_Código[i]) == '142.0'):
+    #         if ((str(Final_Masc_CSV.Ocupação_Código[j]))== (str(int(Kmeans3_T.Cbo[i])))) & (str(Final_Masc_CSV.Curso_Superior_Graduação_Código[j]) == str(int(Kmeans3_T.Curso[i]))) & Final_Masc_CSV.Idade_em_Anos[j] >30 & Final_Masc_CSV.Idade_em_Anos[j] <=39:
+    #             Qtdade = Qtdade + 1
+    #     Kmeans3_T.M30[i] = int(Qtdade)            
+    # Kmeans3_T.to_csv(save_results_to + 'Kmeans3_T_IdadeCursoCBO.csv')     
+    # # -----------------------------------------------------------------------------------    
+    # # # ----------------------------------------------------------------------------------- 
+    # # for i in range(0,10): 
+    # for i in range(len(Kmeans3_T)): 
+    #     Qtdade = 0
+    #     for j in range(len(Final_Masc_CSV)):
+    #         # if (str(Final_Fem_CSV.Ocupação_Código[i])== '2341.0') & (str(Final_Fem_CSV.Curso_Superior_Graduação_Código[i]) == '142.0'):
+    #         if ((str(Final_Masc_CSV.Ocupação_Código[j]))== (str(int(Kmeans3_T.Cbo[i])))) & (str(Final_Masc_CSV.Curso_Superior_Graduação_Código[j]) == str(int(Kmeans3_T.Curso[i]))) & Final_Masc_CSV.Idade_em_Anos[j] >40 & Final_Masc_CSV.Idade_em_Anos[j] <=49:
+    #             Qtdade = Qtdade + 1
+    #     Kmeans3_T.M40[i] = int(Qtdade)            
+    # Kmeans3_T.to_csv(save_results_to + 'Kmeans3_T_IdadeCursoCBO.csv')    
+    # # -----------------------------------------------------------------------------------    
+    # # ----------------------------------------------------------------------------------- 
+    # # for i in range(0,10): 
+    # for i in range(len(Kmeans3_T)): 
+    #     Qtdade = 0
+    #     for j in range(len(Final_Masc_CSV)):
+    #         # if (str(Final_Fem_CSV.Ocupação_Código[i])== '2341.0') & (str(Final_Fem_CSV.Curso_Superior_Graduação_Código[i]) == '142.0'):
+    #         if ((str(Final_Masc_CSV.Ocupação_Código[j]))== (str(int(Kmeans3_T.Cbo[i])))) & (str(Final_Masc_CSV.Curso_Superior_Graduação_Código[j]) == str(int(Kmeans3_T.Curso[i]))) & Final_Masc_CSV.Idade_em_Anos[j] >50 & Final_Masc_CSV.Idade_em_Anos[j] <=59:
+    #             Qtdade = Qtdade + 1
+    #     Kmeans3_T.M50[i] = int(Qtdade)            
+    # Kmeans3_T.to_csv(save_results_to + 'Kmeans3_T_IdadeCursoCBO.csv')     
+    # # ----------------------------------------------------------------------------------- 
+    # # for i in range(0,10): 
+    # for i in range(len(Kmeans3_T)): 
+    #     Qtdade = 0
+    #     for j in range(len(Final_Masc_CSV)):
+    #         # if (str(Final_Fem_CSV.Ocupação_Código[i])== '2341.0') & (str(Final_Fem_CSV.Curso_Superior_Graduação_Código[i]) == '142.0'):
+    #         if ((str(Final_Masc_CSV.Ocupação_Código[j]))== (str(int(Kmeans3_T.Cbo[i])))) & (str(Final_Masc_CSV.Curso_Superior_Graduação_Código[j]) == str(int(Kmeans3_T.Curso[i]))) & Final_Masc_CSV.Idade_em_Anos[j] >=60:
+    #             Qtdade = Qtdade + 1
+    #     Kmeans3_T.M60[i] = int(Qtdade)            
+    # Kmeans3_T.to_csv(save_results_to + 'Kmeans3_T_IdadeCursoCBO.csv')    
     return   
