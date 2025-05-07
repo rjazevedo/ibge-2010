@@ -966,3 +966,80 @@ def plot_gender_age_distribution_bycluster(cluster):
         # plt.show()       
 
     return
+
+def extract_data_by_course_cbo():
+    # Read the CSV file
+    df = pd.read_csv("graficos/Kmeans3_T_IdadeCursoCBO.csv")
+    # Convert columns to integers
+    df['Cbo'] = df['Cbo'].astype(int)
+    df['Curso'] = df['Curso'].astype(int)
+    df['Cluster'] = df['Cluster'].astype(int)
+
+    Curso = [212,  724,  321,  342,   342,   344,  380,  581]
+    Cbo   = [2354, 2261, 2642, 1221,  2431,  2411, 2611, 2161]
+
+
+    # Filter by course and cbo
+    # filtered_df = df[(df['Curso'] == Curso[0]) & (df['Cbo'] == Cbo[0])]
+    for i in range(len(Curso)): 
+        filtered_df = df[(df['Curso'] == Curso[i]) & (df['Cbo'] == Cbo[i])]
+        save_results_to = 'graficos/'
+        filtered_df.to_csv(save_results_to + "filtered_data.csv", index=False)
+        plot_gender_age_distribution_cbo('filtered_data.csv', str(Cbo[i]))
+
+    
+    # Save the filtered dataframe to a new file
+    # save_results_to = 'graficos/'
+    # filtered_df.to_csv(save_results_to + "filtered_data.csv", index=False)
+    # plot_gender_age_distribution_cbo('filtered_data.csv', str(Cbo[0]))
+
+
+
+def plot_gender_age_distribution_cbo(path,Cbo):
+    import matplotlib.pyplot as plt
+
+    save_results_to = 'graficos/'
+    # Leitura do arquivo
+    file_path = save_results_to + path
+    df = pd.read_csv(file_path)
+
+    # Somar os valores por faixa etária e gênero
+    age_groups = ['29', '30-39', '40-49', '50-59', '60-69']
+    female_sums = [
+        pd.to_numeric(df['F29'], errors='coerce').sum(),
+        pd.to_numeric(df['F30'], errors='coerce').sum(),
+        pd.to_numeric(df['F40'], errors='coerce').sum(),
+        pd.to_numeric(df['F50'], errors='coerce').sum(),
+        pd.to_numeric(df['F60'], errors='coerce').sum()
+    ]
+    male_sums = [
+        pd.to_numeric(df['M29'], errors='coerce').sum(),
+        pd.to_numeric(df['M30'], errors='coerce').sum(),
+        pd.to_numeric(df['M40'], errors='coerce').sum(),
+        pd.to_numeric(df['M50'], errors='coerce').sum(),
+        pd.to_numeric(df['M60'], errors='coerce').sum()
+    ]
+
+    # Criar o gráfico de barras
+    x = range(len(age_groups))
+    width = 0.35
+
+    plt.figure(figsize=(10, 6))
+    plt.bar(x, female_sums, width, label='Feminino', color='pink', edgecolor='black')
+    plt.bar([p + width for p in x], male_sums, width, label='Masculino', color='blue', edgecolor='black')
+    plt.yscale('log')  # Apply logarithmic scale to balance the values
+
+    plt.xlabel('Faixa Etária', fontsize=12)
+    plt.ylabel('Quantidade', fontsize=12)
+    # plt.title('Distribuição por gênero e faixa etária para toda a base representativa', fontsize=14)
+    plt.xticks([p + width / 2 for p in x], age_groups)
+    plt.legend()
+    plt.grid(axis='y', linestyle='--', alpha=0.7)
+    plt.tight_layout()
+
+    # Salvar o gráfico
+    save_results_to = 'graficos/'
+    plt.savefig(save_results_to + "Distribuicao_Genero_FaixaEtaria" + Cbo + ".png")
+    # plt.show()
+
+    return 
