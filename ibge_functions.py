@@ -644,3 +644,10 @@ def Cursos_CBOs_selecionados():
     # ibge_functions_results_1.selecionados(1)
     # ibge_functions_results_1.selecionados(2)
     return
+
+
+def plot_gender_age_distribution_bycluster():
+    ibge_functions_results_1.plot_gender_age_distribution_bycluster(0)
+    ibge_functions_results_1.plot_gender_age_distribution_bycluster(1)
+    ibge_functions_results_1.plot_gender_age_distribution_bycluster(2)
+    return
