@@ -1043,3 +1043,78 @@ def plot_gender_age_distribution_cbo(path,Cbo):
     # plt.show()
 
     return 
+
+def split_csv_by_cluster():
+    # Read the CSV file
+    file_path = 'graficos/Kmeans3_T.csv'
+    df = pd.read_csv(file_path)
+
+    # Convert columns to integer
+    df['Cbo'] = df['Cbo'].astype(int)
+    df['Curso'] = df['Curso'].astype(int)
+    df['Cluster'] = df['Cluster'].astype(int)
+
+    # Capitalize the first letter of each word in the columns
+    df['Cbo_Nome'] = df['Cbo_Nome'].str.title()
+    df['Curso_Nome'] = df['Curso_Nome'].str.title()
+
+    # Split the data by cluster
+    cluster_0 = df[df['Cluster'] == 0]
+    cluster_1 = df[df['Cluster'] == 1]
+    cluster_2 = df[df['Cluster'] == 2]
+
+    # Save the data to separate files
+    save_results_to = 'graficos/'
+    cluster_0.to_csv(save_results_to + 'Kmeans3_T_cluster_0.csv', index=False)
+    cluster_1.to_csv(save_results_to + 'Kmeans3_T_cluster_1.csv', index=False)
+    cluster_2.to_csv(save_results_to + 'Kmeans3_T_cluster_2.csv', index=False)
+    
+
+def save_csv_to_table(cluster):
+    # Read the CSV file
+    if cluster == 0:
+        df = pd.read_csv('graficos/Kmeans3_T_cluster_0.csv')
+
+        # Remove the 'Unnamed: 0' column
+        df = df.drop('Unnamed: 0', axis=1)
+        df = df.drop('Ida', axis=1)
+        df = df.drop('Volta', axis=1)
+
+        # Save the records in a LaTeX table
+        latex_table = df.to_latex(index=False, caption="Cluster 0 - Profissões e Cursos ", label="tab:Profissoes_Cluster0") 
+
+        # Salvar em um arquivo .tex
+        with open("tabelas/Kmeans3_T_cluster_0.tex", "w") as f:
+            f.write(latex_table)
+
+    if cluster ==1:
+        df = pd.read_csv('graficos/Kmeans3_T_cluster_1.csv')
+
+        # Remove the 'Unnamed: 0' column
+        df = df.drop('Unnamed: 0', axis=1)
+        df = df.drop('Ida', axis=1)
+        df = df.drop('Volta', axis=1)
+
+        # Save the records in a LaTeX table
+        latex_table = df.to_latex(index=False, caption="Cluster 1 - Profissões e Cursos ", label="tab:Profissoes_Cluster1") 
+
+        # Salvar em um arquivo .tex
+        with open("tabelas/Kmeans3_T_cluster_1.tex", "w") as f:
+            f.write(latex_table)
+
+    if cluster == 2:
+        df = pd.read_csv('graficos/Kmeans3_T_cluster_2.csv')
+
+        # Remove the 'Unnamed: 0' column
+        df = df.drop('Unnamed: 0', axis=1)
+        df = df.drop('Ida', axis=1)
+        df = df.drop('Volta', axis=1)
+
+        # Save the records in a LaTeX table
+        latex_table = df.to_latex(index=False, caption="Cluster 2 - Profissões e Cursos ", label="tab:Profissoes_Cluster2") 
+
+        # Salvar em um arquivo .tex
+        with open("tabelas/Kmeans3_T_cluster_2.tex", "w") as f:
+            f.write(latex_table)        
+    return
+    

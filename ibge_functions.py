@@ -651,3 +651,9 @@ def plot_gender_age_distribution_bycluster():
     ibge_functions_results_1.plot_gender_age_distribution_bycluster(1)
     ibge_functions_results_1.plot_gender_age_distribution_bycluster(2)
     return
+
+def save_csv_to_table():
+    ibge_functions_results_1.save_csv_to_table(0)
+    ibge_functions_results_1.save_csv_to_table(1)
+    ibge_functions_results_1.save_csv_to_table(2)
+    return

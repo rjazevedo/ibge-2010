@@ -304,5 +304,7 @@ if fase == 100: # aqui é só de teste
     # ibge_functions_results_1.plot_gender_age_distribution()
     # ibge_functions_results_1.split_csv_by_cluster()
     # ibge_functions.plot_gender_age_distribution_bycluster()
-    ibge_functions_results_1.extract_data_by_course_cbo()
+    # ibge_functions_results_1.extract_data_by_course_cbo()
+    # ibge_functions_results_1.split_csv_by_cluster()
+    ibge_functions.save_csv_to_table()
     pass
