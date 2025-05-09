@@ -1117,4 +1117,18 @@ def save_csv_to_table(cluster):
         with open("tabelas/Kmeans3_T_cluster_2.tex", "w") as f:
             f.write(latex_table)        
     return
-    
+
+def diminuir_and_save_csv():
+    # Read the CSV file
+    file_path = 'processados/CSVs_ArquivoFinalGraduados/Brasil_Graduados.csv'
+    df = pd.read_csv(file_path)
+
+    # Subtract one digit from the specified columns
+    df['Curso_Superior_Graduação_Código'] = df['Curso_Superior_Graduação_Código'].astype(str).str[:-1].astype(int)
+    df['Ocupação_Código'] = df['Ocupação_Código'].astype(str).str[:-1].astype(int)
+
+    # Save the transformed DataFrame to a new file
+    save_results_to = 'processados/CSVs_ArquivoFinalGraduados/Brasil_Graduados_Diminuido.csv'
+    df.to_csv(save_results_to, index=False)
+
+    return
