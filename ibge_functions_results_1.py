@@ -1389,3 +1389,54 @@ def transform_columns_to_int_and_save():
 
     return
 
+def voronoi_1():
+    import numpy as np
+    import pandas as pd
+    import matplotlib.pyplot as plt
+    from scipy.spatial import Voronoi, voronoi_plot_2d
+
+    # Load data from CSV
+    file_path = 'graficos/10Porcent_DF_Limpo_Diminuido.csv'
+    df = pd.read_csv(file_path)
+
+    # Define Voronoi points
+    points = np.array([[27.00526316, 21.78263158], [66.464375, 77.656875], [25.76357143, 62.88071429]])
+
+    # Generate the Voronoi diagram for the points
+    vor = Voronoi(points)
+
+    # Plot the Voronoi diagram
+    fig, ax = plt.subplots(figsize=(10, 10))
+    voronoi_plot_2d(vor, ax=ax, show_vertices=False, line_colors='orange', line_width=2, line_alpha=0.6, point_size=2)
+
+    # Plot the Voronoi points
+    ax.scatter(points[:, 0], points[:, 1], color='yellow', s=150, label='Voronoi', edgecolor='black')
+
+    # Classify and plot the points from the CSV
+    for _, row in df.iterrows():
+        x, y = row['Ida'], row['Volta']
+        if x < 50 and y >= 50:  # Upper left
+            ax.scatter(x, y, color='red', label='Cluster 0', edgecolor='black')
+        elif x >= 50 and y >= 50:  # Upper right
+            ax.scatter(x, y, color='blue', label='Cluster 1', edgecolor='black')
+        elif x < 50 and y < 50:  # Lower left
+            ax.scatter(x, y, color='green', label='Cluster 2', edgecolor='black')
+
+    # Remove duplicate labels in the legend
+    handles, labels = plt.gca().get_legend_handles_labels()
+    by_label = dict(zip(labels, handles))
+    plt.legend(by_label.values(), by_label.keys())
+
+    # Set plot limits and labels
+    plt.xlim(0.0, 100.0)
+    plt.ylim(0.0, 100.0)
+    plt.xlabel('Ida')
+    plt.ylabel('Volta')
+    plt.title('Voronoi Diagram with Points from CSV')
+
+    # Save the plot
+    save_results_to = 'graficos/'
+    plt.savefig(save_results_to + 'voronoi_with_csv_points.png')
+
+    return
+

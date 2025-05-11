@@ -310,6 +310,7 @@ if fase == 100: # aqui é só de teste
     # ibge_functions_results_1.diminuir_and_save_csv()
     # ibge_functions_results_1.transform_columns_to_int_and_save()
     # ibge_functions.ibge_cursos_filter_1()
-    ibge_functions.ibge_idas_voltas_cursos_profissoes_1()
+    # ibge_functions.ibge_idas_voltas_cursos_profissoes_1()
+    ibge_functions_results_1.voronoi_1()
 
     pass
