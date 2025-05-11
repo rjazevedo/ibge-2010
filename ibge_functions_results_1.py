@@ -22,6 +22,8 @@ import ibge_variable
 import matplotlib.pyplot as plt
 import logging
 import ibge_functions_descriptive_analysis
+import ibge_functions_descriptive_analysis_1
+
 
 
 
@@ -1119,16 +1121,271 @@ def save_csv_to_table(cluster):
     return
 
 def diminuir_and_save_csv():
-    # Read the CSV file
-    file_path = 'processados/CSVs_ArquivoFinalGraduados/Brasil_Graduados.csv'
-    df = pd.read_csv(file_path)
+    # Process the first file
+    file_path_graduados = 'processados/CSVs_ArquivoFinalGraduados/Brasil_Graduados.csv'
+    df_graduados = pd.read_csv(file_path_graduados)
 
     # Subtract one digit from the specified columns
-    df['Curso_Superior_Graduação_Código'] = df['Curso_Superior_Graduação_Código'].astype(str).str[:-1].astype(int)
-    df['Ocupação_Código'] = df['Ocupação_Código'].astype(str).str[:-1].astype(int)
+    df_graduados['Curso_Superior_Graduação_Código'] = df_graduados['Curso_Superior_Graduação_Código'].astype(str).str[:-1].astype(int)
+    df_graduados['Ocupação_Código'] = df_graduados['Ocupação_Código'].astype(str).str[:-1].astype(int)
 
     # Save the transformed DataFrame to a new file
-    save_results_to = 'processados/CSVs_ArquivoFinalGraduados/Brasil_Graduados_Diminuido.csv'
-    df.to_csv(save_results_to, index=False)
+    save_results_graduados = 'processados/CSVs_ArquivoFinalGraduados/Brasil_Graduados_Diminuido.csv'
+    df_graduados.to_csv(save_results_graduados, index=False)
+
+    # Process the second file
+    file_path_pivot = 'processados/CSVs_PivotTableFinal/Brasil_PivotFinal.csv'
+    df_pivot = pd.read_csv(file_path_pivot)
+
+    # Subtract one digit from the Ocupação_Código column
+    df_pivot['Ocupação_Código'] = df_pivot['Ocupação_Código'].astype(str).str[:-1].astype(int)
+
+    # Save the transformed DataFrame to a new file
+    save_results_pivot = 'processados/CSVs_PivotTableFinal/Brasil_PivotFinal_Diminuida.csv'
+    df_pivot.to_csv(save_results_pivot, index=False)
 
     return
+# def ibge_cursos_filter_1(path,name):   
+def ibge_cursos_filter_1():  
+    #...
+    path ='documentacao/'
+    name ='Curso_CSV.csv'
+    file = os.path.join(path,name)
+    cursos = pd.read_csv(file, dtype ='str')
+    CURSO = []
+    NOME  = []
+    for i in range(len(cursos)):
+        # print(len(cursos.Cod_Curso[i]))
+        # if len(cursos.Cod_Curso[i]) >=5:
+        if len(cursos.Cod_Curso[i]) ==2:
+           CURSO.append(cursos.Cod_Curso[i])
+           NOME.append(cursos.Nome_Curso[i])
+           #print(cursos.Cod_Curso[i])     
+              
+    Cursos_Censo=[]
+    for i in range(len(CURSO)):
+        tupla=(CURSO[i],NOME[i])
+        Cursos_Censo.append(tupla)
+    #...
+    CursosCenso = pd.DataFrame(Cursos_Censo)
+    #Curso_Cbo_dir_curso_cbos.shape
+    nomes = {0:"curso_num",
+             1:"curso_nome",
+            }
+    CursosCenso.rename(columns=nomes,inplace=True)
+    CursosCenso = CursosCenso.sort_values(by=['curso_num'])    
+    CursosCenso['curso_num'] = CursosCenso['curso_num'].astype(int)   
+    CursosCenso.to_csv(path + 'Curso_Censo_Diminuido.csv')       
+    return CursosCenso
+
+# def Ida_Volta_1(path,name,path1,name1):
+def Ida_Volta_1():
+
+
+    logging.info(" Gerando as idas e voltas")   
+    # csv_estado = os.path.join(path[0],name[0]) # arquivo do censo do Brasil inteiro (somente graduados)
+    # path1 = ibge_variable.paths(12)
+    # name1 = ibge_variable.names(6)
+    csv_estado = os.path.join('processados/CSVs_ArquivoFinalGraduados/Brasil_Graduados_Diminuido.csv') # arquivo do censo do Brasil inteiro (somente graduados)
+    # csv_CBO = os.path.join(path1[0],name1[1]) # Tabela de CBOs
+    # csv_CURSOS = os.path.join(path1[0],name1[2]) # Tabela de Cursos
+    csv_CBO = os.path.join('documentacao/CBO_CSV.csv') # Tabela de CBOs
+    csv_CURSOS = os.path.join('documentacao/Curso_Censo_Diminuido.csv') # Tabela de Cursos
+    # path2 = ibge_variable.paths(8)
+    # name2 = ibge_variable.names(8)         
+    # csv_PivotTableFinal =  os.path.join(path2[0],name2[0]) #Pivo Table Final
+    csv_PivotTableFinal =  os.path.join('processados/CSVs_PivotTableFinal/Brasil_PivotFinal_Diminuida.csv') #Pivo Table Final
+    
+
+    # CursosCenso = ibge_cursos_filter_1(path1[0],name1[2])
+    CursosCenso = ibge_cursos_filter_1()
+    # print(len(CursosCenso))
+    # curso_num  = float(CursosCenso.curso_num.iloc[88])
+    # curso_nome = CursosCenso.curso_nome.iloc[88]
+    # titulo10 =  "Curso:  " +  str(curso_num) + ": " + curso_nome + " - Os 10 maiores"
+    # titulo3  =  "Curso:  " +  str(curso_num) + ": " + curso_nome + " - Os 3 maiores"
+    # print(curso_num)
+    # print(curso_nome)
+    # print(titulo10)
+    # print(titulo3)
+    # Inserir comando para criar a pasta ida
+    save_results_to = 'graficos/'  
+
+# Testar curso 79,80,85...
+    #for f in range(0,89):
+    for f in range(0,23):
+
+       
+        # curso_num= float(CursosCenso.curso_num.iloc[f])
+        curso_num= CursosCenso.curso_num.iloc[f]
+        # print(curso_num)
+        curso_nome= CursosCenso.curso_nome.iloc[f]
+        titulo10= "Course " + str( CursosCenso.curso_num.iloc[f])+ ": " + CursosCenso.curso_nome.iloc[f] + " - 10% "
+        titulo3=  "Course " + str(CursosCenso.curso_num.iloc[f]) + ": " + CursosCenso.curso_nome.iloc[f] + " - 10%"
+        print("curso_num:", curso_num, "curso_nome:",curso_nome)
+        # print(f)
+        # print("=================================================================================================")
+        
+        #======================================================Plotando os cbos de determinado curso, usando função ...
+        primeirosCbos,primeirosCbos_Nome,Porcentagens,CURSO_NUM,CURSO_NOME=ibge_functions_descriptive_analysis_1.CBOs_Curso_v6_1(csv_estado,csv_CBO,curso_num,curso_nome,titulo10,titulo3,0.1,save_results_to)
+        print("primeirosCbos:", primeirosCbos)
+        print("primeirosCbos_Nome:", primeirosCbos_Nome)
+        print("CURSO_NUM:", CURSO_NUM)
+        print("CURSO_NOME:", CURSO_NOME)
+        print("=================================================================================================")
+
+        if (primeirosCbos!=0)&(primeirosCbos!=0)&(Porcentagens!=0):
+            #======================================================Achando a quantidade de Não-Graduados na PivotTable
+            primeirosCbos,NaoGraduados,Graduados_Nao,Graduados = ibge_functions_descriptive_analysis.NaoGraduados_PivotTable_2(primeirosCbos, csv_PivotTableFinal)
+            #=====================================================Plotando os cursos de determinado cbo, sem função e salvando os plots ...
+            Intensidade = []
+            Porcentagens_vol = []
+            CBO_vol = []
+            Cursos_vol = []
+            Nomes_vol  = []
+            for i in range (len(primeirosCbos)):
+                titulo3=primeirosCbos_Nome[i]
+                if(int(float(primeirosCbos[i]))>=2000):
+                    CBO,Curso,tresprimeirosCursos,intensidade,fig,string,cursos_vol, nomes_vol, porcentagens_vol=ibge_functions_descriptive_analysis.Cursos_CBO_14_10(csv_estado,csv_CBO,csv_CURSOS,primeirosCbos[i],titulo3,NaoGraduados[i],curso_num,curso_nome,primeirosCbos_Nome,i,0.1)
+                    Intensidade.append(intensidade)
+                    # print(intensidade)
+                    Porcentagens_vol.append(porcentagens_vol)
+                    CBO_vol.append(CBO)
+                    Cursos_vol.append(cursos_vol)
+                    Nomes_vol.append(nomes_vol)
+                else:
+                    print(primeirosCbos[i])
+                    CBO,Curso,tresprimeirosCursos,intensidade,fig,string,cursos_vol, nomes_vol, porcentagens_vol=ibge_functions_descriptive_analysis_1.Cursos_CBO_13_10_1(csv_estado,csv_CBO,csv_CURSOS,primeirosCbos[i],titulo3,NaoGraduados[i],Graduados_Nao[i],curso_num,curso_nome,primeirosCbos_Nome,i,0.1,save_results_to)
+                    if (cursos_vol!=0)&(nomes_vol!=0)&(porcentagens_vol!=0):
+                        Intensidade.append(intensidade)
+                        Porcentagens_vol.append(porcentagens_vol)
+                        CBO_vol.append(CBO)
+                        Cursos_vol.append(cursos_vol)
+                        Nomes_vol.append(nomes_vol)
+                    else:
+                        print("Não existe cursos para esse CBO")  
+
+            # ======================================================Plotando os cbos de determinado curso, usando função ...
+        
+            # ==================================================================Colocando Ida e Volta no mesmo grafico
+            if(f==0):
+                # Se for a primeira execução, tem que criar as listas ... e o paramentro da ida é 1
+                #Recuperando as idas e voltas ...
+                x_ = []
+                y_ = []
+                z_ = []
+                v_ = []
+                X_,Y_,Z_,V_= ibge_functions_descriptive_analysis.Ida(primeirosCbos,CURSO_NUM,Porcentagens,1,x_,y_,z_,v_)
+                x_= X_
+                y_= Y_
+                z_= Z_
+                v_= V_
+                for i in range(len(primeirosCbos)):
+                    X_,Y_,Z_,V_= ibge_functions_descriptive_analysis.Volta(Cursos_vol[i],primeirosCbos[i],Porcentagens_vol[i], 0,x_,y_,z_,v_)
+
+                x_= X_
+                y_= Y_
+                z_= Z_
+                v_= V_
+                #df1 = x_y_z_v_df(X_,Y_,Z_,V_)
+                #print(df1)
+                #Juntando as idas e voltas ...
+                for l in range(len(CBO_vol)):
+                    ibge_functions_descriptive_analysis.Jun_Ida_Volta(X_,Y_,Z_,V_, CBO_vol[l],CURSO_NUM)
+                #atribuição
+                x_= X_
+                y_= Y_
+                z_= Z_
+                v_= V_
+            else:
+                #Recuperando as idas e voltas ...
+                X_,Y_,Z_,V_= ibge_functions_descriptive_analysis.Ida(primeirosCbos,CURSO_NUM,Porcentagens,0,x_,y_,z_,v_)
+                x_= X_
+                y_= Y_
+                z_= Z_
+                v_= V_
+                for i in range(len(primeirosCbos)):
+                    X_,Y_,Z_,V_= ibge_functions_descriptive_analysis.Volta(Cursos_vol[i],primeirosCbos[i],Porcentagens_vol[i], 0,x_,y_,z_,v_)
+
+                x_= X_
+                y_= Y_
+                z_= Z_
+                v_= V_
+                #df1 = x_y_z_v_df(X_,Y_,Z_,V_)
+                #print(df1)
+                #Juntando as idas e voltas ...
+                for l in range(len(CBO_vol)):
+                    ibge_functions_descriptive_analysis.Jun_Ida_Volta(X_,Y_,Z_,V_, CBO_vol[l],CURSO_NUM)
+                #atribuição
+                x_= X_
+                y_= Y_
+                z_= Z_
+                v_= V_
+
+    df = ibge_functions_descriptive_analysis.x_y_z_v_df(x_,y_,z_,v_)    
+    df.to_csv(save_results_to + '10Porcent_DF_Diminuido.csv')
+    return     
+
+# def Tabela_Ida_Volta_1(path2,name2):
+def Tabela_Ida_Volta_1():
+    # df =  os.path.join(path2[0],name2[1])
+    # df1 = pd.read_csv(df)    
+    df1 = pd.read_csv('graficos/10Porcent_DF_Diminuido.csv')
+    save_results_to = 'graficos/'  
+
+
+    # Remover_Voltas_semIdas_e_Idas_semVoltas
+    # tive que passar tudo pra float porque tem valores menores do que 0 ...
+    for i in range(len(df1)):
+        if (df1['Ida'][i].astype('float')==0.00) & (df1['Volta'][i].astype('float')!=0.00):
+            df1 = df1.drop(i)
+        else:
+            if (df1['Ida'][i].astype('float')!=0.00) & (df1['Volta'][i].astype('float')==0.00):
+                df1 = df1.drop(i)
+            else:
+                if (df1['Ida'][i].astype('float')==0.00) & (df1['Volta'][i].astype('float')==0.00):
+                    df1 = df1.drop(i)
+    # Remover_Duplicados
+    df1 = df1.drop_duplicates(subset=['Ida','Volta'])
+    # Reset_Indice
+    df1 = df1.reset_index(drop=True)
+    # Salvar_Tabela
+    df1.to_csv(save_results_to + '10Porcent_DF_Limpo_Diminuido.csv')
+    df1.to_excel(save_results_to + '10Porcent_DF_Limpo_Diminuido.xlsx')
+    return      
+
+
+def transform_columns_to_int_and_save():
+    # Define file paths
+    files = [
+        'documentacao/CBO_CSV.csv',
+        'documentacao/Curso_CSV.csv',
+        'documentacao/Curso_Censo.csv',
+        'processados/CSVs_ArquivoFinalGraduados/Brasil_Graduados.csv',
+        'processados/CSVs_PivotTableFinal/Brasil_PivotFinal.csv',
+        'documentacao/Curso_Censo_Diminuido.csv',
+        'processados/CSVs_ArquivoFinalGraduados/Brasil_Graduados_Diminuido.csv',
+        'processados/CSVs_PivotTableFinal/Brasil_PivotFinal_Diminuida.csv'
+    ]
+
+    # Define columns to transform
+    columns_to_transform = ['Cod_CBO', 'curso_num', 'Cod_Curso']
+
+    for file in files:
+        try:
+            # Read the CSV file
+            df = pd.read_csv(file, dtype=str)
+
+            # Transform specified columns to integers if they exist
+            for column in columns_to_transform:
+                if column in df.columns:
+                    df[column] = df[column].astype(float).astype(int)
+
+            # Save the transformed DataFrame back to the same file
+            df.to_csv(file, index=False)
+            print(f"Processed and saved file: {file}")
+        except Exception as e:
+            print(f"Error processing file {file}: {e}")
+
+    return
+

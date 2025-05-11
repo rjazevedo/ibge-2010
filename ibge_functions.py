@@ -657,3 +657,29 @@ def save_csv_to_table():
     ibge_functions_results_1.save_csv_to_table(1)
     ibge_functions_results_1.save_csv_to_table(2)
     return
+
+def ibge_idas_voltas_cursos_profissoes_1():
+    # # path = ibge_variable.paths(11)
+    # # name = ibge_variable.names(7)
+    # # path1 = ibge_variable.paths(12)
+    # # name1 = ibge_variable.names(6)
+    # path = 'processados/CSVs_ArquivoFinalGraduados/'
+    # name = 'Brasil_Graduados.csv'
+    # path1 = 'documentacao/'
+    # name1 = 'CBO_CSV.csv', 'Curso_CSV.csv'
+    # ibge_functions_results_1.Ida_Volta_1(path,name,path1,name1)
+    # ibge_functions_results_1.Ida_Volta_1()
+
+    # path2 = ibge_variable.paths(13)
+    # name2 = ibge_variable.names(9)
+    # path2 = 'graficos/'
+    # # name2 = '10Porcent_DF.csv'
+    # ibge_functions_results_1.Tabela_Ida_Volta_1(path2,name2)   
+    ibge_functions_results_1.Tabela_Ida_Volta_1()    
+    return
+def ibge_cursos_filter_1():
+    # path ='documentacao/'
+    # name ='Curso_CSV.csv'
+    # ibge_functions_results_1.ibge_cursos_filter_1(path,name)  
+    ibge_functions_results_1.ibge_cursos_filter_1()
+    return
