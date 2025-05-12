@@ -324,7 +324,7 @@ if fase == 100: # aqui é só de teste
     # ibge_functions_descriptive_analysis_1.fill_course_and_cbo_names()
 
     #QP6
-    QP6.transform_categoria_emprego()
-    # QP6.classify_employment_stability()
+    # QP6.transform_categoria_emprego()
+    QP6.classify_employment_stability()
 
     pass
