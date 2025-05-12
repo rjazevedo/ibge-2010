@@ -18,11 +18,12 @@ from ibgeparser.enums import Anos, Estados, Modalidades
 #import original.ibge_functions
 import ibge_functions
 import ibge_functions_exploratory_analysis
-import ibge_functions_descriptive_analysis
+import ibge_functions_descriptive_analysis_1
 import ibge_variable
 import ibge_functions_preprocessing
 import ibge_functions_results
 import ibge_functions_results_1
+import QP6
 import logging
 
 # Modificando o comportamento do pandas para mostrar os erros de atribuição para eliminar os warnings - Rafael 20250413
@@ -306,11 +307,24 @@ if fase == 100: # aqui é só de teste
     # ibge_functions.plot_gender_age_distribution_bycluster()
     # ibge_functions_results_1.extract_data_by_course_cbo()
     # ibge_functions_results_1.split_csv_by_cluster()
+
     # ibge_functions.save_csv_to_table()
     # ibge_functions_results_1.diminuir_and_save_csv()
     # ibge_functions_results_1.transform_columns_to_int_and_save()
     # ibge_functions.ibge_cursos_filter_1()
     # ibge_functions.ibge_idas_voltas_cursos_profissoes_1()
-    ibge_functions_results_1.voronoi_1()
+    # ibge_functions_results_1.voronoi_1()
+
+    # Tem que ver se isso de ver de onde veio vai ser fácil: se todos os pontos que foram agrupados vieram do mesmo cluster, ok, sem problemas. 
+    # Mas e se vieram de clusters diferentes?
+    # Veja isso com umas duas tabelas, onde você tem os Cursos e CBOs e consegue comparar elas
+    # ibge_functions_descriptive_analysis_1.process_kmeans_results()
+    # ibge_functions_descriptive_analysis_1.transform_and_reduce_columns()
+    # ibge_functions_descriptive_analysis_1.update_processed_kmeans_results()
+    # ibge_functions_descriptive_analysis_1.fill_course_and_cbo_names()
+
+    #QP6
+    QP6.transform_categoria_emprego()
+    # QP6.classify_employment_stability()
 
     pass

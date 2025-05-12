@@ -422,3 +422,208 @@ def CBOs_Curso_v6_1(csv_estado,csv_CBO,curso_num,curso_nome,titulo10,titulo3,por
          return primeiros,nomes,porcentagens,curso_num,curso_nome
     
     return primeiros,nomes,porcentagens,curso_num,curso_nome
+
+
+
+
+def process_kmeans_results():
+    # Example usage
+    file_path = 'graficos/10Porcent_DF_Limpo_Diminuido.csv'
+    output_file_path = 'graficos/Processed_Kmeans_Results.csv'
+    
+    # Read the CSV file
+    df = pd.read_csv(file_path)
+
+    # Drop columns 'Unnamed: 0' and 'Unnamed: 0.1'
+    df = df.drop(columns=['Unnamed: 0', 'Unnamed: 0.1'], errors='ignore')
+
+    # Rename column CB to Cbo
+    df.rename(columns={'CB': 'Cbo'}, inplace=True)
+
+    # Rename column CR to Curso
+    df.rename(columns={'CR': 'Curso'}, inplace=True)
+
+
+    # Create the Cluster column
+    df['Cluster'] = ''
+
+    # Create the Cbo_Nome column
+    df['Cbo_Nome'] = ''
+    # # Move Cbo_Nome next to Cbo
+    # cbo_index = df.columns.get_loc('Cbo')
+    # columns = list(df.columns)
+    # columns.insert(cbo_index + 1, columns.pop(columns.index('Cbo_Nome')))
+    # df = df[columns]
+
+    # Create the Curso_Nome column
+    df['Curso_Nome'] = ''
+    # # Move Curso_Nome next to Curso
+    # curso_index = df.columns.get_loc('Curso')
+    # columns = list(df.columns)
+    # columns.insert(curso_index + 1, columns.pop(columns.index('Curso_Nome')))
+    # df = df[columns]
+
+
+    # Move columns 'Ida' and 'Volta' before 'Cbo'
+    if 'Ida' in df.columns and 'Volta' in df.columns:
+        ida_index = df.columns.get_loc('Ida')
+        volta_index = df.columns.get_loc('Volta')
+        cbo_index = df.columns.get_loc('Cbo')
+        columns = list(df.columns)
+        columns.insert(cbo_index, columns.pop(volta_index))
+        columns.insert(cbo_index, columns.pop(ida_index))
+        df = df[columns]
+
+
+    # Reorder the columns as specified
+    column_order = ['Ida', 'Volta', 'Cluster', 'Curso', 'Curso_Nome', 'Cbo', 'Cbo_Nome']
+    df = df[[col for col in column_order if col in df.columns]]
+    # Save the processed DataFrame to a new CSV file
+    df.to_csv(output_file_path, index=False)
+
+    return df
+def transform_and_reduce_columns():
+    # File path
+    file_path = 'graficos/Kmeans3_T.csv'
+    output_file_path = 'graficos/Transformed_Reduced_Columns_Kmeans3_T.csv'
+
+    # Read the CSV file
+    df = pd.read_csv(file_path)
+
+    # Transform 'Curso' and 'Cbo' columns to integers
+    df['Cluster'] = df['Cluster'].astype(int)
+    df['Curso'] = df['Curso'].astype(int)
+    df['Cbo'] = df['Cbo'].astype(int)
+
+    # Reduce one digit from 'Curso' and 'Cbo' columns
+    df['Curso'] = df['Curso'] // 10
+    df['Cbo'] = df['Cbo'] // 10
+
+    # Remove duplicate rows with the same 'Curso' and 'Cbo'
+    df = df.drop_duplicates(subset=['Curso', 'Cbo'])
+
+    # Save the transformed DataFrame to a new CSV file
+    df.to_csv(output_file_path, index=False)
+
+    return df
+
+def update_processed_kmeans_results():
+    # File paths
+    processed_file_path = 'graficos/Processed_Kmeans_Results.csv'
+    transformed_file_path = 'graficos/Transformed_Reduced_Columns_Kmeans3_T.csv'
+    output_file_path = 'graficos/Updated_Processed_Kmeans_Results.csv'
+
+    # Read the CSV files
+    processed_df = pd.read_csv(processed_file_path)
+    transformed_df = pd.read_csv(transformed_file_path)
+
+    # Ensure 'Curso' and 'Cbo' columns are integers for comparison
+    processed_df['Curso'] = processed_df['Curso'].astype(int)
+    processed_df['Cbo'] = processed_df['Cbo'].astype(int)
+    transformed_df['Curso'] = transformed_df['Curso'].astype(int)
+    transformed_df['Cbo'] = transformed_df['Cbo'].astype(int)
+
+    # Merge the two DataFrames on 'Curso' and 'Cbo'
+    merged_df = processed_df.merge(
+        transformed_df[['Curso', 'Cbo', 'Cbo_Nome', 'Curso_Nome', 'Cluster']],
+        on=['Curso', 'Cbo'],
+        how='left'
+    )
+
+    # Update the columns in the processed DataFrame
+    merged_df['Cbo_Nome_x'] = merged_df['Cbo_Nome_y']
+    merged_df['Curso_Nome_x'] = merged_df['Curso_Nome_y']
+    merged_df['Cluster'] = merged_df['Cluster_y']
+
+    # Rename columns back to original names
+    merged_df.rename(columns={'Cbo_Nome_x': 'Cbo_Nome', 'Curso_Nome_x': 'Curso_Nome'}, inplace=True)
+
+    # Drop unnecessary columns
+    merged_df = merged_df.drop(columns=['Cbo_Nome_y', 'Curso_Nome_y', 'Cluster_x'])
+
+    # Reorder columns to place 'Cluster' before 'Curso'
+    column_order = ['Ida', 'Volta', 'Cluster', 'Curso', 'Curso_Nome', 'Cbo', 'Cbo_Nome']
+    # Set all values in 'Curso_Nome' and 'Cbo_Nome' columns to empty strings
+    merged_df['Curso_Nome'] = ''
+    merged_df['Cbo_Nome'] = ''
+
+    # Reorder columns to match the specified order
+    merged_df = merged_df[[col for col in column_order if col in merged_df.columns]]
+
+    # Save the updated DataFrame to a new CSV file
+    merged_df.to_csv(output_file_path, index=False)
+
+    return merged_df
+
+def fill_course_and_cbo_names():
+    # File paths
+    updated_file_path = 'graficos/Updated_Processed_Kmeans_Results.csv'
+    cursos_file_path = 'documentacao/Curso_Censo_Diminuido.csv'
+    cbos_file_path = 'documentacao/CBO_CSV.csv'
+    output_file_path = 'graficos/Filled_Updated_Processed_Kmeans_Results.csv'
+
+    # Read the CSV files
+    updated_df = pd.read_csv(updated_file_path)
+    cursos_df = pd.read_csv(cursos_file_path)
+    cbos_df = pd.read_csv(cbos_file_path)
+
+    # Ensure 'Curso' and 'Cbo' columns are integers for comparison
+    updated_df['Curso'] = updated_df['Curso'].astype(int)
+    updated_df['Cbo'] = updated_df['Cbo'].astype(int)
+    cursos_df['curso_num'] = cursos_df['curso_num'].astype(int)
+    cbos_df['Cod_CBO'] = cbos_df['Cod_CBO'].astype(int)
+
+    # Merge to fill Curso_Nome
+    updated_df = updated_df.merge(
+        cursos_df[['curso_num', 'curso_nome']],
+        left_on='Curso',
+        right_on='curso_num',
+        how='left'
+    )
+
+    # Merge to fill Cbo_Nome
+    updated_df = updated_df.merge(
+        cbos_df[['Cod_CBO', 'Nome_CBO']],
+        left_on='Cbo',
+        right_on='Cod_CBO',
+        how='left'
+    )
+
+    # Update the Curso_Nome and Cbo_Nome columns in the updated DataFrame
+    updated_df['Curso_Nome'] = updated_df['curso_nome']
+    updated_df['Cbo_Nome'] = updated_df['Nome_CBO']
+
+    # Drop unnecessary columns after merging
+    updated_df = updated_df.drop(columns=['curso_num', 'curso_nome', 'Cod_CBO', 'Nome_CBO'])
+
+    # Save the updated DataFrame to a new CSV file
+    updated_df.to_csv(output_file_path, index=False)
+
+    return updated_df
+
+def split_clusters_to_files():
+    # File path
+    input_file_path = 'graficos/Filled_Updated_Processed_Kmeans_Results.csv'
+    output_file_template = 'graficos/Cluster_{}.csv'
+
+    # Read the CSV file
+    df = pd.read_csv(input_file_path)
+
+    # Ensure the 'Cluster' column is present and is an integer
+    if 'Cluster' not in df.columns:
+        raise ValueError("The input file does not contain a 'Cluster' column.")
+    df['Cluster'] = df['Cluster'].astype(int)
+
+    # Dictionary to store file paths for each cluster
+    cluster_file_paths = {}
+
+    # Split the DataFrame by cluster and save each cluster to a separate file
+    for cluster in df['Cluster'].unique():
+        cluster_df = df[df['Cluster'] == cluster]
+        output_file_path = output_file_template.format(cluster)
+        cluster_df.to_csv(output_file_path, index=False)
+        cluster_file_paths[cluster] = output_file_path
+
+    print("Files for each cluster have been created successfully.")
+    return cluster_file_paths
+

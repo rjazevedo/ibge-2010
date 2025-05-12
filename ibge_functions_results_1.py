@@ -1396,7 +1396,7 @@ def voronoi_1():
     from scipy.spatial import Voronoi, voronoi_plot_2d
 
     # Load data from CSV
-    file_path = 'graficos/10Porcent_DF_Limpo_Diminuido.csv'
+    file_path = 'graficos/Filled_Updated_Processed_Kmeans_Results.csv'
     df = pd.read_csv(file_path)
 
     # Define Voronoi points
@@ -1414,12 +1414,12 @@ def voronoi_1():
 
     # Classify and plot the points from the CSV
     for _, row in df.iterrows():
-        x, y = row['Ida'], row['Volta']
-        if x < 50 and y >= 50:  # Upper left
+        x, y, cluster = row['Ida'], row['Volta'], row['Cluster']
+        if cluster == 0:  # Cluster 0
             ax.scatter(x, y, color='red', label='Cluster 0', edgecolor='black')
-        elif x >= 50 and y >= 50:  # Upper right
+        elif cluster == 1:  # Cluster 1
             ax.scatter(x, y, color='blue', label='Cluster 1', edgecolor='black')
-        elif x < 50 and y < 50:  # Lower left
+        elif cluster == 2:  # Cluster 2
             ax.scatter(x, y, color='green', label='Cluster 2', edgecolor='black')
 
     # Remove duplicate labels in the legend
