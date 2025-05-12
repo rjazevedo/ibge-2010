@@ -1430,9 +1430,9 @@ def voronoi_1():
     # Set plot limits and labels
     plt.xlim(0.0, 100.0)
     plt.ylim(0.0, 100.0)
-    plt.xlabel('Ida')
-    plt.ylabel('Volta')
-    plt.title('Voronoi Diagram with Points from CSV')
+    plt.xlabel('Cursos')
+    plt.ylabel('Profissões')
+    # plt.title('Voronoi Diagram with Points from CSV')
 
     # Save the plot
     save_results_to = 'graficos/'

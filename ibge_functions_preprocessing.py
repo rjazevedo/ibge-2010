@@ -58,7 +58,7 @@ def Filtrar_Dados_Censo(path,name,i):
     X.to_csv(name_path) 
     return X
 
-def Limpeza_Arquivo_Censo_Graduados_NaoGraduados_1_2(path,name,i):
+def Limpeza_Arquivo_Censo_Graduados_NaoGraduados_1_2(path,name,i): 
 
     file = os.path.join(path,name)
     print(file)
@@ -71,6 +71,7 @@ def Limpeza_Arquivo_Censo_Graduados_NaoGraduados_1_2(path,name,i):
     #removendo pessoas com ocupações mal-definidas
     X.drop(X[(X['Ocupação_Código'] <1)].index, inplace=True)
     
+   
 
     #print("Listando os NANs que ainda restam:==============================")
     #print(X.isnull().sum())
@@ -83,6 +84,12 @@ def Limpeza_Arquivo_Censo_Graduados_NaoGraduados_1_2(path,name,i):
     
     # removendo que tem graduação, mas o curso superior é igual a Zero
     X.drop(X[(X['Nível_instrução'] ==4) & (X['Curso_Superior_Graduação_Código'] ==0)].index, inplace=True) ## alterado 23/09/2023 #=============================
+
+    # Alteração 12/5/2025
+    #removendo pessoas sem remuneração
+    X.drop(X[(X['Categoria_Emprego'] ==7)].index, inplace=True) ## alterado 12/05/2025 #=============================
+    X.drop(X[(X['Categoria_Emprego'] ==0)].index, inplace=True) ## alterado 12/05/2025 #=============================
+
 
     name_path = name.split("_Fase1.csv")
     path_proc =  ibge_variable.paths(3)
