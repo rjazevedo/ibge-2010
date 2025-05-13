@@ -500,7 +500,7 @@ def transform_and_reduce_columns():
     df['Cbo'] = df['Cbo'] // 10
 
     # Remove duplicate rows with the same 'Curso' and 'Cbo'
-    df = df.drop_duplicates(subset=['Curso', 'Cbo'])
+    # df = df.drop_duplicates(subset=['Curso', 'Cbo'])
 
     # Save the transformed DataFrame to a new CSV file
     df.to_csv(output_file_path, index=False)

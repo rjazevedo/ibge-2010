@@ -319,12 +319,12 @@ if fase == 100: # aqui é só de teste
     # Mas e se vieram de clusters diferentes?
     # Veja isso com umas duas tabelas, onde você tem os Cursos e CBOs e consegue comparar elas
     # ibge_functions_descriptive_analysis_1.process_kmeans_results()
-    # ibge_functions_descriptive_analysis_1.transform_and_reduce_columns()
+    ibge_functions_descriptive_analysis_1.transform_and_reduce_columns()
     # ibge_functions_descriptive_analysis_1.update_processed_kmeans_results()
     # ibge_functions_descriptive_analysis_1.fill_course_and_cbo_names()
 
     #QP6
     # QP6.transform_categoria_emprego()
-    QP6.classify_employment_stability()
+    # QP6.classify_employment_stability()
 
     pass
