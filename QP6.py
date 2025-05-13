@@ -192,6 +192,7 @@ def data_processed_groupby():
 # --------------------------------------------------------------------------------------------------------------------------------
         import matplotlib.pyplot as plt
         import seaborn as sns
+       
 
         if data_processed is not None and not patterns.empty:
             # Exemplo para visualizar 'patterns' (Gênero e Curso)
@@ -238,3 +239,39 @@ def data_processed_groupby():
                 print("Coluna para emprego formal (ex: 1) não encontrada em patterns_gender para plotagem.")
 
         return
+    
+def plot_employment_by_gender():
+    import matplotlib.pyplot as plt
+    import seaborn as sns
+    
+    input_file = 'processados/Emprego_Formal_Informal_por_Genero.csv'
+    output_graph_file = 'processados/Emprego_Formal_Informal_por_Genero_Atualizado.png'
+
+    if not os.path.exists(input_file):
+        logging.error(f"File not found: {input_file}")
+        return
+
+    # Load the data
+    data = pd.read_csv(input_file)
+
+    # Replace gender values
+    data['gênero'] = data['gênero'].replace({1: 'Masc', 2: 'Fem'})
+
+    # Plot the data
+    plt.figure(figsize=(10, 6))
+    sns.barplot(
+        x='gênero',
+        y='Porcentagem',
+        hue='Tipo_Emprego',
+        data=data
+    )
+    plt.title('Porcentagem de Emprego Formal e Informal por Gênero (Atualizado)')
+    plt.ylabel('Porcentagem (%)')
+    plt.xlabel('Gênero')
+    plt.legend(title='Tipo de Emprego')
+    plt.tight_layout()
+
+    # Save the plot
+    plt.savefig(output_graph_file)
+    print(f"Gráfico salvo em: {output_graph_file}")
+    return    

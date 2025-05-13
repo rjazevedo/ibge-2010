@@ -330,6 +330,7 @@ if fase == 100: # aqui é só de teste
     #QP6
     # QP6.transform_categoria_emprego()
     # QP6.classify_employment_stability()
-    QP6.data_processed_groupby()
+    # QP6.data_processed_groupby()
+    QP6.plot_employment_by_gender()
 
     pass
