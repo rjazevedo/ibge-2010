@@ -604,7 +604,7 @@ def fill_course_and_cbo_names():
 def split_clusters_to_files():
     # File path
     input_file_path = 'graficos/Filled_Updated_Processed_Kmeans_Results.csv'
-    output_file_template = 'graficos/Cluster_{}.csv'
+    output_file_template = 'graficos/Filled_Updated_Processed_Kmeans_Results_Cluster_{}.csv'
 
     # Read the CSV file
     df = pd.read_csv(input_file_path)
@@ -625,5 +625,20 @@ def split_clusters_to_files():
         cluster_file_paths[cluster] = output_file_path
 
     print("Files for each cluster have been created successfully.")
+    # Generate .tex tables for each cluster
+    for cluster, file_path in cluster_file_paths.items():
+        cluster_df = pd.read_csv(file_path)
+        
+        # Remove the 'Ida' and 'Volta' columns if they exist
+        cluster_df = cluster_df.drop(columns=['Ida', 'Volta'], errors='ignore')
+        
+        # Capitalize the first letter of each word in string columns
+        for col in cluster_df.select_dtypes(include=['object']).columns:
+            cluster_df[col] = cluster_df[col].str.title()
+        
+        tex_file_path = file_path.replace('.csv', '.tex')
+        cluster_df.to_latex(tex_file_path, index=False)
+        print(f"LaTeX table for Cluster {cluster} saved to {tex_file_path}")
+
     return cluster_file_paths
 
