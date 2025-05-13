@@ -56,7 +56,7 @@ def transform_categoria_emprego():
 
 # def classify_employment_stability():
 #     # Load the dataset
-#     file_path = 'processados/CSVs_ArquivoFinalGraduados/Brasil_Graduados.csv'
+#     file_path = 'processados/CSVs_ArquivoFinalGraduados/Brasil_Graduados_CategoriaEmprego_Binario.csv'
 #     if not os.path.exists(file_path):
 #         logging.error(f"File not found: {file_path}")
 #         return None
@@ -99,7 +99,7 @@ def transform_categoria_emprego():
 # // ...existing code...
 def classify_employment_stability():
     # Load the dataset
-    file_path = 'processados/CSVs_ArquivoFinalGraduados/Brasil_Graduados.csv'
+    file_path = 'processados/CSVs_ArquivoFinalGraduados/Brasil_Graduados_CategoriaEmprego_Binario.csv'
     if not os.path.exists(file_path):
         logging.error(f"File not found: {file_path}")
         return None, None, None, None
@@ -157,55 +157,84 @@ def classify_employment_stability():
 # accuracy, trained_model, importances, encoders, data_processed = classify_employment_stability()
 
 # -----------------------------------------------------------------------------------------------------------------------------------------------
+def data_processed_groupby():
+    # Supondo que você chamou a função e obteve 'data_processed':
+    accuracy, trained_model, importances, encoders, data_processed = classify_employment_stability()
 
-# Supondo que você chamou a função e obteve 'data_processed':
-# accuracy, trained_model, importances, encoders, data_processed = classify_employment_stability()
+    if data_processed is not None:
+        # Certifique-se que 'Categoria_Emprego' está no formato que você espera (ex: 0 e 1)
+        # Se 'Curso_Superior_Graduação_Código' for numérico e você tiver um mapeamento para nomes, use-o para melhor legibilidade.
 
-# if data_processed is not None:
-#     # Certifique-se que 'Categoria_Emprego' está no formato que você espera (ex: 0 e 1)
-#     # Se 'Curso_Superior_Graduação_Código' for numérico e você tiver um mapeamento para nomes, use-o para melhor legibilidade.
-#
-#     # Calcular a proporção de cada categoria de emprego por gênero e código do curso
-#     # Assumindo que 'Categoria_Emprego' foi mapeada para 0 (Informal) e 1 (Formal)
-#     patterns = data_processed.groupby(['gênero', 'Curso_Superior_Graduação_Código'])['Categoria_Emprego'].value_counts(normalize=True).mul(100).unstack(fill_value=0)
-#
-#     print("\n--- Padrões de Emprego (Formal/Informal %) por Gênero e Código do Curso ---")
-#     print(patterns)
-#
-#     # Para uma análise mais detalhada por gênero:
-#     patterns_gender = data_processed.groupby(['gênero'])['Categoria_Emprego'].value_counts(normalize=True).mul(100).unstack(fill_value=0)
-#     print("\n--- Padrões de Emprego (Formal/Informal %) por Gênero ---")
-#     print(patterns_gender)
+        # Calcular a proporção de cada categoria de emprego por gênero e código do curso
+        # Assumindo que 'Categoria_Emprego' foi mapeada para 0 (Informal) e 1 (Formal)
+        patterns = data_processed.groupby(['gênero', 'Curso_Superior_Graduação_Código'])['Categoria_Emprego'].value_counts(normalize=True).mul(100).unstack(fill_value=0)
 
-#     # Para uma análise mais detalhada por área de formação (código do curso):
-#     patterns_curso = data_processed.groupby(['Curso_Superior_Graduação_Código'])['Categoria_Emprego'].value_counts(normalize=True).mul(100).unstack(fill_value=0)
-#     print("\n--- Padrões de Emprego (Formal/Informal %) por Código do Curso ---")
-#     print(patterns_curso)
-#
-#     # Você pode querer usar os 'encoders' para mapear de volta os valores codificados de 'gênero'
-#     # e 'Curso_Superior_Graduação_Código' para seus rótulos originais se você os agrupou após a codificação.
-#     # No entanto, o 'data_processed' retornado acima deve ter as colunas originais antes da codificação das features X,
-#     # mas com 'Categoria_Emprego' já como alvo numérico.
-#     # Se 'gênero' em data_processed ainda for string (ex: 'Masculino', 'Feminino'), o groupby funcionará diretamente.
-#     # Se estiver codificado, você pode precisar mapeá-lo de volta para os nomes para melhor interpretação das tabelas.
+        print("\n--- Padrões de Emprego (Formal/Informal %) por Gênero e Código do Curso ---")
+        print(patterns)
+
+        # Para uma análise mais detalhada por gênero:
+        patterns_gender = data_processed.groupby(['gênero'])['Categoria_Emprego'].value_counts(normalize=True).mul(100).unstack(fill_value=0)
+        print("\n--- Padrões de Emprego (Formal/Informal %) por Gênero ---")
+        print(patterns_gender)
+
+        # Para uma análise mais detalhada por área de formação (código do curso):
+        patterns_curso = data_processed.groupby(['Curso_Superior_Graduação_Código'])['Categoria_Emprego'].value_counts(normalize=True).mul(100).unstack(fill_value=0)
+        print("\n--- Padrões de Emprego (Formal/Informal %) por Código do Curso ---")
+        print(patterns_curso)
+
+        # Você pode querer usar os 'encoders' para mapear de volta os valores codificados de 'gênero'
+        # e 'Curso_Superior_Graduação_Código' para seus rótulos originais se você os agrupou após a codificação.
+        # No entanto, o 'data_processed' retornado acima deve ter as colunas originais antes da codificação das features X,
+        # mas com 'Categoria_Emprego' já como alvo numérico.
+        # Se 'gênero' em data_processed ainda for string (ex: 'Masculino', 'Feminino'), o groupby funcionará diretamente.
+        # Se estiver codificado, você pode precisar mapeá-lo de volta para os nomes para melhor interpretação das tabelas.
 
 # --------------------------------------------------------------------------------------------------------------------------------
-# import matplotlib.pyplot as plt
-# import seaborn as sns
+        import matplotlib.pyplot as plt
+        import seaborn as sns
 
-# if data_processed is not None and not patterns.empty:
-#     # Exemplo para visualizar 'patterns' (Gênero e Curso)
-#     # Isso pode ser complexo se houver muitos cursos, então talvez filtre ou agrupe os cursos.
-#     # Vamos focar em visualizar patterns_gender como exemplo mais simples:
-#     if 1 in patterns_gender.columns: # Se a coluna para 'Formal' (ex: 1) existir
-#         patterns_gender_formal = patterns_gender[[1]].reset_index() # Pegar a porcentagem de Formal
-#         patterns_gender_formal.columns = ['gênero', 'Formal (%)']
-#
-#         plt.figure(figsize=(8, 6))
-#         sns.barplot(x='gênero', y='Formal (%)', data=patterns_gender_formal)
-#         plt.title('Porcentagem de Emprego Formal por Gênero')
-#         plt.ylabel('Formal (%)')
-#         plt.xlabel('Gênero')
-#         plt.show()
-#     else:
-#         print("Coluna para emprego formal (ex: 1) não encontrada em patterns_gender para plotagem.")
+        if data_processed is not None and not patterns.empty:
+            # Exemplo para visualizar 'patterns' (Gênero e Curso)
+            # Isso pode ser complexo se houver muitos cursos, então talvez filtre ou agrupe os cursos.
+            # Vamos focar em visualizar patterns_gender como exemplo mais simples:
+            if not patterns_gender.empty:  # Verificar se há dados para plotagem
+                # Resetar o índice para facilitar a manipulação
+                patterns_gender_reset = patterns_gender.reset_index()
+                patterns_gender_reset.columns.name = None  # Remover o nome das colunas para evitar confusão
+
+                # Transformar os dados para um formato longo (long format) para facilitar a plotagem
+                patterns_gender_melted = patterns_gender_reset.melt(
+                    id_vars=['gênero'], 
+                    value_vars=[0, 1], 
+                    var_name='Tipo_Emprego', 
+                    value_name='Porcentagem'
+                )
+
+                # Substituir os valores de 'Tipo_Emprego' para legibilidade
+                patterns_gender_melted['Tipo_Emprego'] = patterns_gender_melted['Tipo_Emprego'].replace({0: 'Informal', 1: 'Formal'})
+
+                # Plotar os dados
+                plt.figure(figsize=(10, 6))
+                sns.barplot(
+                    x='gênero', 
+                    y='Porcentagem', 
+                    hue='Tipo_Emprego', 
+                    data=patterns_gender_melted
+                )
+                plt.title('Porcentagem de Emprego Formal e Informal por Gênero')
+                plt.ylabel('Porcentagem (%)')
+                plt.xlabel('Gênero')
+                plt.legend(title='Tipo de Emprego')
+                plt.tight_layout()
+                output_graph_file = 'processados/Emprego_Formal_Informal_por_Genero.png'
+                plt.savefig(output_graph_file)
+                print(f"Gráfico salvo em: {output_graph_file}")
+
+                # Salvar os dados em disco
+                output_file = 'processados/Emprego_Formal_Informal_por_Genero.csv'
+                patterns_gender_melted.to_csv(output_file, index=False)
+                print(f"Dados salvos em: {output_file}")
+            else:
+                print("Coluna para emprego formal (ex: 1) não encontrada em patterns_gender para plotagem.")
+
+        return

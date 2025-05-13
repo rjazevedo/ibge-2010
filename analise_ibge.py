@@ -29,9 +29,13 @@ import logging
 # Modificando o comportamento do pandas para mostrar os erros de atribuição para eliminar os warnings - Rafael 20250413
 # pd.options.mode.chained_assignment = 'raise'
 
-# Esse arquivo não pode conter código que não seja chamada de funções e verificação de parâmetros
+# #Esse arquivo não pode conter código que não seja chamada de funções e verificação de parâmetros
+# parser = argparse.ArgumentParser()
+# parser.add_argument('-f', '--fase', type=int, help='Indica a fase do fluxo para começar a execução')
+# args = parser.parse_args()
 parser = argparse.ArgumentParser()
-parser.add_argument('-f', '--fase', type=int, help='Indica a fase do fluxo para começar a execução')
+parser.add_argument('-f', '--fase', type=int, help='Descrição do argumento -f')
+parser.add_argument('--plot', action='store_true', help='Descrição do argumento --plot')
 args = parser.parse_args()
 
 # Setup do pacote logging
@@ -326,5 +330,6 @@ if fase == 100: # aqui é só de teste
     #QP6
     # QP6.transform_categoria_emprego()
     # QP6.classify_employment_stability()
+    QP6.data_processed_groupby()
 
     pass
