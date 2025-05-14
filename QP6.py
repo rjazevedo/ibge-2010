@@ -100,7 +100,6 @@ def transform_categoria_emprego():
 
 # // filepath: /home/elisangela.silva/ibge-2010/QP6.py
 # // ...existing code...
-# O objetivo é treinar um modelo de aprendizado de máquina para para identificar padrões de emprego, que podem ser interpretados como "Formal/Informal" com base em um conjunto de dados de pessoas graduados do Censo.
 def classify_employment_stability():
 
     # Load the dataset
@@ -157,7 +156,7 @@ def classify_employment_stability():
 
     # Save confusion matrix as a heatmap
     plt.figure(figsize=(8, 6))
-    sns.heatmap(conf_matrix, annot=True, fmt='d', cmap='Blues', xticklabels=['Predicted_0', 'Predicted_1'], yticklabels=['Actual_0', 'Actual_1'])
+    sns.heatmap(conf_matrix, annot=True, fmt='d', cmap='Blues', xticklabels=['Predicted_Formal', 'Predicted_Informal'], yticklabels=['Actual_Formal', 'Actual_Informal'])
     plt.title('Confusion Matrix Heatmap')
     plt.xlabel('Predicted')
     plt.ylabel('Actual')
@@ -168,7 +167,7 @@ def classify_employment_stability():
     output_class_report_file = 'processados/ml/classification_report.txt'
     
     # Save confusion matrix as a CSV
-    conf_matrix_df = pd.DataFrame(conf_matrix, index=['Actual_0', 'Actual_1'], columns=['Predicted_0', 'Predicted_1'])
+    conf_matrix_df = pd.DataFrame(conf_matrix, index=['Actual_Formal', 'Actual_1'], columns=['Predicted_Formal', 'Predicted_Informal'])
     conf_matrix_df.to_csv(output_conf_matrix_file, index=True)
     print(f"Confusion matrix saved to: {output_conf_matrix_file}")
     
