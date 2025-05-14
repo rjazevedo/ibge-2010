@@ -326,11 +326,11 @@ if fase == 100: # aqui é só de teste
     # ibge_functions_descriptive_analysis_1.transform_and_reduce_columns()
     # ibge_functions_descriptive_analysis_1.update_processed_kmeans_results()
     # ibge_functions_descriptive_analysis_1.fill_course_and_cbo_names()
-    ibge_functions_descriptive_analysis_1.split_clusters_to_files()
+    # ibge_functions_descriptive_analysis_1.split_clusters_to_files()
 
     #QP6
     # QP6.transform_categoria_emprego()
-    # QP6.classify_employment_stability()
+    QP6.classify_employment_stability()
     # QP6.data_processed_groupby()
     # QP6.plot_employment_by_gender()
 
