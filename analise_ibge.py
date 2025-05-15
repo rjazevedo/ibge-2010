@@ -305,12 +305,13 @@ if fase == 50:
 if fase == 100: # aqui é só de teste
     # # ibge_functions_results_1.plot_age_distribution_for_course_cbo()
     # ibge_functions. plot_ida_volta_distribution_for_course_cbo()
-    # ibge_functions_results_1.Analise_Genero_FaixaEtaria()
-    # ibge_functions_results_1.plot_gender_age_distribution()
-    # ibge_functions_results_1.split_csv_by_cluster()
-    # ibge_functions.plot_gender_age_distribution_bycluster()
+    # ibge_functions_results_1.Analise_Genero_FaixaEtaria() # QP3
+    # ibge_functions_results_1.Analise_Genero_FaixaEtaria_1() # QP3
+    # ibge_functions_results_1.plot_gender_age_distribution() # QP3
+    # ibge_functions_results_1.split_csv_by_cluster() # QP3
+    # ibge_functions.plot_gender_age_distribution_bycluster() # QP3
     # ibge_functions_results_1.extract_data_by_course_cbo()
-    # ibge_functions_results_1.split_csv_by_cluster()
+    # ibge_functions_results_1.split_csv_by_cluster_1()
 
     # ibge_functions.save_csv_to_table()
     # ibge_functions_results_1.diminuir_and_save_csv()

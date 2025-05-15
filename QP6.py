@@ -29,6 +29,8 @@ from sklearn.preprocessing import LabelEncoder
 import matplotlib.pyplot as plt
 import seaborn as sns
 from sklearn.metrics import confusion_matrix, classification_report
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
 # import matplotlib.pyplot as plt
 # import seaborn as sns
 
@@ -106,51 +108,60 @@ def classify_employment_stability():
     file_path = 'processados/CSVs_ArquivoFinalGraduados/Brasil_Graduados_CategoriaEmprego_Binario.csv'
     if not os.path.exists(file_path):
         logging.error(f"File not found: {file_path}")
-        return None, None, None, None, None
-    
+        return None, None, None, None, None, None
+
     data = pd.read_csv(file_path)
-    
+
     # Ensure necessary columns exist
     required_columns = ['Idade_em_Anos', 'gênero', 'Nível_instrução', 'Curso_Superior_Graduação_Código', 'Ocupação_Código', 'Categoria_Emprego']
     if not all(col in data.columns for col in required_columns):
         logging.error("Missing required columns in the dataset.")
-        return None, None, None, None, None
-    
+        return None, None, None, None, None, None
+
     # Preprocess the data
     data_original_features = data[['Idade_em_Anos', 'gênero', 'Nível_instrução', 'Curso_Superior_Graduação_Código', 'Ocupação_Código']].copy()
     data = data.dropna(subset=required_columns)
-    
+
     label_encoders = {col: LabelEncoder() for col in ['Idade_em_Anos', 'gênero', 'Nível_instrução', 'Curso_Superior_Graduação_Código', 'Ocupação_Código']}
-    data_encoded_features = data_original_features.copy()  # Work on a copy for encoding
+    data_encoded_features = data_original_features.copy()
     for col, encoder in label_encoders.items():
         data_encoded_features[col] = encoder.fit_transform(data[col])
-    
+
     X = data_encoded_features[['Idade_em_Anos', 'gênero', 'Nível_instrução', 'Curso_Superior_Graduação_Código', 'Ocupação_Código']]
-    y = data['Categoria_Emprego']  # This should already be mapped to 0 (Informal) and 1 (Formal)
-    
-    # Train Random Forest with cross-validation
+    y = data['Categoria_Emprego']
+
+    # Centering and scaling (standardization)
+    scaler = StandardScaler()
+    X = scaler.fit_transform(X)
+
+    # Split the data into training and test sets before training
+    X_train, X_test, y_train, y_test = train_test_split(
+        X, y, test_size=0.2, random_state=42, stratify=y
+    )
+
+    # Train Random Forest with cross-validation on the training set
     cv_model = RandomForestClassifier(random_state=42)
-    scores = cross_val_score(cv_model, X, y, cv=5, scoring='accuracy')
-    
+    scores = cross_val_score(cv_model, X_train, y_train, cv=5, scoring='accuracy')
+
     accuracy = scores.mean()
     logging.info(f"Cross-validated accuracy: {accuracy:.4f}")
     print(f"Cross-validated accuracy: {accuracy:.4f}")
-    
-    # Train the final model on all data
+
+    # Train the final model on the training data
     final_model = RandomForestClassifier(random_state=42)
-    final_model.fit(X, y)
-    
-    # Predict on the training data to generate the confusion matrix
-    y_pred = final_model.predict(X)
-    conf_matrix = confusion_matrix(y, y_pred)
-    class_report = classification_report(y, y_pred)
-    
+    final_model.fit(X_train, y_train)
+
+    # Predict on the test data to generate the confusion matrix
+    y_pred = final_model.predict(X_test)
+    conf_matrix = confusion_matrix(y_test, y_pred)
+    class_report = classification_report(y_test, y_pred)
+
     print("\nConfusion Matrix:")
     print(conf_matrix)
-    
+
     print("\nClassification Report:")
     print(class_report)
-    
+
     # Save the confusion matrix and classification report to disk
     output_conf_matrix_file = 'processados/ml/confusion_matrix.csv'
 
@@ -165,25 +176,27 @@ def classify_employment_stability():
     plt.savefig(output_conf_matrix_graph_file)
     print(f"Confusion matrix heatmap saved to: {output_conf_matrix_graph_file}")
     output_class_report_file = 'processados/ml/classification_report.txt'
-    
+
     # Save confusion matrix as a CSV
-    conf_matrix_df = pd.DataFrame(conf_matrix, index=['Actual_Formal', 'Actual_1'], columns=['Predicted_Formal', 'Predicted_Informal'])
+    conf_matrix_df = pd.DataFrame(conf_matrix, index=['Actual_Formal', 'Actual_Informal'], columns=['Predicted_Formal', 'Predicted_Informal'])
     conf_matrix_df.to_csv(output_conf_matrix_file, index=True)
     print(f"Confusion matrix saved to: {output_conf_matrix_file}")
-    
+
     # Save classification report as a text file
     with open(output_class_report_file, 'w') as f:
         f.write(class_report)
     print(f"Classification report saved to: {output_class_report_file}")
-    
+
     # Get feature importances
-    feature_names = X.columns
+    # feature_names = X_train.columns
+    feature_names = ['Idade_em_Anos', 'gênero', 'Nível_instrução', 'Curso_Superior_Graduação_Código', 'Ocupação_Código']
     importances = final_model.feature_importances_
     feature_importance_df = pd.DataFrame({'feature': feature_names, 'importance': importances})
     feature_importance_df = feature_importance_df.sort_values(by='importance', ascending=False)
-    
+
     logging.info(f"Feature Importances:\n{feature_importance_df}")
-    
+
+    # Optionally, return also X_test, y_test for further analysis
     return accuracy, final_model, feature_importance_df, label_encoders, data, conf_matrix
 
 # # Call the function
