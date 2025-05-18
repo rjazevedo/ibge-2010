@@ -303,26 +303,34 @@ if fase == 50:
 #     pass
  
 if fase == 100: # aqui é só de teste
-    # # ibge_functions_results_1.plot_age_distribution_for_course_cbo()
+    # #ibge_functions_results_1.plot_age_distribution_for_course_cbo()
+    # QP3 ...
+    # Análise de idade por CBO -  Gráficos de Cursos e CBOs ------------------------------------------------------------------------------------------
     # ibge_functions. plot_ida_volta_distribution_for_course_cbo()
-    # ibge_functions_results_1.Analise_Genero_FaixaEtaria() # QP3
-    # ibge_functions_results_1.Analise_Genero_FaixaEtaria_1() # QP3
-    # ibge_functions_results_1.plot_gender_age_distribution() # QP3
-    # ibge_functions_results_1.split_csv_by_cluster() # QP3
-    # ibge_functions.plot_gender_age_distribution_bycluster() # QP3
+    # #Análise de idade por CBO - Geração do Arquivo com as  idades  ---------------------------------------------------------------------------------
+    # #ibge_functions_results_1.Analise_Genero_FaixaEtaria() 
+    # ibge_functions_results_1.Analise_Genero_FaixaEtaria_1() 
+    # #Análise de idade por CBO - Plot das idades para toda a base representativa  --------------------------------------------------------------------
+    # ibge_functions_results_1.plot_gender_age_distribution() 
+    # #Análise de idade por CBO - Plot das idades para toda os clusters  ------------------------------------------------------------------------------
+    # ibge_functions_results_1.split_csv_by_cluster() 
+    # ibge_functions.plot_gender_age_distribution_bycluster() 
+    # #Análise de idade por CBO - Plot das idades para Curso/CBO  -------------------------------------------------------------------------------------
     # ibge_functions_results_1.extract_data_by_course_cbo()
     # ibge_functions_results_1.split_csv_by_cluster_1()
-
+    # Geração de tabelas dos clusters -----------------------------------------------------------------------------------------------------------------
     # ibge_functions.save_csv_to_table()
+    # # Diminuir Cursos e Cbos no Arquivo de Graduados e no Arquivo Pivot Table -----------------------------------------------------------------------
     # ibge_functions_results_1.diminuir_and_save_csv()
     # ibge_functions_results_1.transform_columns_to_int_and_save()
     # ibge_functions.ibge_cursos_filter_1()
+    # #Idas e voltas para Cursos e CBOs Diminuidos ---------------------------------------------------------------------------------------------------
     # ibge_functions.ibge_idas_voltas_cursos_profissoes_1()
     # ibge_functions_results_1.voronoi_1()
 
-    # Tem que ver se isso de ver de onde veio vai ser fácil: se todos os pontos que foram agrupados vieram do mesmo cluster, ok, sem problemas. 
-    # Mas e se vieram de clusters diferentes?
-    # Veja isso com umas duas tabelas, onde você tem os Cursos e CBOs e consegue comparar elas
+    # #Tem que ver se isso de ver de onde veio vai ser fácil: se todos os pontos que foram agrupados vieram do mesmo cluster, ok, sem problemas. -------
+    # #Mas e se vieram de clusters diferentes? ---------------------------------------------------------------------------------------------------------
+    # #Veja isso com umas duas tabelas, onde você tem os Cursos e CBOs e consegue comparar elas----------------------------------------------------------
     # ibge_functions_descriptive_analysis_1.process_kmeans_results()
     # ibge_functions_descriptive_analysis_1.transform_and_reduce_columns()
     # ibge_functions_descriptive_analysis_1.update_processed_kmeans_results()
@@ -331,7 +339,7 @@ if fase == 100: # aqui é só de teste
 
     #QP6
     # QP6.transform_categoria_emprego()
-    QP6.classify_employment_stability()
+    # QP6.classify_employment_stability()
     # QP6.data_processed_groupby()
     # QP6.plot_employment_by_gender()
 
