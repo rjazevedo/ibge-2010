@@ -406,14 +406,15 @@ def Profissoes_Cursos_Menor_CBO_Curso(): # https://colab.research.google.com/dri
 
 
    # # Centróides
-   kmeans.cluster_centers_[:, 0], kmeans.cluster_centers_[:, 1]
+   # kmeans.cluster_centers_[:, 0], kmeans.cluster_centers_[:, 1]
    # # cluster 1 : 27.00526316,21.78263158  ... Vermelho
    # # cluster 2 : 66.464375,  77.656875    ... Azul
    # # cluster 3:  25.76357143,62.88071429  ... Verde
           
     
    # Obtendo os centróides
-   centroids = kmeans.cluster_centers_
+   # centroids = kmeans.cluster_centers_
+   centroids = [row[:2] for row in centroids]
    # Criando um DataFrame com os centróides
    df_centroids = pd.DataFrame(centroids, columns=['x', 'y'])
    # Salvando os centróides em um arquivo CSV
