@@ -359,19 +359,19 @@ def Profissoes_Cursos_Menor_CBO_Curso(): # https://colab.research.google.com/dri
    # plt.savefig(save_results_to + string)    
 
    # The Elbow Method Graph
-   wcss=[]
-   for i in range(1,11):
-       kmeans = KMeans(n_clusters=i, init ='k-means++', max_iter=300,  n_init=10,random_state=0 )
-       kmeans.fit(X)
-       wcss.append(kmeans.inertia_)
-   plt.plot(range(1,11),wcss,'bx-')
-   plt.title('The Elbow Method Graph - Cursos e CBOs Diminuidos de um Digito')
-   plt.xlabel('Number of clusters')
-   plt.ylabel('WCSS')
-   # plt.show()
-   string1 = "10_The_Elbow_Method_Graph_Profissoes_Cursos_Menor_CBO_Curso" +".pdf"
-   save_results_to = 'graficos/'  
-   plt.savefig(save_results_to + string1)  
+#    wcss=[]
+#    for i in range(1,11):
+#        kmeans = KMeans(n_clusters=i, init ='k-means++', max_iter=300,  n_init=10,random_state=0 )
+#        kmeans.fit(X)
+#        wcss.append(kmeans.inertia_)
+#    plt.plot(range(1,11),wcss,'bx-')
+#    plt.title('The Elbow Method Graph - Cursos e CBOs Diminuidos de um Digito')
+#    plt.xlabel('Number of clusters')
+#    plt.ylabel('WCSS')
+#    # plt.show()
+#    string1 = "10_The_Elbow_Method_Graph_Profissoes_Cursos_Menor_CBO_Curso" +".pdf"
+#    save_results_to = 'graficos/'  
+#    plt.savefig(save_results_to + string1)  
 
    # De acordo com o Metodo Elbow, determinar o numero de clusters
    # kmeans = KMeans(n_clusters=3, init ='k-means++', max_iter=300, n_init=10,random_state=0 )
@@ -392,15 +392,22 @@ def Profissoes_Cursos_Menor_CBO_Curso(): # https://colab.research.google.com/dri
    plt.xlim(0, 100) # definir limite do eixo
    plt.grid()
    # Visualising the clusters
-   plt.scatter(X.iloc[y_kmeans==0, 0], X.iloc[y_kmeans==0, 1], s=100, c='red', label ='Cluster 0', marker = '*')
-   plt.scatter(X.iloc[y_kmeans==1, 0], X.iloc[y_kmeans==1, 1], s=100, c='blue', label ='Cluster 1', marker = '*')
+   plt.scatter(X.iloc[y_kmeans == 0, 0], X.iloc[y_kmeans == 0, 1], s=100, c='red', label='Cluster 0', marker='*')
+   plt.scatter(X.iloc[y_kmeans == 1, 0], X.iloc[y_kmeans == 1, 1], s=100, c='blue', label='Cluster 1', marker='*')
+   # Ajustar os limites dos eixos dinamicamente para garantir que todos os pontos estejam visíveis
+   x_min, x_max = X.iloc[:, 0].min(), X.iloc[:, 0].max()
+   y_min, y_max = X.iloc[:, 1].min(), X.iloc[:, 1].max()
+   plt.xlim(x_min - 5, x_max + 5)
+   plt.ylim(y_min - 5, y_max + 5)
+   # plt.scatter(X.iloc[y_kmeans==0, 0], X.iloc[y_kmeans==0, 1], s=100, c='red', label ='Cluster 0', marker = '*')
+   # plt.scatter(X.iloc[y_kmeans==1, 0], X.iloc[y_kmeans==1, 1], s=100, c='blue', label ='Cluster 1', marker = '*')
    # plt.scatter(X.iloc[y_kmeans==2, 0], X.iloc[y_kmeans==2, 1], s=100, c='green', label ='Cluster 2', marker = '*')
    # plt.scatter(kmeans.cluster_centers_[:, 0], kmeans.cluster_centers_[:, 1], s=300, c='yellow', label = 'Centroids', marker = '*') # Diversos  ( Explicações e correções) e Estilo de texto 
    plt.legend()
    # plt.show()
    # string1 = "10%  - Todos os Cursos - Clusterização " +".pdf"
    # string1 = "10% - All Courses - Clustering" +".pdf"
-   string1 = "10_All Courses_Clustering_Profissoes_Cursos_Menor_CBO_Curso" +".png"
+   string1 = "10_All_Courses_Clustering_Profissoes_Cursos_Menor_CBO_Curso" +".png"
    save_results_to = 'graficos/'  
    plt.savefig(save_results_to + string1)  
 
@@ -413,10 +420,10 @@ def Profissoes_Cursos_Menor_CBO_Curso(): # https://colab.research.google.com/dri
           
     
    # Obtendo os centróides
-   # centroids = kmeans.cluster_centers_
-   centroids = [row[:2] for row in centroids]
+   centroids = kmeans.cluster_centers_
    # Criando um DataFrame com os centróides
-   df_centroids = pd.DataFrame(centroids, columns=['x', 'y'])
+   # df_centroids = pd.DataFrame(centroids, columns=['x', 'y'])
+   df_centroids = pd.DataFrame([c[:2] for c in centroids], columns=['x', 'y'])
    # Salvando os centróides em um arquivo CSV
    df_centroids.to_csv(save_results_to + 'centroids_Profissoes_Cursos_Menor_CBO_Curso.csv', index=False)
 
