@@ -18,6 +18,7 @@ from ibgeparser.enums import Anos, Estados, Modalidades
 #import original.ibge_functions
 import ibge_functions
 import ibge_functions_exploratory_analysis
+import ibge_functions_exploratory_analysis_1
 import ibge_functions_descriptive_analysis_1
 import ibge_variable
 import ibge_functions_preprocessing
@@ -336,6 +337,9 @@ if fase == 100: # aqui é só de teste
     # ibge_functions_descriptive_analysis_1.update_processed_kmeans_results()
     # ibge_functions_descriptive_analysis_1.fill_course_and_cbo_names()
     # ibge_functions_descriptive_analysis_1.split_clusters_to_files()
+
+    # Clusterização - Diminuição dos digitos de cursos e cbos
+    ibge_functions_exploratory_analysis_1.Profissoes_Cursos_Menor_CBO_Curso()
 
     #QP6
     # QP6.transform_categoria_emprego()
