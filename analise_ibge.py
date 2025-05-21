@@ -339,8 +339,9 @@ if fase == 100: # aqui é só de teste
     # ibge_functions_descriptive_analysis_1.split_clusters_to_files()
 
     # Clusterização - Diminuição dos digitos de cursos e cbos
-    ibge_functions_exploratory_analysis_1.Profissoes_Cursos_Menor_CBO_Curso()
-
+    ibge_functions_exploratory_analysis_1.Profissoes_Cursos_Menor_CBO_Curso() # CBOs 3 - Cursos 2
+    # ibge_functions_exploratory_analysis_1.clusterizacao_metodo_cotovelo_e_kmeans2() # somente teste, não será utilizada 
+    
     #QP6
     # QP6.transform_categoria_emprego()
     # QP6.classify_employment_stability()
