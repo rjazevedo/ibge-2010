@@ -380,76 +380,76 @@ def Profissoes_Cursos_Menor_CBO_Curso(): # https://colab.research.google.com/dri
 #    save_results_to = 'graficos/'  
 #    plt.savefig(save_results_to + string1)  
    
-   # ==============================================================================================================
-   distortions = []
-   inertias = []
-   mapping1 = {}
-   mapping2 = {}
-   K = range(1, 10)
+#    # ==============================================================================================================
+#    distortions = []
+#    inertias = []
+#    mapping1 = {}
+#    mapping2 = {}
+#    K = range(1, 10)
 
-   for k in K:
-       kmeanModel = KMeans(n_clusters=k, random_state=42).fit(X)
+#    for k in K:
+#        kmeanModel = KMeans(n_clusters=k, random_state=42).fit(X)
        
-       distortions.append(sum(np.min(cdist(X, kmeanModel.cluster_centers_, 'euclidean'), axis=1)**2) / X.shape[0])
+#        distortions.append(sum(np.min(cdist(X, kmeanModel.cluster_centers_, 'euclidean'), axis=1)**2) / X.shape[0])
        
-       inertias.append(kmeanModel.inertia_)
+#        inertias.append(kmeanModel.inertia_)
         
-       mapping1[k] = distortions[-1]
-       mapping2[k] = inertias[-1]
-   # ===========================
-   print("Distortion values:")
-   for key, val in mapping1.items():
-        print(f'{key} : {val}')
+#        mapping1[k] = distortions[-1]
+#        mapping2[k] = inertias[-1]
+#    # ===========================
+#    print("Distortion values:")
+#    for key, val in mapping1.items():
+#         print(f'{key} : {val}')
 
-   plt.plot(K, distortions, 'bx-')
-   plt.xlabel('Number of Clusters (k)')
-   plt.ylabel('Distortion')
-   plt.title('The Elbow Method using Distortion')
-   # plt.show()   
-   string2 = "10_The_Elbow_Method_Graph_Profissoes_Cursos_Menor_CBO_Curso_Distortion" +".pdf"
-   save_results_to = 'graficos/'   
-   plt.savefig(save_results_to + string2)  
-    # ===========================
-   print("Inertia values:")
-   for key, val in mapping2.items():
-       print(f'{key} : {val}')
+#    plt.plot(K, distortions, 'bx-')
+#    plt.xlabel('Number of Clusters (k)')
+#    plt.ylabel('Distortion')
+#    plt.title('The Elbow Method using Distortion')
+#    # plt.show()   
+#    string2 = "10_The_Elbow_Method_Graph_Profissoes_Cursos_Menor_CBO_Curso_Distortion" +".pdf"
+#    save_results_to = 'graficos/'   
+#    plt.savefig(save_results_to + string2)  
+#     # ===========================
+#    print("Inertia values:")
+#    for key, val in mapping2.items():
+#        print(f'{key} : {val}')
 
-   plt.plot(K, inertias, 'bx-')
-   plt.xlabel('Number of Clusters (k)')
-   plt.ylabel('Inertia')
-   plt.title('The Elbow Method using Inertia')
-   # plt.show()   
-   string3 = "10_The_Elbow_Method_Graph_Profissoes_Cursos_Menor_CBO_Curso_Inertia" +".pdf"
-   save_results_to = 'graficos/'   
-   plt.savefig(save_results_to + string3)  
-   # ===========================
-   k_range = range(1, 6)
-   # Pontos de dados agrupados
-    # Carregar apenas as colunas 'Ida' e 'Volta' do arquivo
-   X_plot = pd.read_csv('graficos/10Porcent_DF_Limpo_Diminuido.csv', usecols=['Ida', 'Volta'])
-   X_plot = X_plot.values  # Converter para numpy array para compatibilidade com KMeans
+#    plt.plot(K, inertias, 'bx-')
+#    plt.xlabel('Number of Clusters (k)')
+#    plt.ylabel('Inertia')
+#    plt.title('The Elbow Method using Inertia')
+#    # plt.show()   
+#    string3 = "10_The_Elbow_Method_Graph_Profissoes_Cursos_Menor_CBO_Curso_Inertia" +".pdf"
+#    save_results_to = 'graficos/'   
+#    plt.savefig(save_results_to + string3)  
+#    # ===========================
+#    k_range = range(1, 6)
+#    # Pontos de dados agrupados
+#     # Carregar apenas as colunas 'Ida' e 'Volta' do arquivo
+#    X_plot = pd.read_csv('graficos/10Porcent_DF_Limpo_Diminuido.csv', usecols=['Ida', 'Volta'])
+#    X_plot = X_plot.values  # Converter para numpy array para compatibilidade com KMeans
 
-   for k in k_range:
-     kmeans = KMeans(n_clusters=k, init='k-means++', random_state=42)
-     y_kmeans = kmeans.fit_predict(X_plot)
+#    for k in k_range:
+#      kmeans = KMeans(n_clusters=k, init='k-means++', random_state=42)
+#      y_kmeans = kmeans.fit_predict(X_plot)
      
-     plt.figure()
-     plt.scatter(X_plot[:, 0], X_plot[:, 1], c=y_kmeans, cmap='viridis', marker='o', edgecolor='k', s=100)
-     plt.scatter(kmeans.cluster_centers_[:, 0], kmeans.cluster_centers_[:, 1],
-                     s=300, c='red', label='Centroids', edgecolor='k')
-     plt.title(f'K-means Clustering (k={k})')
-     plt.xlabel('Ida')
-     plt.ylabel('Volta')
-     plt.legend()
-     plt.grid()
-     # plt.show()
-     string4 = "10_The_Elbow_Method_Graph_Profissoes_Cursos_Menor_CBO_Curso_PontosDedadosAgrupados" +".png"
-     save_results_to = 'graficos/'   
-     plt.savefig(save_results_to + string4)  
-   # ==============================================================================================================
+#      plt.figure()
+#      plt.scatter(X_plot[:, 0], X_plot[:, 1], c=y_kmeans, cmap='viridis', marker='o', edgecolor='k', s=100)
+#      plt.scatter(kmeans.cluster_centers_[:, 0], kmeans.cluster_centers_[:, 1],
+#                      s=300, c='red', label='Centroids', edgecolor='k')
+#      plt.title(f'K-means Clustering (k={k})')
+#      plt.xlabel('Ida')
+#      plt.ylabel('Volta')
+#      plt.legend()
+#      plt.grid()
+#      # plt.show()
+#      string4 = "10_The_Elbow_Method_Graph_Profissoes_Cursos_Menor_CBO_Curso_PontosDedadosAgrupados" +".png"
+#      save_results_to = 'graficos/'   
+#      plt.savefig(save_results_to + string4)  
+#    # ==============================================================================================================
    # De acordo com o Metodo Elbow, determinar o numero de clusters
    # kmeans = KMeans(n_clusters=3, init ='k-means++', max_iter=300, n_init=10,random_state=0 )
-   kmeans = KMeans(n_clusters=4, init ='k-means++', max_iter=300, n_init=10,random_state=0 )
+   kmeans = KMeans(n_clusters=5, init ='k-means++', max_iter=300, n_init=10,random_state=0 )
    y_kmeans = kmeans.fit_predict(X)
    # print(y_kmeans)
    # print(kmeans.labels_)
@@ -470,6 +470,7 @@ def Profissoes_Cursos_Menor_CBO_Curso(): # https://colab.research.google.com/dri
    plt.scatter(X.iloc[y_kmeans == 1, 0], X.iloc[y_kmeans == 1, 1], s=100, c='blue', label='Cluster 1', marker='*')
    plt.scatter(X.iloc[y_kmeans==  2, 0], X.iloc[y_kmeans==  2, 1], s=100, c='green', label ='Cluster 2', marker = '*')
    plt.scatter(X.iloc[y_kmeans==  3, 0], X.iloc[y_kmeans==  3, 1], s=100, c='black', label ='Cluster 3', marker = '*')
+   plt.scatter(X.iloc[y_kmeans==  4, 0], X.iloc[y_kmeans==  4, 1], s=100, c='pink', label ='Cluster 4', marker = '*')
    plt.scatter(kmeans.cluster_centers_[:, 0], kmeans.cluster_centers_[:, 1], s=300, c='yellow', label = 'Centroids', marker = '*') # Diversos  ( Explicações e correções) e Estilo de texto
    # # Ajustar os limites dos eixos dinamicamente para garantir que todos os pontos estejam visíveis
    # x_min, x_max = X.iloc[:, 0].min(), X.iloc[:, 0].max()
@@ -484,7 +485,7 @@ def Profissoes_Cursos_Menor_CBO_Curso(): # https://colab.research.google.com/dri
    # plt.show()
    # string1 = "10%  - Todos os Cursos - Clusterização " +".pdf"
    # string1 = "10% - All Courses - Clustering" +".pdf"
-   string1 = "10_All_Courses_Clustering_Profissoes_Cursos_Menor_CBO_Curso_4" +".png"
+   string1 = "10_All_Courses_Clustering_Profissoes_Cursos_Menor_CBO_Curso_5" +".png"
    save_results_to = 'graficos/'  
    plt.savefig(save_results_to + string1)  
 
@@ -502,7 +503,7 @@ def Profissoes_Cursos_Menor_CBO_Curso(): # https://colab.research.google.com/dri
    # df_centroids = pd.DataFrame(centroids, columns=['x', 'y'])
    df_centroids = pd.DataFrame([c[:2] for c in centroids], columns=['x', 'y'])
    # Salvando os centróides em um arquivo CSV
-   df_centroids.to_csv(save_results_to + 'centroids_Profissoes_Cursos_Menor_CBO_Curso_4.csv', index=False)
+   df_centroids.to_csv(save_results_to + 'centroids_Profissoes_Cursos_Menor_CBO_Curso_5.csv', index=False)
 
    # # O que tem em cada cluster? ===================================================================================================================
    X['cluster'] = kmeans.labels_
@@ -776,7 +777,7 @@ def Profissoes_Cursos_Menor_CBO_Curso(): # https://colab.research.google.com/dri
    # Unique_Cbo = Kmeans3_T.Cbo_Nome.unique()
    # len(Unique_Cbo)
    # Kmeans3_T
-   Kmeans3_T.to_csv(save_results_to +'Kmeans3_T_Profissoes_Cursos_Menor_CBO_Curso_4.csv')
+   Kmeans3_T.to_csv(save_results_to +'Kmeans3_T_Profissoes_Cursos_Menor_CBO_Curso_5.csv')
    return
 
 

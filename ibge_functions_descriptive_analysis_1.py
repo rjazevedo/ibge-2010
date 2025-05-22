@@ -250,7 +250,7 @@ def CBOs_Curso_v6_1(csv_estado,csv_CBO,curso_num,curso_nome,titulo10,titulo3,por
    
     #Cbos -> Cursos ... criar um novo dataframe somente com cursos e cbos para facilitar
     X_CURSO_CBO = X[['Curso_Superior_Graduação_Código','Ocupação_Código']]
-    
+    # print(X_CURSO_CBO.shape)
     # Transforma  X_CURSO_CBO.Ocupação_Código de Float para String 
     # A partir do arquivo brasil, criar um novo dataframe somente com cursos e cbos para facilitar 
     Curso_Superior_Graduação_Código = []
@@ -263,6 +263,7 @@ def CBOs_Curso_v6_1(csv_estado,csv_CBO,curso_num,curso_nome,titulo10,titulo3,por
             Curso_Superior_Graduação_Código.append(X_CURSO_CBO.Curso_Superior_Graduação_Código[i])
             Ocupação_Código.append(X_CURSO_CBO.Ocupação_Código[i])
     # ...
+    # print("len(Curso_Superior_Graduação_Código)",len(Curso_Superior_Graduação_Código),"len(Ocupação_Código)",len(Ocupação_Código),"len(Ocupação_Código_temp)",len(Ocupação_Código_temp))
     X_CURSO_CBO_Filter=[]
     for i in range(len(Curso_Superior_Graduação_Código)):
       tupla=(Curso_Superior_Graduação_Código[i],Ocupação_Código[i])
@@ -277,7 +278,10 @@ def CBOs_Curso_v6_1(csv_estado,csv_CBO,curso_num,curso_nome,titulo10,titulo3,por
     #CBOs por curso
     #Indice ===========================================================================================================
     # dir = X_CURSO_CBO.index[X_CURSO_CBO['Curso_Superior_Graduação_Código'] == curso_num].tolist()
-    dir = X_CURSO_CBO.index[X_CURSO_CBO['Curso_Superior_Graduação_Código'] == curso_num].tolist()
+    # dir = X_CURSO_CBO.index[X_CURSO_CBO['Curso_Superior_Graduação_Código'] == curso_num].tolist()
+    # Ensure both are strings for comparison
+    dir = X_CURSO_CBO.index[X_CURSO_CBO['Curso_Superior_Graduação_Código'].astype(str) == str(curso_num)].tolist()
+    # print("curso_num", type(curso_num), "unique values:", X_CURSO_CBO['Curso_Superior_Graduação_Código'].unique())
     # print("curso_num",type(curso_num))
     # print("len(dir)",len(dir))
     if(len(dir)>=1):

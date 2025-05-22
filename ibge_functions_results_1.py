@@ -1301,6 +1301,32 @@ def diminuir_and_save_csv():
     df_pivot.to_csv(save_results_pivot, index=False)
 
     return
+def diminuir_and_save_csv_CBO():
+    # Process the first file
+    file_path_graduados = 'processados/CSVs_ArquivoFinalGraduados/Brasil_Graduados.csv'
+    df_graduados = pd.read_csv(file_path_graduados)
+
+    # Subtract one digit from the specified columns
+    # df_graduados['Curso_Superior_Graduação_Código'] = df_graduados['Curso_Superior_Graduação_Código'].astype(str).str[:-1].astype(int)
+    df_graduados['Ocupação_Código'] = df_graduados['Ocupação_Código'].astype(str).str[:-1].astype(int)
+
+    # Save the transformed DataFrame to a new file
+    save_results_graduados = 'processados/CSVs_ArquivoFinalGraduados/Brasil_Graduados_Diminuido_CBO.csv'
+    df_graduados.to_csv(save_results_graduados, index=False)
+
+    # Process the second file
+    file_path_pivot = 'processados/CSVs_PivotTableFinal/Brasil_PivotFinal.csv'
+    df_pivot = pd.read_csv(file_path_pivot)
+
+    # Subtract one digit from the Ocupação_Código column
+    df_pivot['Ocupação_Código'] = df_pivot['Ocupação_Código'].astype(str).str[:-1].astype(int)
+
+    # Save the transformed DataFrame to a new file
+    save_results_pivot = 'processados/CSVs_PivotTableFinal/Brasil_PivotFinal_Diminuida_CBO.csv'
+    df_pivot.to_csv(save_results_pivot, index=False)
+
+    return
+# def ibge_cursos_filter_1(path,name):   
 # def ibge_cursos_filter_1(path,name):   
 def ibge_cursos_filter_1():  
     #...
@@ -1334,27 +1360,31 @@ def ibge_cursos_filter_1():
     CursosCenso.to_csv(path + 'Curso_Censo_Diminuido.csv')       
     return CursosCenso
 
+
 # def Ida_Volta_1(path,name,path1,name1):
-def Ida_Volta_1():
+def Ida_Volta_CBO():
 
 
     logging.info(" Gerando as idas e voltas")   
     # csv_estado = os.path.join(path[0],name[0]) # arquivo do censo do Brasil inteiro (somente graduados)
     # path1 = ibge_variable.paths(12)
     # name1 = ibge_variable.names(6)
-    csv_estado = os.path.join('processados/CSVs_ArquivoFinalGraduados/Brasil_Graduados_Diminuido.csv') # arquivo do censo do Brasil inteiro (somente graduados)
+    csv_estado = os.path.join('processados/CSVs_ArquivoFinalGraduados/Brasil_Graduados_Diminuido_CBO.csv') # arquivo do censo do Brasil inteiro (somente graduados)
     # csv_CBO = os.path.join(path1[0],name1[1]) # Tabela de CBOs
     # csv_CURSOS = os.path.join(path1[0],name1[2]) # Tabela de Cursos
     csv_CBO = os.path.join('documentacao/CBO_CSV.csv') # Tabela de CBOs
-    csv_CURSOS = os.path.join('documentacao/Curso_Censo_Diminuido.csv') # Tabela de Cursos
+    # csv_CURSOS = os.path.join('documentacao/Curso_Censo_Diminuido.csv') # Tabela de Cursos
+    csv_CURSOS = os.path.join('documentacao/Curso_Censo.csv') # Tabela de Cursos
     # path2 = ibge_variable.paths(8)
     # name2 = ibge_variable.names(8)         
     # csv_PivotTableFinal =  os.path.join(path2[0],name2[0]) #Pivo Table Final
-    csv_PivotTableFinal =  os.path.join('processados/CSVs_PivotTableFinal/Brasil_PivotFinal_Diminuida.csv') #Pivo Table Final
+    csv_PivotTableFinal =  os.path.join('processados/CSVs_PivotTableFinal/Brasil_PivotFinal_Diminuida_CBO.csv') #Pivo Table Final
     
-
-    # CursosCenso = ibge_cursos_filter_1(path1[0],name1[2])
-    CursosCenso = ibge_cursos_filter_1()
+    path ='documentacao/'
+    name ='Curso_Censo.csv'
+    file = os.path.join(path,name)
+    CursosCenso = pd.read_csv(file, dtype ='str')
+    # CursosCenso = ibge_cursos_filter_1()
     # print(len(CursosCenso))
     # curso_num  = float(CursosCenso.curso_num.iloc[88])
     # curso_nome = CursosCenso.curso_nome.iloc[88]
@@ -1368,8 +1398,8 @@ def Ida_Volta_1():
     save_results_to = 'graficos/'  
 
 # Testar curso 79,80,85...
-    #for f in range(0,89):
-    for f in range(0,23):
+    for f in range(0,89):
+    # for f in range(0,23):
 
        
         # curso_num= float(CursosCenso.curso_num.iloc[f])
@@ -1479,8 +1509,10 @@ def Ida_Volta_1():
                 v_= V_
 
     df = ibge_functions_descriptive_analysis.x_y_z_v_df(x_,y_,z_,v_)    
-    df.to_csv(save_results_to + '10Porcent_DF_Diminuido.csv')
+    df.to_csv(save_results_to + '10Porcent_DF_Diminuido_CBO.csv')
     return     
+
+
 
 # def Tabela_Ida_Volta_1(path2,name2):
 def Tabela_Ida_Volta_1():
@@ -1508,20 +1540,81 @@ def Tabela_Ida_Volta_1():
     # Salvar_Tabela
     df1.to_csv(save_results_to + '10Porcent_DF_Limpo_Diminuido.csv')
     df1.to_excel(save_results_to + '10Porcent_DF_Limpo_Diminuido.xlsx')
-    return      
+    return    
+
+# def Tabela_Ida_Volta_1(path2,name2):
+def Tabela_Ida_Volta_CBO():
+    # df =  os.path.join(path2[0],name2[1])
+    # df1 = pd.read_csv(df)    
+    df1 = pd.read_csv('graficos/10Porcent_DF_Diminuido_CBO.csv')
+    save_results_to = 'graficos/'  
+
+
+    # Remover_Voltas_semIdas_e_Idas_semVoltas
+    # tive que passar tudo pra float porque tem valores menores do que 0 ...
+    for i in range(len(df1)):
+        if (df1['Ida'][i].astype('float')==0.00) & (df1['Volta'][i].astype('float')!=0.00):
+            df1 = df1.drop(i)
+        else:
+            if (df1['Ida'][i].astype('float')!=0.00) & (df1['Volta'][i].astype('float')==0.00):
+                df1 = df1.drop(i)
+            else:
+                if (df1['Ida'][i].astype('float')==0.00) & (df1['Volta'][i].astype('float')==0.00):
+                    df1 = df1.drop(i)
+    # Remover_Duplicados
+    df1 = df1.drop_duplicates(subset=['Ida','Volta'])
+    # Reset_Indice
+    df1 = df1.reset_index(drop=True)
+    # Salvar_Tabela
+    df1.to_csv(save_results_to + '10Porcent_DF_Limpo_Diminuido_CBO.csv')
+    df1.to_excel(save_results_to + '10Porcent_DF_Limpo_Diminuido_CBO.xlsx')
+    return        
 
 
 def transform_columns_to_int_and_save():
     # Define file paths
     files = [
         'documentacao/CBO_CSV.csv',
-        'documentacao/Curso_CSV.csv',
-        'documentacao/Curso_Censo.csv',
+        # 'documentacao/Curso_CSV.csv',
+        # 'documentacao/Curso_Censo.csv',
         'processados/CSVs_ArquivoFinalGraduados/Brasil_Graduados.csv',
         'processados/CSVs_PivotTableFinal/Brasil_PivotFinal.csv',
-        'documentacao/Curso_Censo_Diminuido.csv',
-        'processados/CSVs_ArquivoFinalGraduados/Brasil_Graduados_Diminuido.csv',
-        'processados/CSVs_PivotTableFinal/Brasil_PivotFinal_Diminuida.csv'
+        # 'documentacao/Curso_Censo_Diminuido.csv',
+        'processados/CSVs_ArquivoFinalGraduados/Brasil_Graduados_Diminuido_CBO.csv',
+        'processados/CSVs_PivotTableFinal/Brasil_PivotFinal_Diminuida_CBO.csv'
+    ]
+
+    # Define columns to transform
+    columns_to_transform = ['Cod_CBO', 'curso_num', 'Cod_Curso']
+
+    for file in files:
+        try:
+            # Read the CSV file
+            df = pd.read_csv(file, dtype=str)
+
+            # Transform specified columns to integers if they exist
+            for column in columns_to_transform:
+                if column in df.columns:
+                    df[column] = df[column].astype(float).astype(int)
+
+            # Save the transformed DataFrame back to the same file
+            df.to_csv(file, index=False)
+            print(f"Processed and saved file: {file}")
+        except Exception as e:
+            print(f"Error processing file {file}: {e}")
+
+    return
+def transform_columns_to_int_and_save_CBO():
+    # Define file paths
+    files = [
+        'documentacao/CBO_CSV.csv',
+        # 'documentacao/Curso_CSV.csv',
+        # 'documentacao/Curso_Censo.csv',
+        'processados/CSVs_ArquivoFinalGraduados/Brasil_Graduados.csv',
+        'processados/CSVs_PivotTableFinal/Brasil_PivotFinal.csv',
+        # 'documentacao/Curso_Censo_Diminuido.csv',
+        'processados/CSVs_ArquivoFinalGraduados/Brasil_Graduados_Diminuido_CBO.csv',
+        'processados/CSVs_PivotTableFinal/Brasil_PivotFinal_Diminuida_CBO.csv'
     ]
 
     # Define columns to transform

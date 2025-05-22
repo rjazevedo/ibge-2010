@@ -668,7 +668,7 @@ def ibge_idas_voltas_cursos_profissoes_1():
     # path1 = 'documentacao/'
     # name1 = 'CBO_CSV.csv', 'Curso_CSV.csv'
     # ibge_functions_results_1.Ida_Volta_1(path,name,path1,name1)
-    # ibge_functions_results_1.Ida_Volta_1()
+    ibge_functions_results_1.Ida_Volta_1()
 
     # path2 = ibge_variable.paths(13)
     # name2 = ibge_variable.names(9)
