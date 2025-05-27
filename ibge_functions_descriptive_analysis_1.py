@@ -646,3 +646,175 @@ def split_clusters_to_files():
 
     return cluster_file_paths
 
+def Cursos_CBO_14_10_1(csv_estado,csv_CBO,csv_CURSOS,cbo_num,titulo3,NaoGraduados_qtdade,curso_num,curso_nome,primeirosCbos_Nome,i,porcent_param):
+    numero = i
+    #Leitura de Arquivos CSVs ...
+    X = pd.read_csv(csv_estado)
+    CBO = pd.read_csv(csv_CBO, dtype ='str')
+    CURSOS = pd.read_csv(csv_CURSOS, dtype ='str')
+    # drop the 'Unnamed:0' column
+    CBO = CBO.drop(columns=['Unnamed: 0'])
+    CURSOS = CURSOS.drop(columns=['Unnamed: 0'])
+  
+    #Cbos -> Cursos ... criar um novo dataframe somente com cursos e cbos para facilitar
+    # Filter only the relevant columns for courses and occupations
+    X_CURSO_CBO = X.loc[:, ['Curso_Superior_Graduação_Código', 'Ocupação_Código']]
+    X_CURSO_CBO.shape
+
+    #Cursos por CBO
+    #Indice =================================================================================================
+    X_CURSO_CBO['Ocupação_Código'] = X_CURSO_CBO['Ocupação_Código'].astype(int)
+    dir_curso_cbos = X_CURSO_CBO.index[X_CURSO_CBO['Ocupação_Código'] == int(str(cbo_num))].tolist()
+    # ...
+    Curso_dir_curso_cbos = []
+    Cbo_dir_curso_cbos = []
+    for i in range(len(dir_curso_cbos)):
+        #print(direito[i])
+        curso = X_CURSO_CBO._get_value(dir_curso_cbos[i],'Curso_Superior_Graduação_Código')
+        cbo = X_CURSO_CBO._get_value(dir_curso_cbos[i],'Ocupação_Código')
+        #print("Curso:",curso,"CBO:",str(int(cbo)))
+        Curso_dir_curso_cbos.append(curso)
+        Cbo_dir_curso_cbos.append(cbo)
+    #..
+    resultados_dir_curso_cbos=[]
+    for i in range(len(Curso_dir_curso_cbos)):
+      tupla=(Curso_dir_curso_cbos[i],Cbo_dir_curso_cbos[i])
+      resultados_dir_curso_cbos.append(tupla)
+    #...
+    Curso_Cbo_dir_curso_cbos = pd.DataFrame(resultados_dir_curso_cbos)
+    #Curso_Cbo_dir_curso_cbos.shape
+    dict = {0:"Curso_Repet",
+        1:"Cbo_Repet",
+        }
+    Curso_Cbo_dir_curso_cbos.rename(columns=dict,inplace=True)
+    # print(Curso_Cbo_dir_curso_cbos)
+    #Cursos Únicos por CBO ====================================================================================
+    Curso_Cbo_dir_curso_cbos_unique = np.unique(Curso_Cbo_dir_curso_cbos.Curso_Repet)
+    Curso_Unique = Curso_Cbo_dir_curso_cbos['Curso_Repet'].astype(int).tolist()
+    #...
+    Curso_Cbo_dir_curso_cbos['Curso_Repet'].value_counts().sort_index()
+    #...
+    from numpy.ma.core import sort
+    A_dir_curso_cbos = Curso_Cbo_dir_curso_cbos['Curso_Repet'].value_counts().sort_index()
+    #...
+    A_dir_curso_cbos_sort = pd.DataFrame(A_dir_curso_cbos)
+    #...
+    A_Curso = A_dir_curso_cbos_sort.sort_values("Curso_Repet",ascending=False)
+    Total = A_Curso['Curso_Repet'].sum()
+    porcento = Total*porcent_param
+    porcento_10 = round(porcento/Total * 100, 2)
+    Porcentagem = []
+    for i in range(len(A_Curso)):
+        Porcentagem = round(A_Curso['Curso_Repet']/Total * 100, 2)
+    A_Curso['Porcentagem'] = Porcentagem
+    #...
+    qtdade = 0
+    A_Curso.index = A_Curso.index.astype(str)
+    for i in range(len(A_Curso)):
+        if (A_Curso.Porcentagem[i]>= porcento_10):
+            qtdade = qtdade+1
+
+    A_Curso_11 = A_Curso.iloc[:qtdade].copy()  # Garante uma cópia das 'qtdade' primeiras linhas para modificações posteriores
+    if(len(A_Curso_11)>=1):
+      #...
+      #Coletando o nome dos Cursos ...
+      NomeCurso = []
+      for i in range(len(A_Curso_11)):
+          curso=str(float(A_Curso_11.index[i]))
+          for indexx, row in CURSOS.iterrows():
+              if (row['curso_num'] == curso): #if (row['Cod_Curso'] == curso):
+              #if(row['Cod_Curso'] == A_Curso_10.index[i]):
+                  NomeCurso.append(row['Nome_Curso'])
+                  #print(row['Cod_Curso'],":",row['Nome_Curso'])
+      #...
+      NomeCurso = pd.DataFrame(NomeCurso, columns=['Nome_Curso'])
+      print("NomeCurso",NomeCurso)
+      # ...
+      #   A_Curso_11["Nome"] = 1
+      import warnings
+      #   A_Curso_11['Nome'] = NomeCurso['Nome_Curso'].values
+      if not NomeCurso.empty and len(NomeCurso['Nome_Curso'].values) == len(A_Curso_11.index):
+        A_Curso_11['Nome'] = NomeCurso['Nome_Curso'].values
+            #...
+      else:
+        print("Erro: NomeCurso está vazio ou tamanho incompatível com A_Curso_11")   
+        cursos=0
+        nomes=0
+        porcentagens=0
+        intensidade=0
+        string = ""
+        return cbo_num,curso_nome,primeirosCbos_Nome,intensidade,plt,string, cursos, nomes,porcentagens
+     
+      A_Curso_11.reset_index(inplace=True)
+      A_Curso_11 = A_Curso_11.rename(columns = {'index':'Curso'})
+      A_Curso_11['Curso'] = A_Curso_11['Curso'].astype("float").astype('str')
+      A_Curso_11['Curso_Nome'] = A_Curso_11['Curso'].str.cat(A_Curso_11['Nome'], sep =" ")
+        
+      primeiros = []
+      if (len(A_Curso_11)<1):
+          print("Não existem cursos para este CBO")
+      else:
+          for i in range(len(A_Curso_11)): #Alterado em 09/09/2023 para pegar o 4º Elemento
+              primeiros.append(int(float(A_Curso_11.Curso[i])))
+      A_Curso_11_sort = A_Curso_11.iloc[0:qtdade].sort_values("Porcentagem",ascending=True)  #26/09
+      index =  A_Curso_11_sort.index
+      colors = []
+      for i in range(len(index)):
+          colors.append('black')
+                
+      # tituloalterado = titulo3 + " : " + "Cbo fraco"
+      tituloalterado = titulo3 + " : " + "Weak CBO"    
+      curso_num = str(float(curso_num))
+        
+      intensidade = 'Fraco'     
+      for i in range(len(index)):
+          if ((A_Curso_11_sort.index[i]==0)and(A_Curso_11_sort['Curso'].iloc[i]==str(curso_num))): #curso_num
+              # tituloalterado = titulo3 + " : " + "Cbo forte"
+              tituloalterado = titulo3 + " : " + "Strong Cbo"
+              intensidade ='Forte'
+              break
+      cursos = [] # Alterado em 26/09/2023
+      if (len(A_Curso_11)<1):
+          print("Não existe CBOs para este curso")
+          #  sys.exit() #===============================================================================================
+      else:
+          for i in range(len(A_Curso_11)):
+              cursos.append(A_Curso_11.Curso[i])
+      nomes = [] # Alterado em 26/09/2023
+      if (len(A_Curso_11)<1):
+          print("Não existe CBOs para este curso")
+          #   sys.exit() #===============================================================================================
+      else:
+         for i in range(len(A_Curso_11)):
+             nomes.append(A_Curso_11.Nome[i])
+      porcentagens = []
+      if (len(A_Curso_11)<1):
+          print("Não existe CBOs para este curso")
+          #   sys.exit() #===============================================================================================
+      else:
+          for i in range(len(A_Curso_11)):
+              porcentagens.append(A_Curso_11.Porcentagem[i])
+      x='Curso_Nome'
+      y='Porcentagem'
+      plt.rcParams["figure.figsize"] = (18, 8)
+      plt.rcParams["figure.autolayout"] = True
+      ax = A_Curso_11_sort.plot(x,y,kind='barh',title=tituloalterado,color=colors,legend=False)
+      ax.bar_label(ax.containers[0])
+      # plt.xlabel("Porcentagem")
+      plt.xlabel("Percentage")
+      plt.ylabel("CBO_Name")
+      # string = str(curso_num) + " - " + curso_nome + " : " + primeirosCbos_Nome[numero] + "_" + str(porcent_param) +".pdf"
+      string = str(curso_num) + " - " + curso_nome + " : " + primeirosCbos_Nome[numero] + "_" + str(porcent_param) +".png"
+      save_results_to =  'graficos/'   
+      plt.savefig(save_results_to + string)
+      volta = 'Volta'
+      
+    else:
+        print("Não existe cursos para esse CBO")  
+        cursos=0
+        nomes=0
+        porcentagens=0
+        return cbo_num,curso_nome,primeirosCbos_Nome,intensidade,plt,string, cursos, nomes,porcentagens
+  
+    return cbo_num,curso_nome,primeirosCbos_Nome,intensidade,plt,string,cursos,nomes,porcentagens
+
