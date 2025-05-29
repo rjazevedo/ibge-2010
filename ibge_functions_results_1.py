@@ -1987,6 +1987,7 @@ def voronoi_1():
     import pandas as pd
     import matplotlib.pyplot as plt
     from scipy.spatial import Voronoi, voronoi_plot_2d
+    import pandas as pd
 
     # Load data from CSV
     file_path = 'graficos/Filled_Updated_Processed_Kmeans_Results.csv'
@@ -2033,3 +2034,117 @@ def voronoi_1():
 
     return
 
+
+def split_Kmeans3_T_Profissoes_Cursos_Menor_CBO_by_cluster(input_file, n_clusters):
+
+    df = pd.read_csv(f'graficos/{input_file}')
+
+    # Garante que a coluna Cluster está como float
+    df['Cluster'] = df['Cluster'].astype(float)
+
+    for i in range(n_clusters):
+        cluster_df = df[df['Cluster'] == float(i)]
+        output_path = f'graficos/{input_file.replace(".csv", "")}_Cluster{i}.csv'
+        cluster_df.to_csv(output_path, index=False)
+
+    return
+
+def caracterizar_cluster0():
+
+    # Leitura do arquivo
+    file_path = 'graficos/Kmeans3_T_Profissoes_Cursos_Menor_CBO_Cluster0.csv'
+    df = pd.read_csv(file_path)
+
+    # Remover coluna 'Unnamed: 0' se existir
+    if 'Unnamed: 0' in df.columns:
+        df = df.drop(columns=['Unnamed: 0'])
+
+    # Transformar coluna Cluster para inteiro
+    if 'Cluster' in df.columns:
+        df['Cluster'] = df['Cluster'].astype(int)
+
+    # Mapeamentos simples para exemplo (ajuste conforme necessário)
+    area_conhecimento_map = {
+        'Matemática': 'Exatas',
+        'Engenharia': 'Exatas',
+        'Física': 'Exatas',
+        'Química': 'Exatas',
+        'Direito': 'Humanas',
+        'Administração': 'Humanas',
+        'Psicologia': 'Saúde',
+        'Medicina': 'Saúde',
+        'Enfermagem': 'Saúde',
+        'Pedagogia': 'Humanas',
+        'História': 'Humanas',
+        'Biologia': 'Exatas',
+        'Computação': 'Exatas',
+        'Educação Física': 'Saúde',
+        # Adicione mais conforme necessário
+    }
+
+    tipo_competencia_map = {
+        'Programador': 'Programação',
+        'Analista de Sistemas': 'Programação',
+        'Gerente': 'Gestão',
+        'Professor': 'Educação',
+        'Médico': 'Atendimento à Saúde',
+        'Enfermeiro': 'Atendimento à Saúde',
+        'Psicólogo': 'Atendimento à Saúde',
+        'Advogado': 'Gestão',
+        'Vendedor': 'Atendimento ao Cliente',
+        'Engenheiro': 'Gestão',
+        # Adicione mais conforme necessário
+    }
+
+    setor_economico_map = {
+        'Professor': 'Educação',
+        'Médico': 'Saúde',
+        'Enfermeiro': 'Saúde',
+        'Psicólogo': 'Saúde',
+        'Advogado': 'Serviços',
+        'Engenheiro': 'Indústria',
+        'Programador': 'Serviços',
+        'Vendedor': 'Serviços',
+        'Gerente': 'Serviços',
+        # Adicione mais conforme necessário
+    }
+
+    # Funções auxiliares para mapear os valores
+    def get_area_conhecimento(curso_nome):
+        for key in area_conhecimento_map:
+            if key.lower() in str(curso_nome).lower():
+                return area_conhecimento_map[key]
+        return 'Outro'
+
+    def get_tipo_competencia(cbo_nome):
+        for key in tipo_competencia_map:
+            if key.lower() in str(cbo_nome).lower():
+                return tipo_competencia_map[key]
+        return 'Outro'
+
+    def get_setor_economico(cbo_nome):
+        for key in setor_economico_map:
+            if key.lower() in str(cbo_nome).lower():
+                return setor_economico_map[key]
+        return 'Outro'
+
+    # Aplicar as funções para criar as novas colunas
+    df['area_conhecimento'] = df['Curso_Nome'].apply(get_area_conhecimento)
+    df['tipo_Competencia_Tecnica'] = df['Cbo_Nome'].apply(get_tipo_competencia)
+    df['Setor_Economico'] = df['Cbo_Nome'].apply(get_setor_economico)
+
+    # Salvar o arquivo caracterizado
+    output_path = 'graficos/Kmeans3_T_Profissoes_Cursos_Menor_CBO_Cluster0_Caracterizacao.csv'
+    df.to_csv(output_path, index=False)
+
+    # Nomear o cluster de acordo com a análise (exemplo: "Cluster de Saúde e Educação")
+    cluster_nome = "Cluster de Saúde e Educação"
+
+    # Salvar o nome do cluster em um arquivo
+    with open('graficos/Kmeans3_T_Profissoes_Cursos_Menor_CBO_Cluster0_nome.txt', 'w') as f:
+        f.write(cluster_nome)
+
+    print(f"Arquivo salvo em: {output_path}")
+    print(f"Nome do cluster salvo em: graficos/Kmeans3_T_Profissoes_Cursos_Menor_CBO_Cluster0_nome.txt")
+
+    return

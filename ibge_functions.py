@@ -683,3 +683,11 @@ def ibge_cursos_filter_1():
     # ibge_functions_results_1.ibge_cursos_filter_1(path,name)  
     ibge_functions_results_1.ibge_cursos_filter_1()
     return
+
+def split_Kmeans3_T_Profissoes_Cursos_Menor_CBO_by_cluster():
+    input = 'Kmeans3_T_Profissoes_Cursos_Menor_CBO_Curso_3.csv'
+    # ibge_functions_results_1.split_Kmeans3_T_Profissoes_Cursos_Menor_CBO_by_cluster(Kmeans3_T_Profissoes_Cursos_Menor_CBO_Curso.csv,2)
+    ibge_functions_results_1.split_Kmeans3_T_Profissoes_Cursos_Menor_CBO_by_cluster(input,3)
+    # ibge_functions_results_1.split_Kmeans3_T_Profissoes_Cursos_Menor_CBO_by_cluster(Kmeans3_T_Profissoes_Cursos_Menor_CBO_Curso_4.csv,4)
+    # ibge_functions_results_1.split_Kmeans3_T_Profissoes_Cursos_Menor_CBO_by_cluster(Kmeans3_T_Profissoes_Cursos_Menor_CBO_Curso_5.csv,5)
+    return

@@ -327,8 +327,8 @@ if fase == 100: # aqui é só de teste
     # ibge_functions.ibge_cursos_filter_1()
     # ------------------------------------------------------------------------------------------------------------------------------------------------
     # #Idas e voltas para Cursos e CBOs Diminuidos ---------------------------------------------------------------------------------------------------
-    ibge_functions.ibge_idas_voltas_cursos_profissoes_1()
-    ibge_functions_results_1.voronoi_1()
+    # ibge_functions.ibge_idas_voltas_cursos_profissoes_1()
+    # ibge_functions_results_1.voronoi_1()
     # -----------------------------------------------------
     # # ibge_functions_results_1.diminuir_and_save_csv_CBO()
     # # ibge_functions_results_1.transform_columns_to_int_and_save_CBO()
@@ -353,8 +353,12 @@ if fase == 100: # aqui é só de teste
 
     # Clusterização - Diminuição dos digitos de cursos e cbos
     # ibge_functions_exploratory_analysis_1.clusterizacao_metodo_cotovelo_e_kmeans2() # somente teste, não será utilizada 
-    ibge_functions_exploratory_analysis_1.Profissoes_Cursos_Menor_CBO_Curso() # CBOs 3 - Cursos 2
-    
+    # ibge_functions_exploratory_analysis_1.Profissoes_Cursos_Menor_CBO_Curso() # CBOs 3 - Cursos 2
+
+    # #Caracterização dos Clusters
+    ibge_functions.split_Kmeans3_T_Profissoes_Cursos_Menor_CBO_by_cluster()
+    # ibge_functions_results_1.caracterizar_cluster0()
+
     #QP6
     # QP6.transform_categoria_emprego()
     # QP6.classify_employment_stability()
