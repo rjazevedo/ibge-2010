@@ -4656,7 +4656,13 @@ def Juntar_40_60Porcento_Genero():
             # if (str(Final_Fem_CSV.Ocupação_Código[i])== '2341.0') & (str(Final_Fem_CSV.Curso_Superior_Graduação_Código[i]) == '142.0'):
             if ((str(Final_Fem_CSV.Ocupação_Código[j]))== (str(int(Kmeans3_T.Cbo[i])))) & (str(Final_Fem_CSV.Curso_Superior_Graduação_Código[j]) == str(int(Kmeans3_T.Curso[i]))):
                 Qtdade = Qtdade + 1
-        Kmeans3_T.F[i] = int(Qtdade)            
+        Kmeans3_T.F[i] = int(Qtdade)     
+    # Converter as colunas para inteiro antes de salvar
+    Kmeans3_T['M'] = Kmeans3_T['M'].astype(int)
+    Kmeans3_T['F'] = Kmeans3_T['F'].astype(int)
+    Kmeans3_T['Total'] = Kmeans3_T['Total'].astype(int)
+    Kmeans3_T['MP'] = (Kmeans3_T['MP'] * 100).astype(int)
+    Kmeans3_T['FP'] = (Kmeans3_T['FP'] * 100).astype(int)
     Kmeans3_T.to_csv(save_results_to + 'Kmeans3_T_F_45_55.csv')       
     # -----------------------------------------------------------------------------------
     # -----------------------------------------------------------------------------------
