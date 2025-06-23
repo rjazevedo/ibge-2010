@@ -378,11 +378,11 @@ def Profissoes_Cursos(path1,name1,path2,name2): # https://colab.research.google.
     #Clusterização
     #plt.figure(figsize=(6, 4))
     #plt.title("10%  - Todos os Cursos - Clusterização ")
-    #plt.xlabel('Cursos')
-    #plt.ylabel('Profissões')
+    plt.xlabel('Cursos')
+    plt.ylabel('Profissões')
     # plt.title("10% - All Courses - Clustering") # Diversos  ( Explicações e correções) e Estilo de texto 
-    plt.xlabel('Courses')
-    plt.ylabel('Professions')
+    # plt.xlabel('Courses')
+    # plt.ylabel('Professions')
     plt.ylim(0, 100) # definir limite do eixo
     plt.xlim(0, 100) # definir limite do eixo
     plt.grid()
@@ -841,7 +841,8 @@ def Empregabilidade_cursos_commaisprofissoes(path1,name1,path2,name2):
     save_results_to = 'graficos/' 
     
     # Filtrar as linhas com CR: 214, 342, 520, 721, 726
-    cr_values = [142, 145, 211, 212, 214, 223, 342, 520, 721, 726]
+    # cr_values = [142, 145, 211, 212, 214, 223, 342, 520, 721, 726]
+    cr_values = [142, 145, 211, 212, 223]
     filtered_data = data[data['Curso'].isin(cr_values)]
 
     ##### -------------------------------- Gráfico separado por cursos 
@@ -849,9 +850,9 @@ def Empregabilidade_cursos_commaisprofissoes(path1,name1,path2,name2):
     plt.figure(figsize=(6, 4))    
 
     # # Lista de cores para os clusters
-    cores_personalizadas = ['DarkViolet', 'DarkMagenta', 'DeepPink', 'Crimson',
-                            'red', 'Yellow',
-                            'blue', 'brown', 'black', 'green']  # Adicione mais cores, se necessário
+    #cores_personalizadas = ['DarkViolet', 'DarkMagenta', 'DeepPink', 'Crimson',
+    #                        'red', 'Yellow', 'blue', 'brown', 'black', 'green']  # Adicione mais cores, se necessário
+    cores_personalizadas = ['red', 'blue', 'brown', 'black', 'green']  # Adicione mais cores, se necessário
 
     # # Ordenar os clusters antes de criar o gráfico
     clusters_ordenados = sorted(filtered_data['Curso'].unique())
@@ -912,7 +913,8 @@ def Empregabilidade_cursos_commaisprofissoes(path1,name1,path2,name2):
     # Mostrar o gráfico
     # plt.show()
     # string1 = "Cursos e Profissões que mudam de Clusters" +".png"
-    string1 = "Empregabilidade: cursos e profissões que tem profissionais atuando em mais de uma profissão" +".png"
+    # string1 = "Empregabilidade: cursos e profissões que tem profissionais atuando em mais de uma profissão" +".png"
+    string1 = "Empregabilidade_cursos_profissões_profissionais_atuando_mais_profissão" +".png"
     save_results_to = 'graficos/'  
     plt.savefig(save_results_to + string1)  
     return
@@ -1546,7 +1548,8 @@ def  Salarios_cursos_commaisprofissoes(path1,name1,path2,name2):
     
     # Filtrar as linhas com CR: 214, 342, 520, 721, 726
     # cr_values = [214, 342, 520, 721, 726]
-    cr_values = [142, 145, 211, 212, 214, 223, 342, 520, 721, 726]
+    # cr_values = [142, 145, 211, 212, 214, 223, 342, 520, 721, 726]
+    cr_values = [142, 145, 211, 212, 223]
     filtered_data = data[data['Curso'].isin(cr_values)]
 
     ##### -------------------------------- Gráfico separado por cursos 
@@ -1555,10 +1558,9 @@ def  Salarios_cursos_commaisprofissoes(path1,name1,path2,name2):
 
     # # Lista de cores para os clusters
     # cores_personalizadas = ['red', 'blue', 'green', 'black', 'pink']  # Adicione mais cores, se necessário
-    cores_personalizadas = ['DarkViolet', 'DarkMagenta', 'DeepPink', 'Crimson',
-                            'red', 'Yellow',
-                            'blue', 'brown', 'black', 'green']  # Adicione mais cores, se necessário
-
+    # cores_personalizadas = ['DarkViolet', 'DarkMagenta', 'DeepPink', 'Crimson',
+    #                        'red', 'Yellow','blue', 'brown', 'black', 'green']  # Adicione mais cores, se necessário
+    cores_personalizadas = ['red','blue', 'brown', 'black', 'green']  # Adicione mais cores, se necessário
     # # Ordenar os clusters antes de criar o gráfico
     clusters_ordenados = sorted(filtered_data['Curso'].unique())
 
@@ -1614,7 +1616,8 @@ def  Salarios_cursos_commaisprofissoes(path1,name1,path2,name2):
     # Mostrar o gráfico
     # plt.show()
     # string1 = "Cursos e Profissões que mudam de Clusters" +".png"
-    string1 = "Salários: cursos e profissões que tem profissionais atuando em mais de uma profissão" +".png"
+    # string1 = "Salários: cursos e profissões que tem profissionais atuando em mais de uma profissão" +".png"
+    string1 = "Salários_cursos_profissões_profissionais_atuando_profissão" +".png"
     save_results_to = 'graficos/'  
     plt.savefig(save_results_to + string1)  
 
