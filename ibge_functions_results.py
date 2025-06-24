@@ -880,6 +880,53 @@ def Profissoes_Cursos_Masculino_Feminino(path1,name1,path2,name2,sx):
        plt.savefig(save_results_to + string)      
     return
 
+def Profissoes_Cursos_Masculino_Feminino_Juntos(path1, name1, path2, name2):
+    """
+    Gera um gráfico com os dados de profissões/cursos masculinos e femininos juntos.
+    Feminino: marcador estrela ('*'), Masculino: marcador bolinha ('o').
+    """
+    import matplotlib.pyplot as plt
+
+    # Leitura Feminino
+    df_fem = os.path.join(path2[0], name2[5])
+    X_fem = pd.read_csv(df_fem)
+    X_fem = X_fem.drop(columns=['Unnamed: 0'])
+    X_fem = X_fem.drop(columns=['Unnamed: 0.1'])
+    X_fem = X_fem.drop(columns=['CB'])
+    X_fem = X_fem.drop(columns=['CR'])
+
+    # Leitura Masculino
+    df_masc = os.path.join(path2[0], name2[6])
+    X_masc = pd.read_csv(df_masc)
+    X_masc = X_masc.drop(columns=['Unnamed: 0'])
+    X_masc = X_masc.drop(columns=['Unnamed: 0.1'])
+    X_masc = X_masc.drop(columns=['CB'])
+    X_masc = X_masc.drop(columns=['CR'])
+
+    save_results_to = 'graficos/'
+
+    plt.figure(figsize=(8, 6))
+    # plt.xlabel('Courses')
+    # plt.ylabel('Professions')
+    plt.xlabel('Cursos')
+    plt.ylabel('Profissões')
+    plt.ylim(0, 100)
+    plt.xlim(0, 100)
+    plt.grid()
+
+    # Feminino: estrela
+    plt.scatter(X_fem.iloc[:, 0], X_fem.iloc[:, 1], marker='*', color='magenta', label='Feminino')
+    # Masculino: bolinha
+    plt.scatter(X_masc.iloc[:, 0], X_masc.iloc[:, 1], marker='o', color='blue', label='Masculino')
+
+    # plt.legend()
+    plt.legend(loc='lower right') # Places the legend in the upper right corner
+    # plt.title("10% - All Courses - Feminino (star) and Masculino (circle)")
+    string = "10_All_Courses_Female_Star_Male_Circle.png"
+    plt.savefig(save_results_to + string)
+    # plt.show()
+    return
+
 def PlotOriginal_AdicionaColunaGenero(path1,name1,path2,name2,G):
 
     # Leitura do arquivo df original, masculino ou feminino
@@ -4847,7 +4894,7 @@ def tabela_40_60():
     df = df.drop(columns=['Cbo_Nome'])
 
     # Converter para código LaTeX
-    latex_code = df.to_latex(index=False, caption="Porcentagens de Masculinos e Femininos entre 40\\% e 60\%", label="tab:Fem_Masc")
+    latex_code = df.to_latex(index=False, caption="Porcentagens_Masculinos_Femininos_40_60%", label="tab:Fem_Masc")
 
     # Salvar em um arquivo .tex
     with open("tabela_40_60.tex", "w") as f:

@@ -687,16 +687,16 @@ def Coluna_Empregabilidade(path2,name2):
     Kmeans3_T['Soma_Empregabilidade'] = Empregabilidade['Soma']
     
     # Se Kmeans3_T .Curso == 520, então Empregabilidade['Soma']/500
-    Kmeans3_T.loc[Kmeans3_T['Curso'] == 142, 'Soma_Empregabilidade'] = np.round(np.log(Empregabilidade['Soma'] + 1) * 10 ) # Multiplicando para ajustar a escala
-    Kmeans3_T.loc[Kmeans3_T['Curso'] == 145, 'Soma_Empregabilidade'] = np.round(np.log(Empregabilidade['Soma'] + 1) * 10 ) # Multiplicando para ajustar a escala
-    Kmeans3_T.loc[Kmeans3_T['Curso'] == 211, 'Soma_Empregabilidade'] = np.round(np.log(Empregabilidade['Soma'] + 1) * 10 ) # Multiplicando para ajustar a escala
-    Kmeans3_T.loc[Kmeans3_T['Curso'] == 212, 'Soma_Empregabilidade'] = np.round(np.log(Empregabilidade['Soma'] + 1) * 10)  # Multiplicando para ajustar a escala
-    Kmeans3_T.loc[Kmeans3_T['Curso'] == 214, 'Soma_Empregabilidade'] = np.round(np.log(Empregabilidade['Soma'] + 1) * 10)   # Multiplicando para ajustar a escala
-    Kmeans3_T.loc[Kmeans3_T['Curso'] == 223, 'Soma_Empregabilidade'] = np.round(np.log(Empregabilidade['Soma'] + 1) * 10)  # Multiplicando para ajustar a escala
-    Kmeans3_T.loc[Kmeans3_T['Curso'] == 342, 'Soma_Empregabilidade'] = np.round(np.log(Empregabilidade['Soma'] + 1) * 10)  # Multiplicando para ajustar a escala
-    Kmeans3_T.loc[Kmeans3_T['Curso'] == 520, 'Soma_Empregabilidade'] = np.round(np.log(Empregabilidade['Soma'] + 1) * 10)  # Multiplicando para ajustar a escala
-    Kmeans3_T.loc[Kmeans3_T['Curso'] == 721, 'Soma_Empregabilidade'] = np.round(np.log(Empregabilidade['Soma'] + 1) * 10) # Multiplicando para ajustar a escala
-    Kmeans3_T.loc[Kmeans3_T['Curso'] == 726, 'Soma_Empregabilidade'] = np.round(np.log(Empregabilidade['Soma'] + 1) * 10)  # Multiplicando para ajustar a escala
+    Kmeans3_T.loc[Kmeans3_T['Curso'] == 142, 'Soma_Empregabilidade'] = np.log(Empregabilidade['Soma'] + 1) * 10 # Multiplicando para ajustar a escala
+    Kmeans3_T.loc[Kmeans3_T['Curso'] == 145, 'Soma_Empregabilidade'] = np.log(Empregabilidade['Soma'] + 1) * 10 # Multiplicando para ajustar a escala
+    Kmeans3_T.loc[Kmeans3_T['Curso'] == 211, 'Soma_Empregabilidade'] = np.log(Empregabilidade['Soma'] + 1) * 10 # Multiplicando para ajustar a escala
+    Kmeans3_T.loc[Kmeans3_T['Curso'] == 212, 'Soma_Empregabilidade'] = np.log(Empregabilidade['Soma'] + 1) * 10 # Multiplicando para ajustar a escala
+    Kmeans3_T.loc[Kmeans3_T['Curso'] == 214, 'Soma_Empregabilidade'] = np.log(Empregabilidade['Soma'] + 1) * 10 # Multiplicando para ajustar a escala
+    Kmeans3_T.loc[Kmeans3_T['Curso'] == 223, 'Soma_Empregabilidade'] = np.log(Empregabilidade['Soma'] + 1) * 10 # Multiplicando para ajustar a escala
+    Kmeans3_T.loc[Kmeans3_T['Curso'] == 342, 'Soma_Empregabilidade'] = np.log(Empregabilidade['Soma'] + 1) * 10 # Multiplicando para ajustar a escala
+    Kmeans3_T.loc[Kmeans3_T['Curso'] == 520, 'Soma_Empregabilidade'] = np.log(Empregabilidade['Soma'] + 1) * 10 # Multiplicando para ajustar a escala
+    Kmeans3_T.loc[Kmeans3_T['Curso'] == 721, 'Soma_Empregabilidade'] = np.log(Empregabilidade['Soma'] + 1) * 10 # Multiplicando para ajustar a escala
+    Kmeans3_T.loc[Kmeans3_T['Curso'] == 726, 'Soma_Empregabilidade'] = np.log(Empregabilidade['Soma'] + 1) * 10 # Multiplicando para ajustar a escala
     # Kmeans3_T.loc[Kmeans3_T['Soma_Empregabilidade'] > 4000, 'Soma_Empregabilidade'] = Empregabilidade['Soma'] / 30
    
     # Arredondar os valores da coluna 'Soma_Empregabilidade' para o inteiro mais próximo

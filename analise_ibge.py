@@ -135,16 +135,17 @@ if fase == 20:  #QP1
 
 # Fase 30: Resultados da Análise ...
 if fase == 30:  #QP2
-    ## Funções para 10%  
-    ## Geração do dataframes femininos e masculinos
-    ibge_functions.Filtro_Masculino_Feminino() 
-    ## Geração dos Arquivos de idas e voltas Femininas e Masculinas
-    ibge_functions.Ida_Volta_Masculino_Feminino()
-    ## Limpeza dos arquivos  de idas e voltas Femininas e Masculinas
-    ibge_functions.Tabela_Ida_Volta_Masculino_Feminino() 
-    ## Geração dos gráficos:
-    ##  - Profissões e Cursos-Masculino (10%-Cursos e Profissões do Censo-Masculino)
-    ##  - Profissões e Cursos-Feminino  (10%-Cursos e Profissões do Censo-Feminino)   
+    # ## Funções para 10%  
+    # ## Geração do dataframes femininos e masculinos
+    # ibge_functions.Filtro_Masculino_Feminino() 
+    # ## Geração dos Arquivos de idas e voltas Femininas e Masculinas
+    # ibge_functions.Ida_Volta_Masculino_Feminino()
+    # ## Limpeza dos arquivos  de idas e voltas Femininas e Masculinas
+    # ibge_functions.Tabela_Ida_Volta_Masculino_Feminino() 
+    # ## Geração dos gráficos:
+    # ##  - Profissões e Cursos-Masculino (10%-Cursos e Profissões do Censo-Masculino)
+    # ##  - Profissões e Cursos-Feminino  (10%-Cursos e Profissões do Censo-Feminino)   
+    # 
     ibge_functions.Profissoes_Cursos_Masculino_Feminino()     
     pass
 

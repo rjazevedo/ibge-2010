@@ -346,8 +346,9 @@ def Profissoes_Cursos_Masculino_Feminino():
     name1 = ibge_variable.names(6)
     path2 = ibge_variable.paths(13)
     name2 = ibge_variable.names(9)
-    ibge_functions_results.Profissoes_Cursos_Masculino_Feminino(path1,name1,path2,name2,'F')
-    ibge_functions_results.Profissoes_Cursos_Masculino_Feminino(path1,name1,path2,name2,'M')
+    # ibge_functions_results.Profissoes_Cursos_Masculino_Feminino(path1,name1,path2,name2,'F')
+    # ibge_functions_results.Profissoes_Cursos_Masculino_Feminino(path1,name1,path2,name2,'M')
+    ibge_functions_results.Profissoes_Cursos_Masculino_Feminino_Juntos(path1,name1,path2,name2) 
     return  
 
 # Fase 31
