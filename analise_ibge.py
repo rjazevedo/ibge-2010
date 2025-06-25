@@ -318,7 +318,7 @@ if fase == 100: # aqui é só de teste
     # #Análise de idade por CBO - Plot das idades para toda a base representativa  --------------------------------------------------------------------
     # ibge_functions_results_1.plot_gender_age_distribution() 
     # #Análise de idade por CBO - Plot das idades para toda os clusters  ------------------------------------------------------------------------------
-    # ibge_functions_results_1.split_csv_by_cluster() 
+    #  ibge_functions_results_1.split_csv_by_cluster() 
     # ibge_functions.plot_gender_age_distribution_bycluster() 
     # #Análise de idade por CBO - Plot das idades para Curso/CBO  -------------------------------------------------------------------------------------
     # ibge_functions_results_1.extract_data_by_course_cbo()
@@ -360,7 +360,7 @@ if fase == 100: # aqui é só de teste
     # ibge_functions_exploratory_analysis_1.Profissoes_Cursos_Menor_CBO_Curso() # CBOs 3 - Cursos 2
 
     # #Caracterização dos Clusters
-    ibge_functions.split_Kmeans3_T_Profissoes_Cursos_Menor_CBO_by_cluster()
+    # ibge_functions.split_Kmeans3_T_Profissoes_Cursos_Menor_CBO_by_cluster()
     # ibge_functions_results_1.caracterizar_cluster0()
 
     #QP6
@@ -368,5 +368,11 @@ if fase == 100: # aqui é só de teste
     # QP6.classify_employment_stability()
     # QP6.data_processed_groupby()
     # QP6.plot_employment_by_gender()
+
+    # ibge_functions_results_1.Analise_FaixaEtaria_Geral()
+    # ibge_functions_results_1.plot_age_distribution_geral()
+    # ibge_functions_results_1.plot_age_distribution_bycluster()
+    ibge_functions_results_1.plot_age_distribution_bycluster_1()
+    # ibge_functions_results_1.split_csv_by_cluster_geral()
 
     pass

@@ -963,6 +963,108 @@ def plot_gender_age_distribution():
 
     return
 
+def Analise_FaixaEtaria_Geral():
+        save_results_to = 'graficos/'
+        save_results_too = 'processados/CSVs_ArquivoFinalGraduados/'
+
+        file_path = save_results_to + 'Kmeans3_T.csv'
+        file_path1 = save_results_too + 'Brasil_Graduados.csv'
+
+        Kmeans3_T = pd.read_csv(file_path)
+        Final = pd.read_csv(file_path1)
+
+        Kmeans3_T = Kmeans3_T.drop(columns=['Unnamed: 0'])
+        Final = Final.drop(columns=['Unnamed: 0'])
+
+        Kmeans3_T['E29'] = ''
+        Kmeans3_T['E30'] = ''
+        Kmeans3_T['E40'] = ''
+        Kmeans3_T['E50'] = ''
+        Kmeans3_T['E60'] = ''
+
+        for i in range(len(Kmeans3_T)):
+            Qtdade = 0
+            for j in range(len(Final)):
+                if ((str(Final.Ocupação_Código[j])) == (str(int(Kmeans3_T.Cbo[i])))) and \
+                   (str(Final.Curso_Superior_Graduação_Código[j]) == str(int(Kmeans3_T.Curso[i]))) and \
+                   (Final.Idade_em_Anos[j] <= 29):
+                    Qtdade += 1
+            Kmeans3_T.E29[i] = int(Qtdade)
+
+            Qtdade = 0
+            for j in range(len(Final)):
+                if ((str(Final.Ocupação_Código[j])) == (str(int(Kmeans3_T.Cbo[i])))) and \
+                   (str(Final.Curso_Superior_Graduação_Código[j]) == str(int(Kmeans3_T.Curso[i]))) and \
+                   (30 <= Final.Idade_em_Anos[j] <= 39):
+                    Qtdade += 1
+            Kmeans3_T.E30[i] = int(Qtdade)
+
+            Qtdade = 0
+            for j in range(len(Final)):
+                if ((str(Final.Ocupação_Código[j])) == (str(int(Kmeans3_T.Cbo[i])))) and \
+                   (str(Final.Curso_Superior_Graduação_Código[j]) == str(int(Kmeans3_T.Curso[i]))) and \
+                   (40 <= Final.Idade_em_Anos[j] <= 49):
+                    Qtdade += 1
+            Kmeans3_T.E40[i] = int(Qtdade)
+
+            Qtdade = 0
+            for j in range(len(Final)):
+                if ((str(Final.Ocupação_Código[j])) == (str(int(Kmeans3_T.Cbo[i])))) and \
+                   (str(Final.Curso_Superior_Graduação_Código[j]) == str(int(Kmeans3_T.Curso[i]))) and \
+                   (50 <= Final.Idade_em_Anos[j] <= 59):
+                    Qtdade += 1
+            Kmeans3_T.E50[i] = int(Qtdade)
+
+            Qtdade = 0
+            for j in range(len(Final)):
+                if ((str(Final.Ocupação_Código[j])) == (str(int(Kmeans3_T.Cbo[i])))) and \
+                   (str(Final.Curso_Superior_Graduação_Código[j]) == str(int(Kmeans3_T.Curso[i]))) and \
+                   (Final.Idade_em_Anos[j] >= 60):
+                    Qtdade += 1
+            Kmeans3_T.E60[i] = int(Qtdade)
+
+        Kmeans3_T.to_csv(save_results_to + 'Kmeans3_T_IdadeCursoCBO_Geral.csv')
+        return    
+
+def plot_age_distribution_geral():
+    import matplotlib.pyplot as plt
+
+    # Leitura do arquivo
+    file_path = 'graficos/Kmeans3_T_IdadeCursoCBO_Geral.csv'
+    df = pd.read_csv(file_path)
+
+    # Somar os valores por faixa etária (sem separar por gênero)
+    age_groups = ['29', '30-39', '40-49', '50-59', '60-69']
+    sums = [
+        pd.to_numeric(df['E29'], errors='coerce').sum(),
+        pd.to_numeric(df['E30'], errors='coerce').sum(),
+        pd.to_numeric(df['E40'], errors='coerce').sum(),
+        pd.to_numeric(df['E50'], errors='coerce').sum(),
+        pd.to_numeric(df['E60'], errors='coerce').sum()
+    ]
+
+    # Criar o gráfico de barras
+    x = range(len(age_groups))
+    width = 0.35
+
+    plt.figure(figsize=(10, 6))
+    plt.bar(x, sums, width, color='pink', edgecolor='black')
+    plt.yscale('log')  # Escala logarítmica para balancear os valores
+
+    plt.xlabel('Faixa Etária', fontsize=12)
+    plt.ylabel('Quantidade', fontsize=12)
+    # plt.title('Distribuição por faixa etária para toda a base representativa', fontsize=14)
+    plt.xticks([p for p in x], age_groups)
+    plt.grid(axis='y', linestyle='--', alpha=0.7)
+    plt.tight_layout()
+
+    # Salvar o gráfico
+    save_results_to = 'graficos/'
+    plt.savefig(save_results_to + 'Distribuicao_FaixaEtaria_BaseRepresentativa_Geral.png')
+    # plt.show()
+
+    return
+
 def split_csv_by_cluster():
     # Read the CSV file
     # file_path = 'graficos/Kmeans3_T_IdadeCursoCBO.csv'
@@ -985,6 +1087,25 @@ def split_csv_by_cluster():
 
     return
 
+def split_csv_by_cluster_geral():
+    # Read the CSV file
+    file_path = 'graficos/Kmeans3_T_IdadeCursoCBO_Geral.csv'
+    df = pd.read_csv(file_path)
+
+    # Convert the 'Cluster' column to integer
+    df['Cluster'] = df['Cluster'].astype(int)
+
+    # Split the data into separate DataFrames based on the cluster
+    cluster_0 = df[df['Cluster'] == 0]
+    cluster_1 = df[df['Cluster'] == 1]
+    cluster_2 = df[df['Cluster'] == 2]
+
+    # Save each cluster to a separate CSV file
+    cluster_0.to_csv('graficos/Kmeans3_T_IdadeCursoCBO_Geral_Cluster0.csv', index=False)
+    cluster_1.to_csv('graficos/Kmeans3_T_IdadeCursoCBO_Geral_Cluster1.csv', index=False)
+    cluster_2.to_csv('graficos/Kmeans3_T_IdadeCursoCBO_Geral_Cluster2.csv', index=False)
+
+    return
 
 
 def plot_gender_age_distribution_bycluster(cluster):
@@ -1123,6 +1244,121 @@ def plot_gender_age_distribution_bycluster(cluster):
         plt.savefig(save_results_to + 'Distribuicao_Genero_FaixaEtaria_Cluster2.png')
         # plt.show()       
 
+    return
+# def plot_age_distribution_bycluster(cluster):
+# def plot_age_distribution_bycluster():
+#     import matplotlib.pyplot as plt
+
+#     # if cluster == 0:
+#     file_path = 'graficos/Kmeans3_T_IdadeCursoCBO_Geral_Cluster0.csv'
+#     df = pd.read_csv(file_path)
+#     age_groups = ['29', '30-39', '40-49', '50-59', '60-69']
+#     sums = [
+#         pd.to_numeric(df['E29'], errors='coerce').sum(),
+#         pd.to_numeric(df['E30'], errors='coerce').sum(),
+#         pd.to_numeric(df['E40'], errors='coerce').sum(),
+#         pd.to_numeric(df['E50'], errors='coerce').sum(),
+#         pd.to_numeric(df['E60'], errors='coerce').sum()
+#     ]
+#     x = range(len(age_groups))
+#     width = 0.5
+#     plt.figure(figsize=(10, 6))
+#     plt.bar(x, sums, width, color='pink', edgecolor='black')
+#     plt.yscale('log')
+#     plt.xlabel('Faixa Etária', fontsize=12)
+#     plt.ylabel('Quantidade', fontsize=12)
+#     plt.xticks([p for p in x], age_groups)
+#     plt.grid(axis='y', linestyle='--', alpha=0.7)
+#     plt.tight_layout()
+#     save_results_to = 'graficos/'
+#     plt.savefig(save_results_to + 'Distribuicao_FaixaEtaria_Cluster0.png')
+
+#     # if cluster == 1:
+#     file_path = 'graficos/Kmeans3_T_IdadeCursoCBO_Geral_Cluster1.csv'
+#     df = pd.read_csv(file_path)
+#     age_groups = ['29', '30-39', '40-49', '50-59', '60-69']
+#     sums = [
+#         pd.to_numeric(df['E29'], errors='coerce').sum(),
+#         pd.to_numeric(df['E30'], errors='coerce').sum(),
+#         pd.to_numeric(df['E40'], errors='coerce').sum(),
+#         pd.to_numeric(df['E50'], errors='coerce').sum(),
+#         pd.to_numeric(df['E60'], errors='coerce').sum()
+#     ]
+#     x = range(len(age_groups))
+#     width = 0.5
+#     plt.figure(figsize=(10, 6))
+#     plt.bar(x, sums, width, color='pink', edgecolor='black')
+#     plt.yscale('log')
+#     plt.xlabel('Faixa Etária', fontsize=12)
+#     plt.ylabel('Quantidade', fontsize=12)
+#     plt.xticks([p for p in x], age_groups)
+#     plt.grid(axis='y', linestyle='--', alpha=0.7)
+#     plt.tight_layout()
+#     save_results_to = 'graficos/'
+#     plt.savefig(save_results_to + 'Distribuicao_FaixaEtaria_Cluster1.png')
+
+#     # if cluster == 2:
+#     file_path = 'graficos/Kmeans3_T_IdadeCursoCBO_Geral_Cluster2.csv'
+#     df = pd.read_csv(file_path)
+#     age_groups = ['29', '30-39', '40-49', '50-59', '60-69']
+#     sums = [
+#         pd.to_numeric(df['E29'], errors='coerce').sum(),
+#         pd.to_numeric(df['E30'], errors='coerce').sum(),
+#         pd.to_numeric(df['E40'], errors='coerce').sum(),
+#         pd.to_numeric(df['E50'], errors='coerce').sum(),
+#         pd.to_numeric(df['E60'], errors='coerce').sum()
+#     ]
+#     x = range(len(age_groups))
+#     width = 0.5
+#     plt.figure(figsize=(10, 6))
+#     plt.bar(x, sums, width, color='pink', edgecolor='black')
+#     plt.yscale('log')
+#     plt.xlabel('Faixa Etária', fontsize=12)
+#     plt.ylabel('Quantidade', fontsize=12)
+#     plt.xticks([p for p in x], age_groups)
+#     plt.grid(axis='y', linestyle='--', alpha=0.7)
+#     plt.tight_layout()
+#     save_results_to = 'graficos/'
+#     plt.savefig(save_results_to + 'Distribuicao_FaixaEtaria_Cluster2.png')
+
+#     return
+
+def plot_age_distribution_bycluster_1():
+    import matplotlib.pyplot as plt
+
+    # File paths for each cluster
+    files = [
+        ('graficos/Kmeans3_T_IdadeCursoCBO_Geral_Cluster0.csv', 'Cluster 0', 'red'),
+        ('graficos/Kmeans3_T_IdadeCursoCBO_Geral_Cluster1.csv', 'Cluster 1', 'blue'),
+        ('graficos/Kmeans3_T_IdadeCursoCBO_Geral_Cluster2.csv', 'Cluster 2', 'green')
+    ]
+    age_groups = ['29', '30-39', '40-49', '50-59', '60-69']
+    width = 0.25
+    x = range(len(age_groups))
+
+    plt.figure(figsize=(10, 6))
+
+    for idx, (file_path, label, color) in enumerate(files):
+        df = pd.read_csv(file_path)
+        sums = [
+            pd.to_numeric(df['E29'], errors='coerce').sum(),
+            pd.to_numeric(df['E30'], errors='coerce').sum(),
+            pd.to_numeric(df['E40'], errors='coerce').sum(),
+            pd.to_numeric(df['E50'], errors='coerce').sum(),
+            pd.to_numeric(df['E60'], errors='coerce').sum()
+        ]
+        plt.bar([p + width * idx for p in x], sums, width=width, color=color, edgecolor='black', label=label)
+
+    plt.yscale('log')
+    plt.xlabel('Faixa Etária', fontsize=12)
+    plt.ylabel('Quantidade', fontsize=12)
+    plt.xticks([p + width for p in x], age_groups)
+    plt.legend()
+    plt.grid(axis='y', linestyle='--', alpha=0.7)
+    plt.tight_layout()
+    save_results_to = 'graficos/'
+    plt.savefig(save_results_to + 'Distribuicao_FaixaEtaria_Clusters_Juntos.png')
+    # plt.show()
     return
 
 def extract_data_by_course_cbo():
