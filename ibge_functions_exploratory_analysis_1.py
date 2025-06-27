@@ -460,8 +460,10 @@ def Profissoes_Cursos_Menor_CBO_Curso(): # https://colab.research.google.com/dri
    #plt.xlabel('Cursos')
    #plt.ylabel('Profissões')
    # plt.title("10% - All Courses - Clustering") # Diversos  ( Explicações e correções) e Estilo de texto 
-   plt.xlabel('Courses')
-   plt.ylabel('Professions')
+   # plt.xlabel('Courses')
+   # plt.ylabel('Professions')
+   plt.xlabel('Cursos')
+   plt.ylabel('Profissões')
    plt.ylim(0, 100) # definir limite do eixo
    plt.xlim(0, 100) # definir limite do eixo
    plt.grid()
@@ -470,8 +472,9 @@ def Profissoes_Cursos_Menor_CBO_Curso(): # https://colab.research.google.com/dri
    plt.scatter(X.iloc[y_kmeans == 1, 0], X.iloc[y_kmeans == 1, 1], s=100, c='blue', label='Cluster 1', marker='*')
    plt.scatter(X.iloc[y_kmeans==  2, 0], X.iloc[y_kmeans==  2, 1], s=100, c='green', label ='Cluster 2', marker = '*')
    plt.scatter(X.iloc[y_kmeans==  3, 0], X.iloc[y_kmeans==  3, 1], s=100, c='black', label ='Cluster 3', marker = '*')
-   plt.scatter(X.iloc[y_kmeans==  4, 0], X.iloc[y_kmeans==  4, 1], s=100, c='pink', label ='Cluster 4', marker = '*')
-   plt.scatter(kmeans.cluster_centers_[:, 0], kmeans.cluster_centers_[:, 1], s=300, c='yellow', label = 'Centroids', marker = '*') # Diversos  ( Explicações e correções) e Estilo de texto
+   plt.scatter(X.iloc[y_kmeans==  4, 0], X.iloc[y_kmeans==  4, 1], s=100, c='brown', label ='Cluster 4', marker = '*')
+   # plt.scatter(X.iloc[y_kmeans==  5, 0], X.iloc[y_kmeans==  5, 1], s=100, c='pink', label ='Cluster 5', marker = '*')
+   # plt.scatter(kmeans.cluster_centers_[:, 0], kmeans.cluster_centers_[:, 1], s=300, c='yellow', label = 'Centroids', marker = '*') # Diversos  ( Explicações e correções) e Estilo de texto
    # # Ajustar os limites dos eixos dinamicamente para garantir que todos os pontos estejam visíveis
    # x_min, x_max = X.iloc[:, 0].min(), X.iloc[:, 0].max()
    # y_min, y_max = X.iloc[:, 1].min(), X.iloc[:, 1].max()
@@ -485,7 +488,7 @@ def Profissoes_Cursos_Menor_CBO_Curso(): # https://colab.research.google.com/dri
    # plt.show()
    # string1 = "10%  - Todos os Cursos - Clusterização " +".pdf"
    # string1 = "10% - All Courses - Clustering" +".pdf"
-   string1 = "10_All_Courses_Clustering_Profissoes_Cursos_Menor_CBO_Curso_5" +".png"
+   string1 = "10_All_Courses_Clustering_Profissoes_Cursos_Menor_CBO_Curso_5_certo" +".png"
    save_results_to = 'graficos/'  
    plt.savefig(save_results_to + string1)  
 
@@ -517,7 +520,7 @@ def Profissoes_Cursos_Menor_CBO_Curso(): # https://colab.research.google.com/dri
    # print(X_Original)
 
    # selecao_Kmeans3 = X_['cluster']==0
-   selecao_Kmeans3 = X['cluster']==0
+   selecao_Kmeans3 = X['cluster']==0 #--------------------------------Cluster 0---------------------------------------------------------------------------------------
    X_0_Kmeans3 = X[selecao_Kmeans3]
    X_0_Kmeans3
 
@@ -569,7 +572,7 @@ def Profissoes_Cursos_Menor_CBO_Curso(): # https://colab.research.google.com/dri
    print("")
    # ==============================================
    # selecao_Kmeans3 = X_['cluster']==1
-   selecao_Kmeans3 = X['cluster']==1
+   selecao_Kmeans3 = X['cluster']==1 #--------------------------------Cluster 1---------------------------------------------------------------------------------------
    X_1_Kmeans3 = X[selecao_Kmeans3]
 
    Kmeans3_CursoNum =[]
@@ -618,7 +621,7 @@ def Profissoes_Cursos_Menor_CBO_Curso(): # https://colab.research.google.com/dri
    print("")
    # ==============================================
    # selecao_Kmeans3 = X_['cluster']==2    
-   selecao_Kmeans3 = X['cluster']==2
+   selecao_Kmeans3 = X['cluster']==2  #--------------------------------Cluster 2---------------------------------------------------------------------------------------
    X_2_Kmeans3 = X[selecao_Kmeans3]   
    # X_2_Kmeans3
 
@@ -669,7 +672,7 @@ def Profissoes_Cursos_Menor_CBO_Curso(): # https://colab.research.google.com/dri
 
    # ==============================================
    # selecao_Kmeans3 = X_['cluster']==2    
-   selecao_Kmeans3 = X['cluster']==3
+   selecao_Kmeans3 = X['cluster']==3 #--------------------------------Cluster 3---------------------------------------------------------------------------------------
    X_2_Kmeans3 = X[selecao_Kmeans3]   
    # X_2_Kmeans3
 
@@ -717,6 +720,108 @@ def Profissoes_Cursos_Menor_CBO_Curso(): # https://colab.research.google.com/dri
    }
    kmeans3_3.rename(columns=dict,inplace=True) 
    print(kmeans3_3)             
+   # ==============================================
+   # selecao_Kmeans3 = X_['cluster']==2    
+   selecao_Kmeans3 = X['cluster']==4 #--------------------------------Cluster 4---------------------------------------------------------------------------------------
+   X_2_Kmeans3 = X[selecao_Kmeans3]   
+   # X_2_Kmeans3
+
+   Kmeans3_CursoNum =[]
+   Kmeans3_CboNum =[]
+   for index, row in X_Original.iterrows():
+       for indexx, roww in X_2_Kmeans3.iterrows():
+           if (row['Ida']== roww['Ida']) and (row['Volta']==roww['Volta']):
+               #CR_Cluster1Cursos_Kmeans3.append(row['CR'])
+               Kmeans3_CursoNum.append(row['CR'])
+               #Kmeans3_CursoNome.append(row['CR'])
+               Kmeans3_CboNum.append(row['CB'])
+               #Kmeans3_CboNome.append(row['CR'])#     
+   # print("len(Kmeans3_CursoNum):", len(Kmeans3_CursoNum))
+   # print("len(Kmeans3_CboNum):", len(Kmeans3_CboNum))
+    
+   Kmeans3_CursoNome =[]
+   for i in range (len(Kmeans3_CursoNum)):
+       for index, row in CursosCenso.iterrows():
+    #            if (str(Kmeans3_CursoNum[i]) == CursosCenso['curso_num'][index]):
+    #                Kmeans3_CursoNome.append(CursosCenso['curso_nome'][index])
+    ## Kmeans3_CursoNome
+            if str(int(Kmeans3_CursoNum[i])) == str(CursosCenso['curso_num'][index]):
+               Kmeans3_CursoNome.append(CursosCenso['curso_nome'][index])
+   print('len(Kmeans3_CursoNome)', len(Kmeans3_CursoNome))
+    
+   Kmeans3_CboNome =[]
+   for i in range (len(Kmeans3_CboNum)):
+       for index, row in CBO.iterrows():
+           if (int(Kmeans3_CboNum[i]) == CBO['Cod_CBO'][index]):
+               Kmeans3_CboNome.append(CBO['Nome_CBO'][index])
+   # Kmeans3_CboNome
+
+   Kmeans3_resultados_4=[]
+   for i in range(len(Kmeans3_CursoNum)):
+       tupla=(Kmeans3_CursoNum[i],Kmeans3_CursoNome[i],Kmeans3_CboNum[i],Kmeans3_CboNome[i])
+       Kmeans3_resultados_4.append(tupla)
+   #...
+   kmeans3_4= pd.DataFrame(Kmeans3_resultados_4)
+   #...
+   dict = {0:"Curso",
+           1:"Curso_Nome",
+           2:"Cbo",
+           3:"Cbo_Nome",
+   }
+   kmeans3_4.rename(columns=dict,inplace=True) 
+   print(kmeans3_4)   
+
+#    # ==============================================
+#    # selecao_Kmeans3 = X_['cluster']==2    
+#    selecao_Kmeans3 = X['cluster']==5 #--------------------------------Cluster 5---------------------------------------------------------------------------------------
+#    X_2_Kmeans3 = X[selecao_Kmeans3]   
+#    # X_2_Kmeans3
+
+#    Kmeans3_CursoNum =[]
+#    Kmeans3_CboNum =[]
+#    for index, row in X_Original.iterrows():
+#        for indexx, roww in X_2_Kmeans3.iterrows():
+#            if (row['Ida']== roww['Ida']) and (row['Volta']==roww['Volta']):
+#                #CR_Cluster1Cursos_Kmeans3.append(row['CR'])
+#                Kmeans3_CursoNum.append(row['CR'])
+#                #Kmeans3_CursoNome.append(row['CR'])
+#                Kmeans3_CboNum.append(row['CB'])
+#                #Kmeans3_CboNome.append(row['CR'])#     
+#    # print("len(Kmeans3_CursoNum):", len(Kmeans3_CursoNum))
+#    # print("len(Kmeans3_CboNum):", len(Kmeans3_CboNum))
+    
+#    Kmeans3_CursoNome =[]
+#    for i in range (len(Kmeans3_CursoNum)):
+#        for index, row in CursosCenso.iterrows():
+#     #            if (str(Kmeans3_CursoNum[i]) == CursosCenso['curso_num'][index]):
+#     #                Kmeans3_CursoNome.append(CursosCenso['curso_nome'][index])
+#     ## Kmeans3_CursoNome
+#             if str(int(Kmeans3_CursoNum[i])) == str(CursosCenso['curso_num'][index]):
+#                Kmeans3_CursoNome.append(CursosCenso['curso_nome'][index])
+#    print('len(Kmeans3_CursoNome)', len(Kmeans3_CursoNome))
+    
+#    Kmeans3_CboNome =[]
+#    for i in range (len(Kmeans3_CboNum)):
+#        for index, row in CBO.iterrows():
+#            if (int(Kmeans3_CboNum[i]) == CBO['Cod_CBO'][index]):
+#                Kmeans3_CboNome.append(CBO['Nome_CBO'][index])
+#    # Kmeans3_CboNome
+
+#    Kmeans3_resultados_5=[]
+#    for i in range(len(Kmeans3_CursoNum)):
+#        tupla=(Kmeans3_CursoNum[i],Kmeans3_CursoNome[i],Kmeans3_CboNum[i],Kmeans3_CboNome[i])
+#        Kmeans3_resultados_5.append(tupla)
+#    #...
+#    kmeans3_5= pd.DataFrame(Kmeans3_resultados_5)
+#    #...
+#    dict = {0:"Curso",
+#            1:"Curso_Nome",
+#            2:"Cbo",
+#            3:"Cbo_Nome",
+#    }
+#    kmeans3_5.rename(columns=dict,inplace=True) 
+#    print(kmeans3_5)    
+ 
 
    # # O que tem em todos os  cluster? ===================================================================================================================
    Kmeans3_CursoNum =[]

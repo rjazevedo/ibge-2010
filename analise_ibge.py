@@ -111,7 +111,8 @@ if fase == 20:  #QP1
     # - geração do gráfico K-Means com K=3 (10% - Todos os Cursos - Clusterização) 
     # - geração do arquivo Kmeans3_T.csv   
     ################## ------------------------ 
-    # ibge_functions.Profissoes_Cursos()    
+    # 
+    ibge_functions.Profissoes_Cursos()    
     ## Empregabilidade x Salario
     # ibge_functions.median_salario() 
     # ibge_functions_exploratory_analysis.separar_cursos_por_clusters()
@@ -357,7 +358,8 @@ if fase == 100: # aqui é só de teste
 
     # Clusterização - Diminuição dos digitos de cursos e cbos
     # ibge_functions_exploratory_analysis_1.clusterizacao_metodo_cotovelo_e_kmeans2() # somente teste, não será utilizada 
-    # ibge_functions_exploratory_analysis_1.Profissoes_Cursos_Menor_CBO_Curso() # CBOs 3 - Cursos 2
+    # 
+    ibge_functions_exploratory_analysis_1.Profissoes_Cursos_Menor_CBO_Curso() # CBOs 3 - Cursos 2
 
     # #Caracterização dos Clusters
     # ibge_functions.split_Kmeans3_T_Profissoes_Cursos_Menor_CBO_by_cluster()
@@ -372,7 +374,7 @@ if fase == 100: # aqui é só de teste
     # ibge_functions_results_1.Analise_FaixaEtaria_Geral()
     # ibge_functions_results_1.plot_age_distribution_geral()
     # ibge_functions_results_1.plot_age_distribution_bycluster()
-    ibge_functions_results_1.plot_age_distribution_bycluster_1()
+    # ibge_functions_results_1.plot_age_distribution_bycluster_1()
     # ibge_functions_results_1.split_csv_by_cluster_geral()
 
     pass
