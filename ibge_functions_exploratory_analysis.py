@@ -808,7 +808,7 @@ def Empregabilidade(path1,name1,path2,name2):
     # Mostrar o gráfico
     # plt.show()
     # string1 = "Cursos e Profissões que mudam de Clusters" +".png"
-    string1 = "Empregabilidade: Cursos e Profissões que mudam de Clusters" +".png"
+    string1 = "Empregabilidade_Cursos_Profissões_mudam_Clusters" +".png"
     save_results_to = 'graficos/'  
     plt.savefig(save_results_to + string1)  
     return

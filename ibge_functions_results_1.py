@@ -923,7 +923,7 @@ def plot_gender_age_distribution():
     df = pd.read_csv(file_path)
 
     # Somar os valores por faixa etária e gênero
-    age_groups = ['29', '30-39', '40-49', '50-59', '60-69']
+    age_groups = ['25-29', '30-39', '40-49', '50-59', '60+']
     female_sums = [
         pd.to_numeric(df['F29'], errors='coerce').sum(),
         pd.to_numeric(df['F30'], errors='coerce').sum(),
@@ -1034,7 +1034,7 @@ def plot_age_distribution_geral():
     df = pd.read_csv(file_path)
 
     # Somar os valores por faixa etária (sem separar por gênero)
-    age_groups = ['29', '30-39', '40-49', '50-59', '60-69']
+    age_groups = ['25-29', '30-39', '40-49', '50-59', '60+']
     sums = [
         pd.to_numeric(df['E29'], errors='coerce').sum(),
         pd.to_numeric(df['E30'], errors='coerce').sum(),
@@ -1117,7 +1117,7 @@ def plot_gender_age_distribution_bycluster(cluster):
         df = pd.read_csv(file_path)
 
         # Somar os valores por faixa etária e gênero
-        age_groups = ['29', '30-39', '40-49', '50-59', '60-69']
+        age_groups = ['25-29', '30-39', '40-49', '50-59', '60+']
         female_sums = [
             pd.to_numeric(df['F29'], errors='coerce').sum(),
             pd.to_numeric(df['F30'], errors='coerce').sum(),
@@ -1161,7 +1161,7 @@ def plot_gender_age_distribution_bycluster(cluster):
         df = pd.read_csv(file_path)
 
         # Somar os valores por faixa etária e gênero
-        age_groups = ['29', '30-39', '40-49', '50-59', '60-69']
+        age_groups = ['25-29', '30-39', '40-49', '50-59', '60+']
         female_sums = [
             pd.to_numeric(df['F29'], errors='coerce').sum(),
             pd.to_numeric(df['F30'], errors='coerce').sum(),
@@ -1206,7 +1206,7 @@ def plot_gender_age_distribution_bycluster(cluster):
         df = pd.read_csv(file_path)
 
         # Somar os valores por faixa etária e gênero
-        age_groups = ['29', '30-39', '40-49', '50-59', '60-69']
+        age_groups = ['25-29', '30-39', '40-49', '50-59', '60+']
         female_sums = [
             pd.to_numeric(df['F29'], errors='coerce').sum(),
             pd.to_numeric(df['F30'], errors='coerce').sum(),
@@ -1332,7 +1332,7 @@ def plot_age_distribution_bycluster_1():
         ('graficos/Kmeans3_T_IdadeCursoCBO_Geral_Cluster1.csv', 'Cluster 1', 'blue'),
         ('graficos/Kmeans3_T_IdadeCursoCBO_Geral_Cluster2.csv', 'Cluster 2', 'green')
     ]
-    age_groups = ['29', '30-39', '40-49', '50-59', '60-69']
+    age_groups = ['25-29', '30-39', '40-49', '50-59', '60+']
     width = 0.25
     x = range(len(age_groups))
 
