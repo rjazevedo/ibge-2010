@@ -515,9 +515,9 @@ def Cursos_CBO_14_10_sn(csv_estado,csv_CBO,csv_CURSOS,cbo_num,titulo3,NaoGraduad
     #print("")
     #print(qtdade)
     A_Curso_11 = A_Curso.head(qtdade)
-    #print("")
-    #print(A_Curso_11)
-    #sys.exit() #==============================================================
+    # print("")
+    # print(A_Curso_11)
+    # sys.exit() #==============================================================
 
     if(len(A_Curso_11)>=1):
       #Coletando o nome dos Cursos ...
@@ -531,6 +531,7 @@ def Cursos_CBO_14_10_sn(csv_estado,csv_CBO,csv_CURSOS,cbo_num,titulo3,NaoGraduad
                   #print(row['Cod_Curso'],":",row['Nome_Curso'])
       #...
       NomeCurso = pd.DataFrame(NomeCurso, columns=['Nome_Curso'])
+      print("NomeCurso:",NomeCurso)  
       # ...
       A_Curso_11["Nome"] = 1
       import warnings
@@ -538,7 +539,7 @@ def Cursos_CBO_14_10_sn(csv_estado,csv_CBO,csv_CURSOS,cbo_num,titulo3,NaoGraduad
       import pandas as pd
       for i in range(len(A_Curso_11)):
         #   A_Curso_11['Nome'][i] = NomeCurso.Nome_Curso[i]
-          A_Curso_11['Nome'].iloc[i]= NomeCurso['Nome_Curso'].iloc[i]
+            A_Curso_11['Nome'].iloc[i]= NomeCurso['Nome_Curso'].iloc[i]
 
       #...
       A_Curso_11.reset_index(inplace=True)
@@ -2100,7 +2101,7 @@ def Kmeans3_T_Grafico_Genero():
     plt.ylim(0.0, 100.0)
     # plt.show()    
     #string1 = "10%  -  Visualização dos três gráficos - Genero - Kmeans3_" + ".pdf"
-    string1 = "10% - View of the three graphs - Gender - Kmeans3_" + ".png"
+    string1 = "10%_View_of_the_three_graphs_Gender_Kmeans3" + ".png"
     save_results_to = 'graficos/'  
     plt.savefig(save_results_to + string1)          
     return
