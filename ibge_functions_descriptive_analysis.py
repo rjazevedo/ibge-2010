@@ -476,12 +476,21 @@ def NaoGraduados_PivotTable_2(primeirosCbos,csv_PivotTableFinal):
     Graduados = []
     for i in range(len(primeirosCbos)):
         # print( type(primeirosCbos[i]))
-        Valor1 = PivotTableFinal.loc[PivotTableFinal.Ocupação_Código==int(str(primeirosCbos[i])), '1.0'].values[0]
-        Valor2 = PivotTableFinal.loc[PivotTableFinal.Ocupação_Código==int(str(primeirosCbos[i])), '2.0'].values[0]
-        Valor3 = PivotTableFinal.loc[PivotTableFinal.Ocupação_Código==int(str(primeirosCbos[i])), '3.0'].values[0]
-        Valor5 = PivotTableFinal.loc[PivotTableFinal.Ocupação_Código==int(str(primeirosCbos[i])), '5.0'].values[0]
+        # print('primeirosCbos',primeirosCbos)
+        # exit(0)
+        # Valor1 = PivotTableFinal.loc[PivotTableFinal.Ocupação_Código==int(str(primeirosCbos[i])), '1.0'].values[0]  
+        Valor1 = PivotTableFinal.loc[PivotTableFinal['CBO-Domiciliar']==int(str(primeirosCbos[i])), '1.0'].values[0]   
+        # print('Valor1:',Valor1)  
+        # exit(0)       
+        # Valor2 = PivotTableFinal.loc[PivotTableFinal.Ocupação_Código==int(str(primeirosCbos[i])), '2.0'].values[0]
+        Valor2 = PivotTableFinal.loc[PivotTableFinal['CBO-Domiciliar']==int(str(primeirosCbos[i])), '2.0'].values[0]
+        # Valor3 = PivotTableFinal.loc[PivotTableFinal.Ocupação_Código==int(str(primeirosCbos[i])), '3.0'].values[0]
+        Valor3 = PivotTableFinal.loc[PivotTableFinal['CBO-Domiciliar']==int(str(primeirosCbos[i])), '3.0'].values[0]
+        # Valor5 = PivotTableFinal.loc[PivotTableFinal.Ocupação_Código==int(str(primeirosCbos[i])), '5.0'].values[0]
+        Valor5 = PivotTableFinal.loc[PivotTableFinal['CBO-Domiciliar']==int(str(primeirosCbos[i])), '5.0'].values[0]
         ValorFinal= Valor1 + Valor2 + Valor3 + Valor5
-        Valor4 = PivotTableFinal.loc[PivotTableFinal.Ocupação_Código==int(str(primeirosCbos[i])), '4.0'].values[0]
+        # Valor4 = PivotTableFinal.loc[PivotTableFinal.Ocupação_Código==int(str(primeirosCbos[i])), '4.0'].values[0]
+        Valor4 = PivotTableFinal.loc[PivotTableFinal['CBO-Domiciliar']==int(str(primeirosCbos[i])), '4.0'].values[0]
         ValorTotal= Valor1 + Valor2 + Valor3 + Valor4 + Valor5
         NaoGraduados.append(ValorFinal)
         Graduados_Nao.append(ValorTotal)
@@ -636,10 +645,12 @@ def Plot_Cursos_CBOs_11(csv_estado,csv_CBO,csv_CURSOS,primeirosCbos_Nome,primeir
 def CBOs_Curso_v6(csv_estado,csv_CBO,curso_num,curso_nome,titulo10,titulo3,porcent_param,save_results_to):
     X = pd.read_csv(csv_estado)
     CBO = pd.read_csv(csv_CBO, dtype ='str')
-    CBO = CBO.drop(columns=['Unnamed: 0'])
+    # CBO = CBO.drop(columns=['Unnamed: 0']) #comentado  em 12/08/2025 ... troca de arquivo de CBOs
    
     #Cbos -> Cursos ... criar um novo dataframe somente com cursos e cbos para facilitar
-    X_CURSO_CBO = X[['Curso_Superior_Graduação_Código','Ocupação_Código']]
+    # X_CURSO_CBO = X[['Curso_Superior_Graduação_Código','Ocupação_Código']]
+    X_CURSO_CBO = X[['Curso_Superior_Graduação_Código','CBO-Domiciliar']] #mudado  em 12/08/2025 ... troca de arquivo de CBOs
+    
     
     # Transforma  X_CURSO_CBO.Ocupação_Código de Float para String 
     # A partir do arquivo brasil, criar um novo dataframe somente com cursos e cbos para facilitar 
@@ -647,11 +658,13 @@ def CBOs_Curso_v6(csv_estado,csv_CBO,curso_num,curso_nome,titulo10,titulo3,porce
     Ocupação_Código = []
     Ocupação_Código_temp = []    
     for i in range(len(X_CURSO_CBO)):        
-        Ocupação_Código_temp.append(str(int(X_CURSO_CBO.Ocupação_Código[i])))   
+        # Ocupação_Código_temp.append(str(int(X_CURSO_CBO.Ocupação_Código[i]))) 
+        Ocupação_Código_temp.append(str(int(X_CURSO_CBO['CBO-Domiciliar'][i])))  
     for i in range(len(X_CURSO_CBO)):         
         if (Ocupação_Código_temp[i][0] == '2') or (Ocupação_Código_temp[i][0] == '1'):
             Curso_Superior_Graduação_Código.append(X_CURSO_CBO.Curso_Superior_Graduação_Código[i])
-            Ocupação_Código.append(X_CURSO_CBO.Ocupação_Código[i])
+            # Ocupação_Código.append(X_CURSO_CBO.Ocupação_Código[i])
+            Ocupação_Código.append(X_CURSO_CBO['CBO-Domiciliar'][i])
     # ...
     X_CURSO_CBO_Filter=[]
     for i in range(len(Curso_Superior_Graduação_Código)):
@@ -659,7 +672,8 @@ def CBOs_Curso_v6(csv_estado,csv_CBO,curso_num,curso_nome,titulo10,titulo3,porce
       X_CURSO_CBO_Filter.append(tupla)
     X_CURSO_CBO = pd.DataFrame(X_CURSO_CBO_Filter)
     dict = {0:"Curso_Superior_Graduação_Código",
-    1:"Ocupação_Código",
+    #1:"Ocupação_Código",
+    1:"CBO-Domiciliar",
     }
     X_CURSO_CBO.rename(columns=dict,inplace=True)
     # print(X_CURSO_CBO)
@@ -675,7 +689,8 @@ def CBOs_Curso_v6(csv_estado,csv_CBO,curso_num,curso_nome,titulo10,titulo3,porce
         Cbo_dir = []
         for i in range(len(dir)):
             curso = X_CURSO_CBO._get_value(dir[i],'Curso_Superior_Graduação_Código')
-            cbo = X_CURSO_CBO._get_value(dir[i],'Ocupação_Código')
+            # cbo = X_CURSO_CBO._get_value(dir[i],'Ocupação_Código')
+            cbo = X_CURSO_CBO._get_value(dir[i],'CBO-Domiciliar') #comentado  em 12/08/2025 ... troca de arquivo de CBOs
             Curso_dir.append(curso)
             Cbo_dir.append(cbo)
         # print("Curso_dir",Curso_dir)  
@@ -743,6 +758,8 @@ def CBOs_Curso_v6(csv_estado,csv_CBO,curso_num,curso_nome,titulo10,titulo3,porce
             # A_cbo_10["Nome"] = 1
             #...
             #import warnings
+            #A_cbo_10['Nome'] = NomeCbo['Nome_CBO'].values
+            A_cbo_10 = A_cbo_10.iloc[:len(NomeCbo)] # 12/08/2025 ajuste por causa da mudança de arquivo de CBOs
             A_cbo_10['Nome'] = NomeCbo['Nome_CBO'].values
             #A_cbo_10
             A_cbo_10.reset_index(inplace=True)
@@ -830,25 +847,29 @@ def Cursos_CBO_14_10(csv_estado,csv_CBO,csv_CURSOS,cbo_num,titulo3,NaoGraduados_
     CBO = pd.read_csv(csv_CBO, dtype ='str')
     CURSOS = pd.read_csv(csv_CURSOS, dtype ='str')
     # drop the 'Unnamed:0' column
-    CBO = CBO.drop(columns=['Unnamed: 0'])
-    CURSOS = CURSOS.drop(columns=['Unnamed: 0'])
+    # CBO = CBO.drop(columns=['Unnamed: 0']) #comentado  em 12/08/2025 ... troca de arquivo de CBOs
+    CURSOS = CURSOS.drop(columns=['Unnamed: 0']) 
   
     #Cbos -> Cursos ... criar um novo dataframe somente com cursos e cbos para facilitar
     # Filter only the relevant columns for courses and occupations
-    X_CURSO_CBO = X.loc[:, ['Curso_Superior_Graduação_Código', 'Ocupação_Código']]
+    # X_CURSO_CBO = X.loc[:, ['Curso_Superior_Graduação_Código', 'Ocupação_Código']]
+    X_CURSO_CBO = X.loc[:, ['Curso_Superior_Graduação_Código', 'CBO-Domiciliar']]
     X_CURSO_CBO.shape
 
     #Cursos por CBO
     #Indice =================================================================================================
-    X_CURSO_CBO['Ocupação_Código'] = X_CURSO_CBO['Ocupação_Código'].astype(int)
-    dir_curso_cbos = X_CURSO_CBO.index[X_CURSO_CBO['Ocupação_Código'] == int(str(cbo_num))].tolist()
+    # X_CURSO_CBO['Ocupação_Código'] = X_CURSO_CBO['Ocupação_Código'].astype(int)  #comentado  em 12/08/2025 ... troca de arquivo de CBOs
+    # dir_curso_cbos = X_CURSO_CBO.index[X_CURSO_CBO['Ocupação_Código'] == int(str(cbo_num))].tolist() #comentado  em 12/08/2025 ... troca de arquivo de CBOs
+    X_CURSO_CBO['CBO-Domiciliar'] = X_CURSO_CBO['CBO-Domiciliar'].astype(int)
+    dir_curso_cbos = X_CURSO_CBO.index[X_CURSO_CBO['CBO-Domiciliar'] == int(str(cbo_num))].tolist()
     # ...
     Curso_dir_curso_cbos = []
     Cbo_dir_curso_cbos = []
     for i in range(len(dir_curso_cbos)):
         #print(direito[i])
         curso = X_CURSO_CBO._get_value(dir_curso_cbos[i],'Curso_Superior_Graduação_Código')
-        cbo = X_CURSO_CBO._get_value(dir_curso_cbos[i],'Ocupação_Código')
+        # cbo = X_CURSO_CBO._get_value(dir_curso_cbos[i],'Ocupação_Código') #comentado  em 12/08/2025 ... troca de arquivo de CBOs
+        cbo = X_CURSO_CBO._get_value(dir_curso_cbos[i],'CBO-Domiciliar') 
         #print("Curso:",curso,"CBO:",str(int(cbo)))
         Curso_dir_curso_cbos.append(curso)
         Cbo_dir_curso_cbos.append(cbo)
@@ -1019,17 +1040,21 @@ def Cursos_CBO_13_10(csv_estado,csv_CBO,csv_CURSOS,cbo_num,titulo3,NaoGraduados_
     CBO = pd.read_csv(csv_CBO, dtype ='str')
     CURSOS = pd.read_csv(csv_CURSOS, dtype ='str')
     # drop the 'Unnamed:0' column
-    CBO = CBO.drop(columns=['Unnamed: 0'])
+    # CBO = CBO.drop(columns=['Unnamed: 0'])  #comentado  em 12/08/2025 ... troca de arquivo de CBOs
     CURSOS = CURSOS.drop(columns=['Unnamed: 0'])
     
     #Cbos -> Cursos ... criar um novo dataframe somente com cursos e cbos para facilitar
-    X_CURSO_CBO = X[['Curso_Superior_Graduação_Código','Ocupação_Código']]
+    # X_CURSO_CBO = X[['Curso_Superior_Graduação_Código','Ocupação_Código']] #comentado  em 12/08/2025 ... troca de arquivo de CBOs
+    X_CURSO_CBO = X[['Curso_Superior_Graduação_Código','CBO-Domiciliar']]
+
     X_CURSO_CBO.shape
 
     #Cursos por CBO
     #Indice =================================================================================================
-    X_CURSO_CBO['Ocupação_Código'] = X_CURSO_CBO['Ocupação_Código'].astype(int)
-    dir_curso_cbos = X_CURSO_CBO.index[X_CURSO_CBO['Ocupação_Código'] == int(str(cbo_num))].tolist()
+    # X_CURSO_CBO['Ocupação_Código'] = X_CURSO_CBO['Ocupação_Código'].astype(int)  #comentado  em 12/08/2025 ... troca de arquivo de CBOs
+    # dir_curso_cbos = X_CURSO_CBO.index[X_CURSO_CBO['Ocupação_Código'] == int(str(cbo_num))].tolist()  #comentado  em 12/08/2025 ... troca de arquivo de CBOs
+    X_CURSO_CBO['CBO-Domiciliar'] = X_CURSO_CBO['CBO-Domiciliar'].astype(int) 
+    dir_curso_cbos = X_CURSO_CBO.index[X_CURSO_CBO['CBO-Domiciliar'] == int(str(cbo_num))].tolist()  
     # dir_curso_cbos = X_CURSO_CBO.index[X_CURSO_CBO['Ocupação_Código'] == cbo_num].tolist()
     # ...
     Curso_dir_curso_cbos = []
@@ -1037,7 +1062,8 @@ def Cursos_CBO_13_10(csv_estado,csv_CBO,csv_CURSOS,cbo_num,titulo3,NaoGraduados_
     for i in range(len(dir_curso_cbos)):
         #print(direito[i])
         curso = X_CURSO_CBO._get_value(dir_curso_cbos[i],'Curso_Superior_Graduação_Código')
-        cbo = X_CURSO_CBO._get_value(dir_curso_cbos[i],'Ocupação_Código')
+        # cbo = X_CURSO_CBO._get_value(dir_curso_cbos[i],'Ocupação_Código') #comentado  em 12/08/2025 ... troca de arquivo de CBOs
+        cbo = X_CURSO_CBO._get_value(dir_curso_cbos[i],'CBO-Domiciliar') 
         #print("Curso:",curso,"CBO:",str(int(cbo)))
         Curso_dir_curso_cbos.append(curso)
         Cbo_dir_curso_cbos.append(cbo)
@@ -1657,9 +1683,9 @@ def Ida_Volta(path,name,path1,name1):
                 titulo3=primeirosCbos_Nome[i]
                 if(int(float(primeirosCbos[i]))>=2000):
                     #10%
-                    #CBO,Curso,tresprimeirosCursos,intensidade,fig,string,cursos_vol, nomes_vol, porcentagens_vol=Cursos_CBO_14_10(csv_estado,csv_CBO,csv_CURSOS,primeirosCbos[i],titulo3,NaoGraduados[i],curso_num,curso_nome,primeirosCbos_Nome,i,0.1)
+                    CBO,Curso,tresprimeirosCursos,intensidade,fig,string,cursos_vol, nomes_vol, porcentagens_vol=Cursos_CBO_14_10(csv_estado,csv_CBO,csv_CURSOS,primeirosCbos[i],titulo3,NaoGraduados[i],curso_num,curso_nome,primeirosCbos_Nome,i,0.1)
                     #100%
-                    CBO,Curso,tresprimeirosCursos,intensidade,fig,string,cursos_vol, nomes_vol, porcentagens_vol=Cursos_CBO_14_10(csv_estado,csv_CBO,csv_CURSOS,primeirosCbos[i],titulo3,NaoGraduados[i],curso_num,curso_nome,primeirosCbos_Nome,i,0)
+                    # CBO,Curso,tresprimeirosCursos,intensidade,fig,string,cursos_vol, nomes_vol, porcentagens_vol=Cursos_CBO_14_10(csv_estado,csv_CBO,csv_CURSOS,primeirosCbos[i],titulo3,NaoGraduados[i],curso_num,curso_nome,primeirosCbos_Nome,i,0)
                     if (cursos_vol!=0)&(nomes_vol!=0)&(porcentagens_vol!=0):
                       Intensidade.append(intensidade)
                       # print(intensidade)
@@ -1673,9 +1699,9 @@ def Ida_Volta(path,name,path1,name1):
                 else:
                     # print(primeirosCbos[i])
                     #10%
-                    #CBO,Curso,tresprimeirosCursos,intensidade,fig,string,cursos_vol, nomes_vol, porcentagens_vol=Cursos_CBO_13_10(csv_estado,csv_CBO,csv_CURSOS,primeirosCbos[i],titulo3,NaoGraduados[i],Graduados_Nao[i],curso_num,curso_nome,primeirosCbos_Nome,i,0.1,save_results_to)
+                    CBO,Curso,tresprimeirosCursos,intensidade,fig,string,cursos_vol, nomes_vol, porcentagens_vol=Cursos_CBO_13_10(csv_estado,csv_CBO,csv_CURSOS,primeirosCbos[i],titulo3,NaoGraduados[i],Graduados_Nao[i],curso_num,curso_nome,primeirosCbos_Nome,i,0.1,save_results_to)
                     #100%
-                    CBO,Curso,tresprimeirosCursos,intensidade,fig,string,cursos_vol, nomes_vol, porcentagens_vol=Cursos_CBO_13_10(csv_estado,csv_CBO,csv_CURSOS,primeirosCbos[i],titulo3,NaoGraduados[i],Graduados_Nao[i],curso_num,curso_nome,primeirosCbos_Nome,i,0,save_results_to)
+                    # CBO,Curso,tresprimeirosCursos,intensidade,fig,string,cursos_vol, nomes_vol, porcentagens_vol=Cursos_CBO_13_10(csv_estado,csv_CBO,csv_CURSOS,primeirosCbos[i],titulo3,NaoGraduados[i],Graduados_Nao[i],curso_num,curso_nome,primeirosCbos_Nome,i,0,save_results_to)
                     if (cursos_vol!=0)&(nomes_vol!=0)&(porcentagens_vol!=0):
                         Intensidade.append(intensidade)
                         Porcentagens_vol.append(porcentagens_vol)
@@ -1748,14 +1774,15 @@ def Ida_Volta(path,name,path1,name1):
 
     df = x_y_z_v_df(x_,y_,z_,v_)  
     #10%  
-    #df.to_csv(save_results_to + '10Porcent_DF.csv')
+    df.to_csv(save_results_to + '10Porcent_DF.csv')
     #100%
-    df.to_csv(save_results_to + '100Porcent_DF.csv')
+    # df.to_csv(save_results_to + '100Porcent_DF.csv')
     return           
 
 def Tabela_Ida_Volta(path2,name2):
     # df =  os.path.join(path2[0],name2[1])
-    df ='graficos/100Porcent_DF.csv' 
+    df ='graficos/10Porcent_DF.csv' 
+    # df ='graficos/100Porcent_DF.csv' 
     df1 = pd.read_csv(df)    
     save_results_to = 'graficos/'  
 
@@ -1777,11 +1804,11 @@ def Tabela_Ida_Volta(path2,name2):
     df1 = df1.reset_index(drop=True)
     # Salvar_Tabela
     # # 10%
-    # df1.to_csv(save_results_to + '10Porcent_DF_Limpo.csv')
-    # df1.to_excel(save_results_to + '10Porcent_DF_Limpo.xlsx')
+    df1.to_csv(save_results_to + '10Porcent_DF_Limpo.csv')
+    df1.to_excel(save_results_to + '10Porcent_DF_Limpo.xlsx')
     # # 100%
-    df1.to_csv(save_results_to + '100Porcent_DF_Limpo.csv')
-    df1.to_excel(save_results_to + '100Porcent_DF_Limpo.xlsx')
+    # df1.to_csv(save_results_to + '100Porcent_DF_Limpo.csv')
+    # df1.to_excel(save_results_to + '100Porcent_DF_Limpo.xlsx')
     return
 
 

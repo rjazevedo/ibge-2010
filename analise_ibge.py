@@ -76,8 +76,10 @@ if fase == 2:
 
     ibge_functions.ibge_Pivot_Masculino()
 
+    
     ibge_functions.ibge_Pivot_Geral()          
 
+    
     ibge_functions.ibge_PivotTableFinal()
 
     ibge_functions.ibge_Graduados()
