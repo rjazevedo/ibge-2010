@@ -80,10 +80,13 @@ def Limpeza_Arquivo_Censo_Graduados_NaoGraduados_1_2(path,name,i):
     X.fillna(0, inplace = True)
 
     #Removendo CBO-Domiciliar
-    X = X.drop(columns=['CBO-Domiciliar'])
+    # X = X.drop(columns=['CBO-Domiciliar'])
+    # 02/08/2025 Porque remover CBO-Domicilar ?
     
     # removendo que tem graduação, mas o curso superior é igual a Zero
     X.drop(X[(X['Nível_instrução'] ==4) & (X['Curso_Superior_Graduação_Código'] ==0)].index, inplace=True) ## alterado 23/09/2023 #=============================
+    # removendo que tem graduação, mas o CBO-Domiciliar é igual a Zero
+    X.drop(X[(X['Nível_instrução'] ==4) & (X['CBO-Domiciliar'] ==0)].index, inplace=True) ## alterado 08/08/2023 #=============================
 
     # Alteração 12/5/2025
     #removendo pessoas sem remuneração
@@ -115,7 +118,9 @@ def Limpeza_Arquivo_Censo_Graduados_2(path,name,i):
  
     # Deixando somente os graduados ...
     X.drop(X[(X['Curso_Superior_Graduação_Código'] ==0)].index, inplace=True) #Essa condição, deixa o dataset somente com as pessoas graduadas ...
-    
+    # Deixando somente os graduados que exercem função de graduados
+    X.drop(X[(X['CBO-Domiciliar']>3000)].index, inplace=True) #Essa condição, deixa o dataset somente com as pessoas graduadas que exercem função de graduados ...
+
     name_path = name.split("_Todos.csv")
     path_proc =  ibge_variable.paths(9)
 
@@ -133,8 +138,9 @@ def Pivot_Table_Censo(path,name,gender,i):
     #...
     if gender == "M":
         
-        file = os.path.join(path,name)
-        X= pd.read_csv(file,usecols=["Nível_instrução", "Ocupação_Código", "gênero"], sep=",")  	
+        file = os.path.join(path,name)      
+        # X= pd.read_csv(file,usecols=["Nível_instrução", "Ocupação_Código", "gênero"], sep=",")  	
+        X= pd.read_csv(file,usecols=["Nível_instrução", "CBO-Domiciliar", "gênero"], sep=",") #12/08/2025 	
 
         #removendo pessoas do sexo feminino ...
         X.drop(X[(X['gênero'] ==2)].index, inplace=True)
@@ -154,7 +160,8 @@ def Pivot_Table_Censo(path,name,gender,i):
         if gender == "F":
            
             file = os.path.join(path,name)
-            X= pd.read_csv(file,usecols=["Nível_instrução", "Ocupação_Código", "gênero"], sep=",")  	
+            # X= pd.read_csv(file,usecols=["Nível_instrução", "Ocupação_Código", "gênero"], sep=",")  	
+            X= pd.read_csv(file,usecols=["Nível_instrução", "CBO-Domiciliar", "gênero"], sep=",") #12/08/2025 	
 
             #removendo pessoas do sexo masculino ...
             X.drop(X[(X['gênero'] ==1)].index, inplace=True)
@@ -172,7 +179,10 @@ def Pivot_Table_Censo(path,name,gender,i):
             X_1.to_csv(name_path)
         else:
             file = os.path.join(path,name)
-            X= pd.read_csv(file,usecols=["Nível_instrução", "Ocupação_Código", "gênero"], sep=",")  	
+            # print(file)
+            # exit(0)
+            # X= pd.read_csv(file,usecols=["Nível_instrução", "Ocupação_Código", "gênero"], sep=",")  	
+            X= pd.read_csv(file,usecols=["Nível_instrução", "CBO-Domiciliar", "gênero"], sep=",") #12/08/2025 	
 
             X_1 = Pivot_Table(X)
 
@@ -189,14 +199,20 @@ def Pivot_Table_Censo(path,name,gender,i):
 
 def Pivot_Table(X):
     
-    X[["Nível_instrução", "Ocupação_Código"]]
+    # X[["Nível_instrução", "Ocupação_Código"]]
+    X[["Nível_instrução", "CBO-Domiciliar"]] #12/08/2025
+
 
     #Remover todas as linhas que tem CBO = Nan ---------------------------------------------------------------------------------------------------------------------------------
-    X = X.dropna(subset=['Ocupação_Código'])        
+    # X = X.dropna(subset=['Ocupação_Código'])    
+    X = X.dropna(subset=['CBO-Domiciliar']) #12/08/2025
+    
 
     #Gerando a Pivot table
     X['Ensino Superior']=1
-    X_Pivot= pd.pivot_table(X, values=['Ensino Superior'], index=['Ocupação_Código'],columns=['Nível_instrução'],aggfunc='count',fill_value=0) 
+    # X_Pivot= pd.pivot_table(X, values=['Ensino Superior'], index=['Ocupação_Código'],columns=['Nível_instrução'],aggfunc='count',fill_value=0) 
+    X_Pivot= pd.pivot_table(X, values=['Ensino Superior'], index=['CBO-Domiciliar'],columns=['Nível_instrução'],aggfunc='count',fill_value=0) #12/08/2025
+
     return X_Pivot
 
 def df2pivot(df):

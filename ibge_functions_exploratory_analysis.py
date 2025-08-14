@@ -335,6 +335,8 @@ def Profissoes_Cursos(path1,name1,path2,name2): # https://colab.research.google.
     X = X.drop(columns=['CR'])
 
     CursosCenso = ibge_functions_descriptive_analysis.ibge_cursos_filter(path1[0],name1[2])
+    # print("CursosCenso:", CursosCenso)
+    # exit(0)
     csv_CBO = os.path.join(path1[0],name1[1]) # Tabela de CBOs
     CBO = pd.read_csv(csv_CBO)
 
@@ -395,7 +397,7 @@ def Profissoes_Cursos(path1,name1,path2,name2): # https://colab.research.google.
     # plt.show()
     # string1 = "10%  - Todos os Cursos - Clusterização " +".pdf"
     # string1 = "10% - All Courses - Clustering" +".pdf"
-    string1 = "10% - All Courses - Clustering" +".png"
+    string1 = "10%_AllCourses_Clustering" +".png"
     save_results_to = 'graficos/'  
     plt.savefig(save_results_to + string1)  
 
@@ -425,7 +427,8 @@ def Profissoes_Cursos(path1,name1,path2,name2): # https://colab.research.google.
     # print(X_Original)
 
     # selecao_Kmeans3 = X_['cluster']==0
-    selecao_Kmeans3 = X['cluster']==0
+    selecao_Kmeans3 = X['cluster']==0  #===================================================================================================================
+    X['cluster'] = kmeans.labels_
     X_0_Kmeans3 = X[selecao_Kmeans3]
     X_0_Kmeans3
 
@@ -442,12 +445,21 @@ def Profissoes_Cursos(path1,name1,path2,name2): # https://colab.research.google.
     #print("len(Kmeans3_CursoNum):", len(Kmeans3_CursoNum))
     #print("len(Kmeans3_CboNum):", len(Kmeans3_CboNum))		 
 
+    # print("Kmeans3_CursoNum:", Kmeans3_CursoNum)
+    # exit(0)
     Kmeans3_CursoNome =[]
     for i in range (len(Kmeans3_CursoNum)):
         for index, row in CursosCenso.iterrows():
-            if (str(Kmeans3_CursoNum[i]) == CursosCenso['curso_num'][index]):
+            # print("Kmeans3_CursoNum[i]:", int(Kmeans3_CursoNum[i]))
+            # print("CursosCenso['curso_num'][index]:", CursosCenso['curso_num'][index])
+            # exit(0)
+            # print("")
+            # if (int(Kmeans3_CursoNum[i]) == CursosCenso['curso_num'][index]):
+            if (int(Kmeans3_CursoNum[i]) == int(CursosCenso['curso_num'][index])):    
                 Kmeans3_CursoNome.append(CursosCenso['curso_nome'][index])
-    #Kmeans3_CursoNome		
+    # Kmeans3_CursoNome	
+    # print(len(Kmeans3_CursoNome))	
+    # exit(0)
 
     Kmeans3_CboNome =[]
     for i in range (len(Kmeans3_CboNum)):
@@ -456,6 +468,11 @@ def Profissoes_Cursos(path1,name1,path2,name2): # https://colab.research.google.
                 Kmeans3_CboNome.append(CBO['Nome_CBO'][index])
     #Kmeans3_CboNome 
     
+    # print(len(Kmeans3_CursoNum))
+    # print(len(Kmeans3_CursoNome))
+    # print(len(Kmeans3_CboNum))
+    # print(len(Kmeans3_CboNome))
+    # exit(0)
     Kmeans3_resultados_0=[]
     for i in range(len(Kmeans3_CursoNum)):
         tupla=(Kmeans3_CursoNum[i],Kmeans3_CursoNome[i],Kmeans3_CboNum[i],Kmeans3_CboNome[i])
@@ -473,7 +490,7 @@ def Profissoes_Cursos(path1,name1,path2,name2): # https://colab.research.google.
     # print("")
 
     # selecao_Kmeans3 = X_['cluster']==1
-    selecao_Kmeans3 = X['cluster']==1
+    selecao_Kmeans3 = X['cluster']==1   #===================================================================================================================
     X_1_Kmeans3 = X[selecao_Kmeans3]
 
     Kmeans3_CursoNum =[]
@@ -492,7 +509,8 @@ def Profissoes_Cursos(path1,name1,path2,name2): # https://colab.research.google.
 
     for i in range (len(Kmeans3_CursoNum)):
         for index, row in CursosCenso.iterrows():
-            if (str(Kmeans3_CursoNum[i]) == CursosCenso['curso_num'][index]):
+            # if (str(Kmeans3_CursoNum[i]) == CursosCenso['curso_num'][index]):
+            if (int(Kmeans3_CursoNum[i]) == int(CursosCenso['curso_num'][index])):      
                 Kmeans3_CursoNome.append(CursosCenso['curso_nome'][index]) 
     # Kmeans3_CursoNome
     Kmeans3_CboNome =[]
@@ -518,7 +536,7 @@ def Profissoes_Cursos(path1,name1,path2,name2): # https://colab.research.google.
     # print("")
 
     # selecao_Kmeans3 = X_['cluster']==2    
-    selecao_Kmeans3 = X['cluster']==2
+    selecao_Kmeans3 = X['cluster']==2  #===================================================================================================================
     X_2_Kmeans3 = X[selecao_Kmeans3]   
     # X_2_Kmeans3
 
@@ -538,7 +556,8 @@ def Profissoes_Cursos(path1,name1,path2,name2): # https://colab.research.google.
     Kmeans3_CursoNome =[]
     for i in range (len(Kmeans3_CursoNum)):
         for index, row in CursosCenso.iterrows():
-            if (str(Kmeans3_CursoNum[i]) == CursosCenso['curso_num'][index]):
+            # if (str(Kmeans3_CursoNum[i]) == CursosCenso['curso_num'][index]):
+            if (int(Kmeans3_CursoNum[i]) == int(CursosCenso['curso_num'][index])):   
                 Kmeans3_CursoNome.append(CursosCenso['curso_nome'][index])
     # Kmeans3_CursoNome
     
@@ -589,7 +608,8 @@ def Profissoes_Cursos(path1,name1,path2,name2): # https://colab.research.google.
     Kmeans3_CursoNome =[]
     for i in range (len(Kmeans3_CursoNum)):
         for index, row in CursosCenso.iterrows():
-            if (str(Kmeans3_CursoNum[i]) == CursosCenso['curso_num'][index]):
+            # if (str(Kmeans3_CursoNum[i]) == CursosCenso['curso_num'][index]):
+            if (int(Kmeans3_CursoNum[i]) == int(CursosCenso['curso_num'][index])):   
                 Kmeans3_CursoNome.append(CursosCenso['curso_nome'][index])
     # Kmeans3_CursoNome  
     Kmeans3_CboNome =[]
