@@ -1684,7 +1684,7 @@ def Ida_Volta(path,name,path1,name1):
     save_results_to = 'graficos/'  
     # N = 1 # Variável para controlar se existe cursos ou não
     # Testar curso 79,80,85...
-    for f in range(0,60):
+    for f in range(0,89):
     #   if (f==83):
     #     f=f+1 # Pular o curso 83, que não tem CBOs. curso_num: 852.0 curso_nome: AMBIENTES NATURAIS E VIDA SELVAGEM
     #   if (f==88):
