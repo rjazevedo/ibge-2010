@@ -645,6 +645,7 @@ def Plot_Cursos_CBOs_11(csv_estado,csv_CBO,csv_CURSOS,primeirosCbos_Nome,primeir
 def CBOs_Curso_v6(csv_estado,csv_CBO,curso_num,curso_nome,titulo10,titulo3,porcent_param,save_results_to):
     X = pd.read_csv(csv_estado)
     CBO = pd.read_csv(csv_CBO, dtype ='str')
+    CBO_aux = pd.read_csv('documentacao/CBO_CSV_TabelaAuxiliar.csv', dtype ='str')
     # CBO = CBO.drop(columns=['Unnamed: 0']) #comentado  em 12/08/2025 ... troca de arquivo de CBOs
    
     #Cbos -> Cursos ... criar um novo dataframe somente com cursos e cbos para facilitar
@@ -764,11 +765,18 @@ def CBOs_Curso_v6(csv_estado,csv_CBO,curso_num,curso_nome,titulo10,titulo3,porce
             #         #     porcentagens=0
             #         #     return primeiros,nomes,porcentagens,curso_num,curso_nome  
 
-            # Para encontrar todos os CBOs que estão em A_cbo_10 e também em CBO['Cod_CBO'], você pode usar o método isin do pandas:
+            # # Para encontrar todos os CBOs que estão em A_cbo_10 e também em CBO['Cod_CBO'], você pode usar o método isin do pandas:
+            # cbo_indices = [str(int(float(idx))) for idx in A_cbo_10.index]
+            # # Filtra o DataFrame CBO para manter apenas os CBOs presentes em cbo_indices
+            # CBO_filtrado = CBO[CBO['Cod_CBO'].astype(str).isin(cbo_indices)]
+            # NomeCbo = CBO_filtrado['Nome_CBO'].tolist()
+            # Para encontrar todos os CBOs que estão em A_cbo_10 e também em CBO['Cod_CBO'] ou CBO_aux['Cod_CBO']:
             cbo_indices = [str(int(float(idx))) for idx in A_cbo_10.index]
             # Filtra o DataFrame CBO para manter apenas os CBOs presentes em cbo_indices
             CBO_filtrado = CBO[CBO['Cod_CBO'].astype(str).isin(cbo_indices)]
-            NomeCbo = CBO_filtrado['Nome_CBO'].tolist()
+            CBO_aux_filtrado = CBO_aux[CBO_aux['Cod_Dom'].astype(str).isin(cbo_indices)]
+            # Junta os nomes dos CBOs encontrados nos dois DataFrames, sem duplicatas
+            NomeCbo = pd.concat([CBO_filtrado['Nome_CBO'], CBO_aux_filtrado['Nome_CBO']]).drop_duplicates().tolist()
 
             # Para guardar os CBOs que estão em A_cbo_10 e não estão em CBO['Cod_CBO']:
             cbo_nao_encontrados = [cbo for cbo in cbo_indices if cbo not in set(CBO['Cod_CBO'].astype(str))]
@@ -1684,7 +1692,7 @@ def Ida_Volta(path,name,path1,name1):
     save_results_to = 'graficos/'  
     # N = 1 # Variável para controlar se existe cursos ou não
     # Testar curso 79,80,85...
-    for f in range(0,89):
+    for f in range(0,20):
     #   if (f==83):
     #     f=f+1 # Pular o curso 83, que não tem CBOs. curso_num: 852.0 curso_nome: AMBIENTES NATURAIS E VIDA SELVAGEM
     #   if (f==88):
