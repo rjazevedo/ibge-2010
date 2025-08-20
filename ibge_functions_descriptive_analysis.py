@@ -878,7 +878,7 @@ def CBOs_Curso_v6(csv_estado,csv_CBO,curso_num,curso_nome,titulo10,titulo3,porce
          porcentagens=0
          return primeiros,nomes,porcentagens,curso_num,curso_nome
     # print(primeiros,nomes,porcentagens,curso_num,curso_nome)
-    # exit(0) #30/07/2025
+    # exit(0) #30/07/2025 ...
     return primeiros,nomes,porcentagens,curso_num,curso_nome
 
 
