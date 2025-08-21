@@ -774,9 +774,18 @@ def CBOs_Curso_v6(csv_estado,csv_CBO,curso_num,curso_nome,titulo10,titulo3,porce
             cbo_indices = [str(int(float(idx))) for idx in A_cbo_10.index]
             # Filtra o DataFrame CBO para manter apenas os CBOs presentes em cbo_indices
             CBO_filtrado = CBO[CBO['Cod_CBO'].astype(str).isin(cbo_indices)]
-            CBO_aux_filtrado = CBO_aux[CBO_aux['Cod_Dom'].astype(str).isin(cbo_indices)]
-            # Junta os nomes dos CBOs encontrados nos dois DataFrames, sem duplicatas
+            CBO_aux_filtrado = CBO_aux[CBO_aux['Cod_Dom'].astype(str).isin(cbo_indices)] #--------------------
+            # Filtra o DataFrame CBO_aux para manter apenas os CBOs presentes em cbo_indices, 
+            # mas pega o 'Cod_CBO' correspondente ao 'Cod_Dom' filtrado
+            # CBO_aux_filtrado = CBO_aux[CBO_aux['Cod_Dom'].astype(str).isin(cbo_indices)]
+            # # Substitui 'Cod_Dom' por 'Cod_CBO' na lista de códigos filtrados
+            # CBO_aux_filtrado = CBO_aux_filtrado[['Cod_CBO', 'Nome_CBO']]
+            # print(CBO_aux_filtrado)
+            # print("")
+            # Junta os nomes dos CBOs encontrados nos dois DataFrames, sem duplicatas      
             NomeCbo = pd.concat([CBO_filtrado['Nome_CBO'], CBO_aux_filtrado['Nome_CBO']]).drop_duplicates().tolist()
+            # print(NomeCbo)
+            # exit(0)
 
             # Para guardar os CBOs que estão em A_cbo_10 e não estão em CBO['Cod_CBO']:
             cbo_nao_encontrados = [cbo for cbo in cbo_indices if cbo not in set(CBO['Cod_CBO'].astype(str))]
@@ -1692,7 +1701,7 @@ def Ida_Volta(path,name,path1,name1):
     save_results_to = 'graficos/'  
     # N = 1 # Variável para controlar se existe cursos ou não
     # Testar curso 79,80,85...
-    for f in range(0,20):
+    for f in range(0,89):
     #   if (f==83):
     #     f=f+1 # Pular o curso 83, que não tem CBOs. curso_num: 852.0 curso_nome: AMBIENTES NATURAIS E VIDA SELVAGEM
     #   if (f==88):
