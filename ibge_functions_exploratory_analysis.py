@@ -320,7 +320,9 @@ import matplotlib.pyplot as plt
 #     # Kmeans3_T
 #     Kmeans3_T.to_csv(save_results_to +'Kmeans3_T.csv')
 #     return
-
+# def leitura_kmeans3_t():
+#     df = 'graficos/Kmeans3_T.csv'
+#     return
 def Profissoes_Cursos(path1,name1,path2,name2): # https://colab.research.google.com/drive/1cTpvuIkd7FGZbzEkScU4xKGFb6sSbGog?authuser=1#scrollTo=MGx4AWThonQb
 
     # Leitura
@@ -329,7 +331,7 @@ def Profissoes_Cursos(path1,name1,path2,name2): # https://colab.research.google.
     X = pd.read_csv(df)    
     save_results_to = 'graficos/' 
     X = X.drop(columns=['Unnamed: 0'])
-    X = X.drop(columns=['Unnamed: 0.1'])
+    # X = X.drop(columns=['Unnamed: 0.1'])
 
     # Remoção de Features 
     X = X.drop(columns=['CB'])
@@ -405,19 +407,19 @@ def Profissoes_Cursos(path1,name1,path2,name2): # https://colab.research.google.
     plt.savefig(save_results_to + string1)  
 
 
-    # # Centróides
-    # kmeans.cluster_centers_[:, 0], kmeans.cluster_centers_[:, 1]
-    # # cluster 1 : 27.00526316,21.78263158  ... Vermelho
-    # # cluster 2 : 66.464375,  77.656875    ... Azul
-    # # cluster 3:  25.76357143,62.88071429  ... Verde
+#     # Centróides
+#     kmeans.cluster_centers_[:, 0], kmeans.cluster_centers_[:, 1]
+#     # cluster 1 : 27.00526316,21.78263158  ... Vermelho
+#     # cluster 2 : 66.464375,  77.656875    ... Azul
+#     # cluster 3:  25.76357143,62.88071429  ... Verde
           
     
-   # Obtendo os centróides
-    centroids = kmeans.cluster_centers_
-    # Criando um DataFrame com os centróides
-    df_centroids = pd.DataFrame(centroids, columns=['x', 'y'])
-    # Salvando os centróides em um arquivo CSV
-    df_centroids.to_csv(save_results_to + 'centroids.csv', index=False)
+#    # Obtendo os centróides
+#     centroids = kmeans.cluster_centers_
+#     # Criando um DataFrame com os centróides
+#     df_centroids = pd.DataFrame(centroids, columns=['x', 'y'])
+#     # Salvando os centróides em um arquivo CSV
+#     df_centroids.to_csv(save_results_to + 'centroids.csv', index=False)
 
     # # O que tem em cada cluster? ===================================================================================================================
     X['cluster'] = kmeans.labels_
