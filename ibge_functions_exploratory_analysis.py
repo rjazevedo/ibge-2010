@@ -14,6 +14,7 @@ from os import chmod
 from copy import deepcopy
 import subprocess
 import glob
+from collections import Counter
 # import da classe principal
 from ibgeparser.microdados import Microdados
 # import dos enums para facilitar as buscas
@@ -320,9 +321,84 @@ import matplotlib.pyplot as plt
 #     # Kmeans3_T
 #     Kmeans3_T.to_csv(save_results_to +'Kmeans3_T.csv')
 #     return
-# def leitura_kmeans3_t():
-#     df = 'graficos/Kmeans3_T.csv'
-#     return
+def leitura_kmeans3_t():
+     df = 'graficos/Kmeans3_T.csv'
+     df_kmeans = pd.read_csv(df)
+
+     df1 ='graficos/100Porcent_DF_Limpo.csv'
+     df_100 = pd.read_csv(df1)
+     #  Tabela Auxuliar para corrigir CBOs
+     #  df_100.loc[df_100['CB'] == 100, 'CB'] = 102
+     df_100.loc[df_100['CB'] == 100, 'CB'] = 102
+     df_100.loc[df_100['CB'] == 200, 'CB'] = 201
+     df_100.loc[df_100['CB'] == 1122, 'CB'] = 114
+     df_100.loc[df_100['CB'] == 1123, 'CB'] = 114
+     df_100.loc[df_100['CB'] == 1140, 'CB'] = 114
+     df_100.loc[df_100['CB'] == 1219, 'CB'] = 1210
+     df_100.loc[df_100['CB'] == 1220, 'CB'] = 122
+     df_100.loc[df_100['CB'] == 1230, 'CB'] = 123
+     df_100.loc[df_100['CB'] == 1310, 'CB'] = 141
+     df_100.loc[df_100['CB'] == 1320, 'CB'] = 142
+     df_100.loc[df_100['CB'] == 2121, 'CB'] = 212
+     df_100.loc[df_100['CB'] == 2125, 'CB'] = 3171
+     df_100.loc[df_100['CB'] == 2231, 'CB'] = 2251
+     df_100.loc[df_100['CB'] == 2330, 'CB'] = 2331
+     df_100.loc[df_100['CB'] == 2340, 'CB'] = 234
+     df_100.loc[df_100['CB'] == 2391, 'CB'] = 2241
+     df_100.loc[df_100['CB'] == 2419, 'CB'] = 2410
+     df_100.loc[df_100['CB'] == 2421, 'CB'] = 1113
+
+     df_100['CR'] = df_100['CR'].astype(int)
+
+    #  df_kmeans = pd.read_csv(df)
+    #  for idx, row in df_kmeans.iterrows():
+    #     curso_numero = row['Curso']
+    #     print(f"Linha {idx}: Número do curso = {curso_numero}")
+
+    #  print(df_100.head())
+     print("")    
+
+     for idx, row in df_kmeans.iterrows():
+        curso_numero = row['Curso']
+        print(f"Linha {idx}: Número do curso = {curso_numero}")
+        df_100_curso = df_100[df_100['CR'] == curso_numero].sort_values(by='CR')
+        df_100_curso_10 = df_100_curso.head(10)
+        print(df_100_curso_10)
+        print("")
+        # Extrair os três primeiros dígitos da coluna 'CB' e colocar em um vetor
+        cb_prefixos = df_100_curso_10['CB'].astype(str).str[:3].tolist()
+        contagem_prefixos = Counter(cb_prefixos)
+        # Ler o arquivo de subgrupos principais do CBO
+        cbo_familia = pd.read_csv('documentacao/cbo2002_familia.csv', dtype=str)
+        cbo_subgrupo = pd.read_csv('documentacao/cbo2002_subgrupo.csv', dtype=str)
+        for prefixo, quantidade in contagem_prefixos.items():
+            nome_familia = cbo_familia.loc[cbo_familia['CODIGO'] == prefixo, 'TITULO']
+            if not nome_familia.empty:
+             print(f"{prefixo}: {quantidade} - {nome_familia.iloc[0]}")
+            else:
+             nome_subgrupo = cbo_subgrupo.loc[cbo_subgrupo['CODIGO'] == prefixo, 'TITULO']
+             nome_subgrupo = nome_subgrupo.iloc[0] if not nome_subgrupo.empty else 'Nome não encontrado'
+             print(f"{prefixo}: {quantidade} - {nome_subgrupo}")
+        # for prefixo, quantidade in contagem_prefixos.items():
+        #     # Procurar o nome do subgrupo pelo prefixo
+        #     nome_subgrupo = cbo_subgrupo.loc[cbo_subgrupo['CODIGO'] == prefixo, 'TITULO']
+        #     nome_subgrupo = nome_subgrupo.iloc[0] if not nome_subgrupo.empty else 'Nome não encontrado'
+        #     print(f"{prefixo}: {quantidade} - {nome_subgrupo}")   
+          
+        print("")    
+
+        # Extrair os dois primeiros dígitos da coluna 'CB' e colocar em um vetor
+        cb_prefixos = df_100_curso_10['CB'].astype(str).str[:2].tolist()
+        contagem_prefixos = Counter(cb_prefixos)
+        # Ler o arquivo de subgrupos principais do CBO
+        cbo_subgrupo_principal = pd.read_csv('documentacao/cbo2002_subgrupo_principal.csv', dtype=str)
+        for prefixo, quantidade in contagem_prefixos.items():
+            # Procurar o nome do subgrupo principal pelo prefixo
+            nome_subgrupo_principal = cbo_subgrupo_principal.loc[cbo_subgrupo_principal['CODIGO'] == prefixo, 'TITULO']
+            nome_subgrupo_principal = nome_subgrupo_principal.iloc[0] if not nome_subgrupo_principal.empty else 'Nome não encontrado'
+            print(f"{prefixo}: {quantidade} - {nome_subgrupo_principal}")   
+     return
+
 def Profissoes_Cursos(path1,name1,path2,name2): # https://colab.research.google.com/drive/1cTpvuIkd7FGZbzEkScU4xKGFb6sSbGog?authuser=1#scrollTo=MGx4AWThonQb
 
     # Leitura
@@ -1956,9 +2032,7 @@ def correlacao_empregabilidade_salario():
     ###########################################################################################################################
     import pandas as pd
     import matplotlib.pyplot as plt
-    import numpy as np
-    
-    # # Dados de empregabilidade
+    import numpy as np        # # Dados de empregabilidade
     empregabilidade_data = {
          "Curso": [214.0, 214.0, 342.0, 342.0, 520.0, 520.0, 721.0, 721.0, 726.0, 726.0],
          "Cbo": [2163.0, 2166.0, 2431.0, 1221.0, 2142.0, 2141.0, 2211.0, 2212.0, 2264.0, 2265.0],
