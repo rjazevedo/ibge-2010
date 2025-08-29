@@ -1,5 +1,6 @@
 #pip install ibge-parser
 
+import csv
 import logging
 import string
 import ibgeparser
@@ -322,11 +323,15 @@ import matplotlib.pyplot as plt
 #     Kmeans3_T.to_csv(save_results_to +'Kmeans3_T.csv')
 #     return
 def leitura_kmeans3_t():
+     import csv
      df = 'graficos/Kmeans3_T.csv'
      df_kmeans = pd.read_csv(df)
+     print(f"Quantidade de cursos antes de eliminar repetidos: {len(df_kmeans)}")
+     df_kmeans = df_kmeans.drop_duplicates(subset=['Curso'])
+     print(f"Quantidade de cursos após eliminar repetidos: {len(df_kmeans)}")
 
      df1 ='graficos/100Porcent_DF_Limpo.csv'
-     df_100 = pd.read_csv(df1)
+     df_100 = pd.read_csv(df1)    
      #  Tabela Auxuliar para corrigir CBOs
      #  df_100.loc[df_100['CB'] == 100, 'CB'] = 102
      df_100.loc[df_100['CB'] == 100, 'CB'] = 102
@@ -358,45 +363,96 @@ def leitura_kmeans3_t():
     #  print(df_100.head())
      print("")    
 
+    #  for idx, row in df_kmeans.iterrows():
+    #     curso_numero = row['Curso']
+    #     print(f"Linha {idx}: Número do curso = {curso_numero}")
+    #     df_100_curso = df_100[df_100['CR'] == curso_numero].sort_values(by='CR')
+    #     df_100_curso_10 = df_100_curso.head(10)
+    #     print(df_100_curso_10)
+    #     print("")
+    #     # Extrair os três primeiros dígitos da coluna 'CB' e colocar em um vetor
+    #     cb_prefixos = df_100_curso_10['CB'].astype(str).str[:3].tolist()
+    #     contagem_prefixos = Counter(cb_prefixos)
+    #     # Ler o arquivo de subgrupos principais do CBO
+    #     cbo_familia = pd.read_csv('documentacao/cbo2002_familia.csv', dtype=str)
+    #     cbo_subgrupo = pd.read_csv('documentacao/cbo2002_subgrupo.csv', dtype=str)
+    #     for prefixo, quantidade in contagem_prefixos.items():
+    #         nome_familia = cbo_familia.loc[cbo_familia['CODIGO'] == prefixo, 'TITULO']
+    #         if not nome_familia.empty:
+    #          print(f"{prefixo}: {quantidade} - {nome_familia.iloc[0]}")
+    #         else:
+    #          nome_subgrupo = cbo_subgrupo.loc[cbo_subgrupo['CODIGO'] == prefixo, 'TITULO']
+    #          nome_subgrupo = nome_subgrupo.iloc[0] if not nome_subgrupo.empty else 'Nome não encontrado'
+    #          print(f"{prefixo}: {quantidade} - {nome_subgrupo}")
+    #     # for prefixo, quantidade in contagem_prefixos.items():
+    #     #     # Procurar o nome do subgrupo pelo prefixo
+    #     #     nome_subgrupo = cbo_subgrupo.loc[cbo_subgrupo['CODIGO'] == prefixo, 'TITULO']
+    #     #     nome_subgrupo = nome_subgrupo.iloc[0] if not nome_subgrupo.empty else 'Nome não encontrado'
+    #     #     print(f"{prefixo}: {quantidade} - {nome_subgrupo}")   
+          
+    #     print("")    
+
+    #     # Extrair os dois primeiros dígitos da coluna 'CB' e colocar em um vetor
+    #     cb_prefixos = df_100_curso_10['CB'].astype(str).str[:2].tolist()
+    #     contagem_prefixos = Counter(cb_prefixos)
+    #     # Ler o arquivo de subgrupos principais do CBO
+    #     cbo_subgrupo_principal = pd.read_csv('documentacao/cbo2002_subgrupo_principal.csv', dtype=str)
+    #     for prefixo, quantidade in contagem_prefixos.items():
+    #         # Procurar o nome do subgrupo principal pelo prefixo
+    #         nome_subgrupo_principal = cbo_subgrupo_principal.loc[cbo_subgrupo_principal['CODIGO'] == prefixo, 'TITULO']
+    #         nome_subgrupo_principal = nome_subgrupo_principal.iloc[0] if not nome_subgrupo_principal.empty else 'Nome não encontrado'
+    #         print(f"{prefixo}: {quantidade} - {nome_subgrupo_principal}")   
+     resultados = []
+
      for idx, row in df_kmeans.iterrows():
         curso_numero = row['Curso']
-        print(f"Linha {idx}: Número do curso = {curso_numero}")
-        df_100_curso = df_100[df_100['CR'] == curso_numero].sort_values(by='CR')
+        df_100_curso = df_100[df_100['CR'] == curso_numero].sort_values(by=['CR', 'Ida'], ascending=[True, False])
         df_100_curso_10 = df_100_curso.head(10)
         print(df_100_curso_10)
-        print("")
-        # Extrair os três primeiros dígitos da coluna 'CB' e colocar em um vetor
-        cb_prefixos = df_100_curso_10['CB'].astype(str).str[:3].tolist()
-        contagem_prefixos = Counter(cb_prefixos)
-        # Ler o arquivo de subgrupos principais do CBO
+        # Salvar todos os df_100_curso_10 em um único arquivo CSV
+        df_100_curso_10['Curso'] = curso_numero  # Adiciona coluna do curso para identificar
+        resultados_df = pd.DataFrame() if 'resultados_df' not in locals() else resultados_df
+        resultados_df = pd.concat([resultados_df, df_100_curso_10], ignore_index=True)
+        resultados_df = pd.concat([resultados_df, pd.DataFrame([{}])], ignore_index=True)
+
+
+        # Após o loop, salve o DataFrame concatenado em um único arquivo CSV:
+        if 'resultados_df' in locals():
+            resultados_df.to_csv('graficos/df_100_curso_10_concatenado.csv', index=False)
+        # ...
+        
+        cb_prefixos_3 = df_100_curso_10['CB'].astype(str).str[:3].tolist()
+        contagem_prefixos_3 = Counter(cb_prefixos_3)
         cbo_familia = pd.read_csv('documentacao/cbo2002_familia.csv', dtype=str)
         cbo_subgrupo = pd.read_csv('documentacao/cbo2002_subgrupo.csv', dtype=str)
-        for prefixo, quantidade in contagem_prefixos.items():
+        for prefixo, quantidade in contagem_prefixos_3.items():
             nome_familia = cbo_familia.loc[cbo_familia['CODIGO'] == prefixo, 'TITULO']
             if not nome_familia.empty:
-             print(f"{prefixo}: {quantidade} - {nome_familia.iloc[0]}")
+                resultados.append([idx, curso_numero, prefixo, quantidade, nome_familia.iloc[0], 'familia'])
             else:
-             nome_subgrupo = cbo_subgrupo.loc[cbo_subgrupo['CODIGO'] == prefixo, 'TITULO']
-             nome_subgrupo = nome_subgrupo.iloc[0] if not nome_subgrupo.empty else 'Nome não encontrado'
-             print(f"{prefixo}: {quantidade} - {nome_subgrupo}")
-        # for prefixo, quantidade in contagem_prefixos.items():
-        #     # Procurar o nome do subgrupo pelo prefixo
-        #     nome_subgrupo = cbo_subgrupo.loc[cbo_subgrupo['CODIGO'] == prefixo, 'TITULO']
-        #     nome_subgrupo = nome_subgrupo.iloc[0] if not nome_subgrupo.empty else 'Nome não encontrado'
-        #     print(f"{prefixo}: {quantidade} - {nome_subgrupo}")   
-          
-        print("")    
+                nome_subgrupo = cbo_subgrupo.loc[cbo_subgrupo['CODIGO'] == prefixo, 'TITULO']
+                nome_subgrupo = nome_subgrupo.iloc[0] if not nome_subgrupo.empty else 'Nome não encontrado'
+                resultados.append([idx, curso_numero, prefixo, quantidade, nome_subgrupo, 'subgrupo'])
 
-        # Extrair os dois primeiros dígitos da coluna 'CB' e colocar em um vetor
-        cb_prefixos = df_100_curso_10['CB'].astype(str).str[:2].tolist()
-        contagem_prefixos = Counter(cb_prefixos)
-        # Ler o arquivo de subgrupos principais do CBO
+        cb_prefixos_2 = df_100_curso_10['CB'].astype(str).str[:2].tolist()
+        contagem_prefixos_2 = Counter(cb_prefixos_2)
         cbo_subgrupo_principal = pd.read_csv('documentacao/cbo2002_subgrupo_principal.csv', dtype=str)
-        for prefixo, quantidade in contagem_prefixos.items():
-            # Procurar o nome do subgrupo principal pelo prefixo
+        for prefixo, quantidade in contagem_prefixos_2.items():
             nome_subgrupo_principal = cbo_subgrupo_principal.loc[cbo_subgrupo_principal['CODIGO'] == prefixo, 'TITULO']
             nome_subgrupo_principal = nome_subgrupo_principal.iloc[0] if not nome_subgrupo_principal.empty else 'Nome não encontrado'
-            print(f"{prefixo}: {quantidade} - {nome_subgrupo_principal}")   
+            resultados.append([idx, curso_numero, prefixo, quantidade, nome_subgrupo_principal, 'subgrupo_principal'])
+
+     # Salvar resultados em um único CSV
+     with open('graficos/resultado_prefixos.csv', 'w', newline='', encoding='utf-8') as f:
+       writer = csv.writer(f)
+       writer.writerow(['idx', 'Curso', 'Prefixo', 'Quantidade', 'Nome', 'Tipo'])
+       last_curso = None
+       for row in resultados:
+          idx, curso_numero, prefixo, quantidade, nome, tipo = row
+          if last_curso is not None and curso_numero != last_curso:
+             writer.writerow([])  # Escreve uma linha em branco para separar cada curso
+          writer.writerow(row)
+          last_curso = curso_numero
      return
 
 def Profissoes_Cursos(path1,name1,path2,name2): # https://colab.research.google.com/drive/1cTpvuIkd7FGZbzEkScU4xKGFb6sSbGog?authuser=1#scrollTo=MGx4AWThonQb

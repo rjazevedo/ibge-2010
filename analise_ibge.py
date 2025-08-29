@@ -112,7 +112,7 @@ if fase == 20:  # QP1
     # - clusterização com k=3,
     # - geração do gráfico K-Means com K=3 (10% - Todos os Cursos - Clusterização)
     # - geração do arquivo Kmeans3_T.csv
-    # ibge_functions.Profissoes_Cursos()
+    ibge_functions.Profissoes_Cursos()
     # Leitura arquivo Kmeans3_T.csv para gerar a contagem de CBOs de forma automática
     ibge_functions_exploratory_analysis.leitura_kmeans3_t()
     # # Empregabilidade x Salario -----------------------------------------------------------------
