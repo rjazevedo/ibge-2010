@@ -419,28 +419,129 @@ def leitura_kmeans3_t():
         # Após o loop, salve o DataFrame concatenado em um único arquivo CSV:
         if 'resultados_df' in locals():
             resultados_df.to_csv('graficos/df_100_curso_10_concatenado.csv', index=False)
-        # ...
+   
+    # ...
+        # cb_prefixos_3 = df_100_curso_10['CB'].astype(str).str[:3].tolist()
+        # Agrupar por prefixo de 3 dígitos e somar as porcentagens de 'Ida'
+        cb_prefixos_3 = df_100_curso_10['CB'].astype(str).str[:3]
+        soma_por_prefixo_3 = df_100_curso_10.groupby(cb_prefixos_3)['Ida'].sum().round(2).to_dict()
+        # print(cb_prefixos_3)
+        print(soma_por_prefixo_3)
+
+    #    # Salvar soma_por_prefixo_2 em um CSV para cada curso
+    #     soma_prefixo_3_df = pd.DataFrame(list(soma_por_prefixo_3.items()), columns=['Prefixo_3', 'Soma_Ida'])
+    #     soma_prefixo_3_df['Curso'] = curso_numero
+    #     soma_prefixo_3_df['idx'] = idx
+    #     # Acumula os DataFrames em uma lista para salvar tudo de uma vez ao final
+    #     if 'soma_prefixo_3_dfs' not in locals():
+    #         soma_prefixo_3_dfs = []
+    #     soma_prefixo_3_dfs.append(soma_prefixo_3_df)
+    #     # Após o loop principal (fora do for idx, row in df_kmeans.iterrows()), salve tudo de uma vez:
+    #     if 'soma_prefixo_3_dfs' in locals():
+    #        resultado_concat = pd.concat(soma_prefixo_3_dfs, ignore_index=True)
+    #        resultado_concat.to_csv('graficos/soma_por_prefixo_3.csv', index=False)
+
+
         
-        cb_prefixos_3 = df_100_curso_10['CB'].astype(str).str[:3].tolist()
         contagem_prefixos_3 = Counter(cb_prefixos_3)
-        cbo_familia = pd.read_csv('documentacao/cbo2002_familia.csv', dtype=str)
+        # cbo_familia = pd.read_csv('documentacao/cbo2002_familia.csv', dtype=str)
+        # cbo_subgrupo = pd.read_csv('documentacao/cbo2002_subgrupo.csv', dtype=str)
+        # for prefixo, quantidade in contagem_prefixos_3.items():
+        #     nome_familia = cbo_familia.loc[cbo_familia['CODIGO'] == prefixo, 'TITULO']
+        #     if not nome_familia.empty:
+        #         resultados.append([idx, curso_numero, prefixo, quantidade, nome_familia.iloc[0], 'familia'])
+        #     else:
+        #         nome_subgrupo = cbo_subgrupo.loc[cbo_subgrupo['CODIGO'] == prefixo, 'TITULO']
+        #         nome_subgrupo = nome_subgrupo.iloc[0] if not nome_subgrupo.empty else 'Nome não encontrado'
+        #         resultados.append([idx, curso_numero, prefixo, quantidade, nome_subgrupo, 'subgrupo'])
         cbo_subgrupo = pd.read_csv('documentacao/cbo2002_subgrupo.csv', dtype=str)
         for prefixo, quantidade in contagem_prefixos_3.items():
-            nome_familia = cbo_familia.loc[cbo_familia['CODIGO'] == prefixo, 'TITULO']
-            if not nome_familia.empty:
-                resultados.append([idx, curso_numero, prefixo, quantidade, nome_familia.iloc[0], 'familia'])
-            else:
-                nome_subgrupo = cbo_subgrupo.loc[cbo_subgrupo['CODIGO'] == prefixo, 'TITULO']
-                nome_subgrupo = nome_subgrupo.iloc[0] if not nome_subgrupo.empty else 'Nome não encontrado'
-                resultados.append([idx, curso_numero, prefixo, quantidade, nome_subgrupo, 'subgrupo'])
+            nome_subgrupo = cbo_subgrupo.loc[cbo_subgrupo['CODIGO'] == prefixo, 'TITULO']
+            nome_subgrupo = nome_subgrupo.iloc[0] if not nome_subgrupo.empty else 'Nome não encontrado'
+            resultados.append([idx, curso_numero, prefixo, quantidade, nome_subgrupo, 'subgrupo'])
 
-        cb_prefixos_2 = df_100_curso_10['CB'].astype(str).str[:2].tolist()
+        # cb_prefixos_2 = df_100_curso_10['CB'].astype(str).str[:2].tolist()
+        # Agrupar por prefixo de 3 dígitos e somar as porcentagens de 'Ida'
+        cb_prefixos_2 = df_100_curso_10['CB'].astype(str).str[:2]
+        soma_por_prefixo_2 = df_100_curso_10.groupby(cb_prefixos_2)['Ida'].sum().round(2).to_dict()
+        # print(cb_prefixos_2)
+        print(soma_por_prefixo_2)
+
+        # # Salvar soma_por_prefixo_2 em um CSV para cada curso
+        # soma_prefixo_2_df = pd.DataFrame(list(soma_por_prefixo_2.items()), columns=['Prefixo_2', 'Soma_Ida'])
+        # soma_prefixo_2_df['Curso'] = curso_numero
+        # soma_prefixo_2_df['idx'] = idx
+        # # Acumula os DataFrames em uma lista para salvar tudo de uma vez ao final
+        # if 'soma_prefixo_2_dfs' not in locals():
+        #     soma_prefixo_2_dfs = []
+        # soma_prefixo_2_dfs.append(soma_prefixo_2_df)
+        # # Após o loop principal (fora do for idx, row in df_kmeans.iterrows()), salve tudo de uma vez:
+        # if 'soma_prefixo_2_dfs' in locals():
+        #    resultado_concat = pd.concat(soma_prefixo_2_dfs, ignore_index=True)
+        #    resultado_concat.to_csv('graficos/soma_por_prefixo_2.csv', index=False)
+        
+        # Para pegar somente a porcentagem de cada prefixo de 2 dígitos:
+        porcentagens_prefixo_2 = list(soma_por_prefixo_2.values())
+        # print(porcentagens_prefixo_2)
         contagem_prefixos_2 = Counter(cb_prefixos_2)
+        # print(contagem_prefixos_2)
+        # print(contagem_prefixos_2.items())
         cbo_subgrupo_principal = pd.read_csv('documentacao/cbo2002_subgrupo_principal.csv', dtype=str)
-        for prefixo, quantidade in contagem_prefixos_2.items():
+        for prefixo, quantidade, in contagem_prefixos_2.items():
+            # print(soma_por_prefixo_2.values())
             nome_subgrupo_principal = cbo_subgrupo_principal.loc[cbo_subgrupo_principal['CODIGO'] == prefixo, 'TITULO']
             nome_subgrupo_principal = nome_subgrupo_principal.iloc[0] if not nome_subgrupo_principal.empty else 'Nome não encontrado'
             resultados.append([idx, curso_numero, prefixo, quantidade, nome_subgrupo_principal, 'subgrupo_principal'])
+
+     
+        # Agrupar por prefixo de 3 dígitos e somar as porcentagens de 'Ida' e 'Volta'
+        cb_prefixos_3 = df_100_curso_10['CB'].astype(str).str[:3]
+        soma_por_prefixo_3_ida = df_100_curso_10.groupby(cb_prefixos_3)['Ida'].sum().round(2).to_dict()
+        soma_por_prefixo_3_volta = df_100_curso_10.groupby(cb_prefixos_3)['Volta'].sum().round(2).to_dict()
+        soma_prefixo_3_df = pd.DataFrame({
+            'Prefixo': list(soma_por_prefixo_3_ida.keys()),
+            'Soma_Ida': list(soma_por_prefixo_3_ida.values()),
+            'Soma_Volta': [soma_por_prefixo_3_volta.get(p, 0) for p in soma_por_prefixo_3_ida.keys()]
+        })
+        soma_prefixo_3_df['Tipo'] = 'Prefixo_3'
+        soma_prefixo_3_df['Curso'] = curso_numero
+        soma_prefixo_3_df['idx'] = idx
+
+        # Agrupar por prefixo de 2 dígitos e somar as porcentagens de 'Ida' e 'Volta'
+        cb_prefixos_2 = df_100_curso_10['CB'].astype(str).str[:2]
+        soma_por_prefixo_2_ida = df_100_curso_10.groupby(cb_prefixos_2)['Ida'].sum().round(2).to_dict()
+        soma_por_prefixo_2_volta = df_100_curso_10.groupby(cb_prefixos_2)['Volta'].sum().round(2).to_dict()
+        soma_prefixo_2_df = pd.DataFrame({
+            'Prefixo': list(soma_por_prefixo_2_ida.keys()),
+            'Soma_Ida': list(soma_por_prefixo_2_ida.values()),
+            'Soma_Volta': [soma_por_prefixo_2_volta.get(p, 0) for p in soma_por_prefixo_2_ida.keys()]
+        })
+        soma_prefixo_2_df['Tipo'] = 'Prefixo_2'
+        soma_prefixo_2_df['Curso'] = curso_numero
+        soma_prefixo_2_df['idx'] = idx
+
+        # Acumula os DataFrames em uma lista para salvar tudo de uma vez ao final
+        if 'soma_prefixos_dfs' not in locals():
+            soma_prefixos_dfs = []
+        soma_prefixos_dfs.append(soma_prefixo_3_df)
+        soma_prefixos_dfs.append(soma_prefixo_2_df)
+
+        # Após o loop principal (fora do for idx, row in df_kmeans.iterrows()), salve tudo de uma vez ao final:
+        if 'soma_prefixos_dfs' in locals():
+           resultado_concat = pd.concat(soma_prefixos_dfs, ignore_index=True)
+           cursos_unicos = resultado_concat['Curso'].unique()
+           resultado_final = pd.DataFrame()
+        for curso in cursos_unicos:
+            df_curso = resultado_concat[resultado_concat['Curso'] == curso]
+            # Ordena prefixos de 3 dígitos por Soma_Ida
+            df_prefixo_3 = df_curso[df_curso['Tipo'] == 'Prefixo_3'].sort_values(by='Soma_Ida', ascending=False)
+            # Ordena prefixos de 2 dígitos por Soma_Ida
+            df_prefixo_2 = df_curso[df_curso['Tipo'] == 'Prefixo_2'].sort_values(by='Soma_Ida', ascending=False)
+            # Mantém a ordem: prefixo_3, depois prefixo_2
+            df_curso_ordenado = pd.concat([df_prefixo_3, df_prefixo_2], ignore_index=True)
+            resultado_final = pd.concat([resultado_final, df_curso_ordenado, pd.DataFrame([{}])], ignore_index=True)
+        resultado_final.to_csv('graficos/soma_por_prefixos.csv', index=False)
+
 
      # Salvar resultados em um único CSV
      with open('graficos/resultado_prefixos.csv', 'w', newline='', encoding='utf-8') as f:
@@ -452,7 +553,83 @@ def leitura_kmeans3_t():
           if last_curso is not None and curso_numero != last_curso:
              writer.writerow([])  # Escreve uma linha em branco para separar cada curso
           writer.writerow(row)
-          last_curso = curso_numero
+          last_curso = curso_numero   
+     
+     # Adicionar coluna Soma_Ida e Soma_Volta do arquivo soma_por_prefixos ao arquivo resultado_prefixos e salvar como novo arquivo
+     # Carregar o arquivo soma_por_prefixos
+     soma_por_prefixos_df = pd.read_csv('graficos/soma_por_prefixos.csv')
+     resultado_prefixos_df = pd.read_csv('graficos/resultado_prefixos.csv')
+
+     # Mesclar os dois DataFrames pelo Curso e Prefixo
+     merged_df = pd.merge(
+       resultado_prefixos_df,
+       soma_por_prefixos_df[['Curso', 'Prefixo', 'Soma_Ida', 'Soma_Volta']],
+       left_on=['Curso', 'Prefixo'],
+       right_on=['Curso', 'Prefixo'],
+       how='left'
+    )
+     # Colocar as colunas Soma_Ida e Soma_Volta ao lado da coluna Quantidade
+     cols = merged_df.columns.tolist()
+     for col in ['Soma_Ida', 'Soma_Volta']:
+        if col in cols and 'Quantidade' in cols:
+           cols.remove(col)
+     if 'Quantidade' in cols:
+        idx_quantidade = cols.index('Quantidade')
+        cols.insert(idx_quantidade + 1, 'Soma_Ida')
+        cols.insert(idx_quantidade + 2, 'Soma_Volta')
+        merged_df = merged_df[cols]
+
+     # Salvar como novo arquivo chamado prefixos.csv, separando cada curso com uma linha em branco e colocando o nome do curso
+     with open('graficos/prefixos.csv', 'w', newline='', encoding='utf-8') as f:
+      writer = csv.writer(f)
+      writer.writerow(merged_df.columns.tolist() + ['Curso_Nome'])
+      last_curso = None
+      # Carregar o arquivo de nomes dos cursos
+      cursos_df = pd.read_csv('graficos/Kmeans3_T.csv')
+      for _, row in merged_df.iterrows():
+        curso = row['Curso']
+        # Buscar o nome do curso
+        curso_nome = cursos_df.loc[cursos_df['Curso'] == curso, 'Curso_Nome']
+        curso_nome = curso_nome.iloc[0] if not curso_nome.empty else ''
+        if last_curso is not None and curso != last_curso:
+           writer.writerow([])  # linha em branco para separar cursos
+        writer.writerow(row.tolist() + [curso_nome])
+        last_curso = curso
+
+
+
+    #     cb_prefixos_3 = df_100_curso_10['CB'].astype(str).str[:3].tolist()
+    #     contagem_prefixos_3 = Counter(cb_prefixos_3)
+    #     cbo_familia = pd.read_csv('documentacao/cbo2002_familia.csv', dtype=str)
+    #     cbo_subgrupo = pd.read_csv('documentacao/cbo2002_subgrupo.csv', dtype=str)
+    #     for prefixo, quantidade in contagem_prefixos_3.items():
+    #         nome_familia = cbo_familia.loc[cbo_familia['CODIGO'] == prefixo, 'TITULO']
+    #         if not nome_familia.empty:
+    #             resultados.append([idx, curso_numero, prefixo, quantidade, nome_familia.iloc[0], 'familia'])
+    #         else:
+    #             nome_subgrupo = cbo_subgrupo.loc[cbo_subgrupo['CODIGO'] == prefixo, 'TITULO']
+    #             nome_subgrupo = nome_subgrupo.iloc[0] if not nome_subgrupo.empty else 'Nome não encontrado'
+    #             resultados.append([idx, curso_numero, prefixo, quantidade, nome_subgrupo, 'subgrupo'])
+
+    #     cb_prefixos_2 = df_100_curso_10['CB'].astype(str).str[:2].tolist()
+    #     contagem_prefixos_2 = Counter(cb_prefixos_2)
+    #     cbo_subgrupo_principal = pd.read_csv('documentacao/cbo2002_subgrupo_principal.csv', dtype=str)
+    #     for prefixo, quantidade in contagem_prefixos_2.items():
+    #         nome_subgrupo_principal = cbo_subgrupo_principal.loc[cbo_subgrupo_principal['CODIGO'] == prefixo, 'TITULO']
+    #         nome_subgrupo_principal = nome_subgrupo_principal.iloc[0] if not nome_subgrupo_principal.empty else 'Nome não encontrado'
+    #         resultados.append([idx, curso_numero, prefixo, quantidade, nome_subgrupo_principal, 'subgrupo_principal'])
+
+    #  # Salvar resultados em um único CSV
+    #  with open('graficos/resultado_prefixos.csv', 'w', newline='', encoding='utf-8') as f:
+    #    writer = csv.writer(f)
+    #    writer.writerow(['idx', 'Curso', 'Prefixo', 'Quantidade', 'Nome', 'Tipo'])
+    #    last_curso = None
+    #    for row in resultados:
+    #       idx, curso_numero, prefixo, quantidade, nome, tipo = row
+    #       if last_curso is not None and curso_numero != last_curso:
+    #          writer.writerow([])  # Escreve uma linha em branco para separar cada curso
+    #       writer.writerow(row)
+    #       last_curso = curso_numero      
      return
 
 def Profissoes_Cursos(path1,name1,path2,name2): # https://colab.research.google.com/drive/1cTpvuIkd7FGZbzEkScU4xKGFb6sSbGog?authuser=1#scrollTo=MGx4AWThonQb
