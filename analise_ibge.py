@@ -102,7 +102,7 @@ if fase == 10:
 
     # ## ibge_functions.ibge_corte_CBO()
 
-    # ibge_functions.ibge_idas_voltas_cursos_profissoes()
+    ibge_functions.ibge_idas_voltas_cursos_profissoes()
 
     # Essas funções  só devem ser usadas em caso de necessidade, pois ela acha ida e volta com os CBOs com 2 ou 3 digitos
     # ibge_functions.ibge_idas_voltas_cursos_profissoes_CBO2()
@@ -118,7 +118,7 @@ if fase == 20:  # QP1
     # - clusterização com k=3,
     # - geração do gráfico K-Means com K=3 (10% - Todos os Cursos - Clusterização)
     # - geração do arquivo Kmeans3_T.csv
-    # ibge_functions.Profissoes_Cursos()
+    ibge_functions.Profissoes_Cursos()
 
     # Essas funções  só devem ser usadas em caso de necessidade, pois elas trabalham com os CBOs com 2 ou 3 digitos
     # ibge_functions.Profissoes_Cursos_CBO2()
@@ -127,8 +127,11 @@ if fase == 20:  # QP1
     # Leitura arquivo Kmeans3_T.csv para gerar a contagem de CBOs de forma automática
     # ibge_functions_exploratory_analysis.leitura_kmeans3_t()
     
-    # Leitura arquivo Kmeans3_T_CBO2.csv para pegar os 10 primeiros CBOs ...
-    ibge_functions_exploratory_analysis.leitura_kmeans3_t_cbo2()
+    # Leitura arquivo Kmeans3.csv para pegar os 10 primeiros CBOs ...
+    # ibge_functions_exploratory_analysis.leitura_kmeans3_t_cbo()
+    # ibge_functions_exploratory_analysis.leitura_kmeans3_t_cbo2()
+    # ibge_functions_exploratory_analysis.leitura_kmeans3_t_cbo3()
+
 
     # # Empregabilidade x Salario -----------------------------------------------------------------
     # ibge_functions.median_salario()

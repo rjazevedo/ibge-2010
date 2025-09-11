@@ -632,6 +632,43 @@ def leitura_kmeans3_t():
     #       last_curso = curso_numero      
      return
 
+def leitura_kmeans3_t_cbo():
+    #  import csv
+    #  df = 'graficos/Kmeans3_T_CBO2.csv'
+    #  df_kmeans = pd.read_csv(df)
+    #  print(f"Quantidade de cursos antes de eliminar repetidos: {len(df_kmeans)}")
+    #  df_kmeans_unicos = df_kmeans.drop_duplicates(subset=['Curso'])
+    #  print(f"Quantidade de cursos após eliminar repetidos: {len(df_kmeans)}")
+
+    #  df1 ='graficos/CBO2_100Porcent_DF_Limpo.csv'
+    #  df_100 = pd.read_csv(df1)    
+
+    
+    import pandas as pd
+
+    df_kmeans = pd.read_csv('graficos/Kmeans3_T.csv')
+    df_kmeans_unicos = df_kmeans.drop_duplicates(subset=['Curso'])
+
+    df_100 = pd.read_csv('graficos/100Porcent_DF_Limpo.csv')
+
+    resultados = []
+
+    for idx, row in df_kmeans_unicos.iterrows():
+        curso_numero = row['Curso']
+        df_curso = df_100[df_100['CR'] == curso_numero].sort_values(by=['CR', 'Ida'], ascending=[True, False])
+        df_curso_10 = df_curso.head(10)
+        df_curso_10['Curso'] = curso_numero
+        resultados.append(df_curso_10)
+        # Adiciona uma linha em branco (DataFrame vazio) para separar cursos
+        resultados.append(pd.DataFrame([{}]))
+
+    if resultados:
+        resultado_concat = pd.concat(resultados, ignore_index=True)
+        resultado_concat.to_csv('graficos/CBO_10primeiros_cbo_por_curso.csv', index=False)
+
+          
+    return
+
 def leitura_kmeans3_t_cbo2():
     #  import csv
     #  df = 'graficos/Kmeans3_T_CBO2.csv'
@@ -665,6 +702,43 @@ def leitura_kmeans3_t_cbo2():
     if resultados:
         resultado_concat = pd.concat(resultados, ignore_index=True)
         resultado_concat.to_csv('graficos/CBO2_10primeiros_cbo_por_curso.csv', index=False)
+
+          
+    return
+
+def leitura_kmeans3_t_cbo3():
+    #  import csv
+    #  df = 'graficos/Kmeans3_T_CBO2.csv'
+    #  df_kmeans = pd.read_csv(df)
+    #  print(f"Quantidade de cursos antes de eliminar repetidos: {len(df_kmeans)}")
+    #  df_kmeans_unicos = df_kmeans.drop_duplicates(subset=['Curso'])
+    #  print(f"Quantidade de cursos após eliminar repetidos: {len(df_kmeans)}")
+
+    #  df1 ='graficos/CBO2_100Porcent_DF_Limpo.csv'
+    #  df_100 = pd.read_csv(df1)    
+
+    
+    import pandas as pd
+
+    df_kmeans = pd.read_csv('graficos/Kmeans3_T_CBO3.csv')
+    df_kmeans_unicos = df_kmeans.drop_duplicates(subset=['Curso'])
+
+    df_100 = pd.read_csv('graficos/CBO3_100Porcent_DF_Limpo.csv')
+
+    resultados = []
+
+    for idx, row in df_kmeans_unicos.iterrows():
+        curso_numero = row['Curso']
+        df_curso = df_100[df_100['CR'] == curso_numero].sort_values(by=['CR', 'Ida'], ascending=[True, False])
+        df_curso_10 = df_curso.head(10)
+        df_curso_10['Curso'] = curso_numero
+        resultados.append(df_curso_10)
+        # Adiciona uma linha em branco (DataFrame vazio) para separar cursos
+        resultados.append(pd.DataFrame([{}]))
+
+    if resultados:
+        resultado_concat = pd.concat(resultados, ignore_index=True)
+        resultado_concat.to_csv('graficos/CBO3_10primeiros_cbo_por_curso.csv', index=False)
 
           
     return
