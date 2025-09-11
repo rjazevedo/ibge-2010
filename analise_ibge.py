@@ -88,6 +88,9 @@ if fase == 2:
 
     ibge_functions_preprocessing.filtrar_por_genero()
 
+    # # Essa função só deve ser usada em caso de necessidade, pois ela reduz os digitos dos CBOs
+    # ibge_functions.ibge_diminuirCBOs()
+
 # Fase 10: Essa é a primeira fase que você faz no dia a dia. Aqui você começa a fazer a análise dos dados
 # Fase 10: Análise Descritiva ... ...
 # if fase >= 10:
@@ -99,8 +102,11 @@ if fase == 10:
 
     # ## ibge_functions.ibge_corte_CBO()
 
-    #
-    ibge_functions.ibge_idas_voltas_cursos_profissoes()
+    # ibge_functions.ibge_idas_voltas_cursos_profissoes()
+
+    # Essas funções  só devem ser usadas em caso de necessidade, pois ela acha ida e volta com os CBOs com 2 ou 3 digitos
+    # ibge_functions.ibge_idas_voltas_cursos_profissoes_CBO2()
+    # ibge_functions.ibge_idas_voltas_cursos_profissoes_CBO3()
 
     # ibge_functions.ibge_trabalho_recenseados()
     pass
@@ -113,8 +119,17 @@ if fase == 20:  # QP1
     # - geração do gráfico K-Means com K=3 (10% - Todos os Cursos - Clusterização)
     # - geração do arquivo Kmeans3_T.csv
     # ibge_functions.Profissoes_Cursos()
+
+    # Essas funções  só devem ser usadas em caso de necessidade, pois elas trabalham com os CBOs com 2 ou 3 digitos
+    # ibge_functions.Profissoes_Cursos_CBO2()
+    # ibge_functions.Profissoes_Cursos_CBO3()
+
     # Leitura arquivo Kmeans3_T.csv para gerar a contagem de CBOs de forma automática
-    ibge_functions_exploratory_analysis.leitura_kmeans3_t()
+    # ibge_functions_exploratory_analysis.leitura_kmeans3_t()
+    
+    # Leitura arquivo Kmeans3_T_CBO2.csv para pegar os 10 primeiros CBOs ...
+    ibge_functions_exploratory_analysis.leitura_kmeans3_t_cbo2()
+
     # # Empregabilidade x Salario -----------------------------------------------------------------
     # ibge_functions.median_salario()
     # ibge_functions_exploratory_analysis.separar_cursos_por_clusters()
@@ -315,14 +330,15 @@ if fase == 100:  # aqui é só de teste
     # #Análise de idade por CBO - Plot das idades para toda a base representativa  --------------------------------------------------------------------
     # ibge_functions_results_1.plot_gender_age_distribution()
     # #Análise de idade por CBO - Plot das idades para toda os clusters  ------------------------------------------------------------------------------
-    #  ibge_functions_results_1.split_csv_by_cluster()
-    #
-    ibge_functions.plot_gender_age_distribution_bycluster()
+    # ibge_functions_results_1.split_csv_by_cluster()
+    # ibge_functions.plot_gender_age_distribution_bycluster()
     # #Análise de idade por CBO - Plot das idades para Curso/CBO  -------------------------------------------------------------------------------------
     # ibge_functions_results_1.extract_data_by_course_cbo()
     # ibge_functions_results_1.split_csv_by_cluster_1()
     # Geração de tabelas dos clusters -----------------------------------------------------------------------------------------------------------------
     # ibge_functions.save_csv_to_table()
+
+    #########################################################################################
     # # Diminuir Cursos e Cbos no Arquivo de Graduados e no Arquivo Pivot Table -----------------------------------------------------------------------
     # ibge_functions_results_1.diminuir_and_save_csv()
     # ibge_functions_results_1.transform_columns_to_int_and_save()
@@ -331,8 +347,8 @@ if fase == 100:  # aqui é só de teste
     # #Idas e voltas para Cursos e CBOs Diminuidos ---------------------------------------------------------------------------------------------------
     # ibge_functions.ibge_idas_voltas_cursos_profissoes_1()
     # ibge_functions_results_1.voronoi_1()
-    # -----------------------------------------------------
-    # # ibge_functions_results_1.diminuir_and_save_csv_CBO()
+    # -----------------------------------------------------    
+    # ibge_functions_results_1.diminuir_and_save_csv_CBO()
     # # ibge_functions_results_1.transform_columns_to_int_and_save_CBO()
     # ---------------------------------------------------------------
     # # ibge_functions_results_1.Ida_Volta_CBO()

@@ -151,7 +151,11 @@ def ibge_JuntarCSVs():
         #  ibge_functions_preprocessing.JuntarCSVs(path[i],opcao[i],dir)
          ibge_functions_preprocessing.JuntarCSVs(path[i],opcao[i])
      return
-
+def ibge_diminuirCBOs():
+    # opcao=2
+    opcao=3
+    ibge_functions_preprocessing.ibge_diminuirCBOs(opcao)
+    return
 
 ## Fase 10: Essa é a primeira fase que você faz no dia a dia. Aqui você começa a fazer a análise dos dados
 #  Fase 10: Análise Descritiva ... ...
@@ -247,6 +251,22 @@ def Profissoes_Cursos():
     path2 = ibge_variable.paths(13)
     name2 = ibge_variable.names(9)
     ibge_functions_exploratory_analysis.Profissoes_Cursos(path1,name1,path2,name2)    
+    return
+
+def Profissoes_Cursos_CBO2():
+    # path1 = ibge_variable.paths(12)
+    # name1 = ibge_variable.names(6)
+    # path2 = ibge_variable.paths(13)
+    # name2 = ibge_variable.names(9)
+    ibge_functions_exploratory_analysis.Profissoes_Cursos_CBO2()    
+    return
+
+def Profissoes_Cursos_CBO3():
+    # path1 = ibge_variable.paths(12)
+    # name1 = ibge_variable.names(6)
+    # path2 = ibge_variable.paths(13)
+    # name2 = ibge_variable.names(9)
+    ibge_functions_exploratory_analysis.Profissoes_Cursos_CBO3()    
     return
 
 # def Profissoes_Cursos_1():
@@ -682,8 +702,31 @@ def ibge_cursos_filter_1():
     # path ='documentacao/'
     # name ='Curso_CSV.csv'
     # ibge_functions_results_1.ibge_cursos_filter_1(path,name)  
-    ibge_functions_results_1.ibge_cursos_filter_1()
+    # ibge_functions_results_1.ibge_cursos_filter_1()
     return
+
+def ibge_idas_voltas_cursos_profissoes_CBO2():
+    # path = ibge_variable.paths(11)
+    # name = ibge_variable.names(7)
+    # path1 = ibge_variable.paths(12)
+    # name1 = ibge_variable.names(6)
+    ibge_functions_descriptive_analysis.Ida_Volta_CBO2()
+
+    ibge_functions_descriptive_analysis.Tabela_Ida_Volta_CBO2()    
+
+    return
+
+def ibge_idas_voltas_cursos_profissoes_CBO3():
+    # path = ibge_variable.paths(11)
+    # name = ibge_variable.names(7)
+    # path1 = ibge_variable.paths(12)
+    # name1 = ibge_variable.names(6)
+    ibge_functions_descriptive_analysis.Ida_Volta_CBO3()
+
+    ibge_functions_descriptive_analysis.Tabela_Ida_Volta_CBO3()    
+
+    return
+
 
 def split_Kmeans3_T_Profissoes_Cursos_Menor_CBO_by_cluster():
     # input = 'Kmeans3_T_Profissoes_Cursos_Menor_CBO_Curso_3.csv'

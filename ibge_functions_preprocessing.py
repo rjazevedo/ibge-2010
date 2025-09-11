@@ -321,4 +321,60 @@ def JuntarCSVs(path,opcao):
 
 
 
+def ibge_diminuirCBOs(opcao):
+    if opcao ==2:
+       # Process the first file
+       file_path_graduados = 'processados/CSVs_ArquivoFinalGraduados/Brasil_Graduados.csv'
+       df_graduados = pd.read_csv(file_path_graduados)
+       # Subtract one digit from the specified columns
+       # df_graduados['Curso_Superior_Graduação_Código'] = df_graduados['Curso_Superior_Graduação_Código'].astype(str).str[:-1].astype(int)
+       # df_graduados['CBO-Domiciliar'] = df_graduados['CBO-Domiciliar'].astype(str).str[:-2].astype(int)
+       df_graduados['CBO-Domiciliar'] = df_graduados['CBO-Domiciliar'].apply(
+        lambda x: int(str(x)[:-2]) if len(str(x)) == 4 else (
+            int(str(x)[:-1]) if len(str(x)) == 3 else int(str(x))
+        )
+       )
+       # Save the transformed DataFrame to a new file
+       save_results_graduados = 'processados/CSVs_ArquivoFinalGraduados/Brasil_Graduados_DiminuidoCBO2.csv'
+       df_graduados.to_csv(save_results_graduados, index=False)
 
+       # Process the second file
+       file_path_pivot = 'processados/CSVs_PivotTableFinal/Brasil_PivotFinal.csv'
+       df_pivot = pd.read_csv(file_path_pivot)
+       # Subtract one digit from the Ocupação_Código column
+       # df_pivot['CBO-Domiciliar'] = df_pivot['CBO-Domiciliar'].astype(str).str[:-2].astype(int)
+       df_pivot['CBO-Domiciliar'] = df_pivot['CBO-Domiciliar'].apply(
+        lambda x: int(str(x)[:-2]) if len(str(x)) == 4 else (
+            int(str(x)[:-1]) if len(str(x)) == 3 else int(str(x))
+        )
+       )
+       # Save the transformed DataFrame to a new file
+       save_results_pivot = 'processados/CSVs_PivotTableFinal/Brasil_PivotFinal_DiminuidaCBO2.csv'
+       df_pivot.to_csv(save_results_pivot, index=False) # opcao=2
+
+    elif opcao ==3:
+       # Process the first file
+       file_path_graduados = 'processados/CSVs_ArquivoFinalGraduados/Brasil_Graduados.csv'
+       df_graduados = pd.read_csv(file_path_graduados)
+       # Subtract one digit from the specified columns
+       # df_graduados['Curso_Superior_Graduação_Código'] = df_graduados['Curso_Superior_Graduação_Código'].astype(str).str[:-1].astype(int)
+       # df_graduados['CBO-Domiciliar'] = df_graduados['CBO-Domiciliar'].astype(str).str[:-2].astype(int)
+       df_graduados['CBO-Domiciliar'] = df_graduados['CBO-Domiciliar'].apply(
+        lambda x: int(str(x)[:-1]) if len(str(x)) == 4 else int(str(x))
+        )
+       # Save the transformed DataFrame to a new file
+       save_results_graduados = 'processados/CSVs_ArquivoFinalGraduados/Brasil_Graduados_DiminuidoCBO3.csv'
+       df_graduados.to_csv(save_results_graduados, index=False)
+
+       # Process the second file
+       file_path_pivot = 'processados/CSVs_PivotTableFinal/Brasil_PivotFinal.csv'
+       df_pivot = pd.read_csv(file_path_pivot)
+       # Subtract one digit from the Ocupação_Código column
+       # df_pivot['CBO-Domiciliar'] = df_pivot['CBO-Domiciliar'].astype(str).str[:-2].astype(int)
+       df_pivot['CBO-Domiciliar'] = df_pivot['CBO-Domiciliar'].apply(
+        lambda x: int(str(x)[:-1]) if len(str(x)) == 4 else int(str(x))
+       )
+       # Save the transformed DataFrame to a new file
+       save_results_pivot = 'processados/CSVs_PivotTableFinal/Brasil_PivotFinal_DiminuidaCBO3.csv'
+       df_pivot.to_csv(save_results_pivot, index=False)
+    return
