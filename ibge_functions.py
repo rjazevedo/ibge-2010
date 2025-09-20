@@ -157,6 +157,10 @@ def ibge_diminuirCBOs():
     ibge_functions_preprocessing.ibge_diminuirCBOs(opcao)
     return
 
+def diminuirCurso():
+    ibge_functions_preprocessing.diminuirCurso()
+    return 
+
 ## Fase 10: Essa é a primeira fase que você faz no dia a dia. Aqui você começa a fazer a análise dos dados
 #  Fase 10: Análise Descritiva ... ...
 def ibge_cursos_profissoes():
@@ -233,6 +237,18 @@ def ibge_idas_voltas_cursos_profissoes():
     ibge_functions_descriptive_analysis.Tabela_Ida_Volta(path2,name2)    
     return
 
+def ibge_idas_voltas_cursos_profissoes_Curso2():
+    path = ibge_variable.paths(11)
+    name = ibge_variable.names(7)
+    path1 = ibge_variable.paths(12)
+    name1 = ibge_variable.names(6)
+    ibge_functions_descriptive_analysis.Ida_Volta_Curso2(path,name,path1,name1)
+
+    path2 = ibge_variable.paths(13)
+    name2 = ibge_variable.names(9)
+    ibge_functions_descriptive_analysis.Tabela_Ida_Volta_Curso2(path2,name2)    
+    return
+
 def ibge_trabalho_recenseados():
     path = ibge_variable.paths(11)
     name = ibge_variable.names(7)
@@ -253,6 +269,14 @@ def Profissoes_Cursos():
     ibge_functions_exploratory_analysis.Profissoes_Cursos(path1,name1,path2,name2)    
     return
 
+def Profissoes_Cursos_Curso2():
+    path1 = ibge_variable.paths(12)
+    name1 = ibge_variable.names(6)
+    path2 = ibge_variable.paths(13)
+    name2 = ibge_variable.names(9)
+    ibge_functions_exploratory_analysis.Profissoes_Cursos_Curso2(path1,name1,path2,name2)    
+    return
+
 def Profissoes_Cursos_CBO2():
     # path1 = ibge_variable.paths(12)
     # name1 = ibge_variable.names(6)
@@ -261,12 +285,28 @@ def Profissoes_Cursos_CBO2():
     ibge_functions_exploratory_analysis.Profissoes_Cursos_CBO2()    
     return
 
+def Profissoes_Cursos_CBO2_Curso2():
+    # path1 = ibge_variable.paths(12)
+    # name1 = ibge_variable.names(6)
+    # path2 = ibge_variable.paths(13)
+    # name2 = ibge_variable.names(9)
+    ibge_functions_exploratory_analysis.Profissoes_Cursos_CBO2_Curso2()    
+    return
+
 def Profissoes_Cursos_CBO3():
     # path1 = ibge_variable.paths(12)
     # name1 = ibge_variable.names(6)
     # path2 = ibge_variable.paths(13)
     # name2 = ibge_variable.names(9)
     ibge_functions_exploratory_analysis.Profissoes_Cursos_CBO3()    
+    return
+
+def Profissoes_Cursos_CBO3_Curso2():
+    # path1 = ibge_variable.paths(12)
+    # name1 = ibge_variable.names(6)
+    # path2 = ibge_variable.paths(13)
+    # name2 = ibge_variable.names(9)
+    ibge_functions_exploratory_analysis.Profissoes_Cursos_CBO3_Curso2()    
     return
 
 # def Profissoes_Cursos_1():
@@ -715,6 +755,16 @@ def ibge_idas_voltas_cursos_profissoes_CBO2():
     ibge_functions_descriptive_analysis.Tabela_Ida_Volta_CBO2()    
 
     return
+def ibge_idas_voltas_cursos_profissoes_CBO2_Curso2():
+    # path = ibge_variable.paths(11)
+    # name = ibge_variable.names(7)
+    # path1 = ibge_variable.paths(12)
+    # name1 = ibge_variable.names(6)
+    ibge_functions_descriptive_analysis.Ida_Volta_CBO2_Curso2()
+
+    ibge_functions_descriptive_analysis.Tabela_Ida_Volta_CBO2_Curso2()    
+
+    return
 
 def ibge_idas_voltas_cursos_profissoes_CBO3():
     # path = ibge_variable.paths(11)
@@ -727,6 +777,15 @@ def ibge_idas_voltas_cursos_profissoes_CBO3():
 
     return
 
+def ibge_idas_voltas_cursos_profissoes_CBO3_Curso2():
+    # path = ibge_variable.paths(11)
+    # name = ibge_variable.names(7)
+    # path1 = ibge_variable.paths(12)
+    # name1 = ibge_variable.names(6)
+    ibge_functions_descriptive_analysis.Ida_Volta_CBO3_Curso2()
+
+    ibge_functions_descriptive_analysis.Tabela_Ida_Volta_CBO3_Curso2()   
+    return
 
 def split_Kmeans3_T_Profissoes_Cursos_Menor_CBO_by_cluster():
     # input = 'Kmeans3_T_Profissoes_Cursos_Menor_CBO_Curso_3.csv'

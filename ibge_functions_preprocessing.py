@@ -319,7 +319,46 @@ def JuntarCSVs(path,opcao):
     combined_csv.to_csv(name_path, index=False, encoding='utf-8-sig')   
     return 
 
+def diminuirCurso():
+    # Ler o arquivo Brasil_Graduados.csv         --------------------------------------
+    file_path = "processados/CSVs_ArquivoFinalGraduados/Brasil_Graduados.csv"
+    df = pd.read_csv(file_path)
 
+    # Reduzir um dígito da coluna Curso_Superior_Graduação_Código se tiver 3 dígitos
+    df['Curso_Superior_Graduação_Código'] = df['Curso_Superior_Graduação_Código'].apply(
+        lambda x: int(str(x)[:-1]) if len(str(x)) == 3 else int(str(x))
+    )
+
+    # Salvar em novo arquivo
+    save_path = "processados/CSVs_ArquivoFinalGraduados/Brasil_Graduados_CBO4_Curso2.csv"
+    df.to_csv(save_path, index=False)
+
+    # Ler o arquivo Brasil_Graduados_DiminuidoCBO2.csv --------------------------------
+    file_path = "processados/CSVs_ArquivoFinalGraduados/Brasil_Graduados_DiminuidoCBO2.csv"
+    df = pd.read_csv(file_path)
+
+    # Reduzir um dígito da coluna Curso_Superior_Graduação_Código se tiver 3 dígitos
+    df['Curso_Superior_Graduação_Código'] = df['Curso_Superior_Graduação_Código'].apply(
+        lambda x: int(str(x)[:-1]) if len(str(x)) == 3 else int(str(x))
+    )
+
+    # Salvar em novo arquivo
+    save_path = "processados/CSVs_ArquivoFinalGraduados/Brasil_Graduados_DiminuidoCBO2_Curso2.csv"
+    df.to_csv(save_path, index=False)
+
+    # Ler o arquivo Brasil_Graduados_DiminuidoCBO3.csv--------------------------------
+    file_path = "processados/CSVs_ArquivoFinalGraduados/Brasil_Graduados_DiminuidoCBO3.csv"
+    df = pd.read_csv(file_path)
+
+    # Reduzir um dígito da coluna Curso_Superior_Graduação_Código se tiver 3 dígitos
+    df['Curso_Superior_Graduação_Código'] = df['Curso_Superior_Graduação_Código'].apply(
+        lambda x: int(str(x)[:-1]) if len(str(x)) == 3 else int(str(x))
+    )
+
+    # Salvar em novo arquivo
+    save_path = "processados/CSVs_ArquivoFinalGraduados/Brasil_Graduados_DiminuidoCBO3_Curso2.csv"
+    df.to_csv(save_path, index=False)
+    return
 
 def ibge_diminuirCBOs(opcao):
     if opcao ==2:

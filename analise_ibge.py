@@ -6,6 +6,7 @@ import argparse
 import sys
 import os
 import numpy as np
+import ibge_functions_descriptive_analysis
 import ibgeparser
 import pandas as pd
 from pandas import DataFrame
@@ -89,7 +90,14 @@ if fase == 2:
     ibge_functions_preprocessing.filtrar_por_genero()
 
     # # Essa função só deve ser usada em caso de necessidade, pois ela reduz os digitos dos CBOs
+    # # Diminui CBO em Brasil_Graduados e Brasil_PivotTableFinal ...
     # ibge_functions.ibge_diminuirCBOs()
+
+    # # Reduzir cursos ... essa função só deve ser usada em caso de necessidade, pois ela reduz os digitos dos Cursos
+    # # Diminui cursos em Cursos_csv ...
+    # ibge_functions_descriptive_analysis.ibge_cursos_filter_DiminuirCurso()
+    # # Diminui cursos em Brasil_Graduados - Brasil_Graduados_DiminuidoCBO2.csv e Brasil_Graduados_DiminuidoCBO3.csv  ...
+    # ibge_functions.diminuirCurso() # ...
 
 # Fase 10: Essa é a primeira fase que você faz no dia a dia. Aqui você começa a fazer a análise dos dados
 # Fase 10: Análise Descritiva ... ...
@@ -103,10 +111,13 @@ if fase == 10:
     # ## ibge_functions.ibge_corte_CBO()
 
     ibge_functions.ibge_idas_voltas_cursos_profissoes()
+    # ibge_functions.ibge_idas_voltas_cursos_profissoes_Curso2()
 
     # Essas funções  só devem ser usadas em caso de necessidade, pois ela acha ida e volta com os CBOs com 2 ou 3 digitos
     # ibge_functions.ibge_idas_voltas_cursos_profissoes_CBO2()
+    # ibge_functions.ibge_idas_voltas_cursos_profissoes_CBO2_Curso2()
     # ibge_functions.ibge_idas_voltas_cursos_profissoes_CBO3()
+    # ibge_functions.ibge_idas_voltas_cursos_profissoes_CBO3_Curso2()
 
     # ibge_functions.ibge_trabalho_recenseados()
     pass
@@ -118,19 +129,29 @@ if fase == 20:  # QP1
     # - clusterização com k=3,
     # - geração do gráfico K-Means com K=3 (10% - Todos os Cursos - Clusterização)
     # - geração do arquivo Kmeans3_T.csv
-    ibge_functions.Profissoes_Cursos()
+    # ibge_functions.Profissoes_Cursos()
+    # ibge_functions.Profissoes_Cursos_Curso2() 
+
 
     # Essas funções  só devem ser usadas em caso de necessidade, pois elas trabalham com os CBOs com 2 ou 3 digitos
     # ibge_functions.Profissoes_Cursos_CBO2()
+    ibge_functions.Profissoes_Cursos_CBO2_Curso2() 
     # ibge_functions.Profissoes_Cursos_CBO3()
+    # ibge_functions.Profissoes_Cursos_CBO3_Curso2()
 
+
+    # Essa função não esta mais sendo usada
     # Leitura arquivo Kmeans3_T.csv para gerar a contagem de CBOs de forma automática
     # ibge_functions_exploratory_analysis.leitura_kmeans3_t()
     
     # Leitura arquivo Kmeans3.csv para pegar os 10 primeiros CBOs ...
     # ibge_functions_exploratory_analysis.leitura_kmeans3_t_cbo()
+    # ibge_functions_exploratory_analysis.leitura_kmeans3_t_cbo_Curso2()
     # ibge_functions_exploratory_analysis.leitura_kmeans3_t_cbo2()
+    # ibge_functions_exploratory_analysis.leitura_kmeans3_t_cbo2_Curso2()
     # ibge_functions_exploratory_analysis.leitura_kmeans3_t_cbo3()
+    # ibge_functions_exploratory_analysis.leitura_kmeans3_t_cbo3_Curso2()
+
 
 
     # # Empregabilidade x Salario -----------------------------------------------------------------

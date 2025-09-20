@@ -669,6 +669,43 @@ def leitura_kmeans3_t_cbo():
           
     return
 
+def leitura_kmeans3_t_cbo_Curso2():
+    #  import csv
+    #  df = 'graficos/Kmeans3_T_CBO2.csv'
+    #  df_kmeans = pd.read_csv(df)
+    #  print(f"Quantidade de cursos antes de eliminar repetidos: {len(df_kmeans)}")
+    #  df_kmeans_unicos = df_kmeans.drop_duplicates(subset=['Curso'])
+    #  print(f"Quantidade de cursos após eliminar repetidos: {len(df_kmeans)}")
+
+    #  df1 ='graficos/CBO2_100Porcent_DF_Limpo.csv'
+    #  df_100 = pd.read_csv(df1)    
+
+    
+    import pandas as pd
+
+    df_kmeans = pd.read_csv('graficos/Kmeans3_T_Curso02.csv')
+    df_kmeans_unicos = df_kmeans.drop_duplicates(subset=['Curso'])
+
+    df_100 = pd.read_csv('graficos/100Porcent_DF_Limpo_Curso02.csv')
+
+    resultados = []
+
+    for idx, row in df_kmeans_unicos.iterrows():
+        curso_numero = row['Curso']
+        df_curso = df_100[df_100['CR'] == curso_numero].sort_values(by=['CR', 'Ida'], ascending=[True, False])
+        df_curso_10 = df_curso.head(10)
+        df_curso_10['Curso'] = curso_numero
+        resultados.append(df_curso_10)
+        # Adiciona uma linha em branco (DataFrame vazio) para separar cursos
+        resultados.append(pd.DataFrame([{}]))
+
+    if resultados:
+        resultado_concat = pd.concat(resultados, ignore_index=True)
+        resultado_concat.to_csv('graficos/CBO_10primeiros_cbo_por_curso_Curso02.csv', index=False)
+
+          
+    return
+
 def leitura_kmeans3_t_cbo2():
     #  import csv
     #  df = 'graficos/Kmeans3_T_CBO2.csv'
@@ -702,6 +739,43 @@ def leitura_kmeans3_t_cbo2():
     if resultados:
         resultado_concat = pd.concat(resultados, ignore_index=True)
         resultado_concat.to_csv('graficos/CBO2_10primeiros_cbo_por_curso.csv', index=False)
+
+          
+    return
+
+def leitura_kmeans3_t_cbo2_Curso2():
+    #  import csv
+    #  df = 'graficos/Kmeans3_T_CBO2.csv'
+    #  df_kmeans = pd.read_csv(df)
+    #  print(f"Quantidade de cursos antes de eliminar repetidos: {len(df_kmeans)}")
+    #  df_kmeans_unicos = df_kmeans.drop_duplicates(subset=['Curso'])
+    #  print(f"Quantidade de cursos após eliminar repetidos: {len(df_kmeans)}")
+
+    #  df1 ='graficos/CBO2_100Porcent_DF_Limpo.csv'
+    #  df_100 = pd.read_csv(df1)    
+
+    
+    import pandas as pd
+
+    df_kmeans = pd.read_csv('graficos/Kmeans3_T_CBO2_Curso02.csv')
+    df_kmeans_unicos = df_kmeans.drop_duplicates(subset=['Curso'])
+
+    df_100 = pd.read_csv('graficos/CBO2_100Porcent_DF_Limpo_Curso02.csv')
+
+    resultados = []
+
+    for idx, row in df_kmeans_unicos.iterrows():
+        curso_numero = row['Curso']
+        df_curso = df_100[df_100['CR'] == curso_numero].sort_values(by=['CR', 'Ida'], ascending=[True, False])
+        df_curso_10 = df_curso.head(10)
+        df_curso_10['Curso'] = curso_numero
+        resultados.append(df_curso_10)
+        # Adiciona uma linha em branco (DataFrame vazio) para separar cursos
+        resultados.append(pd.DataFrame([{}]))
+
+    if resultados:
+        resultado_concat = pd.concat(resultados, ignore_index=True)
+        resultado_concat.to_csv('graficos/CBO2_10primeiros_cbo_por_curso_Curso02.csv', index=False)
 
           
     return
@@ -743,6 +817,43 @@ def leitura_kmeans3_t_cbo3():
           
     return
 
+def leitura_kmeans3_t_cbo3_Curso2():
+    #  import csv
+    #  df = 'graficos/Kmeans3_T_CBO2.csv'
+    #  df_kmeans = pd.read_csv(df)
+    #  print(f"Quantidade de cursos antes de eliminar repetidos: {len(df_kmeans)}")
+    #  df_kmeans_unicos = df_kmeans.drop_duplicates(subset=['Curso'])
+    #  print(f"Quantidade de cursos após eliminar repetidos: {len(df_kmeans)}")
+
+    #  df1 ='graficos/CBO2_100Porcent_DF_Limpo.csv'
+    #  df_100 = pd.read_csv(df1)    
+
+    
+    import pandas as pd
+
+    df_kmeans = pd.read_csv('graficos/Kmeans3_T_CBO3_Curso02.csv')
+    df_kmeans_unicos = df_kmeans.drop_duplicates(subset=['Curso'])
+
+    df_100 = pd.read_csv('graficos/CBO3_100Porcent_DF_Limpo_Curso02.csv')
+
+    resultados = []
+
+    for idx, row in df_kmeans_unicos.iterrows():
+        curso_numero = row['Curso']
+        df_curso = df_100[df_100['CR'] == curso_numero].sort_values(by=['CR', 'Ida'], ascending=[True, False])
+        df_curso_10 = df_curso.head(10)
+        df_curso_10['Curso'] = curso_numero
+        resultados.append(df_curso_10)
+        # Adiciona uma linha em branco (DataFrame vazio) para separar cursos
+        resultados.append(pd.DataFrame([{}]))
+
+    if resultados:
+        resultado_concat = pd.concat(resultados, ignore_index=True)
+        resultado_concat.to_csv('graficos/CBO3_10primeiros_cbo_por_curso_Curso02.csv', index=False)
+
+          
+    return
+
 def Profissoes_Cursos(path1,name1,path2,name2): # https://colab.research.google.com/drive/1cTpvuIkd7FGZbzEkScU4xKGFb6sSbGog?authuser=1#scrollTo=MGx4AWThonQb
 
     # Leitura
@@ -751,11 +862,13 @@ def Profissoes_Cursos(path1,name1,path2,name2): # https://colab.research.google.
     X = pd.read_csv(df)    
     save_results_to = 'graficos/' 
     X = X.drop(columns=['Unnamed: 0'])
-    # X = X.drop(columns=['Unnamed: 0.1'])
+    X = X.drop(columns=['Unnamed: 0.1'])
 
     # Remoção de Features 
     X = X.drop(columns=['CB'])
     X = X.drop(columns=['CR'])
+    # print(X)
+    # exit(0)
 
     CursosCenso = ibge_functions_descriptive_analysis.ibge_cursos_filter(path1[0],name1[2])
     # print("CursosCenso:", CursosCenso)
@@ -769,7 +882,7 @@ def Profissoes_Cursos(path1,name1,path2,name2): # https://colab.research.google.
     # # Plotagem dos Dados Originais
     # # print(X.iloc[:,0])
     # plt.figure(figsize=(6, 4))
-    # plt.title("10%  - Todos os Cursos - Clusterização ")
+    # # plt.title("10%  - Todos os Cursos - Clusterização ")
     # plt.xlabel('Ida')
     # plt.ylabel('Volta')
     # plt.ylim(0, 100) # definir limite do eixo
@@ -777,7 +890,7 @@ def Profissoes_Cursos(path1,name1,path2,name2): # https://colab.research.google.
     # plt.grid()
     # plt.scatter(X.iloc[:,0],X.iloc[:,1],marker = '*')
     # # plt.show()
-    # string = "10%  - Todos os Cursos - Dados Originais " +".pdf"
+    # string = "10%_TodosCursos_DadosOriginais" +".png"
     # save_results_to = 'graficos/'  
     # plt.savefig(save_results_to + string)    
 
@@ -805,6 +918,7 @@ def Profissoes_Cursos(path1,name1,path2,name2): # https://colab.research.google.
     #Clusterização
     #plt.figure(figsize=(6, 4))
     #plt.title("10%  - Todos os Cursos - Clusterização ")
+    plt.title("10%  - Clusterização - Cursos 03 - CBO 4 Dígitos")
     plt.xlabel('Cursos')
     plt.ylabel('Profissões')
     # plt.title("10% - All Courses - Clustering") # Diversos  ( Explicações e correções) e Estilo de texto 
@@ -817,7 +931,7 @@ def Profissoes_Cursos(path1,name1,path2,name2): # https://colab.research.google.
     plt.scatter(X.iloc[y_kmeans==0, 0], X.iloc[y_kmeans==0, 1], s=100, c='red', label ='Cluster 0', marker = '*')
     plt.scatter(X.iloc[y_kmeans==1, 0], X.iloc[y_kmeans==1, 1], s=100, c='blue', label ='Cluster 1', marker = '*')
     plt.scatter(X.iloc[y_kmeans==2, 0], X.iloc[y_kmeans==2, 1], s=100, c='green', label ='Cluster 2', marker = '*')
-    # plt.scatter(kmeans.cluster_centers_[:, 0], kmeans.cluster_centers_[:, 1], s=300, c='yellow', label = 'Centroids', marker = '*') # Diversos  ( Explicações e correções) e Estilo de texto 
+    plt.scatter(kmeans.cluster_centers_[:, 0], kmeans.cluster_centers_[:, 1], s=300, c='yellow', label = 'Centroids', marker = '*') # Diversos  ( Explicações e correções) e Estilo de texto 
     plt.legend()
     # plt.show()
     # string1 = "10%  - Todos os Cursos - Clusterização " +".pdf"
@@ -1140,6 +1254,411 @@ def Profissoes_Cursos(path1,name1,path2,name2): # https://colab.research.google.
     Kmeans3_T.to_csv(save_results_to +'Kmeans3_T.csv')
     return
 
+def Profissoes_Cursos_Curso2(path1,name1,path2,name2): # https://colab.research.google.com/drive/1cTpvuIkd7FGZbzEkScU4xKGFb6sSbGog?authuser=1#scrollTo=MGx4AWThonQb
+
+    # Leitura
+    # df =  os.path.join(path2[0],name2[2])
+    # df ='graficos/10Porcent_DF_Limpo.csv' #12/08/2025 10Porcent_DF_Limpo_Curso02.csv
+    df ='graficos/10Porcent_DF_Limpo_Curso02.csv' 
+    X = pd.read_csv(df)    
+    save_results_to = 'graficos/' 
+    X = X.drop(columns=['Unnamed: 0'])
+    X = X.drop(columns=['Unnamed: 0.1'])
+
+    # Remoção de Features 
+    X = X.drop(columns=['CB'])
+    X = X.drop(columns=['CR'])
+    # print(X)
+    # exit(0)
+
+    CursosCenso = ibge_functions_descriptive_analysis.ibge_cursos_filter_DiminuirCurso(path1[0],name1[2])
+    # print("CursosCenso:", CursosCenso)
+    # exit(0)
+    csv_CBO = os.path.join(path1[0],name1[1]) # Tabela de CBOs
+    CBO = pd.read_csv(csv_CBO)
+    CBO_aux = pd.read_csv('documentacao/CBO_CSV_TabelaAuxiliar.csv', dtype ='str')
+
+
+
+    # # Plotagem dos Dados Originais
+    # # print(X.iloc[:,0])
+    # plt.figure(figsize=(6, 4))
+    # # plt.title("10%  - Todos os Cursos - Clusterização ")
+    # plt.xlabel('Ida')
+    # plt.ylabel('Volta')
+    # plt.ylim(0, 100) # definir limite do eixo
+    # plt.xlim(0, 100) # definir limite do eixo
+    # plt.grid()
+    # plt.scatter(X.iloc[:,0],X.iloc[:,1],marker = '*')
+    # # plt.show()
+    # string = "10%_TodosCursos_DadosOriginais" +".png"
+    # save_results_to = 'graficos/'  
+    # plt.savefig(save_results_to + string)    
+
+    # # The Elbow Method Graph
+    # wcss=[]
+    # for i in range(1,11):
+    #     kmeans = KMeans(n_clusters=i, init ='k-means++', max_iter=300,  n_init=10,random_state=0 )
+    #     kmeans.fit(X)
+    #     wcss.append(kmeans.inertia_)
+    # plt.plot(range(1,11),wcss,'bx-')
+    # plt.title('The Elbow Method Graph')
+    # plt.xlabel('Number of clusters')
+    # plt.ylabel('WCSS')
+    # # plt.show()
+    # string1 = "10%  - The Elbow Method Graph " +".pdf"
+    # save_results_to = 'graficos/'  
+    # plt.savefig(save_results_to + string1)  
+
+    # De acordo com o Metodo Elbow, determinar o numero de clusters
+    kmeans = KMeans(n_clusters=3, init ='k-means++', max_iter=300, n_init=10,random_state=0 )
+    y_kmeans = kmeans.fit_predict(X)
+    # print(y_kmeans)
+    # print(kmeans.labels_)
+
+    #Clusterização
+    #plt.figure(figsize=(6, 4))
+    #plt.title("10%  - Todos os Cursos - Clusterização ")
+    plt.title("10%  - Clusterização - Cursos 02 - CBO 4 Dígitos")
+    plt.xlabel('Cursos')
+    plt.ylabel('Profissões')
+    # plt.title("10% - All Courses - Clustering") # Diversos  ( Explicações e correções) e Estilo de texto 
+    # plt.xlabel('Courses')
+    # plt.ylabel('Professions')
+    plt.ylim(0, 100) # definir limite do eixo
+    plt.xlim(0, 100) # definir limite do eixo
+    plt.grid()
+    # Visualising the clusters
+    plt.scatter(X.iloc[y_kmeans==0, 0], X.iloc[y_kmeans==0, 1], s=100, c='red', label ='Cluster 0', marker = '*')
+    plt.scatter(X.iloc[y_kmeans==1, 0], X.iloc[y_kmeans==1, 1], s=100, c='blue', label ='Cluster 1', marker = '*')
+    plt.scatter(X.iloc[y_kmeans==2, 0], X.iloc[y_kmeans==2, 1], s=100, c='green', label ='Cluster 2', marker = '*')
+    plt.scatter(kmeans.cluster_centers_[:, 0], kmeans.cluster_centers_[:, 1], s=300, c='yellow', label = 'Centroids', marker = '*') # Diversos  ( Explicações e correções) e Estilo de texto 
+    plt.legend()
+    # plt.show()
+    # string1 = "10%  - Todos os Cursos - Clusterização " +".pdf"
+    # string1 = "10% - All Courses - Clustering" +".pdf"
+    string1 = "10%_AllCourses_Clustering_Curso02" +".png"
+    save_results_to = 'graficos/'  
+    plt.savefig(save_results_to + string1)  
+
+
+#     # Centróides
+#     kmeans.cluster_centers_[:, 0], kmeans.cluster_centers_[:, 1]
+#     # cluster 1 : 27.00526316,21.78263158  ... Vermelho
+#     # cluster 2 : 66.464375,  77.656875    ... Azul
+#     # cluster 3:  25.76357143,62.88071429  ... Verde
+          
+    
+#    # Obtendo os centróides
+#     centroids = kmeans.cluster_centers_
+#     # Criando um DataFrame com os centróides
+#     df_centroids = pd.DataFrame(centroids, columns=['x', 'y'])
+#     # Salvando os centróides em um arquivo CSV
+#     df_centroids.to_csv(save_results_to + 'centroids.csv', index=False)
+
+    # # O que tem em cada cluster? ===================================================================================================================
+    X['cluster'] = kmeans.labels_
+    X = X.sort_values("cluster",ascending=True)
+    # print(X)
+    # exit(0)
+
+    X_Original = pd.read_csv(df)
+    X_Original = X_Original.drop(columns=['Unnamed: 0'])
+    X_Original = X_Original.drop(columns=['Unnamed: 0.1'])
+    # print(X_Original)
+    # exit(0)
+
+    # # selecao_Kmeans3 = X_['cluster']==0
+    # selecao_Kmeans3 = X['cluster']==0  #===================================================================================================================
+    # X['cluster'] = kmeans.labels_
+    # X_0_Kmeans3 = X[selecao_Kmeans3]
+    # X_0_Kmeans3
+
+    # Kmeans3_CursoNum =[]
+    # Kmeans3_CboNum =[]
+    # for index, row in X_Original.iterrows():
+    #     for indexx, roww in X_0_Kmeans3.iterrows():
+    #         if (row['Ida']== roww['Ida']) and (row['Volta']==roww['Volta']):
+    #             #CR_Cluster1Cursos_Kmeans3.append(row['CR'])
+    #             Kmeans3_CursoNum.append(row['CR'])
+    #             #Kmeans3_CursoNome.append(row['CR'])
+    #             Kmeans3_CboNum.append(row['CB'])
+    #             #Kmeans3_CboNome.append(row['CR'])#
+    # #print("len(Kmeans3_CursoNum):", len(Kmeans3_CursoNum))
+    # #print("len(Kmeans3_CboNum):", len(Kmeans3_CboNum))		 
+
+    # # print("Kmeans3_CursoNum:", Kmeans3_CursoNum)
+    # # exit(0)
+    # Kmeans3_CursoNome =[]
+    # for i in range (len(Kmeans3_CursoNum)):
+    #     for index, row in CursosCenso.iterrows():
+    #         # print("Kmeans3_CursoNum[i]:", int(Kmeans3_CursoNum[i]))
+    #         # print("CursosCenso['curso_num'][index]:", CursosCenso['curso_num'][index])
+    #         # exit(0)
+    #         # print("")
+    #         # if (int(Kmeans3_CursoNum[i]) == CursosCenso['curso_num'][index]):
+    #         if (int(Kmeans3_CursoNum[i]) == int(CursosCenso['curso_num'][index])):    
+    #             Kmeans3_CursoNome.append(CursosCenso['curso_nome'][index])
+    # # Kmeans3_CursoNome	
+    # # print(len(Kmeans3_CursoNome))	
+    # # exit(0)
+
+    # Kmeans3_CboNome =[]
+    # for i in range (len(Kmeans3_CboNum)):
+    #     # print("Kmeans3_CboNum[i]:", Kmeans3_CboNum[i])
+    #     flag = False
+    #     for index, row in CBO.iterrows():
+    #         if (int(Kmeans3_CboNum[i]) == CBO['Cod_CBO'][index]): #...
+    #             Kmeans3_CboNome.append(CBO['Nome_CBO'][index])
+    #             # print("Kmeans3_CboNum[i]:", Kmeans3_CboNum[i])
+    #             flag = True
+    #             break
+    #     if not flag:
+    #         for index, row in CBO_aux.iterrows():
+    #             if (int(Kmeans3_CboNum[i]) == int(CBO_aux['Cod_Dom'][index])):
+    #                 Kmeans3_CboNome.append(CBO_aux['Nome_CBO'][index])
+    #                 # print("Kmeans3_CboNum[i]:", Kmeans3_CboNum[i])
+    #                 Kmeans3_CboNum[i] = CBO_aux['Cod_CBO'][index]
+    #                 # print("Kmeans3_CboNum[i]:", Kmeans3_CboNum[i])
+    #                 break
+
+    # #Kmeans3_CboNome 
+    
+    # print(len(Kmeans3_CursoNum))
+    # # print(len(Kmeans3_CursoNome))
+    # # print(len(Kmeans3_CboNum))
+    # print(len(Kmeans3_CboNome))
+    # # exit(0)
+    # Kmeans3_resultados_0=[]
+    # for i in range(len(Kmeans3_CursoNum)):
+    #     tupla=(Kmeans3_CursoNum[i],Kmeans3_CursoNome[i],Kmeans3_CboNum[i],Kmeans3_CboNome[i])
+    #     Kmeans3_resultados_0.append(tupla)
+    # #...
+    # kmeans3_0= pd.DataFrame(Kmeans3_resultados_0)
+    # #...
+    # dict = {0:"Curso",
+    #         1:"Curso_Nome",
+    #         2:"Cbo",
+    #         3:"Cbo_Nome",
+    # }
+    # kmeans3_0.rename(columns=dict,inplace=True)
+    # print(kmeans3_0)
+    # print("")
+
+    # # selecao_Kmeans3 = X_['cluster']==1
+    # selecao_Kmeans3 = X['cluster']==1   #===================================================================================================================
+    # X_1_Kmeans3 = X[selecao_Kmeans3]
+
+    # Kmeans3_CursoNum =[]
+    # Kmeans3_CboNum =[]
+    # for index, row in X_Original.iterrows():
+    #     for indexx, roww in X_1_Kmeans3.iterrows():
+    #         if (row['Ida']== roww['Ida']) and (row['Volta']==roww['Volta']):
+    #             #CR_Cluster1Cursos_Kmeans3.append(row['CR'])
+    #             Kmeans3_CursoNum.append(row['CR'])
+    #             #Kmeans3_CursoNome.append(row['CR'])
+    #             Kmeans3_CboNum.append(row['CB'])
+    #             #Kmeans3_CboNome.append(row['CR'])#
+    # # print("len(Kmeans3_CursoNum):", len(Kmeans3_CursoNum))
+    # # print("len(Kmeans3_CboNum):", len(Kmeans3_CboNum))    
+    # Kmeans3_CursoNome =[]
+
+    # for i in range (len(Kmeans3_CursoNum)):
+    #     for index, row in CursosCenso.iterrows():
+    #         # if (str(Kmeans3_CursoNum[i]) == CursosCenso['curso_num'][index]):
+    #         if (int(Kmeans3_CursoNum[i]) == int(CursosCenso['curso_num'][index])):      
+    #             Kmeans3_CursoNome.append(CursosCenso['curso_nome'][index]) 
+    # # # Kmeans3_CursoNome
+    # # Kmeans3_CboNome =[]
+    # # for i in range (len(Kmeans3_CboNum)):
+    # #     for index, row in CBO.iterrows():
+    # #         if (int(Kmeans3_CboNum[i]) == CBO['Cod_CBO'][index]):
+    # #             Kmeans3_CboNome.append(CBO['Nome_CBO'][index])   
+    # Kmeans3_CboNome =[]
+    # for i in range (len(Kmeans3_CboNum)):
+    #     # print("Kmeans3_CboNum[i]:", Kmeans3_CboNum[i])
+    #     flag = False
+    #     for index, row in CBO.iterrows():
+    #         if (int(Kmeans3_CboNum[i]) == CBO['Cod_CBO'][index]): #...
+    #             Kmeans3_CboNome.append(CBO['Nome_CBO'][index])
+    #             # print("Kmeans3_CboNum[i]:", Kmeans3_CboNum[i])
+    #             flag = True
+    #             break
+    #     if not flag:
+    #         for index, row in CBO_aux.iterrows():
+    #             if (int(Kmeans3_CboNum[i]) == int(CBO_aux['Cod_Dom'][index])):
+    #                 Kmeans3_CboNome.append(CBO_aux['Nome_CBO'][index])
+    #                 # print("Kmeans3_CboNum[i]:", Kmeans3_CboNum[i])
+    #                 Kmeans3_CboNum[i] = CBO_aux['Cod_CBO'][index]
+    #                 # print("Kmeans3_CboNum[i]:", Kmeans3_CboNum[i])
+    #                 break
+
+    # # Kmeans3_CboNome
+    # Kmeans3_resultados_1=[]
+    # for i in range(len(Kmeans3_CursoNum)):
+    #     tupla=(Kmeans3_CursoNum[i],Kmeans3_CursoNome[i],Kmeans3_CboNum[i],Kmeans3_CboNome[i])
+    #     Kmeans3_resultados_1.append(tupla)
+    # #...
+    # kmeans3_1= pd.DataFrame(Kmeans3_resultados_1)
+    # #...
+    # dict = {0:"Curso",
+    #         1:"Curso_Nome",
+    #         2:"Cbo",
+    #         3:"Cbo_Nome",
+    # }
+    # kmeans3_1.rename(columns=dict,inplace=True) 
+    # print(kmeans3_1)
+    # print("")
+
+    # # selecao_Kmeans3 = X_['cluster']==2    
+    # selecao_Kmeans3 = X['cluster']==2  #===================================================================================================================
+    # X_2_Kmeans3 = X[selecao_Kmeans3]   
+    # # X_2_Kmeans3
+
+    # Kmeans3_CursoNum =[]
+    # Kmeans3_CboNum =[]
+    # for index, row in X_Original.iterrows():
+    #     for indexx, roww in X_2_Kmeans3.iterrows():
+    #         if (row['Ida']== roww['Ida']) and (row['Volta']==roww['Volta']):
+    #             #CR_Cluster1Cursos_Kmeans3.append(row['CR'])
+    #             Kmeans3_CursoNum.append(row['CR'])
+    #             #Kmeans3_CursoNome.append(row['CR'])
+    #             Kmeans3_CboNum.append(row['CB'])
+    #             #Kmeans3_CboNome.append(row['CR'])#     
+    # # print("len(Kmeans3_CursoNum):", len(Kmeans3_CursoNum))
+    # # print("len(Kmeans3_CboNum):", len(Kmeans3_CboNum))
+    
+    # Kmeans3_CursoNome =[]
+    # for i in range (len(Kmeans3_CursoNum)):
+    #     for index, row in CursosCenso.iterrows():
+    #         # if (str(Kmeans3_CursoNum[i]) == CursosCenso['curso_num'][index]):
+    #         if (int(Kmeans3_CursoNum[i]) == int(CursosCenso['curso_num'][index])):   
+    #             Kmeans3_CursoNome.append(CursosCenso['curso_nome'][index])
+    # # Kmeans3_CursoNome
+    
+    # # Kmeans3_CboNome =[]
+    # # for i in range (len(Kmeans3_CboNum)):
+    # #     for index, row in CBO.iterrows():
+    # #         if (int(Kmeans3_CboNum[i]) == CBO['Cod_CBO'][index]):
+    # #             Kmeans3_CboNome.append(CBO['Nome_CBO'][index])
+    # # # Kmeans3_CboNome
+    # Kmeans3_CboNome =[]
+    # for i in range (len(Kmeans3_CboNum)):
+    #     # print("Kmeans3_CboNum[i]:", Kmeans3_CboNum[i])
+    #     flag = False
+    #     for index, row in CBO.iterrows():
+    #         if (int(Kmeans3_CboNum[i]) == CBO['Cod_CBO'][index]): #...
+    #             Kmeans3_CboNome.append(CBO['Nome_CBO'][index])
+    #             # print("Kmeans3_CboNum[i]:", Kmeans3_CboNum[i])
+    #             flag = True
+    #             break
+    #     if not flag:
+    #         for index, row in CBO_aux.iterrows():
+    #             if (int(Kmeans3_CboNum[i]) == int(CBO_aux['Cod_Dom'][index])):
+    #                 Kmeans3_CboNome.append(CBO_aux['Nome_CBO'][index])
+    #                 # print("Kmeans3_CboNum[i]:", Kmeans3_CboNum[i])
+    #                 Kmeans3_CboNum[i] = CBO_aux['Cod_CBO'][index]
+    #                 # print("Kmeans3_CboNum[i]:", Kmeans3_CboNum[i])
+    #                 break
+
+    # Kmeans3_resultados_2=[]
+    # for i in range(len(Kmeans3_CursoNum)):
+    #     tupla=(Kmeans3_CursoNum[i],Kmeans3_CursoNome[i],Kmeans3_CboNum[i],Kmeans3_CboNome[i])
+    #     Kmeans3_resultados_2.append(tupla)
+    # #...
+    # kmeans3_2= pd.DataFrame(Kmeans3_resultados_2)
+    # #...
+    # dict = {0:"Curso",
+    #         1:"Curso_Nome",
+    #         2:"Cbo",
+    #         3:"Cbo_Nome",
+    # }
+    # kmeans3_2.rename(columns=dict,inplace=True) 
+    # print(kmeans3_2)   
+
+    # # O que tem em todos os  cluster? ===================================================================================================================
+    Kmeans3_CursoNum =[]
+    Kmeans3_CboNum =[]
+    Kmeans3_CursosIda = []
+    Kmeans3_CursosVolta = []
+    Kmeans3_Cursoscluster = []
+
+    for index, row in X_Original.iterrows():
+        for indexx, roww in X.iterrows():
+            if (row['Ida']== roww['Ida']) and (row['Volta']==roww['Volta']):
+                Kmeans3_CursoNum.append(row['CR'])
+                Kmeans3_CboNum.append(row['CB'])
+                Kmeans3_CursosIda.append(row['Ida'])
+                Kmeans3_CursosVolta.append(row['Volta'])
+                Kmeans3_Cursoscluster.append(roww['cluster'])
+                #Kmeans5_Cursoscluster.append(X_['cluster'][indexx])   
+    # print("len(Kmeans3_CursoNum):", len(Kmeans3_CursoNum))
+    # print("len(Kmeans3_CboNum):", len(Kmeans3_CboNum))
+    # print("len(Kmeans3_CursosIda):", len(Kmeans3_CursosIda))
+    # print("len(Kmeans3_CursosVolta):", len(Kmeans3_CursosVolta))
+    # print("len(Kmeans3_Cursoscluster):", len(Kmeans3_Cursoscluster))     
+    # print("Kmeans3_Cursoscluster:", Kmeans3_Cursoscluster)
+    # exit(0)
+    Kmeans3_CursoNome =[]
+    for i in range (len(Kmeans3_CursoNum)):
+        for index, row in CursosCenso.iterrows():
+            # if (str(Kmeans3_CursoNum[i]) == CursosCenso['curso_num'][index]):
+            if (int(Kmeans3_CursoNum[i]) == int(CursosCenso['curso_num'][index])):   
+                Kmeans3_CursoNome.append(CursosCenso['curso_nome'][index])
+    # print(Kmeans3_CursoNome )
+    # exit(0) 
+    # Kmeans3_CboNome =[]
+    # for i in range (len(Kmeans3_CboNum)):
+    #     for index, row in CBO.iterrows():
+    #         if (int(Kmeans3_CboNum[i]) == CBO['Cod_CBO'][index]):
+    #             Kmeans3_CboNome.append(CBO['Nome_CBO'][index])      
+    Kmeans3_CboNome =[]
+    for i in range (len(Kmeans3_CboNum)):
+        # print("Kmeans3_CboNum[i]:", Kmeans3_CboNum[i])
+        flag = False
+        for index, row in CBO.iterrows():
+            if (int(Kmeans3_CboNum[i]) == CBO['Cod_CBO'][index]): #...
+                Kmeans3_CboNome.append(CBO['Nome_CBO'][index])
+                # print("Kmeans3_CboNum[i]:", Kmeans3_CboNum[i])
+                flag = True
+                break
+        if not flag:
+            for index, row in CBO_aux.iterrows():
+                if (int(Kmeans3_CboNum[i]) == int(CBO_aux['Cod_Dom'][index])):
+                    Kmeans3_CboNome.append(CBO_aux['Nome_CBO'][index])
+                    # print("Kmeans3_CboNum[i]:", Kmeans3_CboNum[i])
+                    Kmeans3_CboNum[i] = CBO_aux['Cod_CBO'][index]
+                    # print("Kmeans3_CboNum[i]:", Kmeans3_CboNum[i])
+                    break                
+    # Kmeans3_CboNome
+    Kmeans3_resultados_T=[]
+    for i in range(len(Kmeans3_CursoNum)):
+        tupla=(Kmeans3_CursosIda[i],Kmeans3_CursosVolta[i],Kmeans3_Cursoscluster[i], Kmeans3_CursoNum[i],Kmeans3_CursoNome[i],Kmeans3_CboNum[i],Kmeans3_CboNome[i])
+        Kmeans3_resultados_T.append(tupla)
+    #...
+    Kmeans3_T= pd.DataFrame(Kmeans3_resultados_T)
+    #...
+    dict = {0:"Ida",
+            1:"Volta",
+            2:"Cluster",
+            3:"Curso",
+            4:"Curso_Nome",
+            5:"Cbo",
+            6:"Cbo_Nome"
+    }
+    Kmeans3_T.rename(columns=dict,inplace=True)   
+    Kmeans3_T['Cluster'] = Kmeans3_T['Cluster'].astype(int)
+    Kmeans3_T['Curso'] = Kmeans3_T['Curso'].astype(int)
+    Kmeans3_T['Cbo'] = Kmeans3_T['Cbo'].astype(int)
+
+    # Unique_Cursos = Kmeans3_T.Curso_Nome.unique()
+    # len(Unique_Cursos)     
+    # Unique_Cbo = Kmeans3_T.Cbo_Nome.unique()
+    # len(Unique_Cbo)
+    print(Kmeans3_T)
+    Kmeans3_T.to_csv(save_results_to +'Kmeans3_T_Curso02.csv')
+    return
+
 def Profissoes_Cursos_CBO2(): # https://colab.research.google.com/drive/1cTpvuIkd7FGZbzEkScU4xKGFb6sSbGog?authuser=1#scrollTo=MGx4AWThonQb
 
     # Leitura
@@ -1148,11 +1667,13 @@ def Profissoes_Cursos_CBO2(): # https://colab.research.google.com/drive/1cTpvuIk
     X = pd.read_csv(df)    
     save_results_to = 'graficos/' 
     X = X.drop(columns=['Unnamed: 0'])
-    # X = X.drop(columns=['Unnamed: 0.1'])
+    X = X.drop(columns=['Unnamed: 0.1'])
 
     # Remoção de Features 
     X = X.drop(columns=['CB'])
     X = X.drop(columns=['CR'])
+    # print(X)
+    # exit(0)
 
     CursosCenso = ibge_functions_descriptive_analysis.ibge_cursos_filter('documentacao/','Curso_CSV.csv')
     # print("CursosCenso:", CursosCenso)
@@ -1202,6 +1723,7 @@ def Profissoes_Cursos_CBO2(): # https://colab.research.google.com/drive/1cTpvuIk
     #Clusterização
     #plt.figure(figsize=(6, 4))
     #plt.title("10%  - Todos os Cursos - Clusterização ")
+    plt.title("10%  - Clusterização - Cursos 03 - CBO 2 Dígitos")
     plt.xlabel('Cursos')
     plt.ylabel('Profissões')
     # plt.title("10% - All Courses - Clustering") # Diversos  ( Explicações e correções) e Estilo de texto 
@@ -1537,6 +2059,408 @@ def Profissoes_Cursos_CBO2(): # https://colab.research.google.com/drive/1cTpvuIk
     Kmeans3_T.to_csv(save_results_to +'Kmeans3_T_CBO2.csv')
     return
 
+def Profissoes_Cursos_CBO2_Curso2(): # https://colab.research.google.com/drive/1cTpvuIkd7FGZbzEkScU4xKGFb6sSbGog?authuser=1#scrollTo=MGx4AWThonQb
+
+    # Leitura
+    # df =  os.path.join(path2[0],name2[2])
+    df ='graficos/CBO2_10Porcent_DF_Limpo_Curso02.csv' #16/09/2025
+    X = pd.read_csv(df)    
+    save_results_to = 'graficos/' 
+    X = X.drop(columns=['Unnamed: 0'])
+    X = X.drop(columns=['Unnamed: 0.1'])
+
+    # Remoção de Features 
+    X = X.drop(columns=['CB'])
+    X = X.drop(columns=['CR'])
+    # print(X)
+    # exit(0)
+
+    CursosCenso = ibge_functions_descriptive_analysis.ibge_cursos_filter_DiminuirCurso('documentacao/','Curso_CSV.csv')
+    # print("CursosCenso:", CursosCenso)
+    # exit(0)
+    csv_CBO = os.path.join('documentacao/cbo2002_subgrupo_principal.csv')  # Tabela de CBOs
+    CBO = pd.read_csv(csv_CBO)
+    CBO_aux = pd.read_csv('documentacao/cbo2002_subgrupo.csv', dtype ='str')
+
+
+
+    # # Plotagem dos Dados Originais
+    # # print(X.iloc[:,0])
+    # plt.figure(figsize=(6, 4))
+    # plt.title("10%  - Todos os Cursos - Clusterização ")
+    # plt.xlabel('Ida')
+    # plt.ylabel('Volta')
+    # plt.ylim(0, 100) # definir limite do eixo
+    # plt.xlim(0, 100) # definir limite do eixo
+    # plt.grid()
+    # plt.scatter(X.iloc[:,0],X.iloc[:,1],marker = '*')
+    # # plt.show()
+    # string = "10%  - Todos os Cursos - Dados Originais " +".pdf"
+    # save_results_to = 'graficos/'  
+    # plt.savefig(save_results_to + string)    
+
+    # # The Elbow Method Graph
+    # wcss=[]
+    # for i in range(1,11):
+    #     kmeans = KMeans(n_clusters=i, init ='k-means++', max_iter=300,  n_init=10,random_state=0 )
+    #     kmeans.fit(X)
+    #     wcss.append(kmeans.inertia_)
+    # plt.plot(range(1,11),wcss,'bx-')
+    # plt.title('The Elbow Method Graph')
+    # plt.xlabel('Number of clusters')
+    # plt.ylabel('WCSS')
+    # # plt.show()
+    # string1 = "10%  - The Elbow Method Graph " +".pdf"
+    # save_results_to = 'graficos/'  
+    # plt.savefig(save_results_to + string1)  
+
+    # De acordo com o Metodo Elbow, determinar o numero de clusters
+    kmeans = KMeans(n_clusters=3, init ='k-means++', max_iter=300, n_init=10,random_state=0 )
+    y_kmeans = kmeans.fit_predict(X)
+    # print(y_kmeans)
+    # print(kmeans.labels_)
+
+    #Clusterização
+    #plt.figure(figsize=(6, 4))
+    #plt.title("10%  - Todos os Cursos - Clusterização ")
+    plt.title("10%  - Clusterização - Cursos 02 - CBO 2 Dígitos")
+    plt.xlabel('Cursos')
+    plt.ylabel('Profissões')
+    # plt.title("10% - All Courses - Clustering") # Diversos  ( Explicações e correções) e Estilo de texto 
+    # plt.xlabel('Courses')
+    # plt.ylabel('Professions')
+    plt.ylim(0, 100) # definir limite do eixo
+    plt.xlim(0, 100) # definir limite do eixo
+    plt.grid()
+    # Visualising the clusters
+    plt.scatter(X.iloc[y_kmeans==0, 0], X.iloc[y_kmeans==0, 1], s=100, c='red', label ='Cluster 0', marker = '*')
+    plt.scatter(X.iloc[y_kmeans==1, 0], X.iloc[y_kmeans==1, 1], s=100, c='blue', label ='Cluster 1', marker = '*')
+    plt.scatter(X.iloc[y_kmeans==2, 0], X.iloc[y_kmeans==2, 1], s=100, c='green', label ='Cluster 2', marker = '*')
+    # plt.scatter(kmeans.cluster_centers_[:, 0], kmeans.cluster_centers_[:, 1], s=300, c='yellow', label = 'Centroids', marker = '*') # Diversos  ( Explicações e correções) e Estilo de texto 
+    plt.legend(loc='upper left')
+    # plt.show()
+    # string1 = "10%  - Todos os Cursos - Clusterização " +".pdf"
+    # string1 = "10% - All Courses - Clustering" +".pdf"
+    string1 = "10%_AllCourses_Clustering_CBO2_Curso02" +".png"
+    save_results_to = 'graficos/'  
+    plt.savefig(save_results_to + string1)  
+
+
+#     # Centróides
+#     kmeans.cluster_centers_[:, 0], kmeans.cluster_centers_[:, 1]
+#     # cluster 1 : 27.00526316,21.78263158  ... Vermelho
+#     # cluster 2 : 66.464375,  77.656875    ... Azul
+#     # cluster 3:  25.76357143,62.88071429  ... Verde
+          
+    
+#    # Obtendo os centróides
+#     centroids = kmeans.cluster_centers_
+#     # Criando um DataFrame com os centróides
+#     df_centroids = pd.DataFrame(centroids, columns=['x', 'y'])
+#     # Salvando os centróides em um arquivo CSV
+#     df_centroids.to_csv(save_results_to + 'centroids.csv', index=False)
+
+    # # O que tem em cada cluster? ===================================================================================================================
+    X['cluster'] = kmeans.labels_
+    X = X.sort_values("cluster",ascending=True)
+    # print(X)
+
+    X_Original = pd.read_csv(df)
+    X_Original = X_Original.drop(columns=['Unnamed: 0'])
+    X_Original = X_Original.drop(columns=['Unnamed: 0.1'])
+    # print(X_Original)
+
+    # # selecao_Kmeans3 = X_['cluster']==0
+    # selecao_Kmeans3 = X['cluster']==0  #===================================================================================================================
+    # X['cluster'] = kmeans.labels_
+    # X_0_Kmeans3 = X[selecao_Kmeans3]
+    # X_0_Kmeans3
+
+    # Kmeans3_CursoNum =[]
+    # Kmeans3_CboNum =[]
+    # for index, row in X_Original.iterrows():
+    #     for indexx, roww in X_0_Kmeans3.iterrows():
+    #         if (row['Ida']== roww['Ida']) and (row['Volta']==roww['Volta']):
+    #             #CR_Cluster1Cursos_Kmeans3.append(row['CR'])
+    #             Kmeans3_CursoNum.append(row['CR'])
+    #             #Kmeans3_CursoNome.append(row['CR'])
+    #             Kmeans3_CboNum.append(row['CB'])
+    #             #Kmeans3_CboNome.append(row['CR'])#
+    # #print("len(Kmeans3_CursoNum):", len(Kmeans3_CursoNum))
+    # #print("len(Kmeans3_CboNum):", len(Kmeans3_CboNum))		 
+
+    # # print("Kmeans3_CursoNum:", Kmeans3_CursoNum)
+    # # exit(0)
+    # Kmeans3_CursoNome =[]
+    # for i in range (len(Kmeans3_CursoNum)):
+    #     for index, row in CursosCenso.iterrows():
+    #         # print("Kmeans3_CursoNum[i]:", int(Kmeans3_CursoNum[i]))
+    #         # print("CursosCenso['curso_num'][index]:", CursosCenso['curso_num'][index])
+    #         # exit(0)
+    #         # print("")
+    #         # if (int(Kmeans3_CursoNum[i]) == CursosCenso['curso_num'][index]):
+    #         if (int(Kmeans3_CursoNum[i]) == int(CursosCenso['curso_num'][index])):    
+    #             Kmeans3_CursoNome.append(CursosCenso['curso_nome'][index])
+    # # Kmeans3_CursoNome	
+    # # print(len(Kmeans3_CursoNome))	
+    # # exit(0)
+
+    # Kmeans3_CboNome =[]
+    # for i in range (len(Kmeans3_CboNum)):
+    #     # print("Kmeans3_CboNum[i]:", Kmeans3_CboNum[i])
+    #     flag = False
+    #     for index, row in CBO.iterrows():
+    #         if (int(Kmeans3_CboNum[i]) == CBO['Cod_CBO'][index]): #...
+    #             Kmeans3_CboNome.append(CBO['Nome_CBO'][index])
+    #             # print("Kmeans3_CboNum[i]:", Kmeans3_CboNum[i])
+    #             flag = True
+    #             break
+    #     if not flag:
+    #         for index, row in CBO_aux.iterrows():
+    #             if (int(Kmeans3_CboNum[i]) == int(CBO_aux['Cod_Dom'][index])):
+    #                 Kmeans3_CboNome.append(CBO_aux['Nome_CBO'][index])
+    #                 # print("Kmeans3_CboNum[i]:", Kmeans3_CboNum[i])
+    #                 Kmeans3_CboNum[i] = CBO_aux['Cod_CBO'][index]
+    #                 # print("Kmeans3_CboNum[i]:", Kmeans3_CboNum[i])
+    #                 break
+
+    # #Kmeans3_CboNome 
+    
+    # print(len(Kmeans3_CursoNum))
+    # # print(len(Kmeans3_CursoNome))
+    # # print(len(Kmeans3_CboNum))
+    # print(len(Kmeans3_CboNome))
+    # # exit(0)
+    # Kmeans3_resultados_0=[]
+    # for i in range(len(Kmeans3_CursoNum)):
+    #     tupla=(Kmeans3_CursoNum[i],Kmeans3_CursoNome[i],Kmeans3_CboNum[i],Kmeans3_CboNome[i])
+    #     Kmeans3_resultados_0.append(tupla)
+    # #...
+    # kmeans3_0= pd.DataFrame(Kmeans3_resultados_0)
+    # #...
+    # dict = {0:"Curso",
+    #         1:"Curso_Nome",
+    #         2:"Cbo",
+    #         3:"Cbo_Nome",
+    # }
+    # kmeans3_0.rename(columns=dict,inplace=True)
+    # print(kmeans3_0)
+    # print("")
+
+    # # selecao_Kmeans3 = X_['cluster']==1
+    # selecao_Kmeans3 = X['cluster']==1   #===================================================================================================================
+    # X_1_Kmeans3 = X[selecao_Kmeans3]
+
+    # Kmeans3_CursoNum =[]
+    # Kmeans3_CboNum =[]
+    # for index, row in X_Original.iterrows():
+    #     for indexx, roww in X_1_Kmeans3.iterrows():
+    #         if (row['Ida']== roww['Ida']) and (row['Volta']==roww['Volta']):
+    #             #CR_Cluster1Cursos_Kmeans3.append(row['CR'])
+    #             Kmeans3_CursoNum.append(row['CR'])
+    #             #Kmeans3_CursoNome.append(row['CR'])
+    #             Kmeans3_CboNum.append(row['CB'])
+    #             #Kmeans3_CboNome.append(row['CR'])#
+    # # print("len(Kmeans3_CursoNum):", len(Kmeans3_CursoNum))
+    # # print("len(Kmeans3_CboNum):", len(Kmeans3_CboNum))    
+    # Kmeans3_CursoNome =[]
+
+    # for i in range (len(Kmeans3_CursoNum)):
+    #     for index, row in CursosCenso.iterrows():
+    #         # if (str(Kmeans3_CursoNum[i]) == CursosCenso['curso_num'][index]):
+    #         if (int(Kmeans3_CursoNum[i]) == int(CursosCenso['curso_num'][index])):      
+    #             Kmeans3_CursoNome.append(CursosCenso['curso_nome'][index]) 
+    # # # Kmeans3_CursoNome
+    # # Kmeans3_CboNome =[]
+    # # for i in range (len(Kmeans3_CboNum)):
+    # #     for index, row in CBO.iterrows():
+    # #         if (int(Kmeans3_CboNum[i]) == CBO['Cod_CBO'][index]):
+    # #             Kmeans3_CboNome.append(CBO['Nome_CBO'][index])   
+    # Kmeans3_CboNome =[]
+    # for i in range (len(Kmeans3_CboNum)):
+    #     # print("Kmeans3_CboNum[i]:", Kmeans3_CboNum[i])
+    #     flag = False
+    #     for index, row in CBO.iterrows():
+    #         if (int(Kmeans3_CboNum[i]) == CBO['Cod_CBO'][index]): #...
+    #             Kmeans3_CboNome.append(CBO['Nome_CBO'][index])
+    #             # print("Kmeans3_CboNum[i]:", Kmeans3_CboNum[i])
+    #             flag = True
+    #             break
+    #     if not flag:
+    #         for index, row in CBO_aux.iterrows():
+    #             if (int(Kmeans3_CboNum[i]) == int(CBO_aux['Cod_Dom'][index])):
+    #                 Kmeans3_CboNome.append(CBO_aux['Nome_CBO'][index])
+    #                 # print("Kmeans3_CboNum[i]:", Kmeans3_CboNum[i])
+    #                 Kmeans3_CboNum[i] = CBO_aux['Cod_CBO'][index]
+    #                 # print("Kmeans3_CboNum[i]:", Kmeans3_CboNum[i])
+    #                 break
+
+    # # Kmeans3_CboNome
+    # Kmeans3_resultados_1=[]
+    # for i in range(len(Kmeans3_CursoNum)):
+    #     tupla=(Kmeans3_CursoNum[i],Kmeans3_CursoNome[i],Kmeans3_CboNum[i],Kmeans3_CboNome[i])
+    #     Kmeans3_resultados_1.append(tupla)
+    # #...
+    # kmeans3_1= pd.DataFrame(Kmeans3_resultados_1)
+    # #...
+    # dict = {0:"Curso",
+    #         1:"Curso_Nome",
+    #         2:"Cbo",
+    #         3:"Cbo_Nome",
+    # }
+    # kmeans3_1.rename(columns=dict,inplace=True) 
+    # print(kmeans3_1)
+    # print("")
+
+    # # selecao_Kmeans3 = X_['cluster']==2    
+    # selecao_Kmeans3 = X['cluster']==2  #===================================================================================================================
+    # X_2_Kmeans3 = X[selecao_Kmeans3]   
+    # # X_2_Kmeans3
+
+    # Kmeans3_CursoNum =[]
+    # Kmeans3_CboNum =[]
+    # for index, row in X_Original.iterrows():
+    #     for indexx, roww in X_2_Kmeans3.iterrows():
+    #         if (row['Ida']== roww['Ida']) and (row['Volta']==roww['Volta']):
+    #             #CR_Cluster1Cursos_Kmeans3.append(row['CR'])
+    #             Kmeans3_CursoNum.append(row['CR'])
+    #             #Kmeans3_CursoNome.append(row['CR'])
+    #             Kmeans3_CboNum.append(row['CB'])
+    #             #Kmeans3_CboNome.append(row['CR'])#     
+    # # print("len(Kmeans3_CursoNum):", len(Kmeans3_CursoNum))
+    # # print("len(Kmeans3_CboNum):", len(Kmeans3_CboNum))
+    
+    # Kmeans3_CursoNome =[]
+    # for i in range (len(Kmeans3_CursoNum)):
+    #     for index, row in CursosCenso.iterrows():
+    #         # if (str(Kmeans3_CursoNum[i]) == CursosCenso['curso_num'][index]):
+    #         if (int(Kmeans3_CursoNum[i]) == int(CursosCenso['curso_num'][index])):   
+    #             Kmeans3_CursoNome.append(CursosCenso['curso_nome'][index])
+    # # Kmeans3_CursoNome
+    
+    # # Kmeans3_CboNome =[]
+    # # for i in range (len(Kmeans3_CboNum)):
+    # #     for index, row in CBO.iterrows():
+    # #         if (int(Kmeans3_CboNum[i]) == CBO['Cod_CBO'][index]):
+    # #             Kmeans3_CboNome.append(CBO['Nome_CBO'][index])
+    # # # Kmeans3_CboNome
+    # Kmeans3_CboNome =[]
+    # for i in range (len(Kmeans3_CboNum)):
+    #     # print("Kmeans3_CboNum[i]:", Kmeans3_CboNum[i])
+    #     flag = False
+    #     for index, row in CBO.iterrows():
+    #         if (int(Kmeans3_CboNum[i]) == CBO['Cod_CBO'][index]): #...
+    #             Kmeans3_CboNome.append(CBO['Nome_CBO'][index])
+    #             # print("Kmeans3_CboNum[i]:", Kmeans3_CboNum[i])
+    #             flag = True
+    #             break
+    #     if not flag:
+    #         for index, row in CBO_aux.iterrows():
+    #             if (int(Kmeans3_CboNum[i]) == int(CBO_aux['Cod_Dom'][index])):
+    #                 Kmeans3_CboNome.append(CBO_aux['Nome_CBO'][index])
+    #                 # print("Kmeans3_CboNum[i]:", Kmeans3_CboNum[i])
+    #                 Kmeans3_CboNum[i] = CBO_aux['Cod_CBO'][index]
+    #                 # print("Kmeans3_CboNum[i]:", Kmeans3_CboNum[i])
+    #                 break
+
+    # Kmeans3_resultados_2=[]
+    # for i in range(len(Kmeans3_CursoNum)):
+    #     tupla=(Kmeans3_CursoNum[i],Kmeans3_CursoNome[i],Kmeans3_CboNum[i],Kmeans3_CboNome[i])
+    #     Kmeans3_resultados_2.append(tupla)
+    # #...
+    # kmeans3_2= pd.DataFrame(Kmeans3_resultados_2)
+    # #...
+    # dict = {0:"Curso",
+    #         1:"Curso_Nome",
+    #         2:"Cbo",
+    #         3:"Cbo_Nome",
+    # }
+    # kmeans3_2.rename(columns=dict,inplace=True) 
+    # print(kmeans3_2)   
+
+    # # O que tem em todos os  cluster? ===================================================================================================================
+    Kmeans3_CursoNum =[]
+    Kmeans3_CboNum =[]
+    Kmeans3_CursosIda = []
+    Kmeans3_CursosVolta = []
+    Kmeans3_Cursoscluster = []
+
+    for index, row in X_Original.iterrows():
+        for indexx, roww in X.iterrows():
+            if (row['Ida']== roww['Ida']) and (row['Volta']==roww['Volta']):
+                Kmeans3_CursoNum.append(row['CR'])
+                Kmeans3_CboNum.append(row['CB'])
+                Kmeans3_CursosIda.append(row['Ida'])
+                Kmeans3_CursosVolta.append(row['Volta'])
+                Kmeans3_Cursoscluster.append(roww['cluster'])
+                #Kmeans5_Cursoscluster.append(X_['cluster'][indexx])   
+    # print("len(Kmeans3_CursoNum):", len(Kmeans3_CursoNum))
+    # print("len(Kmeans3_CboNum):", len(Kmeans3_CboNum))
+    # print("len(Kmeans3_CursosIda):", len(Kmeans3_CursosIda))
+    # print("len(Kmeans3_CursosVolta):", len(Kmeans3_CursosVolta))
+    # print("len(Kmeans3_Cursoscluster):", len(Kmeans3_Cursoscluster))     
+    # Kmeans3_Cursoscluster
+    Kmeans3_CursoNome =[]
+    for i in range (len(Kmeans3_CursoNum)):
+        for index, row in CursosCenso.iterrows():
+            # if (str(Kmeans3_CursoNum[i]) == CursosCenso['curso_num'][index]):
+            if (int(Kmeans3_CursoNum[i]) == int(CursosCenso['curso_num'][index])):   
+                Kmeans3_CursoNome.append(CursosCenso['curso_nome'][index])
+    # print(Kmeans3_CursoNome )
+    # exit(0)     
+    # Kmeans3_CboNome =[]
+    # for i in range (len(Kmeans3_CboNum)):
+    #     for index, row in CBO.iterrows():
+    #         if (int(Kmeans3_CboNum[i]) == CBO['Cod_CBO'][index]):
+    #             Kmeans3_CboNome.append(CBO['Nome_CBO'][index])      
+    Kmeans3_CboNome =[]
+    for i in range (len(Kmeans3_CboNum)):
+        # print("Kmeans3_CboNum[i]:", Kmeans3_CboNum[i])
+        flag = False
+        for index, row in CBO.iterrows():
+            if (int(Kmeans3_CboNum[i]) == CBO['Cod_CBO'][index]): #...
+                Kmeans3_CboNome.append(CBO['Nome_CBO'][index])
+                # print("Kmeans3_CboNum[i]:", Kmeans3_CboNum[i])
+                flag = True
+                break
+        if not flag:
+            for index, row in CBO_aux.iterrows():
+                if (int(Kmeans3_CboNum[i]) == int(CBO_aux['Cod_Dom'][index])):
+                    Kmeans3_CboNome.append(CBO_aux['Nome_CBO'][index])
+                    # print("Kmeans3_CboNum[i]:", Kmeans3_CboNum[i])
+                    Kmeans3_CboNum[i] = CBO_aux['Cod_CBO'][index]
+                    # print("Kmeans3_CboNum[i]:", Kmeans3_CboNum[i])
+                    break                
+    Kmeans3_CboNome
+    exit(0)
+    Kmeans3_resultados_T=[]
+    for i in range(len(Kmeans3_CursoNum)):
+        tupla=(Kmeans3_CursosIda[i],Kmeans3_CursosVolta[i],Kmeans3_Cursoscluster[i], Kmeans3_CursoNum[i],Kmeans3_CursoNome[i],Kmeans3_CboNum[i],Kmeans3_CboNome[i])
+        Kmeans3_resultados_T.append(tupla)
+    #...
+    Kmeans3_T= pd.DataFrame(Kmeans3_resultados_T)
+    #...
+    dict = {0:"Ida",
+            1:"Volta",
+            2:"Cluster",
+            3:"Curso",
+            4:"Curso_Nome",
+            5:"Cbo",
+            6:"Cbo_Nome"
+    }
+    Kmeans3_T.rename(columns=dict,inplace=True)   
+    Kmeans3_T['Cluster'] = Kmeans3_T['Cluster'].astype(int)
+    Kmeans3_T['Curso'] = Kmeans3_T['Curso'].astype(int)
+    Kmeans3_T['Cbo'] = Kmeans3_T['Cbo'].astype(int)
+
+    # Unique_Cursos = Kmeans3_T.Curso_Nome.unique()
+    # len(Unique_Cursos)     
+    # Unique_Cbo = Kmeans3_T.Cbo_Nome.unique()
+    # len(Unique_Cbo)
+    print(Kmeans3_T)
+    Kmeans3_T.to_csv(save_results_to +'Kmeans3_T_CBO2_Curso02.csv')
+    return
+
 def Profissoes_Cursos_CBO3(): # https://colab.research.google.com/drive/1cTpvuIkd7FGZbzEkScU4xKGFb6sSbGog?authuser=1#scrollTo=MGx4AWThonQb
 
     # Leitura
@@ -1545,11 +2469,13 @@ def Profissoes_Cursos_CBO3(): # https://colab.research.google.com/drive/1cTpvuIk
     X = pd.read_csv(df)    
     save_results_to = 'graficos/' 
     X = X.drop(columns=['Unnamed: 0'])
-    # X = X.drop(columns=['Unnamed: 0.1'])
+    X = X.drop(columns=['Unnamed: 0.1'])
 
     # Remoção de Features 
     X = X.drop(columns=['CB'])
     X = X.drop(columns=['CR'])
+    # print(X)
+    # exit(0)
 
     CursosCenso = ibge_functions_descriptive_analysis.ibge_cursos_filter('documentacao/','Curso_CSV.csv')
     # print("CursosCenso:", CursosCenso)
@@ -1599,6 +2525,7 @@ def Profissoes_Cursos_CBO3(): # https://colab.research.google.com/drive/1cTpvuIk
     #Clusterização
     #plt.figure(figsize=(6, 4))
     #plt.title("10%  - Todos os Cursos - Clusterização ")
+    plt.title("10%  - Clusterização - Cursos 03 - CBO 3 Dígitos")
     plt.xlabel('Cursos')
     plt.ylabel('Profissões')
     # plt.title("10% - All Courses - Clustering") # Diversos  ( Explicações e correções) e Estilo de texto 
@@ -1932,6 +2859,409 @@ def Profissoes_Cursos_CBO3(): # https://colab.research.google.com/drive/1cTpvuIk
     # len(Unique_Cbo)
     print(Kmeans3_T)
     Kmeans3_T.to_csv(save_results_to +'Kmeans3_T_CBO3.csv')
+    return
+
+def Profissoes_Cursos_CBO3_Curso2(): # https://colab.research.google.com/drive/1cTpvuIkd7FGZbzEkScU4xKGFb6sSbGog?authuser=1#scrollTo=MGx4AWThonQb
+
+    # Leitura
+    # df =  os.path.join(path2[0],name2[2])
+    df ='graficos/CBO3_10Porcent_DF_Limpo_Curso02.csv' #12/08/2025
+    X = pd.read_csv(df)    
+    save_results_to = 'graficos/' 
+    X = X.drop(columns=['Unnamed: 0'])
+    X = X.drop(columns=['Unnamed: 0.1'])
+
+    # Remoção de Features 
+    X = X.drop(columns=['CB'])
+    X = X.drop(columns=['CR'])
+    # print(X)
+    # exit(0)
+
+    CursosCenso = ibge_functions_descriptive_analysis.ibge_cursos_filter_DiminuirCurso('documentacao/','Curso_CSV.csv')
+    # print("CursosCenso:", CursosCenso)
+    # exit(0)
+    csv_CBO = os.path.join('documentacao/cbo2002_subgrupo.csv')  # Tabela de CBOs
+    CBO = pd.read_csv(csv_CBO)
+    CBO_aux = pd.read_csv('documentacao/CBO_CSV_TabelaAuxiliar.csv', dtype ='str')
+
+
+
+    # # Plotagem dos Dados Originais
+    # # print(X.iloc[:,0])
+    # plt.figure(figsize=(6, 4))
+    # plt.title("10%  - Todos os Cursos - Clusterização ")
+    # plt.xlabel('Ida')
+    # plt.ylabel('Volta')
+    # plt.ylim(0, 100) # definir limite do eixo
+    # plt.xlim(0, 100) # definir limite do eixo
+    # plt.grid()
+    # plt.scatter(X.iloc[:,0],X.iloc[:,1],marker = '*')
+    # # plt.show()
+    # string = "10%  - Todos os Cursos - Dados Originais " +".pdf"
+    # save_results_to = 'graficos/'  
+    # plt.savefig(save_results_to + string)    
+
+    # # The Elbow Method Graph
+    # wcss=[]
+    # for i in range(1,11):
+    #     kmeans = KMeans(n_clusters=i, init ='k-means++', max_iter=300,  n_init=10,random_state=0 )
+    #     kmeans.fit(X)
+    #     wcss.append(kmeans.inertia_)
+    # plt.plot(range(1,11),wcss,'bx-')
+    # plt.title('The Elbow Method Graph')
+    # plt.xlabel('Number of clusters')
+    # plt.ylabel('WCSS')
+    # # plt.show()
+    # string1 = "10%  - The Elbow Method Graph " +".pdf"
+    # save_results_to = 'graficos/'  
+    # plt.savefig(save_results_to + string1)  
+
+    # De acordo com o Metodo Elbow, determinar o numero de clusters
+    kmeans = KMeans(n_clusters=3, init ='k-means++', max_iter=300, n_init=10,random_state=0 )
+    y_kmeans = kmeans.fit_predict(X)
+    # print(y_kmeans)
+    # print(kmeans.labels_)
+
+    #Clusterização
+    #plt.figure(figsize=(6, 4))
+    #plt.title("10%  - Todos os Cursos - Clusterização ")
+    plt.title("10%  - Clusterização - Cursos 02 - CBO 3 Dígitos")
+    plt.xlabel('Cursos')
+    plt.ylabel('Profissões')
+    # plt.title("10% - All Courses - Clustering") # Diversos  ( Explicações e correções) e Estilo de texto 
+    # plt.xlabel('Courses')
+    # plt.ylabel('Professions')
+    plt.ylim(0, 100) # definir limite do eixo
+    plt.xlim(0, 100) # definir limite do eixo
+    plt.grid()
+    # Visualising the clusters
+    plt.scatter(X.iloc[y_kmeans==0, 0], X.iloc[y_kmeans==0, 1], s=100, c='red', label ='Cluster 0', marker = '*')
+    plt.scatter(X.iloc[y_kmeans==1, 0], X.iloc[y_kmeans==1, 1], s=100, c='blue', label ='Cluster 1', marker = '*')
+    plt.scatter(X.iloc[y_kmeans==2, 0], X.iloc[y_kmeans==2, 1], s=100, c='green', label ='Cluster 2', marker = '*')
+    # plt.scatter(kmeans.cluster_centers_[:, 0], kmeans.cluster_centers_[:, 1], s=300, c='yellow', label = 'Centroids', marker = '*') # Diversos  ( Explicações e correções) e Estilo de texto 
+    plt.legend()
+    # plt.show()
+    # string1 = "10%  - Todos os Cursos - Clusterização " +".pdf"
+    # string1 = "10% - All Courses - Clustering" +".pdf"
+    string1 = "10%_AllCourses_Clustering_CBO3_Curso02" +".png"
+    save_results_to = 'graficos/'  
+    plt.savefig(save_results_to + string1)  
+
+
+#     # Centróides
+#     kmeans.cluster_centers_[:, 0], kmeans.cluster_centers_[:, 1]
+#     # cluster 1 : 27.00526316,21.78263158  ... Vermelho
+#     # cluster 2 : 66.464375,  77.656875    ... Azul
+#     # cluster 3:  25.76357143,62.88071429  ... Verde
+          
+    
+#    # Obtendo os centróides
+#     centroids = kmeans.cluster_centers_
+#     # Criando um DataFrame com os centróides
+#     df_centroids = pd.DataFrame(centroids, columns=['x', 'y'])
+#     # Salvando os centróides em um arquivo CSV
+#     df_centroids.to_csv(save_results_to + 'centroids.csv', index=False)
+
+    # # O que tem em cada cluster? ===================================================================================================================
+    X['cluster'] = kmeans.labels_
+    X = X.sort_values("cluster",ascending=True)
+    # print(X)
+
+    X_Original = pd.read_csv(df)
+    X_Original = X_Original.drop(columns=['Unnamed: 0'])
+    X_Original = X_Original.drop(columns=['Unnamed: 0.1'])
+    # print(X_Original)
+
+    # # selecao_Kmeans3 = X_['cluster']==0
+    # selecao_Kmeans3 = X['cluster']==0  #===================================================================================================================
+    # X['cluster'] = kmeans.labels_
+    # X_0_Kmeans3 = X[selecao_Kmeans3]
+    # X_0_Kmeans3
+
+    # Kmeans3_CursoNum =[]
+    # Kmeans3_CboNum =[]
+    # for index, row in X_Original.iterrows():
+    #     for indexx, roww in X_0_Kmeans3.iterrows():
+    #         if (row['Ida']== roww['Ida']) and (row['Volta']==roww['Volta']):
+    #             #CR_Cluster1Cursos_Kmeans3.append(row['CR'])
+    #             Kmeans3_CursoNum.append(row['CR'])
+    #             #Kmeans3_CursoNome.append(row['CR'])
+    #             Kmeans3_CboNum.append(row['CB'])
+    #             #Kmeans3_CboNome.append(row['CR'])#
+    # #print("len(Kmeans3_CursoNum):", len(Kmeans3_CursoNum))
+    # #print("len(Kmeans3_CboNum):", len(Kmeans3_CboNum))		 
+
+    # # print("Kmeans3_CursoNum:", Kmeans3_CursoNum)
+    # # exit(0)
+    # Kmeans3_CursoNome =[]
+    # for i in range (len(Kmeans3_CursoNum)):
+    #     for index, row in CursosCenso.iterrows():
+    #         # print("Kmeans3_CursoNum[i]:", int(Kmeans3_CursoNum[i]))
+    #         # print("CursosCenso['curso_num'][index]:", CursosCenso['curso_num'][index])
+    #         # exit(0)
+    #         # print("")
+    #         # if (int(Kmeans3_CursoNum[i]) == CursosCenso['curso_num'][index]):
+    #         if (int(Kmeans3_CursoNum[i]) == int(CursosCenso['curso_num'][index])):    
+    #             Kmeans3_CursoNome.append(CursosCenso['curso_nome'][index])
+    # # Kmeans3_CursoNome	
+    # # print(len(Kmeans3_CursoNome))	
+    # # exit(0)
+
+    # Kmeans3_CboNome =[]
+    # for i in range (len(Kmeans3_CboNum)):
+    #     # print("Kmeans3_CboNum[i]:", Kmeans3_CboNum[i])
+    #     flag = False
+    #     for index, row in CBO.iterrows():
+    #         if (int(Kmeans3_CboNum[i]) == CBO['Cod_CBO'][index]): #...
+    #             Kmeans3_CboNome.append(CBO['Nome_CBO'][index])
+    #             # print("Kmeans3_CboNum[i]:", Kmeans3_CboNum[i])
+    #             flag = True
+    #             break
+    #     if not flag:
+    #         for index, row in CBO_aux.iterrows():
+    #             if (int(Kmeans3_CboNum[i]) == int(CBO_aux['Cod_Dom'][index])):
+    #                 Kmeans3_CboNome.append(CBO_aux['Nome_CBO'][index])
+    #                 # print("Kmeans3_CboNum[i]:", Kmeans3_CboNum[i])
+    #                 Kmeans3_CboNum[i] = CBO_aux['Cod_CBO'][index]
+    #                 # print("Kmeans3_CboNum[i]:", Kmeans3_CboNum[i])
+    #                 break
+
+    # #Kmeans3_CboNome 
+    
+    # print(len(Kmeans3_CursoNum))
+    # # print(len(Kmeans3_CursoNome))
+    # # print(len(Kmeans3_CboNum))
+    # print(len(Kmeans3_CboNome))
+    # # exit(0)
+    # Kmeans3_resultados_0=[]
+    # for i in range(len(Kmeans3_CursoNum)):
+    #     tupla=(Kmeans3_CursoNum[i],Kmeans3_CursoNome[i],Kmeans3_CboNum[i],Kmeans3_CboNome[i])
+    #     Kmeans3_resultados_0.append(tupla)
+    # #...
+    # kmeans3_0= pd.DataFrame(Kmeans3_resultados_0)
+    # #...
+    # dict = {0:"Curso",
+    #         1:"Curso_Nome",
+    #         2:"Cbo",
+    #         3:"Cbo_Nome",
+    # }
+    # kmeans3_0.rename(columns=dict,inplace=True)
+    # print(kmeans3_0)
+    # print("")
+
+    # # selecao_Kmeans3 = X_['cluster']==1
+    # selecao_Kmeans3 = X['cluster']==1   #===================================================================================================================
+    # X_1_Kmeans3 = X[selecao_Kmeans3]
+
+    # Kmeans3_CursoNum =[]
+    # Kmeans3_CboNum =[]
+    # for index, row in X_Original.iterrows():
+    #     for indexx, roww in X_1_Kmeans3.iterrows():
+    #         if (row['Ida']== roww['Ida']) and (row['Volta']==roww['Volta']):
+    #             #CR_Cluster1Cursos_Kmeans3.append(row['CR'])
+    #             Kmeans3_CursoNum.append(row['CR'])
+    #             #Kmeans3_CursoNome.append(row['CR'])
+    #             Kmeans3_CboNum.append(row['CB'])
+    #             #Kmeans3_CboNome.append(row['CR'])#
+    # # print("len(Kmeans3_CursoNum):", len(Kmeans3_CursoNum))
+    # # print("len(Kmeans3_CboNum):", len(Kmeans3_CboNum))    
+    # Kmeans3_CursoNome =[]
+
+    # for i in range (len(Kmeans3_CursoNum)):
+    #     for index, row in CursosCenso.iterrows():
+    #         # if (str(Kmeans3_CursoNum[i]) == CursosCenso['curso_num'][index]):
+    #         if (int(Kmeans3_CursoNum[i]) == int(CursosCenso['curso_num'][index])):      
+    #             Kmeans3_CursoNome.append(CursosCenso['curso_nome'][index]) 
+    # # # Kmeans3_CursoNome
+    # # Kmeans3_CboNome =[]
+    # # for i in range (len(Kmeans3_CboNum)):
+    # #     for index, row in CBO.iterrows():
+    # #         if (int(Kmeans3_CboNum[i]) == CBO['Cod_CBO'][index]):
+    # #             Kmeans3_CboNome.append(CBO['Nome_CBO'][index])   
+    # Kmeans3_CboNome =[]
+    # for i in range (len(Kmeans3_CboNum)):
+    #     # print("Kmeans3_CboNum[i]:", Kmeans3_CboNum[i])
+    #     flag = False
+    #     for index, row in CBO.iterrows():
+    #         if (int(Kmeans3_CboNum[i]) == CBO['Cod_CBO'][index]): #...
+    #             Kmeans3_CboNome.append(CBO['Nome_CBO'][index])
+    #             # print("Kmeans3_CboNum[i]:", Kmeans3_CboNum[i])
+    #             flag = True
+    #             break
+    #     if not flag:
+    #         for index, row in CBO_aux.iterrows():
+    #             if (int(Kmeans3_CboNum[i]) == int(CBO_aux['Cod_Dom'][index])):
+    #                 Kmeans3_CboNome.append(CBO_aux['Nome_CBO'][index])
+    #                 # print("Kmeans3_CboNum[i]:", Kmeans3_CboNum[i])
+    #                 Kmeans3_CboNum[i] = CBO_aux['Cod_CBO'][index]
+    #                 # print("Kmeans3_CboNum[i]:", Kmeans3_CboNum[i])
+    #                 break
+
+    # # Kmeans3_CboNome
+    # Kmeans3_resultados_1=[]
+    # for i in range(len(Kmeans3_CursoNum)):
+    #     tupla=(Kmeans3_CursoNum[i],Kmeans3_CursoNome[i],Kmeans3_CboNum[i],Kmeans3_CboNome[i])
+    #     Kmeans3_resultados_1.append(tupla)
+    # #...
+    # kmeans3_1= pd.DataFrame(Kmeans3_resultados_1)
+    # #...
+    # dict = {0:"Curso",
+    #         1:"Curso_Nome",
+    #         2:"Cbo",
+    #         3:"Cbo_Nome",
+    # }
+    # kmeans3_1.rename(columns=dict,inplace=True) 
+    # print(kmeans3_1)
+    # print("")
+
+    # # selecao_Kmeans3 = X_['cluster']==2    
+    # selecao_Kmeans3 = X['cluster']==2  #===================================================================================================================
+    # X_2_Kmeans3 = X[selecao_Kmeans3]   
+    # # X_2_Kmeans3
+
+    # Kmeans3_CursoNum =[]
+    # Kmeans3_CboNum =[]
+    # for index, row in X_Original.iterrows():
+    #     for indexx, roww in X_2_Kmeans3.iterrows():
+    #         if (row['Ida']== roww['Ida']) and (row['Volta']==roww['Volta']):
+    #             #CR_Cluster1Cursos_Kmeans3.append(row['CR'])
+    #             Kmeans3_CursoNum.append(row['CR'])
+    #             #Kmeans3_CursoNome.append(row['CR'])
+    #             Kmeans3_CboNum.append(row['CB'])
+    #             #Kmeans3_CboNome.append(row['CR'])#     
+    # # print("len(Kmeans3_CursoNum):", len(Kmeans3_CursoNum))
+    # # print("len(Kmeans3_CboNum):", len(Kmeans3_CboNum))
+    
+    # Kmeans3_CursoNome =[]
+    # for i in range (len(Kmeans3_CursoNum)):
+    #     for index, row in CursosCenso.iterrows():
+    #         # if (str(Kmeans3_CursoNum[i]) == CursosCenso['curso_num'][index]):
+    #         if (int(Kmeans3_CursoNum[i]) == int(CursosCenso['curso_num'][index])):   
+    #             Kmeans3_CursoNome.append(CursosCenso['curso_nome'][index])
+    # # Kmeans3_CursoNome
+    
+    # # Kmeans3_CboNome =[]
+    # # for i in range (len(Kmeans3_CboNum)):
+    # #     for index, row in CBO.iterrows():
+    # #         if (int(Kmeans3_CboNum[i]) == CBO['Cod_CBO'][index]):
+    # #             Kmeans3_CboNome.append(CBO['Nome_CBO'][index])
+    # # # Kmeans3_CboNome
+    # Kmeans3_CboNome =[]
+    # for i in range (len(Kmeans3_CboNum)):
+    #     # print("Kmeans3_CboNum[i]:", Kmeans3_CboNum[i])
+    #     flag = False
+    #     for index, row in CBO.iterrows():
+    #         if (int(Kmeans3_CboNum[i]) == CBO['Cod_CBO'][index]): #...
+    #             Kmeans3_CboNome.append(CBO['Nome_CBO'][index])
+    #             # print("Kmeans3_CboNum[i]:", Kmeans3_CboNum[i])
+    #             flag = True
+    #             break
+    #     if not flag:
+    #         for index, row in CBO_aux.iterrows():
+    #             if (int(Kmeans3_CboNum[i]) == int(CBO_aux['Cod_Dom'][index])):
+    #                 Kmeans3_CboNome.append(CBO_aux['Nome_CBO'][index])
+    #                 # print("Kmeans3_CboNum[i]:", Kmeans3_CboNum[i])
+    #                 Kmeans3_CboNum[i] = CBO_aux['Cod_CBO'][index]
+    #                 # print("Kmeans3_CboNum[i]:", Kmeans3_CboNum[i])
+    #                 break
+
+    # Kmeans3_resultados_2=[]
+    # for i in range(len(Kmeans3_CursoNum)):
+    #     tupla=(Kmeans3_CursoNum[i],Kmeans3_CursoNome[i],Kmeans3_CboNum[i],Kmeans3_CboNome[i])
+    #     Kmeans3_resultados_2.append(tupla)
+    # #...
+    # kmeans3_2= pd.DataFrame(Kmeans3_resultados_2)
+    # #...
+    # dict = {0:"Curso",
+    #         1:"Curso_Nome",
+    #         2:"Cbo",
+    #         3:"Cbo_Nome",
+    # }
+    # kmeans3_2.rename(columns=dict,inplace=True) 
+    # print(kmeans3_2)   
+
+    # # O que tem em todos os  cluster? ===================================================================================================================
+    Kmeans3_CursoNum =[]
+    Kmeans3_CboNum =[]
+    Kmeans3_CursosIda = []
+    Kmeans3_CursosVolta = []
+    Kmeans3_Cursoscluster = []
+
+    for index, row in X_Original.iterrows():
+        for indexx, roww in X.iterrows():
+            if (row['Ida']== roww['Ida']) and (row['Volta']==roww['Volta']):
+                Kmeans3_CursoNum.append(row['CR'])
+                Kmeans3_CboNum.append(row['CB'])
+                Kmeans3_CursosIda.append(row['Ida'])
+                Kmeans3_CursosVolta.append(row['Volta'])
+                Kmeans3_Cursoscluster.append(roww['cluster'])
+                #Kmeans5_Cursoscluster.append(X_['cluster'][indexx])   
+    # print("len(Kmeans3_CursoNum):", len(Kmeans3_CursoNum))
+    # print("len(Kmeans3_CboNum):", len(Kmeans3_CboNum))
+    # print("len(Kmeans3_CursosIda):", len(Kmeans3_CursosIda))
+    # print("len(Kmeans3_CursosVolta):", len(Kmeans3_CursosVolta))
+    # print("len(Kmeans3_Cursoscluster):", len(Kmeans3_Cursoscluster))     
+    # Kmeans3_Cursoscluster
+    Kmeans3_CursoNome =[]
+    for i in range (len(Kmeans3_CursoNum)):
+        for index, row in CursosCenso.iterrows():
+            # if (str(Kmeans3_CursoNum[i]) == CursosCenso['curso_num'][index]):
+            # print(int(Kmeans3_CursoNum[i]), int(CursosCenso['curso_num'][index]))
+            if (int(Kmeans3_CursoNum[i]) == int(CursosCenso['curso_num'][index])):   
+                Kmeans3_CursoNome.append(CursosCenso['curso_nome'][index])
+    # Kmeans3_CursoNome  
+    # Kmeans3_CboNome =[]
+    # for i in range (len(Kmeans3_CboNum)):
+    #     for index, row in CBO.iterrows():
+    #         if (int(Kmeans3_CboNum[i]) == CBO['Cod_CBO'][index]):
+    #             Kmeans3_CboNome.append(CBO['Nome_CBO'][index])      
+    Kmeans3_CboNome =[]
+    for i in range (len(Kmeans3_CboNum)):
+        # print("Kmeans3_CboNum[i]:", Kmeans3_CboNum[i])
+        flag = False
+        for index, row in CBO.iterrows():
+            if (int(Kmeans3_CboNum[i]) == CBO['Cod_CBO'][index]): #...
+                Kmeans3_CboNome.append(CBO['Nome_CBO'][index])
+                # print("Kmeans3_CboNum[i]:", Kmeans3_CboNum[i])
+                flag = True
+                break
+        if not flag:
+            for index, row in CBO_aux.iterrows():
+                if (int(Kmeans3_CboNum[i]) == int(CBO_aux['Cod_Dom'][index])):
+                    Kmeans3_CboNome.append(CBO_aux['Nome_CBO'][index])
+                    # print("Kmeans3_CboNum[i]:", Kmeans3_CboNum[i])
+                    Kmeans3_CboNum[i] = CBO_aux['Cod_CBO'][index]
+                    # print("Kmeans3_CboNum[i]:", Kmeans3_CboNum[i])
+                    break                
+    # print(Kmeans3_CboNome)
+    # print(Kmeans3_CursoNum)
+    # exit(0)
+    Kmeans3_resultados_T=[]
+    for i in range(len(Kmeans3_CursoNum)):
+        tupla=(Kmeans3_CursosIda[i],Kmeans3_CursosVolta[i],Kmeans3_Cursoscluster[i], Kmeans3_CursoNum[i],Kmeans3_CursoNome[i],Kmeans3_CboNum[i],Kmeans3_CboNome[i])
+        Kmeans3_resultados_T.append(tupla)
+    #...
+    Kmeans3_T= pd.DataFrame(Kmeans3_resultados_T)
+    #...
+    dict = {0:"Ida",
+            1:"Volta",
+            2:"Cluster",
+            3:"Curso",
+            4:"Curso_Nome",
+            5:"Cbo",
+            6:"Cbo_Nome"
+    }
+    Kmeans3_T.rename(columns=dict,inplace=True)   
+    Kmeans3_T['Cluster'] = Kmeans3_T['Cluster'].astype(int)
+    Kmeans3_T['Curso'] = Kmeans3_T['Curso'].astype(int)
+    Kmeans3_T['Cbo'] = Kmeans3_T['Cbo'].astype(int)
+
+    # Unique_Cursos = Kmeans3_T.Curso_Nome.unique()
+    # len(Unique_Cursos)     
+    # Unique_Cbo = Kmeans3_T.Cbo_Nome.unique()
+    # len(Unique_Cbo)
+    print(Kmeans3_T)
+    Kmeans3_T.to_csv(save_results_to +'Kmeans3_T_CBO3_Curso02.csv')
     return
 
 def Soma_PivotTable(path1,name1):
