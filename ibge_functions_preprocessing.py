@@ -319,101 +319,574 @@ def JuntarCSVs(path,opcao):
     combined_csv.to_csv(name_path, index=False, encoding='utf-8-sig')   
     return 
 
-def diminuirCurso():
-    # Ler o arquivo Brasil_Graduados.csv         --------------------------------------
-    file_path = "processados/CSVs_ArquivoFinalGraduados/Brasil_Graduados.csv"
-    df = pd.read_csv(file_path)
+# def ibge_trocar_CBO_Domiciliar_por_CBO():
+#     # # Ler o arquivo Brasil_Graduados.csv         --------------------------------------
+#     # file_path = "processados/CSVs_ArquivoFinalGraduados/Brasil_Graduados.csv"
+#     # df = pd.read_csv(file_path)
 
-    # Reduzir um dígito da coluna Curso_Superior_Graduação_Código se tiver 3 dígitos
-    df['Curso_Superior_Graduação_Código'] = df['Curso_Superior_Graduação_Código'].apply(
-        lambda x: int(str(x)[:-1]) if len(str(x)) == 3 else int(str(x))
+#     # file_path1 = "/documentacao/CBO_CSV.csv"
+#     # df = pd.read_csv(file_path1)
+
+#     # Carregar o arquivo Brasil_Graduados.csv
+#     file_path_graduados = "processados/CSVs_ArquivoFinalGraduados/Brasil_Graduados.csv"
+#     df_graduados = pd.read_csv(file_path_graduados)
+#     # print(df_graduados)
+#     # exit(0)
+
+#     # Carregar o arquivo CBO_CSV.csv
+#     file_path_cbo = "documentacao/CBO_CSV.csv"
+#     # df_cbo = pd.read_csv(file_path_cbo)
+#     df_cbo = pd.read_csv(file_path_cbo, dtype=str)
+
+#     # Obter o conjunto de códigos válidos de CBO
+#     set_cbo = set(df_cbo['Cod_CBO'].astype(int))
+
+#     # Encontrar os valores de CBO-Domiciliar que não estão em Cod_CBO
+#     nao_encontrados = df_graduados[~df_graduados['CBO-Domiciliar'].astype(int).isin(set_cbo)]['CBO-Domiciliar'].unique()
+
+#     print("Valores de CBO-Domiciliar que não estão em Cod_CBO:")
+#     print(sorted(nao_encontrados))
+#     print(len(nao_encontrados))
+    
+#     print("")
+#     # Ler o arquivo CBO_CSV_TabelaAuxiliar.csv
+#     file_path_aux = "documentacao/CBO_CSV_TabelaAuxiliar.csv"
+#     df_aux = pd.read_csv(file_path_aux)
+
+#     # Garantir que Cod_Dom é inteiro para comparação correta
+#     cod_dom_set = set(df_aux['Cod_Dom'].astype(int))
+
+#     # Encontrar valores de nao_encontrados que NÃO estão em Cod_Dom
+#     nao_encontrados_na_aux = [v for v in nao_encontrados if int(v) not in cod_dom_set]
+
+#     print("Valores de CBO-Domiciliar que não estão em Cod_CBO nem em Cod_Dom da tabela auxiliar:")
+#     print(sorted(nao_encontrados_na_aux))
+#     print(len(nao_encontrados_na_aux))
+
+#     # ============================================================================================
+#     # Substituir valores de CBO-Domiciliar usando a tabela auxiliar
+#     # Crie um dicionário de mapeamento Cod_Dom -> Cod_CBO
+#     aux_map = dict(zip(df_aux['Cod_Dom'].astype(int), df_aux['Cod_CBO'].astype(int)))
+
+#     # Substituir apenas os valores em nao_encontrados que estão em Cod_Dom
+#     df_graduados['CBO-Domiciliar'] = df_graduados['CBO-Domiciliar'].apply(
+#         lambda x: aux_map[int(x)] if int(x) in aux_map else x
+#     )
+#     # Salvar o DataFrame atualizado em um novo arquivo
+#     save_path = "processados/CSVs_ArquivoFinalGraduados/Brasil_Graduados_CBO.csv"
+#     df_graduados.to_csv(save_path, index=False)
+#     # print(df_graduados)
+#     # exit(0)
+
+#     return
+
+def ibge_trocar_CBO_Domiciliar_por_CBO():
+    # # Ler o arquivo Brasil_Graduados.csv         --------------------------------------
+    # file_path = "processados/CSVs_ArquivoFinalGraduados/Brasil_Graduados.csv"
+    # df = pd.read_csv(file_path)
+
+    # file_path1 = "/documentacao/CBO_CSV.csv"
+    # df = pd.read_csv(file_path1)
+
+    # Carregar o arquivo Brasil_Graduados.csv
+    file_path_graduados = "processados/CSVs_ArquivoFinalGraduados/Brasil_Graduados.csv"
+    df_graduados = pd.read_csv(file_path_graduados)
+    
+
+    # Carregar o arquivo CBO_CSV.csv
+    file_path_cbo = "documentacao/CBO_CSV.csv"
+    # df_cbo = pd.read_csv(file_path_cbo)
+    df_cbo = pd.read_csv(file_path_cbo, dtype=str)
+    # print(df_cbo)
+    # exit(0)
+
+    # Obter o conjunto de códigos válidos de CBO como string, preservando zeros à esquerda
+    set_cbo = set(df_cbo['Cod_CBO'].astype(str))
+
+    # Encontrar os valores de CBO-Domiciliar que não estão em Cod_CBO, também como string
+    nao_encontrados = df_graduados[~df_graduados['CBO-Domiciliar'].astype(str).isin(set_cbo)]['CBO-Domiciliar'].astype(str).unique()
+
+    print("Valores de CBO-Domiciliar que não estão em Cod_CBO:")
+    print(sorted(nao_encontrados))
+    print(len(nao_encontrados))
+    
+    print("")
+    # Ler o arquivo CBO_CSV_TabelaAuxiliar.csv
+    file_path_aux = "documentacao/CBO_CSV_TabelaAuxiliar.csv"
+    # df_aux = pd.read_csv(file_path_aux)
+    df_aux = pd.read_csv(file_path_aux, dtype=str)
+    # print(df_aux)
+    # exit(0)
+
+    # Garantir que Cod_Dom é string para comparação correta (preservando zeros à esquerda)
+    cod_dom_set = set(df_aux['Cod_Dom'].astype(str))
+
+    # Encontrar valores de nao_encontrados que NÃO estão em Cod_Dom (como string)
+    nao_encontrados_na_aux = [v for v in nao_encontrados if str(v) not in cod_dom_set]
+
+    print("Valores de CBO-Domiciliar que não estão em Cod_CBO nem em Cod_Dom da tabela auxiliar:")
+    print(sorted(nao_encontrados_na_aux))
+    print(len(nao_encontrados_na_aux))
+    # exit(0)
+    # ============================================================================================
+    # Substituir valores de CBO-Domiciliar usando a tabela auxiliar
+    # Crie um dicionário de mapeamento Cod_Dom -> Cod_CBO (como string para preservar zeros à esquerda)
+    aux_map = dict(zip(df_aux['Cod_Dom'].astype(str), df_aux['Cod_CBO'].astype(str)))
+
+    # Substituir apenas os valores em nao_encontrados que estão em Cod_Dom, mantendo como string
+    df_graduados['CBO-Domiciliar'] = df_graduados['CBO-Domiciliar'].astype(str).apply(
+        lambda x: aux_map[x] if x in aux_map else x
     )
+    # Salvar o DataFrame atualizado em um novo arquivo
+    save_path = "processados/CSVs_ArquivoFinalGraduados/Brasil_Graduados_CBO.csv"
+    # Garanta que CBO-Domiciliar seja salva como texto para preservar zeros à esquerda
+    df_graduados.to_csv(save_path, index=False, encoding='utf-8-sig', quoting=1)
+    # print(df_graduados)
+    # exit(0)
 
-    # Salvar em novo arquivo
-    save_path = "processados/CSVs_ArquivoFinalGraduados/Brasil_Graduados_CBO4_Curso2.csv"
-    df.to_csv(save_path, index=False)
-
-    # Ler o arquivo Brasil_Graduados_DiminuidoCBO2.csv --------------------------------
-    file_path = "processados/CSVs_ArquivoFinalGraduados/Brasil_Graduados_DiminuidoCBO2.csv"
-    df = pd.read_csv(file_path)
-
-    # Reduzir um dígito da coluna Curso_Superior_Graduação_Código se tiver 3 dígitos
-    df['Curso_Superior_Graduação_Código'] = df['Curso_Superior_Graduação_Código'].apply(
-        lambda x: int(str(x)[:-1]) if len(str(x)) == 3 else int(str(x))
-    )
-
-    # Salvar em novo arquivo
-    save_path = "processados/CSVs_ArquivoFinalGraduados/Brasil_Graduados_DiminuidoCBO2_Curso2.csv"
-    df.to_csv(save_path, index=False)
-
-    # Ler o arquivo Brasil_Graduados_DiminuidoCBO3.csv--------------------------------
-    file_path = "processados/CSVs_ArquivoFinalGraduados/Brasil_Graduados_DiminuidoCBO3.csv"
-    df = pd.read_csv(file_path)
-
-    # Reduzir um dígito da coluna Curso_Superior_Graduação_Código se tiver 3 dígitos
-    df['Curso_Superior_Graduação_Código'] = df['Curso_Superior_Graduação_Código'].apply(
-        lambda x: int(str(x)[:-1]) if len(str(x)) == 3 else int(str(x))
-    )
-
-    # Salvar em novo arquivo
-    save_path = "processados/CSVs_ArquivoFinalGraduados/Brasil_Graduados_DiminuidoCBO3_Curso2.csv"
-    df.to_csv(save_path, index=False)
     return
+
+# def ibge_trocar_CBO_Domiciliar_por_CBO_PivotTable():
+#     # # Ler o arquivo Brasil_Graduados.csv         --------------------------------------
+#     # file_path = "processados/CSVs_ArquivoFinalGraduados/Brasil_Graduados.csv"
+#     # df = pd.read_csv(file_path)
+
+#     # file_path1 = "/documentacao/CBO_CSV.csv"
+#     # df = pd.read_csv(file_path1)
+
+#     # Carregar o arquivo Brasil_Graduados.csv
+#     # file_path_graduados = "processados/CSVs_ArquivoFinalGraduados/Brasil_Graduados.csv"
+#     file_path_Brasil_PivotFinalFeminina = "processados/CSVs_PivotTableFinal/Brasil_PivotFinalFeminina.csv"
+#     file_path_Brasil_PivotFinalMasculina = "processados/CSVs_PivotTableFinal/Brasil_PivotFinalMasculina.csv"
+#     file_path_Brasil_PivotFinal = "processados/CSVs_PivotTableFinal/Brasil_PivotFinal.csv"
+#     # df_graduados = pd.read_csv(file_path_graduados)
+#     df_Brasil_PivotFinalFeminina = pd.read_csv(file_path_Brasil_PivotFinalFeminina)
+#     df_Brasil_PivotFinalMasculina = pd.read_csv(file_path_Brasil_PivotFinalMasculina)
+#     df_Brasil_PivotFinal = pd.read_csv(file_path_Brasil_PivotFinal)
+
+#     # Carregar o arquivo CBO_CSV.csv
+#     file_path_cbo = "documentacao/CBO_CSV.csv"
+#     df_cbo = pd.read_csv(file_path_cbo)
+
+#     # Obter o conjunto de códigos válidos de CBO
+#     set_cbo = set(df_cbo['Cod_CBO'].astype(int))
+
+#     # Encontrar os valores de CBO-Domiciliar que não estão em Cod_CBO
+#     # nao_encontrados = df_graduados[~df_graduados['CBO-Domiciliar'].astype(int).isindf_Brasil_PivotFinalFeminina(set_cbo)]['CBO-Domiciliar'].unique()
+#     nao_encontrados_Brasil_PivotFinal = df_Brasil_PivotFinal[~df_Brasil_PivotFinal['CBO-Domiciliar'].astype(int).isin(set_cbo)]['CBO-Domiciliar'].unique()
+#     nao_encontrados_Brasil_PivotFinalMasculina = df_Brasil_PivotFinalMasculina[~df_Brasil_PivotFinalMasculina['CBO-Domiciliar'].astype(int).isin(set_cbo)]['CBO-Domiciliar'].unique()
+#     nao_encontrados_Brasil_PivotFinalFeminina = df_Brasil_PivotFinalFeminina[~df_Brasil_PivotFinalFeminina['CBO-Domiciliar'].astype(int).isin(set_cbo)]['CBO-Domiciliar'].unique()
+
+#     print("Valores de CBO-Domiciliar que não estão em Cod_CBO:")
+#     # print(sorted(nao_encontrados))
+#     # print(len(nao_encontrados))
+#     print(sorted(nao_encontrados_Brasil_PivotFinal))
+#     print(len(nao_encontrados_Brasil_PivotFinal))
+#     print(sorted(nao_encontrados_Brasil_PivotFinalMasculina))
+#     print(len(nao_encontrados_Brasil_PivotFinalMasculina))
+#     print(sorted(nao_encontrados_Brasil_PivotFinalFeminina))
+#     print(len(nao_encontrados_Brasil_PivotFinalFeminina))
+    
+#     print("")
+#     # Ler o arquivo CBO_CSV_TabelaAuxiliar.csv
+#     file_path_aux = "documentacao/CBO_CSV_TabelaAuxiliar.csv"
+#     df_aux = pd.read_csv(file_path_aux)
+
+#     # Garantir que Cod_Dom é inteiro para comparação correta
+#     cod_dom_set = set(df_aux['Cod_Dom'].astype(int))
+
+#     # Encontrar valores de nao_encontrados que NÃO estão em Cod_Dom
+#     # nao_encontrados_na_aux = [v for v in nao_encontrados if int(v) not in cod_dom_set]
+#     nao_encontrados_na_aux_Brasil_PivotFinal = [v for v in nao_encontrados_Brasil_PivotFinal if int(v) not in cod_dom_set]
+#     nao_encontrados_na_aux_Brasil_PivotFinalMasculina = [v for v in nao_encontrados_Brasil_PivotFinal if int(v) not in cod_dom_set]
+#     nao_encontrados_na_aux_Brasil_PivotFinalFeminina = [v for v in nao_encontrados_Brasil_PivotFinalFeminina if int(v) not in cod_dom_set]
+
+
+
+#     print("Valores de CBO-Domiciliar que não estão em Cod_CBO nem em Cod_Dom da tabela auxiliar:")
+#     # print(sorted(nao_encontrados_na_aux))
+#     # print(len(nao_encontrados_na_aux))
+#     print(sorted(nao_encontrados_na_aux_Brasil_PivotFinal))
+#     print(len(nao_encontrados_na_aux_Brasil_PivotFinal))
+#     print(sorted(nao_encontrados_na_aux_Brasil_PivotFinalMasculina))
+#     print(len(nao_encontrados_na_aux_Brasil_PivotFinalMasculina))
+#     print(sorted(nao_encontrados_na_aux_Brasil_PivotFinalFeminina))
+#     print(len(nao_encontrados_na_aux_Brasil_PivotFinalFeminina))
+
+#     # ============================================================================================
+#     # Substituir valores de CBO-Domiciliar usando a tabela auxiliar
+#     # Crie um dicionário de mapeamento Cod_Dom -> Cod_CBO
+#     aux_map = dict(zip(df_aux['Cod_Dom'].astype(int), df_aux['Cod_CBO'].astype(int)))
+
+#     # Substituir apenas os valores em nao_encontrados que estão em Cod_Dom
+#     # df_graduados['CBO-Domiciliar'] = df_graduados['CBO-Domiciliar'].apply(
+#     #     lambda x: aux_map[int(x)] if int(x) in aux_map else x
+#     # )
+#     df_Brasil_PivotFinal['CBO-Domiciliar'] = df_Brasil_PivotFinal['CBO-Domiciliar'].apply(
+#         lambda x: aux_map[int(x)] if int(x) in aux_map else x
+#     )
+#     df_Brasil_PivotFinalMasculina['CBO-Domiciliar'] = df_Brasil_PivotFinalMasculina['CBO-Domiciliar'].apply(
+#         lambda x: aux_map[int(x)] if int(x) in aux_map else x
+#     )
+#     df_Brasil_PivotFinalFeminina['CBO-Domiciliar'] = df_Brasil_PivotFinalFeminina['CBO-Domiciliar'].apply(
+#         lambda x: aux_map[int(x)] if int(x) in aux_map else x
+#     )
+#     # Salvar o DataFrame atualizado em um novo arquivo
+#     # save_path = "processados/CSVs_ArquivoFinalGraduados/Brasil_Graduados_CBO.csv"
+#     # df_graduados.to_csv(save_path, index=False)
+#     save_path_Brasil_PivotFinal_CBO = "processados/CSVs_PivotTableFinal/Brasil_PivotFinal_CBO.csv"
+#     save_path_Brasil_PivotFinalMasculina_CBO = "processados/CSVs_PivotTableFinal/Brasil_PivotFinalMasculina_CBO.csv"
+#     save_path_Brasil_PivotFinalFeminina_CBO = "processados/CSVs_PivotTableFinal/Brasil_PivotFinalFeminina_CBO.csv"
+#     df_Brasil_PivotFinal.to_csv(save_path_Brasil_PivotFinal_CBO, index=False)
+#     df_Brasil_PivotFinalMasculina.to_csv(save_path_Brasil_PivotFinalMasculina_CBO, index=False)
+#     df_Brasil_PivotFinalFeminina.to_csv(save_path_Brasil_PivotFinalFeminina_CBO, index=False)
+
+#     return
+
+def ibge_trocar_CBO_Domiciliar_por_CBO_PivotTable():
+    # # Ler o arquivo Brasil_Graduados.csv         --------------------------------------
+    # file_path = "processados/CSVs_ArquivoFinalGraduados/Brasil_Graduados.csv"
+    # df = pd.read_csv(file_path)
+
+    # file_path1 = "/documentacao/CBO_CSV.csv"
+    # df = pd.read_csv(file_path1)
+
+    # Carregar o arquivo Brasil_Graduados.csv
+    # file_path_graduados = "processados/CSVs_ArquivoFinalGraduados/Brasil_Graduados.csv"
+    file_path_Brasil_PivotFinalFeminina = "processados/CSVs_PivotTableFinal/Brasil_PivotFinalFeminina.csv"
+    file_path_Brasil_PivotFinalMasculina = "processados/CSVs_PivotTableFinal/Brasil_PivotFinalMasculina.csv"
+    file_path_Brasil_PivotFinal = "processados/CSVs_PivotTableFinal/Brasil_PivotFinal.csv"
+    # df_graduados = pd.read_csv(file_path_graduados)
+    df_Brasil_PivotFinalFeminina = pd.read_csv(file_path_Brasil_PivotFinalFeminina)
+    df_Brasil_PivotFinalMasculina = pd.read_csv(file_path_Brasil_PivotFinalMasculina)
+    df_Brasil_PivotFinal = pd.read_csv(file_path_Brasil_PivotFinal)
+
+    # Carregar o arquivo CBO_CSV.csv
+    file_path_cbo = "documentacao/CBO_CSV.csv"
+    df_cbo = pd.read_csv(file_path_cbo, dtype=str)
+    # print(df_cbo)
+    # exit(0)
+
+    # Obter o conjunto de códigos válidos de CBO como string (preservando zeros à esquerda)
+    set_cbo = set(df_cbo['Cod_CBO'].astype(str))
+
+    # Encontrar os valores de CBO-Domiciliar que não estão em Cod_CBO, também como string
+    nao_encontrados_Brasil_PivotFinal = df_Brasil_PivotFinal[~df_Brasil_PivotFinal['CBO-Domiciliar'].astype(str).isin(set_cbo)]['CBO-Domiciliar'].astype(str).unique()
+    nao_encontrados_Brasil_PivotFinalMasculina = df_Brasil_PivotFinalMasculina[~df_Brasil_PivotFinalMasculina['CBO-Domiciliar'].astype(str).isin(set_cbo)]['CBO-Domiciliar'].astype(str).unique()
+    nao_encontrados_Brasil_PivotFinalFeminina = df_Brasil_PivotFinalFeminina[~df_Brasil_PivotFinalFeminina['CBO-Domiciliar'].astype(str).isin(set_cbo)]['CBO-Domiciliar'].astype(str).unique()
+
+    print("Valores de CBO-Domiciliar que não estão em Cod_CBO:")
+    # print(sorted(nao_encontrados))
+    # print(len(nao_encontrados))
+    print(sorted(nao_encontrados_Brasil_PivotFinal))
+    print(len(nao_encontrados_Brasil_PivotFinal))
+    print(sorted(nao_encontrados_Brasil_PivotFinalMasculina))
+    print(len(nao_encontrados_Brasil_PivotFinalMasculina))
+    print(sorted(nao_encontrados_Brasil_PivotFinalFeminina))
+    print(len(nao_encontrados_Brasil_PivotFinalFeminina))
+    
+    print("")
+    # Ler o arquivo CBO_CSV_TabelaAuxiliar.csv
+    file_path_aux = "documentacao/CBO_CSV_TabelaAuxiliar.csv"
+    df_aux = pd.read_csv(file_path_aux, dtype=str)
+    # print(df_aux)
+    # exit(0)
+
+    # Garantir que Cod_Dom é string para comparação correta (preservando zeros à esquerda)
+    cod_dom_set = set(df_aux['Cod_Dom'].astype(str))
+
+    # Encontrar valores de nao_encontrados que NÃO estão em Cod_Dom (como string)
+    nao_encontrados_na_aux_Brasil_PivotFinal = [v for v in nao_encontrados_Brasil_PivotFinal if str(v) not in cod_dom_set]
+    nao_encontrados_na_aux_Brasil_PivotFinalMasculina = [v for v in nao_encontrados_Brasil_PivotFinalMasculina if str(v) not in cod_dom_set]
+    nao_encontrados_na_aux_Brasil_PivotFinalFeminina = [v for v in nao_encontrados_Brasil_PivotFinalFeminina if str(v) not in cod_dom_set]
+
+
+    print("Valores de CBO-Domiciliar que não estão em Cod_CBO nem em Cod_Dom da tabela auxiliar:")
+    # print(sorted(nao_encontrados_na_aux))
+    # print(len(nao_encontrados_na_aux))
+    print(sorted(nao_encontrados_na_aux_Brasil_PivotFinal))
+    print(len(nao_encontrados_na_aux_Brasil_PivotFinal))
+    print(sorted(nao_encontrados_na_aux_Brasil_PivotFinalMasculina))
+    print(len(nao_encontrados_na_aux_Brasil_PivotFinalMasculina))
+    print(sorted(nao_encontrados_na_aux_Brasil_PivotFinalFeminina))
+    print(len(nao_encontrados_na_aux_Brasil_PivotFinalFeminina))
+
+    # ============================================================================================
+    # Substituir valores de CBO-Domiciliar usando a tabela auxiliar
+    # Crie um dicionário de mapeamento Cod_Dom -> Cod_CBO (como string para preservar zeros à esquerda)
+    aux_map = dict(zip(df_aux['Cod_Dom'].astype(str), df_aux['Cod_CBO'].astype(str)))
+
+    # Substituir apenas os valores em nao_encontrados que estão em Cod_Dom, mantendo como string
+    df_Brasil_PivotFinal['CBO-Domiciliar'] = df_Brasil_PivotFinal['CBO-Domiciliar'].astype(str).apply(
+        lambda x: aux_map[x] if x in aux_map else x
+    )
+    df_Brasil_PivotFinalMasculina['CBO-Domiciliar'] = df_Brasil_PivotFinalMasculina['CBO-Domiciliar'].astype(str).apply(
+        lambda x: aux_map[x] if x in aux_map else x
+    )
+    df_Brasil_PivotFinalFeminina['CBO-Domiciliar'] = df_Brasil_PivotFinalFeminina['CBO-Domiciliar'].astype(str).apply(
+        lambda x: aux_map[x] if x in aux_map else x
+    )
+    # Salvar os DataFrames atualizados em novos arquivos, garantindo que CBO-Domiciliar seja salva como texto
+    save_path_Brasil_PivotFinal_CBO = "processados/CSVs_PivotTableFinal/Brasil_PivotFinal_CBO.csv"
+    save_path_Brasil_PivotFinalMasculina_CBO = "processados/CSVs_PivotTableFinal/Brasil_PivotFinalMasculina_CBO.csv"
+    save_path_Brasil_PivotFinalFeminina_CBO = "processados/CSVs_PivotTableFinal/Brasil_PivotFinalFeminina_CBO.csv"
+    df_Brasil_PivotFinal.to_csv(save_path_Brasil_PivotFinal_CBO, index=False, encoding='utf-8-sig', quoting=1)
+    df_Brasil_PivotFinalMasculina.to_csv(save_path_Brasil_PivotFinalMasculina_CBO, index=False, encoding='utf-8-sig', quoting=1)
+    df_Brasil_PivotFinalFeminina.to_csv(save_path_Brasil_PivotFinalFeminina_CBO, index=False, encoding='utf-8-sig', quoting=1)
+
+    return
+
+def diminuirCurso():
+    # # Ler o arquivo Brasil_Graduados.csv         --------------------------------------
+    # # file_path = "processados/CSVs_ArquivoFinalGraduados/Brasil_Graduados.csv"
+    # file_path = "processados/CSVs_ArquivoFinalGraduados/Brasil_Graduados_CBO.csv"
+    # df = pd.read_csv(file_path)
+
+    # # Reduzir um dígito da coluna Curso_Superior_Graduação_Código se tiver 3 dígitos
+    # df['Curso_Superior_Graduação_Código'] = df['Curso_Superior_Graduação_Código'].apply(
+    #     lambda x: int(str(x)[:-1]) if len(str(x)) == 3 else int(str(x))
+    # )
+
+    # # Salvar em novo arquivo
+    # # save_path = "processados/CSVs_ArquivoFinalGraduados/Brasil_Graduados_CBO4_Curso2.csv"
+    # save_path = "processados/CSVs_ArquivoFinalGraduados/Brasil_Graduados_CBO_CBO4_Curso2.csv"
+    # df.to_csv(save_path, index=False)
+
+    # # Ler o arquivo Brasil_Graduados_DiminuidoCBO2.csv ------------------------------------------
+    # ---------------------------------------------------------------------------------------------
+    # ---------------------------------------------------------------------------------------------
+    # # file_path = "processados/CSVs_ArquivoFinalGraduados/Brasil_Graduados_DiminuidoCBO2.csv"
+    # file_path = "processados/CSVs_ArquivoFinalGraduados/Brasil_Graduados_CBO_DiminuidoCBO2.csv"
+
+    # df = pd.read_csv(file_path)
+
+    # # Reduzir um dígito da coluna Curso_Superior_Graduação_Código se tiver 3 dígitos
+    # df['Curso_Superior_Graduação_Código'] = df['Curso_Superior_Graduação_Código'].apply(
+    #     lambda x: int(str(x)[:-1]) if len(str(x)) == 3 else int(str(x))
+    # )
+
+    # # Salvar em novo arquivo
+    # # save_path = "processados/CSVs_ArquivoFinalGraduados/Brasil_Graduados_DiminuidoCBO2_Curso2.csv"
+    # save_path = "processados/CSVs_ArquivoFinalGraduados/Brasil_Graduados_CBO_DiminuidoCBO2_Curso2.csv"
+    # df.to_csv(save_path, index=False)
+    # file_path = "processados/CSVs_ArquivoFinalGraduados/Brasil_Graduados_DiminuidoCBO3.csv"
+    file_path = "processados/CSVs_ArquivoFinalGraduados/Brasil_Graduados_CBO_DiminuidoCBO2.csv"
+    df = pd.read_csv(file_path, dtype={'CBO-Domiciliar': str})
+
+    # Imprimir registros onde CBO-Domiciliar tem zeros à esquerda
+    # print(df[df['CBO-Domiciliar'].str.startswith('0')])
+    # print("-----------------------------------")
+    # Reduzir um dígito da coluna Curso_Superior_Graduação_Código se tiver 3 dígitos
+    df['Curso_Superior_Graduação_Código'] = df['Curso_Superior_Graduação_Código'].apply(
+        lambda x: int(str(x)[:-1]) if len(str(x)) == 3 else int(str(x))
+    )
+
+    # Salvar em novo arquivo, mantendo zeros à esquerda na coluna CBO-Domiciliar
+    save_path = "processados/CSVs_ArquivoFinalGraduados/Brasil_Graduados_CBO_DiminuidoCBO2_Curso2.csv"
+    # Imprimir registros onde CBO-Domiciliar tem zeros à esquerda
+    # print(df[df['CBO-Domiciliar'].str.startswith('0')])
+    # df.to_csv(save_path, index=False, encoding='utf-8-sig', quoting=1)
+
+    # Ler o arquivo Brasil_Graduados_DiminuidoCBO3.csv---------------------------------------------
+    # ---------------------------------------------------------------------------------------------
+    # ---------------------------------------------------------------------------------------------
+    # file_path = "processados/CSVs_ArquivoFinalGraduados/Brasil_Graduados_DiminuidoCBO3.csv"
+    file_path = "processados/CSVs_ArquivoFinalGraduados/Brasil_Graduados_CBO_DiminuidoCBO3.csv"
+    df = pd.read_csv(file_path, dtype={'CBO-Domiciliar': str})
+
+    # Imprimir registros onde CBO-Domiciliar tem zeros à esquerda
+    # print(df[df['CBO-Domiciliar'].str.startswith('0')])
+    # print("-----------------------------------")
+    # Reduzir um dígito da coluna Curso_Superior_Graduação_Código se tiver 3 dígitos
+    df['Curso_Superior_Graduação_Código'] = df['Curso_Superior_Graduação_Código'].apply(
+        lambda x: int(str(x)[:-1]) if len(str(x)) == 3 else int(str(x))
+    )
+
+    # Salvar em novo arquivo, mantendo zeros à esquerda na coluna CBO-Domiciliar
+    save_path = "processados/CSVs_ArquivoFinalGraduados/Brasil_Graduados_CBO_DiminuidoCBO3_Curso2.csv"
+    # Imprimir registros onde CBO-Domiciliar tem zeros à esquerda
+    # print(df[df['CBO-Domiciliar'].str.startswith('0')])
+    # df.to_csv(save_path, index=False, encoding='utf-8-sig', quoting=1)
+    return
+
+# def ibge_diminuirCBOs(opcao):
+#     if opcao ==2:
+#        # Process the first file
+#        # file_path_graduados = 'processados/CSVs_ArquivoFinalGraduados/Brasil_Graduados.csv'
+#        file_path_graduados = 'processados/CSVs_ArquivoFinalGraduados/Brasil_Graduados_CBO.csv'
+
+#        df_graduados = pd.read_csv(file_path_graduados)
+#        # Subtract one digit from the specified columns
+#        # df_graduados['Curso_Superior_Graduação_Código'] = df_graduados['Curso_Superior_Graduação_Código'].astype(str).str[:-1].astype(int)
+#        # df_graduados['CBO-Domiciliar'] = df_graduados['CBO-Domiciliar'].astype(str).str[:-2].astype(int)
+#        df_graduados['CBO-Domiciliar'] = df_graduados['CBO-Domiciliar'].apply(
+#         lambda x: int(str(x)[:-2]) if len(str(x)) == 4 else (
+#             int(str(x)[:-1]) if len(str(x)) == 3 else int(str(x))
+#         )
+#        )
+#        # Save the transformed DataFrame to a new file
+#        # save_results_graduados = 'processados/CSVs_ArquivoFinalGraduados/Brasil_Graduados_DiminuidoCBO2.csv'
+#        save_results_graduados = 'processados/CSVs_ArquivoFinalGraduados/Brasil_Graduados_CBO_DiminuidoCBO2.csv'
+#        df_graduados.to_csv(save_results_graduados, index=False)
+
+#        # Process the second file
+#        # file_path_pivot = 'processados/CSVs_PivotTableFinal/Brasil_PivotFinal.csv'
+#        file_path_pivot = 'processados/CSVs_PivotTableFinal/Brasil_PivotFinal_CBO.csv'
+#        df_pivot = pd.read_csv(file_path_pivot)
+#        # Subtract one digit from the Ocupação_Código column
+#        # df_pivot['CBO-Domiciliar'] = df_pivot['CBO-Domiciliar'].astype(str).str[:-2].astype(int)
+#        df_pivot['CBO-Domiciliar'] = df_pivot['CBO-Domiciliar'].apply(
+#         lambda x: int(str(x)[:-2]) if len(str(x)) == 4 else (
+#             int(str(x)[:-1]) if len(str(x)) == 3 else int(str(x))
+#         )
+#        )
+#        # Save the transformed DataFrame to a new file
+#        # save_results_pivot = 'processados/CSVs_PivotTableFinal/Brasil_PivotFinal_DiminuidaCBO2.csv'
+#        save_results_pivot = 'processados/CSVs_PivotTableFinal/Brasil_PivotFinal_CBO_DiminuidaCBO2.csv'
+#        df_pivot.to_csv(save_results_pivot, index=False) # opcao=2
+
+#     elif opcao ==3:
+#        # Process the first file
+#        # file_path_graduados = 'processados/CSVs_ArquivoFinalGraduados/Brasil_Graduados.csv'
+#        file_path_graduados = 'processados/CSVs_ArquivoFinalGraduados/Brasil_Graduados_CBO.csv'
+#        df_graduados = pd.read_csv(file_path_graduados)
+#        # Subtract one digit from the specified columns
+#        # df_graduados['Curso_Superior_Graduação_Código'] = df_graduados['Curso_Superior_Graduação_Código'].astype(str).str[:-1].astype(int)
+#        # df_graduados['CBO-Domiciliar'] = df_graduados['CBO-Domiciliar'].astype(str).str[:-2].astype(int)
+#        df_graduados['CBO-Domiciliar'] = df_graduados['CBO-Domiciliar'].apply(
+#         lambda x: int(str(x)[:-1]) if len(str(x)) == 4 else int(str(x))
+#         )
+#        # Save the transformed DataFrame to a new file
+#        # save_results_graduados = 'processados/CSVs_ArquivoFinalGraduados/Brasil_Graduados_DiminuidoCBO3.csv'
+#        save_results_graduados = 'processados/CSVs_ArquivoFinalGraduados/Brasil_Graduados_CBO_DiminuidoCBO3.csv'
+#        df_graduados.to_csv(save_results_graduados, index=False)
+
+#        # Process the second file
+#     #    file_path_pivot = 'processados/CSVs_PivotTableFinal/Brasil_PivotFinal.csv'      
+#        file_path_pivot = 'processados/CSVs_PivotTableFinal/Brasil_PivotFinal_CBO.csv'
+
+#        df_pivot = pd.read_csv(file_path_pivot)
+#        # Subtract one digit from the Ocupação_Código column
+#        # df_pivot['CBO-Domiciliar'] = df_pivot['CBO-Domiciliar'].astype(str).str[:-2].astype(int)
+#        df_pivot['CBO-Domiciliar'] = df_pivot['CBO-Domiciliar'].apply(
+#         lambda x: int(str(x)[:-1]) if len(str(x)) == 4 else int(str(x))
+#        )
+#        # Save the transformed DataFrame to a new file
+#        # save_results_pivot = 'processados/CSVs_PivotTableFinal/Brasil_PivotFinal_DiminuidaCBO3.csv'
+#        save_results_pivot = 'processados/CSVs_PivotTableFinal/Brasil_PivotFinal_CBO_DiminuidaCBO3.csv'
+#        df_pivot.to_csv(save_results_pivot, index=False)
+#     return
 
 def ibge_diminuirCBOs(opcao):
     if opcao ==2:
        # Process the first file
-       file_path_graduados = 'processados/CSVs_ArquivoFinalGraduados/Brasil_Graduados.csv'
-       df_graduados = pd.read_csv(file_path_graduados)
-       # Subtract one digit from the specified columns
-       # df_graduados['Curso_Superior_Graduação_Código'] = df_graduados['Curso_Superior_Graduação_Código'].astype(str).str[:-1].astype(int)
-       # df_graduados['CBO-Domiciliar'] = df_graduados['CBO-Domiciliar'].astype(str).str[:-2].astype(int)
+       # file_path_graduados = 'processados/CSVs_ArquivoFinalGraduados/Brasil_Graduados.csv'
+       file_path_graduados = 'processados/CSVs_ArquivoFinalGraduados/Brasil_Graduados_CBO.csv'
+       # df_graduados = pd.read_csv(file_path_graduados)
+       df_graduados = pd.read_csv(file_path_graduados, dtype=str)
+
+
+    #    # Subtract one digit from the specified columns
+    #    # df_graduados['Curso_Superior_Graduação_Código'] = df_graduados['Curso_Superior_Graduação_Código'].astype(str).str[:-1].astype(int)
+    #    # df_graduados['CBO-Domiciliar'] = df_graduados['CBO-Domiciliar'].astype(str).str[:-2].astype(int)
+    #    df_graduados['CBO-Domiciliar'] = df_graduados['CBO-Domiciliar'].apply(
+    #     lambda x: int(str(x)[:-2]) if len(str(x)) == 4 else (
+    #         int(str(x)[:-1]) if len(str(x)) == 3 else int(str(x))
+    #     )
+    #    )
+    #    # Save the transformed DataFrame to a new file
+    #    # save_results_graduados = 'processados/CSVs_ArquivoFinalGraduados/Brasil_Graduados_DiminuidoCBO2.csv'
+    #    save_results_graduados = 'processados/CSVs_ArquivoFinalGraduados/Brasil_Graduados_CBO_DiminuidoCBO2.csv'
+    #    df_graduados.to_csv(save_results_graduados, index=False)
+        
+       # Subtrair dígitos da coluna CBO-Domiciliar baseada em string (preservando zeros à esquerda)
        df_graduados['CBO-Domiciliar'] = df_graduados['CBO-Domiciliar'].apply(
-        lambda x: int(str(x)[:-2]) if len(str(x)) == 4 else (
-            int(str(x)[:-1]) if len(str(x)) == 3 else int(str(x))
-        )
+       lambda x: x[:-2] if len(x) == 4 else (x[:-1] if len(x) == 3 else x)
        )
-       # Save the transformed DataFrame to a new file
-       save_results_graduados = 'processados/CSVs_ArquivoFinalGraduados/Brasil_Graduados_DiminuidoCBO2.csv'
-       df_graduados.to_csv(save_results_graduados, index=False)
+       # Salvar o DataFrame transformado em um novo arquivo
+       save_results_graduados = 'processados/CSVs_ArquivoFinalGraduados/Brasil_Graduados_CBO_DiminuidoCBO2.csv'
+       # Imprimir os primeiros registros mostrando os zeros à esquerda
+       # print(df_graduados.head().to_string(index=False))
+       df_graduados.to_csv(save_results_graduados,  index=False, encoding='utf-8-sig', quoting=1)
+
+
+
+    #    # Process the second file
+    #    # file_path_pivot = 'processados/CSVs_PivotTableFinal/Brasil_PivotFinal.csv'
+    #    file_path_pivot = 'processados/CSVs_PivotTableFinal/Brasil_PivotFinal_CBO.csv'
+    #    df_pivot = pd.read_csv(file_path_pivot)
+    #    # Subtract one digit from the Ocupação_Código column
+    #    # df_pivot['CBO-Domiciliar'] = df_pivot['CBO-Domiciliar'].astype(str).str[:-2].astype(int)
+    #    df_pivot['CBO-Domiciliar'] = df_pivot['CBO-Domiciliar'].apply(
+    #     lambda x: int(str(x)[:-2]) if len(str(x)) == 4 else (
+    #         int(str(x)[:-1]) if len(str(x)) == 3 else int(str(x))
+    #     )
+    #    )
+    #    # Save the transformed DataFrame to a new file
+    #    # save_results_pivot = 'processados/CSVs_PivotTableFinal/Brasil_PivotFinal_DiminuidaCBO2.csv'
+    #    save_results_pivot = 'processados/CSVs_PivotTableFinal/Brasil_PivotFinal_CBO_DiminuidaCBO2.csv'
+    #    df_pivot.to_csv(save_results_pivot, index=False) 
 
        # Process the second file
-       file_path_pivot = 'processados/CSVs_PivotTableFinal/Brasil_PivotFinal.csv'
-       df_pivot = pd.read_csv(file_path_pivot)
-       # Subtract one digit from the Ocupação_Código column
-       # df_pivot['CBO-Domiciliar'] = df_pivot['CBO-Domiciliar'].astype(str).str[:-2].astype(int)
+       # file_path_pivot = 'processados/CSVs_PivotTableFinal/Brasil_PivotFinal.csv'
+       file_path_pivot = 'processados/CSVs_PivotTableFinal/Brasil_PivotFinal_CBO.csv'
+       df_pivot = pd.read_csv(file_path_pivot, dtype=str)
+       # Subtrair dígitos da coluna CBO-Domiciliar baseada em string (preservando zeros à esquerda)
        df_pivot['CBO-Domiciliar'] = df_pivot['CBO-Domiciliar'].apply(
-        lambda x: int(str(x)[:-2]) if len(str(x)) == 4 else (
-            int(str(x)[:-1]) if len(str(x)) == 3 else int(str(x))
+        lambda x: x[:-2] if len(x) == 4 else (x[:-1] if len(x) == 3 else x)
         )
-       )
-       # Save the transformed DataFrame to a new file
-       save_results_pivot = 'processados/CSVs_PivotTableFinal/Brasil_PivotFinal_DiminuidaCBO2.csv'
-       df_pivot.to_csv(save_results_pivot, index=False) # opcao=2
+       # Salvar o DataFrame transformado em um novo arquivo
+       save_results_pivot = 'processados/CSVs_PivotTableFinal/Brasil_PivotFinal_CBO_DiminuidaCBO2.csv'
+       # print(df_pivot.head().to_string(index=False))
+       df_pivot.to_csv(save_results_pivot,  index=False, encoding='utf-8-sig', quoting=1)
 
     elif opcao ==3:
        # Process the first file
-       file_path_graduados = 'processados/CSVs_ArquivoFinalGraduados/Brasil_Graduados.csv'
-       df_graduados = pd.read_csv(file_path_graduados)
-       # Subtract one digit from the specified columns
-       # df_graduados['Curso_Superior_Graduação_Código'] = df_graduados['Curso_Superior_Graduação_Código'].astype(str).str[:-1].astype(int)
-       # df_graduados['CBO-Domiciliar'] = df_graduados['CBO-Domiciliar'].astype(str).str[:-2].astype(int)
+       # file_path_graduados = 'processados/CSVs_ArquivoFinalGraduados/Brasil_Graduados.csv'
+       file_path_graduados = 'processados/CSVs_ArquivoFinalGraduados/Brasil_Graduados_CBO.csv'
+    #    df_graduados = pd.read_csv(file_path_graduados)
+       df_graduados = pd.read_csv(file_path_graduados, dtype=str)
+
+    #    # Subtract one digit from the specified columns
+    #    # df_graduados['Curso_Superior_Graduação_Código'] = df_graduados['Curso_Superior_Graduação_Código'].astype(str).str[:-1].astype(int)
+    #    # df_graduados['CBO-Domiciliar'] = df_graduados['CBO-Domiciliar'].astype(str).str[:-2].astype(int)
+    #    df_graduados['CBO-Domiciliar'] = df_graduados['CBO-Domiciliar'].apply(
+    #     lambda x: int(str(x)[:-1]) if len(str(x)) == 4 else int(str(x))
+    #     )
+    #    # Save the transformed DataFrame to a new file
+    #    # save_results_graduados = 'processados/CSVs_ArquivoFinalGraduados/Brasil_Graduados_DiminuidoCBO3.csv'
+    #    save_results_graduados = 'processados/CSVs_ArquivoFinalGraduados/Brasil_Graduados_CBO_DiminuidoCBO3.csv'
+    #    df_graduados.to_csv(save_results_graduados, index=False)
+
+       # Subtrair um dígito da coluna CBO-Domiciliar baseada em string (preservando zeros à esquerda)
        df_graduados['CBO-Domiciliar'] = df_graduados['CBO-Domiciliar'].apply(
-        lambda x: int(str(x)[:-1]) if len(str(x)) == 4 else int(str(x))
-        )
-       # Save the transformed DataFrame to a new file
-       save_results_graduados = 'processados/CSVs_ArquivoFinalGraduados/Brasil_Graduados_DiminuidoCBO3.csv'
-       df_graduados.to_csv(save_results_graduados, index=False)
+       lambda x: x[:-1] if len(x) == 4 else x
+       )
+       # Salvar o DataFrame transformado em um novo arquivo
+       save_results_graduados = 'processados/CSVs_ArquivoFinalGraduados/Brasil_Graduados_CBO_DiminuidoCBO3.csv'
+       df_graduados.to_csv(save_results_graduados, index=False, encoding='utf-8-sig', quoting=1)
 
        # Process the second file
-       file_path_pivot = 'processados/CSVs_PivotTableFinal/Brasil_PivotFinal.csv'
-       df_pivot = pd.read_csv(file_path_pivot)
-       # Subtract one digit from the Ocupação_Código column
-       # df_pivot['CBO-Domiciliar'] = df_pivot['CBO-Domiciliar'].astype(str).str[:-2].astype(int)
+       # file_path_pivot = 'processados/CSVs_PivotTableFinal/Brasil_PivotFinal.csv'      
+       file_path_pivot = 'processados/CSVs_PivotTableFinal/Brasil_PivotFinal_CBO.csv'
+    #    df_pivot = pd.read_csv(file_path_pivot)
+       df_pivot = pd.read_csv(file_path_pivot, dtype=str)
+
+    #    # Subtract one digit from the Ocupação_Código column
+    #    # df_pivot['CBO-Domiciliar'] = df_pivot['CBO-Domiciliar'].astype(str).str[:-2].astype(int)
+    #    df_pivot['CBO-Domiciliar'] = df_pivot['CBO-Domiciliar'].apply(
+    #     lambda x: int(str(x)[:-1]) if len(str(x)) == 4 else int(str(x))
+    #    )
+    #    # Save the transformed DataFrame to a new file
+    #    # save_results_pivot = 'processados/CSVs_PivotTableFinal/Brasil_PivotFinal_DiminuidaCBO3.csv'
+    #    save_results_pivot = 'processados/CSVs_PivotTableFinal/Brasil_PivotFinal_CBO_DiminuidaCBO3.csv'
+    #    df_pivot.to_csv(save_results_pivot, index=False)
+       df_pivot = pd.read_csv(file_path_pivot, dtype=str)
+       # Subtrair um dígito da coluna CBO-Domiciliar baseada em string (preservando zeros à esquerda)
        df_pivot['CBO-Domiciliar'] = df_pivot['CBO-Domiciliar'].apply(
-        lambda x: int(str(x)[:-1]) if len(str(x)) == 4 else int(str(x))
-       )
-       # Save the transformed DataFrame to a new file
-       save_results_pivot = 'processados/CSVs_PivotTableFinal/Brasil_PivotFinal_DiminuidaCBO3.csv'
-       df_pivot.to_csv(save_results_pivot, index=False)
+        lambda x: x[:-1] if len(x) == 4 else x
+        )
+       # Salvar o DataFrame transformado em um novo arquivo
+       save_results_pivot = 'processados/CSVs_PivotTableFinal/Brasil_PivotFinal_CBO_DiminuidaCBO3.csv'
+       df_pivot.to_csv(save_results_pivot, index=False, encoding='utf-8-sig', quoting=1)
     return

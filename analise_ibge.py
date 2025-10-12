@@ -73,6 +73,7 @@ if fase == 1:
 # if fase >= 2:
 if fase == 2:
 
+    
     ibge_functions.ibge_Graduados_NaoGraduados()
 
     ibge_functions.ibge_Pivot_Feminino()
@@ -87,8 +88,14 @@ if fase == 2:
 
     ibge_functions.ibge_JuntarCSVs()
 
+    # ... 
     ibge_functions_preprocessing.filtrar_por_genero()
 
+    # # Trocar CBO-Domiciliar por CBO
+    # ibge_functions_preprocessing.ibge_trocar_CBO_Domiciliar_por_CBO()
+    # ibge_functions_preprocessing. ibge_trocar_CBO_Domiciliar_por_CBO_PivotTable()
+
+   
     # # Essa função só deve ser usada em caso de necessidade, pois ela reduz os digitos dos CBOs
     # # Diminui CBO em Brasil_Graduados e Brasil_PivotTableFinal ...
     # ibge_functions.ibge_diminuirCBOs()
@@ -103,23 +110,23 @@ if fase == 2:
 # Fase 10: Análise Descritiva ... ...
 # if fase >= 10:
 if fase == 10:
-    # #https://colab.research.google.com/drive/1_Nx4oOzrgCQvSolh9XG-UgWTQ508Md1M?authuser=1#scrollTo=o9GsbqjctkkL
-    # ibge_functions.ibge_cursos_profissoes()
+    # # #https://colab.research.google.com/drive/1_Nx4oOzrgCQvSolh9XG-UgWTQ508Md1M?authuser=1#scrollTo=o9GsbqjctkkL
+    # # ibge_functions.ibge_cursos_profissoes()
 
-    # ## ibge_functions.ibge_relacionamentos_cursos_profissoes()
+    # # ## ibge_functions.ibge_relacionamentos_cursos_profissoes()
 
-    # ## ibge_functions.ibge_corte_CBO()
+    # # ## ibge_functions.ibge_corte_CBO()
 
-    ibge_functions.ibge_idas_voltas_cursos_profissoes()
+    ibge_functions.ibge_idas_voltas_cursos_profissoes()       #...
     # ibge_functions.ibge_idas_voltas_cursos_profissoes_Curso2()
 
-    # Essas funções  só devem ser usadas em caso de necessidade, pois ela acha ida e volta com os CBOs com 2 ou 3 digitos
+    # # Essas funções  só devem ser usadas em caso de necessidade, pois ela acha ida e volta com os CBOs com 2 ou 3 digitos
     # ibge_functions.ibge_idas_voltas_cursos_profissoes_CBO2()
-    # ibge_functions.ibge_idas_voltas_cursos_profissoes_CBO2_Curso2()
-    # ibge_functions.ibge_idas_voltas_cursos_profissoes_CBO3()
-    # ibge_functions.ibge_idas_voltas_cursos_profissoes_CBO3_Curso2()
+    ibge_functions.ibge_idas_voltas_cursos_profissoes_CBO2_Curso2() #...
+    # # ibge_functions.ibge_idas_voltas_cursos_profissoes_CBO3()
+    ibge_functions.ibge_idas_voltas_cursos_profissoes_CBO3_Curso2() #...
 
-    # ibge_functions.ibge_trabalho_recenseados()
+    # # ibge_functions.ibge_trabalho_recenseados()
     pass
 
 
@@ -129,30 +136,31 @@ if fase == 20:  # QP1
     # - clusterização com k=3,
     # - geração do gráfico K-Means com K=3 (10% - Todos os Cursos - Clusterização)
     # - geração do arquivo Kmeans3_T.csv
-    # ibge_functions.Profissoes_Cursos()
+    ibge_functions.Profissoes_Cursos()              #...
     # ibge_functions.Profissoes_Cursos_Curso2() 
 
 
     # Essas funções  só devem ser usadas em caso de necessidade, pois elas trabalham com os CBOs com 2 ou 3 digitos
     # ibge_functions.Profissoes_Cursos_CBO2()
-    ibge_functions.Profissoes_Cursos_CBO2_Curso2() 
+    ibge_functions.Profissoes_Cursos_CBO2_Curso2()  #...
     # ibge_functions.Profissoes_Cursos_CBO3()
-    # ibge_functions.Profissoes_Cursos_CBO3_Curso2()
+    ibge_functions.Profissoes_Cursos_CBO3_Curso2()  #...
 
 
     # Essa função não esta mais sendo usada
     # Leitura arquivo Kmeans3_T.csv para gerar a contagem de CBOs de forma automática
     # ibge_functions_exploratory_analysis.leitura_kmeans3_t()
     
-    # Leitura arquivo Kmeans3.csv para pegar os 10 primeiros CBOs ...
-    # ibge_functions_exploratory_analysis.leitura_kmeans3_t_cbo()
+    # Leitura arquivo Kmeans3.csv para pegar os 10 primeiros CBOs ... arquivos que acham 10 em 100
+    ibge_functions_exploratory_analysis.leitura_kmeans3_t_cbo()           #...
     # ibge_functions_exploratory_analysis.leitura_kmeans3_t_cbo_Curso2()
     # ibge_functions_exploratory_analysis.leitura_kmeans3_t_cbo2()
-    # ibge_functions_exploratory_analysis.leitura_kmeans3_t_cbo2_Curso2()
+    ibge_functions_exploratory_analysis.leitura_kmeans3_t_cbo2_Curso2()  #...
     # ibge_functions_exploratory_analysis.leitura_kmeans3_t_cbo3()
-    # ibge_functions_exploratory_analysis.leitura_kmeans3_t_cbo3_Curso2()
+    ibge_functions_exploratory_analysis.leitura_kmeans3_t_cbo3_Curso2()  #...
 
-
+    # Análise Exploratória - Gráficos e Tabelas -----------------------------------------------------------------
+    # ibge_functions_exploratory_analysis.GerarGraficosPontos() #  gera o grafico com os pontos circulados em vermelho 
 
     # # Empregabilidade x Salario -----------------------------------------------------------------
     # ibge_functions.median_salario()

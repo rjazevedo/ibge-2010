@@ -861,8 +861,8 @@ def Profissoes_Cursos(path1,name1,path2,name2): # https://colab.research.google.
     df ='graficos/10Porcent_DF_Limpo.csv' #12/08/2025
     X = pd.read_csv(df)    
     save_results_to = 'graficos/' 
-    X = X.drop(columns=['Unnamed: 0'])
-    X = X.drop(columns=['Unnamed: 0.1'])
+    # X = X.drop(columns=['Unnamed: 0'])
+    # X = X.drop(columns=['Unnamed: 0.1'])
 
     # Remoção de Features 
     X = X.drop(columns=['CB'])
@@ -961,8 +961,8 @@ def Profissoes_Cursos(path1,name1,path2,name2): # https://colab.research.google.
     # print(X)
 
     X_Original = pd.read_csv(df)
-    X_Original = X_Original.drop(columns=['Unnamed: 0'])
-    X_Original = X_Original.drop(columns=['Unnamed: 0.1'])
+    # X_Original = X_Original.drop(columns=['Unnamed: 0'])
+    # X_Original = X_Original.drop(columns=['Unnamed: 0.1'])
     # print(X_Original)
 
     # # selecao_Kmeans3 = X_['cluster']==0
@@ -1219,10 +1219,11 @@ def Profissoes_Cursos(path1,name1,path2,name2): # https://colab.research.google.
                 break
         if not flag:
             for index, row in CBO_aux.iterrows():
-                if (int(Kmeans3_CboNum[i]) == int(CBO_aux['Cod_Dom'][index])):
+                # if (int(Kmeans3_CboNum[i]) == int(CBO_aux['Cod_Dom'][index])): #alterado 30/09/2025
+                if (int(Kmeans3_CboNum[i]) == int(CBO_aux['Cod_CBO'][index])):    
                     Kmeans3_CboNome.append(CBO_aux['Nome_CBO'][index])
                     # print("Kmeans3_CboNum[i]:", Kmeans3_CboNum[i])
-                    Kmeans3_CboNum[i] = CBO_aux['Cod_CBO'][index]
+                    # Kmeans3_CboNum[i] = CBO_aux['Cod_CBO'][index]  #alterado 30/09/2025
                     # print("Kmeans3_CboNum[i]:", Kmeans3_CboNum[i])
                     break                
     # Kmeans3_CboNome
@@ -2066,8 +2067,8 @@ def Profissoes_Cursos_CBO2_Curso2(): # https://colab.research.google.com/drive/1
     df ='graficos/CBO2_10Porcent_DF_Limpo_Curso02.csv' #16/09/2025
     X = pd.read_csv(df)    
     save_results_to = 'graficos/' 
-    X = X.drop(columns=['Unnamed: 0'])
-    X = X.drop(columns=['Unnamed: 0.1'])
+    # X = X.drop(columns=['Unnamed: 0'])
+    # X = X.drop(columns=['Unnamed: 0.1'])
 
     # Remoção de Features 
     X = X.drop(columns=['CB'])
@@ -2079,8 +2080,8 @@ def Profissoes_Cursos_CBO2_Curso2(): # https://colab.research.google.com/drive/1
     # print("CursosCenso:", CursosCenso)
     # exit(0)
     csv_CBO = os.path.join('documentacao/cbo2002_subgrupo_principal.csv')  # Tabela de CBOs
-    CBO = pd.read_csv(csv_CBO)
-    CBO_aux = pd.read_csv('documentacao/cbo2002_subgrupo.csv', dtype ='str')
+    CBO = pd.read_csv(csv_CBO, dtype={'Cod_CBO': str})
+    CBO_aux = pd.read_csv(csv_CBO, dtype={'Cod_CBO': str})
 
 
 
@@ -2166,8 +2167,8 @@ def Profissoes_Cursos_CBO2_Curso2(): # https://colab.research.google.com/drive/1
     # print(X)
 
     X_Original = pd.read_csv(df)
-    X_Original = X_Original.drop(columns=['Unnamed: 0'])
-    X_Original = X_Original.drop(columns=['Unnamed: 0.1'])
+    # X_Original = X_Original.drop(columns=['Unnamed: 0'])
+    # X_Original = X_Original.drop(columns=['Unnamed: 0.1'])
     # print(X_Original)
 
     # # selecao_Kmeans3 = X_['cluster']==0
@@ -2425,14 +2426,15 @@ def Profissoes_Cursos_CBO2_Curso2(): # https://colab.research.google.com/drive/1
                 break
         if not flag:
             for index, row in CBO_aux.iterrows():
-                if (int(Kmeans3_CboNum[i]) == int(CBO_aux['Cod_Dom'][index])):
+                #if (int(Kmeans3_CboNum[i]) == int(CBO_aux['Cod_Dom'][index])):'
+                if (int(Kmeans3_CboNum[i]) == int(CBO_aux['Cod_CBO'][index])):
                     Kmeans3_CboNome.append(CBO_aux['Nome_CBO'][index])
                     # print("Kmeans3_CboNum[i]:", Kmeans3_CboNum[i])
                     Kmeans3_CboNum[i] = CBO_aux['Cod_CBO'][index]
                     # print("Kmeans3_CboNum[i]:", Kmeans3_CboNum[i])
                     break                
     Kmeans3_CboNome
-    exit(0)
+    # exit(0)
     Kmeans3_resultados_T=[]
     for i in range(len(Kmeans3_CursoNum)):
         tupla=(Kmeans3_CursosIda[i],Kmeans3_CursosVolta[i],Kmeans3_Cursoscluster[i], Kmeans3_CursoNum[i],Kmeans3_CursoNome[i],Kmeans3_CboNum[i],Kmeans3_CboNome[i])
@@ -2451,14 +2453,17 @@ def Profissoes_Cursos_CBO2_Curso2(): # https://colab.research.google.com/drive/1
     Kmeans3_T.rename(columns=dict,inplace=True)   
     Kmeans3_T['Cluster'] = Kmeans3_T['Cluster'].astype(int)
     Kmeans3_T['Curso'] = Kmeans3_T['Curso'].astype(int)
-    Kmeans3_T['Cbo'] = Kmeans3_T['Cbo'].astype(int)
+    Kmeans3_T['Cbo'] = Kmeans3_T['Cbo'].astype(str) # 09/10/2025
 
     # Unique_Cursos = Kmeans3_T.Curso_Nome.unique()
     # len(Unique_Cursos)     
     # Unique_Cbo = Kmeans3_T.Cbo_Nome.unique()
     # len(Unique_Cbo)
     print(Kmeans3_T)
-    Kmeans3_T.to_csv(save_results_to +'Kmeans3_T_CBO2_Curso02.csv')
+    # Kmeans3_T.to_csv(save_results_to +'Kmeans3_T_CBO2_Curso02.csv')
+    Kmeans3_T['Cbo'] = Kmeans3_T['Cbo'].astype(str)
+    Kmeans3_T.to_csv(save_results_to + 'Kmeans3_T_CBO2_Curso02.csv', index=False, encoding='utf-8-sig', quoting=1)
+
     return
 
 def Profissoes_Cursos_CBO3(): # https://colab.research.google.com/drive/1cTpvuIkd7FGZbzEkScU4xKGFb6sSbGog?authuser=1#scrollTo=MGx4AWThonQb
@@ -2866,10 +2871,11 @@ def Profissoes_Cursos_CBO3_Curso2(): # https://colab.research.google.com/drive/1
     # Leitura
     # df =  os.path.join(path2[0],name2[2])
     df ='graficos/CBO3_10Porcent_DF_Limpo_Curso02.csv' #12/08/2025
-    X = pd.read_csv(df)    
+    # X = pd.read_csv(df)    
+    X = pd.read_csv(df, dtype={'CB': str})    
     save_results_to = 'graficos/' 
-    X = X.drop(columns=['Unnamed: 0'])
-    X = X.drop(columns=['Unnamed: 0.1'])
+    # X = X.drop(columns=['Unnamed: 0'])
+    # X = X.drop(columns=['Unnamed: 0.1'])
 
     # Remoção de Features 
     X = X.drop(columns=['CB'])
@@ -2881,8 +2887,10 @@ def Profissoes_Cursos_CBO3_Curso2(): # https://colab.research.google.com/drive/1
     # print("CursosCenso:", CursosCenso)
     # exit(0)
     csv_CBO = os.path.join('documentacao/cbo2002_subgrupo.csv')  # Tabela de CBOs
-    CBO = pd.read_csv(csv_CBO)
-    CBO_aux = pd.read_csv('documentacao/CBO_CSV_TabelaAuxiliar.csv', dtype ='str')
+    # CBO = pd.read_csv(csv_CBO)
+    CBO = pd.read_csv(csv_CBO, dtype={'Cod_CBO': str})
+    # CBO_aux = pd.read_csv('documentacao/CBO_CSV_TabelaAuxiliar.csv', dtype ='str')
+    CBO_aux = pd.read_csv(csv_CBO, dtype={'Cod_CBO': str})
 
 
 
@@ -2968,8 +2976,8 @@ def Profissoes_Cursos_CBO3_Curso2(): # https://colab.research.google.com/drive/1
     # print(X)
 
     X_Original = pd.read_csv(df)
-    X_Original = X_Original.drop(columns=['Unnamed: 0'])
-    X_Original = X_Original.drop(columns=['Unnamed: 0.1'])
+    # X_Original = X_Original.drop(columns=['Unnamed: 0'])
+    # X_Original = X_Original.drop(columns=['Unnamed: 0.1'])
     # print(X_Original)
 
     # # selecao_Kmeans3 = X_['cluster']==0
@@ -3227,7 +3235,8 @@ def Profissoes_Cursos_CBO3_Curso2(): # https://colab.research.google.com/drive/1
                 break
         if not flag:
             for index, row in CBO_aux.iterrows():
-                if (int(Kmeans3_CboNum[i]) == int(CBO_aux['Cod_Dom'][index])):
+                # if (int(Kmeans3_CboNum[i]) == int(CBO_aux['Cod_Dom'][index])):
+                if (int(Kmeans3_CboNum[i]) == int(CBO_aux['Cod_CBO'][index])):#0/10/2025
                     Kmeans3_CboNome.append(CBO_aux['Nome_CBO'][index])
                     # print("Kmeans3_CboNum[i]:", Kmeans3_CboNum[i])
                     Kmeans3_CboNum[i] = CBO_aux['Cod_CBO'][index]
@@ -3254,14 +3263,17 @@ def Profissoes_Cursos_CBO3_Curso2(): # https://colab.research.google.com/drive/1
     Kmeans3_T.rename(columns=dict,inplace=True)   
     Kmeans3_T['Cluster'] = Kmeans3_T['Cluster'].astype(int)
     Kmeans3_T['Curso'] = Kmeans3_T['Curso'].astype(int)
-    Kmeans3_T['Cbo'] = Kmeans3_T['Cbo'].astype(int)
+    Kmeans3_T['Cbo'] = Kmeans3_T['Cbo'].astype(str) # 09/10/2025
 
     # Unique_Cursos = Kmeans3_T.Curso_Nome.unique()
     # len(Unique_Cursos)     
     # Unique_Cbo = Kmeans3_T.Cbo_Nome.unique()
     # len(Unique_Cbo)
     print(Kmeans3_T)
-    Kmeans3_T.to_csv(save_results_to +'Kmeans3_T_CBO3_Curso02.csv')
+    Kmeans3_T['Cbo'] = Kmeans3_T['Cbo'].astype(str)
+    # Kmeans3_T.to_csv(save_results_to +'Kmeans3_T_CBO3_Curso02.csv')
+    Kmeans3_T.to_csv(save_results_to + 'Kmeans3_T_CBO3_Curso02.csv', index=False, encoding='utf-8-sig', quoting=1)
+
     return
 
 def Soma_PivotTable(path1,name1):
@@ -4558,7 +4570,53 @@ def correlacao_empregabilidade_salario():
     # Exibir gráfico
     plt.show()
 
+    return
+    
+# def GerarGraficosPontos(imagem_path, saida_path, coordenadas, xlim=(0, 100), ylim=(0, 100)):
+def GerarGraficosPontos():
+    from PIL import Image, ImageDraw
 
+    # imagem = Image.open("graficos/10%_AllCourses_Clustering_CBO3_Curso02.png") #Saude ... (80.29, 84.44)
+    imagem = Image.open("graficos/10%_AllCourses_Clustering.png") #Transporte ... (16.73,33.87) e (12.75, 33.33)
+    # imagem = Image.open("graficos/10%_AllCourses_Clustering_CBO3_Curso02.png") #Transporte ... (33.47, 33.73)
+
+    draw = ImageDraw.Draw(imagem)
+
+    # Limites dos eixos do gráfico original
+    xlim = (0, 100)
+    ylim = (0, 100)
+
+    # Coordenadas do ponto a ser circulado (exatamente a estrela)
+    coordenadas = [
+        #(80.29, 84.44),
+        (16.73,33.87),
+        (12.75, 33.33)
+        #(33.47, 33.73),
+        
+    ]
+
+    # Tamanho da imagem
+    width, height = imagem.size
+
+    # Função para converter coordenadas do gráfico para pixels da imagem
+    def grafico_para_pixel(x, y, xlim, ylim, width, height):
+        # Ajuste: matplotlib deixa margens, então é preciso compensar
+        # Supondo margens de 10% em cada lado (ajuste se necessário)
+        margem_x = 0.12  # ajuste conforme necessário
+        margem_y = 0.12
+        px = margem_x * width + (x - xlim[0]) / (xlim[1] - xlim[0]) * (width * (1 - 2 * margem_x))
+        py = margem_y * height + (ylim[1] - y) / (ylim[1] - ylim[0]) * (height * (1 - 2 * margem_y))
+        return px, py
+
+    raio = 18  # ajuste conforme necessário para cobrir a estrela
+
+    for x, y in coordenadas:
+        px, py = grafico_para_pixel(x, y, xlim, ylim, width, height)
+        draw.ellipse((px - raio, py - raio, px + raio, py + raio), outline="red", width=4)
+
+    # imagem.save("graficos/10%_AllCourses_Clustering_CBO3_Curso02_Saude_2x3.png")
+    imagem.save("graficos/10%_AllCourses_Clustering_CBO3_Curso02_Transporte_3x4.png")
+    # imagem.save("graficos/10%_AllCourses_Clustering_CBO3_Curso02_Transporte_2x3.png")
 
 
     return
