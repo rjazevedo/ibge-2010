@@ -835,6 +835,20 @@ def ibge_diminuirCBOs(opcao):
        df_pivot['CBO-Domiciliar'] = df_pivot['CBO-Domiciliar'].apply(
         lambda x: x[:-2] if len(x) == 4 else (x[:-1] if len(x) == 3 else x)
         )
+       
+       # Agrupar os CBOs repetidos da Pivot Table ... =========================================
+       # Somar as colunas específicas para cada CBO-Domiciliar repetido
+       colunas_somar = ['1.0', '2.0', '3.0', '4.0', '5.0']
+       # Converter as colunas para numérico (caso não estejam)
+       for col in colunas_somar:
+          if col in df_pivot.columns:
+             df_pivot[col] = pd.to_numeric(df_pivot[col], errors='coerce').fillna(0)
+       # Agrupar por CBO-Domiciliar e somar apenas as colunas desejadas
+       df_pivot_grouped = df_pivot.groupby('CBO-Domiciliar', as_index=False)[colunas_somar].sum()
+       # Garantir que 'CBO-Domiciliar' seja a primeira coluna
+       df_pivot = df_pivot_grouped[['CBO-Domiciliar'] + colunas_somar]
+       
+
        # Salvar o DataFrame transformado em um novo arquivo
        save_results_pivot = 'processados/CSVs_PivotTableFinal/Brasil_PivotFinal_CBO_DiminuidaCBO2.csv'
        # print(df_pivot.head().to_string(index=False))
@@ -881,12 +895,33 @@ def ibge_diminuirCBOs(opcao):
     #    # save_results_pivot = 'processados/CSVs_PivotTableFinal/Brasil_PivotFinal_DiminuidaCBO3.csv'
     #    save_results_pivot = 'processados/CSVs_PivotTableFinal/Brasil_PivotFinal_CBO_DiminuidaCBO3.csv'
     #    df_pivot.to_csv(save_results_pivot, index=False)
+
+
+    #    df_pivot = pd.read_csv(file_path_pivot, dtype=str)
+    #    # Subtrair um dígito da coluna CBO-Domiciliar baseada em string (preservando zeros à esquerda)
+    #    df_pivot['CBO-Domiciliar'] = df_pivot['CBO-Domiciliar'].apply(
+    #     lambda x: x[:-1] if len(x) == 4 else x
+    #     )
+       
        df_pivot = pd.read_csv(file_path_pivot, dtype=str)
        # Subtrair um dígito da coluna CBO-Domiciliar baseada em string (preservando zeros à esquerda)
        df_pivot['CBO-Domiciliar'] = df_pivot['CBO-Domiciliar'].apply(
         lambda x: x[:-1] if len(x) == 4 else x
         )
-       # Salvar o DataFrame transformado em um novo arquivo
+       
+       # Agrupar os CBOs repetidos da Pivot Table ... =========================================
+       # Somar as colunas específicas para cada CBO-Domiciliar repetido
+       colunas_somar = ['1.0', '2.0', '3.0', '4.0', '5.0']
+       # Converter as colunas para numérico (caso não estejam)
+       for col in colunas_somar:
+          if col in df_pivot.columns:
+             df_pivot[col] = pd.to_numeric(df_pivot[col], errors='coerce').fillna(0)
+       # Agrupar por CBO-Domiciliar e somar apenas as colunas desejadas
+       df_pivot_grouped = df_pivot.groupby('CBO-Domiciliar', as_index=False)[colunas_somar].sum()
+       # Garantir que 'CBO-Domiciliar' seja a primeira coluna
+       df_pivot = df_pivot_grouped[['CBO-Domiciliar'] + colunas_somar]
+       
+       # ========================================================================================
        save_results_pivot = 'processados/CSVs_PivotTableFinal/Brasil_PivotFinal_CBO_DiminuidaCBO3.csv'
        df_pivot.to_csv(save_results_pivot, index=False, encoding='utf-8-sig', quoting=1)
     return

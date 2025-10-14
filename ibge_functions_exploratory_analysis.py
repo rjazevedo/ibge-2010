@@ -4576,8 +4576,8 @@ def correlacao_empregabilidade_salario():
 def GerarGraficosPontos():
     from PIL import Image, ImageDraw
 
-    # imagem = Image.open("graficos/10%_AllCourses_Clustering_CBO3_Curso02.png") #Saude ... (80.29, 84.44)
-    imagem = Image.open("graficos/10%_AllCourses_Clustering.png") #Transporte ... (16.73,33.87) e (12.75, 33.33)
+    imagem = Image.open("graficos/10%_AllCourses_Clustering_CBO3_Curso02.png") #Saude ... (80.29, 84.44)
+    # imagem = Image.open("graficos/10%_AllCourses_Clustering.png") #Transporte ... (16.73,33.87) e (12.75, 33.33)
     # imagem = Image.open("graficos/10%_AllCourses_Clustering_CBO3_Curso02.png") #Transporte ... (33.47, 33.73)
 
     draw = ImageDraw.Draw(imagem)
@@ -4588,10 +4588,10 @@ def GerarGraficosPontos():
 
     # Coordenadas do ponto a ser circulado (exatamente a estrela)
     coordenadas = [
-        #(80.29, 84.44),
-        (16.73,33.87),
-        (12.75, 33.33)
-        #(33.47, 33.73),
+        (80.46, 78.77),
+        # (16.08,33.33),
+        # (21.11, 33.87)
+        # (33.33, 33.73),
         
     ]
 
@@ -4614,8 +4614,8 @@ def GerarGraficosPontos():
         px, py = grafico_para_pixel(x, y, xlim, ylim, width, height)
         draw.ellipse((px - raio, py - raio, px + raio, py + raio), outline="red", width=4)
 
-    # imagem.save("graficos/10%_AllCourses_Clustering_CBO3_Curso02_Saude_2x3.png")
-    imagem.save("graficos/10%_AllCourses_Clustering_CBO3_Curso02_Transporte_3x4.png")
+    imagem.save("graficos/10%_AllCourses_Clustering_CBO3_Curso02_Saude_2x3.png")
+    # imagem.save("graficos/10%_AllCourses_Clustering_CBO3_Curso02_Transporte_3x4.png")
     # imagem.save("graficos/10%_AllCourses_Clustering_CBO3_Curso02_Transporte_2x3.png")
 
 
