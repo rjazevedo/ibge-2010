@@ -65,15 +65,14 @@ if fase == 0:
 # Fase 1: Filtrar somente os dados relevantes. Aqui significa que
 # você precisa filtrar todos os dados que possam ser utilizados no futuro.
 # if fase >= 1:
-if fase == 1:
+if fase <= 1:
     ibge_functions.ibge_filter()
 
 # Fase 2: Limpeza dos dados. Agora começa a processar algo mais complexo desde que seja definitivo
 # Pré-Processamento
 # if fase >= 2:
-if fase == 2:
+if fase <= 2:
 
-    
     ibge_functions.ibge_Graduados_NaoGraduados()
 
     ibge_functions.ibge_Pivot_Feminino()
@@ -88,14 +87,13 @@ if fase == 2:
 
     ibge_functions.ibge_JuntarCSVs()
 
-    # ... 
+    # ...
     ibge_functions_preprocessing.filtrar_por_genero()
 
     # # Trocar CBO-Domiciliar por CBO
     # ibge_functions_preprocessing.ibge_trocar_CBO_Domiciliar_por_CBO()
     # ibge_functions_preprocessing. ibge_trocar_CBO_Domiciliar_por_CBO_PivotTable()
 
-   
     # Redução dos digitos dos CBOs ...
     # # Diminui CBO em Brasil_Graduados e Brasil_PivotTableFinal ...
     ibge_functions.ibge_diminuirCBOs()
@@ -104,12 +102,12 @@ if fase == 2:
     # # Diminui cursos em Cursos_csv ...
     ibge_functions_descriptive_analysis.ibge_cursos_filter_DiminuirCurso()
     # # Diminui cursos em Brasil_Graduados - Brasil_Graduados_DiminuidoCBO2.csv e Brasil_Graduados_DiminuidoCBO3.csv  ...
-    ibge_functions.diminuirCurso() # ...
+    ibge_functions.diminuirCurso()  # ...
 
 # Fase 10: Essa é a primeira fase que você faz no dia a dia. Aqui você começa a fazer a análise dos dados
 # Fase 10: Análise Descritiva ... ...
 # if fase >= 10:
-if fase == 10:
+if fase <= 10:
     # # #https://colab.research.google.com/drive/1_Nx4oOzrgCQvSolh9XG-UgWTQ508Md1M?authuser=1#scrollTo=o9GsbqjctkkL
     # # ibge_functions.ibge_cursos_profissoes()
 
@@ -117,40 +115,38 @@ if fase == 10:
 
     # # ## ibge_functions.ibge_corte_CBO()
 
-    ibge_functions.ibge_idas_voltas_cursos_profissoes()       #...
+    ibge_functions.ibge_idas_voltas_cursos_profissoes()  # ...
     # ibge_functions.ibge_idas_voltas_cursos_profissoes_Curso2()
 
     # # Essas funções  só devem ser usadas em caso de necessidade, pois ela acha ida e volta com os CBOs com 2 ou 3 digitos
     # ibge_functions.ibge_idas_voltas_cursos_profissoes_CBO2()
-    ibge_functions.ibge_idas_voltas_cursos_profissoes_CBO2_Curso2() #...
+    ibge_functions.ibge_idas_voltas_cursos_profissoes_CBO2_Curso2()  # ...
     # # ibge_functions.ibge_idas_voltas_cursos_profissoes_CBO3()
-    ibge_functions.ibge_idas_voltas_cursos_profissoes_CBO3_Curso2() #...
+    ibge_functions.ibge_idas_voltas_cursos_profissoes_CBO3_Curso2()  # ...
 
     # # ibge_functions.ibge_trabalho_recenseados()
     pass
 
 
 # Fase 20: Análise Exploratória ...
-if fase == 20:  # QP1
+if fase <= 20:  # QP1
     # # Função para:
     # # - clusterização com k=3,
     # # - geração do gráfico K-Means com K=3 (10% - Todos os Cursos - Clusterização)
     # # - geração do arquivo Kmeans3_T.csv
     # ibge_functions.Profissoes_Cursos()              #...
-    # # ibge_functions.Profissoes_Cursos_Curso2() 
-
+    # # ibge_functions.Profissoes_Cursos_Curso2()
 
     # # Essas funções  só devem ser usadas em caso de necessidade, pois elas trabalham com os CBOs com 2 ou 3 digitos
     # # ibge_functions.Profissoes_Cursos_CBO2()
-    ibge_functions.Profissoes_Cursos_CBO2_Curso2()  #...
+    ibge_functions.Profissoes_Cursos_CBO2_Curso2()  # ...
     # # ibge_functions.Profissoes_Cursos_CBO3()
     # ibge_functions.Profissoes_Cursos_CBO3_Curso2()  #...
-
 
     # # Essa função não esta mais sendo usada
     # # Leitura arquivo Kmeans3_T.csv para gerar a contagem de CBOs de forma automática
     # # ibge_functions_exploratory_analysis.leitura_kmeans3_t()
-    
+
     # # Leitura arquivo Kmeans3.csv para pegar os 10 primeiros CBOs ... arquivos que acham 10 em 100
     # ibge_functions_exploratory_analysis.leitura_kmeans3_t_cbo()           #...
     # # ibge_functions_exploratory_analysis.leitura_kmeans3_t_cbo_Curso2()
@@ -160,7 +156,7 @@ if fase == 20:  # QP1
     # ibge_functions_exploratory_analysis.leitura_kmeans3_t_cbo3_Curso2()  #...
 
     # # Análise Exploratória - Gráficos e Tabelas -----------------------------------------------------------------
-    # ibge_functions_exploratory_analysis.GerarGraficosPontos() #  gera o grafico com os pontos circulados em vermelho 
+    # ibge_functions_exploratory_analysis.GerarGraficosPontos() #  gera o grafico com os pontos circulados em vermelho
 
     # # # Empregabilidade x Salario -----------------------------------------------------------------
     # # ibge_functions.median_salario()
@@ -181,7 +177,7 @@ if fase == 20:  # QP1
     pass
 
 # Fase 30: Resultados da Análise ...
-if fase == 30:  # QP2
+if fase <= 30:  # QP2
     # Funções para 10%
     # Geração do dataframes femininos e masculinos
     ibge_functions.Filtro_Masculino_Feminino()
@@ -195,13 +191,8 @@ if fase == 30:  # QP2
     ibge_functions.Profissoes_Cursos_Masculino_Feminino()
     pass
 
-if fase == 31:
-    # QP1 é a fase 20
-    pass
-if fase == 32:
-    # QP2 é a fase 30
-    pass
-if fase == 33:
+
+if fase <= 33:
     # QP3
     # # Funções desabilitadas porque hoive mudança e graficos
     # ################# -------------------------
@@ -229,7 +220,7 @@ if fase == 33:
 
     pass
 
-if fase == 34:  # ...
+if fase <= 34:  # ...
     # # QP3 continuação
     # #  Funções que faltam ...
     # #  1-  Gráfico dos gêneros separados por clusters
@@ -255,7 +246,7 @@ if fase == 34:  # ...
     ibge_functions_results.extract_courses_Correspondentes_M()
     pass
 
-if fase == 35:
+if fase <= 35:
     # QP3 continuação
     #  2-  Profissões desequilibradas
     # - Profissões desequilibradas - Pontos Selecionados(Grandes Desloamentos)
@@ -298,7 +289,7 @@ if fase == 35:
 
     pass
 
-if fase == 40:
+if fase <= 40:
     # #QP4
     # Funciona, mas salva csvs. Comentei para usar como dataframes!
     # ibge_functions.Filtro_Idade()
@@ -327,7 +318,7 @@ if fase == 40:
     # - Homens gestores e Mulheres gestoras (Homem e mulher, muda faixa de idade para virar gestores?)
     pass
 
-if fase == 50:
+if fase <= 50:
     # #QP5
     # Funções que faltam ...
     # 1- BoxPlot de salários separados por clusters
@@ -345,13 +336,12 @@ if fase == 50:
     # 7- Platô
     # 8- 20% ida e 80% volta
 
-    pass
 # # Fase 99: Aqui você pode explorar coisas novas que não afetam os dados anteriores.
 # if fase >= 99:
 # if fase == 99:
 #      pass
 
-if fase == 100:  # aqui é só de teste
+if fase <= 100:  # aqui é só de teste
     # #ibge_functions_results_1.plot_age_distribution_for_course_cbo()
     # QP3 ...
     # Análise de idade por CBO -  Gráficos de Cursos e CBOs ------------------------------------------------------------------------------------------
@@ -379,7 +369,7 @@ if fase == 100:  # aqui é só de teste
     # #Idas e voltas para Cursos e CBOs Diminuidos ---------------------------------------------------------------------------------------------------
     # ibge_functions.ibge_idas_voltas_cursos_profissoes_1()
     # ibge_functions_results_1.voronoi_1()
-    # -----------------------------------------------------    
+    # -----------------------------------------------------
     # ibge_functions_results_1.diminuir_and_save_csv_CBO()
     # # ibge_functions_results_1.transform_columns_to_int_and_save_CBO()
     # ---------------------------------------------------------------
@@ -418,5 +408,3 @@ if fase == 100:  # aqui é só de teste
     # ibge_functions_results_1.plot_age_distribution_bycluster()
     # ibge_functions_results_1.plot_age_distribution_bycluster_1()
     # ibge_functions_results_1.split_csv_by_cluster_geral()
-
-    pass
