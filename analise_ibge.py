@@ -139,24 +139,28 @@ if fase <= 20:  # QP1
 
     # # Essas funções  só devem ser usadas em caso de necessidade, pois elas trabalham com os CBOs com 2 ou 3 digitos
     # # ibge_functions.Profissoes_Cursos_CBO2()
-    ibge_functions.Profissoes_Cursos_CBO2_Curso2()  # ...
+    # ibge_functions.Profissoes_Cursos_CBO2_Curso2()  #...
     # # ibge_functions.Profissoes_Cursos_CBO3()
     # ibge_functions.Profissoes_Cursos_CBO3_Curso2()  #...
 
     # # Essa função não esta mais sendo usada
     # # Leitura arquivo Kmeans3_T.csv para gerar a contagem de CBOs de forma automática
     # # ibge_functions_exploratory_analysis.leitura_kmeans3_t()
+    
+    # ibge_functions_exploratory_analysis.leitura_kmeans3_t_cbo3_Curso2_curso()
+    # ibge_functions_exploratory_analysis.leitura_kmeans3_t_cbo2_Curso2_curso()
+    # ibge_functions_exploratory_analysis.leitura_kmeans3_t_curso()
 
-    # # Leitura arquivo Kmeans3.csv para pegar os 10 primeiros CBOs ... arquivos que acham 10 em 100
+    # # # Leitura arquivo Kmeans3.csv para pegar os 10 primeiros CBOs ... arquivos que acham 10 em 100
     # ibge_functions_exploratory_analysis.leitura_kmeans3_t_cbo()           #...
-    # # ibge_functions_exploratory_analysis.leitura_kmeans3_t_cbo_Curso2()
-    # # ibge_functions_exploratory_analysis.leitura_kmeans3_t_cbo2()
+    # # # ibge_functions_exploratory_analysis.leitura_kmeans3_t_cbo_Curso2()
+    # # # ibge_functions_exploratory_analysis.leitura_kmeans3_t_cbo2()
     # ibge_functions_exploratory_analysis.leitura_kmeans3_t_cbo2_Curso2()  #...
-    # # ibge_functions_exploratory_analysis.leitura_kmeans3_t_cbo3()
+    # # # ibge_functions_exploratory_analysis.leitura_kmeans3_t_cbo3()
     # ibge_functions_exploratory_analysis.leitura_kmeans3_t_cbo3_Curso2()  #...
 
     # # Análise Exploratória - Gráficos e Tabelas -----------------------------------------------------------------
-    # ibge_functions_exploratory_analysis.GerarGraficosPontos() #  gera o grafico com os pontos circulados em vermelho
+    ibge_functions_exploratory_analysis.GerarGraficosPontos() #  gera o grafico com os pontos circulados em vermelho 
 
     # # # Empregabilidade x Salario -----------------------------------------------------------------
     # # ibge_functions.median_salario()
