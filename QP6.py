@@ -1,4 +1,4 @@
-conda #pip install ibge-parser
+#pip install ibge-parser
 
 # inclua todos os demais imports aqui
 import argparse

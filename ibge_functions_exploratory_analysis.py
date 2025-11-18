@@ -841,15 +841,18 @@ def leitura_kmeans3_t_cbo2_Curso2():
        
     import pandas as pd
 
-    df_kmeans = pd.read_csv('graficos/Kmeans3_T_CBO2_Curso02.csv')
-    df_kmeans_unicos = df_kmeans.drop_duplicates(subset=['Curso'])
+    # df_kmeans = pd.read_csv('graficos/Kmeans3_T_CBO2_Curso02.csv')
+    # df_kmeans_unicos = df_kmeans.drop_duplicates(subset=['Curso'])
 
     df_100 = pd.read_csv('graficos/CBO2_100Porcent_DF_Limpo_Curso02.csv')
+    df_100_unicos = df_100.drop_duplicates(subset=['CR'])
 
     resultados = []
 
-    for idx, row in df_kmeans_unicos.iterrows():
-        curso_numero = row['Curso']
+    # for idx, row in df_kmeans_unicos.iterrows():
+    for idx, row in df_100_unicos.iterrows():
+        # curso_numero = row['Curso']
+        curso_numero = row['CR']
         df_curso = df_100[df_100['CR'] == curso_numero].sort_values(by=['CR', 'Ida'], ascending=[True, False])
         df_curso_10 = df_curso.head(10)
         df_curso_10['Curso'] = curso_numero
@@ -859,7 +862,7 @@ def leitura_kmeans3_t_cbo2_Curso2():
 
     if resultados:
         resultado_concat = pd.concat(resultados, ignore_index=True)
-        resultado_concat.to_csv('graficos/CBO2_10primeiros_cbo_por_curso_Curso02.csv', index=False)
+        resultado_concat.to_csv('graficos/CBO2_10primeiros_cbo_por_curso_Curso02_mod.csv', index=False)
 
           
     return
@@ -915,15 +918,18 @@ def leitura_kmeans3_t_cbo3_Curso2():
     
     import pandas as pd
 
-    df_kmeans = pd.read_csv('graficos/Kmeans3_T_CBO3_Curso02.csv')
-    df_kmeans_unicos = df_kmeans.drop_duplicates(subset=['Curso'])
+    # df_kmeans = pd.read_csv('graficos/Kmeans3_T_CBO3_Curso02.csv')
+    # df_kmeans_unicos = df_kmeans.drop_duplicates(subset=['Curso'])
 
     df_100 = pd.read_csv('graficos/CBO3_100Porcent_DF_Limpo_Curso02.csv')
+    df_100_unicos = df_100.drop_duplicates(subset=['CR'])
 
     resultados = []
 
-    for idx, row in df_kmeans_unicos.iterrows():
-        curso_numero = row['Curso']
+    # for idx, row in df_kmeans_unicos.iterrows():
+    for idx, row in df_100_unicos.iterrows():
+        # curso_numero = row['Curso']
+        curso_numero = row['CR']
         df_curso = df_100[df_100['CR'] == curso_numero].sort_values(by=['CR', 'Ida'], ascending=[True, False])
         df_curso_10 = df_curso.head(10)
         df_curso_10['Curso'] = curso_numero
@@ -933,7 +939,7 @@ def leitura_kmeans3_t_cbo3_Curso2():
 
     if resultados:
         resultado_concat = pd.concat(resultados, ignore_index=True)
-        resultado_concat.to_csv('graficos/CBO3_10primeiros_cbo_por_curso_Curso02.csv', index=False)
+        resultado_concat.to_csv('graficos/CBO3_10primeiros_cbo_por_curso_Curso02_mod.csv', index=False)
 
           
     return
