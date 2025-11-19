@@ -631,7 +631,101 @@ def leitura_kmeans3_t():
     #       writer.writerow(row)
     #       last_curso = curso_numero      
      return
+def leitura_kmeans3_t_cbo3_Curso2_curso():
+    #  import csv
+    #  df = 'graficos/Kmeans3_T_CBO2.csv'
+    #  df_kmeans = pd.read_csv(df)
+    #  print(f"Quantidade de cursos antes de eliminar repetidos: {len(df_kmeans)}")
+    #  df_kmeans_unicos = df_kmeans.drop_duplicates(subset=['Curso'])
+    #  print(f"Quantidade de cursos após eliminar repetidos: {len(df_kmeans)}")
 
+    #  df1 ='graficos/CBO2_100Porcent_DF_Limpo.csv'
+    #  df_100 = pd.read_csv(df1)    
+
+    
+    import pandas as pd
+
+    df_kmeans = pd.read_csv('graficos/Kmeans3_T_CBO3_Curso02.csv')
+    df_kmeans_unicos = df_kmeans.drop_duplicates(subset=['Curso'])
+
+    df_100 = pd.read_csv('graficos/CBO3_100Porcent_DF_Limpo_Curso02.csv')
+
+    resultados = []
+
+    for idx, row in df_kmeans_unicos.iterrows():
+        curso_numero = row['Cbo']
+        df_curso = df_100[df_100['CB'] == curso_numero].sort_values(by=['CB', 'Volta'],  ascending=[True, False])
+        df_curso_10 = df_curso.head(10)
+        df_curso_10['Cbo'] = curso_numero
+        resultados.append(df_curso_10)
+        # Adiciona uma linha em branco (DataFrame vazio) para separar cursos
+        resultados.append(pd.DataFrame([{}]))
+
+    if resultados:
+        resultado_concat = pd.concat(resultados, ignore_index=True)
+        resultado_concat.to_csv('graficos/Curso_10primeiros_cbo03_por_curso_Curso02.csv', index=False)
+
+          
+    return
+
+def leitura_kmeans3_t_cbo2_Curso2_curso():
+       
+    import pandas as pd
+
+    df_kmeans = pd.read_csv('graficos/Kmeans3_T_CBO2_Curso02.csv')
+    df_kmeans_unicos = df_kmeans.drop_duplicates(subset=['Cbo'])
+    # print(df_kmeans_unicos)
+    # exit(0)
+
+    df_100 = pd.read_csv('graficos/CBO2_100Porcent_DF_Limpo_Curso02.csv')
+
+    resultados = []
+
+    for idx, row in df_kmeans_unicos.iterrows():
+        curso_numero = row['Cbo']
+        df_curso = df_100[df_100['CB'] == curso_numero].sort_values(by=['CB', 'Volta'], ascending=[True, False])
+        df_curso_10 = df_curso.head(10)
+        # print(df_curso_10)
+        # exit(0)
+        df_curso_10['Cbo'] = curso_numero
+        resultados.append(df_curso_10)
+        # Adiciona uma linha em branco (DataFrame vazio) para separar cursos
+        resultados.append(pd.DataFrame([{}]))
+
+    if resultados:
+        resultado_concat = pd.concat(resultados, ignore_index=True)
+        resultado_concat.to_csv('graficos/Curso_10primeiros_cbo02_por_curso_Curso02.csv', index=False)
+
+          
+    return
+
+def leitura_kmeans3_t_curso():
+     
+    import pandas as pd
+
+    df_kmeans = pd.read_csv('graficos/Kmeans3_T.csv')
+    df_kmeans_unicos = df_kmeans.drop_duplicates(subset=['Cbo'])
+
+    df_100 = pd.read_csv('graficos/100Porcent_DF_Limpo.csv')
+
+    resultados = []
+
+    for idx, row in df_kmeans_unicos.iterrows():
+        curso_numero = row['Cbo']
+        df_curso = df_100[df_100['CB'] == curso_numero].sort_values(by=['CB', 'Volta'], ascending=[True, False])
+        df_curso_10 = df_curso.head(10)
+        df_curso_10['Cbo'] = curso_numero
+        resultados.append(df_curso_10)
+        # Adiciona uma linha em branco (DataFrame vazio) para separar cursos
+        resultados.append(pd.DataFrame([{}]))
+
+    if resultados:
+        resultado_concat = pd.concat(resultados, ignore_index=True)
+        resultado_concat.to_csv('graficos/Curso_10primeiros_cbo_por_cbo.csv', index=False)
+
+          
+    return
+    
 def leitura_kmeans3_t_cbo():
     #  import csv
     #  df = 'graficos/Kmeans3_T_CBO2.csv'
@@ -744,28 +838,21 @@ def leitura_kmeans3_t_cbo2():
     return
 
 def leitura_kmeans3_t_cbo2_Curso2():
-    #  import csv
-    #  df = 'graficos/Kmeans3_T_CBO2.csv'
-    #  df_kmeans = pd.read_csv(df)
-    #  print(f"Quantidade de cursos antes de eliminar repetidos: {len(df_kmeans)}")
-    #  df_kmeans_unicos = df_kmeans.drop_duplicates(subset=['Curso'])
-    #  print(f"Quantidade de cursos após eliminar repetidos: {len(df_kmeans)}")
-
-    #  df1 ='graficos/CBO2_100Porcent_DF_Limpo.csv'
-    #  df_100 = pd.read_csv(df1)    
-
-    
+       
     import pandas as pd
 
-    df_kmeans = pd.read_csv('graficos/Kmeans3_T_CBO2_Curso02.csv')
-    df_kmeans_unicos = df_kmeans.drop_duplicates(subset=['Curso'])
+    # df_kmeans = pd.read_csv('graficos/Kmeans3_T_CBO2_Curso02.csv')
+    # df_kmeans_unicos = df_kmeans.drop_duplicates(subset=['Curso'])
 
     df_100 = pd.read_csv('graficos/CBO2_100Porcent_DF_Limpo_Curso02.csv')
+    df_100_unicos = df_100.drop_duplicates(subset=['CR'])
 
     resultados = []
 
-    for idx, row in df_kmeans_unicos.iterrows():
-        curso_numero = row['Curso']
+    # for idx, row in df_kmeans_unicos.iterrows():
+    for idx, row in df_100_unicos.iterrows():
+        # curso_numero = row['Curso']
+        curso_numero = row['CR']
         df_curso = df_100[df_100['CR'] == curso_numero].sort_values(by=['CR', 'Ida'], ascending=[True, False])
         df_curso_10 = df_curso.head(10)
         df_curso_10['Curso'] = curso_numero
@@ -775,7 +862,7 @@ def leitura_kmeans3_t_cbo2_Curso2():
 
     if resultados:
         resultado_concat = pd.concat(resultados, ignore_index=True)
-        resultado_concat.to_csv('graficos/CBO2_10primeiros_cbo_por_curso_Curso02.csv', index=False)
+        resultado_concat.to_csv('graficos/CBO2_10primeiros_cbo_por_curso_Curso02_mod.csv', index=False)
 
           
     return
@@ -831,15 +918,18 @@ def leitura_kmeans3_t_cbo3_Curso2():
     
     import pandas as pd
 
-    df_kmeans = pd.read_csv('graficos/Kmeans3_T_CBO3_Curso02.csv')
-    df_kmeans_unicos = df_kmeans.drop_duplicates(subset=['Curso'])
+    # df_kmeans = pd.read_csv('graficos/Kmeans3_T_CBO3_Curso02.csv')
+    # df_kmeans_unicos = df_kmeans.drop_duplicates(subset=['Curso'])
 
     df_100 = pd.read_csv('graficos/CBO3_100Porcent_DF_Limpo_Curso02.csv')
+    df_100_unicos = df_100.drop_duplicates(subset=['CR'])
 
     resultados = []
 
-    for idx, row in df_kmeans_unicos.iterrows():
-        curso_numero = row['Curso']
+    # for idx, row in df_kmeans_unicos.iterrows():
+    for idx, row in df_100_unicos.iterrows():
+        # curso_numero = row['Curso']
+        curso_numero = row['CR']
         df_curso = df_100[df_100['CR'] == curso_numero].sort_values(by=['CR', 'Ida'], ascending=[True, False])
         df_curso_10 = df_curso.head(10)
         df_curso_10['Curso'] = curso_numero
@@ -849,10 +939,69 @@ def leitura_kmeans3_t_cbo3_Curso2():
 
     if resultados:
         resultado_concat = pd.concat(resultados, ignore_index=True)
-        resultado_concat.to_csv('graficos/CBO3_10primeiros_cbo_por_curso_Curso02.csv', index=False)
+        resultado_concat.to_csv('graficos/CBO3_10primeiros_cbo_por_curso_Curso02_mod.csv', index=False)
 
           
     return
+
+def classificar_pontos_triangulo(pontos):
+    # """
+    # Classifica três pontos (vértices de um triângulo) em 2D como
+    # Superior Esquerdo (Cluster 0), Superior Direito (Cluster 1) e
+    # Inferior Esquerdo (Cluster 2) com base em suas coordenadas.
+
+    # Assume que o eixo Y (vertical) cresce para cima (sistema cartesiano padrão).
+
+    # Args:
+    #     pontos (list): Uma lista de tuplas, onde cada tupla é um ponto (x, y).
+    #                    Exemplo: [(1, 1), (3, 5), (5, 1)]
+
+    # Returns:
+    #     dict: Um dicionário mapeando os rótulos para os pontos classificados.
+    #           As chaves 'Cluster 0', 'Cluster 1' e 'Cluster 2'
+    #           serão preenchidas.
+    # """
+    # 1. Definir os limites de X e Y
+
+    pontos = pontos.tolist()
+
+    min_x = min(p[0] for p in pontos)
+    max_x = max(p[0] for p in pontos)
+    min_y = min(p[1] for p in pontos)
+    max_y = max(p[1] for p in pontos)
+
+    classificacao = {}
+
+    # Lista de todos os pontos para remover os classificados
+    pontos_restantes = list(pontos)
+    # pontos_restantes = pontos
+    # print("pontos_restantes", pontos_restantes)
+
+    # 2. Encontrar o ponto mais próximo do limite superior esquerdo (min_x, max_y)
+    from sklearn.metrics import pairwise_distances_argmin_min
+    dist = pairwise_distances_argmin_min([(min_x, max_y)], pontos_restantes)
+    classificacao['Cluster 0'] = pontos_restantes[dist[0][0]]
+    print(classificacao)
+
+    # 3. Remover o ponto classificado
+    pontos_restantes.remove(classificacao['Cluster 0'])
+    # pontos_restantes=pontos_restantes[pontos_restantes!=classificacao['Cluster 0']].reshape(-1,2)
+
+
+
+    # 4. Encontrar o ponto mais próximo do limite superior direito (max_x, max_y)
+    dist = pairwise_distances_argmin_min([(max_x, max_y)], pontos_restantes)
+    classificacao['Cluster 1'] = pontos_restantes[dist[0][0]]
+
+    # 5. Remover o ponto classificado
+    pontos_restantes.remove(classificacao['Cluster 1'])
+    # pontos_restantes=pontos_restantes[pontos_restantes!=classificacao['Cluster 1']].reshape(-1,2)
+
+
+    # 6. O ponto restante é o Inferior Esquerdo
+    classificacao['Cluster 2'] = pontos_restantes[0]
+
+    return classificacao
 
 def Profissoes_Cursos(path1,name1,path2,name2): # https://colab.research.google.com/drive/1cTpvuIkd7FGZbzEkScU4xKGFb6sSbGog?authuser=1#scrollTo=MGx4AWThonQb
 
@@ -913,7 +1062,9 @@ def Profissoes_Cursos(path1,name1,path2,name2): # https://colab.research.google.
     kmeans = KMeans(n_clusters=3, init ='k-means++', max_iter=300, n_init=10,random_state=0 )
     y_kmeans = kmeans.fit_predict(X)
     # print(y_kmeans)
+    # print("")
     # print(kmeans.labels_)
+    # exit(0)
 
     #Clusterização
     #plt.figure(figsize=(6, 4))
@@ -927,11 +1078,49 @@ def Profissoes_Cursos(path1,name1,path2,name2): # https://colab.research.google.
     plt.ylim(0, 100) # definir limite do eixo
     plt.xlim(0, 100) # definir limite do eixo
     plt.grid()
-    # Visualising the clusters
-    plt.scatter(X.iloc[y_kmeans==0, 0], X.iloc[y_kmeans==0, 1], s=100, c='red', label ='Cluster 0', marker = '*')
-    plt.scatter(X.iloc[y_kmeans==1, 0], X.iloc[y_kmeans==1, 1], s=100, c='blue', label ='Cluster 1', marker = '*')
-    plt.scatter(X.iloc[y_kmeans==2, 0], X.iloc[y_kmeans==2, 1], s=100, c='green', label ='Cluster 2', marker = '*')
-    plt.scatter(kmeans.cluster_centers_[:, 0], kmeans.cluster_centers_[:, 1], s=300, c='yellow', label = 'Centroids', marker = '*') # Diversos  ( Explicações e correções) e Estilo de texto 
+    #==================================================================================
+    # # Visualising the clusters
+    # plt.scatter(X.iloc[y_kmeans==0, 0], X.iloc[y_kmeans==0, 1], s=100, c='red', label ='Cluster 0', marker = '*')
+    # plt.scatter(X.iloc[y_kmeans==1, 0], X.iloc[y_kmeans==1, 1], s=100, c='blue', label ='Cluster 1', marker = '*')
+    # plt.scatter(X.iloc[y_kmeans==2, 0], X.iloc[y_kmeans==2, 1], s=100, c='green', label ='Cluster 2', marker = '*')
+    # plt.scatter(kmeans.cluster_centers_[:, 0], kmeans.cluster_centers_[:, 1], s=300, c='yellow', label = 'Centroids', marker = '*') # Diversos  ( Explicações e correções) e Estilo de texto 
+    
+    # Classificar os centróides para garantir a posição desejada dos clusters
+    centroids = kmeans.cluster_centers_
+    classificacao = classificar_pontos_triangulo(centroids)
+    # print("classificacao:", classificacao)
+
+    # predict pega o label atual do centroide original e mapeia para o novo label considerando o ultimo caractere do texto "Cluster x"
+    classificacao_invertida = {kmeans.predict([v])[0]: int(k[-1]) for k, v in classificacao.items()}
+    # print("classificacao_invertida:", classificacao_invertida)
+    # exit(0)
+
+    # # Superior esquerdo: menor x, maior y
+    # idx_0 = np.argmin(centroids[:, 0] - centroids[:, 1] * 0)
+    # # Inferior esquerdo: menor x, menor y
+    # idx_2 = np.argmin(centroids[:, 0] + centroids[:, 1])
+    # # Superior direito: maior x, maior y
+    # idx_1 = np.argmax(centroids[:, 0] + centroids[:, 1])
+
+    # # Cria um mapeamento dos índices originais para os desejados
+    # cluster_map = {idx_0: 0, idx_1: 1, idx_2: 2}
+    # # # Reordena os labels conforme o mapeamento
+    # y_kmeans_mapped = np.array([cluster_map[label] for label in kmeans.labels_])
+    # # # Se algum label não estiver no cluster_map, mantenha o original
+    # # y_kmeans_mapped = np.array([cluster_map[label] if label in cluster_map else label for label in kmeans.labels_])
+
+    # y_kmeans_mapped = np.array(map(lambda x: classificacao_invertida[x], kmeans.labels_))
+    y_kmeans_mapped = np.array(list(map(lambda x: classificacao_invertida[x], kmeans.labels_)))
+
+    # print("y_kmeans_mapped:", y_kmeans_mapped)
+    # print("kmeans.labels_:", kmeans.labels_)
+    # exit(0)
+    # Visualizando os clusters com a ordem desejada
+    plt.scatter(X.iloc[y_kmeans_mapped==0, 0], X.iloc[y_kmeans_mapped==0, 1], s=100, c='red', label ='Cluster 0', marker = '*')
+    plt.scatter(X.iloc[y_kmeans_mapped==2, 0], X.iloc[y_kmeans_mapped==2, 1], s=100, c='green', label ='Cluster 2', marker = '*')
+    plt.scatter(X.iloc[y_kmeans_mapped==1, 0], X.iloc[y_kmeans_mapped==1, 1], s=100, c='blue', label ='Cluster 1', marker = '*')
+    plt.scatter(centroids[:, 0], centroids[:, 1], s=300, c='yellow', label = 'Centroids', marker = '*')
+    #==================================================================================
     plt.legend()
     # plt.show()
     # string1 = "10%  - Todos os Cursos - Clusterização " +".pdf"
@@ -2133,11 +2322,132 @@ def Profissoes_Cursos_CBO2_Curso2(): # https://colab.research.google.com/drive/1
     plt.ylim(0, 100) # definir limite do eixo
     plt.xlim(0, 100) # definir limite do eixo
     plt.grid()
-    # Visualising the clusters
-    plt.scatter(X.iloc[y_kmeans==0, 0], X.iloc[y_kmeans==0, 1], s=100, c='red', label ='Cluster 0', marker = '*')
-    plt.scatter(X.iloc[y_kmeans==1, 0], X.iloc[y_kmeans==1, 1], s=100, c='blue', label ='Cluster 1', marker = '*')
-    plt.scatter(X.iloc[y_kmeans==2, 0], X.iloc[y_kmeans==2, 1], s=100, c='green', label ='Cluster 2', marker = '*')
+
+    # =================================================================================================
+ 
+    # # Visualising the clusters
+    # plt.scatter(X.iloc[y_kmeans==0, 0], X.iloc[y_kmeans==0, 1], s=100, c='red', label ='Cluster 0', marker = '*')
+    # plt.scatter(X.iloc[y_kmeans==1, 0], X.iloc[y_kmeans==1, 1], s=100, c='blue', label ='Cluster 1', marker = '*')
+    # plt.scatter(X.iloc[y_kmeans==2, 0], X.iloc[y_kmeans==2, 1], s=100, c='green', label ='Cluster 2', marker = '*')
+    # # plt.scatter(kmeans.cluster_centers_[:, 0], kmeans.cluster_centers_[:, 1], s=300, c='yellow', label = 'Centroids', marker = '*') # Diversos  ( Explicações e correções) e Estilo de texto 
+     
+
+    # def classificar_pontos_triangulo(pontos):
+    #     # """
+    #     # Classifica três pontos (vértices de um triângulo) em 2D como
+    #     # Superior Esquerdo (Cluster 0), Superior Direito (Cluster 1) e
+    #     # Inferior Esquerdo (Cluster 2) com base em suas coordenadas.
+
+    #     # Assume que o eixo Y (vertical) cresce para cima (sistema cartesiano padrão).
+
+    #     # Args:
+    #     #     pontos (list): Uma lista de tuplas, onde cada tupla é um ponto (x, y).
+    #     #                    Exemplo: [(1, 1), (3, 5), (5, 1)]
+
+    #     # Returns:
+    #     #     dict: Um dicionário mapeando os rótulos para os pontos classificados.
+    #     #           As chaves 'Cluster 0', 'Cluster 1' e 'Cluster 2'
+    #     #           serão preenchidas.
+    #     # """
+    #     # 1. Definir os limites de X e Y
+    #     min_x = min(p[0] for p in pontos)
+    #     max_x = max(p[0] for p in pontos)
+    #     min_y = min(p[1] for p in pontos)
+    #     max_y = max(p[1] for p in pontos)
+
+    #     classificacao = {}
+
+    #     # Lista de todos os pontos para remover os classificados
+    #     pontos_restantes = list(pontos)
+
+    #     # 2. Encontrar o ponto mais próximo do limite superior esquerdo (min_x, max_y)
+    #     from sklearn.metrics import pairwise_distances_argmin_min
+    #     dist = pairwise_distances_argmin_min([(min_x, max_y)], pontos_restantes)
+    #     classificacao['Cluster 0'] = pontos_restantes[dist[0][0]]
+
+    #     # 3. Remover o ponto classificado
+    #     pontos_restantes.remove(classificacao['Cluster 0'])
+
+    #     # 4. Encontrar o ponto mais próximo do limite superior direito (max_x, max_y)
+    #     dist = pairwise_distances_argmin_min([(max_x, max_y)], pontos_restantes)
+    #     classificacao['Cluster 1'] = pontos_restantes[dist[0][0]]
+
+    #     # 5. Remover o ponto classificado
+    #     pontos_restantes.remove(classificacao['Cluster 1'])
+
+    #     # 6. O ponto restante é o Inferior Esquerdo
+    #     classificacao['Cluster 2'] = pontos_restantes[0]
+
+    # return classificacao
+
+    # # Classificar os centróides para garantir a posição desejada dos clusters
+    # centroids = kmeans.cluster_centers_
+    # # Superior esquerdo: menor x, maior y
+    # idx_0 = np.argmin(centroids[:, 0] - centroids[:, 1] * 0)
+    # idx_0 = np.argmin(centroids[:, 0] - centroids[:, 1] * 0)
+    # idx_0 = np.argmin(centroids[:, 0] - centroids[:, 1] * 0)
+    # # Superior esquerdo: menor x, maior y
+    # idx_0 = np.argmin(centroids[:, 0] - centroids[:, 1] * 0)
+    # # Inferior esquerdo: menor x, menor y
+    # idx_2 = np.argmin(centroids[:, 0] + centroids[:, 1])
+    # # Superior direito: maior x, maior y
+    # idx_1 = np.argmax(centroids[:, 0] + centroids[:, 1])
+
+    # # Cria um mapeamento dos índices originais para os desejados
+    # cluster_map = {idx_0: 0, idx_1: 1, idx_2: 2}
+    # # Reordena os labels conforme o mapeamento
+    # y_kmeans_mapped = np.array([cluster_map[label] for label in kmeans.labels_])
+
+    # # Visualising the clusters com a ordem desejada
+    # plt.scatter(X.iloc[y_kmeans_mapped==0, 0], X.iloc[y_kmeans_mapped==0, 1], s=100, c='red', label ='Cluster 0 ', marker = '*')
+    # plt.scatter(X.iloc[y_kmeans_mapped==2, 0], X.iloc[y_kmeans_mapped==2, 1], s=100, c='green', label ='Cluster 2 ', marker = '*')
+    # plt.scatter(X.iloc[y_kmeans_mapped==1, 0], X.iloc[y_kmeans_mapped==1, 1], s=100, c='blue', label ='Cluster 1 ', marker = '*')
+    # # plt.scatter(centroids[:, 0], centroids[:, 1], s=300, c='yellow', label = 'Centroids', marker = '*')
+   
+   #=====================================================================================
+    # # Visualising the clusters
+    # plt.scatter(X.iloc[y_kmeans==0, 0], X.iloc[y_kmeans==0, 1], s=100, c='red', label ='Cluster 0', marker = '*')
+    # plt.scatter(X.iloc[y_kmeans==1, 0], X.iloc[y_kmeans==1, 1], s=100, c='blue', label ='Cluster 1', marker = '*')
+    # plt.scatter(X.iloc[y_kmeans==2, 0], X.iloc[y_kmeans==2, 1], s=100, c='green', label ='Cluster 2', marker = '*')
     # plt.scatter(kmeans.cluster_centers_[:, 0], kmeans.cluster_centers_[:, 1], s=300, c='yellow', label = 'Centroids', marker = '*') # Diversos  ( Explicações e correções) e Estilo de texto 
+    
+    # Classificar os centróides para garantir a posição desejada dos clusters
+    centroids = kmeans.cluster_centers_
+    classificacao = classificar_pontos_triangulo(centroids)
+    # print("classificacao:", classificacao)
+
+    # predict pega o label atual do centroide original e mapeia para o novo label considerando o ultimo caractere do texto "Cluster x"
+    classificacao_invertida = {kmeans.predict([v])[0]: int(k[-1]) for k, v in classificacao.items()}
+    # print("classificacao_invertida:", classificacao_invertida)
+    # exit(0)
+
+    # # Superior esquerdo: menor x, maior y
+    # idx_0 = np.argmin(centroids[:, 0] - centroids[:, 1] * 0)
+    # # Inferior esquerdo: menor x, menor y
+    # idx_2 = np.argmin(centroids[:, 0] + centroids[:, 1])
+    # # Superior direito: maior x, maior y
+    # idx_1 = np.argmax(centroids[:, 0] + centroids[:, 1])
+
+    # # Cria um mapeamento dos índices originais para os desejados
+    # cluster_map = {idx_0: 0, idx_1: 1, idx_2: 2}
+    # # # Reordena os labels conforme o mapeamento
+    # y_kmeans_mapped = np.array([cluster_map[label] for label in kmeans.labels_])
+    # # # Se algum label não estiver no cluster_map, mantenha o original
+    # # y_kmeans_mapped = np.array([cluster_map[label] if label in cluster_map else label for label in kmeans.labels_])
+
+    # y_kmeans_mapped = np.array(map(lambda x: classificacao_invertida[x], kmeans.labels_))
+    y_kmeans_mapped = np.array(list(map(lambda x: classificacao_invertida[x], kmeans.labels_)))
+
+    # print("y_kmeans_mapped:", y_kmeans_mapped)
+    # print("kmeans.labels_:", kmeans.labels_)
+    # exit(0)
+    # Visualizando os clusters com a ordem desejada
+    plt.scatter(X.iloc[y_kmeans_mapped==0, 0], X.iloc[y_kmeans_mapped==0, 1], s=100, c='red', label ='Cluster 0', marker = '*')
+    plt.scatter(X.iloc[y_kmeans_mapped==2, 0], X.iloc[y_kmeans_mapped==2, 1], s=100, c='green', label ='Cluster 2', marker = '*')
+    plt.scatter(X.iloc[y_kmeans_mapped==1, 0], X.iloc[y_kmeans_mapped==1, 1], s=100, c='blue', label ='Cluster 1', marker = '*')
+    plt.scatter(centroids[:, 0], centroids[:, 1], s=300, c='yellow', label = 'Centroids', marker = '*')
+   
+    # =================================================================================================
     plt.legend(loc='upper left')
     # plt.show()
     # string1 = "10%  - Todos os Cursos - Clusterização " +".pdf"
@@ -2942,11 +3252,81 @@ def Profissoes_Cursos_CBO3_Curso2(): # https://colab.research.google.com/drive/1
     plt.ylim(0, 100) # definir limite do eixo
     plt.xlim(0, 100) # definir limite do eixo
     plt.grid()
-    # Visualising the clusters
-    plt.scatter(X.iloc[y_kmeans==0, 0], X.iloc[y_kmeans==0, 1], s=100, c='red', label ='Cluster 0', marker = '*')
-    plt.scatter(X.iloc[y_kmeans==1, 0], X.iloc[y_kmeans==1, 1], s=100, c='blue', label ='Cluster 1', marker = '*')
-    plt.scatter(X.iloc[y_kmeans==2, 0], X.iloc[y_kmeans==2, 1], s=100, c='green', label ='Cluster 2', marker = '*')
+    # =====================================================================================
+    # # # Visualising the clusters
+    # # plt.scatter(X.iloc[y_kmeans==0, 0], X.iloc[y_kmeans==0, 1], s=100, c='red', label ='Cluster 0', marker = '*')
+    # # plt.scatter(X.iloc[y_kmeans==1, 0], X.iloc[y_kmeans==1, 1], s=100, c='blue', label ='Cluster 1', marker = '*')
+    # # plt.scatter(X.iloc[y_kmeans==2, 0], X.iloc[y_kmeans==2, 1], s=100, c='green', label ='Cluster 2', marker = '*')
+    # # # plt.scatter(kmeans.cluster_centers_[:, 0], kmeans.cluster_centers_[:, 1], s=300, c='yellow', label = 'Centroids', marker = '*') # Diversos  ( Explicações e correções) e Estilo de texto 
+    
+    # # Classificar os centróides para garantir a posição desejada dos clusters
+    # centroids = kmeans.cluster_centers_
+    # # Superior esquerdo: menor x, maior y
+    # idx_0 = np.argmin(centroids[:, 0] - centroids[:, 1] * 0)
+    # idx_0 = np.argmin(centroids[:, 0] - centroids[:, 1] * 0)
+    # idx_0 = np.argmin(centroids[:, 0] - centroids[:, 1] * 0)
+    # # Superior esquerdo: menor x, maior y
+    # idx_0 = np.argmin(centroids[:, 0] - centroids[:, 1] * 0)
+    # # Inferior esquerdo: menor x, menor y
+    # idx_2 = np.argmin(centroids[:, 0] + centroids[:, 1])
+    # # Superior direito: maior x, maior y
+    # idx_1 = np.argmax(centroids[:, 0] + centroids[:, 1])
+
+    # # Cria um mapeamento dos índices originais para os desejados
+    # cluster_map = {idx_0: 0, idx_1: 1, idx_2: 2}
+    # # Reordena os labels conforme o mapeamento
+    # y_kmeans_mapped = np.array([cluster_map[label] for label in kmeans.labels_])
+
+    # # Visualising the clusters com a ordem desejada
+    # plt.scatter(X.iloc[y_kmeans_mapped==0, 0], X.iloc[y_kmeans_mapped==0, 1], s=100, c='red', label ='Cluster 0', marker = '*')
+    # plt.scatter(X.iloc[y_kmeans_mapped==2, 0], X.iloc[y_kmeans_mapped==2, 1], s=100, c='green', label ='Cluster 2 ', marker = '*')
+    # plt.scatter(X.iloc[y_kmeans_mapped==1, 0], X.iloc[y_kmeans_mapped==1, 1], s=100, c='blue', label ='Cluster 1 ', marker = '*')
+    # # plt.scatter(centroids[:, 0], centroids[:, 1], s=300, c='yellow', label = 'Centroids', marker = '*')
+    
+    #=====================================================================================
+    # # Visualising the clusters
+    # plt.scatter(X.iloc[y_kmeans==0, 0], X.iloc[y_kmeans==0, 1], s=100, c='red', label ='Cluster 0', marker = '*')
+    # plt.scatter(X.iloc[y_kmeans==1, 0], X.iloc[y_kmeans==1, 1], s=100, c='blue', label ='Cluster 1', marker = '*')
+    # plt.scatter(X.iloc[y_kmeans==2, 0], X.iloc[y_kmeans==2, 1], s=100, c='green', label ='Cluster 2', marker = '*')
     # plt.scatter(kmeans.cluster_centers_[:, 0], kmeans.cluster_centers_[:, 1], s=300, c='yellow', label = 'Centroids', marker = '*') # Diversos  ( Explicações e correções) e Estilo de texto 
+    
+    # Classificar os centróides para garantir a posição desejada dos clusters
+    centroids = kmeans.cluster_centers_
+    classificacao = classificar_pontos_triangulo(centroids)
+    # print("classificacao:", classificacao)
+
+    # predict pega o label atual do centroide original e mapeia para o novo label considerando o ultimo caractere do texto "Cluster x"
+    classificacao_invertida = {kmeans.predict([v])[0]: int(k[-1]) for k, v in classificacao.items()}
+    # print("classificacao_invertida:", classificacao_invertida)
+    # exit(0)
+
+    # # Superior esquerdo: menor x, maior y
+    # idx_0 = np.argmin(centroids[:, 0] - centroids[:, 1] * 0)
+    # # Inferior esquerdo: menor x, menor y
+    # idx_2 = np.argmin(centroids[:, 0] + centroids[:, 1])
+    # # Superior direito: maior x, maior y
+    # idx_1 = np.argmax(centroids[:, 0] + centroids[:, 1])
+
+    # # Cria um mapeamento dos índices originais para os desejados
+    # cluster_map = {idx_0: 0, idx_1: 1, idx_2: 2}
+    # # # Reordena os labels conforme o mapeamento
+    # y_kmeans_mapped = np.array([cluster_map[label] for label in kmeans.labels_])
+    # # # Se algum label não estiver no cluster_map, mantenha o original
+    # # y_kmeans_mapped = np.array([cluster_map[label] if label in cluster_map else label for label in kmeans.labels_])
+
+    # y_kmeans_mapped = np.array(map(lambda x: classificacao_invertida[x], kmeans.labels_))
+    y_kmeans_mapped = np.array(list(map(lambda x: classificacao_invertida[x], kmeans.labels_)))
+
+    # print("y_kmeans_mapped:", y_kmeans_mapped)
+    # print("kmeans.labels_:", kmeans.labels_)
+    # exit(0)
+    # Visualizando os clusters com a ordem desejada
+    plt.scatter(X.iloc[y_kmeans_mapped==0, 0], X.iloc[y_kmeans_mapped==0, 1], s=100, c='red', label ='Cluster 0', marker = '*')
+    plt.scatter(X.iloc[y_kmeans_mapped==2, 0], X.iloc[y_kmeans_mapped==2, 1], s=100, c='green', label ='Cluster 2', marker = '*')
+    plt.scatter(X.iloc[y_kmeans_mapped==1, 0], X.iloc[y_kmeans_mapped==1, 1], s=100, c='blue', label ='Cluster 1', marker = '*')
+    plt.scatter(centroids[:, 0], centroids[:, 1], s=300, c='yellow', label = 'Centroids', marker = '*')
+
+    #=====================================================================================
     plt.legend()
     # plt.show()
     # string1 = "10%  - Todos os Cursos - Clusterização " +".pdf"
@@ -4576,9 +4956,31 @@ def correlacao_empregabilidade_salario():
 def GerarGraficosPontos():
     from PIL import Image, ImageDraw
 
-    imagem = Image.open("graficos/10%_AllCourses_Clustering_CBO3_Curso02.png") #Saude ... (80.29, 84.44)
-    # imagem = Image.open("graficos/10%_AllCourses_Clustering.png") #Transporte ... (16.73,33.87) e (12.75, 33.33)
-    # imagem = Image.open("graficos/10%_AllCourses_Clustering_CBO3_Curso02.png") #Transporte ... (33.47, 33.73)
+    # # Imperiais ... (...), (...), (...), (...), (...),
+    # imagem = Image.open("graficos/10%_AllCourses_Clustering.png") 
+
+     # Regulamentadas ... (...), (...), (...), (...), (...),
+    imagem = Image.open("graficos/10%_AllCourses_Clustering.png") 
+
+    # # Professores ... (45.12, 45.78), (15.62,	57.73), (12.81,	67.16), (39.29,	15.33), (31.22,	29.43),
+    # imagem = Image.open("graficos/10%_AllCourses_Clustering.png") 
+    # # Professores ... (82.01, 61.79)
+    # imagem = Image.open("graficos/10%_AllCourses_Clustering_CBO2_Curso02.png") 
+
+    # Engenheiro ... (29.23,20.84),(17.0,28.05),(46.74,	47.83),(50.99,61.77),(19.16,20.02),(37.56,	52.58)
+    # imagem = Image.open("graficos/10%_AllCourses_Clustering.png")
+    # Engenheiro ... (51.81, 42.25) 
+    # imagem = Image.open("graficos/10%_AllCourses_Clustering_CBO3_Curso02.png") 
+
+    # Saude (40.81,46.24)(90.32,88.97)(84.26,81.56)(93.84,89.33)(60.45,83.21)(23.16,84.94)(82.77,85.24)
+    # imagem = Image.open("graficos/10%_AllCourses_Clustering.png") 
+    # Saude ... (84.70, 76.12)
+    # imagem = Image.open("graficos/10%_AllCourses_Clustering_CBO2_Curso02.png") 
+
+    # Transporte ... (16.73,33.87) e (12.75, 33.33)
+    # imagem = Image.open("graficos/10%_AllCourses_Clustering.png")
+    # Transporte ... (33.47, 33.73) 
+    # imagem = Image.open("graficos/10%_AllCourses_Clustering_CBO3_Curso02.png") 
 
     draw = ImageDraw.Draw(imagem)
 
@@ -4588,11 +4990,63 @@ def GerarGraficosPontos():
 
     # Coordenadas do ponto a ser circulado (exatamente a estrela)
     coordenadas = [
-        (80.46, 78.77),
+        
+
+        # Imperiais
+        # (29.23,	20.84), #Engenharia e Profissões Correlatas ... Engenheiros civis e Afins 
+        # (17.0,	28.05), #Engenharia e Profissões Correlatas ... Engenheiros mecânicos e Afins 
+        # (46.74,	47.83), #Engenharia mecânica e metalurgia ... Engenheiros mecânicos e Afins
+        (68.34,	59.1),  #Direito ... Advogados  
+        (90.32,	88.97), #Medicina ... Médicos Clinicos
+        (68.34,	90.9),  #Engenharia Civil e de Construção ... Engenheiros civis e Afins 
+
+        ## Regulamentadas
+        ##(29.23,	20.84), #Engenharia e Profissões Correlatas ... Engenheiros civis e Afins 
+        ##(17.0,	28.05), #Engenharia e Profissões Correlatas ... Engenheiros mecânicos e Afins 
+        ##(46.74,	47.83), #Engenharia mecânica e metalurgia ... Engenheiros mecânicos e Afins 
+        # (68.34,	59.1),  #Engenharia Civil e de Construção ... Engenheiros civis e Afins
+        # (90.32,	88.97), #Medicina ... Médicos Clinicos
+        # (68.34,	90.9),  #Direito ... Advogados   
+        # (76.1,	87.45), #Arquitetura e Urbanismo ... Arquitetos e urbanistas
+        # (65.74,	81.3),  #Psicologia ... Psicólogos e psicanalistas
+        # (93.84,	89.33), #Odontologia ... cirurgiões-dentistas
+
+
+
+        # Professores
+        # (45.12, 45.78),
+        # (15.62,	57.73),
+        # (12.81,	67.16),
+        # (39.29,	15.33),
+        # (31.22,	29.43),
+        # (82.01, 61.79),
+
+        # Engenheiros
+        # (29.23,	20.84),
+        # (17.0,	28.05),
+        # (46.74,	47.83),
+        # (50.99,	61.77),
+        # (19.16,	20.02),
+        # (37.56,	52.58),
+        # (51.81, 42.25) 
+
+        # Saúde 
+        # (40.81,46.24),
+        # (90.32,88.97),
+        # (84.26,81.56),
+        # (93.84,89.33),
+        # (60.45,83.21),
+        # (23.16,84.94),
+        # (82.77,85.24),
+        # (84.70, 76.12),
+
+        # Transportes
         # (16.08,33.33),
         # (21.11, 33.87)
         # (33.33, 33.73),
+
         
+          
     ]
 
     # Tamanho da imagem
@@ -4614,7 +5068,20 @@ def GerarGraficosPontos():
         px, py = grafico_para_pixel(x, y, xlim, ylim, width, height)
         draw.ellipse((px - raio, py - raio, px + raio, py + raio), outline="red", width=4)
 
-    imagem.save("graficos/10%_AllCourses_Clustering_CBO3_Curso02_Saude_2x3.png")
+
+    imagem.save("graficos/10%_AllCourses_Clustering_Imperiais_3x4.png")
+    # imagem.save("graficos/10%_AllCourses_Clustering_Regulamentadas_3x4.png")
+
+
+    # imagem.save("graficos/10%_AllCourses_Clustering_CBO3_Curso02_Professores_3x4.png")
+    # imagem.save("graficos/10%_AllCourses_Clustering_CBO3_Curso02_Professores_2x2.png")
+
+    # imagem.save("graficos/10%_AllCourses_Clustering_CBO3_Curso02_Engenheiros_3x4.png")
+    # imagem.save("graficos/10%_AllCourses_Clustering_CBO3_Curso02_Engenheiros_2x3.png")
+
+    # imagem.save("graficos/10%_AllCourses_Clustering_CBO3_Curso02_Saude_3x4.png")
+    # imagem.save("graficos/10%_AllCourses_Clustering_CBO3_Curso02_Saude_2x2.png")
+
     # imagem.save("graficos/10%_AllCourses_Clustering_CBO3_Curso02_Transporte_3x4.png")
     # imagem.save("graficos/10%_AllCourses_Clustering_CBO3_Curso02_Transporte_2x3.png")
 
