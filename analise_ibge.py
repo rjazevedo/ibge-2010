@@ -64,8 +64,8 @@ if fase == 0:
 
 # Fase 1: Filtrar somente os dados relevantes. Aqui significa que
 # você precisa filtrar todos os dados que possam ser utilizados no futuro.
-if fase >= 1:
-# if fase == 1:
+if fase <= 1:
+    # if fase == 1:
     # garantir que a pasta /processados existe, senão criar
     proc_dir = os.path.join("processados")
     if not os.path.exists(proc_dir):
@@ -78,7 +78,7 @@ if fase >= 1:
 
 # Fase 2: Limpeza dos dados. Agora começa a processar algo mais complexo desde que seja definitivo
 # Pré-Processamento
-if fase >= 2:
+if fase <= 2:
     # if fase == 2:
 
     ibge_functions.ibge_Graduados_NaoGraduados()
@@ -169,8 +169,8 @@ if fase >= 2:
 
 # Fase 10: Essa é a primeira fase que você faz no dia a dia. Aqui você começa a fazer a análise dos dados
 # Fase 10: Análise Descritiva ... ...
-if fase >= 10:
-# if fase == 10:
+if fase <= 10:
+    # if fase == 10:
     # https://colab.research.google.com/drive/1_Nx4oOzrgCQvSolh9XG-UgWTQ508Md1M?authuser=1#scrollTo=o9GsbqjctkkL
     # ibge_functions.ibge_cursos_profissoes()
 
@@ -192,7 +192,7 @@ if fase >= 10:
 
 
 # Fase 20: Análise Exploratória ...
-if fase >= 20:  # QP1
+if fase <= 20:  # QP1
     # Função para:
     # - clusterização com k=3,
     # - geração do gráfico K-Means com K=3 (10% - Todos os Cursos - Clusterização)
@@ -408,7 +408,7 @@ if fase >= 20:  # QP1
 #     # 8- 20% ida e 80% volta
 
 # # # Fase 99: Aqui você pode explorar coisas novas que não afetam os dados anteriores.
-# # if fase >= 99:
+# # if fase <= 99:
 # # if fase == 99:
 # #      pass
 
