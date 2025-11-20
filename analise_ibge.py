@@ -73,13 +73,13 @@ if fase >= 1:
         logging.info("Diretório criado: %s", proc_dir)
     else:
         logging.info("Diretório já existe: %s", proc_dir)
-        
+
     ibge_functions.ibge_filter()
-    
+
 # Fase 2: Limpeza dos dados. Agora começa a processar algo mais complexo desde que seja definitivo
 # Pré-Processamento
 if fase >= 2:
-# if fase == 2:
+    # if fase == 2:
 
     ibge_functions.ibge_Graduados_NaoGraduados()
 
@@ -97,71 +97,81 @@ if fase >= 2:
 
     ibge_functions_preprocessing.filtrar_por_genero()
 
-    file_path = os.path.join("processados", "CSVs_ArquivoFinalGraduados", "Brasil_Graduados_CBO.csv")
+    file_path = os.path.join(
+        "processados", "CSVs_ArquivoFinalGraduados", "Brasil_Graduados_CBO.csv")
     if not os.path.exists(file_path):
-        logging.info("Arquivo %s não encontrado — executando ibge_trocar_CBO_Domiciliar_por_CBO()", file_path)
+        logging.info(
+            "Arquivo %s não encontrado — executando ibge_trocar_CBO_Domiciliar_por_CBO()", file_path)
         ibge_functions_preprocessing.ibge_trocar_CBO_Domiciliar_por_CBO()
     else:
-        logging.info("Arquivo %s já existe — pulando ibge_trocar_CBO_Domiciliar_por_CBO()", file_path) 
+        logging.info(
+            "Arquivo %s já existe — pulando ibge_trocar_CBO_Domiciliar_por_CBO()", file_path)
 
-
-    # # processados/CSVs_PivotTableFinal/Brasil_PivotFinal_CBO.csv   
+    # # processados/CSVs_PivotTableFinal/Brasil_PivotFinal_CBO.csv
     # # processados/CSVs_PivotTableFinal/Brasil_PivotFinalMasculina_CBO.csv
     # # processados/CSVs_PivotTableFinal/Brasil_PivotFinalFeminina_CBO.csv
     # ibge_functions_preprocessing. ibge_trocar_CBO_Domiciliar_por_CBO_PivotTable()
-    masc_path = os.path.join("processados", "CSVs_PivotTableFinal", "Brasil_PivotFinalMasculina_CBO.csv")
-    fem_path  = os.path.join("processados", "CSVs_PivotTableFinal", "Brasil_PivotFinalFeminina_CBO.csv")
-    geral_path = os.path.join("processados", "CSVs_PivotTableFinal", "Brasil_PivotFinal_CBO.csv")
+    masc_path = os.path.join(
+        "processados", "CSVs_PivotTableFinal", "Brasil_PivotFinalMasculina_CBO.csv")
+    fem_path = os.path.join(
+        "processados", "CSVs_PivotTableFinal", "Brasil_PivotFinalFeminina_CBO.csv")
+    geral_path = os.path.join(
+        "processados", "CSVs_PivotTableFinal", "Brasil_PivotFinal_CBO.csv")
     # Executa a troca apenas se pelo menos um dos arquivos não existir
     if not (os.path.exists(masc_path) and os.path.exists(fem_path) and os.path.exists(geral_path)):
-        logging.info("Arquivos %s, %s e/ou %s não encontrados — executando ibge_trocar_CBO_Domiciliar_por_CBO_PivotTable()", masc_path, fem_path, geral_path)
+        logging.info("Arquivos %s, %s e/ou %s não encontrados — executando ibge_trocar_CBO_Domiciliar_por_CBO_PivotTable()",
+                     masc_path, fem_path, geral_path)
         ibge_functions_preprocessing.ibge_trocar_CBO_Domiciliar_por_CBO_PivotTable()
     else:
-        logging.info("Arquivos %s, %s e %s já existem — pulando ibge_trocar_CBO_Domiciliar_por_CBO_PivotTable()", masc_path, fem_path, geral_path)
+        logging.info("Arquivos %s, %s e %s já existem — pulando ibge_trocar_CBO_Domiciliar_por_CBO_PivotTable()",
+                     masc_path, fem_path, geral_path)
 
     # Redução dos digitos dos CBOs ...
     # # Diminui CBO em Brasil_Graduados e Brasil_PivotTableFinal ...
     # ibge_functions.ibge_diminuirCBOs()
     # Diminui CBO em Brasil_Graduados e Brasil_PivotTableFinal ...
     arquivos = [
-        os.path.join("processados", "CSVs_PivotTableFinal", "Brasil_PivotFinal_CBO_DiminuidaCBO2.csv"),
-        os.path.join("processados", "CSVs_ArquivoFinalGraduados", "Brasil_Graduados_CBO_DiminuidoCBO2.csv"),
-        os.path.join("processados", "CSVs_ArquivoFinalGraduados", "Brasil_Graduados_CBO_DiminuidoCBO3.csv"),
-        os.path.join("processados", "CSVs_PivotTableFinal", "Brasil_PivotFinal_CBO_DiminuidaCBO3.csv"),
+        os.path.join("processados", "CSVs_PivotTableFinal",
+                     "Brasil_PivotFinal_CBO_DiminuidaCBO2.csv"),
+        os.path.join("processados", "CSVs_ArquivoFinalGraduados",
+                     "Brasil_Graduados_CBO_DiminuidoCBO2.csv"),
+        os.path.join("processados", "CSVs_ArquivoFinalGraduados",
+                     "Brasil_Graduados_CBO_DiminuidoCBO3.csv"),
+        os.path.join("processados", "CSVs_PivotTableFinal",
+                     "Brasil_PivotFinal_CBO_DiminuidaCBO3.csv"),
     ]
 
     if not all(os.path.exists(p) for p in arquivos):
-        logging.info("Um ou mais arquivos CBO não encontrados — executando ibge_diminuirCBOs()")
+        logging.info(
+            "Um ou mais arquivos CBO não encontrados — executando ibge_diminuirCBOs()")
         ibge_functions.ibge_diminuirCBOs()
     else:
-        logging.info("Todos os arquivos CBO já existem — pulando ibge_diminuirCBOs()") 
+        logging.info(
+            "Todos os arquivos CBO já existem — pulando ibge_diminuirCBOs()")
 
     # Redução os digitos dos Cursos
     # # Diminui cursos em Cursos_csv ...
     # ibge_functions_descriptive_analysis.ibge_cursos_filter_DiminuirCurso()
     # # Diminui cursos em Brasil_Graduados - Brasil_Graduados_DiminuidoCBO2.csv e Brasil_Graduados_DiminuidoCBO3.csv  ...
     # ibge_functions.diminuirCurso()  # ...
-    curso2_path1 = os.path.join("processados", "CSVs_ArquivoFinalGraduados", "Brasil_Graduados_CBO_DiminuidoCBO2_Curso2.csv")
-    curso2_path2 = os.path.join("processados", "CSVs_ArquivoFinalGraduados", "Brasil_Graduados_CBO_DiminuidoCBO3_Curso2.csv")
+    curso2_path1 = os.path.join("processados", "CSVs_ArquivoFinalGraduados",
+                                "Brasil_Graduados_CBO_DiminuidoCBO2_Curso2.csv")
+    curso2_path2 = os.path.join("processados", "CSVs_ArquivoFinalGraduados",
+                                "Brasil_Graduados_CBO_DiminuidoCBO3_Curso2.csv")
 
     if not (os.path.exists(curso2_path1) and os.path.exists(curso2_path2)):
-        logging.info("Arquivos %s e/ou %s não encontrados — executando diminuirCurso()", curso2_path1, curso2_path2)
+        logging.info("Arquivos %s e/ou %s não encontrados — executando diminuirCurso()",
+                     curso2_path1, curso2_path2)
         ibge_functions.diminuirCurso()
     else:
-        logging.info("Arquivos %s e %s já existem — pulando diminuirCurso()", curso2_path1, curso2_path2)
+        logging.info("Arquivos %s e %s já existem — pulando diminuirCurso()",
+                     curso2_path1, curso2_path2)
 
 # Fase 10: Essa é a primeira fase que você faz no dia a dia. Aqui você começa a fazer a análise dos dados
 # Fase 10: Análise Descritiva ... ...
 if fase >= 10:
-# if fase == 10:  
-    # garantir que a pasta /graficos existe, senão criar
-    graf_dir = os.path.join("graficos")
-    if not os.path.exists(graf_dir):
-        os.makedirs(graf_dir, exist_ok=True)
-        logging.info("Diretório criado: %s", graf_dir)
-    else:
-        logging.info("Diretório já existe: %s", graf_dir)
-
+# if fase == 10:
+    # https://colab.research.google.com/drive/1_Nx4oOzrgCQvSolh9XG-UgWTQ508Md1M?authuser=1#scrollTo=o9GsbqjctkkL
     # ibge_functions.ibge_cursos_profissoes()
 
     # ibge_functions.ibge_relacionamentos_cursos_profissoes()
@@ -187,16 +197,15 @@ if fase >= 20:  # QP1
     # - clusterização com k=3,
     # - geração do gráfico K-Means com K=3 (10% - Todos os Cursos - Clusterização)
     # - geração do arquivo Kmeans3_T.csv
-    ibge_functions.Profissoes_Cursos()              #...
+    ibge_functions.Profissoes_Cursos()  # ...
     # # ibge_functions.Profissoes_Cursos_Curso2()
 
     # Essas funções  só devem ser usadas em caso de necessidade, pois elas trabalham com os CBOs com 2 ou 3 digitos
     # ibge_functions.Profissoes_Cursos_CBO2()
-    ibge_functions.Profissoes_Cursos_CBO2_Curso2()  #...
+    ibge_functions.Profissoes_Cursos_CBO2_Curso2()  # ...
     # ibge_functions.Profissoes_Cursos_CBO3()
-    ibge_functions.Profissoes_Cursos_CBO3_Curso2()  #...
+    ibge_functions.Profissoes_Cursos_CBO3_Curso2()  # ...
 
-   
     # # Leitura arquivo Kmeans3_T.csv para gerar a contagem de CBOs de forma automática
     # # ibge_functions_exploratory_analysis.leitura_kmeans3_t()
     # ibge_functions_exploratory_analysis.leitura_kmeans3_t_cbo3_Curso2_curso()
@@ -204,15 +213,16 @@ if fase >= 20:  # QP1
     # ibge_functions_exploratory_analysis.leitura_kmeans3_t_curso()
 
     # # Leitura arquivo Kmeans3.csv para pegar os 10 primeiros CBOs ... arquivos que acham os 10 primeiros no arquivo que considera 100% dos dados
-    ibge_functions_exploratory_analysis.leitura_kmeans3_t_cbo()           #...
+    ibge_functions_exploratory_analysis.leitura_kmeans3_t_cbo()  # ...
     # # ibge_functions_exploratory_analysis.leitura_kmeans3_t_cbo_Curso2()
     # # ibge_functions_exploratory_analysis.leitura_kmeans3_t_cbo2()
-    ibge_functions_exploratory_analysis.leitura_kmeans3_t_cbo2_Curso2()  #...
+    ibge_functions_exploratory_analysis.leitura_kmeans3_t_cbo2_Curso2()  # ...
     # # ibge_functions_exploratory_analysis.leitura_kmeans3_t_cbo3()
-    ibge_functions_exploratory_analysis.leitura_kmeans3_t_cbo3_Curso2()  #...
+    ibge_functions_exploratory_analysis.leitura_kmeans3_t_cbo3_Curso2()  # ...
 
     # # Análise Exploratória - Gráficos e Tabelas -----------------------------------------------------------------
-    ibge_functions_exploratory_analysis.GerarGraficosPontos() #  gera o grafico com os pontos circulados em vermelho 
+    # gera o grafico com os pontos circulados em vermelho
+    ibge_functions_exploratory_analysis.GerarGraficosPontos()
 
     # # Empregabilidade x Salario -----------------------------------------------------------------
     # ibge_functions.median_salario()
