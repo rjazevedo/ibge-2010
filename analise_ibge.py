@@ -66,7 +66,7 @@ if fase == 0:
 # você precisa filtrar todos os dados que possam ser utilizados no futuro.
 if fase >= 1:
 # if fase == 1:
-    # garantir que a pasta microdados-ibge/processados existe, senão criar
+    # garantir que a pasta /processados existe, senão criar
     proc_dir = os.path.join("processados")
     if not os.path.exists(proc_dir):
         os.makedirs(proc_dir, exist_ok=True)
@@ -153,8 +153,15 @@ if fase >= 2:
 # Fase 10: Essa é a primeira fase que você faz no dia a dia. Aqui você começa a fazer a análise dos dados
 # Fase 10: Análise Descritiva ... ...
 if fase >= 10:
-# if fase == 10:
-    # https://colab.research.google.com/drive/1_Nx4oOzrgCQvSolh9XG-UgWTQ508Md1M?authuser=1#scrollTo=o9GsbqjctkkL
+# if fase == 10:  
+    # garantir que a pasta /graficos existe, senão criar
+    graf_dir = os.path.join("graficos")
+    if not os.path.exists(graf_dir):
+        os.makedirs(graf_dir, exist_ok=True)
+        logging.info("Diretório criado: %s", graf_dir)
+    else:
+        logging.info("Diretório já existe: %s", graf_dir)
+
     # ibge_functions.ibge_cursos_profissoes()
 
     # ibge_functions.ibge_relacionamentos_cursos_profissoes()
