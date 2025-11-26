@@ -8,3 +8,5 @@ __pycache__/
 microdados-ibge
 *.pyc
 *.xls
+*.parquet
+*.xlsx
