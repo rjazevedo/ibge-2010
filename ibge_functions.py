@@ -152,9 +152,10 @@ def ibge_JuntarCSVs():
          ibge_functions_preprocessing.JuntarCSVs(path[i],opcao[i])
      return
 def ibge_diminuirCBOs():
-    opcao=2
+    # opcao=2
     # opcao=3
-    ibge_functions_preprocessing.ibge_diminuirCBOs(opcao)
+    # ibge_functions_preprocessing.ibge_diminuirCBOs(opcao)
+    ibge_functions_preprocessing.ibge_diminuirCBOs()
     return
 
 def diminuirCurso():

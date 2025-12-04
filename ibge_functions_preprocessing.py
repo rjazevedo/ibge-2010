@@ -777,8 +777,9 @@ def diminuirCurso():
 #        df_pivot.to_csv(save_results_pivot, index=False)
 #     return
 
-def ibge_diminuirCBOs(opcao):
-    if opcao ==2:
+# def ibge_diminuirCBOs(opcao):
+def ibge_diminuirCBOs():    
+    # if opcao ==2:
        # Process the first file
        # file_path_graduados = 'processados/CSVs_ArquivoFinalGraduados/Brasil_Graduados.csv'
        file_path_graduados = 'processados/CSVs_ArquivoFinalGraduados/Brasil_Graduados_CBO.csv'
@@ -854,7 +855,7 @@ def ibge_diminuirCBOs(opcao):
        # print(df_pivot.head().to_string(index=False))
        df_pivot.to_csv(save_results_pivot,  index=False, encoding='utf-8-sig', quoting=1)
 
-    elif opcao ==3:
+    # elif opcao ==3:
        # Process the first file
        # file_path_graduados = 'processados/CSVs_ArquivoFinalGraduados/Brasil_Graduados.csv'
        file_path_graduados = 'processados/CSVs_ArquivoFinalGraduados/Brasil_Graduados_CBO.csv'
@@ -924,4 +925,4 @@ def ibge_diminuirCBOs(opcao):
        # ========================================================================================
        save_results_pivot = 'processados/CSVs_PivotTableFinal/Brasil_PivotFinal_CBO_DiminuidaCBO3.csv'
        df_pivot.to_csv(save_results_pivot, index=False, encoding='utf-8-sig', quoting=1)
-    return
+       return
