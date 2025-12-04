@@ -9,3 +9,4 @@ scikit-learn==1.4.2
 xlrd==2.0.1 
 openpyxl==3.0.9
 Jinja2==3.0.3
+seaborn==0.13.2
