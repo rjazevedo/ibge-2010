@@ -10,3 +10,8 @@ microdados-ibge
 *.xls
 *.parquet
 *.xlsx
+
+# Não ignorar arquivos de nomes específicos
+!documentacao/CBO_CSV.csv
+!documentacao/Curso_CSV.csv
+!documentacao/CBO_CSV_TabelaAuxiliar.csv
