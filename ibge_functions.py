@@ -231,11 +231,20 @@ def ibge_idas_voltas_cursos_profissoes():
     name = ibge_variable.names(7)
     path1 = ibge_variable.paths(12)
     name1 = ibge_variable.names(6)
-    ibge_functions_descriptive_analysis.Ida_Volta(path,name,path1,name1)
+    # ibge_functions_descriptive_analysis.Ida_Volta(path,name,path1,name1)
+    ibge_functions_descriptive_analysis.Ida_Volta(path,name,path1,name1, 'O', modo=10)
+    ibge_functions_descriptive_analysis.Ida_Volta(path,name,path1,name1, 'O', modo=100)
+    ibge_functions_descriptive_analysis.Ida_Volta(path,name,path1,name1, 'F', modo=100)
+    ibge_functions_descriptive_analysis.Ida_Volta(path,name,path1,name1, 'M', modo=100)
+
 
     path2 = ibge_variable.paths(13)
     name2 = ibge_variable.names(9)
-    ibge_functions_descriptive_analysis.Tabela_Ida_Volta(path2,name2)    
+    # ibge_functions_descriptive_analysis.Tabela_Ida_Volta(path2,name2)    
+    ibge_functions_descriptive_analysis.Tabela_Ida_Volta(path2,name2, 'O', modo=10) 
+    ibge_functions_descriptive_analysis.Tabela_Ida_Volta(path2,name2, 'O', modo=100) 
+    ibge_functions_descriptive_analysis.Tabela_Ida_Volta(path2,name2, 'F', modo=100) 
+    ibge_functions_descriptive_analysis.Tabela_Ida_Volta(path2,name2, 'M', modo=100) 
     return
 
 def ibge_idas_voltas_cursos_profissoes_Curso2():
@@ -243,11 +252,15 @@ def ibge_idas_voltas_cursos_profissoes_Curso2():
     name = ibge_variable.names(7)
     path1 = ibge_variable.paths(12)
     name1 = ibge_variable.names(6)
-    ibge_functions_descriptive_analysis.Ida_Volta_Curso2(path,name,path1,name1)
+    # ibge_functions_descriptive_analysis.Ida_Volta_Curso2(path,name,path1,name1)
+    ibge_functions_descriptive_analysis.Ida_Volta_Curso2(path,name,path1,name1, modo=10)
+    ibge_functions_descriptive_analysis.Ida_Volta_Curso2(path,name,path1,name1, modo=100)
 
     path2 = ibge_variable.paths(13)
     name2 = ibge_variable.names(9)
-    ibge_functions_descriptive_analysis.Tabela_Ida_Volta_Curso2(path2,name2)    
+    # ibge_functions_descriptive_analysis.Tabela_Ida_Volta_Curso2(path2,name2)   
+    ibge_functions_descriptive_analysis.Tabela_Ida_Volta_Curso2(path2,name2, modo=10)    
+    ibge_functions_descriptive_analysis.Tabela_Ida_Volta_Curso2(path2,name2, modo=100)    
     return
 
 def ibge_trabalho_recenseados():
@@ -360,9 +373,9 @@ def Empregabilidade_cursos_commaisprofissoes():
 def median_salario():
     path2 = ibge_variable.paths(13)
     name2 = ibge_variable.names(9) #5
-    # ibge_functions_exploratory_analysis.median_salario(path2,name2,'O')    
-    ibge_functions_exploratory_analysis.median_salario(path2,name2,'M')    
-    # ibge_functions_exploratory_analysis.median_salario(path2,name2,'F')    
+    ibge_functions_exploratory_analysis.median_salario(path2,name2,'O')          
+    ibge_functions_exploratory_analysis.median_salario(path2,name2,'F')    
+    ibge_functions_exploratory_analysis.median_salario(path2,name2,'M')  
 
     return
 
@@ -428,18 +441,31 @@ def Profissoes_Cursos_Masculino_Feminino():
 #     ibge_functions_results.Genero_Profissoes_Masc_Fem_Grupo2()
 #     ibge_functions_results.Genero_Profissoes_Masc_Fem_Grupo3()
 #     return
+def Filtro_Graduados_Masculino_Feminino():
+    # path = ibge_variable.paths(11)
+    # name = ibge_variable.names(7)
+
+    # ibge_functions_results.Filtro_Masculino_Feminino(path,name,'F')
+    # ibge_functions_results.Filtro_Masculino_Feminino(path,name,'M')
+    ibge_functions_results.Filtro_Masculino_Feminino('F')
+    ibge_functions_results.Filtro_Masculino_Feminino('M')
+    
 
 def Ida_Volta_Masculino_Feminino_100(): # 100% ...
     path = ibge_variable.paths(11)
     name = ibge_variable.names(7)
-    Fem  = ibge_functions_results.Filtro_Masculino_Feminino(path,name,'F')
-    Masc = ibge_functions_results.Filtro_Masculino_Feminino(path,name,'M')
+    # Fem  = ibge_functions_results.Filtro_Masculino_Feminino(path,name,'F')
+    # Masc = ibge_functions_results.Filtro_Masculino_Feminino(path,name,'M')
+    ibge_functions_results.Filtro_Masculino_Feminino(path,name,'F')
+    ibge_functions_results.Filtro_Masculino_Feminino(path,name,'M')
     # path1 = ibge_variable.paths(11)
     # name1 = ibge_variable.names(7)
     path2 = ibge_variable.paths(12)
     name2 = ibge_variable.names(6)
-    ibge_functions_results.Ida_Volta_Masculino_Feminino_100(Fem,path2,name2,'F')
-    ibge_functions_results.Ida_Volta_Masculino_Feminino_100(Masc,path2,name2,'M')
+    # ibge_functions_results.Ida_Volta_Masculino_Feminino_100(Fem,path2,name2,'F')
+    # ibge_functions_results.Ida_Volta_Masculino_Feminino_100(Masc,path2,name2,'M')
+    ibge_functions_results.Ida_Volta_Masculino_Feminino_100(path2,name2,'F')
+    ibge_functions_results.Ida_Volta_Masculino_Feminino_100(path2,name2,'M')
     return
 
 def Tabela_Ida_Volta_Masculino_Feminino_100(): 

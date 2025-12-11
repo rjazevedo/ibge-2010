@@ -639,18 +639,20 @@ def ibge_trocar_CBO_Domiciliar_por_CBO_PivotTable():
 def diminuirCurso():
     # # Ler o arquivo Brasil_Graduados.csv         --------------------------------------
     # # file_path = "processados/CSVs_ArquivoFinalGraduados/Brasil_Graduados.csv"
-    # file_path = "processados/CSVs_ArquivoFinalGraduados/Brasil_Graduados_CBO.csv"
-    # df = pd.read_csv(file_path)
+    file_path = "processados/CSVs_ArquivoFinalGraduados/Brasil_Graduados_CBO.csv"
+    df = pd.read_csv(file_path, dtype={'CBO-Domiciliar': str})
 
-    # # Reduzir um dígito da coluna Curso_Superior_Graduação_Código se tiver 3 dígitos
-    # df['Curso_Superior_Graduação_Código'] = df['Curso_Superior_Graduação_Código'].apply(
-    #     lambda x: int(str(x)[:-1]) if len(str(x)) == 3 else int(str(x))
-    # )
+    # Reduzir um dígito da coluna Curso_Superior_Graduação_Código se tiver 3 dígitos
+    df['Curso_Superior_Graduação_Código'] = df['Curso_Superior_Graduação_Código'].apply(
+        lambda x: int(str(x)[:-1]) if len(str(x)) == 3 else int(str(x))
+    )
 
     # # Salvar em novo arquivo
     # # save_path = "processados/CSVs_ArquivoFinalGraduados/Brasil_Graduados_CBO4_Curso2.csv"
-    # save_path = "processados/CSVs_ArquivoFinalGraduados/Brasil_Graduados_CBO_CBO4_Curso2.csv"
+    save_path = "processados/CSVs_ArquivoFinalGraduados/Brasil_Graduados_CBO_CBO4_Curso2.csv" 
     # df.to_csv(save_path, index=False)
+    df.to_csv(save_path, index=False, encoding='utf-8-sig', quoting=1)
+
 
     # # Ler o arquivo Brasil_Graduados_DiminuidoCBO2.csv ------------------------------------------
     # ---------------------------------------------------------------------------------------------
@@ -685,7 +687,7 @@ def diminuirCurso():
     save_path = "processados/CSVs_ArquivoFinalGraduados/Brasil_Graduados_CBO_DiminuidoCBO2_Curso2.csv"
     # Imprimir registros onde CBO-Domiciliar tem zeros à esquerda
     # print(df[df['CBO-Domiciliar'].str.startswith('0')])
-    # df.to_csv(save_path, index=False, encoding='utf-8-sig', quoting=1)
+    df.to_csv(save_path, index=False, encoding='utf-8-sig', quoting=1)
 
     # Ler o arquivo Brasil_Graduados_DiminuidoCBO3.csv---------------------------------------------
     # ---------------------------------------------------------------------------------------------
@@ -706,7 +708,7 @@ def diminuirCurso():
     save_path = "processados/CSVs_ArquivoFinalGraduados/Brasil_Graduados_CBO_DiminuidoCBO3_Curso2.csv"
     # Imprimir registros onde CBO-Domiciliar tem zeros à esquerda
     # print(df[df['CBO-Domiciliar'].str.startswith('0')])
-    # df.to_csv(save_path, index=False, encoding='utf-8-sig', quoting=1)
+    df.to_csv(save_path, index=False, encoding='utf-8-sig', quoting=1)
     return
 
 # def ibge_diminuirCBOs(opcao):
