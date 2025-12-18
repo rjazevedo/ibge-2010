@@ -3665,15 +3665,18 @@ def Soma_PivotTable(path1,name1):
     
     #Kmeans3_T = Kmeans3_T.drop(columns=['Unnamed: 0'])
 
-    Pivot = pd.read_csv("processados/CSVs_PivotTableFinal/Brasil_PivotFinal.csv", sep=",")
+    # Pivot = pd.read_csv("processados/CSVs_PivotTableFinal/Brasil_PivotFinal.csv", sep=",")
+    Pivot = pd.read_csv("processados/CSVs_PivotTableFinal/Brasil_PivotFinal_CBO.csv", sep=",")
+
     # Pivot = Pivot.drop(columns=['Unnamed: 0'])
     
     # Somar as colunas 1, 2, 3, 4, 5 para cada ocupação
     Pivot['Soma'] = Pivot.iloc[:, 1:6].sum(axis=1)
     
     # Gerar um novo arquivo somente com as ocupações e a soma
-    novo_arquivo = Pivot[['Ocupação_Código', 'Soma']]
-    novo_arquivo.to_csv("processados/CSVs_PivotTableFinal/Soma_Ocupacao.csv", index=False)
+    # novo_arquivo = Pivot[['Ocupação_Código', 'Soma']]
+    novo_arquivo = Pivot[['CBO-Domiciliar', 'Soma']]
+    novo_arquivo.to_csv("processados/CSVs_PivotTableFinal/Soma_Ocupacao_CBO.csv", index=False)
     return    
 
 # def Coluna_Empregabilidade(path2,name2):
@@ -3710,7 +3713,7 @@ def Coluna_Empregabilidade(path2,name2):
     
     #Kmeans3_T = Kmeans3_T.drop(columns=['Unnamed: 0'])
 
-    Empregabilidade = pd.read_csv("processados/CSVs_PivotTableFinal/Soma_Ocupacao.csv", sep=",")
+    Empregabilidade = pd.read_csv("processados/CSVs_PivotTableFinal/Soma_Ocupacao_CBO.csv", sep=",")
     # Pivot = Pivot.drop(columns=['Unnamed: 0'])
     
     # Juntar as colunas de Kmeans3_T e a coluna Soma de Empregabilidade
@@ -3719,14 +3722,16 @@ def Coluna_Empregabilidade(path2,name2):
     # Se Kmeans3_T .Curso == 520, então Empregabilidade['Soma']/500
     Kmeans3_T.loc[Kmeans3_T['Curso'] == 142, 'Soma_Empregabilidade'] = np.log(Empregabilidade['Soma'] + 1) * 10 # Multiplicando para ajustar a escala
     Kmeans3_T.loc[Kmeans3_T['Curso'] == 145, 'Soma_Empregabilidade'] = np.log(Empregabilidade['Soma'] + 1) * 10 # Multiplicando para ajustar a escala
-    Kmeans3_T.loc[Kmeans3_T['Curso'] == 211, 'Soma_Empregabilidade'] = np.log(Empregabilidade['Soma'] + 1) * 10 # Multiplicando para ajustar a escala
+    # Kmeans3_T.loc[Kmeans3_T['Curso'] == 211, 'Soma_Empregabilidade'] = np.log(Empregabilidade['Soma'] + 1) * 10 # Multiplicando para ajustar a escala
     Kmeans3_T.loc[Kmeans3_T['Curso'] == 212, 'Soma_Empregabilidade'] = np.log(Empregabilidade['Soma'] + 1) * 10 # Multiplicando para ajustar a escala
-    Kmeans3_T.loc[Kmeans3_T['Curso'] == 214, 'Soma_Empregabilidade'] = np.log(Empregabilidade['Soma'] + 1) * 10 # Multiplicando para ajustar a escala
+    # Kmeans3_T.loc[Kmeans3_T['Curso'] == 214, 'Soma_Empregabilidade'] = np.log(Empregabilidade['Soma'] + 1) * 10 # Multiplicando para ajustar a escala
     Kmeans3_T.loc[Kmeans3_T['Curso'] == 223, 'Soma_Empregabilidade'] = np.log(Empregabilidade['Soma'] + 1) * 10 # Multiplicando para ajustar a escala
-    Kmeans3_T.loc[Kmeans3_T['Curso'] == 342, 'Soma_Empregabilidade'] = np.log(Empregabilidade['Soma'] + 1) * 10 # Multiplicando para ajustar a escala
+    # Kmeans3_T.loc[Kmeans3_T['Curso'] == 342, 'Soma_Empregabilidade'] = np.log(Empregabilidade['Soma'] + 1) * 10 # Multiplicando para ajustar a escala
     Kmeans3_T.loc[Kmeans3_T['Curso'] == 520, 'Soma_Empregabilidade'] = np.log(Empregabilidade['Soma'] + 1) * 10 # Multiplicando para ajustar a escala
-    Kmeans3_T.loc[Kmeans3_T['Curso'] == 721, 'Soma_Empregabilidade'] = np.log(Empregabilidade['Soma'] + 1) * 10 # Multiplicando para ajustar a escala
+    # Kmeans3_T.loc[Kmeans3_T['Curso'] == 721, 'Soma_Empregabilidade'] = np.log(Empregabilidade['Soma'] + 1) * 10 # Multiplicando para ajustar a escala
     Kmeans3_T.loc[Kmeans3_T['Curso'] == 726, 'Soma_Empregabilidade'] = np.log(Empregabilidade['Soma'] + 1) * 10 # Multiplicando para ajustar a escala
+    Kmeans3_T.loc[Kmeans3_T['Curso'] == 840, 'Soma_Empregabilidade'] = np.log(Empregabilidade['Soma'] + 1) * 10 # Multiplicando para ajustar a escala
+
     # Kmeans3_T.loc[Kmeans3_T['Soma_Empregabilidade'] > 4000, 'Soma_Empregabilidade'] = Empregabilidade['Soma'] / 30
    
     # Arredondar os valores da coluna 'Soma_Empregabilidade' para o inteiro mais próximo
@@ -3769,7 +3774,8 @@ def Empregabilidade(path1,name1,path2,name2):
     save_results_to = 'graficos/' 
     
     # Filtrar as linhas com CR: 214, 342, 520, 721, 726
-    cr_values = [214, 342, 520, 721, 726]
+    # cr_values = [214, 342, 520, 721, 726]
+    cr_values = [726]
     filtered_data = data[data['Curso'].isin(cr_values)]
 
     ##### -------------------------------- Gráfico separado por cursos 
@@ -3777,7 +3783,9 @@ def Empregabilidade(path1,name1,path2,name2):
     plt.figure(figsize=(6, 4))    
 
     # # Lista de cores para os clusters
-    cores_personalizadas = ['red', 'blue', 'brown', 'black', 'green']  # Adicione mais cores, se necessário
+    # cores_personalizadas = ['red', 'blue', 'brown', 'black', 'green']  # Adicione mais cores, se necessário
+    cores_personalizadas = ['green']  # Adicione mais cores, se necessário
+
 
     # # Ordenar os clusters antes de criar o gráfico
     clusters_ordenados = sorted(filtered_data['Curso'].unique())
@@ -3869,13 +3877,14 @@ def Empregabilidade_cursos_commaisprofissoes(path1,name1,path2,name2):
     ##### -------------------------------- Usar um arquivo de teste para empregabilidade
     # Carregar o arquivo CSV
     # file_path = "graficos/Kmeans3_T_Empregabilidade.csv"  # Substitua pelo caminho do arquivo
-    file_path = "graficos/Kmeans3_T_Empregabiselected_courses_plot_1.png}lidade_teste.csv"  # Substitua pelo caminho do arquivo
+    file_path = "graficos/Kmeans3_T_Empregabilidade_teste.csv"  # Substitua pelo caminho do arquivo
     data = pd.read_csv(file_path)
     save_results_to = 'graficos/' 
     
     # Filtrar as linhas com CR: 214, 342, 520, 721, 726
     # cr_values = [142, 145, 211, 212, 214, 223, 342, 520, 721, 726]
-    cr_values = [142, 145, 211, 212, 223]
+    # cr_values = [142, 145, 211, 212, 223]
+    cr_values = [142, 145, 212, 223, 520, 726,840]
     filtered_data = data[data['Curso'].isin(cr_values)]
 
     ##### -------------------------------- Gráfico separado por cursos 
@@ -3885,7 +3894,7 @@ def Empregabilidade_cursos_commaisprofissoes(path1,name1,path2,name2):
     # # Lista de cores para os clusters
     #cores_personalizadas = ['DarkViolet', 'DarkMagenta', 'DeepPink', 'Crimson',
     #                        'red', 'Yellow', 'blue', 'brown', 'black', 'green']  # Adicione mais cores, se necessário
-    cores_personalizadas = ['red', 'blue', 'brown', 'black', 'green']  # Adicione mais cores, se necessário
+    cores_personalizadas = ['red', 'Yellow','blue', 'brown', 'black', 'green','DarkViolet']  # Adicione mais cores, se necessário
 
     # # Ordenar os clusters antes de criar o gráfico
     clusters_ordenados = sorted(filtered_data['Curso'].unique())
@@ -3947,9 +3956,113 @@ def Empregabilidade_cursos_commaisprofissoes(path1,name1,path2,name2):
     # plt.show()
     # string1 = "Cursos e Profissões que mudam de Clusters" +".png"
     # string1 = "Empregabilidade: cursos e profissões que tem profissionais atuando em mais de uma profissão" +".png"
-    string1 = "Empregabilidade_cursos_profissões_profissionais_atuando_mais_profissão" +".png"
+    # string1 = "Empregabilidade_cursos_profissões_profissionais_atuando_mais_profissão" +".png"
+    string1 = "Empregabilidade_cursos_profissões_profissionais_atuando_mais_profissão_atual" +".png"
+
     save_results_to = 'graficos/'  
     plt.savefig(save_results_to + string1)  
+    return
+
+def  Empregabilidade_cursos_commaisprofissoes_voronoi(points=None, data_points=None, save_name="Empregabilidade_cursos_profissões_profissionais_atuando_mais_profissão_atual_voronoi"):
+    """
+    Função dinâmica para plotar diagrama de Voronoi com setas de deslocamento.
+    
+    Args:
+        points: np.array com coordenadas dos centróides do Voronoi shape (n, 2)
+                Ex: np.array([[27.00, 21.78], [66.46, 77.65], [25.76, 62.88]])
+        data_points: lista de dicts contendo:
+                    - 'orig': [x, y] coordenadas originais
+                    - 'label': string com descrição (opcional)
+                    Ex: [
+                        {'orig': [28.31, 39.27], 'label': '442: Química / 2113'},
+                        ...
+                    ]
+        save_name: string com nome do arquivo a salvar (sem extensão)
+    """
+    import numpy as np
+    import matplotlib.pyplot as plt
+    from scipy.spatial import Voronoi, voronoi_plot_2d
+    
+    # Valores padrão se não fornecidos
+    if points is None:
+        points = np.array([
+            [27.00526316, 21.78263158],
+            [66.464375, 77.656875],
+            [25.76357143, 62.88071429]
+        ])
+    
+    if data_points is None:
+        data_points = [
+            {'orig': [45.12, 45.78], 'curso': 142, 'label': '142: Ciências da Educação / 2313'},
+            {'orig': [15.62, 57.73], 'curso': 142, 'label': '142: Ciências da Educação / 2311'},
+            {'orig': [12.81, 67.16], 'curso': 142, 'label': '142: Ciências da Educação / 2394'},			
+            {'orig': [39.29, 15.33], 'curso': 145, 'label': '145: Formação de Professores com Especialização em Matérias Especificas / 2313'},
+            {'orig': [31.22, 29.43], 'curso': 145, 'label': '145: Formação de Professores com Especialização em Matérias Especificas / 2321'},
+            {'orig': [23.47, 28.31], 'curso': 212, 'label': '212: Música e Artes Cênicas / 2624'},
+            {'orig': [10.36, 19.48], 'curso': 212, 'label': '212: Música e Artes Cênicas / 2623'},			
+            {'orig': [42.40, 10.73], 'curso': 223, 'label': '223: Língua Materna (Vernácula) / 2313'},
+            {'orig': [25.13, 15.37], 'curso': 223, 'label': '223: Língua Materna (Vernácula) / 2321'},
+            {'orig': [29.23, 20.84], 'curso': 520, 'label': '520: Engenharia e Profissões de Engenharia / 2142'},
+            {'orig': [17.0,  28.05], 'curso': 520, 'label': '520: Engenharia e Profissões de Engenharia / 2144'},
+            {'orig': [60.45, 83.21], 'curso': 726, 'label': '726: Terapia e Reabilitação / 2236'},
+            {'orig': [23.16, 84.94], 'curso': 726, 'label': '726: Terapia e Reabilitação/ 2237'},
+            {'orig': [21.11, 33.87], 'curso': 840, 'label': '840: Serviços de Transportes/ 2151'},
+            {'orig': [16.08, 33.33], 'curso': 840, 'label': '840: Serviços de Transportes/ 2153'},
+        ]
+    
+    # Dicionário de cores para cada curso
+    cores_por_curso = {
+        142: 'green',
+        145: 'yellow',
+        212: 'red',
+        223: 'blue',
+        520: 'purple',
+        726: 'orange',
+        840: 'brown'
+    }
+    
+    # Criar diagrama de Voronoi
+    vor = Voronoi(points)
+    voronoi_plot_2d(vor)
+    
+    # Dicionário para controlar quais cursos já foram adicionados à legenda
+    cursos_na_legenda = set()
+    
+    # Plotar os pontos originais com cores por curso
+    for data in data_points:
+        orig = data['orig']
+        curso = data.get('curso', 'unknown')
+        cor = cores_por_curso.get(curso, 'black')
+        
+        # Determinar se adiciona à legenda (apenas primeira ocorrência de cada curso)
+        label = None
+        if curso not in cursos_na_legenda:
+            label = f'Curso {curso}'
+            cursos_na_legenda.add(curso)
+        
+        # Scatter do ponto original com cor específica do curso
+        plt.scatter(orig[0], orig[1], 
+                   color=cor,
+                   s=100,
+                   zorder=3,
+                   label=label,
+                   edgecolors='black',
+                   linewidth=1.5)
+    
+    # Configurações do gráfico
+    plt.xlim(0.0, 100.0)
+    plt.ylim(0.0, 100.0)
+    plt.xlabel("Cursos")
+    plt.ylabel("Profissões")
+    plt.title("Diagrama de Voronoi - Cursos com presença de Profissões Representativas")
+    plt.grid(True, alpha=0.3)
+    plt.legend(loc='upper right', framealpha=0.9)
+    
+    # Salvar
+    save_results_to = 'graficos/'
+    plt.savefig(f"{save_results_to}{save_name}.png", dpi=300, bbox_inches='tight')
+    plt.close()
+    
     return
 
 def median_salario(path1,name1,sx):
@@ -4991,7 +5104,8 @@ def  Salarios_cursos_commaisprofissoes(path1,name1,path2,name2):
     # Filtrar as linhas com CR: 214, 342, 520, 721, 726
     # cr_values = [214, 342, 520, 721, 726]
     # cr_values = [142, 145, 211, 212, 214, 223, 342, 520, 721, 726]
-    cr_values = [142, 145, 211, 212, 223]
+    # cr_values = [142, 145, 211, 212, 223]
+    cr_values = [142, 145, 212, 223, 520, 726, 840]
     filtered_data = data[data['Curso'].isin(cr_values)]
 
     ##### -------------------------------- Gráfico separado por cursos 
@@ -5002,7 +5116,7 @@ def  Salarios_cursos_commaisprofissoes(path1,name1,path2,name2):
     # cores_personalizadas = ['red', 'blue', 'green', 'black', 'pink']  # Adicione mais cores, se necessário
     # cores_personalizadas = ['DarkViolet', 'DarkMagenta', 'DeepPink', 'Crimson',
     #                        'red', 'Yellow','blue', 'brown', 'black', 'green']  # Adicione mais cores, se necessário
-    cores_personalizadas = ['red','blue', 'brown', 'black', 'green']  # Adicione mais cores, se necessário
+    cores_personalizadas = ['red','Yellow','blue', 'brown', 'black', 'green','DarkViolet']  # Adicione mais cores, se necessário
     # # Ordenar os clusters antes de criar o gráfico
     clusters_ordenados = sorted(filtered_data['Curso'].unique())
 
@@ -5059,7 +5173,8 @@ def  Salarios_cursos_commaisprofissoes(path1,name1,path2,name2):
     # plt.show()
     # string1 = "Cursos e Profissões que mudam de Clusters" +".png"
     # string1 = "Salários: cursos e profissões que tem profissionais atuando em mais de uma profissão" +".png"
-    string1 = "Salários_cursos_profissões_profissionais_atuando_profissão" +".png"
+    # string1 = "Salários_cursos_profissões_profissionais_atuando_profissão" +".png"
+    string1 = "Salários_cursos_profissões_profissionais_atuando_profissão_atual" +".png"
     save_results_to = 'graficos/'  
     plt.savefig(save_results_to + string1)  
 

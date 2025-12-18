@@ -1,6 +1,5 @@
 
 # pip install ibge-parser
-
 # inclua todos os demais imports aqui
 import argparse
 import sys
@@ -51,21 +50,15 @@ else:
     fase = args.fase
 
 # Fase 0: Download dos dados do IBGE da web
-# if fase >= 0:
 if fase == 0:
-    # for p in ["microdados-ibge/original", "microdados-ibge/processados", "microdados-ibge/graficos"]:
-    #   if not os.path.exists(p):
-    #       os.makedirs(p)
     for p in ["microdados-ibge/original", "processados", "graficos"]:
         if not os.path.exists(p):
             os.makedirs(p)
 
     ibge_functions.ibge_download()
 
-# Fase 1: Filtrar somente os dados relevantes. Aqui significa que
-# você precisa filtrar todos os dados que possam ser utilizados no futuro.
+# Fase 1: Filtrar somente os dados relevantes. Aqui significa que você precisa filtrar todos os dados que possam ser utilizados no futuro.
 if fase <= 1:
-    # if fase == 1:
     # garantir que a pasta /processados existe, senão criar
     proc_dir = os.path.join("processados")
     if not os.path.exists(proc_dir):
@@ -87,8 +80,7 @@ if fase <= 1:
 # Fase 2: Limpeza dos dados. Agora começa a processar algo mais complexo desde que seja definitivo
 # Pré-Processamento
 if fase <= 2:
-    # if fase == 2:
-
+    
     ibge_functions.ibge_Graduados_NaoGraduados()
 
     ibge_functions.ibge_Pivot_Feminino()
@@ -115,17 +107,12 @@ if fase <= 2:
         logging.info(
             "Arquivo %s já existe — pulando ibge_trocar_CBO_Domiciliar_por_CBO()", file_path)
 
-    # # processados/CSVs_PivotTableFinal/Brasil_PivotFinal_CBO.csv
-    # # processados/CSVs_PivotTableFinal/Brasil_PivotFinalMasculina_CBO.csv
-    # # processados/CSVs_PivotTableFinal/Brasil_PivotFinalFeminina_CBO.csv
-    # ibge_functions_preprocessing. ibge_trocar_CBO_Domiciliar_por_CBO_PivotTable()
     masc_path = os.path.join(
         "processados", "CSVs_PivotTableFinal", "Brasil_PivotFinalMasculina_CBO.csv")
     fem_path = os.path.join(
         "processados", "CSVs_PivotTableFinal", "Brasil_PivotFinalFeminina_CBO.csv")
     geral_path = os.path.join(
         "processados", "CSVs_PivotTableFinal", "Brasil_PivotFinal_CBO.csv")
-    # Executa a troca apenas se pelo menos um dos arquivos não existir
     if not (os.path.exists(masc_path) and os.path.exists(fem_path) and os.path.exists(geral_path)):
         logging.info("Arquivos %s, %s e/ou %s não encontrados — executando ibge_trocar_CBO_Domiciliar_por_CBO_PivotTable()",
                      masc_path, fem_path, geral_path)
@@ -135,9 +122,7 @@ if fase <= 2:
                      masc_path, fem_path, geral_path)
 
     # Redução dos digitos dos CBOs ...
-    # # Diminui CBO em Brasil_Graduados e Brasil_PivotTableFinal ...
-    # ibge_functions.ibge_diminuirCBOs()
-    # Diminui CBO em Brasil_Graduados e Brasil_PivotTableFinal ...
+    # Diminui CBO em Brasil_Graduados e Brasil_PivotTableFinal 
     arquivos = [
         os.path.join("processados", "CSVs_PivotTableFinal",
                      "Brasil_PivotFinal_CBO_DiminuidaCBO2.csv"),
@@ -148,7 +133,6 @@ if fase <= 2:
         os.path.join("processados", "CSVs_PivotTableFinal",
                      "Brasil_PivotFinal_CBO_DiminuidaCBO3.csv"),
     ]
-
     if not all(os.path.exists(p) for p in arquivos):
         logging.info(
             "Um ou mais arquivos CBO não encontrados — executando ibge_diminuirCBOs()")
@@ -158,10 +142,9 @@ if fase <= 2:
             "Todos os arquivos CBO já existem — pulando ibge_diminuirCBOs()")
 
     # Redução os digitos dos Cursos
-    # # Diminui cursos em Cursos_csv ...
+    # Diminui cursos em Cursos_csv ...
     # ibge_functions_descriptive_analysis.ibge_cursos_filter_DiminuirCurso()
-    # # Diminui cursos em Brasil_Graduados - Brasil_Graduados_DiminuidoCBO2.csv e Brasil_Graduados_DiminuidoCBO3.csv  ...
-    
+    # # Diminui cursos em Brasil_Graduados - Brasil_Graduados_DiminuidoCBO2.csv e Brasil_Graduados_DiminuidoCBO3.csv  
     curso2_path0 = os.path.join("processados", "CSVs_ArquivoFinalGraduados",
                                 "Brasil_Graduados_CBO_CBO4_Curso2.csv")
     curso2_path1 = os.path.join("processados", "CSVs_ArquivoFinalGraduados",
@@ -180,9 +163,8 @@ if fase <= 2:
     ibge_functions.Filtro_Graduados_Masculino_Feminino()                 
 
 # Fase 10: Essa é a primeira fase que você faz no dia a dia. Aqui você começa a fazer a análise dos dados
-# Fase 10: Análise Descritiva ... ...
+# Fase 10: Análise Descritiva 
 if fase <= 10:
-    # if fase == 10:
     # https://colab.research.google.com/drive/1_Nx4oOzrgCQvSolh9XG-UgWTQ508Md1M?authuser=1#scrollTo=o9GsbqjctkkL
     # ibge_functions.ibge_cursos_profissoes()
 
@@ -190,86 +172,82 @@ if fase <= 10:
 
     # ibge_functions.ibge_corte_CBO()
 
-    ibge_functions.ibge_idas_voltas_cursos_profissoes()  # OK
-    ibge_functions.ibge_idas_voltas_cursos_profissoes_Curso2() # OK
-
-    # Essas funções  só devem ser usadas em caso de necessidade, pois ela acha ida e volta com os CBOs com 2 ou 3 digitos
-    # ibge_functions.ibge_idas_voltas_cursos_profissoes_CBO3()
+    ibge_functions.ibge_idas_voltas_cursos_profissoes()                                    # OK
+    ibge_functions.ibge_idas_voltas_cursos_profissoes_Curso2()                             # OK
+    ibge_functions.ibge_idas_voltas_cursos_profissoes_CBO3()                               # OK
     # ibge_functions.ibge_idas_voltas_cursos_profissoes_CBO3_Curso2()  
     # ibge_functions.ibge_idas_voltas_cursos_profissoes_CBO2()
     # ibge_functions.ibge_idas_voltas_cursos_profissoes_CBO2_Curso2() 
 
-    # # ibge_functions.ibge_trabalho_recenseados()
+    # ibge_functions.ibge_trabalho_recenseados()
     pass
 
+# Fase 20: Análise Exploratória ...
+if fase <= 20:  
+    # Clusterização com k=3 
+    # Geração do gráfico K-Means com K=3 (10% - Todos os Cursos - Clusterização)
+    # Geração do arquivo Kmeans3_T.csv
+    ibge_functions.Profissoes_Cursos()                                                    # OK
+    # ibge_functions.Profissoes_Cursos_Curso2()
+    # ibge_functions.Profissoes_Cursos_CBO2()
+    # ibge_functions.Profissoes_Cursos_CBO2_Curso2()  
+    # ibge_functions.Profissoes_Cursos_CBO3()
+    # ibge_functions.Profissoes_Cursos_CBO3_Curso2() 
 
-# # Fase 20: Análise Exploratória ...
-# if fase <= 20:  # QP1
-#     # Função para:
-#     # - clusterização com k=3,
-#     # - geração do gráfico K-Means com K=3 (10% - Todos os Cursos - Clusterização)
-#     # - geração do arquivo Kmeans3_T.csv
-#     ibge_functions.Profissoes_Cursos()  # OK
-#     # ibge_functions.Profissoes_Cursos_Curso2()
+    # Gerar a contagem de CBOs de forma automática
+    # ibge_functions_exploratory_analysis.leitura_kmeans3_t()
+    # ibge_functions_exploratory_analysis.leitura_kmeans3_t_cbo3_Curso2_curso()
+    # ibge_functions_exploratory_analysis.leitura_kmeans3_t_cbo2_Curso2_curso()
+    # ibge_functions_exploratory_analysis.leitura_kmeans3_t_curso()
 
-#     # # Essas funções  só devem ser usadas em caso de necessidade, pois elas trabalham com os CBOs com 2 ou 3 digitos
-#     # ibge_functions.Profissoes_Cursos_CBO2()
-#     # ibge_functions.Profissoes_Cursos_CBO2_Curso2()  # ...
-#     # ibge_functions.Profissoes_Cursos_CBO3()
-#     # ibge_functions.Profissoes_Cursos_CBO3_Curso2()  # ...
+    # Pegar os 10 primeiros CBOs de cada curso no arquivo que considera 100% dos dados
+    # ibge_functions_exploratory_analysis.leitura_kmeans3_t_cbo()  
+    # ibge_functions_exploratory_analysis.leitura_kmeans3_t_cbo_Curso2()
+    # ibge_functions_exploratory_analysis.leitura_kmeans3_t_cbo2()
+    # ibge_functions_exploratory_analysis.leitura_kmeans3_t_cbo2_Curso2() 
+    # ibge_functions_exploratory_analysis.leitura_kmeans3_t_cbo3()
+    # ibge_functions_exploratory_analysis.leitura_kmeans3_t_cbo3_Curso2()  
 
-#     # # # Leitura arquivo Kmeans3_T.csv para gerar a contagem de CBOs de forma automática
-#     # # # ibge_functions_exploratory_analysis.leitura_kmeans3_t()
-#     # # ibge_functions_exploratory_analysis.leitura_kmeans3_t_cbo3_Curso2_curso()
-#     # # ibge_functions_exploratory_analysis.leitura_kmeans3_t_cbo2_Curso2_curso()
-#     # # ibge_functions_exploratory_analysis.leitura_kmeans3_t_curso()
+    # Análise Exploratória - Gráficos e Tabelas -----------------------------------------------------------------
+    # gera o grafico com os pontos circulados em vermelho
+    # ibge_functions_exploratory_analysis.GerarGraficosPontos()
+    # Empregabilidade x Salario -----------------------------------------------------------------
+    ibge_functions.Juntar_10Porcento_Genero()                                                # OK    
+    ibge_functions.median_salario()                                                          # OK  
+    # ibge_functions_exploratory_analysis.separar_cursos_por_clusters()
+    # ibge_functions_exploratory_analysis.medianas_por_clusters()
+    # ibge_functions.Salarios()
+    ibge_functions.Salarios_cursos_commaisprofissoes()                                       # OK
+    ibge_functions.Soma_PivotTable()                                                         # OK
+    ibge_functions.Coluna_Empregabilidade()                                                  # OK
+    ibge_functions.Empregabilidade()                                                         # OK
+    ibge_functions_exploratory_analysis.Empregabilidade_cursos_commaisprofissoes_voronoi()   # OK
+    ibge_functions.Empregabilidade_cursos_commaisprofissoes()                                # OK
+    # ibge_functions_exploratory_analysis.correlacao_empregabilidade_salario() 
+    # ibge_functions_exploratory_analysis.plot_selected_courses()
+    # ibge_functions.plot_selected_courses_1()
+    pass
 
-#     # # # Leitura arquivo Kmeans3.csv para pegar os 10 primeiros CBOs ... arquivos que acham os 10 primeiros no arquivo que considera 100% dos dados
-#     # ibge_functions_exploratory_analysis.leitura_kmeans3_t_cbo()  # ...
-#     # ibge_functions_exploratory_analysis.leitura_kmeans3_t_cbo_Curso2()
-#     # ibge_functions_exploratory_analysis.leitura_kmeans3_t_cbo2()
-#     # ibge_functions_exploratory_analysis.leitura_kmeans3_t_cbo2_Curso2()  # ...
-#     # ibge_functions_exploratory_analysis.leitura_kmeans3_t_cbo3()
-#     # ibge_functions_exploratory_analysis.leitura_kmeans3_t_cbo3_Curso2()  # ...
-
-#     # Análise Exploratória - Gráficos e Tabelas -----------------------------------------------------------------
-#     # gera o grafico com os pontos circulados em vermelho
-#     # ibge_functions_exploratory_analysis.GerarGraficosPontos()
-
-#     # Empregabilidade x Salario -----------------------------------------------------------------
-#     # ibge_functions.Juntar_10Porcento_Genero()  # OK    
-#     ibge_functions.median_salario()              # OK  
-#     # ibge_functions_exploratory_analysis.separar_cursos_por_clusters()
-#     # ibge_functions_exploratory_analysis.medianas_por_clusters()
-#     ibge_functions.Salarios()
-#     # ibge_functions.Salarios_cursos_commaisprofissoes()
-#     # ibge_functions.Soma_PivotTable()
-#     # ibge_functions.Coluna_Empregabilidade()
-#     # ibge_functions.Empregabilidade()
-#     ibge_functions.Empregabilidade_cursos_commaisprofissoes()
-#     # ibge_functions_exploratory_analysis.correlacao_empregabilidade_salario() #...Gráfico
-#     # ibge_functions_exploratory_analysis.plot_selected_courses()
-#     # ibge_functions.plot_selected_courses_1()
-#     pass
-
-# IMPORTANTE: =========================================================================================================================================
+# IMPORTANTE: ======================================================================================
 # O código abaixo será reescrito devido às mudanças na Questão de Pesquisa.
-# Ele foi mantido comentado para facilitar a comparação com a nova versão e permitir o reaproveitamento de partes da lógica original.
+# Comentado para facilitar a comparação com a nova versão e permitir o reaproveitamento de partes da lógica original.
 # Portanto, NÃO apague as fases comentadas por enquanto.
 
-# # Fase 30: Resultados da Análise ...
+# Fase 30: Resultados da Análise ...
+if fase <= 30:  
 # if fase == 30:  # QP2
+#       
 #     # Funções para 10%
 #     # Geração do dataframes femininos e masculinos
 #     ibge_functions.Filtro_Masculino_Feminino()
 #     # Geração dos Arquivos de idas e voltas Femininas e Masculinas
-#     ibge_functions.Ida_Volta_Masculino_Feminino()
+#     ibge_functions.Ida_Volta_Masculino_Feminino()                    # Essa função foi movida para a fase 10 ...
 #     # Limpeza dos arquivos  de idas e voltas Femininas e Masculinas
-#     ibge_functions.Tabela_Ida_Volta_Masculino_Feminino()
+#     ibge_functions.Tabela_Ida_Volta_Masculino_Feminino()             # Essa função foi movida para a fase 10 ...
 #     # Geração dos gráficos:
 #     # - Profissões e Cursos-Masculino (10%-Cursos e Profissões do Censo-Masculino)
 #     # - Profissões e Cursos-Feminino  (10%-Cursos e Profissões do Censo-Feminino)
-#     ibge_functions.Profissoes_Cursos_Masculino_Feminino()
+      ibge_functions.Profissoes_Cursos_Masculino_Feminino()                                    # OK
 #     pass
 
 
@@ -327,7 +305,9 @@ if fase <= 10:
 #     ibge_functions_results.extract_courses_Correspondentes_M()
 #     pass
 
-# if fase == 35:
+
+if fase <= 35:  
+# if fase == 35:        
 #     # QP3 continuação
 #     #  2-  Profissões desequilibradas
 #     # - Profissões desequilibradas - Pontos Selecionados(Grandes Desloamentos)
@@ -338,12 +318,12 @@ if fase <= 10:
 #     ibge_functions_results.resultados_distancia()
 #     ibge_functions_results.tabela_clusters_diferentes()
 #     # - Profissões desequlibradas  - Gráfico com os pontos que mudaram de cluster e diagrama de Voronoi
-#      ibge_functions_results.voronoi()
+#     ibge_functions_results.voronoi()
 #     #  3-  Profissões equilibradas - 40%-60% ...
 #     # - Tabela com os pontos clusterizados contendo as porcentagens de masculinos e femininos
-#     ibge_functions_results.Juntar_40_60Porcento_Genero()
-#     ibge_functions_results.tabela()
-#     ibge_functions_results.separar_registros_por_cluster()
+    ibge_functions_results.Juntar_40_60Porcento_Genero()                                       # OK 
+    ibge_functions_results.tabela()                                                            # OK 
+    ibge_functions_results.separar_registros_por_cluster()                                     # OK 
 #     # - Tabela com os pontos selecionados(40%-60%)
 #     ibge_functions_results. pt_selecionados_40_60()
 #     ibge_functions_results.tabela_40_60()
@@ -368,7 +348,7 @@ if fase <= 10:
 #     ibge_functions_results.extract_courses_transicao()
 #     ibge_functions_results.extract_courses_equidade()
 
-#     pass
+    pass
 
 # if fase == 40:
 #     # #QP4

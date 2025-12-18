@@ -236,6 +236,8 @@ def ibge_idas_voltas_cursos_profissoes():
     ibge_functions_descriptive_analysis.Ida_Volta(path,name,path1,name1, 'O', modo=100)
     ibge_functions_descriptive_analysis.Ida_Volta(path,name,path1,name1, 'F', modo=100)
     ibge_functions_descriptive_analysis.Ida_Volta(path,name,path1,name1, 'M', modo=100)
+    ibge_functions_descriptive_analysis.Ida_Volta(path,name,path1,name1, 'F', modo=10)
+    ibge_functions_descriptive_analysis.Ida_Volta(path,name,path1,name1, 'M', modo=10)
 
 
     path2 = ibge_variable.paths(13)
@@ -245,6 +247,8 @@ def ibge_idas_voltas_cursos_profissoes():
     ibge_functions_descriptive_analysis.Tabela_Ida_Volta(path2,name2, 'O', modo=100) 
     ibge_functions_descriptive_analysis.Tabela_Ida_Volta(path2,name2, 'F', modo=100) 
     ibge_functions_descriptive_analysis.Tabela_Ida_Volta(path2,name2, 'M', modo=100) 
+    ibge_functions_descriptive_analysis.Tabela_Ida_Volta(path2,name2, 'F', modo=10) 
+    ibge_functions_descriptive_analysis.Tabela_Ida_Volta(path2,name2, 'M', modo=10) 
     return
 
 def ibge_idas_voltas_cursos_profissoes_Curso2():
@@ -416,13 +420,15 @@ def Tabela_Ida_Volta_Masculino_Feminino():
     return
 
 def Profissoes_Cursos_Masculino_Feminino(): 
-    path1 = ibge_variable.paths(12)
-    name1 = ibge_variable.names(6)
-    path2 = ibge_variable.paths(13)
-    name2 = ibge_variable.names(9)
+    # path1 = ibge_variable.paths(12)
+    # name1 = ibge_variable.names(6)
+    # path2 = ibge_variable.paths(13)
+    # name2 = ibge_variable.names(9)
     # ibge_functions_results.Profissoes_Cursos_Masculino_Feminino(path1,name1,path2,name2,'F')
     # ibge_functions_results.Profissoes_Cursos_Masculino_Feminino(path1,name1,path2,name2,'M')
-    ibge_functions_results.Profissoes_Cursos_Masculino_Feminino_Juntos(path1,name1,path2,name2) 
+    # ibge_functions_results.Profissoes_Cursos_Masculino_Feminino_Juntos(path1,name1,path2,name2) 
+    ibge_functions_results.Profissoes_Cursos_Masculino_Feminino_Juntos() 
+
     return  
 
 # Fase 31
@@ -798,9 +804,11 @@ def ibge_idas_voltas_cursos_profissoes_CBO3():
     # name = ibge_variable.names(7)
     # path1 = ibge_variable.paths(12)
     # name1 = ibge_variable.names(6)
-    ibge_functions_descriptive_analysis.Ida_Volta_CBO3()
-
-    ibge_functions_descriptive_analysis.Tabela_Ida_Volta_CBO3()    
+    ibge_functions_descriptive_analysis.Ida_Volta_CBO3(modo=10)
+    ibge_functions_descriptive_analysis.Ida_Volta_CBO3(modo=100)
+    ibge_functions_descriptive_analysis.Tabela_Ida_Volta_CBO3(modo=10)   
+    ibge_functions_descriptive_analysis.Tabela_Ida_Volta_CBO3(modo=100)    
+ 
 
     return
 

@@ -3148,11 +3148,20 @@ def Ida_Volta(path,name,path1,name1, sx, modo):
         df.to_csv(save_results_to + '100Porcent_DF.csv', index=False, encoding='utf-8-sig', quoting=1)
 
     if modo == 100 and  sx == 'F':
-        # usa os arquivos de 10%
+        # usa os arquivos de 100%
         df.to_csv(save_results_to + '100Porcent_DF_Fem.csv', index=False, encoding='utf-8-sig', quoting=1)
     if modo == 100 and  sx == 'M':
         # usa os arquivos de 100%
         df.to_csv(save_results_to + '100Porcent_DF_Masc.csv', index=False, encoding='utf-8-sig', quoting=1)    
+
+    if modo == 10 and  sx == 'F':
+        # usa os arquivos de 10%
+        df.to_csv(save_results_to + '10Porcent_DF_Fem.csv', index=False, encoding='utf-8-sig', quoting=1)
+    if modo == 10 and  sx == 'M':
+        # usa os arquivos de 10%
+        df.to_csv(save_results_to + '10Porcent_DF_Masc.csv', index=False, encoding='utf-8-sig', quoting=1)    
+
+      
 
     return           
 
@@ -3181,6 +3190,16 @@ def Tabela_Ida_Volta(path2,name2, sx, modo):
         # usa os arquivos de 100%
         df ='graficos/100Porcent_DF_Masc.csv'
         logging.info(" Gerando a tabelas idas e voltas ...") 
+
+    if modo == 10 and  sx == 'F':    
+        # usa os arquivos de 100%
+        df ='graficos/10Porcent_DF_Fem.csv' 
+        logging.info(" Gerando a tabelas idas e voltas ...") 
+
+    if modo == 10 and  sx == 'M':                  
+        # usa os arquivos de 100%
+        df ='graficos/10Porcent_DF_Masc.csv'
+        logging.info(" Gerando a tabelas idas e voltas ...")     
 
     df1 = pd.read_csv(df)    
     # df1 = pd.read_csv(df, dtype=str)
@@ -3231,6 +3250,16 @@ def Tabela_Ida_Volta(path2,name2, sx, modo):
         logging.info(" Concluindo a geração da tabela de idas e voltas ...") 
         df1.to_csv(save_results_to + '100Porcent_DF_Limpo_Masc.csv', index=False, encoding='utf-8-sig', quoting=1)
     
+    if modo == 10 and  sx == 'F':   
+        # usa os arquivos de 10%
+        logging.info(" Concluindo a geração da tabela de idas e voltas ...") 
+        df1.to_csv(save_results_to + '10Porcent_DF_Limpo_Fem.csv', index=False, encoding='utf-8-sig', quoting=1)
+     
+    if modo == 10 and  sx == 'M':     
+        # usa os arquivos de 10%
+        logging.info(" Concluindo a geração da tabela de idas e voltas ...") 
+        df1.to_csv(save_results_to + '10Porcent_DF_Limpo_Masc.csv', index=False, encoding='utf-8-sig', quoting=1)
+
     return
 
 # def Ida_Volta_Curso2(path,name,path1,name1):
@@ -3954,11 +3983,14 @@ def Tabela_Ida_Volta_CBO2_Curso2():
 
     return
 
-def Ida_Volta_CBO3():
+# def Ida_Volta_CBO3():
+def Ida_Volta_CBO3(modo):
 
     logging.info(" Gerando as idas e voltas")   
     # csv_estado = os.path.join(path[0],name[0]) # arquivo do censo do Brasil inteiro (somente graduados)
-    csv_estado = os.path.join('processados/CSVs_ArquivoFinalGraduados/Brasil_Graduados_DiminuidoCBO3.csv') # arquivo do censo do Brasil inteiro (somente graduados)
+    # csv_estado = os.path.join('processados/CSVs_ArquivoFinalGraduados/Brasil_Graduados_DiminuidoCBO3.csv') # arquivo do censo do Brasil inteiro (somente graduados)
+    csv_estado = os.path.join('processados/CSVs_ArquivoFinalGraduados/Brasil_Graduados_CBO_DiminuidoCBO3.csv') # arquivo do censo do Brasil inteiro (somente graduados)
+
     # path1 = ibge_variable.paths(12)
     # name1 = ibge_variable.names(6)
     # csv_CBO = os.path.join(path1[0],name1[1]) # Tabela de CBOs
@@ -3968,8 +4000,9 @@ def Ida_Volta_CBO3():
     # path2 = ibge_variable.paths(8)
     # name2 = ibge_variable.names(8)         
     # csv_PivotTableFinal =  os.path.join(path2[0],name2[0]) #Pivo Table Final
-    csv_PivotTableFinal =  os.path.join('processados/CSVs_PivotTableFinal/Brasil_PivotFinal_DiminuidaCBO3.csv') #Pivo Table Final
-
+    # csv_PivotTableFinal =  os.path.join('processados/CSVs_PivotTableFinal/Brasil_PivotFinal_DiminuidaCBO3.csv') #Pivo Table Final
+    csv_PivotTableFinal =  os.path.join('processados/CSVs_PivotTableFinal/Brasil_PivotFinal_CBO_DiminuidaCBO3.csv') #Pivo Table Final
+    
     # CursosCenso = ibge_cursos_filter(path1[0],name1[2])
     CursosCenso = ibge_cursos_filter('documentacao/','Curso_CSV.csv')
     
@@ -4002,10 +4035,12 @@ def Ida_Volta_CBO3():
         print(f)
         
         #======================================================Plotando os cbos de determinado curso, usando função ...
-        #10%
-        # primeirosCbos,primeirosCbos_Nome,Porcentagens,CURSO_NUM,CURSO_NOME=CBOs_Curso_v6_CBO3(csv_estado,csv_CBO,curso_num,curso_nome,titulo10,titulo3,0.1,save_results_to)
-        # 100%
-        primeirosCbos,primeirosCbos_Nome,Porcentagens,CURSO_NUM,CURSO_NOME=CBOs_Curso_v6_CBO3(csv_estado,csv_CBO,curso_num,curso_nome,titulo10,titulo3,0,save_results_to)
+        if modo == 10:
+          # usa os arquivos de 10%  
+          primeirosCbos,primeirosCbos_Nome,Porcentagens,CURSO_NUM,CURSO_NOME=CBOs_Curso_v6_CBO3(csv_estado,csv_CBO,curso_num,curso_nome,titulo10,titulo3,0.1,save_results_to)
+        elif modo == 100:
+            # usa os arquivos de 100%
+            primeirosCbos,primeirosCbos_Nome,Porcentagens,CURSO_NUM,CURSO_NOME=CBOs_Curso_v6_CBO3(csv_estado,csv_CBO,curso_num,curso_nome,titulo10,titulo3,0,save_results_to)
 
         if (primeirosCbos!=0)&(primeirosCbos!=0)&(Porcentagens!=0):
             #======================================================Achando a quantidade de Não-Graduados na PivotTable
@@ -4021,15 +4056,16 @@ def Ida_Volta_CBO3():
             for i in range (len(primeirosCbos)):
                 titulo3=primeirosCbos_Nome[i]
                 if(int(float(primeirosCbos[i]))>=2000):
-                    # 10%
-                    # CBO,Curso,tresprimeirosCursos,intensidade,fig,string,cursos_vol, nomes_vol, porcentagens_vol=Cursos_CBO_14_10(csv_estado,csv_CBO,csv_CURSOS,primeirosCbos[i],titulo3,NaoGraduados[i],curso_num,curso_nome,primeirosCbos_Nome,i,0.1)
-                    # retirar intensidade ...
-                    # CBO,Curso,tresprimeirosCursos,fig,string,cursos_vol, nomes_vol, porcentagens_vol=Cursos_CBO_14_10(csv_estado,csv_CBO,csv_CURSOS,primeirosCbos[i],titulo3,NaoGraduados[i],curso_num,curso_nome,primeirosCbos_Nome,i,0.1)
-
-                    # 100%
-                    # CBO,Curso,tresprimeirosCursos,intensidade,fig,string,cursos_vol, nomes_vol, porcentagens_vol=Cursos_CBO_14_10(csv_estado,csv_CBO,csv_CURSOS,primeirosCbos[i],titulo3,NaoGraduados[i],curso_num,curso_nome,primeirosCbos_Nome,i,0)
-                    # retirar intensidade ...
-                    CBO,Curso,tresprimeirosCursos,fig,string,cursos_vol, nomes_vol, porcentagens_vol=Cursos_CBO_14_10(csv_estado,csv_CBO,csv_CURSOS,primeirosCbos[i],titulo3,NaoGraduados[i],curso_num,curso_nome,primeirosCbos_Nome,i,0)
+                    if modo == 10:
+                       # usa os arquivos de 10%
+                       # CBO,Curso,tresprimeirosCursos,intensidade,fig,string,cursos_vol, nomes_vol, porcentagens_vol=Cursos_CBO_14_10(csv_estado,csv_CBO,csv_CURSOS,primeirosCbos[i],titulo3,NaoGraduados[i],curso_num,curso_nome,primeirosCbos_Nome,i,0.1)
+                       # retirar intensidade ...
+                       CBO,Curso,tresprimeirosCursos,fig,string,cursos_vol, nomes_vol, porcentagens_vol=Cursos_CBO_14_10(csv_estado,csv_CBO,csv_CURSOS,primeirosCbos[i],titulo3,NaoGraduados[i],curso_num,curso_nome,primeirosCbos_Nome,i,0.1)
+                    elif modo == 100:
+                          # usa os arquivos de 100%
+                          # CBO,Curso,tresprimeirosCursos,intensidade,fig,string,cursos_vol, nomes_vol, porcentagens_vol=Cursos_CBO_14_10(csv_estado,csv_CBO,csv_CURSOS,primeirosCbos[i],titulo3,NaoGraduados[i],curso_num,curso_nome,primeirosCbos_Nome,i,0)
+                          # retirar intensidade ...
+                          CBO,Curso,tresprimeirosCursos,fig,string,cursos_vol, nomes_vol, porcentagens_vol=Cursos_CBO_14_10(csv_estado,csv_CBO,csv_CURSOS,primeirosCbos[i],titulo3,NaoGraduados[i],curso_num,curso_nome,primeirosCbos_Nome,i,0)
                    
                     if (cursos_vol!=0)&(nomes_vol!=0)&(porcentagens_vol!=0):
                       # Intensidade.append(intensidade) #retirar intensidade ... 10/09/2025
@@ -4044,15 +4080,16 @@ def Ida_Volta_CBO3():
                         N = 0 #15/10/2025 ... Existem cursos para esse CBO
                 else:
                     # print(primeirosCbos[i])
-                    # 10%
-                    # CBO,Curso,tresprimeirosCursos,intensidade,fig,string,cursos_vol, nomes_vol, porcentagens_vol=Cursos_CBO_13_10(csv_estado,csv_CBO,csv_CURSOS,primeirosCbos[i],titulo3,NaoGraduados[i],Graduados_Nao[i],curso_num,curso_nome,primeirosCbos_Nome,i,0.1,save_results_to)
-                    # retirar intensidade e string  ... 10/09/2025
-                    # CBO,Curso,tresprimeirosCursos,fig,cursos_vol, nomes_vol, porcentagens_vol=Cursos_CBO_13_10(csv_estado,csv_CBO,csv_CURSOS,primeirosCbos[i],titulo3,NaoGraduados[i],Graduados_Nao[i],curso_num,curso_nome,primeirosCbos_Nome,i,0.1,save_results_to)
-                    
-                    # 100%
-                    # CBO,Curso,tresprimeirosCursos,intensidade,fig,string,cursos_vol, nomes_vol, porcentagens_vol=Cursos_CBO_13_10(csv_estado,csv_CBO,csv_CURSOS,primeirosCbos[i],titulo3,NaoGraduados[i],Graduados_Nao[i],curso_num,curso_nome,primeirosCbos_Nome,i,0,save_results_to)
-                    # retirar intensidade e string  ... 10/09/2025
-                    CBO,Curso,tresprimeirosCursos,fig,cursos_vol, nomes_vol, porcentagens_vol=Cursos_CBO_13_10(csv_estado,csv_CBO,csv_CURSOS,primeirosCbos[i],titulo3,NaoGraduados[i],Graduados_Nao[i],curso_num,curso_nome,primeirosCbos_Nome,i,0,save_results_to)
+                    if modo == 10:
+                       # usa os arquivos de 10%
+                       # CBO,Curso,tresprimeirosCursos,intensidade,fig,string,cursos_vol, nomes_vol, porcentagens_vol=Cursos_CBO_13_10(csv_estado,csv_CBO,csv_CURSOS,primeirosCbos[i],titulo3,NaoGraduados[i],Graduados_Nao[i],curso_num,curso_nome,primeirosCbos_Nome,i,0.1,save_results_to)
+                       # retirar intensidade e string  ... 10/09/2025
+                       CBO,Curso,tresprimeirosCursos,fig,cursos_vol, nomes_vol, porcentagens_vol=Cursos_CBO_13_10(csv_estado,csv_CBO,csv_CURSOS,primeirosCbos[i],titulo3,NaoGraduados[i],Graduados_Nao[i],curso_num,curso_nome,primeirosCbos_Nome,i,0.1,save_results_to)
+                    elif modo == 100:
+                          # usa os arquivos de 100%
+                          # CBO,Curso,tresprimeirosCursos,intensidade,fig,string,cursos_vol, nomes_vol, porcentagens_vol=Cursos_CBO_13_10(csv_estado,csv_CBO,csv_CURSOS,primeirosCbos[i],titulo3,NaoGraduados[i],Graduados_Nao[i],curso_num,curso_nome,primeirosCbos_Nome,i,0,save_results_to)
+                          # retirar intensidade e string  ... 10/09/2025
+                          CBO,Curso,tresprimeirosCursos,fig,cursos_vol, nomes_vol, porcentagens_vol=Cursos_CBO_13_10(csv_estado,csv_CBO,csv_CURSOS,primeirosCbos[i],titulo3,NaoGraduados[i],Graduados_Nao[i],curso_num,curso_nome,primeirosCbos_Nome,i,0,save_results_to)
 
                     if (cursos_vol!=0)&(nomes_vol!=0)&(porcentagens_vol!=0):
                         # Intensidade.append(intensidade) #retirar intensidade ... 10/09/2025
@@ -4130,26 +4167,31 @@ def Ida_Volta_CBO3():
                 v_= V_
 
     df = x_y_z_v_df(x_,y_,z_,v_)  
-    #10%  
-    # df.to_csv(save_results_to + '10Porcent_DF.csv')
-    # df.to_csv(save_results_to + 'CBO3_10Porcent_DF.csv')
-    #100%
-    # df.to_csv(save_results_to + '100Porcent_DF.csv')
-    df.to_csv(save_results_to + 'CBO3_100Porcent_DF.csv')
+
+    if modo == 10:
+       # usa os arquivos de 10%  
+       # df.to_csv(save_results_to + '10Porcent_DF.csv')
+       df.to_csv(save_results_to + 'CBO3_10Porcent_DF.csv')
+    if modo == 100:
+       # df.to_csv(save_results_to + '100Porcent_DF.csv')
+       df.to_csv(save_results_to + 'CBO3_100Porcent_DF.csv')
 
     return 
 
-def Tabela_Ida_Volta_CBO3():
+# def Tabela_Ida_Volta_CBO3():
+def Tabela_Ida_Volta_CBO3(modo):
     # df =  os.path.join(path2[0],name2[1])
     # df ='graficos/10Porcent_DF.csv' 
     # df ='graficos/100Porcent_DF.csv' 
     # df1 = pd.read_csv(df)  
-    #10%
-    # save_results_to = 'graficos/'
-    # df1 = pd.read_csv('graficos/CBO3_10Porcent_DF.csv')  
-    #100%
-    save_results_to = 'graficos/'
-    df1 = pd.read_csv('graficos/CBO3_100Porcent_DF.csv')  
+    if modo == 10:
+        # usa os arquivos de 10%
+        save_results_to = 'graficos/'
+        df1 = pd.read_csv('graficos/CBO3_10Porcent_DF.csv')  
+    if modo == 100:
+        # usa os arquivos de 100%   
+        save_results_to = 'graficos/'
+        df1 = pd.read_csv('graficos/CBO3_100Porcent_DF.csv')  
       
 
 
@@ -4169,16 +4211,18 @@ def Tabela_Ida_Volta_CBO3():
     # Reset_Indice
     df1 = df1.reset_index(drop=True)
     # Salvar_Tabela
-    # # 10%
-    # df1.to_csv(save_results_to + '10Porcent_DF_Limpo.csv')
-    # df1.to_excel(save_results_to + '10Porcent_DF_Limpo.xlsx')
-    # df1.to_csv(save_results_to + 'CBO3_10Porcent_DF_Limpo.csv')
-    # df1.to_excel(save_results_to + 'CBO3_10Porcent_DF_Limpo.xlsx')
-    # # 100%
-    # df1.to_csv(save_results_to + '100Porcent_DF_Limpo.csv')
-    # df1.to_excel(save_results_to + '100Porcent_DF_Limpo.xlsx')
-    df1.to_csv(save_results_to + 'CBO3_100Porcent_DF_Limpo.csv')
-    df1.to_excel(save_results_to + 'CBO3_100Porcent_DF_Limpo.xlsx')
+    if modo == 10:  
+      # usa os arquivos de 10%        
+      # df1.to_csv(save_results_to + '10Porcent_DF_Limpo.csv')
+      # df1.to_excel(save_results_to + '10Porcent_DF_Limpo.xlsx')
+      df1.to_csv(save_results_to + 'CBO3_10Porcent_DF_Limpo.csv')
+      df1.to_excel(save_results_to + 'CBO3_10Porcent_DF_Limpo.xlsx')
+    if modo == 100:  
+      # usa os arquivos de 10%   
+      # df1.to_csv(save_results_to + '100Porcent_DF_Limpo.csv')
+      # df1.to_excel(save_results_to + '100Porcent_DF_Limpo.xlsx')
+      df1.to_csv(save_results_to + 'CBO3_100Porcent_DF_Limpo.csv')
+      df1.to_excel(save_results_to + 'CBO3_100Porcent_DF_Limpo.xlsx')
     return
 
 def Ida_Volta_CBO3_Curso2():

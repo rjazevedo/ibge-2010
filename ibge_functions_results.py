@@ -786,7 +786,9 @@ def Cursos_CBO_14_10_sn(csv_estado,csv_CBO,csv_CURSOS,cbo_num,titulo3,NaoGraduad
     return cbo_num,curso_nome,primeirosCbos_Nome,intensidade,plt,cursos,nomes,porcentagens
 
 # https://colab.research.google.com/drive/1iLmL2_RNZNwhhYxoKEYwgy0LWoh7ri-g?authuser=1#scrollTo=8qssn8eI1s9a
-def Filtro_Masculino_Feminino(path, name, sx):
+# def Filtro_Masculino_Feminino(path, name, sx):
+def Filtro_Masculino_Feminino(sx):
+
     # csv_estado = os.path.join(path[0],name[0]) # arquivo do censo do Brasil inteiro (somente graduados)
     csv_estado = os.path.join('processados/CSVs_ArquivoFinalGraduados/Brasil_Graduados_CBO.csv') # arquivo do censo do Brasil inteiro (somente graduados)
     Estado = pd.read_csv(csv_estado)
@@ -1051,7 +1053,9 @@ def Profissoes_Cursos_Masculino_Feminino(path1,name1,path2,name2,sx):
        plt.savefig(save_results_to + string)      
     return
 
-def Profissoes_Cursos_Masculino_Feminino_Juntos(path1, name1, path2, name2):
+# def Profissoes_Cursos_Masculino_Feminino_Juntos(path1, name1, path2, name2):
+def Profissoes_Cursos_Masculino_Feminino_Juntos():
+
     """
     Gera um gráfico com os dados de profissões/cursos masculinos e femininos juntos.
     Feminino: marcador estrela ('*'), Masculino: marcador bolinha ('o').
@@ -1059,18 +1063,19 @@ def Profissoes_Cursos_Masculino_Feminino_Juntos(path1, name1, path2, name2):
     import matplotlib.pyplot as plt
 
     # Leitura Feminino
-    df_fem = os.path.join(path2[0], name2[5])
+    # df_fem = os.path.join(path2[0], name2[5])    #'10Porcent_DF_Fem_Limpo.csv', 
+    df_fem = os.path.join('graficos/10Porcent_DF_Limpo_Fem.csv') 
     X_fem = pd.read_csv(df_fem)
-    X_fem = X_fem.drop(columns=['Unnamed: 0'])
-    X_fem = X_fem.drop(columns=['Unnamed: 0.1'])
-    X_fem = X_fem.drop(columns=['CB'])
+    # X_fem = X_fem.drop(columns=['Unnamed: 0'])
+    # X_fem = X_fem.drop(columns=['Unnamed: 0.1'])
+    X_fem = X_fem.drop(columns=['CB']) 
     X_fem = X_fem.drop(columns=['CR'])
-
     # Leitura Masculino
-    df_masc = os.path.join(path2[0], name2[6])
+    # df_masc = os.path.join(path2[0], name2[6])   #'10Porcent_DF_Masc_Limpo.csv',
+    df_masc = os.path.join('graficos/10Porcent_DF_Limpo_Masc.csv') 
     X_masc = pd.read_csv(df_masc)
-    X_masc = X_masc.drop(columns=['Unnamed: 0'])
-    X_masc = X_masc.drop(columns=['Unnamed: 0.1'])
+    # X_masc = X_masc.drop(columns=['Unnamed: 0'])
+    # X_masc = X_masc.drop(columns=['Unnamed: 0.1'])
     X_masc = X_masc.drop(columns=['CB'])
     X_masc = X_masc.drop(columns=['CR'])
 
@@ -1093,7 +1098,7 @@ def Profissoes_Cursos_Masculino_Feminino_Juntos(path1, name1, path2, name2):
     # plt.legend()
     plt.legend(loc='lower right') # Places the legend in the upper right corner
     # plt.title("10% - All Courses - Feminino (star) and Masculino (circle)")
-    string = "10_All_Courses_Female_Star_Male_Circle.png"
+    string = "10_All_Courses_Female_Star_Male_Circle_atual.png"
     plt.savefig(save_results_to + string)
     # plt.show()
     return
@@ -4778,100 +4783,195 @@ def tabela_clusters_diferentes():
     with open("tabelas/distancia_mudanca_clusters_filtrados.tex", "w") as f:
         f.write(latex_code)
     return
-def voronoi():
-    # https://colab.research.google.com/drive/1ZP-z62wJWWM3zr52MYMjO_-brdvThb88?authuser=1#scrollTo=-oDzCfNi5PK0
+# def voronoi():
+#     # https://colab.research.google.com/drive/1ZP-z62wJWWM3zr52MYMjO_-brdvThb88?authuser=1#scrollTo=-oDzCfNi5PK0
+#     import numpy as np
+#     import matplotlib.pyplot as plt
+#     from scipy.spatial import Voronoi, voronoi_plot_2d
+#     # Create a set of points for the example:
+#     # rng = np.random.default_rng()
+#     # points = rng.random((10,2))
+
+#     # plot
+#     # Generate the Voronoi diagram for the points:
+#     # cluster 1 : 27.00526316,21.78263158  ... Vermelho
+#     # cluster 2 : 66.464375,  77.656875    ... Azul
+#     # cluster 3:  25.76357143,62.88071429  ... Verde
+#     # xpoints = np.array([20.09, 34.66, 28.31])
+#     # ypoints = np.array([32.74, 43.11, 39.27])
+#     fem=  [20.09, 32.74,49.52, 52.32,18.86, 62.32,11.87,71.31,41.75,47.08,13.23,37.01,73.32, 43.39,27.49, 39.83,34.08, 70.54,31.97, 69.25,77.99, 69.72]
+#     masc= [34.66, 43.11,42.23, 21.82,11.40, 24.06, 8.58, 35.28,25.13,25.90,68.44,64.93,50.82, 45.37,44.66, 67.29,48.45, 77.56,48.40, 81.73,46.05, 25.99]
+#     orig= [28.31, 39.27,49.00, 48.17,18.42, 58.22,11.63, 67.67,36.51,39.98,53.81,61.88,68.94, 43.67,43.95, 66.11,47.35, 77.14,45.94, 80.22,76.28, 66.06]
+
+#     points = np.array([[27.00526316,21.78263158], [66.464375,77.656875], [25.76357143,62.88071429]])
+#     vor = Voronoi(points)
+
+#     #Use voronoi_plot_2d to plot the diagram:
+#     #fig = voronoi_plot_2d(vor)
+#     # fig, ax = plt.subplots(20,10)
+#     voronoi_plot_2d(vor)
+#     #plt.plot(xpoints[0], ypoints[1], 'o', color='pink')
+#     #plt.plot(xpoints[0], ypoints[1], 'o', color='blue')
+#     #plt.plot(xpoints[0], ypoints[1], 'o', color='black')
+#     # 442: Química  / 2113: Químicos
+#     plt.scatter([orig[0], fem[0], masc[0]], [orig[1], fem[1], masc[1]], color=['black', 'pink', 'blue'])
+#     plt.annotate("", xy=(fem[0], fem[1]), xytext=(orig[0], orig[1]),arrowprops=dict(arrowstyle="->", color='pink'))
+#     plt.annotate("", xy=(masc[0], masc[1]), xytext=(orig[0], orig[1]),arrowprops=dict(arrowstyle="->", color='blue'))
+#     # 142: Ciências da Educação / 2341: Professores do Ensino Fundamental
+#     plt.scatter([orig[2], fem[2], masc[2]], [orig[3], fem[3], masc[3]], color=['black', 'pink', 'blue'])
+#     plt.annotate("", xy=(fem[2], fem[3]), xytext=(orig[2], orig[3]),arrowprops=dict(arrowstyle="->", color='pink'))
+#     plt.annotate("", xy=(masc[2], masc[3]), xytext=(orig[2], orig[3]),arrowprops=dict(arrowstyle="->", color='blue'))
+#     #142: Ciências da Educação / 2342: Professores do Ensino Pré-Escolar
+#     plt.scatter([orig[4], fem[4], masc[4]], [orig[5], fem[5], masc[5]], color=['black', 'pink', 'blue'])
+#     plt.annotate("", xy=(fem[4], fem[5]), xytext=(orig[4], orig[5]),arrowprops=dict(arrowstyle="->", color='pink'))
+#     plt.annotate("", xy=(masc[4], masc[5]), xytext=(orig[4], orig[5]),arrowprops=dict(arrowstyle="->", color='blue'))
+#     #142: Ciências da Educação / 2351: Especialistas em Métodos Pedagógicos
+#     plt.scatter([orig[6], fem[6], masc[6]], [orig[7], fem[7], masc[7]], color=['black', 'pink', 'blue'])
+#     plt.annotate("", xy=(fem[6], fem[7]), xytext=(orig[6], orig[7]),arrowprops=dict(arrowstyle="->", color='pink'))
+#     plt.annotate("", xy=(masc[6], masc[7]), xytext=(orig[6], orig[7]),arrowprops=dict(arrowstyle="->", color='blue'))
+#     #214: Design e estilismo / 2163: Desenhistas de Produtos e Vestuário
+#     plt.scatter([orig[8], fem[8], masc[8]], [orig[9], fem[9], masc[9]], color=['black', 'pink', 'blue'])
+#     plt.annotate("", xy=(fem[8], fem[9]), xytext=(orig[8], orig[9]),arrowprops=dict(arrowstyle="->", color='pink'))
+#     plt.annotate("", xy=(masc[8], masc[9]), xytext=(orig[8], orig[9]),arrowprops=dict(arrowstyle="->", color='blue'))
+#     #221: Religião /  2636: Ministros de Cultos Religiosos, Missionários e
+#     plt.scatter([orig[10], fem[10], masc[10]], [orig[11], fem[11], masc[11]], color=['black', 'pink', 'blue'])
+#     plt.annotate("", xy=(fem[10], fem[11]), xytext=(orig[10], orig[11]),arrowprops=dict(arrowstyle="->", color='pink'))
+#     plt.annotate("", xy=(masc[10], masc[11]), xytext=(orig[10], orig[11]),arrowprops=dict(arrowstyle="->", color='blue'))
+#     #322:Biblioteconomia, informação, arquivos 2622: Bibliotecários, documentaristas e Afins
+#     plt.scatter([orig[12], fem[12], masc[12]], [orig[13], fem[13], masc[13]], color=['black', 'pink', 'blue'])
+#     plt.annotate("", xy=(fem[12], fem[13]), xytext=(orig[12], orig[13]),arrowprops=dict(arrowstyle="->", color='pink'))
+#     plt.annotate("", xy=(masc[12], masc[13]), xytext=(orig[12], orig[13]),arrowprops=dict(arrowstyle="->", color='blue'))
+#     #521: Engenharia Mecânica e Metalurgia / 2144:Engenheiros Mecânicos
+#     plt.scatter([orig[14], fem[14], masc[14]], [orig[15], fem[15], masc[15]], color=['black', 'pink', 'blue'])
+#     plt.annotate("", xy=(fem[14], fem[15]), xytext=(orig[14], orig[15]),arrowprops=dict(arrowstyle="->", color='pink'))
+#     plt.annotate("", xy=(masc[14], masc[15]), xytext=(orig[14], orig[15]),arrowprops=dict(arrowstyle="->", color='blue'))
+#     #522: Elericidade e Energia / 2151:Engenheiros Eletricistas
+#     plt.scatter([orig[16], fem[16], masc[16]], [orig[17], fem[17], masc[17]], color=['black', 'pink', 'blue'])
+#     plt.annotate("", xy=(fem[16], fem[17]), xytext=(orig[16], orig[17]),arrowprops=dict(arrowstyle="->", color='pink'))
+#     plt.annotate("", xy=(masc[16], masc[17]), xytext=(orig[16], orig[17]),arrowprops=dict(arrowstyle="->", color='blue'))
+#     #621: Produção Agrícola e Pecuária / 2132:Agrônomos e Afins
+#     plt.scatter([orig[18], fem[18], masc[18]], [orig[19], fem[19], masc[19]], color=['black', 'pink', 'blue'])
+#     plt.annotate("", xy=(fem[18], fem[19]), xytext=(orig[18], orig[19]),arrowprops=dict(arrowstyle="->", color='pink'))
+#     plt.annotate("", xy=(masc[18], masc[19]), xytext=(orig[18], orig[19]),arrowprops=dict(arrowstyle="->", color='blue'))
+#     #762: Serviço Social e Orientação / 2635: Assistentes Sociais
+#     plt.scatter([orig[20], fem[20], masc[20]], [orig[21], fem[21], masc[21]], color=['black', 'pink', 'blue'])
+#     plt.annotate("", xy=(fem[20], fem[21]), xytext=(orig[20], orig[21]),arrowprops=dict(arrowstyle="->", color='pink'))
+#     plt.annotate("", xy=(masc[20], masc[21]), xytext=(orig[20], orig[21]),arrowprops=dict(arrowstyle="->", color='blue'))
+
+#     plt.xlim(0.0, 100.0)
+#     plt.ylim(0.0, 100.0)
+#     # plt.show()
+#     string1 = "voronoi" + ".png"
+#     save_results_to = 'graficos/'  
+#     plt.savefig(save_results_to + string1)  
+
+#     #fig, ax = plt.subplots()
+#     ##Use voronoi_plot_2d to plot the diagram again, with some settings customized:
+#     ##fig = voronoi_plot_2d(vor, show_vertices=False, line_colors='orange', line_width=2, line_alpha=0.6, point_size=2)
+#     #voronoi_plot_2d(vor, show_vertices=False, line_colors='orange', line_width=2, line_alpha=0.6, point_size=2)
+#     #plt.plot(xpoints[0], ypoints[0], 'o', color='pink')
+#     #plt.plot(xpoints[1], ypoints[1], 'o', color='blue')
+#     #plt.plot(xpoints[2], ypoints[2], 'o', color='black')
+#     #plt.xlim(0.0, 100.0)
+#     #plt.ylim(0.0, 100.0)
+#     #plt.show()    
+    
+#     return
+def voronoi(points=None, data_points=None, save_name="voronoi"):
+    """
+    Função dinâmica para plotar diagrama de Voronoi com setas de deslocamento.
+    
+    Args:
+        points: np.array com coordenadas dos centróides do Voronoi shape (n, 2)
+                Ex: np.array([[27.00, 21.78], [66.46, 77.65], [25.76, 62.88]])
+        data_points: lista de dicts contendo:
+                    - 'orig': [x, y] coordenadas originais
+                    - 'fem': [x, y] coordenadas femininas
+                    - 'masc': [x, y] coordenadas masculinas
+                    - 'label': string com descrição (opcional)
+                    Ex: [
+                        {'orig': [28.31, 39.27], 'fem': [20.09, 32.74], 'masc': [34.66, 43.11], 'label': '442: Química / 2113'},
+                        ...
+                    ]
+        save_name: string com nome do arquivo a salvar (sem extensão)
+    """
     import numpy as np
     import matplotlib.pyplot as plt
     from scipy.spatial import Voronoi, voronoi_plot_2d
-    # Create a set of points for the example:
-    # rng = np.random.default_rng()
-    # points = rng.random((10,2))
-
-    # plot
-    # Generate the Voronoi diagram for the points:
-    # cluster 1 : 27.00526316,21.78263158  ... Vermelho
-    # cluster 2 : 66.464375,  77.656875    ... Azul
-    # cluster 3:  25.76357143,62.88071429  ... Verde
-    # xpoints = np.array([20.09, 34.66, 28.31])
-    # ypoints = np.array([32.74, 43.11, 39.27])
-    fem=  [20.09, 32.74,49.52, 52.32,18.86, 62.32,11.87,71.31,41.75,47.08,13.23,37.01,73.32, 43.39,27.49, 39.83,34.08, 70.54,31.97, 69.25,77.99, 69.72]
-    masc= [34.66, 43.11,42.23, 21.82,11.40, 24.06, 8.58, 35.28,25.13,25.90,68.44,64.93,50.82, 45.37,44.66, 67.29,48.45, 77.56,48.40, 81.73,46.05, 25.99]
-    orig= [28.31, 39.27,49.00, 48.17,18.42, 58.22,11.63, 67.67,36.51,39.98,53.81,61.88,68.94, 43.67,43.95, 66.11,47.35, 77.14,45.94, 80.22,76.28, 66.06]
-
-    points = np.array([[27.00526316,21.78263158], [66.464375,77.656875], [25.76357143,62.88071429]])
+    
+    # Valores padrão se não fornecidos
+    if points is None:
+        points = np.array([
+            [27.00526316, 21.78263158],
+            [66.464375, 77.656875],
+            [25.76357143, 62.88071429]
+        ])
+    
+    if data_points is None:
+        data_points = [
+            {'orig': [28.31, 39.27], 'fem': [20.09, 32.74], 'masc': [34.66, 43.11], 
+             'label': '442: Química / 2113: Químicos'},
+            {'orig': [49.00, 48.17], 'fem': [49.52, 52.32], 'masc': [42.23, 21.82],
+             'label': '142: Ciências da Educação / 2341'},
+            {'orig': [18.42, 58.22], 'fem': [18.86, 62.32], 'masc': [11.40, 24.06],
+             'label': '142: Ciências da Educação / 2342'},
+            {'orig': [11.63, 67.67], 'fem': [11.87, 71.31], 'masc': [8.58, 35.28],
+             'label': '142: Ciências da Educação / 2351'},
+            {'orig': [36.51, 39.98], 'fem': [41.75, 47.08], 'masc': [25.13, 25.90],
+             'label': '214: Design e estilismo / 2163'},
+            {'orig': [53.81, 61.88], 'fem': [13.23, 37.01], 'masc': [68.44, 64.93],
+             'label': '221: Religião / 2636'},
+            {'orig': [68.94, 43.67], 'fem': [73.32, 43.39], 'masc': [50.82, 45.37],
+             'label': '322: Biblioteconomia / 2622'},
+            {'orig': [43.95, 66.11], 'fem': [27.49, 39.83], 'masc': [44.66, 67.29],
+             'label': '521: Engenharia Mecânica / 2144'},
+            {'orig': [47.35, 77.14], 'fem': [34.08, 70.54], 'masc': [48.45, 77.56],
+             'label': '522: Eletricidade e Energia / 2151'},
+            {'orig': [45.94, 80.22], 'fem': [31.97, 69.25], 'masc': [48.40, 81.73],
+             'label': '621: Produção Agrícola / 2132'},
+            {'orig': [76.28, 66.06], 'fem': [77.99, 69.72], 'masc': [46.05, 25.99],
+             'label': '762: Serviço Social / 2635'},
+        ]
+    
+    # Criar diagrama de Voronoi
     vor = Voronoi(points)
-
-    #Use voronoi_plot_2d to plot the diagram:
-    #fig = voronoi_plot_2d(vor)
-    # fig, ax = plt.subplots(20,10)
     voronoi_plot_2d(vor)
-    #plt.plot(xpoints[0], ypoints[1], 'o', color='pink')
-    #plt.plot(xpoints[0], ypoints[1], 'o', color='blue')
-    #plt.plot(xpoints[0], ypoints[1], 'o', color='black')
-    # 442: Química  / 2113: Químicos
-    plt.scatter([orig[0], fem[0], masc[0]], [orig[1], fem[1], masc[1]], color=['black', 'pink', 'blue'])
-    plt.annotate("", xy=(fem[0], fem[1]), xytext=(orig[0], orig[1]),arrowprops=dict(arrowstyle="->", color='pink'))
-    plt.annotate("", xy=(masc[0], masc[1]), xytext=(orig[0], orig[1]),arrowprops=dict(arrowstyle="->", color='blue'))
-    # 142: Ciências da Educação / 2341: Professores do Ensino Fundamental
-    plt.scatter([orig[2], fem[2], masc[2]], [orig[3], fem[3], masc[3]], color=['black', 'pink', 'blue'])
-    plt.annotate("", xy=(fem[2], fem[3]), xytext=(orig[2], orig[3]),arrowprops=dict(arrowstyle="->", color='pink'))
-    plt.annotate("", xy=(masc[2], masc[3]), xytext=(orig[2], orig[3]),arrowprops=dict(arrowstyle="->", color='blue'))
-    #142: Ciências da Educação / 2342: Professores do Ensino Pré-Escolar
-    plt.scatter([orig[4], fem[4], masc[4]], [orig[5], fem[5], masc[5]], color=['black', 'pink', 'blue'])
-    plt.annotate("", xy=(fem[4], fem[5]), xytext=(orig[4], orig[5]),arrowprops=dict(arrowstyle="->", color='pink'))
-    plt.annotate("", xy=(masc[4], masc[5]), xytext=(orig[4], orig[5]),arrowprops=dict(arrowstyle="->", color='blue'))
-    #142: Ciências da Educação / 2351: Especialistas em Métodos Pedagógicos
-    plt.scatter([orig[6], fem[6], masc[6]], [orig[7], fem[7], masc[7]], color=['black', 'pink', 'blue'])
-    plt.annotate("", xy=(fem[6], fem[7]), xytext=(orig[6], orig[7]),arrowprops=dict(arrowstyle="->", color='pink'))
-    plt.annotate("", xy=(masc[6], masc[7]), xytext=(orig[6], orig[7]),arrowprops=dict(arrowstyle="->", color='blue'))
-    #214: Design e estilismo / 2163: Desenhistas de Produtos e Vestuário
-    plt.scatter([orig[8], fem[8], masc[8]], [orig[9], fem[9], masc[9]], color=['black', 'pink', 'blue'])
-    plt.annotate("", xy=(fem[8], fem[9]), xytext=(orig[8], orig[9]),arrowprops=dict(arrowstyle="->", color='pink'))
-    plt.annotate("", xy=(masc[8], masc[9]), xytext=(orig[8], orig[9]),arrowprops=dict(arrowstyle="->", color='blue'))
-    #221: Religião /  2636: Ministros de Cultos Religiosos, Missionários e
-    plt.scatter([orig[10], fem[10], masc[10]], [orig[11], fem[11], masc[11]], color=['black', 'pink', 'blue'])
-    plt.annotate("", xy=(fem[10], fem[11]), xytext=(orig[10], orig[11]),arrowprops=dict(arrowstyle="->", color='pink'))
-    plt.annotate("", xy=(masc[10], masc[11]), xytext=(orig[10], orig[11]),arrowprops=dict(arrowstyle="->", color='blue'))
-    #322:Biblioteconomia, informação, arquivos 2622: Bibliotecários, documentaristas e Afins
-    plt.scatter([orig[12], fem[12], masc[12]], [orig[13], fem[13], masc[13]], color=['black', 'pink', 'blue'])
-    plt.annotate("", xy=(fem[12], fem[13]), xytext=(orig[12], orig[13]),arrowprops=dict(arrowstyle="->", color='pink'))
-    plt.annotate("", xy=(masc[12], masc[13]), xytext=(orig[12], orig[13]),arrowprops=dict(arrowstyle="->", color='blue'))
-    #521: Engenharia Mecânica e Metalurgia / 2144:Engenheiros Mecânicos
-    plt.scatter([orig[14], fem[14], masc[14]], [orig[15], fem[15], masc[15]], color=['black', 'pink', 'blue'])
-    plt.annotate("", xy=(fem[14], fem[15]), xytext=(orig[14], orig[15]),arrowprops=dict(arrowstyle="->", color='pink'))
-    plt.annotate("", xy=(masc[14], masc[15]), xytext=(orig[14], orig[15]),arrowprops=dict(arrowstyle="->", color='blue'))
-    #522: Elericidade e Energia / 2151:Engenheiros Eletricistas
-    plt.scatter([orig[16], fem[16], masc[16]], [orig[17], fem[17], masc[17]], color=['black', 'pink', 'blue'])
-    plt.annotate("", xy=(fem[16], fem[17]), xytext=(orig[16], orig[17]),arrowprops=dict(arrowstyle="->", color='pink'))
-    plt.annotate("", xy=(masc[16], masc[17]), xytext=(orig[16], orig[17]),arrowprops=dict(arrowstyle="->", color='blue'))
-    #621: Produção Agrícola e Pecuária / 2132:Agrônomos e Afins
-    plt.scatter([orig[18], fem[18], masc[18]], [orig[19], fem[19], masc[19]], color=['black', 'pink', 'blue'])
-    plt.annotate("", xy=(fem[18], fem[19]), xytext=(orig[18], orig[19]),arrowprops=dict(arrowstyle="->", color='pink'))
-    plt.annotate("", xy=(masc[18], masc[19]), xytext=(orig[18], orig[19]),arrowprops=dict(arrowstyle="->", color='blue'))
-    #762: Serviço Social e Orientação / 2635: Assistentes Sociais
-    plt.scatter([orig[20], fem[20], masc[20]], [orig[21], fem[21], masc[21]], color=['black', 'pink', 'blue'])
-    plt.annotate("", xy=(fem[20], fem[21]), xytext=(orig[20], orig[21]),arrowprops=dict(arrowstyle="->", color='pink'))
-    plt.annotate("", xy=(masc[20], masc[21]), xytext=(orig[20], orig[21]),arrowprops=dict(arrowstyle="->", color='blue'))
-
+    
+    # Plotar cada ponto com suas setas
+    for data in data_points:
+        orig = data['orig']
+        fem = data['fem']
+        masc = data['masc']
+        label = data.get('label', '')
+        
+        # Scatter dos três pontos
+        plt.scatter([orig[0], fem[0], masc[0]], 
+                   [orig[1], fem[1], masc[1]], 
+                   color=['black', 'pink', 'blue'],
+                   s=50,
+                   zorder=3)
+        
+        # Setas para feminino e masculino
+        plt.annotate("", xy=(fem[0], fem[1]), xytext=(orig[0], orig[1]),
+                    arrowprops=dict(arrowstyle="->", color='pink', lw=1.5))
+        plt.annotate("", xy=(masc[0], masc[1]), xytext=(orig[0], orig[1]),
+                    arrowprops=dict(arrowstyle="->", color='blue', lw=1.5))
+    
+    # Configurações do gráfico
     plt.xlim(0.0, 100.0)
     plt.ylim(0.0, 100.0)
-    # plt.show()
-    string1 = "voronoi" + ".png"
-    save_results_to = 'graficos/'  
-    plt.savefig(save_results_to + string1)  
-
-    #fig, ax = plt.subplots()
-    ##Use voronoi_plot_2d to plot the diagram again, with some settings customized:
-    ##fig = voronoi_plot_2d(vor, show_vertices=False, line_colors='orange', line_width=2, line_alpha=0.6, point_size=2)
-    #voronoi_plot_2d(vor, show_vertices=False, line_colors='orange', line_width=2, line_alpha=0.6, point_size=2)
-    #plt.plot(xpoints[0], ypoints[0], 'o', color='pink')
-    #plt.plot(xpoints[1], ypoints[1], 'o', color='blue')
-    #plt.plot(xpoints[2], ypoints[2], 'o', color='black')
-    #plt.xlim(0.0, 100.0)
-    #plt.ylim(0.0, 100.0)
-    #plt.show()    
+    plt.xlabel("Cursos")
+    plt.ylabel("Profissões")
+    plt.title("Diagrama de Voronoi - Deslocamento por Gênero")
+    plt.grid(True, alpha=0.3)
+    
+    # Salvar
+    save_results_to = 'graficos/'
+    plt.savefig(f"{save_results_to}{save_name}.png", dpi=300, bbox_inches='tight')
+    plt.close()
     
     return
+
 
 def Juntar_40_60Porcento_Genero():
     # https://colab.research.google.com/drive/1y-78aFKxXgt60VIyjhBmM6pn6XzcXZUC?authuser=1#scrollTo=1s_bOT2Q6QTU
@@ -4880,9 +4980,13 @@ def Juntar_40_60Porcento_Genero():
 
     save_results_to = 'graficos/'
     file_path = save_results_to + 'Kmeans3_T.csv'
-    file_path1 =  save_results_too + 'Brasil_Graduados_Fem.csv'
-    file_path2 =  save_results_too + 'Brasil_Graduados_Masc.csv'
-    file_path3 =  save_results_too + 'Brasil_Graduados.csv'
+    # file_path1 =  save_results_too + 'Brasil_Graduados_Fem.csv'  # Brasil_Graduados_Fem_CBO.csv
+    # file_path2 =  save_results_too + 'Brasil_Graduados_Masc.csv' # Brasil_Graduados_Masc_CBO.csv
+    # file_path3 =  save_results_too + 'Brasil_Graduados.csv'      # Brasil_Graduados_CBO.csv 
+    file_path1 =  save_results_too + 'Brasil_Graduados_Fem_CBO.csv'  # Brasil_Graduados_Fem_CBO.csv
+    file_path2 =  save_results_too + 'Brasil_Graduados_Masc_CBO.csv' # Brasil_Graduados_Masc_CBO.csv
+    file_path3 =  save_results_too + 'Brasil_Graduados_CBO.csv'     # Brasil_Graduados_CBO.csv 
+
 
     
     Kmeans3_T         = pd.read_csv(file_path)
@@ -4891,10 +4995,10 @@ def Juntar_40_60Porcento_Genero():
     Final             = pd.read_csv(file_path3)
 
     #...
-    Kmeans3_T       = Kmeans3_T.drop(columns=['Unnamed: 0'])
-    Final_Fem_CSV   = Final_Fem_CSV.drop(columns=['Unnamed: 0'])
-    Final_Masc_CSV  = Final_Masc_CSV.drop(columns=['Unnamed: 0'])
-    Final           = Final.drop(columns=['Unnamed: 0'])
+    # Kmeans3_T       = Kmeans3_T.drop(columns=['Unnamed: 0'])
+    # Final_Fem_CSV   = Final_Fem_CSV.drop(columns=['Unnamed: 0'])
+    # Final_Masc_CSV  = Final_Masc_CSV.drop(columns=['Unnamed: 0'])
+    # Final           = Final.drop(columns=['Unnamed: 0'])
 
     # ...    
     Kmeans3_T['M'] = ''
@@ -4902,42 +5006,129 @@ def Juntar_40_60Porcento_Genero():
     Kmeans3_T['Total'] = ''
     Kmeans3_T['MP'] = ''
     Kmeans3_T['FP'] = ''
-
+    # print(Kmeans3_T.head())
+    # print(Final_Fem_CSV.head())
+    # print(Final_Masc_CSV.head())
+    # print(Final.head())
+    # exit()
     # for i in range(0,1): 
-    for i in range(len(Kmeans3_T)): 
-        Qtdade = 0
-        for j in range(len(Final_Fem_CSV)):
-            # if (str(Final_Fem_CSV.Ocupação_Código[i])== '2341.0') & (str(Final_Fem_CSV.Curso_Superior_Graduação_Código[i]) == '142.0'):
-            if ((str(Final_Fem_CSV.Ocupação_Código[j]))== (str(int(Kmeans3_T.Cbo[i])))) & (str(Final_Fem_CSV.Curso_Superior_Graduação_Código[j]) == str(int(Kmeans3_T.Curso[i]))):
-                Qtdade = Qtdade + 1
-        Kmeans3_T.F[i] = int(Qtdade)   
-    Kmeans3_T.to_csv(save_results_to + 'Kmeans3_T_F_45_55.csv')       
+
+    # for i in range(len(Kmeans3_T)): 
+    #     Qtdade = 0
+    #     for j in range(len(Final_Fem_CSV)):
+    #         print(":")
+    #         # if (str(Final_Fem_CSV.Ocupação_Código[i])== '2341.0') & (str(Final_Fem_CSV.Curso_Superior_Graduação_Código[i]) == '142.0'):
+    #         # if ((str(Final_Fem_CSV.Ocupação_Código[j]))== (str(int(Kmeans3_T.Cbo[i])))) & (str(Final_Fem_CSV.Curso_Superior_Graduação_Código[j]) == str(int(Kmeans3_T.Curso[i]))):
+    #         if ((str(Final_Fem_CSV['CBO-Domiciliar'][j]))== (str(int(Kmeans3_T.Cbo[i])))) & (str(Final_Fem_CSV.Curso_Superior_Graduação_Código[j]) == str(int(Kmeans3_T.Curso[i]))):
+    #             Qtdade = Qtdade + 1
+    #             print("...")
+    #     Kmeans3_T.F[i] = int(Qtdade)   
+    # # Kmeans3_T.to_csv(save_results_to + 'Kmeans3_T_F_45_55.csv')       
+    # Kmeans3_T.to_csv(save_results_to + 'Kmeans3_T_F_45_55_atual.csv')    
+
+    # Vectorized approach using pandas merge - much faster than nested loops
+    Final_Fem_CSV_filtered = Final_Fem_CSV[['CBO-Domiciliar', 'Curso_Superior_Graduação_Código']].copy()
+    Final_Fem_CSV_filtered['CBO-Domiciliar'] = Final_Fem_CSV_filtered['CBO-Domiciliar'].astype(str)
+    Final_Fem_CSV_filtered['Curso_Superior_Graduação_Código'] = Final_Fem_CSV_filtered['Curso_Superior_Graduação_Código'].astype(str)
+    
+    Kmeans3_T['Cbo_str'] = Kmeans3_T['Cbo'].astype(int).astype(str)
+    Kmeans3_T['Curso_str'] = Kmeans3_T['Curso'].astype(int).astype(str)
+    
+    # Count matches using groupby
+    counts = Final_Fem_CSV_filtered.groupby(['CBO-Domiciliar', 'Curso_Superior_Graduação_Código']).size().reset_index(name='count')
+    
+    # Merge with Kmeans3_T
+    Kmeans3_T = Kmeans3_T.merge(
+        counts.rename(columns={'CBO-Domiciliar': 'Cbo_str', 'Curso_Superior_Graduação_Código': 'Curso_str'}),
+        on=['Cbo_str', 'Curso_str'],
+        how='left'
+    )
+    
+    Kmeans3_T['F'] = Kmeans3_T['count'].fillna(0).astype(int)
+    Kmeans3_T = Kmeans3_T.drop(columns=['Cbo_str', 'Curso_str', 'count'])
+    
+    Kmeans3_T.to_csv(save_results_to + 'Kmeans3_T_F_45_55_atual.csv')
     # -----------------------------------------------------------------------------------
     # -----------------------------------------------------------------------------------
 
-    Kmeans3_T  = pd.read_csv(save_results_to + 'Kmeans3_T_F_45_55.csv')
-    for i in range(len(Kmeans3_T)):
-        Qtdade = 0
-        for j in range(len(Final_Masc_CSV)):
-            if ((str(Final_Masc_CSV.Ocupação_Código[j]))== (str(int(Kmeans3_T.Cbo[i])))) & (str(Final_Masc_CSV.Curso_Superior_Graduação_Código[j]) == str(int(Kmeans3_T.Curso[i]))):
-                Qtdade = Qtdade + 1
-        Kmeans3_T.M[i] = int(Qtdade)
-    Kmeans3_T.to_csv(save_results_to + 'Kmeans3_T_FM_45_55.csv')      
-    # -----------------------------------------------------------------------------------    
-    # -----------------------------------------------------------------------------------
+    # # Kmeans3_T  = pd.read_csv(save_results_to + 'Kmeans3_T_F_45_55.csv')
+    # Kmeans3_T  = pd.read_csv(save_results_to + 'Kmeans3_T_F_45_55_atual.csv')
+    # for i in range(len(Kmeans3_T)):
+    #     Qtdade = 0
+    #     for j in range(len(Final_Masc_CSV)):
+    #         # if ((str(Final_Masc_CSV.Ocupação_Código[j]))== (str(int(Kmeans3_T.Cbo[i])))) & (str(Final_Masc_CSV.Curso_Superior_Graduação_Código[j]) == str(int(Kmeans3_T.Curso[i]))):
+    #         if ((str(Final_Masc_CSV['CBO-Domiciliar'][j]))== (str(int(Kmeans3_T.Cbo[i])))) & (str(Final_Masc_CSV.Curso_Superior_Graduação_Código[j]) == str(int(Kmeans3_T.Curso[i]))):
+    #            Qtdade = Qtdade + 1
+    #     Kmeans3_T.M[i] = int(Qtdade)
+    # # Kmeans3_T.to_csv(save_results_to + 'Kmeans3_T_FM_45_55.csv')      
+    # Kmeans3_T.to_csv(save_results_to + 'Kmeans3_T_FM_45_55_atual.csv')
 
-    Kmeans3_T  = pd.read_csv(save_results_to + 'Kmeans3_T_FM_45_55.csv')
-    for i in range(len(Kmeans3_T)):
-        Qtdade = 0
-        for j in range(len(Final)):
-            if ((str(Final.Ocupação_Código[j]))== (str(int(Kmeans3_T.Cbo[i])))) & (str(Final.Curso_Superior_Graduação_Código[j]) == str(int(Kmeans3_T.Curso[i]))):
-                Qtdade = Qtdade + 1
-        Kmeans3_T.Total[i] = int(Qtdade)
-    Kmeans3_T.to_csv(save_results_to + 'Kmeans3_T_TFM_45_55.csv')  
-    # -----------------------------------------------------------------------------------    
-    # -----------------------------------------------------------------------------------   
+    # # Vectorized approach using pandas merge - much faster than nested loops
+    Final_Masc_CSV_filtered = Final_Masc_CSV[['CBO-Domiciliar', 'Curso_Superior_Graduação_Código']].copy()
+    Final_Masc_CSV_filtered['CBO-Domiciliar'] = Final_Masc_CSV_filtered['CBO-Domiciliar'].astype(str)
+    Final_Masc_CSV_filtered['Curso_Superior_Graduação_Código'] = Final_Masc_CSV_filtered['Curso_Superior_Graduação_Código'].astype(str)
+    
+    Kmeans3_T['Cbo_str'] = Kmeans3_T['Cbo'].astype(int).astype(str)
+    Kmeans3_T['Curso_str'] = Kmeans3_T['Curso'].astype(int).astype(str)
+    
+    # Count matches using groupby
+    counts = Final_Masc_CSV_filtered.groupby(['CBO-Domiciliar', 'Curso_Superior_Graduação_Código']).size().reset_index(name='count')
+    
+    # Merge with Kmeans3_T
+    Kmeans3_T = Kmeans3_T.merge(
+        counts.rename(columns={'CBO-Domiciliar': 'Cbo_str', 'Curso_Superior_Graduação_Código': 'Curso_str'}),
+        on=['Cbo_str', 'Curso_str'],
+        how='left'
+    )
+    
+    Kmeans3_T['M'] = Kmeans3_T['count'].fillna(0).astype(int)
+    Kmeans3_T = Kmeans3_T.drop(columns=['Cbo_str', 'Curso_str', 'count'])
+    
+    Kmeans3_T.to_csv(save_results_to + 'Kmeans3_T_FM_45_55_atual.csv')
+    # # -----------------------------------------------------------------------------------    
+    # # -----------------------------------------------------------------------------------
 
-    Kmeans3_T  = pd.read_csv(save_results_to + 'Kmeans3_T_TFM_45_55.csv')
+    # # Kmeans3_T  = pd.read_csv(save_results_to + 'Kmeans3_T_FM_45_55.csv')
+    # Kmeans3_T  = pd.read_csv(save_results_to + 'Kmeans3_T_FM_45_55_atual.csv')
+    # for i in range(len(Kmeans3_T)):
+    #     Qtdade = 0
+    #     for j in range(len(Final)):
+    #         # if ((str(Final.Ocupação_Código[j]))== (str(int(Kmeans3_T.Cbo[i])))) & (str(Final.Curso_Superior_Graduação_Código[j]) == str(int(Kmeans3_T.Curso[i]))):
+    #         if ((str(Final['CBO-Domiciliar'][j]))== (str(int(Kmeans3_T.Cbo[i])))) & (str(Final.Curso_Superior_Graduação_Código[j]) == str(int(Kmeans3_T.Curso[i]))):
+    #             Qtdade = Qtdade + 1
+    #     Kmeans3_T.Total[i] = int(Qtdade)
+    # # Kmeans3_T.to_csv(save_results_to + 'Kmeans3_T_TFM_45_55.csv')  
+    # Kmeans3_T.to_csv(save_results_to + 'Kmeans3_T_TFM_45_55_atual.csv') 
+
+     
+    # Vectorized approach using pandas merge - much faster than nested loops
+    Final_filtered = Final[['CBO-Domiciliar', 'Curso_Superior_Graduação_Código']].copy()
+    Final_filtered['CBO-Domiciliar'] = Final_filtered['CBO-Domiciliar'].astype(str)
+    Final_filtered['Curso_Superior_Graduação_Código'] = Final_filtered['Curso_Superior_Graduação_Código'].astype(str)
+    
+    Kmeans3_T['Cbo_str'] = Kmeans3_T['Cbo'].astype(int).astype(str)
+    Kmeans3_T['Curso_str'] = Kmeans3_T['Curso'].astype(int).astype(str)
+    
+    # Count matches using groupby
+    counts = Final_filtered.groupby(['CBO-Domiciliar', 'Curso_Superior_Graduação_Código']).size().reset_index(name='count')
+    
+    # Merge with Kmeans3_T
+    Kmeans3_T = Kmeans3_T.merge(
+        counts.rename(columns={'CBO-Domiciliar': 'Cbo_str', 'Curso_Superior_Graduação_Código': 'Curso_str'}),
+        on=['Cbo_str', 'Curso_str'],
+        how='left'
+    )
+    
+    Kmeans3_T['Total'] = Kmeans3_T['count'].fillna(0).astype(int)
+    Kmeans3_T = Kmeans3_T.drop(columns=['Cbo_str', 'Curso_str', 'count'])
+    
+    Kmeans3_T.to_csv(save_results_to + 'Kmeans3_T_TFM_45_55_atual.csv')
+
+    # # -----------------------------------------------------------------------------------    
+    # # -----------------------------------------------------------------------------------   
+
+    # Kmeans3_T  = pd.read_csv(save_results_to + 'Kmeans3_T_TFM_45_55.csv')
+    Kmeans3_T  = pd.read_csv(save_results_to + 'Kmeans3_T_TFM_45_55_atual.csv')
     for i in range(len(Kmeans3_T)):
         Kmeans3_T.MP[i] = round(Kmeans3_T.M[i]/Kmeans3_T.Total[i],2)
         Kmeans3_T.FP[i] = round(Kmeans3_T.F[i]/Kmeans3_T.Total[i],2)
@@ -4950,20 +5141,22 @@ def Juntar_40_60Porcento_Genero():
     Kmeans3_T['Cbo'] = Kmeans3_T['Cbo'].astype(int)
     Kmeans3_T['Cluster'] = Kmeans3_T['Cluster'].astype(int)
     Kmeans3_T['Curso'] = Kmeans3_T['Curso'].astype(int)     
-    Kmeans3_T.to_csv(save_results_to + 'Kmeans3_T_FMT_MPFP_45_55.csv')     
-    # -----------------------------------------------------------------------------------    
-    # -----------------------------------------------------------------------------------   
+    # Kmeans3_T.to_csv(save_results_to + 'Kmeans3_T_FMT_MPFP_45_55.csv')     
+    Kmeans3_T.to_csv(save_results_to + 'Kmeans3_T_FMT_MPFP_45_55_atual.csv')  
+    # # -----------------------------------------------------------------------------------    
+    # # -----------------------------------------------------------------------------------   
     return
 
 def tabela():
     import pandas as pd
 
     # Carregar o CSV
-    df = pd.read_csv("graficos/Kmeans3_T_FMT_MPFP_45_55.csv")
+    # df = pd.read_csv("graficos/Kmeans3_T_FMT_MPFP_45_55.csv")
+    df = pd.read_csv("graficos/Kmeans3_T_FMT_MPFP_45_55_atual.csv")
     df = df.drop(columns=['Unnamed: 0'])
     df = df.drop(columns=['Unnamed: 0.1'])
     df = df.drop(columns=['Unnamed: 0.1.1'])
-    df = df.drop(columns=['Unnamed: 0.1.1.1'])
+    # df = df.drop(columns=['Unnamed: 0.1.1.1'])
     df = df.drop(columns=['Ida'])
     df = df.drop(columns=['Volta'])
     df['Cluster'] = df['Cluster'].astype(int)
@@ -4977,23 +5170,55 @@ def tabela():
     # Converter para código LaTeX
     latex_code = df.to_latex(index=False, caption="Porcentagens de Masculinos e Femininos", label="tab:Fem_Masc")
 
+     # Criar a pasta 'tabelas' se não existir
+    if not os.path.exists('tabelas'):
+        os.makedirs('tabelas')
+
+    # # Salvar em um arquivo .tex
+    # with open("tabelas/tabela.tex", "w") as f:
+    #     f.write(latex_code)
+
+    # Ordenar a tabela em ordem decrescente pela coluna M
+    df = df.sort_values('M', ascending=False)
+    # Converter para código LaTeX
+    latex_code = df.to_latex(index=False, caption="Porcentagens de Masculinos e Femininos", label="tab:Fem_Masc")
+    # Criar a pasta 'tabelas' se não existir
+    if not os.path.exists('tabelas'):
+        os.makedirs('tabelas')
     # Salvar em um arquivo .tex
-    with open("tabelas/tabela.tex", "w") as f:
+    with open("tabelas/tabelatop10masculinos.tex", "w") as f:
         f.write(latex_code)
+
+    # Ordenar a tabela em ordem decrescente pela coluna M
+    df = df.sort_values('F', ascending=False)
+    # Converter para código LaTeX
+    latex_code = df.to_latex(index=False, caption="Porcentagens de Masculinos e Femininos", label="tab:Fem_Masc")
+    # Criar a pasta 'tabelas' se não existir
+    if not os.path.exists('tabelas'):
+        os.makedirs('tabelas')
+    # Salvar em um arquivo .tex
+    with open("tabelas/tabelatop10femininos.tex", "w") as f:
+        f.write(latex_code)
+
     return
+
+    
 
 def separar_registros_por_cluster():
     import pandas as pd
 
     # Carregar o CSV
-    df = pd.read_csv("graficos/Kmeans3_T_FMT_MPFP_45_55.csv")
+    # df = pd.read_csv("graficos/Kmeans3_T_FMT_MPFP_45_55.csv")
+    df = pd.read_csv("graficos/Kmeans3_T_FMT_MPFP_45_55_atual.csv")
+
     df = df.drop(columns=['Unnamed: 0'])
     df = df.drop(columns=['Unnamed: 0.1'])
     df = df.drop(columns=['Unnamed: 0.1.1'])
-    df = df.drop(columns=['Unnamed: 0.1.1.1'])
+    # df = df.drop(columns=['Unnamed: 0.1.1.1'])
     df = df.drop(columns=['Ida'])
     df = df.drop(columns=['Volta'])
     df['Cluster'] = df['Cluster'].astype(int)
+    # df = df.drop(columns=['Cluster'])
     df['Curso'] = df['Curso'].astype(int)
     df['Cbo'] = df['Cbo'].astype(int)
     df['M'] = df['M'].astype(int)
@@ -5006,9 +5231,17 @@ def separar_registros_por_cluster():
     part3 = df[df['Cluster'] == 2]
 
     # Save each part into a separate .tex file
-    part1.to_latex("tabelas/tabela_part0.tex", index=False)
-    part2.to_latex("tabelas/tabela_part1.tex", index=False)
-    part3.to_latex("tabelas/tabela_part2.tex", index=False)
+    # part1.to_latex("tabelas/tabela_part0.tex", index=False)
+    # part2.to_latex("tabelas/tabela_part1.tex", index=False)
+    # part3.to_latex("tabelas/tabela_part2.tex", index=False)
+    
+    part1 = part1.drop(columns=['Cluster'])
+    part2 = part2.drop(columns=['Cluster'])
+    part3 = part3.drop(columns=['Cluster'])
+    
+    part1.to_latex("tabelas/tabela_part0_1.tex", index=False)
+    part2.to_latex("tabelas/tabela_part1_2.tex", index=False)
+    part3.to_latex("tabelas/tabela_part2_0.tex", index=False)
 
     # # # Converter para código LaTeX
     # # latex_code = df.to_latex(index=False, caption="Porcentagens de Masculinos e Femininos", label="tab:Fem_Masc")
@@ -5702,7 +5935,7 @@ def extract_courses_Cluster0():
     filtered_data_all['Cbo'] = filtered_data_all['Cbo'].astype(int)
     # filtered_data['Max'] = filtered_data['Max'].astype(int)
     # filtered_data['Min'] = filtered_data['Min'].astype(int)
-    #filtered_data['Median'] = filtered_data['Median'].astype(int)
+    # filtered_data['Median'] = filtered_data['Median'].astype(int)
     filtered_data_all['Median'] = round(filtered_data_all['Median'],2)
 
     # Save the records in a LaTeX table

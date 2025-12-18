@@ -10,6 +10,7 @@ microdados-ibge
 *.xls
 *.parquet
 *.xlsx
+*.tex
 
 # Não ignorar arquivos de nomes específicos
 !documentacao/CBO_CSV.csv
