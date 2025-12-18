@@ -313,7 +313,7 @@ if fase <= 35:
 #     # - Profissões desequilibradas - Pontos Selecionados(Grandes Desloamentos)
 #     # ...
 #     # - Profissões desequilibradas - Quais as profissões onde homens e mulheres estão em clusters diferentes?
-#     ibge_functions.dadosoriginais_resultados()
+    ibge_functions.dadosoriginais_resultados()
 #     ibge_functions_results.resultados_filtragem_10_100()
 #     ibge_functions_results.resultados_distancia()
 #     ibge_functions_results.tabela_clusters_diferentes()

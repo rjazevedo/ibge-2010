@@ -4384,112 +4384,194 @@ def  deslocamentos_maioresdistancias_clusters():
      return
 
 def dadosoriginais_resultados(sx):
-    #https://colab.research.google.com/drive/1iLmL2_RNZNwhhYxoKEYwgy0LWoh7ri-g?authuser=1#scrollTo=RXn_W3SM374X
-        if sx == 'F':
-            save_results_to = 'graficos/'
-            file_path = save_results_to + '100Porcent_DF_Fem_Limpo.csv'
-            file_path1 = 'documentacao/' + 'Curso_Censo.csv'
-            file_path2 = 'documentacao/' + 'CBO_CSV.csv'
+    # #https://colab.research.google.com/drive/1iLmL2_RNZNwhhYxoKEYwgy0LWoh7ri-g?authuser=1#scrollTo=RXn_W3SM374X
+    #     if sx == 'F':
+    #         save_results_to = 'graficos/'
+    #         # file_path = save_results_to + '100Porcent_DF_Fem_Limpo.csv'
+    #         file_path = save_results_to + '100Porcent_DF_Limpo_Fem.csv'
+    #         file_path1 = 'documentacao/' + 'Curso_Censo.csv'
+    #         file_path2 = 'documentacao/' + 'CBO_CSV.csv'
+    #         CBO_aux = pd.read_csv('documentacao/CBO_CSV_TabelaAuxiliar.csv', dtype ='str')
 
 
-            X_Original = pd.read_csv(file_path)
-            X_Original = X_Original.drop(columns=['Unnamed: 0'])
+    #         X_Original = pd.read_csv(file_path)
+    #         # X_Original = X_Original.drop(columns=['Unnamed: 0'])
 
-            CursosCenso = pd.read_csv(file_path1)
-            CursosCenso = CursosCenso.drop(columns=['Unnamed: 0'])
+    #         CursosCenso = pd.read_csv(file_path1)
+    #         # CursosCenso = CursosCenso.drop(columns=['Unnamed: 0'])
 
-            CursoNome =[]
-            for i in range (len(X_Original['CR'])):
-                for index, row in CursosCenso.iterrows():
-                    if (X_Original['CR'][i] == CursosCenso['curso_num'][index]):
-                        CursoNome.append(CursosCenso['curso_nome'][index])
+    #         CursoNome =[]
+    #         for i in range (len(X_Original['CR'])):
+    #             for index, row in CursosCenso.iterrows():
+    #                 if (X_Original['CR'][i] == CursosCenso['curso_num'][index]):
+    #                     CursoNome.append(CursosCenso['curso_nome'][index])
 
-            CBO = pd.read_csv(file_path2)
-            CBO = CBO.drop(columns=['Unnamed: 0'])
+    #         CBO = pd.read_csv(file_path2)
+    #         # CBO = CBO.drop(columns=['Unnamed: 0'])
             
-            CboNome =[]
-            for i in range (len(X_Original['CB'])):
-                for index, row in CBO.iterrows():
-                    if (int(X_Original['CB'][i]) == CBO['Cod_CBO'][index]):
-                        CboNome.append(CBO['Nome_CBO'][index])
+    #         CboNome =[]
+    #         for i in range (len(X_Original['CB'])):
+    #             flag = False
+    #             for index, row in CBO.iterrows():
+    #                 if (int(X_Original['CB'][i]) == CBO['Cod_CBO'][index]):
+    #                     CboNome.append(CBO['Nome_CBO'][index])
+    #                     flag = True
+    #                     break
+    #             if not flag:
+    #                for index, row in CBO_aux.iterrows():
+    #                    if str(int(X_Original['CB'][i])) == str(CBO_aux['Cod_CBO'][index]):
+    #                       CboNome.append(CBO_aux['Nome_CBO'][index])
+    #                       break
 
-            # print(len(X_Original))             
-            # print(len(CursoNome)) 
-            # print(len(CboNome))
+    #         # print(len(X_Original))             
+    #         # print(len(CursoNome)) 
+    #         # print(len(CboNome))
 
-            resultados_T=[]
-            cluster=""
-            for i in range(len(X_Original)):
-                tupla=(X_Original['Ida'][i],X_Original['Volta'][i],cluster, X_Original['CR'][i],CursoNome[i],X_Original['CB'][i],CboNome[i],"F")
-                resultados_T.append(tupla)
-            #...
-            Resultados_T= pd.DataFrame(resultados_T)
+    #         resultados_T=[]
+    #         cluster=""
+    #         for i in range(len(X_Original)):
+    #             # print("len X_Original:", len(X_Original))
+    #             # print("len CursoNome:", len(CursoNome))
+    #             # print("len CboNome:", len(CboNome))
+    #             tupla=(X_Original['Ida'][i],X_Original['Volta'][i],cluster, X_Original['CR'][i],CursoNome[i],X_Original['CB'][i],CboNome[i],"F")
+    #             resultados_T.append(tupla)
+    #         #...
+    #         Resultados_T= pd.DataFrame(resultados_T)
 
-            #...
-            dict = {0:"Ida",
-                    1:"Volta",
-                    2:"Cluster",
-                    3:"Curso",
-                    4:"Curso_Nome",
-                    5:"Cbo",
-                    6:"Cbo_Nome",
-                    7:"Genero"
-            }
-            Resultados_T.rename(columns=dict,inplace=True)       
-            Resultados_T.to_csv(save_results_to + 'Resultados_T_Fem_100.csv', index=False)
-        if sx == 'M':
-            save_results_to = 'graficos/'
-            file_path = save_results_to + '100Porcent_DF_Masc_Limpo.csv'
-            file_path1 = 'documentacao/' + 'Curso_Censo.csv'
-            file_path2 = 'documentacao/' + 'CBO_CSV.csv'
+    #         #...
+    #         dict = {0:"Ida",
+    #                 1:"Volta",
+    #                 2:"Cluster",
+    #                 3:"Curso",
+    #                 4:"Curso_Nome",
+    #                 5:"Cbo",
+    #                 6:"Cbo_Nome",
+    #                 7:"Genero"
+    #         }
+    #         Resultados_T.rename(columns=dict,inplace=True)       
+    #         Resultados_T.to_csv(save_results_to + 'Resultados_T_Fem_100.csv', index=False)
+    #     if sx == 'M':
+    #         save_results_to = 'graficos/'
+    #         # file_path = save_results_to + '100Porcent_DF_Masc_Limpo.csv'
+    #         file_path = save_results_to + '100Porcent_DF_Limpo_Masc.csv'
+    #         file_path1 = 'documentacao/' + 'Curso_Censo.csv'
+    #         file_path2 = 'documentacao/' + 'CBO_CSV.csv'
+    #         CBO_aux = pd.read_csv('documentacao/CBO_CSV_TabelaAuxiliar.csv', dtype ='str')
 
+    #         X_Original = pd.read_csv(file_path)
+    #         # X_Original = X_Original.drop(columns=['Unnamed: 0'])
 
-            X_Original = pd.read_csv(file_path)
-            X_Original = X_Original.drop(columns=['Unnamed: 0'])
+    #         CursosCenso = pd.read_csv(file_path1)
+    #         # CursosCenso = CursosCenso.drop(columns=['Unnamed: 0'])
 
-            CursosCenso = pd.read_csv(file_path1)
-            CursosCenso = CursosCenso.drop(columns=['Unnamed: 0'])
+    #         CursoNome =[]
+    #         for i in range (len(X_Original['CR'])):
+    #             for index, row in CursosCenso.iterrows():
+    #                 if (X_Original['CR'][i] == CursosCenso['curso_num'][index]):
+    #                     CursoNome.append(CursosCenso['curso_nome'][index])
 
-            CursoNome =[]
-            for i in range (len(X_Original['CR'])):
-                for index, row in CursosCenso.iterrows():
-                    if (X_Original['CR'][i] == CursosCenso['curso_num'][index]):
-                        CursoNome.append(CursosCenso['curso_nome'][index])
-
-            CBO = pd.read_csv(file_path2)
-            CBO = CBO.drop(columns=['Unnamed: 0'])
+    #         CBO = pd.read_csv(file_path2)
+    #         # CBO = CBO.drop(columns=['Unnamed: 0'])
             
-            CboNome =[]
-            for i in range (len(X_Original['CB'])):
-                for index, row in CBO.iterrows():
-                    if (int(X_Original['CB'][i]) == CBO['Cod_CBO'][index]):
-                        CboNome.append(CBO['Nome_CBO'][index])
+    #         CboNome =[]
+    #         for i in range (len(X_Original['CB'])):
+    #             flag = False
+    #             for index, row in CBO.iterrows():
+    #                 if (int(X_Original['CB'][i]) == CBO['Cod_CBO'][index]):
+    #                     CboNome.append(CBO['Nome_CBO'][index])
+    #                     flag = True
+    #                     break
+    #             if not flag:
+    #                for index, row in CBO_aux.iterrows():
+    #                    if str(int(X_Original['CB'][i])) == str(CBO_aux['Cod_CBO'][index]):
+    #                       CboNome.append(CBO_aux['Nome_CBO'][index])
+    #                       break
 
-            # print(len(X_Original))             
-            # print(len(CursoNome)) 
-            # print(len(CboNome))
 
-            resultados_T=[]
-            cluster=""
-            for i in range(len(X_Original)):
-                tupla=(X_Original['Ida'][i],X_Original['Volta'][i],cluster, X_Original['CR'][i],CursoNome[i],X_Original['CB'][i],CboNome[i],"M")
-                resultados_T.append(tupla)
-            #...
-            Resultados_T= pd.DataFrame(resultados_T)
+    #         # print(len(X_Original))             
+    #         # print(len(CursoNome)) 
+    #         # print(len(CboNome))
 
-            #...
-            dict = {0:"Ida",
-                    1:"Volta",
-                    2:"Cluster",
-                    3:"Curso",
-                    4:"Curso_Nome",
-                    5:"Cbo",
-                    6:"Cbo_Nome",
-                    7:"Genero"
-            }
-            Resultados_T.rename(columns=dict,inplace=True)       
-            Resultados_T.to_csv(save_results_to + 'Resultados_T_Masc_100.csv', index=False)    
+    #         resultados_T=[]
+    #         cluster=""
+    #         for i in range(len(X_Original)):
+    #             tupla=(X_Original['Ida'][i],X_Original['Volta'][i],cluster, X_Original['CR'][i],CursoNome[i],X_Original['CB'][i],CboNome[i],"M")
+    #             resultados_T.append(tupla)
+    #         #...
+    #         Resultados_T= pd.DataFrame(resultados_T)
+
+    #         #...
+    #         dict = {0:"Ida",
+    #                 1:"Volta",
+    #                 2:"Cluster",
+    #                 3:"Curso",
+    #                 4:"Curso_Nome",
+    #                 5:"Cbo",
+    #                 6:"Cbo_Nome",
+    #                 7:"Genero"
+    #         }
+    #         Resultados_T.rename(columns=dict,inplace=True)       
+    #         Resultados_T.to_csv(save_results_to + 'Resultados_T_Masc_100.csv', index=False)    
+     # unified, non-redundant implementation for building Resultados_T for gender 'F' or 'M'
+    save_results_to = 'graficos/'
+    if sx == 'F':
+        file_path = os.path.join(save_results_to, '100Porcent_DF_Limpo_Fem.csv')
+        out_file = os.path.join(save_results_to, 'Resultados_T_Fem_100.csv')
+        gender = 'F'
+    elif sx == 'M':
+        file_path = os.path.join(save_results_to, '100Porcent_DF_Limpo_Masc.csv')
+        out_file = os.path.join(save_results_to, 'Resultados_T_Masc_100.csv')
+        gender = 'M'
+    else:
         return
+
+    file_path1 = os.path.join('documentacao', 'Curso_Censo.csv')
+    file_path2 = os.path.join('documentacao', 'CBO_CSV.csv')
+    CBO_aux = pd.read_csv('documentacao/CBO_CSV_TabelaAuxiliar.csv', dtype='str')
+
+    X_Original = pd.read_csv(file_path)
+
+    CursosCenso = pd.read_csv(file_path1)
+    CBO = pd.read_csv(file_path2)
+
+    # build mappings (normalize keys to str(int(float(...))))
+    def norm_key(v):
+        try:
+            return str(int(float(v)))
+        except Exception:
+            return str(v).strip()
+
+    curso_map = {norm_key(r['curso_num']): r['curso_nome'] for _, r in CursosCenso.iterrows()}
+    cbo_map = {norm_key(r['Cod_CBO']): r['Nome_CBO'] for _, r in CBO.iterrows()}
+    # include auxiliary table (prefer main CBO names if present)
+    for _, r in CBO_aux.iterrows():
+        k = norm_key(r.get('Cod_CBO') or r.get('Cod_Dom') or r.get('Cod_Domícil') if r is not None else '')
+        if k and k not in cbo_map:
+            cbo_map[k] = r.get('Nome_CBO', '')
+
+    # map Curso and Cbo names
+    CursoNome = []
+    for v in X_Original['CR']:
+        CursoNome.append(curso_map.get(norm_key(v), ''))
+
+    CboNome = []
+    for v in X_Original['CB']:
+        CboNome.append(cbo_map.get(norm_key(v), ''))
+
+    # assemble dataframe
+    Resultados_T = pd.DataFrame({
+        'Ida': X_Original['Ida'],
+        'Volta': X_Original['Volta'],
+        'Cluster': [''] * len(X_Original),
+        'Curso': X_Original['CR'],
+        'Curso_Nome': CursoNome,
+        'Cbo': X_Original['CB'],
+        'Cbo_Nome': CboNome,
+        'Genero': [gender] * len(X_Original)
+    })
+
+    Resultados_T.to_csv(out_file, index=False)
+    return
 
 def resultados_filtragem_10_100():
     save_results_to = 'graficos/'
