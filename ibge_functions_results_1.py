@@ -1015,7 +1015,7 @@ def plot_gender_age_distribution():
 
     # Salvar o gráfico
     save_results_to = 'graficos/'
-    plt.savefig(save_results_to + 'Distribuicao_Genero_FaixaEtaria_BaseRepresentativa.png')
+    plt.savefig(save_results_to + 'Distribuicao_Genero_FaixaEtaria_BaseRepresentativa_atual.png')
     # plt.show()
 
     return

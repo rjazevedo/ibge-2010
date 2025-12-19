@@ -412,7 +412,7 @@ if fase <= 100:  # aqui é só de teste
 # #     # #ibge_functions_results_1.Analise_Genero_FaixaEtaria()
 #       ibge_functions_results_1.Analise_Genero_FaixaEtaria_1()                      # Essa função foi movida para a fase 35 ...
 # #     # #Análise de idade por CBO - Plot das idades para toda a base representativa  --------------------------------------------------------------------
-#       ibge_functions_results_1.plot_gender_age_distribution()
+#       ibge_functions_results_1.plot_gender_age_distribution()                          # Essa função foi movida para a fase 35 ...
 # #     # #Análise de idade por CBO - Plot das idades para toda os clusters  ------------------------------------------------------------------------------
 # #     # ibge_functions_results_1.split_csv_by_cluster()
 # #     # ibge_functions.plot_gender_age_distribution_bycluster()
