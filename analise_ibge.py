@@ -314,7 +314,7 @@ if fase <= 35:
 #     # ...
 #     # - Profissões desequilibradas - Quais as profissões onde homens e mulheres estão em clusters diferentes?
     ibge_functions.dadosoriginais_resultados()
-#     ibge_functions_results.resultados_filtragem_10_100()
+    ibge_functions_results.resultados_filtragem_10_100()
 #     ibge_functions_results.resultados_distancia()
 #     ibge_functions_results.tabela_clusters_diferentes()
 #     # - Profissões desequlibradas  - Gráfico com os pontos que mudaram de cluster e diagrama de Voronoi
@@ -348,6 +348,7 @@ if fase <= 35:
 #     ibge_functions_results.extract_courses_transicao()
 #     ibge_functions_results.extract_courses_equidade()
     ibge_functions_results_1.Analise_Genero_FaixaEtaria_1() 
+    ibge_functions_results_1.plot_gender_age_distribution()  
 
     pass
 

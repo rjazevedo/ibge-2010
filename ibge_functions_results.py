@@ -4615,11 +4615,15 @@ def resultados_filtragem_10_100():
     C2           = []
     C3           = []
 
+    # print(f"Ida: {len(Ida)}, Volta: {len(Volta)}, Cluster: {len(Cluster)}, Curso: {len(Curso)}, Curso_Nome: {len(Curso_Nome)}, Cbo: {len(Cbo)}, Cbo_Nome: {len(Cbo_Nome)}, Genero: {len(Genero)}, C1: {len(C1)}, C2: {len(C2)}, C3: {len(C3)}")
+
     #for i in range(0,1):
     for i in range(len(Kmeans3_T_O)):
         for j in range(len(Resultados_T_Masc_100)):
             #if ((str(Resultados_T_Masc_100.Cbo[j])== '2341') & ( str(Resultados_T_Masc_100.Curso[j])== '142.0')):
-            if ((str(Resultados_T_Masc_100.Cbo[j])== str(int(Kmeans3_T_O.Cbo[i]))) & ( str(Resultados_T_Masc_100.Curso[j])== str(Kmeans3_T_O.Curso[i]))):
+            # print(str(Resultados_T_Masc_100.Cbo[j]), str(int(Kmeans3_T_O.Cbo[i])), str(int(Resultados_T_Masc_100.Curso[j])), str(Kmeans3_T_O.Curso[i]))
+            if ((str(Resultados_T_Masc_100.Cbo[j])== str(int(Kmeans3_T_O.Cbo[i]))) & ( str(int(Resultados_T_Masc_100.Curso[j])) == str(Kmeans3_T_O.Curso[i]))):
+                # print("Achou:")
                 Ida.append(Resultados_T_Masc_100.Ida[j])
                 Volta.append(Resultados_T_Masc_100.Volta[j])
                 Cluster.append(Resultados_T_Masc_100.Cluster[j])
@@ -4632,11 +4636,15 @@ def resultados_filtragem_10_100():
                 C2.append(Resultados_T_Masc_100.C1[j])
                 C3.append(Resultados_T_Masc_100.C2[j])
 
+    # print(f"Ida: {len(Ida)}, Volta: {len(Volta)}, Cluster: {len(Cluster)}, Curso: {len(Curso)}, Curso_Nome: {len(Curso_Nome)}, Cbo: {len(Cbo)}, Cbo_Nome: {len(Cbo_Nome)}, Genero: {len(Genero)}, C1: {len(C1)}, C2: {len(C2)}, C3: {len(C3)}")
+    # exit()
     Resultados_T_Masc_100_F = []
     for i in range(len(Ida)):
         tupla=(Ida[i],Volta[i],Cluster[i], Curso[i],Curso_Nome[i],Cbo[i],Cbo_Nome[i], Genero[i],C1[i],C2[i],C3[i])
-
+        
         Resultados_T_Masc_100_F.append(tupla)
+
+    # print(Resultados_T_Masc_100_F)    
     #...
     Resultados_T_Masc_100_49 = pd.DataFrame(Resultados_T_Masc_100_F)
 
@@ -4677,7 +4685,7 @@ def resultados_filtragem_10_100():
     for i in range(len(Kmeans3_T_O)):
         for j in range(len(Resultados_T_Fem_100)):
             #if ((str(Resultados_T_Masc_100.Cbo[j])== '2341') & ( str(Resultados_T_Masc_100.Curso[j])== '142.0')):
-            if ((str(Resultados_T_Fem_100.Cbo[j])== str(int(Kmeans3_T_O.Cbo[i]))) & ( str(Resultados_T_Fem_100.Curso[j])== str(Kmeans3_T_O.Curso[i]))):
+            if ((str(Resultados_T_Fem_100.Cbo[j])== str(int(Kmeans3_T_O.Cbo[i]))) & ( str(int(Resultados_T_Fem_100.Curso[j]))== str(Kmeans3_T_O.Curso[i]))):
                 Ida.append(Resultados_T_Fem_100.Ida[j])
                 Volta.append(Resultados_T_Fem_100.Volta[j])
                 Cluster.append(Resultados_T_Fem_100.Cluster[j])
