@@ -5249,7 +5249,11 @@ def tabela():
     # df = df.drop(columns=['Unnamed: 0.1.1.1'])
     df = df.drop(columns=['Ida'])
     df = df.drop(columns=['Volta'])
+    
     df['Cluster'] = df['Cluster'].astype(int)
+    # Remapear os valores do Cluster: 0->1, 1->2, 2->0
+    df['Cluster'] = df['Cluster'].map({0: 1, 1: 2, 2: 0})
+
     df['Curso'] = df['Curso'].astype(int)
     df['Cbo'] = df['Cbo'].astype(int)
     df['M'] = df['M'].astype(int)
