@@ -1209,7 +1209,7 @@ def plot_gender_age_distribution_bycluster(cluster):
 
         # Salvar o gráfico
         save_results_to = 'graficos/'
-        plt.savefig(save_results_to + 'Distribuicao_Genero_FaixaEtaria_Cluster0.png')
+        plt.savefig(save_results_to + 'Distribuicao_Genero_FaixaEtaria_Cluster0_1_atual.png')
         # plt.show()
 
     if cluster == 1:
@@ -1253,7 +1253,7 @@ def plot_gender_age_distribution_bycluster(cluster):
 
         # Salvar o gráfico
         save_results_to = 'graficos/'
-        plt.savefig(save_results_to + 'Distribuicao_Genero_FaixaEtaria_Cluster1.png')
+        plt.savefig(save_results_to + 'Distribuicao_Genero_FaixaEtaria_Cluster1_2_atual.png')
         # plt.show()    
 
 
@@ -1298,7 +1298,7 @@ def plot_gender_age_distribution_bycluster(cluster):
 
         # Salvar o gráfico
         save_results_to = 'graficos/'
-        plt.savefig(save_results_to + 'Distribuicao_Genero_FaixaEtaria_Cluster2.png')
+        plt.savefig(save_results_to + 'Distribuicao_Genero_FaixaEtaria_Cluster2_0_atual.png')
         # plt.show()       
 
     return

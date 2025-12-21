@@ -349,7 +349,8 @@ if fase <= 35:
 #     ibge_functions_results.extract_courses_equidade()
     ibge_functions_results_1.Analise_Genero_FaixaEtaria_1() 
     ibge_functions_results_1.plot_gender_age_distribution()  
-
+    ibge_functions_results_1.split_csv_by_cluster()                                   
+    ibge_functions.plot_gender_age_distribution_bycluster()                       
     pass
 
 # if fase == 40:
@@ -415,8 +416,8 @@ if fase <= 35:
 # #     # #Análise de idade por CBO - Plot das idades para toda a base representativa  --------------------------------------------------------------------
 #       ibge_functions_results_1.plot_gender_age_distribution()                      # Essa função foi movida para a fase 35 ...
 # #     # #Análise de idade por CBO - Plot das idades para toda os clusters  ------------------------------------------------------------------------------
-# #     # ibge_functions_results_1.split_csv_by_cluster()
-# #     # ibge_functions.plot_gender_age_distribution_bycluster()
+#       ibge_functions_results_1.split_csv_by_cluster()                                    # Essa função foi movida para a fase 35 ...
+#       ibge_functions.plot_gender_age_distribution_bycluster()                            # Essa função foi movida para a fase 35 ...
 # #     # #Análise de idade por CBO - Plot das idades para Curso/CBO  -------------------------------------------------------------------------------------
 # #     # ibge_functions_results_1.extract_data_by_course_cbo()
 # #     # ibge_functions_results_1.split_csv_by_cluster_1()
@@ -470,5 +471,5 @@ if fase <= 35:
 # #     # ibge_functions_results_1.plot_age_distribution_geral()
 # #     # ibge_functions_results_1.plot_age_distribution_bycluster()
 # #     # ibge_functions_results_1.plot_age_distribution_bycluster_1()
-# #     # ibge_functions_results_1.split_csv_by_cluster_geral()
+# #     ibge_functions_results_1.split_csv_by_cluster_geral()
 #    pass
