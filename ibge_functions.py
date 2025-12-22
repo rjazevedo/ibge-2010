@@ -427,7 +427,9 @@ def Profissoes_Cursos_Masculino_Feminino():
     # ibge_functions_results.Profissoes_Cursos_Masculino_Feminino(path1,name1,path2,name2,'F')
     # ibge_functions_results.Profissoes_Cursos_Masculino_Feminino(path1,name1,path2,name2,'M')
     # ibge_functions_results.Profissoes_Cursos_Masculino_Feminino_Juntos(path1,name1,path2,name2) 
-    ibge_functions_results.Profissoes_Cursos_Masculino_Feminino_Juntos() 
+
+    # ibge_functions_results.Profissoes_Cursos_Masculino_Feminino_Juntos() 
+    ibge_functions_results.voronoi_com_csv()
 
     return  
 

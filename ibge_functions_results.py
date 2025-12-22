@@ -1052,7 +1052,135 @@ def Profissoes_Cursos_Masculino_Feminino(path1,name1,path2,name2,sx):
        save_results_to = 'graficos/'  
        plt.savefig(save_results_to + string)      
     return
+def Profissoes_Cursos_Masculino_Feminino_Juntos_voronoi():
+    """
+    Gera um gráfico com os dados de profissões/cursos masculinos e femininos juntos.
+    Feminino: marcador estrela ('*'), Masculino: marcador bolinha ('o').
+    Inclui o diagrama de Voronoi com os centróides.
+    """
+    import matplotlib.pyplot as plt
+    from scipy.spatial import Voronoi, voronoi_plot_2d
+    import numpy as np
 
+    # Leitura Feminino
+    df_fem = os.path.join('graficos/10Porcent_DF_Limpo_Fem.csv') 
+    X_fem = pd.read_csv(df_fem)
+    X_fem = X_fem.drop(columns=['CB']) 
+    X_fem = X_fem.drop(columns=['CR'])
+    
+    # Leitura Masculino
+    df_masc = os.path.join('graficos/10Porcent_DF_Limpo_Masc.csv') 
+    X_masc = pd.read_csv(df_masc)
+    X_masc = X_masc.drop(columns=['CB'])
+    X_masc = X_masc.drop(columns=['CR'])
+
+    save_results_to = 'graficos/'
+
+    plt.figure(figsize=(12, 10))
+    plt.xlabel('Cursos')
+    plt.ylabel('Profissões')
+    plt.ylim(0, 100)
+    plt.xlim(0, 100)
+    plt.grid(True, alpha=0.3)
+
+    # Feminino: estrela
+    plt.scatter(X_fem.iloc[:, 0], X_fem.iloc[:, 1], marker='*', color='magenta', label='Feminino', s=100, zorder=2)
+    # Masculino: bolinha
+    plt.scatter(X_masc.iloc[:, 0], X_masc.iloc[:, 1], marker='o', color='blue', label='Masculino', s=50, zorder=2)
+
+    # Adicionar diagrama de Voronoi
+    points = np.array([
+        [27.00526316, 21.78263158],
+        [66.464375, 77.656875],
+        [25.76357143, 62.88071429]
+    ])
+    
+    vor = Voronoi(points)
+    voronoi_plot_2d(vor, show_points=False, show_vertices=False, 
+                    line_colors='orange', line_width=2, line_alpha=0.6)
+    
+    # Plotar centróides
+    plt.scatter(points[:, 0], points[:, 1], c='red', s=100, marker='X', 
+               label='Centróides', zorder=3, edgecolors='black', linewidth=2)
+
+    plt.legend(loc='lower right')
+    string = "10_All_Courses_Female_Star_Male_Circle_com_Voronoi.png"
+    plt.savefig(save_results_to + string, dpi=300, bbox_inches='tight')
+    plt.close()
+    
+    return
+
+def voronoi_com_csv(fem_path='graficos/10Porcent_DF_Limpo_Fem.csv',
+                     masc_path='graficos/10Porcent_DF_Limpo_Masc.csv',
+                     points=None,
+                     save_name="10_All_Courses_Female_Star_Male_Circle_atual_voronoi_com_csv"):
+    """
+    Função dinâmica para plotar diagrama de Voronoi com dados de CSVs.
+    
+    Args:
+        fem_path: caminho do arquivo CSV feminino
+        masc_path: caminho do arquivo CSV masculino
+        points: np.array com coordenadas dos centróides do Voronoi shape (n, 2)
+                Ex: np.array([[27.00, 21.78], [66.46, 77.65], [25.76, 62.88]])
+        save_name: string com nome do arquivo a salvar (sem extensão)
+    """
+    import numpy as np
+    import matplotlib.pyplot as plt
+    from scipy.spatial import Voronoi, voronoi_plot_2d
+    import pandas as pd
+    
+    # Leitura dos dados
+    X_fem = pd.read_csv(fem_path)
+    X_fem = X_fem.drop(columns=['CB'], errors='ignore')
+    X_fem = X_fem.drop(columns=['CR'], errors='ignore')
+    
+    X_masc = pd.read_csv(masc_path)
+    X_masc = X_masc.drop(columns=['CB'], errors='ignore')
+    X_masc = X_masc.drop(columns=['CR'], errors='ignore')
+    
+    # Valores padrão para centróides se não fornecidos
+    if points is None:
+        points = np.array([
+            [27.00526316, 21.78263158],
+            [66.464375, 77.656875],
+            [25.76357143, 62.88071429]
+        ])
+    
+    # Criar diagrama de Voronoi
+    vor = Voronoi(points)
+    
+    # Plotar figura
+    fig, ax = plt.subplots(figsize=(12, 10))
+    voronoi_plot_2d(vor, ax=ax, show_points=False, show_vertices=False,
+                    line_colors='orange', line_width=2, line_alpha=0.6)
+    
+    # Feminino: estrela (magenta)
+    ax.scatter(X_fem.iloc[:, 0], X_fem.iloc[:, 1],
+              marker='*', color='magenta', label='Feminino', s=200, zorder=2)
+    
+    # Masculino: bolinha (azul)
+    ax.scatter(X_masc.iloc[:, 0], X_masc.iloc[:, 1],
+              marker='o', color='blue', label='Masculino', s=100, zorder=2)
+    
+    # Plotar centróides
+    ax.scatter(points[:, 0], points[:, 1], c='red', s=100, marker='X',
+              label='Centróides', zorder=3, edgecolors='black', linewidth=2)
+    
+    # Configurações do gráfico
+    ax.set_xlim(0.0, 100.0)
+    ax.set_ylim(0.0, 100.0)
+    ax.set_xlabel('Cursos')
+    ax.set_ylabel('Profissões')
+    ax.set_title('Diagrama de Voronoi - Deslocamento por Gênero')
+    ax.grid(True, alpha=0.3)
+    ax.legend(loc='lower right')
+    
+    # Salvar
+    save_results_to = 'graficos/'
+    plt.savefig(f"{save_results_to}{save_name}.png", dpi=300, bbox_inches='tight')
+    plt.close()
+    
+    return
 # def Profissoes_Cursos_Masculino_Feminino_Juntos(path1, name1, path2, name2):
 def Profissoes_Cursos_Masculino_Feminino_Juntos():
 
