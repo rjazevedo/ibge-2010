@@ -1171,7 +1171,7 @@ def voronoi_com_csv(fem_path='graficos/10Porcent_DF_Limpo_Fem.csv',
     ax.set_ylim(0.0, 100.0)
     ax.set_xlabel('Cursos')
     ax.set_ylabel('Profissões')
-    ax.set_title('Diagrama de Voronoi - Deslocamento por Gênero')
+    ax.set_title('Diagrama de Voronoi - Cursos e Profissões por Gênero')
     ax.grid(True, alpha=0.3)
     ax.legend(loc='lower right')
     
