@@ -56,6 +56,7 @@ def Filtrar_Dados_Censo(path,name,i):
     path_proc = ibge_variable.paths(2)
     name_path = os.path.join(path_proc[i], name_path[0]+"_Fase1.csv")
     X.to_csv(name_path) 
+    del X
     return X
 
 def Limpeza_Arquivo_Censo_Graduados_NaoGraduados_1_2(path,name,i): 
