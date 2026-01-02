@@ -108,6 +108,7 @@ def Limpeza_Arquivo_Censo_Graduados_NaoGraduados_1_2(path,name,i):
 
     name_path = os.path.join(path_proc[i], name_path[0]+"_Todos.csv")
     X.to_csv(name_path) 
+    del X
     return
 
 def Limpeza_Arquivo_Censo_Graduados_2(path,name,i):     
@@ -131,6 +132,7 @@ def Limpeza_Arquivo_Censo_Graduados_2(path,name,i):
 
     name_path = os.path.join(path_proc[i], name_path[0] + "_Graduados.csv")
     X.to_csv(name_path) 
+    del X
     return
 
 #https://colab.research.google.com/drive/16TrgyaIq6T0fbGKl9gOWBXxbAIUfJtCD?authuser=1#scrollTo=qXidkc7VxkIT
@@ -246,7 +248,8 @@ def Reduzir(pivot_final,estado,gender):
          else:
               if gender ==3:
                  name_path = str(pathh[0]) + estado + '_PivotFinal.csv'
-                 pivotfinal.to_csv(name_path)          
+                 pivotfinal.to_csv(name_path)      
+    del pivotfinal                 
     return
 
 # # def SomaPivotTable(path,name,i):
@@ -288,6 +291,7 @@ def filtrar_por_genero():
     name_path_masc = "processados/CSVs_ArquivoFinalGraduados/Brasil_Graduados_Masc.csv"
     df_fem.to_csv(name_path_fem, index=False, encoding='utf-8-sig')
     df_masc.to_csv(name_path_masc, index=False, encoding='utf-8-sig')
+    del df, df_fem, df_masc
     return
 
 #def JuntarCSVs(path,opcao,dir):
@@ -318,6 +322,7 @@ def JuntarCSVs(path,opcao):
         logging.error("Opção inválida")
 
     combined_csv.to_csv(name_path, index=False, encoding='utf-8-sig')   
+    del combined_csv
     return 
 
 # def ibge_trocar_CBO_Domiciliar_por_CBO():
@@ -444,7 +449,7 @@ def ibge_trocar_CBO_Domiciliar_por_CBO():
     df_graduados.to_csv(save_path, index=False, encoding='utf-8-sig', quoting=1)
     # print(df_graduados)
     # exit(0)
-
+    del df_graduados, df_cbo, df_aux
     return
 
 # def ibge_trocar_CBO_Domiciliar_por_CBO_PivotTable():
@@ -634,7 +639,7 @@ def ibge_trocar_CBO_Domiciliar_por_CBO_PivotTable():
     df_Brasil_PivotFinal.to_csv(save_path_Brasil_PivotFinal_CBO, index=False, encoding='utf-8-sig', quoting=1)
     df_Brasil_PivotFinalMasculina.to_csv(save_path_Brasil_PivotFinalMasculina_CBO, index=False, encoding='utf-8-sig', quoting=1)
     df_Brasil_PivotFinalFeminina.to_csv(save_path_Brasil_PivotFinalFeminina_CBO, index=False, encoding='utf-8-sig', quoting=1)
-
+    del df_Brasil_PivotFinal, df_Brasil_PivotFinalMasculina, df_Brasil_PivotFinalFeminina, df_cbo, df_aux
     return
 
 def diminuirCurso():
@@ -710,6 +715,7 @@ def diminuirCurso():
     # Imprimir registros onde CBO-Domiciliar tem zeros à esquerda
     # print(df[df['CBO-Domiciliar'].str.startswith('0')])
     df.to_csv(save_path, index=False, encoding='utf-8-sig', quoting=1)
+    del df
     return
 
 # def ibge_diminuirCBOs(opcao):
@@ -928,4 +934,6 @@ def ibge_diminuirCBOs():
        # ========================================================================================
        save_results_pivot = 'processados/CSVs_PivotTableFinal/Brasil_PivotFinal_CBO_DiminuidaCBO3.csv'
        df_pivot.to_csv(save_results_pivot, index=False, encoding='utf-8-sig', quoting=1)
+
+       del df_graduados, df_pivot
        return

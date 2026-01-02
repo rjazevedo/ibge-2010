@@ -813,7 +813,8 @@ def Filtro_Masculino_Feminino(sx):
             Estado = Estado.drop(columns=['Unnamed: 0'])
             # Estado.to_csv(path[0] + 'Brasil_Graduados_Masc.csv') 
             Estado.to_csv('processados/CSVs_ArquivoFinalGraduados/' + 'Brasil_Graduados_Masc_CBO.csv', index=False, encoding='utf-8-sig', quoting=1)
-               
+    del Estado
+    return               
 
 def Ida_Volta_Masculino_Feminino(path,name,path1,name1,sx):
 
