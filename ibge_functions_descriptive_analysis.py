@@ -3162,7 +3162,7 @@ def Ida_Volta(path,name,path1,name1, sx, modo):
         df.to_csv(save_results_to + '10Porcent_DF_Masc.csv', index=False, encoding='utf-8-sig', quoting=1)    
 
       
-
+    del df
     return           
 
 # def Tabela_Ida_Volta(path2,name2):
@@ -3259,7 +3259,8 @@ def Tabela_Ida_Volta(path2,name2, sx, modo):
         # usa os arquivos de 10%
         logging.info(" Concluindo a geração da tabela de idas e voltas ...") 
         df1.to_csv(save_results_to + '10Porcent_DF_Limpo_Masc.csv', index=False, encoding='utf-8-sig', quoting=1)
-
+    
+    del df1
     return
 
 # def Ida_Volta_Curso2(path,name,path1,name1):
@@ -3461,6 +3462,7 @@ def Ida_Volta_Curso2(path,name,path1,name1,modo):
     elif modo == 100:
         # usa os arquivos de 100%
          df.to_csv(save_results_to + '100Porcent_DF_Curso02.csv')
+    del df
     return           
 
 # def Tabela_Ida_Volta_Curso2(path2,name2):
@@ -3515,6 +3517,7 @@ def Tabela_Ida_Volta_Curso2(path2,name2,modo):
         # usa os arquivos de 100%
         df1.to_csv(save_results_to + '100Porcent_DF_Limpo_Curso02.csv')
         df1.to_excel(save_results_to + '100Porcent_DF_Limpo_Curso02.xlsx')
+    del df1
     return
 
 def Ida_Volta_CBO2():
@@ -4175,7 +4178,8 @@ def Ida_Volta_CBO3(modo):
     if modo == 100:
        # df.to_csv(save_results_to + '100Porcent_DF.csv')
        df.to_csv(save_results_to + 'CBO3_100Porcent_DF.csv')
-
+    
+    del df
     return 
 
 # def Tabela_Ida_Volta_CBO3():
@@ -4223,6 +4227,7 @@ def Tabela_Ida_Volta_CBO3(modo):
       # df1.to_excel(save_results_to + '100Porcent_DF_Limpo.xlsx')
       df1.to_csv(save_results_to + 'CBO3_100Porcent_DF_Limpo.csv')
       df1.to_excel(save_results_to + 'CBO3_100Porcent_DF_Limpo.xlsx')
+    del df1
     return
 
 def Ida_Volta_CBO3_Curso2():
