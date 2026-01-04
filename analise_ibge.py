@@ -382,6 +382,8 @@ if fase == 40:
 #     # - Homens gestores e Mulheres gestoras (Homem e mulher, muda faixa de idade para virar gestores?)
      ibge_functions_results_1.Analise_FaixaEtaria_Geral()
      ibge_functions_results_1.plot_age_distribution_geral()  
+     ibge_functions_results_1.split_csv_by_cluster_geral() 
+     ibge_functions_results_1.plot_age_distribution_bycluster_1() 
      pass
 
 # if fase == 50:
@@ -472,6 +474,6 @@ if fase == 40:
 # #     # ibge_functions_results_1.Analise_FaixaEtaria_Geral()           # Essa função foi movida para a fase 40 ...
 # #     # ibge_functions_results_1.plot_age_distribution_geral()         # Essa função foi movida para a fase 40 ...
 # #     # ibge_functions_results_1.plot_age_distribution_bycluster()
-# #     # ibge_functions_results_1.plot_age_distribution_bycluster_1()
-# #     ibge_functions_results_1.split_csv_by_cluster_geral()
+# #     # ibge_functions_results_1.plot_age_distribution_bycluster_1()   # Essa função foi movida para a fase 40 ...
+# #     ibge_functions_results_1.split_csv_by_cluster_geral()            # Essa função foi movida para a fase 40 ...
 #    pass

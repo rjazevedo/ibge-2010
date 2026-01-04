@@ -1232,7 +1232,9 @@ def split_csv_by_cluster():
 
 def split_csv_by_cluster_geral():
     # Read the CSV file
-    file_path = 'graficos/Kmeans3_T_IdadeCursoCBO_Geral.csv'
+    # file_path = 'graficos/Kmeans3_T_IdadeCursoCBO_Geral.csv'
+    file_path = 'graficos/Kmeans3_T_IdadeCursoCBO_Geral_atual.csv'
+
     df = pd.read_csv(file_path)
 
     # Convert the 'Cluster' column to integer
@@ -1244,9 +1246,12 @@ def split_csv_by_cluster_geral():
     cluster_2 = df[df['Cluster'] == 2]
 
     # Save each cluster to a separate CSV file
-    cluster_0.to_csv('graficos/Kmeans3_T_IdadeCursoCBO_Geral_Cluster0.csv', index=False)
-    cluster_1.to_csv('graficos/Kmeans3_T_IdadeCursoCBO_Geral_Cluster1.csv', index=False)
-    cluster_2.to_csv('graficos/Kmeans3_T_IdadeCursoCBO_Geral_Cluster2.csv', index=False)
+    # cluster_0.to_csv('graficos/Kmeans3_T_IdadeCursoCBO_Geral_Cluster0.csv', index=False)
+    # cluster_1.to_csv('graficos/Kmeans3_T_IdadeCursoCBO_Geral_Cluster1.csv', index=False)
+    # cluster_2.to_csv('graficos/Kmeans3_T_IdadeCursoCBO_Geral_Cluster2.csv', index=False)
+    cluster_0.to_csv('graficos/Kmeans3_T_IdadeCursoCBO_Geral_Cluster0_atual.csv', index=False)
+    cluster_1.to_csv('graficos/Kmeans3_T_IdadeCursoCBO_Geral_Cluster1_atual.csv', index=False)
+    cluster_2.to_csv('graficos/Kmeans3_T_IdadeCursoCBO_Geral_Cluster2_atual.csv', index=False)
 
     return
 
@@ -1471,9 +1476,12 @@ def plot_age_distribution_bycluster_1():
 
     # File paths for each cluster
     files = [
-        ('graficos/Kmeans3_T_IdadeCursoCBO_Geral_Cluster0.csv', 'Cluster 0', 'red'),
-        ('graficos/Kmeans3_T_IdadeCursoCBO_Geral_Cluster1.csv', 'Cluster 1', 'blue'),
-        ('graficos/Kmeans3_T_IdadeCursoCBO_Geral_Cluster2.csv', 'Cluster 2', 'green')
+        # ('graficos/Kmeans3_T_IdadeCursoCBO_Geral_Cluster0.csv', 'Cluster 0', 'red'),
+        # ('graficos/Kmeans3_T_IdadeCursoCBO_Geral_Cluster1.csv', 'Cluster 1', 'blue'),
+        # ('graficos/Kmeans3_T_IdadeCursoCBO_Geral_Cluster2.csv', 'Cluster 2', 'green')
+        ('graficos/Kmeans3_T_IdadeCursoCBO_Geral_Cluster0_atual.csv', 'Cluster 0', 'red'),
+        ('graficos/Kmeans3_T_IdadeCursoCBO_Geral_Cluster1_atual.csv', 'Cluster 1', 'blue'),
+        ('graficos/Kmeans3_T_IdadeCursoCBO_Geral_Cluster2_atual.csv', 'Cluster 2', 'green')
     ]
     age_groups = ['25-29', '30-39', '40-49', '50-59', '60+']
     width = 0.25
@@ -1500,7 +1508,7 @@ def plot_age_distribution_bycluster_1():
     plt.grid(axis='y', linestyle='--', alpha=0.7)
     plt.tight_layout()
     save_results_to = 'graficos/'
-    plt.savefig(save_results_to + 'Distribuicao_FaixaEtaria_Clusters_Juntos.png')
+    plt.savefig(save_results_to + 'Distribuicao_FaixaEtaria_Clusters_Juntos_atual.png')
     # plt.show()
     return
 
