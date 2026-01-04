@@ -1479,9 +1479,9 @@ def plot_age_distribution_bycluster_1():
         # ('graficos/Kmeans3_T_IdadeCursoCBO_Geral_Cluster0.csv', 'Cluster 0', 'red'),
         # ('graficos/Kmeans3_T_IdadeCursoCBO_Geral_Cluster1.csv', 'Cluster 1', 'blue'),
         # ('graficos/Kmeans3_T_IdadeCursoCBO_Geral_Cluster2.csv', 'Cluster 2', 'green')
-        ('graficos/Kmeans3_T_IdadeCursoCBO_Geral_Cluster0_atual.csv', 'Cluster 0', 'red'),
-        ('graficos/Kmeans3_T_IdadeCursoCBO_Geral_Cluster1_atual.csv', 'Cluster 1', 'blue'),
-        ('graficos/Kmeans3_T_IdadeCursoCBO_Geral_Cluster2_atual.csv', 'Cluster 2', 'green')
+        ('graficos/Kmeans3_T_IdadeCursoCBO_Geral_Cluster2_atual.csv', 'Cluster 0', 'red'),
+        ('graficos/Kmeans3_T_IdadeCursoCBO_Geral_Cluster0_atual.csv', 'Cluster 1', 'blue'),
+        ('graficos/Kmeans3_T_IdadeCursoCBO_Geral_Cluster1_atual.csv', 'Cluster 2', 'green')
     ]
     age_groups = ['25-29', '30-39', '40-49', '50-59', '60+']
     width = 0.25
