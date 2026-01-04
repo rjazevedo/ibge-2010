@@ -1020,12 +1020,112 @@ def plot_gender_age_distribution():
 
     return
 
+# def Analise_FaixaEtaria_Geral():
+#         save_results_to = 'graficos/'
+#         save_results_too = 'processados/CSVs_ArquivoFinalGraduados/'
+
+#         file_path = save_results_to + 'Kmeans3_T.csv'
+#         # file_path1 = save_results_too + 'Brasil_Graduados.csv'
+#         file_path1 = save_results_too + 'Brasil_Graduados_CBO.csv'
+
+#         Kmeans3_T = pd.read_csv(file_path)
+#         Final = pd.read_csv(file_path1)
+
+#         Kmeans3_T = Kmeans3_T.drop(columns=['Unnamed: 0'])
+#         Final = Final.drop(columns=['Unnamed: 0'])
+
+#         Kmeans3_T['E29'] = ''
+#         Kmeans3_T['E30'] = ''
+#         Kmeans3_T['E40'] = ''
+#         Kmeans3_T['E50'] = ''
+#         Kmeans3_T['E60'] = ''
+
+#         # for i in range(len(Kmeans3_T)):
+#         #     Qtdade = 0
+#         #     for j in range(len(Final)):
+#         #         # if ((str(Final.Ocupação_Código[j])) == (str(int(Kmeans3_T.Cbo[i])))) and \
+#         #         #   (str(Final.Curso_Superior_Graduação_Código[j]) == str(int(Kmeans3_T.Curso[i]))) and \
+#         #         #   (Final.Idade_em_Anos[j] <= 29):
+#         #         if ((str(Final['CBO-Domiciliar'][j]))== (str(int(Kmeans3_T.Cbo[i])))) & \
+#         #         (str(Final.Curso_Superior_Graduação_Código[j]) == str(int(Kmeans3_T.Curso[i]))) & \
+#         #             (Final.Idade_em_Anos[j] <= 29):
+#         #             Qtdade += 1
+#         #     Kmeans3_T.E29[i] = int(Qtdade)
+
+#         #     Qtdade = 0
+#         #     for j in range(len(Final)):
+#         #         # if ((str(Final.Ocupação_Código[j])) == (str(int(Kmeans3_T.Cbo[i])))) and \
+#         #         #    (str(Final.Curso_Superior_Graduação_Código[j]) == str(int(Kmeans3_T.Curso[i]))) and \
+#         #         if ((str(Final['CBO-Domiciliar'][j]))== (str(int(Kmeans3_T.Cbo[i])))) & \
+#         #            (str(Final.Curso_Superior_Graduação_Código[j]) == str(int(Kmeans3_T.Curso[i]))) & \
+#         #            (30 <= Final.Idade_em_Anos[j] <= 39):
+#         #             Qtdade += 1
+#         #     Kmeans3_T.E30[i] = int(Qtdade)
+
+#         #     Qtdade = 0
+#         #     for j in range(len(Final)):
+#         #         #if ((str(Final.Ocupação_Código[j])) == (str(int(Kmeans3_T.Cbo[i])))) and \
+#         #         #   (str(Final.Curso_Superior_Graduação_Código[j]) == str(int(Kmeans3_T.Curso[i]))) and \
+#         #         if ((str(Final['CBO-Domiciliar'][j]))== (str(int(Kmeans3_T.Cbo[i])))) & \
+#         #            (str(Final.Curso_Superior_Graduação_Código[j]) == str(int(Kmeans3_T.Curso[i]))) & \
+#         #            (40 <= Final.Idade_em_Anos[j] <= 49):
+#         #             Qtdade += 1
+#         #     Kmeans3_T.E40[i] = int(Qtdade)
+
+#         #     Qtdade = 0
+#         #     for j in range(len(Final)):
+#         #         # if ((str(Final.Ocupação_Código[j])) == (str(int(Kmeans3_T.Cbo[i])))) and \
+#         #         #    (str(Final.Curso_Superior_Graduação_Código[j]) == str(int(Kmeans3_T.Curso[i]))) and \
+#         #         if ((str(Final['CBO-Domiciliar'][j]))== (str(int(Kmeans3_T.Cbo[i])))) & \
+#         #            (str(Final.Curso_Superior_Graduação_Código[j]) == str(int(Kmeans3_T.Curso[i]))) & \
+#         #            (50 <= Final.Idade_em_Anos[j] <= 59):
+#         #             Qtdade += 1
+#         #     Kmeans3_T.E50[i] = int(Qtdade)
+
+#         #     Qtdade = 0
+#         #     for j in range(len(Final)):
+#         #         # if ((str(Final.Ocupação_Código[j])) == (str(int(Kmeans3_T.Cbo[i])))) and \
+#         #         #    (str(Final.Curso_Superior_Graduação_Código[j]) == str(int(Kmeans3_T.Curso[i]))) and \
+#         #         if ((str(Final['CBO-Domiciliar'][j]))== (str(int(Kmeans3_T.Cbo[i])))) & \
+#         #            (str(Final.Curso_Superior_Graduação_Código[j]) == str(int(Kmeans3_T.Curso[i]))) & \
+#         #            (Final.Idade_em_Anos[j] >= 60):
+#         #             Qtdade += 1
+#         #     Kmeans3_T.E60[i] = int(Qtdade)   
+#         for i in range(len(Kmeans3_T)):
+#             if i % 100 == 0:
+#                 print(f"Processando linha {i}/{len(Kmeans3_T)}")
+            
+#             age_ranges = [
+#                 ('E29', lambda age: age <= 29),
+#                 ('E30', lambda age: 30 <= age <= 39),
+#                 ('E40', lambda age: 40 <= age <= 49),
+#                 ('E50', lambda age: 50 <= age <= 59),
+#                 ('E60', lambda age: age >= 60)
+#             ]
+            
+#             cbo_value = str(int(Kmeans3_T.Cbo[i]))
+#             curso_value = str(int(Kmeans3_T.Curso[i]))
+            
+#             for col_name, age_condition in age_ranges:
+#                 qtdade = sum(1 for j in range(len(Final))
+#                     if str(Final['CBO-Domiciliar'][j]) == cbo_value and
+#                        str(Final.Curso_Superior_Graduação_Código[j]) == curso_value and
+#                        age_condition(Final.Idade_em_Anos[j]))
+#                 Kmeans3_T.at[i, col_name] = int(qtdade)
+
+#         print(f"Processamento concluído!")
+         
+
+#         Kmeans3_T.to_csv(save_results_to + 'Kmeans3_T_IdadeCursoCBO_Geral_atual.csv')
+#         return    
+
 def Analise_FaixaEtaria_Geral():
         save_results_to = 'graficos/'
         save_results_too = 'processados/CSVs_ArquivoFinalGraduados/'
 
         file_path = save_results_to + 'Kmeans3_T.csv'
-        file_path1 = save_results_too + 'Brasil_Graduados.csv'
+        # file_path1 = save_results_too + 'Brasil_Graduados.csv'
+        file_path1 = save_results_too + 'Brasil_Graduados_CBO.csv'
 
         Kmeans3_T = pd.read_csv(file_path)
         Final = pd.read_csv(file_path1)
@@ -1039,55 +1139,41 @@ def Analise_FaixaEtaria_Geral():
         Kmeans3_T['E50'] = ''
         Kmeans3_T['E60'] = ''
 
+        
         for i in range(len(Kmeans3_T)):
-            Qtdade = 0
-            for j in range(len(Final)):
-                if ((str(Final.Ocupação_Código[j])) == (str(int(Kmeans3_T.Cbo[i])))) and \
-                   (str(Final.Curso_Superior_Graduação_Código[j]) == str(int(Kmeans3_T.Curso[i]))) and \
-                   (Final.Idade_em_Anos[j] <= 29):
-                    Qtdade += 1
-            Kmeans3_T.E29[i] = int(Qtdade)
+            if i % 100 == 0:
+                print(f"Processando linha {i}/{len(Kmeans3_T)}")
+            
+            age_ranges = [
+                ('E29', lambda age: age <= 29),
+                ('E30', lambda age: 30 <= age <= 39),
+                ('E40', lambda age: 40 <= age <= 49),
+                ('E50', lambda age: 50 <= age <= 59),
+                ('E60', lambda age: age >= 60)
+            ]
+            
+            cbo_value = str(int(Kmeans3_T.Cbo[i]))
+            curso_value = str(int(Kmeans3_T.Curso[i]))
+            
+            for col_name, age_condition in age_ranges:
+                qtdade = sum(1 for j in range(len(Final))
+                    if str(Final['CBO-Domiciliar'][j]) == cbo_value and
+                       str(Final.Curso_Superior_Graduação_Código[j]) == curso_value and
+                       age_condition(Final.Idade_em_Anos[j]))
+                Kmeans3_T.at[i, col_name] = int(qtdade)
 
-            Qtdade = 0
-            for j in range(len(Final)):
-                if ((str(Final.Ocupação_Código[j])) == (str(int(Kmeans3_T.Cbo[i])))) and \
-                   (str(Final.Curso_Superior_Graduação_Código[j]) == str(int(Kmeans3_T.Curso[i]))) and \
-                   (30 <= Final.Idade_em_Anos[j] <= 39):
-                    Qtdade += 1
-            Kmeans3_T.E30[i] = int(Qtdade)
+        print(f"Processamento concluído!")
+         
 
-            Qtdade = 0
-            for j in range(len(Final)):
-                if ((str(Final.Ocupação_Código[j])) == (str(int(Kmeans3_T.Cbo[i])))) and \
-                   (str(Final.Curso_Superior_Graduação_Código[j]) == str(int(Kmeans3_T.Curso[i]))) and \
-                   (40 <= Final.Idade_em_Anos[j] <= 49):
-                    Qtdade += 1
-            Kmeans3_T.E40[i] = int(Qtdade)
-
-            Qtdade = 0
-            for j in range(len(Final)):
-                if ((str(Final.Ocupação_Código[j])) == (str(int(Kmeans3_T.Cbo[i])))) and \
-                   (str(Final.Curso_Superior_Graduação_Código[j]) == str(int(Kmeans3_T.Curso[i]))) and \
-                   (50 <= Final.Idade_em_Anos[j] <= 59):
-                    Qtdade += 1
-            Kmeans3_T.E50[i] = int(Qtdade)
-
-            Qtdade = 0
-            for j in range(len(Final)):
-                if ((str(Final.Ocupação_Código[j])) == (str(int(Kmeans3_T.Cbo[i])))) and \
-                   (str(Final.Curso_Superior_Graduação_Código[j]) == str(int(Kmeans3_T.Curso[i]))) and \
-                   (Final.Idade_em_Anos[j] >= 60):
-                    Qtdade += 1
-            Kmeans3_T.E60[i] = int(Qtdade)
-
-        Kmeans3_T.to_csv(save_results_to + 'Kmeans3_T_IdadeCursoCBO_Geral.csv')
-        return    
+        Kmeans3_T.to_csv(save_results_to + 'Kmeans3_T_IdadeCursoCBO_Geral_atual.csv')
+        return  
 
 def plot_age_distribution_geral():
     import matplotlib.pyplot as plt
 
     # Leitura do arquivo
-    file_path = 'graficos/Kmeans3_T_IdadeCursoCBO_Geral.csv'
+    # file_path = 'graficos/Kmeans3_T_IdadeCursoCBO_Geral.csv'
+    file_path = 'graficos/Kmeans3_T_IdadeCursoCBO_Geral_atual.csv'
     df = pd.read_csv(file_path)
 
     # Somar os valores por faixa etária (sem separar por gênero)
@@ -1117,7 +1203,7 @@ def plot_age_distribution_geral():
 
     # Salvar o gráfico
     save_results_to = 'graficos/'
-    plt.savefig(save_results_to + 'Distribuicao_FaixaEtaria_BaseRepresentativa_Geral.png')
+    plt.savefig(save_results_to + 'Distribuicao_FaixaEtaria_BaseRepresentativa_Geral_atual.png')
     # plt.show()
 
     return

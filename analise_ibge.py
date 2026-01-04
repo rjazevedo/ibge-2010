@@ -353,7 +353,7 @@ if fase <= 35:
     ibge_functions.plot_gender_age_distribution_bycluster()                       
     pass
 
-# if fase == 40:
+if fase == 40:
 #     # #QP4
 #     # Funciona, mas salva csvs. Comentei para usar como dataframes!
 #     # ibge_functions.Filtro_Idade()
@@ -380,7 +380,9 @@ if fase <= 35:
 #     # 3- Idade - Casos Administrativos: Descobrir quando alguém vira gerente gestor
 #     # - Olhar todos os médicos e ver na carreira deles, quando começam a pegar o código 1. Comparar com: 1342 - 1345 - 1348 - 1349
 #     # - Homens gestores e Mulheres gestoras (Homem e mulher, muda faixa de idade para virar gestores?)
-#     pass
+     ibge_functions_results_1.Analise_FaixaEtaria_Geral()
+     ibge_functions_results_1.plot_age_distribution_geral()  
+     pass
 
 # if fase == 50:
 #     # #QP5
@@ -467,8 +469,8 @@ if fase <= 35:
 # #     # QP6.data_processed_groupby()
 # #     # QP6.plot_employment_by_gender()
 
-# #     # ibge_functions_results_1.Analise_FaixaEtaria_Geral()
-# #     # ibge_functions_results_1.plot_age_distribution_geral()
+# #     # ibge_functions_results_1.Analise_FaixaEtaria_Geral()           # Essa função foi movida para a fase 40 ...
+# #     # ibge_functions_results_1.plot_age_distribution_geral()         # Essa função foi movida para a fase 40 ...
 # #     # ibge_functions_results_1.plot_age_distribution_bycluster()
 # #     # ibge_functions_results_1.plot_age_distribution_bycluster_1()
 # #     ibge_functions_results_1.split_csv_by_cluster_geral()
