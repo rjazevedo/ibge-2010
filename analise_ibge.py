@@ -214,8 +214,8 @@ if fase <= 20:
     # Empregabilidade x Salario -----------------------------------------------------------------
     ibge_functions.Juntar_10Porcento_Genero()                                                # OK    
     ibge_functions.median_salario()                                                          # OK  
-    # ibge_functions_exploratory_analysis.separar_cursos_por_clusters()
-    # ibge_functions_exploratory_analysis.medianas_por_clusters()
+    # ibge_functions_exploratory_analysis.separar_cursos_por_clusters()                      # Essa função foi movida para a fase 50 ...
+    # ibge_functions_exploratory_analysis.medianas_por_clusters()                            # Essa função foi movida para a fase 50 ...
     # ibge_functions.Salarios()
     ibge_functions.Salarios_cursos_commaisprofissoes()                                       # OK
     ibge_functions.Soma_PivotTable()                                                         # OK
@@ -347,10 +347,10 @@ if fase <= 35:
 
 #     ibge_functions_results.extract_courses_transicao()
 #     ibge_functions_results.extract_courses_equidade()
-    ibge_functions_results_1.Analise_Genero_FaixaEtaria_1() 
-    ibge_functions_results_1.plot_gender_age_distribution()  
-    ibge_functions_results_1.split_csv_by_cluster()                                   
-    ibge_functions.plot_gender_age_distribution_bycluster()                       
+    ibge_functions_results_1.Analise_Genero_FaixaEtaria_1()                                 # OK
+    ibge_functions_results_1.plot_gender_age_distribution()                                 # OK
+    ibge_functions_results_1.split_csv_by_cluster()                                         # OK
+    ibge_functions.plot_gender_age_distribution_bycluster()                                 # OK              
     pass
 
 if fase == 40:
@@ -380,14 +380,16 @@ if fase == 40:
 #     # 3- Idade - Casos Administrativos: Descobrir quando alguém vira gerente gestor
 #     # - Olhar todos os médicos e ver na carreira deles, quando começam a pegar o código 1. Comparar com: 1342 - 1345 - 1348 - 1349
 #     # - Homens gestores e Mulheres gestoras (Homem e mulher, muda faixa de idade para virar gestores?)
-     ibge_functions_results_1.Analise_FaixaEtaria_Geral()
-     ibge_functions_results_1.plot_age_distribution_geral()  
-     ibge_functions_results_1.split_csv_by_cluster_geral() 
-     ibge_functions_results_1.plot_age_distribution_bycluster_1() 
+     ibge_functions_results_1.Analise_FaixaEtaria_Geral()                     # OK
+     ibge_functions_results_1.plot_age_distribution_geral()                   # OK
+     ibge_functions_results_1.split_csv_by_cluster_geral()                    # OK
+     ibge_functions_results_1.plot_age_distribution_bycluster_1()             # OK
      pass
 
-# if fase == 50:
-#     # #QP5
+if fase == 50:
+#     QP5
+      ibge_functions_exploratory_analysis.separar_cursos_por_clusters()                       
+      ibge_functions_exploratory_analysis.medianas_por_clusters()                              
 #     # Funções que faltam ...
 #     # 1- BoxPlot de salários separados por clusters
 #     # 2- BoxPlot de salários separados por faixa etária (idades)  - Idades por Cluster (Grupos)
@@ -403,6 +405,7 @@ if fase == 40:
 #     # BoxPlot da Mediana de três  profissões
 #     # 7- Platô
 #     # 8- 20% ida e 80% volta
+      pass
 
 # # # Fase 99: Aqui você pode explorar coisas novas que não afetam os dados anteriores.
 # # if fase <= 99:

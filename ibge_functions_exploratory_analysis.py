@@ -4959,12 +4959,68 @@ def separar_cursos_por_clusters():
         return  
   
 def medianas_por_clusters():
-            clusters = [0.0, 1.0, 2.0]
+            # clusters = [0.0, 1.0, 2.0]
+            clusters = [0, 1, 2]
             for cluster in clusters:
                 file_path = f"graficos/Kmeans3_T_Salarios_cluster_{cluster}.csv"
                 data = pd.read_csv(file_path)
                 median_of_medians = data['Median'].median()
                 print(f"Cluster {cluster}: Mediana das medianas = {median_of_medians}")        
+
+                if cluster == 0:
+                    df = pd.read_csv('graficos/Kmeans3_T_Salarios_cluster_0.csv')
+
+                    # Remove the 'Unnamed: 0' column
+                    df = df.drop('Unnamed: 0', axis=1)
+                    df = df.drop('Ida', axis=1)
+                    df = df.drop('Volta', axis=1)
+                    df = df.drop('Cluster', axis=1)
+                    df = df.drop('Max', axis=1)
+                    df = df.drop('Min', axis=1)
+
+                    # Save the records in a LaTeX table
+                    latex_table = df.to_latex(index=False, caption="Cluster 1 - Salarios medianos por profissão ", label="tab:mediana_Cluster1") 
+
+                    # Salvar em um arquivo .tex
+                    with open("tabelas/Kmeans3_T_Salarios_cluster_1.tex", "w") as f:
+                        f.write(latex_table)
+
+                if cluster == 1:
+                    df = pd.read_csv('graficos/Kmeans3_T_Salarios_cluster_1.csv')
+
+                    # Remove the 'Unnamed: 0' column
+                    df = df.drop('Unnamed: 0', axis=1)
+                    df = df.drop('Ida', axis=1)
+                    df = df.drop('Volta', axis=1)
+                    df = df.drop('Cluster', axis=1)
+                    df = df.drop('Max', axis=1)
+                    df = df.drop('Min', axis=1)
+
+                    # Save the records in a LaTeX table
+                    latex_table = df.to_latex(index=False, caption="Cluster 2 - Salarios medianos por profissão ", label="tab:mediana_Cluster2") 
+
+                    # Salvar em um arquivo .tex
+                    with open("tabelas/Kmeans3_T_Salarios_cluster_2.tex", "w") as f:
+                        f.write(latex_table)        
+
+                if cluster == 2:
+                    df = pd.read_csv('graficos/Kmeans3_T_Salarios_cluster_2.csv')
+
+                    # Remove the 'Unnamed: 0' column
+                    df = df.drop('Unnamed: 0', axis=1)
+                    df = df.drop('Ida', axis=1)
+                    df = df.drop('Volta', axis=1)
+                    df = df.drop('Cluster', axis=1)
+                    df = df.drop('Max', axis=1)
+                    df = df.drop('Min', axis=1)
+
+                    # Save the records in a LaTeX table
+                    latex_table = df.to_latex(index=False, caption="Cluster 0 - Salarios medianos por profissão ", label="tab:mediana_Cluster0") 
+
+                    # Salvar em um arquivo .tex
+                    with open("tabelas/Kmeans3_T_Salarios_cluster_0.tex", "w") as f:
+                        f.write(latex_table)            
+
             return
           
 def Salarios(path1,name1,path2,name2):
