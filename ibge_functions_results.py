@@ -1359,7 +1359,8 @@ def PlotOriginal_AdicionaColunaGenero(path1,name1,path2,name2,G):
     return 
 
 def Filtro_Idade(path, name, idade):
-    csv_estado = os.path.join(path[0],name[0]) # arquivo do censo do Brasil inteiro (somente graduados)
+    # csv_estado = os.path.join(path[0],name[0]) # arquivo do censo do Brasil inteiro (somente graduados)
+    csv_estado = 'processados/CSVs_ArquivoFinalGraduados/Brasil_Graduados_CBO.csv'
     Estado = pd.read_csv(csv_estado)
     # print(path[0])
 
@@ -1752,13 +1753,18 @@ def Ida_Volta_Idade(df,path1,name1,idade):
     #    csv_estado = os.path.join(path[0],name[3]) # arquivo do censo do Brasil inteiro (somente graduados)
     # path1 = ibge_variable.paths(12)
     # name1 = ibge_variable.names(6)
-    csv_CBO = os.path.join(path1[0],name1[1]) # Tabela de CBOs
-    csv_CURSOS = os.path.join(path1[0],name1[2]) # Tabela de Cursos
+    #csv_CBO = os.path.join(path1[0],name1[1]) # Tabela de CBOs
+    csv_CBO = os.path.join('documentacao/CBO_CSV.csv') # Tabela de CBOs
+    # csv_CURSOS = os.path.join(path1[0],name1[2]) # Tabela de Cursos
+    csv_CURSOS = os.path.join('documentacao/Curso_CSV.csv') # Tabela de Cursos
     path2 = ibge_variable.paths(8)
     name2 = ibge_variable.names(8)         
-    csv_PivotTableFinal =  os.path.join(path2[0],name2[0]) #Pivo Table Final
+    # csv_PivotTableFinal =  os.path.join(path2[0],name2[0]) #Pivo Table Final
+    csv_PivotTableFinal =  os.path.join('processados/CSVs_PivotTableFinal/Brasil_PivotFinal_CBO.csv') #Pivo Table Final
 
-    CursosCenso = ibge_functions_descriptive_analysis.ibge_cursos_filter(path1[0],name1[2])
+
+    # CursosCenso = ibge_functions_descriptive_analysis.ibge_cursos_filter(path1[0],name1[2])
+    CursosCenso = ibge_functions_descriptive_analysis.ibge_cursos_filter('documentacao/','Curso_CSV.csv')
     # print(len(CursosCenso))
     # curso_num  = float(CursosCenso.curso_num.iloc[88])
     # curso_nome = CursosCenso.curso_nome.iloc[88]
@@ -1786,7 +1792,10 @@ def Ida_Volta_Idade(df,path1,name1,idade):
         #primeirosCbos,primeirosCbos_Nome,CURSO_NUM,CURSO_NOME=CBOs_Curso_v5(csv_estado,csv_CBO,curso_num,curso_nome,titulo10,titulo3)
         #primeirosCbos,primeirosCbos_Nome,CURSO_NUM,CURSO_NOME=CBOs_Curso_v6(csv_estado,csv_CBO,curso_num,curso_nome,titulo10,titulo3)
         #primeirosCbos,primeirosCbos_Nome,Porcentagens,CURSO_NUM,CURSO_NOME=CBOs_Curso_v6_sn(csv_estado,csv_CBO,curso_num,curso_nome,titulo10,titulo3,0.07)
-        primeirosCbos,primeirosCbos_Nome,Porcentagens,CURSO_NUM,CURSO_NOME=CBOs_Curso_v6_sn2(df,csv_CBO,curso_num,curso_nome,titulo10,titulo3,1)
+        
+        # primeirosCbos,primeirosCbos_Nome,Porcentagens,CURSO_NUM,CURSO_NOME=CBOs_Curso_v6_sn2(df,csv_CBO,curso_num,curso_nome,titulo10,titulo3,1)
+        # usa os arquivos de 10%   
+        primeirosCbos,primeirosCbos_Nome,Porcentagens,CURSO_NUM,CURSO_NOME=ibge_functions_descriptive_analysis.CBOs_Curso_v6(df,csv_CBO,curso_num,curso_nome,titulo10,titulo3,0.1,save_results_to)
         if (primeirosCbos!=0)&(primeirosCbos!=0)&(Porcentagens!=0):
             #======================================================Achando a quantidade de Não-Graduados na PivotTable
             #NaoGraduados = NaoGraduados_PivotTable(primeirosCbos, csv_PivotTableFinal)
@@ -1808,8 +1817,11 @@ def Ida_Volta_Idade(df,path1,name1,idade):
                 #tresprimeirosCursos=Cursos_CBO_10(csv_estado,csv_CBO,csv_CURSOS,primeirosCbos[i],titulo3)
                 #tresprimeirosCursos=Cursos_CBO_12(csv_estado,csv_CBO,csv_CURSOS,primeirosCbos[i],titulo3,NaoGraduados[i],curso_num)
                 if(int(float(primeirosCbos[i]))>=2000):
-                    #CBO,Curso,tresprimeirosCursos,intensidade,fig,string,cursos_vol, nomes_vol, porcentagens_vol=Cursos_CBO_14_10_sn(csv_estado,csv_CBO,csv_CURSOS,primeirosCbos[i],titulo3,NaoGraduados[i],curso_num,curso_nome,primeirosCbos_Nome,i,0.07)
-                    CBO,Curso,tresprimeirosCursos,intensidade,fig,cursos_vol, nomes_vol, porcentagens_vol=Cursos_CBO_14_10_sn(df,csv_CBO,csv_CURSOS,primeirosCbos[i],titulo3,NaoGraduados[i],curso_num,curso_nome,primeirosCbos_Nome,i,1)
+                    # CBO,Curso,tresprimeirosCursos,intensidade,fig,string,cursos_vol, nomes_vol, porcentagens_vol=Cursos_CBO_14_10_sn(csv_estado,csv_CBO,csv_CURSOS,primeirosCbos[i],titulo3,NaoGraduados[i],curso_num,curso_nome,primeirosCbos_Nome,i,0.07)
+                    
+                    # CBO,Curso,tresprimeirosCursos,intensidade,fig,cursos_vol, nomes_vol, porcentagens_vol=Cursos_CBO_14_10_sn(df,csv_CBO,csv_CURSOS,primeirosCbos[i],titulo3,NaoGraduados[i],curso_num,curso_nome,primeirosCbos_Nome,i,1)
+                    # usa os arquivos de 10%
+                    CBO,Curso,tresprimeirosCursos,intensidade,fig,string,cursos_vol, nomes_vol, porcentagens_vol=ibge_functions_descriptive_analysis.Cursos_CBO_14_10(df,csv_CBO,csv_CURSOS,primeirosCbos[i],titulo3,NaoGraduados[i],curso_num,curso_nome,primeirosCbos_Nome,i,0.1)
                     Intensidade.append(intensidade)
                     #print(intensidade)
                     Porcentagens_vol.append(porcentagens_vol)
@@ -1820,7 +1832,10 @@ def Ida_Volta_Idade(df,path1,name1,idade):
                     #fig.savefig(string)
                 else:
                     #CBO,Curso,tresprimeirosCursos,intensidade,fig,string,cursos_vol, nomes_vol, porcentagens_vol=Cursos_CBO_13_10_sn(csv_estado,csv_CBO,csv_CURSOS,primeirosCbos[i],titulo3,NaoGraduados[i],Graduados_Nao[i],curso_num,curso_nome,primeirosCbos_Nome,i,0.07)
-                    CBO,Curso,tresprimeirosCursos,intensidade,fig,cursos_vol, nomes_vol, porcentagens_vol=Cursos_CBO_13_10_sn(df,csv_CBO,csv_CURSOS,primeirosCbos[i],titulo3,NaoGraduados[i],Graduados_Nao[i],curso_num,curso_nome,primeirosCbos_Nome,i,1)
+                    
+                    # CBO,Curso,tresprimeirosCursos,intensidade,fig,cursos_vol, nomes_vol, porcentagens_vol= Cursos_CBO_13_10_sn(df,csv_CBO,csv_CURSOS,primeirosCbos[i],titulo3,NaoGraduados[i],Graduados_Nao[i],curso_num,curso_nome,primeirosCbos_Nome,i,1)
+                    # usa os arquivos de 10%
+                    CBO,Curso,tresprimeirosCursos,fig,cursos_vol, nomes_vol, porcentagens_vol=ibge_functions_descriptive_analysis.Cursos_CBO_13_10(df,csv_CBO,csv_CURSOS,primeirosCbos[i],titulo3,NaoGraduados[i],Graduados_Nao[i],curso_num,curso_nome,primeirosCbos_Nome,i,0.1,save_results_to)
                     Intensidade.append(intensidade)
                     Porcentagens_vol.append(porcentagens_vol)
                     CBO_vol.append(CBO)
@@ -2452,23 +2467,28 @@ def Tabela_Ida_Volta_Idade(path2,name2,id):
 
     if id == '29':
        logging.info(" Gerando a Tabela de idas e voltas idade 29")   
-       df =  os.path.join(path2[0],name2[0])
+    #    df =  os.path.join(path2[0],name2[0])
+       df = 'graficos/100Porcent_DF_29.csv'
        df1 = pd.read_csv(df)  
     if id == '30-39':
        logging.info(" Gerando a Tabela de idas e voltas idade 30-39")   
-       df =  os.path.join(path2[0],name2[1])
+    #    df =  os.path.join(path2[0],name2[1])
+       df = 'graficos/100Porcent_DF_30-39.csv'
        df1 = pd.read_csv(df)   
     if id == '40-49':
-       logging.info(" Gerando a Tabela de idas e voltas idade 40-49")   
+    #    logging.info(" Gerando a Tabela de idas e voltas idade 40-49")   
        df =  os.path.join(path2[0],name2[2])
+       df = 'graficos/100Porcent_DF_40-49.csv'
        df1 = pd.read_csv(df)  
     if id == '50-59':
        logging.info(" Gerando a Tabela de idas e voltas idade 50-59")   
-       df =  os.path.join(path2[0],name2[3])
+    #    df =  os.path.join(path2[0],name2[3])
+       df = 'graficos/100Porcent_DF_50-59.csv'
        df1 = pd.read_csv(df)   
     if id == '60':
        logging.info(" Gerando a Tabela de idas e voltas idade 60")   
-       df =  os.path.join(path2[0],name2[4])
+    #    df =  os.path.join(path2[0],name2[4])
+       df = 'graficos/100Porcent_DF_60.csv'
        df1 = pd.read_csv(df)          
     save_results_to = 'graficos/'  
 
@@ -3408,7 +3428,8 @@ def Adiciona_Coluna_Idade(path1,name1,path2,name2,name3,id):
     if id == 'O':
        logging.info(" Adicionando a coluna Idade ao arquivo original")   
        # df =  os.path.join(path2[0],name2[2])
-       df =  os.path.join(path2[0],name2[7])
+       # df =  os.path.join(path2[0],name2[7])
+       df = 'graficos/Kmeans3_T.csv'
        X = pd.read_csv(df)    
        # X = X.drop(columns=['Unnamed: 0'])
        # X = X.drop(columns=['Unnamed: 0.1'])
@@ -3416,28 +3437,32 @@ def Adiciona_Coluna_Idade(path1,name1,path2,name2,name3,id):
         if id == '29':
             logging.info(" Adicionando a coluna Idade ao arquivo Idade 29")   
             # df =  os.path.join(path2[0],name2[2])
-            df =  os.path.join(path2[0],name3[5])
+            # df =  os.path.join(path2[0],name3[5])
+            df = 'graficos/100Porcent_DF_29_Limpo.csv'
             X = pd.read_csv(df)    
             # X = X.drop(columns=['Unnamed: 0'])
             # X = X.drop(columns=['Unnamed: 0.1'])
         else:
             if id == '30-39':
                 logging.info(" Adicionando a coluna Idade ao arquivo Idade 30-39")   
-                df =  os.path.join(path2[0],name3[6])
+                # df =  os.path.join(path2[0],name3[6])
+                df = 'graficos/100Porcent_DF_30_39_Limpo.csv'
                 X = pd.read_csv(df)    
                 X = X.drop(columns=['Unnamed: 0'])
                 # X = X.drop(columns=['Unnamed: 0.1'])
             else:
                 if id == '40-49':
                     logging.info(" Adicionando a coluna Idade ao arquivo Idade 40-49")   
-                    df =  os.path.join(path2[0],name3[7])
+                    # df =  os.path.join(path2[0],name3[7])
+                    df = 'graficos/100Porcent_DF_40-49_Limpo.csv'
                     X = pd.read_csv(df)    
                     X = X.drop(columns=['Unnamed: 0'])
                     # X = X.drop(columns=['Unnamed: 0.1'])
                 else: 
                     if id == '50-59':
                         logging.info(" Adicionando a coluna Idade ao arquivo Idade 50-59")   
-                        df =  os.path.join(path2[0],name3[8])
+                        # df =  os.path.join(path2[0],name3[8])
+                        df = 'graficos/100Porcent_DF_50-59.csv'
                         X = pd.read_csv(df)    
                         X = X.drop(columns=['Unnamed: 0'])
                         # X = X.drop(columns=['Unnamed: 0.1'])  
@@ -3445,6 +3470,7 @@ def Adiciona_Coluna_Idade(path1,name1,path2,name2,name3,id):
                         if id == '60':
                             logging.info(" Adicionando a coluna Idade ao arquivo Idade 60")   
                             df =  os.path.join(path2[0],name3[9])
+                            df = 'graficos/100Porcent_DF_60.csv'
                             X = pd.read_csv(df)    
                             X = X.drop(columns=['Unnamed: 0'])
                             # X = X.drop(columns=['Unnamed: 0.1'])  
@@ -3648,9 +3674,11 @@ def Filtrar_Tabela_10Porcento_Idade():
     name2 = ibge_variable.names(9)
     name3 = ibge_variable.names(10)
     save_results_to = 'graficos/'  
-    Kmeans3_T =  os.path.join(path2[0],name2[7])
+    # Kmeans3_T =  os.path.join(path2[0],name2[7])
+    Kmeans3_T = 'graficos/Kmeans3_T.csv'
     X = pd.read_csv(Kmeans3_T) 
-    Resultados_T_29_30_39_40_49_50_59_60Kmeans3_Idade =  os.path.join(path2[0],name2[14])
+    # Resultados_T_29_30_39_40_49_50_59_60Kmeans3_Idade =  os.path.join(path2[0],name2[14])
+    Resultados_T_29_30_39_40_49_50_59_60Kmeans3_Idade = 'graficos/Resultados_T_29_30-39_40-49_50-59_60Kmeans3_Idade.csv'
     df_row2 = pd.read_csv(Resultados_T_29_30_39_40_49_50_59_60Kmeans3_Idade) 
 
     resultados_T=[]
@@ -3684,7 +3712,8 @@ import pandas as pd
 
 def fill_cluster_column(path,name):
     save_results_to = 'graficos/'  
-    file_path = os.path.join(path[0],name[10])
+    # file_path = os.path.join(path[0],name[10])
+    file_path ='graficos/Resultados_T_Filtrados_Kmeans3_Idade.csv'
     df = pd.read_csv(file_path)
     
     cluster_values = df['Cluster'].values
@@ -3726,9 +3755,13 @@ def separate_clusters():
     cluster1 = df[df['Cluster'] == 1]
     cluster2 = df[df['Cluster'] == 2]
     
-    cluster0.to_csv('graficos/Resultados_T_Filtrados_Kmeans3_Idade_Cluster0.csv', index=False)
-    cluster1.to_csv('graficos/Resultados_T_Filtrados_Kmeans3_Idade_Cluster1.csv', index=False)
-    cluster2.to_csv('graficos/Resultados_T_Filtrados_Kmeans3_Idade_Cluster2.csv', index=False)
+    # cluster0.to_csv('graficos/Resultados_T_Filtrados_Kmeans3_Idade_Cluster0.csv', index=False)
+    # cluster1.to_csv('graficos/Resultados_T_Filtrados_Kmeans3_Idade_Cluster1.csv', index=False)
+    # cluster2.to_csv('graficos/Resultados_T_Filtrados_Kmeans3_Idade_Cluster2.csv', index=False)
+    cluster0.to_csv('graficos/Resultados_T_Filtrados_Kmeans3_T_Preenchido_Cluster1.csv', index=False)
+    cluster1.to_csv('graficos/Resultados_T_Filtrados_Kmeans3_T_Preenchido_Cluster2.csv', index=False)
+    cluster2.to_csv('graficos/Resultados_T_Filtrados_Kmeans3_T_Preenchido_Cluster0.csv', index=False)
+
 
 def separate_clusters_Genero():
     file_path = 'graficos/Resultados_T_Filtrados_Kmeans3_T_Preenchido.csv'
@@ -3741,7 +3774,7 @@ def separate_clusters_Genero():
     cluster0.to_csv('graficos/Resultados_T_Filtrados_Kmeans3_T_Preenchido_Cluster0.csv', index=False)
     cluster1.to_csv('graficos/Resultados_T_Filtrados_Kmeans3_T_Preenchido_Cluster1.csv', index=False)
     cluster2.to_csv('graficos/Resultados_T_Filtrados_Kmeans3_T_Preenchido_Cluster2.csv', index=False)
-
+   
 def Kmeans3_T_Grafico_Genero_Clusters(path2,name3,cluster):
     if cluster==0:
        
@@ -4190,7 +4223,9 @@ def Aposentados_maior80(path,name):
 def Salarios_CBO_Idade(path,name,path1,name1,cluster):
     # Final sem Zeros
     save_results_to = 'graficos/'
-    df =  os.path.join(path[0],name[0])
+    # df =  os.path.join(path[0],name[0])
+    # df = 'processados/CSVs_ArquivoFinalGraduados/Brasil_Graduados.csv'
+    df = 'processados/CSVs_ArquivoFinalGraduados/Brasil_Graduados_CBO.csv'
     Final = pd.read_csv(df) 
     Final = Final.drop(columns=['Unnamed: 0'])
     FinalSemZero = Final.loc[((Final['Valor_rend_bruto_M']!= 0))]
@@ -4200,7 +4235,8 @@ def Salarios_CBO_Idade(path,name,path1,name1,cluster):
         #Filtrados ... Cluster 0 ... Ciência da Computação/Analistas de Sistemas(481/2511)
         save_results_to = 'graficos/'
         # df =  os.path.join(path1[0],name1[0])
-        df =  os.path.join(path1[0],name1[1])
+        # df =  os.path.join(path1[0],name1[1])
+        df = 'graficos/Resultados_T_Filtrados_Kmeans3_Idade_Preenchido.csv'
         Resultados_T_Filtrados_Kmeans3_Idade_Editado = pd.read_csv(df) 
         filtrados = Resultados_T_Filtrados_Kmeans3_Idade_Editado.query('Cluster == 0.0')
         filtrados = Resultados_T_Filtrados_Kmeans3_Idade_Editado.query('Curso == 481')
@@ -4268,7 +4304,8 @@ def Salarios_CBO_Idade(path,name,path1,name1,cluster):
     if cluster == 1:       
         #Filtrados ... Cluster 0 ... Ciência da Computação/Analistas de Sistemas(481/2511)
         save_results_to = 'graficos/'
-        df =  os.path.join(path1[0],name1[1])
+        # df =  os.path.join(path1[0],name1[1])
+        df = 'graficos/Resultados_T_Filtrados_Kmeans3_Idade_Preenchido.csv'
         Resultados_T_Filtrados_Kmeans3_Idade_Editado = pd.read_csv(df) 
         filtrados = Resultados_T_Filtrados_Kmeans3_Idade_Editado.query('Cluster == 1.0')
         filtrados = Resultados_T_Filtrados_Kmeans3_Idade_Editado.query('Curso == 721 & Cbo == 2211')
@@ -4336,7 +4373,8 @@ def Salarios_CBO_Idade(path,name,path1,name1,cluster):
     if cluster == 2:
        #Filtrados ... Cluster 0 ... Ciência da Computação/Analistas de Sistemas(481/2511)
         save_results_to = 'graficos/'
-        df =  os.path.join(path1[0],name1[1])
+        # df =  os.path.join(path1[0],name1[1])
+        df = 'graficos/Resultados_T_Filtrados_Kmeans3_Idade_Preenchido.csv'
         Resultados_T_Filtrados_Kmeans3_Idade_Editado = pd.read_csv(df) 
         filtrados = Resultados_T_Filtrados_Kmeans3_Idade_Editado.query('Cluster == 2.0')
         filtrados = Resultados_T_Filtrados_Kmeans3_Idade_Editado.query('Curso == 721 & Cbo == 2212')

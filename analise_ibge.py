@@ -313,8 +313,8 @@ if fase <= 35:
 #     # - Profissões desequilibradas - Pontos Selecionados(Grandes Desloamentos)
 #     # ...
 #     # - Profissões desequilibradas - Quais as profissões onde homens e mulheres estão em clusters diferentes?
-    ibge_functions.dadosoriginais_resultados()
-    ibge_functions_results.resultados_filtragem_10_100()
+    ibge_functions.dadosoriginais_resultados()                                                # OK 
+    ibge_functions_results.resultados_filtragem_10_100()                                      # OK 
 #     ibge_functions_results.resultados_distancia()
 #     ibge_functions_results.tabela_clusters_diferentes()
 #     # - Profissões desequlibradas  - Gráfico com os pontos que mudaram de cluster e diagrama de Voronoi
@@ -357,16 +357,16 @@ if fase == 40:
 #     # #QP4
 #     # Funciona, mas salva csvs. Comentei para usar como dataframes!
 #     # ibge_functions.Filtro_Idade()
-#     ibge_functions.Ida_Volta_Idade()
-#     ibge_functions.Tabela_Ida_Volta_Idade()
+    #  ibge_functions.Ida_Volta_Idade()                                        # Essa função foi movida para a fase 50 ...
+    #  ibge_functions.Tabela_Ida_Volta_Idade()                                 # Essa função foi movida para a fase 50 ...
 #     # Funciona, mas salva csvs. Comentei para usar como dataframes!
 #     # ibge_functions.Adiciona_Coluna_Idade()
 #     ibge_functions_results.Juntar_10Porcento_Idade()
-#     ibge_functions_results.Filtrar_Tabela_10Porcento_Idade()
+    #  ibge_functions_results.Filtrar_Tabela_10Porcento_Idade()               # Essa função foi movida para a fase 50 ...
 #     # Separar manualmente os clusters e depois rodar o codigo abaixo para gerar os gráficos de idades separados os clusters...
 #     # 11/04 ainda esta seperando manualmente? Não, ja foi automatizado!
-#     ibge_functions.fill_cluster_column()
-#     ibge_functions_results.separate_clusters()
+    #  ibge_functions.fill_cluster_column()                                   # Essa função foi movida para a fase 50 ...
+    #  ibge_functions_results.separate_clusters()                             # Essa função foi movida para a fase 50 ...
 #     ibge_functions.Kmeans3_T_Grafico_Idade()
 #     #  Funções que faltam ...
 #     # 1- Idade - Alguns pontos selecionados
@@ -388,8 +388,8 @@ if fase == 40:
 
 if fase == 50:
 #     QP5
-      ibge_functions_exploratory_analysis.separar_cursos_por_clusters()                       
-      ibge_functions_exploratory_analysis.medianas_por_clusters()                              
+      ibge_functions_exploratory_analysis.separar_cursos_por_clusters()     # OK                   
+      ibge_functions_exploratory_analysis.medianas_por_clusters()           # OK                    
 #     # Funções que faltam ...
 #     # 1- BoxPlot de salários separados por clusters
 #     # 2- BoxPlot de salários separados por faixa etária (idades)  - Idades por Cluster (Grupos)
@@ -398,7 +398,12 @@ if fase == 50:
 #     # Tabela: Mediana de cada um dos pontos dentro de cada cluster
 #     # Okay # 5- BoxPlot de salários para um determinado CBO por idade
 #     # Preencher o arquivo Resultados_T_Filtrados_Kmeans3_Idade.csv manualmente ...
-#     ibge_functions.Salarios_CBO_Idade()
+      ibge_functions.Ida_Volta_Idade()                                       # OK
+      ibge_functions.Tabela_Ida_Volta_Idade()                                # OK
+      ibge_functions_results.Filtrar_Tabela_10Porcento_Idade()               # OK
+      ibge_functions.fill_cluster_column()                                   # OK
+      ibge_functions_results.separate_clusters()                             # OK
+      ibge_functions.Salarios_CBO_Idade()                                    # OK
 #     # 6- Análise  de salário por gênero (Ser homem ou mulher implica em diferença salarial?)
 #     # Tabela - Mediana  Feminina
 #     # Tabela - Mediana Masculina
