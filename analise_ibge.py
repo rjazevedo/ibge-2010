@@ -389,7 +389,7 @@ if fase <= 40:
      ibge_functions_results_1.plot_age_distribution_bycluster_1()             # OK
      pass
 
-if fase == 50:
+if fase <= 50:
 #     QP5
       ibge_functions_exploratory_analysis.separar_cursos_por_clusters()     # OK                   
       ibge_functions_exploratory_analysis.medianas_por_clusters()           # OK                    
