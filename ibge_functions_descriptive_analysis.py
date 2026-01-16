@@ -507,7 +507,7 @@ def NaoGraduados_PivotTable(primeirosCbos,csv_PivotTableFinal):
     return NaoGraduados
 
 # Função para achar a quantidade de Não-Graduados na Pivot Table --- 28/04/2024
-@profile
+# @profile
 def NaoGraduados_PivotTable_2(primeirosCbos,csv_PivotTableFinal):
     # PivotTableFinal = pd.read_csv(csv_PivotTableFinal)
     # Read the CSV, forcing 'CBO-Domiciliar' as string and others as int
@@ -971,7 +971,7 @@ def Plot_Cursos_CBOs_11(csv_estado,csv_CBO,csv_CURSOS,primeirosCbos_Nome,primeir
 
 # Cursos por CBO 01/10/2025
 # Achar CBOs por Curso
-@profile
+# @profile
 def CBOs_Curso_v6(csv_estado,csv_CBO,curso_num,curso_nome,titulo10,titulo3,porcent_param,save_results_to):
     # X = pd.read_csv(csv_estado)
     X = pd.read_csv(csv_estado, dtype={'CBO-Domiciliar': str})
@@ -2132,7 +2132,7 @@ def CBOs_Curso_v6_CBO3(csv_estado,csv_CBO,curso_num,curso_nome,titulo10,titulo3,
     # print(primeiros,nomes,porcentagens,curso_num,curso_nome)
     # exit(0) #30/07/2025 ...
     return primeiros,nomes,porcentagens,curso_num,curso_nome
-@profile
+# @profile
 def Cursos_CBO_14_10(csv_estado,csv_CBO,csv_CURSOS,cbo_num,titulo3,NaoGraduados_qtdade,curso_num,curso_nome,primeirosCbos_Nome,i,porcent_param):
     numero = i
     #Leitura de Arquivos CSVs ...
@@ -2326,7 +2326,7 @@ def Cursos_CBO_14_10(csv_estado,csv_CBO,csv_CURSOS,cbo_num,titulo3,NaoGraduados_
     # exit()
     return cbo_num,curso_nome,primeirosCbos_Nome,intensidade,plt,string,cursos,nomes,porcentagens
   
-@profile
+# @profile
 def Cursos_CBO_13_10(csv_estado,csv_CBO,csv_CURSOS,cbo_num,titulo3,NaoGraduados_qtdade,Graduados_Nao_Total,curso_num,curso_nome,primeirosCbos_Nome,i,porcent_param,save_results_to):
     numero = i
     #Leitura de Arquivos CSVs ...
@@ -2928,7 +2928,7 @@ def Jun_Ida_Volta(X_,Y_,Z_,V_,CBO_VOL,CURSO_NUM):
 
 # def Ida_Volta(path,name,path1,name1):
 # def Ida_Volta(path,name,path1,name1, modo):
-@profile
+# @profile
 def Ida_Volta(path,name,path1,name1, sx, modo):
 
     if sx == 'O':
@@ -3172,9 +3172,9 @@ def Ida_Volta(path,name,path1,name1, sx, modo):
 
 # def Tabela_Ida_Volta(path2,name2):
 # def Tabela_Ida_Volta(path2,name2, modo):
-@profile
+#@profile
 def Tabela_Ida_Volta(path2,name2, sx, modo):
-    # df =  os.path.join(path2[0],name2[1])
+    # df =  os.path.join#(path2[0],name2[1])
     # df ='graficos/10Porcent_DF.csv' 
     # df ='graficos/100Porcent_DF.csv' 
 

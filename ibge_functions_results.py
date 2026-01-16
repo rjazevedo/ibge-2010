@@ -1370,7 +1370,7 @@ def Filtro_Idade(path, name, idade):
         #print("")
         Estado = Estado.reset_index(drop=True)
         Estado = Estado.drop(columns=['Unnamed: 0'])
-        #Estado.to_csv(path[0] + 'Brasil_Graduados_29.csv')
+        Estado.to_csv(path[0] + 'Brasil_Graduados_29.csv')
     else: 
          if idade == "30-39":  
             # Novo Filtro
@@ -1378,7 +1378,7 @@ def Filtro_Idade(path, name, idade):
             Estado.drop(Estado[(Estado['Idade_em_Anos'] >=39)].index, inplace=True)
             Estado = Estado.reset_index(drop=True)
             Estado = Estado.drop(columns=['Unnamed: 0'])
-            #Estado.to_csv(path[0] + 'Brasil_Graduados_30_39.csv') 
+            Estado.to_csv(path[0] + 'Brasil_Graduados_30_39.csv') 
          else:   
            if idade == "40-49":  
                 # Novo Filtro
@@ -1386,7 +1386,7 @@ def Filtro_Idade(path, name, idade):
                 Estado.drop(Estado[(Estado['Idade_em_Anos'] >=49)].index, inplace=True)                
                 Estado = Estado.reset_index(drop=True)
                 Estado = Estado.drop(columns=['Unnamed: 0'])
-                #Estado.to_csv(path[0] + 'Brasil_Graduados_40_49.csv') 
+                Estado.to_csv(path[0] + 'Brasil_Graduados_40_49.csv') 
            else:
                if idade == "50-59":  
                     # Novo Filtro
@@ -1394,14 +1394,14 @@ def Filtro_Idade(path, name, idade):
                     Estado.drop(Estado[(Estado['Idade_em_Anos'] >=59)].index, inplace=True)         
                     Estado = Estado.reset_index(drop=True)
                     Estado = Estado.drop(columns=['Unnamed: 0'])
-                    #Estado.to_csv(path[0] + 'Brasil_Graduados_50_59.csv') 
+                    Estado.to_csv(path[0] + 'Brasil_Graduados_50_59.csv') 
                else: 
                     if idade == "60":  
                         # Novo Filtro
                         Estado.drop(Estado[(Estado['Idade_em_Anos'] <=60)].index, inplace=True)
                         Estado = Estado.reset_index(drop=True)
                         Estado = Estado.drop(columns=['Unnamed: 0'])
-                        #Estado.to_csv(path[0] + 'Brasil_Graduados_60.csv')   
+                        Estado.to_csv(path[0] + 'Brasil_Graduados_60.csv')   
                    
     return Estado
 
@@ -1751,6 +1751,19 @@ def Ida_Volta_Idade(df,path1,name1,idade):
     # if sx == 'M':
     #    logging.info(" Gerando as idas e voltas Masculinas")   
     #    csv_estado = os.path.join(path[0],name[3]) # arquivo do censo do Brasil inteiro (somente graduados)
+
+    if idade == "29":
+       csv_estado = os.path.join('processados/CSVs_ArquivoFinalGraduados/Brasil_Graduados_29.csv') # arquivo do censo do Brasil inteiro (somente graduados)
+    
+    elif idade == "30-39":   
+         csv_estado = os.path.join('processados/CSVs_ArquivoFinalGraduados/Brasil_Graduados_30_39.csv') # arquivo do censo do Brasil inteiro (somente graduados)
+    
+    elif idade == "40-49":   
+         csv_estado = os.path.join('processados/CSVs_ArquivoFinalGraduados/Brasil_Graduados_40_49.csv') # arquivo do censo do Brasil inteiro (somente graduados)
+    elif idade == "50-59":   
+         csv_estado = os.path.join('processados/CSVs_ArquivoFinalGraduados/Brasil_Graduados_50_59.csv') # arquivo do censo do Brasil inteiro (somente graduados)
+    elif idade == "60":   
+         csv_estado = os.path.join('processados/CSVs_ArquivoFinalGraduados/Brasil_Graduados_60.csv') # arquivo do censo do Brasil inteiro (somente graduados)
     # path1 = ibge_variable.paths(12)
     # name1 = ibge_variable.names(6)
     #csv_CBO = os.path.join(path1[0],name1[1]) # Tabela de CBOs
@@ -1795,7 +1808,7 @@ def Ida_Volta_Idade(df,path1,name1,idade):
         
         # primeirosCbos,primeirosCbos_Nome,Porcentagens,CURSO_NUM,CURSO_NOME=CBOs_Curso_v6_sn2(df,csv_CBO,curso_num,curso_nome,titulo10,titulo3,1)
         # usa os arquivos de 10%   
-        primeirosCbos,primeirosCbos_Nome,Porcentagens,CURSO_NUM,CURSO_NOME=ibge_functions_descriptive_analysis.CBOs_Curso_v6(df,csv_CBO,curso_num,curso_nome,titulo10,titulo3,0.1,save_results_to)
+        primeirosCbos,primeirosCbos_Nome,Porcentagens,CURSO_NUM,CURSO_NOME=ibge_functions_descriptive_analysis.CBOs_Curso_v6(csv_estado,csv_CBO,curso_num,curso_nome,titulo10,titulo3,0.1,save_results_to)
         if (primeirosCbos!=0)&(primeirosCbos!=0)&(Porcentagens!=0):
             #======================================================Achando a quantidade de Não-Graduados na PivotTable
             #NaoGraduados = NaoGraduados_PivotTable(primeirosCbos, csv_PivotTableFinal)
@@ -1820,8 +1833,8 @@ def Ida_Volta_Idade(df,path1,name1,idade):
                     # CBO,Curso,tresprimeirosCursos,intensidade,fig,string,cursos_vol, nomes_vol, porcentagens_vol=Cursos_CBO_14_10_sn(csv_estado,csv_CBO,csv_CURSOS,primeirosCbos[i],titulo3,NaoGraduados[i],curso_num,curso_nome,primeirosCbos_Nome,i,0.07)
                     
                     # CBO,Curso,tresprimeirosCursos,intensidade,fig,cursos_vol, nomes_vol, porcentagens_vol=Cursos_CBO_14_10_sn(df,csv_CBO,csv_CURSOS,primeirosCbos[i],titulo3,NaoGraduados[i],curso_num,curso_nome,primeirosCbos_Nome,i,1)
-                    # usa os arquivos de 10%
-                    CBO,Curso,tresprimeirosCursos,intensidade,fig,string,cursos_vol, nomes_vol, porcentagens_vol=ibge_functions_descriptive_analysis.Cursos_CBO_14_10(df,csv_CBO,csv_CURSOS,primeirosCbos[i],titulo3,NaoGraduados[i],curso_num,curso_nome,primeirosCbos_Nome,i,0.1)
+                    # usa os arquivos de 100%
+                    CBO,Curso,tresprimeirosCursos,intensidade,fig,string,cursos_vol, nomes_vol, porcentagens_vol=ibge_functions_descriptive_analysis.Cursos_CBO_14_10(csv_estado,csv_CBO,csv_CURSOS,primeirosCbos[i],titulo3,NaoGraduados[i],curso_num,curso_nome,primeirosCbos_Nome,i,0)
                     Intensidade.append(intensidade)
                     #print(intensidade)
                     Porcentagens_vol.append(porcentagens_vol)
@@ -1834,8 +1847,8 @@ def Ida_Volta_Idade(df,path1,name1,idade):
                     #CBO,Curso,tresprimeirosCursos,intensidade,fig,string,cursos_vol, nomes_vol, porcentagens_vol=Cursos_CBO_13_10_sn(csv_estado,csv_CBO,csv_CURSOS,primeirosCbos[i],titulo3,NaoGraduados[i],Graduados_Nao[i],curso_num,curso_nome,primeirosCbos_Nome,i,0.07)
                     
                     # CBO,Curso,tresprimeirosCursos,intensidade,fig,cursos_vol, nomes_vol, porcentagens_vol= Cursos_CBO_13_10_sn(df,csv_CBO,csv_CURSOS,primeirosCbos[i],titulo3,NaoGraduados[i],Graduados_Nao[i],curso_num,curso_nome,primeirosCbos_Nome,i,1)
-                    # usa os arquivos de 10%
-                    CBO,Curso,tresprimeirosCursos,fig,cursos_vol, nomes_vol, porcentagens_vol=ibge_functions_descriptive_analysis.Cursos_CBO_13_10(df,csv_CBO,csv_CURSOS,primeirosCbos[i],titulo3,NaoGraduados[i],Graduados_Nao[i],curso_num,curso_nome,primeirosCbos_Nome,i,0.1,save_results_to)
+                    # usa os arquivos de 100%
+                    CBO,Curso,tresprimeirosCursos,fig,cursos_vol, nomes_vol, porcentagens_vol=ibge_functions_descriptive_analysis.Cursos_CBO_13_10(csv_estado,csv_CBO,csv_CURSOS,primeirosCbos[i],titulo3,NaoGraduados[i],Graduados_Nao[i],curso_num,curso_nome,primeirosCbos_Nome,i,0,save_results_to)
                     Intensidade.append(intensidade)
                     Porcentagens_vol.append(porcentagens_vol)
                     CBO_vol.append(CBO)
@@ -3425,14 +3438,20 @@ def Idade_Plot(csv_idade,CBO,Curso,sx):
 # Terminar ...
 def Adiciona_Coluna_Idade(path1,name1,path2,name2,name3,id):
     # Leitura do arquivo df original, masculino ou feminino
+    
     if id == 'O':
        logging.info(" Adicionando a coluna Idade ao arquivo original")   
        # df =  os.path.join(path2[0],name2[2])
        # df =  os.path.join(path2[0],name2[7])
        df = 'graficos/Kmeans3_T.csv'
-       X = pd.read_csv(df)    
-       # X = X.drop(columns=['Unnamed: 0'])
+       X = pd.read_csv(df)   
+        
+       # X = df.drop(columns=['Unnamed: 0'])
        # X = X.drop(columns=['Unnamed: 0.1'])
+    #    print(X)
+    #    print()
+       # print(df.columns)
+       # exit()
     else:
         if id == '29':
             logging.info(" Adicionando a coluna Idade ao arquivo Idade 29")   
@@ -3440,16 +3459,18 @@ def Adiciona_Coluna_Idade(path1,name1,path2,name2,name3,id):
             # df =  os.path.join(path2[0],name3[5])
             df = 'graficos/100Porcent_DF_29_Limpo.csv'
             X = pd.read_csv(df)    
-            # X = X.drop(columns=['Unnamed: 0'])
-            # X = X.drop(columns=['Unnamed: 0.1'])
+            X = X.drop(columns=['Unnamed: 0'])
+            X = X.drop(columns=['Unnamed: 0.1'])
+            # print(X.columns)
+            # exit()
         else:
             if id == '30-39':
                 logging.info(" Adicionando a coluna Idade ao arquivo Idade 30-39")   
                 # df =  os.path.join(path2[0],name3[6])
-                df = 'graficos/100Porcent_DF_30_39_Limpo.csv'
+                df = 'graficos/100Porcent_DF_30-39_Limpo.csv'
                 X = pd.read_csv(df)    
                 X = X.drop(columns=['Unnamed: 0'])
-                # X = X.drop(columns=['Unnamed: 0.1'])
+                X = X.drop(columns=['Unnamed: 0.1'])
             else:
                 if id == '40-49':
                     logging.info(" Adicionando a coluna Idade ao arquivo Idade 40-49")   
@@ -3457,12 +3478,12 @@ def Adiciona_Coluna_Idade(path1,name1,path2,name2,name3,id):
                     df = 'graficos/100Porcent_DF_40-49_Limpo.csv'
                     X = pd.read_csv(df)    
                     X = X.drop(columns=['Unnamed: 0'])
-                    # X = X.drop(columns=['Unnamed: 0.1'])
+                    X = X.drop(columns=['Unnamed: 0.1'])
                 else: 
                     if id == '50-59':
                         logging.info(" Adicionando a coluna Idade ao arquivo Idade 50-59")   
                         # df =  os.path.join(path2[0],name3[8])
-                        df = 'graficos/100Porcent_DF_50-59.csv'
+                        df = 'graficos/100Porcent_DF_50-59_Limpo.csv'
                         X = pd.read_csv(df)    
                         X = X.drop(columns=['Unnamed: 0'])
                         # X = X.drop(columns=['Unnamed: 0.1'])  
@@ -3470,10 +3491,10 @@ def Adiciona_Coluna_Idade(path1,name1,path2,name2,name3,id):
                         if id == '60':
                             logging.info(" Adicionando a coluna Idade ao arquivo Idade 60")   
                             df =  os.path.join(path2[0],name3[9])
-                            df = 'graficos/100Porcent_DF_60.csv'
+                            df = 'graficos/100Porcent_DF_60_Limpo.csv'
                             X = pd.read_csv(df)    
                             X = X.drop(columns=['Unnamed: 0'])
-                            # X = X.drop(columns=['Unnamed: 0.1'])  
+                            X = X.drop(columns=['Unnamed: 0.1'])  
     # df =  os.path.join(path2[0],name2[2])
     # X = pd.read_csv(df)    
     save_results_to = 'graficos/' 
@@ -3485,6 +3506,8 @@ def Adiciona_Coluna_Idade(path1,name1,path2,name2,name3,id):
     CursosCenso = ibge_functions_descriptive_analysis.ibge_cursos_filter(path1[0],name1[2])
     csv_CBO = os.path.join(path1[0],name1[1]) # Tabela de CBOs
     CBO = pd.read_csv(csv_CBO)
+    CBO_aux = pd.read_csv('documentacao/CBO_CSV_TabelaAuxiliar.csv', dtype ='str')
+
     # Pontos do Gráfico na côr Preta (c = 'k')
     # x= X['Ida']
     # y= X['Volta']
@@ -3502,20 +3525,48 @@ def Adiciona_Coluna_Idade(path1,name1,path2,name2,name3,id):
     if id == 'O':
        X['Idade'] = "O"    
        # X.to_csv(save_results_to +'Resultados_T_Original_Idade.csv')  
+    #    print(X)
        return X
     else:
           # ...
         CursoNome =[]
         for i in range (len(X['CR'])):
             for index, row in CursosCenso.iterrows():
-                if (str(X['CR'][i]) == CursosCenso['curso_num'][index]):
+                if (int(X['CR'][i]) == int(CursosCenso['curso_num'][index])):
                     CursoNome.append(CursosCenso['curso_nome'][index])
-        # CursoNome
+        # # CursoNome
+        # CboNome =[]
+        # for i in range (len(X['CB'])):
+        #     for index, row in CBO.iterrows():
+        #         if (int(X['CB'][i]) == CBO['Cod_CBO'][index]):
+        #             CboNome.append(CBO['Nome_CBO'][index])  
+        # # print(id)  
+
         CboNome =[]
         for i in range (len(X['CB'])):
+            # print("Kmeans3_CboNum[i]:", Kmeans3_CboNum[i])
+            flag = False
             for index, row in CBO.iterrows():
-                if (int(X['CB'][i]) == CBO['Cod_CBO'][index]):
-                    CboNome.append(CBO['Nome_CBO'][index])  
+                if (int(X['CB'][i]) == CBO['Cod_CBO'][index]): #...
+                    CboNome.append(CBO['Nome_CBO'][index])
+                    # print("Kmeans3_CboNum[i]:", Kmeans3_CboNum[i])
+                    flag = True
+                    break
+            if not flag:
+                for index, row in CBO_aux.iterrows():
+                    # if (int(Kmeans3_CboNum[i]) == int(CBO_aux['Cod_Dom'][index])): #alterado 30/09/2025
+                     if (int(X['CB'][i]) == int(CBO_aux['Cod_CBO'][index])):    
+                        CboNome.append(CBO_aux['Nome_CBO'][index])
+                        # print("Kmeans3_CboNum[i]:", Kmeans3_CboNum[i])
+                        # Kmeans3_CboNum[i] = CBO_aux['Cod_CBO'][index]  #alterado 30/09/2025
+                        # print("Kmeans3_CboNum[i]:", Kmeans3_CboNum[i])
+                        break                
+
+
+
+        # print('CursoNome:',len(CursoNome))
+        # print('CboNome:',len(CboNome))  
+        # exit()        
         if id == '29':
              # Adicionando coluna
             resultados_T=[]
@@ -3654,7 +3705,9 @@ def Juntar_10Porcento_Idade():
     save_results_to = 'graficos/'  
      
     df_limpo = Porcent_DF_Limpo_Idade
+    # print(df_limpo)
     df_29_limpo = Porcent_DF_29_Limpo
+    # print(df_29_limpo)
     df_30_39_limpo = Porcent_DF_30_39_Limpo  
     df_40_49_limpo = Porcent_DF_40_49_Limpo
     df_50_59_limpo = Porcent_DF_50_59_Limpo
@@ -4231,213 +4284,381 @@ def Salarios_CBO_Idade(path,name,path1,name1,cluster):
     FinalSemZero = Final.loc[((Final['Valor_rend_bruto_M']!= 0))]
     FinalSemZero = FinalSemZero.reset_index(drop=True)
 
-    if cluster == 0:  
-        #Filtrados ... Cluster 0 ... Ciência da Computação/Analistas de Sistemas(481/2511)
+    # if cluster == 2:  
+    #     #Filtrados ... Cluster 0 ... Ciência da Computação/Analistas de Sistemas(481/2511)
+    #     save_results_to = 'graficos/'
+    #     # df =  os.path.join(path1[0],name1[0])
+    #     # df =  os.path.join(path1[0],name1[1])
+    #     df = 'graficos/Resultados_T_Filtrados_Kmeans3_Idade_Preenchido.csv'
+    #     Resultados_T_Filtrados_Kmeans3_Idade_Editado = pd.read_csv(df) 
+    #     # print(Resultados_T_Filtrados_Kmeans3_Idade_Editado)
+    #     filtrados = Resultados_T_Filtrados_Kmeans3_Idade_Editado.query('Cluster == 2')
+    #     # filtrados = Resultados_T_Filtrados_Kmeans3_Idade_Editado.query('Cluster == 0.0')
+    #     filtrados = Resultados_T_Filtrados_Kmeans3_Idade_Editado.query('Curso == 481')
+    #     Resultados_T_Filtrados_Kmeans3_Idade_Editado = filtrados
+    #     Resultados_T_Filtrados_Kmeans3_Idade_Editado = Resultados_T_Filtrados_Kmeans3_Idade_Editado.reset_index(drop=True) 
+    #     # print(Resultados_T_Filtrados_Kmeans3_Idade_Editado)
+    #     # exit()
+    #     Resultados_T_Filtrados_Kmeans3_Idade_Editado = Resultados_T_Filtrados_Kmeans3_Idade_Editado.drop(5)
+    #     CBO = []
+    #     CURSO = []
+    #     IDADE = []
+    #     for i in range(len(Resultados_T_Filtrados_Kmeans3_Idade_Editado)):
+    #         CBO.append(Resultados_T_Filtrados_Kmeans3_Idade_Editado.Cbo[i])
+    #         CURSO.append(Resultados_T_Filtrados_Kmeans3_Idade_Editado.Curso[i])
+    #         IDADE.append(Resultados_T_Filtrados_Kmeans3_Idade_Editado.Idade[i])
+    #     # print(CBO)    
+    #     # print(CURSO)
+    #     # print(IDADE)
+    #     dados_1 = []  
+    #     dados_2 = []
+    #     dados_3 = []
+    #     dados_4 = []
+    #     dados_5 = []
+    #     dados = [dados_1,dados_2,dados_3,dados_4,dados_5] 
+    #     for i in range(len(CBO)):
+    #         for j in range(len(FinalSemZero)):
+    #             if str(IDADE[i]) == '29':
+    #                # print(str(FinalSemZero.Ocupação_Código[j]), str(int(float(CBO[i]))),str(FinalSemZero.Curso_Superior_Graduação_Código[j]),str(int(float(CURSO[i]))),(FinalSemZero.Idade_em_Anos[j]))  
+    #                 # print(FinalSemZero['CBO-Domiciliar'][j].astype(str))
+    #                 # print(str(int(float(CBO[i]))))
+    #                 # exit()
+    #                 if((FinalSemZero['CBO-Domiciliar'][j].astype(str)==str(int(float(CBO[i]))))&(str(FinalSemZero.Curso_Superior_Graduação_Código[j])== str(int(float(CURSO[i]))))& (FinalSemZero.Idade_em_Anos[j]) <= 29):
+    #                     dados[i].append(FinalSemZero.Qtdade_Salario[j]/100)
+    #             if str(IDADE[i]) == '30-39':
+    #                 if (FinalSemZero['CBO-Domiciliar'][j].astype(str)==str(int(float(CBO[i]))))&(str(FinalSemZero.Curso_Superior_Graduação_Código[j])== str(int(float(CURSO[i]))))& (FinalSemZero.Idade_em_Anos[j] >=30)& (FinalSemZero.Idade_em_Anos[j] <=39):
+    #                     dados[i].append(FinalSemZero.Qtdade_Salario[j]/100)
+    #             if str(IDADE[i]) == '40-49':
+    #                 if (FinalSemZero['CBO-Domiciliar'][j].astype(str)==str(int(float(CBO[i]))))&(str(FinalSemZero.Curso_Superior_Graduação_Código[j])== str(int(float(CURSO[i]))))& (FinalSemZero.Idade_em_Anos[j] >=40)& (FinalSemZero.Idade_em_Anos[j] <=49):
+    #                     dados[i].append(FinalSemZero.Qtdade_Salario[j]/100)
+    #             if str(IDADE[i]) == '50-59':
+    #                 if (FinalSemZero['CBO-Domiciliar'][j].astype(str)==str(int(float(CBO[i]))))&(str(FinalSemZero.Curso_Superior_Graduação_Código[j])== str(int(float(CURSO[i]))))& (FinalSemZero.Idade_em_Anos[j] >=50)& (FinalSemZero.Idade_em_Anos[j] <=59):
+    #                     dados[i].append(FinalSemZero.Qtdade_Salario[j]/100)
+    #             if str(IDADE[i]) == '60':
+    #                 if (FinalSemZero['CBO-Domiciliar'][j].astype(str)==str(int(float(CBO[i]))))&(str(FinalSemZero.Curso_Superior_Graduação_Código[j])== str(int(float(CURSO[i]))))& (FinalSemZero.Idade_em_Anos[j] >= 60):
+    #                     dados[i].append(FinalSemZero.Qtdade_Salario[j]/100)
+    #     # print(dados)                
+    #     xticks = []
+    #     for z in range(len(IDADE)):
+    #         xticks.append(str(IDADE[z]))
+    #     # for i in range(len(CBO)):
+    #     #     print(xticks[i])
+    #     import matplotlib.pyplot as plt
+    #     import numpy as np
+    #     plt.rcParams.update({'font.size':20})      
+    #     DADOS = dados
+    #     fig, ax = plt.subplots(figsize=(20,10))
+    #     ax.boxplot(DADOS)
+    #     ax.set_yscale('log')
+    #     #ax.set_title('Gráfico de Boxplot - Salários: Ciência da Computação/Analistas de Sistemas(481/2511) - Cluster 0 - KMeans3')
+    #     #ax.set_xlabel('Idade')
+    #     #ax.set_ylabel('Quantidade de Salários')
+    #     # ax.set_title('Boxplot Chart - Salaries: Ciência da Computação/Analistas de Sistemas(481/2511) - Cluster 0 - KMeans3')
+    #     ax.set_title('Boxplot Chart - Salários: Ciência da Computação/Analistas de Sistemas(481/2124) - Cluster 2 - KMeans3')
+    #     ax.set_xlabel('Idade')
+    #     ax.set_ylabel('Numero de Salários')
+    #     ax.set_xticklabels(xticks)
+    #     #string1 = "Grafico_Boxplot_Salarios_CienciaComputacao_AnalistasSistemas_481_2511_Cluster0_KMeans3" + ".pdf"
+    #     # string1 = "Grafico_Boxplot_Salarios_CienciaComputacao_AnalistasSistemas_481_2511_Cluster0_KMeans3" + ".png"
+    #     string1 = "Grafico_Boxplot_Salarios_CienciaComputacao_AnalistasSistemas_481_2124_Cluster2_KMeans3" + ".png"
+    #     plt.savefig(save_results_to + string1)   
+    #     # plt.show()  
+    #     #       
+    # if cluster == 1:  
+    #     #Filtrados ... Cluster 0 ... Ciência da Computação/Analistas de Sistemas(481/2511)
+    #     save_results_to = 'graficos/'
+    #     # df =  os.path.join(path1[0],name1[0])
+    #     # df =  os.path.join(path1[0],name1[1])
+    #     df = 'graficos/Resultados_T_Filtrados_Kmeans3_Idade_Preenchido.csv'
+    #     Resultados_T_Filtrados_Kmeans3_Idade_Editado = pd.read_csv(df) 
+    #     # print(Resultados_T_Filtrados_Kmeans3_Idade_Editado)
+    #     filtrados = Resultados_T_Filtrados_Kmeans3_Idade_Editado.query('Cluster == 1')
+    #     # filtrados = Resultados_T_Filtrados_Kmeans3_Idade_Editado.query('Cluster == 0.0')
+    #     filtrados = Resultados_T_Filtrados_Kmeans3_Idade_Editado.query('Curso == 721')
+    #     Resultados_T_Filtrados_Kmeans3_Idade_Editado = filtrados
+    #     Resultados_T_Filtrados_Kmeans3_Idade_Editado = Resultados_T_Filtrados_Kmeans3_Idade_Editado.reset_index(drop=True) 
+    #     # print(Resultados_T_Filtrados_Kmeans3_Idade_Editado)
+    #     # exit()
+    #     Resultados_T_Filtrados_Kmeans3_Idade_Editado = Resultados_T_Filtrados_Kmeans3_Idade_Editado.drop(5)
+    #     CBO = []
+    #     CURSO = []
+    #     IDADE = []
+    #     for i in range(len(Resultados_T_Filtrados_Kmeans3_Idade_Editado)):
+    #         CBO.append(Resultados_T_Filtrados_Kmeans3_Idade_Editado.Cbo[i])
+    #         CURSO.append(Resultados_T_Filtrados_Kmeans3_Idade_Editado.Curso[i])
+    #         IDADE.append(Resultados_T_Filtrados_Kmeans3_Idade_Editado.Idade[i])
+    #     # print(CBO)    
+    #     # print(CURSO)
+    #     # print(IDADE)
+    #     dados_1 = []  
+    #     dados_2 = []
+    #     dados_3 = []
+    #     dados_4 = []
+    #     dados_5 = []
+    #     dados = [dados_1,dados_2,dados_3,dados_4,dados_5] 
+    #     for i in range(len(CBO)):
+    #         for j in range(len(FinalSemZero)):
+    #             if str(IDADE[i]) == '29':
+    #                # print(str(FinalSemZero.Ocupação_Código[j]), str(int(float(CBO[i]))),str(FinalSemZero.Curso_Superior_Graduação_Código[j]),str(int(float(CURSO[i]))),(FinalSemZero.Idade_em_Anos[j]))  
+    #                 # print(FinalSemZero['CBO-Domiciliar'][j].astype(str))
+    #                 # print(str(int(float(CBO[i]))))
+    #                 # exit()
+    #                 if((FinalSemZero['CBO-Domiciliar'][j].astype(str)==str(int(float(CBO[i]))))&(str(FinalSemZero.Curso_Superior_Graduação_Código[j])== str(int(float(CURSO[i]))))& (FinalSemZero.Idade_em_Anos[j]) <= 29):
+    #                     dados[i].append(FinalSemZero.Qtdade_Salario[j]/100)
+    #             if str(IDADE[i]) == '30-39':
+    #                 if (FinalSemZero['CBO-Domiciliar'][j].astype(str)==str(int(float(CBO[i]))))&(str(FinalSemZero.Curso_Superior_Graduação_Código[j])== str(int(float(CURSO[i]))))& (FinalSemZero.Idade_em_Anos[j] >=30)& (FinalSemZero.Idade_em_Anos[j] <=39):
+    #                     dados[i].append(FinalSemZero.Qtdade_Salario[j]/100)
+    #             if str(IDADE[i]) == '40-49':
+    #                 if (FinalSemZero['CBO-Domiciliar'][j].astype(str)==str(int(float(CBO[i]))))&(str(FinalSemZero.Curso_Superior_Graduação_Código[j])== str(int(float(CURSO[i]))))& (FinalSemZero.Idade_em_Anos[j] >=40)& (FinalSemZero.Idade_em_Anos[j] <=49):
+    #                     dados[i].append(FinalSemZero.Qtdade_Salario[j]/100)
+    #             if str(IDADE[i]) == '50-59':
+    #                 if (FinalSemZero['CBO-Domiciliar'][j].astype(str)==str(int(float(CBO[i]))))&(str(FinalSemZero.Curso_Superior_Graduação_Código[j])== str(int(float(CURSO[i]))))& (FinalSemZero.Idade_em_Anos[j] >=50)& (FinalSemZero.Idade_em_Anos[j] <=59):
+    #                     dados[i].append(FinalSemZero.Qtdade_Salario[j]/100)
+    #             if str(IDADE[i]) == '60':
+    #                 if (FinalSemZero['CBO-Domiciliar'][j].astype(str)==str(int(float(CBO[i]))))&(str(FinalSemZero.Curso_Superior_Graduação_Código[j])== str(int(float(CURSO[i]))))& (FinalSemZero.Idade_em_Anos[j] >= 60):
+    #                     dados[i].append(FinalSemZero.Qtdade_Salario[j]/100)
+    #     # print(dados)                
+    #     xticks = []
+    #     for z in range(len(IDADE)):
+    #         xticks.append(str(IDADE[z]))
+    #     # for i in range(len(CBO)):
+    #     #     print(xticks[i])
+    #     import matplotlib.pyplot as plt
+    #     import numpy as np
+    #     plt.rcParams.update({'font.size':20})      
+    #     DADOS = dados
+    #     fig, ax = plt.subplots(figsize=(20,10))
+    #     ax.boxplot(DADOS)
+    #     ax.set_yscale('log')
+    #     #ax.set_title('Gráfico de Boxplot - Salários: Ciência da Computação/Analistas de Sistemas(481/2511) - Cluster 0 - KMeans3')
+    #     #ax.set_xlabel('Idade')
+    #     #ax.set_ylabel('Quantidade de Salários')
+    #     # ax.set_title('Boxplot Chart - Salaries: Ciência da Computação/Analistas de Sistemas(481/2511) - Cluster 0 - KMeans3')
+    #     ax.set_title('Boxplot Chart - Salários: Medicina/Médicos Clinicos(721/2251) - Cluster 1 - KMeans3')
+    #     ax.set_xlabel('Idade')
+    #     ax.set_ylabel('Numero de Salários')
+    #     ax.set_xticklabels(xticks)
+    #     #string1 = "Grafico_Boxplot_Salarios_CienciaComputacao_AnalistasSistemas_481_2511_Cluster0_KMeans3" + ".pdf"
+    #     # string1 = "Grafico_Boxplot_Salarios_CienciaComputacao_AnalistasSistemas_481_2511_Cluster0_KMeans3" + ".png"
+    #     string1 = "Grafico_Boxplot_Salarios_Medicina_MedicosClinicos_721_2251_Cluster1_KMeans3" + ".png"
+    #     plt.savefig(save_results_to + string1)   
+    #     # plt.show()        
+     # unified, vectorized handling for cluster-specific boxplots (keeps original behavior)
+    if cluster in (1, 2):
         save_results_to = 'graficos/'
-        # df =  os.path.join(path1[0],name1[0])
-        # df =  os.path.join(path1[0],name1[1])
-        df = 'graficos/Resultados_T_Filtrados_Kmeans3_Idade_Preenchido.csv'
-        Resultados_T_Filtrados_Kmeans3_Idade_Editado = pd.read_csv(df) 
-        filtrados = Resultados_T_Filtrados_Kmeans3_Idade_Editado.query('Cluster == 0.0')
-        filtrados = Resultados_T_Filtrados_Kmeans3_Idade_Editado.query('Curso == 481')
-        Resultados_T_Filtrados_Kmeans3_Idade_Editado = filtrados
-        Resultados_T_Filtrados_Kmeans3_Idade_Editado = Resultados_T_Filtrados_Kmeans3_Idade_Editado.reset_index(drop=True) 
-        Resultados_T_Filtrados_Kmeans3_Idade_Editado = Resultados_T_Filtrados_Kmeans3_Idade_Editado.drop(5)
-        CBO = []
-        CURSO = []
-        IDADE = []
-        for i in range(len(Resultados_T_Filtrados_Kmeans3_Idade_Editado)):
-            CBO.append(Resultados_T_Filtrados_Kmeans3_Idade_Editado.Cbo[i])
-            CURSO.append(Resultados_T_Filtrados_Kmeans3_Idade_Editado.Curso[i])
-            IDADE.append(Resultados_T_Filtrados_Kmeans3_Idade_Editado.Idade[i])
-        # print(CBO)    
-        # print(CURSO)
-        # print(IDADE)
-        dados_1 = []
-        dados_2 = []
-        dados_3 = []
-        dados_4 = []
-        dados_5 = []
-        dados = [dados_1,dados_2,dados_3,dados_4,dados_5] 
-        for i in range(len(CBO)):
-            for j in range(len(FinalSemZero)):
-                if str(IDADE[i]) == '29':
-                   # print(str(FinalSemZero.Ocupação_Código[j]), str(int(float(CBO[i]))),str(FinalSemZero.Curso_Superior_Graduação_Código[j]),str(int(float(CURSO[i]))),(FinalSemZero.Idade_em_Anos[j]))  
-                    if((str(FinalSemZero.Ocupação_Código[j])==str(int(float(CBO[i]))))&(str(FinalSemZero.Curso_Superior_Graduação_Código[j])== str(int(float(CURSO[i]))))& (FinalSemZero.Idade_em_Anos[j]) <= 29):
-                        dados[i].append(FinalSemZero.Qtdade_Salario[j]/100)
-                if str(IDADE[i]) == '30-39':
-                    if (str(FinalSemZero.Ocupação_Código[j])==str(int(float(CBO[i]))))&(str(FinalSemZero.Curso_Superior_Graduação_Código[j])== str(int(float(CURSO[i]))))& (FinalSemZero.Idade_em_Anos[j] >=30)& (FinalSemZero.Idade_em_Anos[j] <=39):
-                        dados[i].append(FinalSemZero.Qtdade_Salario[j]/100)
-                if str(IDADE[i]) == '40-49':
-                    if (str(FinalSemZero.Ocupação_Código[j])==str(int(float(CBO[i]))))&(str(FinalSemZero.Curso_Superior_Graduação_Código[j])== str(int(float(CURSO[i]))))& (FinalSemZero.Idade_em_Anos[j] >=40)& (FinalSemZero.Idade_em_Anos[j] <=49):
-                        dados[i].append(FinalSemZero.Qtdade_Salario[j]/100)
-                if str(IDADE[i]) == '50-59':
-                    if (str(FinalSemZero.Ocupação_Código[j])==str(int(float(CBO[i]))))&(str(FinalSemZero.Curso_Superior_Graduação_Código[j])== str(int(float(CURSO[i]))))& (FinalSemZero.Idade_em_Anos[j] >=50)& (FinalSemZero.Idade_em_Anos[j] <=59):
-                        dados[i].append(FinalSemZero.Qtdade_Salario[j]/100)
-                if str(IDADE[i]) == '60':
-                    if (str(FinalSemZero.Ocupação_Código[j])==str(int(float(CBO[i]))))&(str(FinalSemZero.Curso_Superior_Graduação_Código[j])== str(int(float(CURSO[i]))))& (FinalSemZero.Idade_em_Anos[j] >= 60):
-                        dados[i].append(FinalSemZero.Qtdade_Salario[j]/100)
-        # print(dados)                
-        xticks = []
-        for z in range(len(IDADE)):
-            xticks.append(str(IDADE[z]))
-        # for i in range(len(CBO)):
-        #     print(xticks[i])
+        df_file = 'graficos/Resultados_T_Filtrados_Kmeans3_Idade_Preenchido.csv'
+        resultados = pd.read_csv(df_file)
+
+        # mapping cluster -> (Curso filter, plot title, filename)
+        mapping = {
+            1: (481,
+                "Boxplot Chart - Salários: Ciência da Computação/Analistas de Sistemas(481/2124) - Cluster 2 - KMeans3",
+                "Grafico_Boxplot_Salarios_CienciaComputacao_AnalistasSistemas_481_2124_Cluster2_KMeans3.png"),
+            0: (721,
+                "Boxplot Chart - Salários: Medicina/Médicos Clinicos(721/2251) - Cluster 1 - KMeans3",
+                "Grafico_Boxplot_Salarios_Medicina_MedicosClinicos_721_2251_Cluster1_KMeans3.png"),
+            2: (726,
+                "Boxplot Chart - Salários: Terapia e Reabilitação/Nutricionistas(726/2237) - Cluster 0 - KMeans3",
+                "Grafico_Boxplot_Salarios_TerapiaReabilitacao_Nutricionistas_726_2237_Cluster0_KMeans3.png")    
+        }
+
+        target_curso, title, filename = mapping[cluster]
+
+        # NOTE: original code ended up filtering by Curso only (it reassigned filtrados),
+        # so we preserve that behavior here.
+        filtrados = resultados.query(f'Curso == {int(target_curso)}').reset_index(drop=True)
+
+        # match original's attempt to drop index 5 if present
+        if 5 in filtrados.index:
+            filtrados = filtrados.drop(5).reset_index(drop=True)
+
+        CBO = filtrados['Cbo'].tolist()
+        CURSO = filtrados['Curso'].tolist()
+        IDADE = filtrados['Idade'].tolist()
+
+        # prepare containers (one list per IDADE entry)
+        dados = [[] for _ in range(len(CBO))]
+
+        # vectorized selection from FinalSemZero for each (CBO, CURSO, IDADE)
+        for i, (cbo_val, curso_val, idade_val) in enumerate(zip(CBO, CURSO, IDADE)):
+            cbo_str = str(int(float(cbo_val)))
+            curso_str = str(int(float(curso_val)))
+
+            # build mask for occupation/course
+            mask_base = (FinalSemZero['CBO-Domiciliar'].astype(str) == cbo_str) & \
+                        (FinalSemZero['Curso_Superior_Graduação_Código'].astype(str) == curso_str)
+
+            if str(idade_val) == '29':
+                mask = mask_base & (FinalSemZero['Idade_em_Anos'] <= 29)
+            elif str(idade_val) == '30-39':
+                mask = mask_base & (FinalSemZero['Idade_em_Anos'] >= 30) & (FinalSemZero['Idade_em_Anos'] <= 39)
+            elif str(idade_val) == '40-49':
+                mask = mask_base & (FinalSemZero['Idade_em_Anos'] >= 40) & (FinalSemZero['Idade_em_Anos'] <= 49)
+            elif str(idade_val) == '50-59':
+                mask = mask_base & (FinalSemZero['Idade_em_Anos'] >= 50) & (FinalSemZero['Idade_em_Anos'] <= 59)
+            elif str(idade_val) == '60':
+                mask = mask_base & (FinalSemZero['Idade_em_Anos'] >= 60)
+            else:
+                mask = mask_base  # fallback: keep all if age bucket unexpected
+
+            # collect Qtdade_Salario / 100 as list (preserves original volume ordering)
+            values = (FinalSemZero.loc[mask, 'Qtdade_Salario'] / 100).tolist()
+            dados[i].extend(values)
+
+        # prepare xticks as original
+        xticks = [str(x) for x in IDADE]
+
+        # plot boxplot (same aesthetics as original)
         import matplotlib.pyplot as plt
-        import numpy as np
-        plt.rcParams.update({'font.size':20})      
-        DADOS = dados
-        fig, ax = plt.subplots(figsize=(20,10))
-        ax.boxplot(DADOS)
+        plt.rcParams.update({'font.size': 20})
+        fig, ax = plt.subplots(figsize=(20, 10))
+        ax.boxplot(dados)
         ax.set_yscale('log')
-        #ax.set_title('Gráfico de Boxplot - Salários: Ciência da Computação/Analistas de Sistemas(481/2511) - Cluster 0 - KMeans3')
-        #ax.set_xlabel('Idade')
-        #ax.set_ylabel('Quantidade de Salários')
-        ax.set_title('Boxplot Chart - Salaries: Ciência da Computação/Analistas de Sistemas(481/2511) - Cluster 0 - KMeans3')
-        ax.set_xlabel('Age')
-        ax.set_ylabel('Number of Salaries')
+        ax.set_title(title)
+        ax.set_xlabel('Idade')
+        ax.set_ylabel('Numero de Salários')
         ax.set_xticklabels(xticks)
-        #string1 = "Grafico_Boxplot_Salarios_CienciaComputacao_AnalistasSistemas_481_2511_Cluster0_KMeans3" + ".pdf"
-        string1 = "Grafico_Boxplot_Salarios_CienciaComputacao_AnalistasSistemas_481_2511_Cluster0_KMeans3" + ".png"
-        plt.savefig(save_results_to + string1)   
-        # plt.show()        
-    if cluster == 1:       
-        #Filtrados ... Cluster 0 ... Ciência da Computação/Analistas de Sistemas(481/2511)
-        save_results_to = 'graficos/'
-        # df =  os.path.join(path1[0],name1[1])
-        df = 'graficos/Resultados_T_Filtrados_Kmeans3_Idade_Preenchido.csv'
-        Resultados_T_Filtrados_Kmeans3_Idade_Editado = pd.read_csv(df) 
-        filtrados = Resultados_T_Filtrados_Kmeans3_Idade_Editado.query('Cluster == 1.0')
-        filtrados = Resultados_T_Filtrados_Kmeans3_Idade_Editado.query('Curso == 721 & Cbo == 2211')
-        Resultados_T_Filtrados_Kmeans3_Idade_Editado = filtrados
-        Resultados_T_Filtrados_Kmeans3_Idade_Editado = Resultados_T_Filtrados_Kmeans3_Idade_Editado.reset_index(drop=True) 
-        Resultados_T_Filtrados_Kmeans3_Idade_Editado = Resultados_T_Filtrados_Kmeans3_Idade_Editado.drop(5)
-        CBO = []
-        CURSO = []
-        IDADE = []
-        for i in range(len(Resultados_T_Filtrados_Kmeans3_Idade_Editado)):
-            CBO.append(Resultados_T_Filtrados_Kmeans3_Idade_Editado.Cbo[i])
-            CURSO.append(Resultados_T_Filtrados_Kmeans3_Idade_Editado.Curso[i])
-            IDADE.append(Resultados_T_Filtrados_Kmeans3_Idade_Editado.Idade[i])
-        # print(CBO)    
-        # print(CURSO)
-        # print(IDADE)
-        dados_1 = []
-        dados_2 = []
-        dados_3 = []
-        dados_4 = []
-        dados_5 = []
-        dados = [dados_1,dados_2,dados_3,dados_4,dados_5] 
-        for i in range(len(CBO)):
-            for j in range(len(FinalSemZero)):
-                if str(IDADE[i]) == '29':
-                   # print(str(FinalSemZero.Ocupação_Código[j]), str(int(float(CBO[i]))),str(FinalSemZero.Curso_Superior_Graduação_Código[j]),str(int(float(CURSO[i]))),(FinalSemZero.Idade_em_Anos[j]))  
-                    if((str(FinalSemZero.Ocupação_Código[j])==str(int(float(CBO[i]))))&(str(FinalSemZero.Curso_Superior_Graduação_Código[j])== str(int(float(CURSO[i]))))& (FinalSemZero.Idade_em_Anos[j]) <= 29):
-                        dados[i].append(FinalSemZero.Qtdade_Salario[j]/100)
-                if str(IDADE[i]) == '30-39':
-                    if (str(FinalSemZero.Ocupação_Código[j])==str(int(float(CBO[i]))))&(str(FinalSemZero.Curso_Superior_Graduação_Código[j])== str(int(float(CURSO[i]))))& (FinalSemZero.Idade_em_Anos[j] >=30)& (FinalSemZero.Idade_em_Anos[j] <=39):
-                        dados[i].append(FinalSemZero.Qtdade_Salario[j]/100)
-                if str(IDADE[i]) == '40-49':
-                    if (str(FinalSemZero.Ocupação_Código[j])==str(int(float(CBO[i]))))&(str(FinalSemZero.Curso_Superior_Graduação_Código[j])== str(int(float(CURSO[i]))))& (FinalSemZero.Idade_em_Anos[j] >=40)& (FinalSemZero.Idade_em_Anos[j] <=49):
-                        dados[i].append(FinalSemZero.Qtdade_Salario[j]/100)
-                if str(IDADE[i]) == '50-59':
-                    if (str(FinalSemZero.Ocupação_Código[j])==str(int(float(CBO[i]))))&(str(FinalSemZero.Curso_Superior_Graduação_Código[j])== str(int(float(CURSO[i]))))& (FinalSemZero.Idade_em_Anos[j] >=50)& (FinalSemZero.Idade_em_Anos[j] <=59):
-                        dados[i].append(FinalSemZero.Qtdade_Salario[j]/100)
-                if str(IDADE[i]) == '60':
-                    if (str(FinalSemZero.Ocupação_Código[j])==str(int(float(CBO[i]))))&(str(FinalSemZero.Curso_Superior_Graduação_Código[j])== str(int(float(CURSO[i]))))& (FinalSemZero.Idade_em_Anos[j] >= 60):
-                        dados[i].append(FinalSemZero.Qtdade_Salario[j]/100)
-        # print(dados)                
-        xticks = []
-        for z in range(len(IDADE)):
-            xticks.append(str(IDADE[z]))
-        # for i in range(len(CBO)):
-        #     print(xticks[i])
-        import matplotlib.pyplot as plt
-        import numpy as np
-        plt.rcParams.update({'font.size':20})      
-        DADOS = dados
-        fig, ax = plt.subplots(figsize=(20,10))
-        ax.boxplot(DADOS)
-        ax.set_yscale('log')
-        #ax.set_title('Gráfico de Boxplot - Salários: Medicina/Médicos Gerais(721/2211) - Cluster 1 - KMeans3 ')
-        #ax.set_xlabel('Idade')
-        #ax.set_ylabel('Quantidade de Salários')
-        ax.set_title('Boxplot Chart - Salaries: Medicina/Médicos Gerais(721/2211) - Cluster 1 - KMeans3 ')
-        ax.set_xlabel('Age')
-        ax.set_ylabel('Number of Salaries')
-        ax.set_xticklabels(xticks)
-        #string1 = "Grafico_Boxplot_Salarios_Medicina_MédicosGerais_721_2511_Cluster1_KMeans3" + ".pdf"
-        string1 = "Grafico_Boxplot_Salarios_Medicina_MédicosGerais_721_2511_Cluster1_KMeans3" + ".png"
-        plt.savefig(save_results_to + string1)   
-        # plt.show()  
-    if cluster == 2:
-       #Filtrados ... Cluster 0 ... Ciência da Computação/Analistas de Sistemas(481/2511)
-        save_results_to = 'graficos/'
-        # df =  os.path.join(path1[0],name1[1])
-        df = 'graficos/Resultados_T_Filtrados_Kmeans3_Idade_Preenchido.csv'
-        Resultados_T_Filtrados_Kmeans3_Idade_Editado = pd.read_csv(df) 
-        filtrados = Resultados_T_Filtrados_Kmeans3_Idade_Editado.query('Cluster == 2.0')
-        filtrados = Resultados_T_Filtrados_Kmeans3_Idade_Editado.query('Curso == 721 & Cbo == 2212')
-        Resultados_T_Filtrados_Kmeans3_Idade_Editado = filtrados
-        Resultados_T_Filtrados_Kmeans3_Idade_Editado = Resultados_T_Filtrados_Kmeans3_Idade_Editado.reset_index(drop=True) 
-        Resultados_T_Filtrados_Kmeans3_Idade_Editado = Resultados_T_Filtrados_Kmeans3_Idade_Editado.drop(5)
-        CBO = []
-        CURSO = []
-        IDADE = []
-        for i in range(len(Resultados_T_Filtrados_Kmeans3_Idade_Editado)):
-            CBO.append(Resultados_T_Filtrados_Kmeans3_Idade_Editado.Cbo[i])
-            CURSO.append(Resultados_T_Filtrados_Kmeans3_Idade_Editado.Curso[i])
-            IDADE.append(Resultados_T_Filtrados_Kmeans3_Idade_Editado.Idade[i])
-        # print(CBO)    
-        # print(CURSO)
-        # print(IDADE)
-        dados_1 = []
-        dados_2 = []
-        dados_3 = []
-        dados_4 = []
-        dados_5 = []
-        dados = [dados_1,dados_2,dados_3,dados_4,dados_5] 
-        for i in range(len(CBO)):
-            for j in range(len(FinalSemZero)):
-                if str(IDADE[i]) == '29':
-                   # print(str(FinalSemZero.Ocupação_Código[j]), str(int(float(CBO[i]))),str(FinalSemZero.Curso_Superior_Graduação_Código[j]),str(int(float(CURSO[i]))),(FinalSemZero.Idade_em_Anos[j]))  
-                    if((str(FinalSemZero.Ocupação_Código[j])==str(int(float(CBO[i]))))&(str(FinalSemZero.Curso_Superior_Graduação_Código[j])== str(int(float(CURSO[i]))))& (FinalSemZero.Idade_em_Anos[j]) <= 29):
-                        dados[i].append(FinalSemZero.Qtdade_Salario[j]/100)
-                if str(IDADE[i]) == '30-39':
-                    if (str(FinalSemZero.Ocupação_Código[j])==str(int(float(CBO[i]))))&(str(FinalSemZero.Curso_Superior_Graduação_Código[j])== str(int(float(CURSO[i]))))& (FinalSemZero.Idade_em_Anos[j] >=30)& (FinalSemZero.Idade_em_Anos[j] <=39):
-                        dados[i].append(FinalSemZero.Qtdade_Salario[j]/100)
-                if str(IDADE[i]) == '40-49':
-                    if (str(FinalSemZero.Ocupação_Código[j])==str(int(float(CBO[i]))))&(str(FinalSemZero.Curso_Superior_Graduação_Código[j])== str(int(float(CURSO[i]))))& (FinalSemZero.Idade_em_Anos[j] >=40)& (FinalSemZero.Idade_em_Anos[j] <=49):
-                        dados[i].append(FinalSemZero.Qtdade_Salario[j]/100)
-                if str(IDADE[i]) == '50-59':
-                    if (str(FinalSemZero.Ocupação_Código[j])==str(int(float(CBO[i]))))&(str(FinalSemZero.Curso_Superior_Graduação_Código[j])== str(int(float(CURSO[i]))))& (FinalSemZero.Idade_em_Anos[j] >=50)& (FinalSemZero.Idade_em_Anos[j] <=59):
-                        dados[i].append(FinalSemZero.Qtdade_Salario[j]/100)
-                if str(IDADE[i]) == '60':
-                    if (str(FinalSemZero.Ocupação_Código[j])==str(int(float(CBO[i]))))&(str(FinalSemZero.Curso_Superior_Graduação_Código[j])== str(int(float(CURSO[i]))))& (FinalSemZero.Idade_em_Anos[j] >= 60):
-                        dados[i].append(FinalSemZero.Qtdade_Salario[j]/100)
-        # print(dados)                
-        xticks = []
-        for z in range(len(IDADE)):
-            xticks.append(str(IDADE[z]))
-        # for i in range(len(CBO)):
-        #     print(xticks[i])
-        import matplotlib.pyplot as plt
-        import numpy as np
-        plt.rcParams.update({'font.size':20})      
-        DADOS = dados
-        fig, ax = plt.subplots(figsize=(20,10))
-        ax.boxplot(DADOS)
-        ax.set_yscale('log')
-        #ax.set_title('Gráfico de Boxplot - Salários: Medicina/Médicos Especialistas(721/2212) - Cluster 2 - KMeans3 ')
-        #ax.set_xlabel('Idade')
-        #ax.set_ylabel('Quantidade de Salários')
-        ax.set_title('Boxplot Chart - Salaries: Medicina/Médicos Especialistas(721/2212) - Cluster 2 - KMeans3 ')
-        ax.set_xlabel('Age')
-        ax.set_ylabel('Number of Salaries')
-        ax.set_xticklabels(xticks)
-        #string1 = "Grafico_Boxplot_Salarios_Medicina_Médicos Especialistas_721_2512_Cluster2_KMeans3" + ".pdf"
-        string1 = "Grafico_Boxplot_Salarios_Medicina_Médicos Especialistas_721_2512_Cluster2_KMeans3" + ".png"
-        plt.savefig(save_results_to + string1)   
+
+        plt.savefig(os.path.join(save_results_to, filename))
+        plt.close()
+
+    # if cluster == 1:       
+    #     #Filtrados ... Cluster 0 ... Ciência da Computação/Analistas de Sistemas(481/2511)
+    #     save_results_to = 'graficos/'
+    #     # df =  os.path.join(path1[0],name1[1])
+    #     df = 'graficos/Resultados_T_Filtrados_Kmeans3_Idade_Preenchido.csv'
+    #     Resultados_T_Filtrados_Kmeans3_Idade_Editado = pd.read_csv(df) 
+    #     filtrados = Resultados_T_Filtrados_Kmeans3_Idade_Editado.query('Cluster == 1.0')
+    #     filtrados = Resultados_T_Filtrados_Kmeans3_Idade_Editado.query('Curso == 721 & Cbo == 2211')
+    #     Resultados_T_Filtrados_Kmeans3_Idade_Editado = filtrados
+    #     Resultados_T_Filtrados_Kmeans3_Idade_Editado = Resultados_T_Filtrados_Kmeans3_Idade_Editado.reset_index(drop=True) 
+    #     Resultados_T_Filtrados_Kmeans3_Idade_Editado = Resultados_T_Filtrados_Kmeans3_Idade_Editado.drop(5)
+    #     CBO = []
+    #     CURSO = []
+    #     IDADE = []
+    #     for i in range(len(Resultados_T_Filtrados_Kmeans3_Idade_Editado)):
+    #         CBO.append(Resultados_T_Filtrados_Kmeans3_Idade_Editado.Cbo[i])
+    #         CURSO.append(Resultados_T_Filtrados_Kmeans3_Idade_Editado.Curso[i])
+    #         IDADE.append(Resultados_T_Filtrados_Kmeans3_Idade_Editado.Idade[i])
+    #     # print(CBO)    
+    #     # print(CURSO)
+    #     # print(IDADE)
+    #     dados_1 = []
+    #     dados_2 = []
+    #     dados_3 = []
+    #     dados_4 = []
+    #     dados_5 = []
+    #     dados = [dados_1,dados_2,dados_3,dados_4,dados_5] 
+    #     for i in range(len(CBO)):
+    #         for j in range(len(FinalSemZero)):
+    #             if str(IDADE[i]) == '29':
+    #                # print(str(FinalSemZero.Ocupação_Código[j]), str(int(float(CBO[i]))),str(FinalSemZero.Curso_Superior_Graduação_Código[j]),str(int(float(CURSO[i]))),(FinalSemZero.Idade_em_Anos[j]))  
+    #                 if((str(FinalSemZero.Ocupação_Código[j])==str(int(float(CBO[i]))))&(str(FinalSemZero.Curso_Superior_Graduação_Código[j])== str(int(float(CURSO[i]))))& (FinalSemZero.Idade_em_Anos[j]) <= 29):
+    #                     dados[i].append(FinalSemZero.Qtdade_Salario[j]/100)
+    #             if str(IDADE[i]) == '30-39':
+    #                 if (str(FinalSemZero.Ocupação_Código[j])==str(int(float(CBO[i]))))&(str(FinalSemZero.Curso_Superior_Graduação_Código[j])== str(int(float(CURSO[i]))))& (FinalSemZero.Idade_em_Anos[j] >=30)& (FinalSemZero.Idade_em_Anos[j] <=39):
+    #                     dados[i].append(FinalSemZero.Qtdade_Salario[j]/100)
+    #             if str(IDADE[i]) == '40-49':
+    #                 if (str(FinalSemZero.Ocupação_Código[j])==str(int(float(CBO[i]))))&(str(FinalSemZero.Curso_Superior_Graduação_Código[j])== str(int(float(CURSO[i]))))& (FinalSemZero.Idade_em_Anos[j] >=40)& (FinalSemZero.Idade_em_Anos[j] <=49):
+    #                     dados[i].append(FinalSemZero.Qtdade_Salario[j]/100)
+    #             if str(IDADE[i]) == '50-59':
+    #                 if (str(FinalSemZero.Ocupação_Código[j])==str(int(float(CBO[i]))))&(str(FinalSemZero.Curso_Superior_Graduação_Código[j])== str(int(float(CURSO[i]))))& (FinalSemZero.Idade_em_Anos[j] >=50)& (FinalSemZero.Idade_em_Anos[j] <=59):
+    #                     dados[i].append(FinalSemZero.Qtdade_Salario[j]/100)
+    #             if str(IDADE[i]) == '60':
+    #                 if (str(FinalSemZero.Ocupação_Código[j])==str(int(float(CBO[i]))))&(str(FinalSemZero.Curso_Superior_Graduação_Código[j])== str(int(float(CURSO[i]))))& (FinalSemZero.Idade_em_Anos[j] >= 60):
+    #                     dados[i].append(FinalSemZero.Qtdade_Salario[j]/100)
+    #     # print(dados)                
+    #     xticks = []
+    #     for z in range(len(IDADE)):
+    #         xticks.append(str(IDADE[z]))
+    #     # for i in range(len(CBO)):
+    #     #     print(xticks[i])
+    #     import matplotlib.pyplot as plt
+    #     import numpy as np
+    #     plt.rcParams.update({'font.size':20})      
+    #     DADOS = dados
+    #     fig, ax = plt.subplots(figsize=(20,10))
+    #     ax.boxplot(DADOS)
+    #     ax.set_yscale('log')
+    #     #ax.set_title('Gráfico de Boxplot - Salários: Medicina/Médicos Gerais(721/2211) - Cluster 1 - KMeans3 ')
+    #     #ax.set_xlabel('Idade')
+    #     #ax.set_ylabel('Quantidade de Salários')
+    #     ax.set_title('Boxplot Chart - Salaries: Medicina/Médicos Gerais(721/2211) - Cluster 1 - KMeans3 ')
+    #     ax.set_xlabel('Age')
+    #     ax.set_ylabel('Number of Salaries')
+    #     ax.set_xticklabels(xticks)
+    #     #string1 = "Grafico_Boxplot_Salarios_Medicina_MédicosGerais_721_2511_Cluster1_KMeans3" + ".pdf"
+    #     string1 = "Grafico_Boxplot_Salarios_Medicina_MédicosGerais_721_2511_Cluster1_KMeans3" + ".png"
+    #     plt.savefig(save_results_to + string1)   
+    #     # plt.show()  
+    # if cluster == 2:
+    #    #Filtrados ... Cluster 0 ... Ciência da Computação/Analistas de Sistemas(481/2511)
+    #     save_results_to = 'graficos/'
+    #     # df =  os.path.join(path1[0],name1[1])
+    #     df = 'graficos/Resultados_T_Filtrados_Kmeans3_Idade_Preenchido.csv'
+    #     Resultados_T_Filtrados_Kmeans3_Idade_Editado = pd.read_csv(df) 
+    #     filtrados = Resultados_T_Filtrados_Kmeans3_Idade_Editado.query('Cluster == 2.0')
+    #     filtrados = Resultados_T_Filtrados_Kmeans3_Idade_Editado.query('Curso == 721 & Cbo == 2212')
+    #     Resultados_T_Filtrados_Kmeans3_Idade_Editado = filtrados
+    #     Resultados_T_Filtrados_Kmeans3_Idade_Editado = Resultados_T_Filtrados_Kmeans3_Idade_Editado.reset_index(drop=True) 
+    #     Resultados_T_Filtrados_Kmeans3_Idade_Editado = Resultados_T_Filtrados_Kmeans3_Idade_Editado.drop(5)
+    #     CBO = []
+    #     CURSO = []
+    #     IDADE = []
+    #     for i in range(len(Resultados_T_Filtrados_Kmeans3_Idade_Editado)):
+    #         CBO.append(Resultados_T_Filtrados_Kmeans3_Idade_Editado.Cbo[i])
+    #         CURSO.append(Resultados_T_Filtrados_Kmeans3_Idade_Editado.Curso[i])
+    #         IDADE.append(Resultados_T_Filtrados_Kmeans3_Idade_Editado.Idade[i])
+    #     # print(CBO)    
+    #     # print(CURSO)
+    #     # print(IDADE)
+    #     dados_1 = []
+    #     dados_2 = []
+    #     dados_3 = []
+    #     dados_4 = []
+    #     dados_5 = []
+    #     dados = [dados_1,dados_2,dados_3,dados_4,dados_5] 
+    #     for i in range(len(CBO)):
+    #         for j in range(len(FinalSemZero)):
+    #             if str(IDADE[i]) == '29':
+    #                # print(str(FinalSemZero.Ocupação_Código[j]), str(int(float(CBO[i]))),str(FinalSemZero.Curso_Superior_Graduação_Código[j]),str(int(float(CURSO[i]))),(FinalSemZero.Idade_em_Anos[j]))  
+    #                 if((str(FinalSemZero.Ocupação_Código[j])==str(int(float(CBO[i]))))&(str(FinalSemZero.Curso_Superior_Graduação_Código[j])== str(int(float(CURSO[i]))))& (FinalSemZero.Idade_em_Anos[j]) <= 29):
+    #                     dados[i].append(FinalSemZero.Qtdade_Salario[j]/100)
+    #             if str(IDADE[i]) == '30-39':
+    #                 if (str(FinalSemZero.Ocupação_Código[j])==str(int(float(CBO[i]))))&(str(FinalSemZero.Curso_Superior_Graduação_Código[j])== str(int(float(CURSO[i]))))& (FinalSemZero.Idade_em_Anos[j] >=30)& (FinalSemZero.Idade_em_Anos[j] <=39):
+    #                     dados[i].append(FinalSemZero.Qtdade_Salario[j]/100)
+    #             if str(IDADE[i]) == '40-49':
+    #                 if (str(FinalSemZero.Ocupação_Código[j])==str(int(float(CBO[i]))))&(str(FinalSemZero.Curso_Superior_Graduação_Código[j])== str(int(float(CURSO[i]))))& (FinalSemZero.Idade_em_Anos[j] >=40)& (FinalSemZero.Idade_em_Anos[j] <=49):
+    #                     dados[i].append(FinalSemZero.Qtdade_Salario[j]/100)
+    #             if str(IDADE[i]) == '50-59':
+    #                 if (str(FinalSemZero.Ocupação_Código[j])==str(int(float(CBO[i]))))&(str(FinalSemZero.Curso_Superior_Graduação_Código[j])== str(int(float(CURSO[i]))))& (FinalSemZero.Idade_em_Anos[j] >=50)& (FinalSemZero.Idade_em_Anos[j] <=59):
+    #                     dados[i].append(FinalSemZero.Qtdade_Salario[j]/100)
+    #             if str(IDADE[i]) == '60':
+    #                 if (str(FinalSemZero.Ocupação_Código[j])==str(int(float(CBO[i]))))&(str(FinalSemZero.Curso_Superior_Graduação_Código[j])== str(int(float(CURSO[i]))))& (FinalSemZero.Idade_em_Anos[j] >= 60):
+    #                     dados[i].append(FinalSemZero.Qtdade_Salario[j]/100)
+    #     # print(dados)                
+    #     xticks = []
+    #     for z in range(len(IDADE)):
+    #         xticks.append(str(IDADE[z]))
+    #     # for i in range(len(CBO)):
+    #     #     print(xticks[i])
+    #     import matplotlib.pyplot as plt
+    #     import numpy as np
+    #     plt.rcParams.update({'font.size':20})      
+    #     DADOS = dados
+    #     fig, ax = plt.subplots(figsize=(20,10))
+    #     ax.boxplot(DADOS)
+    #     ax.set_yscale('log')
+    #     #ax.set_title('Gráfico de Boxplot - Salários: Medicina/Médicos Especialistas(721/2212) - Cluster 2 - KMeans3 ')
+    #     #ax.set_xlabel('Idade')
+    #     #ax.set_ylabel('Quantidade de Salários')
+    #     ax.set_title('Boxplot Chart - Salaries: Medicina/Médicos Especialistas(721/2212) - Cluster 2 - KMeans3 ')
+    #     ax.set_xlabel('Age')
+    #     ax.set_ylabel('Number of Salaries')
+    #     ax.set_xticklabels(xticks)
+    #     #string1 = "Grafico_Boxplot_Salarios_Medicina_Médicos Especialistas_721_2512_Cluster2_KMeans3" + ".pdf"
+    #     string1 = "Grafico_Boxplot_Salarios_Medicina_Médicos Especialistas_721_2512_Cluster2_KMeans3" + ".png"
+    #     plt.savefig(save_results_to + string1)   
         # plt.show()    
     return
 

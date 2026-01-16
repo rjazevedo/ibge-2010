@@ -1442,6 +1442,8 @@ def Profissoes_Cursos(path1,name1,path2,name2): # https://colab.research.google.
     # len(Unique_Cbo)
     print(Kmeans3_T)
     Kmeans3_T.to_csv(save_results_to +'Kmeans3_T.csv')
+    # print("Kmeans3_T.csv salvo com sucesso em:", save_results_to +'Kmeans3_T.csv')
+    # exit()
     return
 
 def Profissoes_Cursos_Curso2(path1,name1,path2,name2): # https://colab.research.google.com/drive/1cTpvuIkd7FGZbzEkScU4xKGFb6sSbGog?authuser=1#scrollTo=MGx4AWThonQb

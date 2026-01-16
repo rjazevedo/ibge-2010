@@ -164,6 +164,7 @@ if fase <= 2:
 
 # Fase 10: Essa é a primeira fase que você faz no dia a dia. Aqui você começa a fazer a análise dos dados
 # Fase 10: Análise Descritiva 
+# if fase == 10:
 if fase <= 10:
     # https://colab.research.google.com/drive/1_Nx4oOzrgCQvSolh9XG-UgWTQ508Md1M?authuser=1#scrollTo=o9GsbqjctkkL
     # ibge_functions.ibge_cursos_profissoes()
@@ -183,6 +184,7 @@ if fase <= 10:
     pass
 
 # Fase 20: Análise Exploratória ...
+# if fase == 20:  
 if fase <= 20:  
     # Clusterização com k=3 
     # Geração do gráfico K-Means com K=3 (10% - Todos os Cursos - Clusterização)
@@ -353,7 +355,8 @@ if fase <= 35:
     ibge_functions.plot_gender_age_distribution_bycluster()                                 # OK              
     pass
 
-if fase == 40:
+# if fase == 40:
+if fase <= 40:
 #     # #QP4
 #     # Funciona, mas salva csvs. Comentei para usar como dataframes!
 #     # ibge_functions.Filtro_Idade()
@@ -361,7 +364,7 @@ if fase == 40:
     #  ibge_functions.Tabela_Ida_Volta_Idade()                                 # Essa função foi movida para a fase 50 ...
 #     # Funciona, mas salva csvs. Comentei para usar como dataframes!
 #     # ibge_functions.Adiciona_Coluna_Idade()
-#     ibge_functions_results.Juntar_10Porcento_Idade()
+    #  ibge_functions_results.Juntar_10Porcento_Idade()                         # Essa função foi movida para a fase 50 ...
     #  ibge_functions_results.Filtrar_Tabela_10Porcento_Idade()               # Essa função foi movida para a fase 50 ...
 #     # Separar manualmente os clusters e depois rodar o codigo abaixo para gerar os gráficos de idades separados os clusters...
 #     # 11/04 ainda esta seperando manualmente? Não, ja foi automatizado!
@@ -400,11 +403,12 @@ if fase == 50:
 #     # Preencher o arquivo Resultados_T_Filtrados_Kmeans3_Idade.csv manualmente ...
       ibge_functions.Ida_Volta_Idade()                                       # OK
       ibge_functions.Tabela_Ida_Volta_Idade()                                # OK
+      ibge_functions_results.Juntar_10Porcento_Idade()                       # Ok
       ibge_functions_results.Filtrar_Tabela_10Porcento_Idade()               # OK
       ibge_functions.fill_cluster_column()                                   # OK
       ibge_functions_results.separate_clusters()                             # OK
       ibge_functions.Salarios_CBO_Idade()                                    # OK
-#     # 6- Análise  de salário por gênero (Ser homem ou mulher implica em diferença salarial?)
+# #     # 6- Análise  de salário por gênero (Ser homem ou mulher implica em diferença salarial?)
 #     # Tabela - Mediana  Feminina
 #     # Tabela - Mediana Masculina
 #     # BoxPlot da Mediana de três  profissões
