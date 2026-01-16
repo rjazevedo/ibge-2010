@@ -4450,16 +4450,28 @@ def Salarios_CBO_Idade(path,name,path1,name1,cluster):
         resultados = pd.read_csv(df_file)
 
         # mapping cluster -> (Curso filter, plot title, filename)
+        # mapping = {
+        #     1: (481,
+        #         "Boxplot Chart - Salários: Ciência da Computação/Analistas de Sistemas(481/2124) - Cluster 2 - KMeans3",
+        #         "Grafico_Boxplot_Salarios_CienciaComputacao_AnalistasSistemas_481_2124_Cluster2_KMeans3.png"),
+        #     0: (721,
+        #         "Boxplot Chart - Salários: Medicina/Médicos Clinicos(721/2251) - Cluster 1 - KMeans3",
+        #         "Grafico_Boxplot_Salarios_Medicina_MedicosClinicos_721_2251_Cluster1_KMeans3.png"),
+        #     2: (726,
+        #         "Boxplot Chart - Salários: Terapia e Reabilitação/Nutricionistas(726/2237) - Cluster 0 - KMeans3",
+        #         "Grafico_Boxplot_Salarios_TerapiaReabilitacao_Nutricionistas_726_2237_Cluster0_KMeans3.png")    
+        # }
+
         mapping = {
             1: (481,
-                "Boxplot Chart - Salários: Ciência da Computação/Analistas de Sistemas(481/2124) - Cluster 2 - KMeans3",
-                "Grafico_Boxplot_Salarios_CienciaComputacao_AnalistasSistemas_481_2124_Cluster2_KMeans3.png"),
+                "Boxplot Chart - Salários: Serviços de transportes (curso gerais)/Oficiais de convés e afins(840/2151) - Cluster 2 - KMeans3",
+                "Grafico_Boxplot_Salarios_ServicosTransportes_OficiaisConves_840_2151_Cluster2_KMeans3.png"),
             0: (721,
                 "Boxplot Chart - Salários: Medicina/Médicos Clinicos(721/2251) - Cluster 1 - KMeans3",
                 "Grafico_Boxplot_Salarios_Medicina_MedicosClinicos_721_2251_Cluster1_KMeans3.png"),
             2: (726,
-                "Boxplot Chart - Salários: Terapia e Reabilitação/Nutricionistas(726/2237) - Cluster 0 - KMeans3",
-                "Grafico_Boxplot_Salarios_TerapiaReabilitacao_Nutricionistas_726_2237_Cluster0_KMeans3.png")    
+                "Boxplot Chart - Salários: Mineração e extração/Engenheiros de minas e afins(544/2147)  - Cluster 0 - KMeans3",
+                "Grafico_Boxplot_Salarios_Mineracao_EngenheirosMinas_544_2147_Cluster0_KMeans3.png")    
         }
 
         target_curso, title, filename = mapping[cluster]

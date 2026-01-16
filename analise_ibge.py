@@ -389,24 +389,24 @@ if fase <= 40:
      ibge_functions_results_1.plot_age_distribution_bycluster_1()             # OK
      pass
 
-if fase <= 50:
+if fase == 50:
 #     QP5
-      ibge_functions_exploratory_analysis.separar_cursos_por_clusters()     # OK                   
-      ibge_functions_exploratory_analysis.medianas_por_clusters()           # OK                    
-#     # Funções que faltam ...
-#     # 1- BoxPlot de salários separados por clusters
-#     # 2- BoxPlot de salários separados por faixa etária (idades)  - Idades por Cluster (Grupos)
-#     # 3- BoxPlot de salários separados por gênero                 - Gênero por Clusters (Grupos)
-#     # 4- Tabela: O maior e o menor de cada um dos pontos dentro de cada cluster
-#     # Tabela: Mediana de cada um dos pontos dentro de cada cluster
-#     # Okay # 5- BoxPlot de salários para um determinado CBO por idade
-#     # Preencher o arquivo Resultados_T_Filtrados_Kmeans3_Idade.csv manualmente ...
-      ibge_functions.Ida_Volta_Idade()                                       # OK
-      ibge_functions.Tabela_Ida_Volta_Idade()                                # OK
-      ibge_functions_results.Juntar_10Porcento_Idade()                       # Ok
-      ibge_functions_results.Filtrar_Tabela_10Porcento_Idade()               # OK
-      ibge_functions.fill_cluster_column()                                   # OK
-      ibge_functions_results.separate_clusters()                             # OK
+#       ibge_functions_exploratory_analysis.separar_cursos_por_clusters()     # OK                   
+#       ibge_functions_exploratory_analysis.medianas_por_clusters()           # OK                    
+# #     # Funções que faltam ...
+# #     # 1- BoxPlot de salários separados por clusters
+# #     # 2- BoxPlot de salários separados por faixa etária (idades)  - Idades por Cluster (Grupos)
+# #     # 3- BoxPlot de salários separados por gênero                 - Gênero por Clusters (Grupos)
+# #     # 4- Tabela: O maior e o menor de cada um dos pontos dentro de cada cluster
+# #     # Tabela: Mediana de cada um dos pontos dentro de cada cluster
+# #     # Okay # 5- BoxPlot de salários para um determinado CBO por idade
+# #     # Preencher o arquivo Resultados_T_Filtrados_Kmeans3_Idade.csv manualmente ...
+#       ibge_functions.Ida_Volta_Idade()                                       # OK
+#       ibge_functions.Tabela_Ida_Volta_Idade()                                # OK
+#       ibge_functions_results.Juntar_10Porcento_Idade()                       # Ok
+#       ibge_functions_results.Filtrar_Tabela_10Porcento_Idade()               # OK
+#       ibge_functions.fill_cluster_column()                                   # OK
+#       ibge_functions_results.separate_clusters()                             # OK
       ibge_functions.Salarios_CBO_Idade()                                    # OK
 # #     # 6- Análise  de salário por gênero (Ser homem ou mulher implica em diferença salarial?)
 #     # Tabela - Mediana  Feminina
