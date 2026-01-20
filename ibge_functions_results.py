@@ -4444,59 +4444,74 @@ def Salarios_CBO_Idade(path,name,path1,name1,cluster):
     #     plt.savefig(save_results_to + string1)   
     #     # plt.show()        
      # unified, vectorized handling for cluster-specific boxplots (keeps original behavior)
-    if cluster in (1, 2):
-        save_results_to = 'graficos/'
-        df_file = 'graficos/Resultados_T_Filtrados_Kmeans3_Idade_Preenchido.csv'
-        resultados = pd.read_csv(df_file)
+    # handle cluster-specific boxplots for cluster in {0,1,2}
+    if cluster not in (0, 1, 2):
+        return
 
-        # mapping cluster -> (Curso filter, plot title, filename)
-        # mapping = {
-        #     1: (481,
-        #         "Boxplot Chart - Salários: Ciência da Computação/Analistas de Sistemas(481/2124) - Cluster 2 - KMeans3",
-        #         "Grafico_Boxplot_Salarios_CienciaComputacao_AnalistasSistemas_481_2124_Cluster2_KMeans3.png"),
-        #     0: (721,
-        #         "Boxplot Chart - Salários: Medicina/Médicos Clinicos(721/2251) - Cluster 1 - KMeans3",
-        #         "Grafico_Boxplot_Salarios_Medicina_MedicosClinicos_721_2251_Cluster1_KMeans3.png"),
-        #     2: (726,
-        #         "Boxplot Chart - Salários: Terapia e Reabilitação/Nutricionistas(726/2237) - Cluster 0 - KMeans3",
-        #         "Grafico_Boxplot_Salarios_TerapiaReabilitacao_Nutricionistas_726_2237_Cluster0_KMeans3.png")    
-        # }
+    save_results_to = 'graficos/'
+    df_file = 'graficos/Resultados_T_Filtrados_Kmeans3_Idade_Preenchido.csv'
+    if not os.path.exists(df_file):
+        # fallback to alternative filename if needed
+        df_file = 'graficos/Resultados_T_Filtrados_Kmeans3_Idade.csv'
+        if not os.path.exists(df_file):
+            print("Arquivo de resultados não encontrado:", df_file)
+            return
 
-        mapping = {
-            1: (481,
-                "Boxplot Chart - Salários: Serviços de transportes (curso gerais)/Oficiais de convés e afins(840/2151) - Cluster 2 - KMeans3",
-                "Grafico_Boxplot_Salarios_ServicosTransportes_OficiaisConves_840_2151_Cluster2_KMeans3.png"),
-            0: (721,
-                "Boxplot Chart - Salários: Medicina/Médicos Clinicos(721/2251) - Cluster 1 - KMeans3",
-                "Grafico_Boxplot_Salarios_Medicina_MedicosClinicos_721_2251_Cluster1_KMeans3.png"),
-            2: (726,
-                "Boxplot Chart - Salários: Mineração e extração/Engenheiros de minas e afins(544/2147)  - Cluster 0 - KMeans3",
-                "Grafico_Boxplot_Salarios_Mineracao_EngenheirosMinas_544_2147_Cluster0_KMeans3.png")    
-        }
+    resultados = pd.read_csv(df_file)
 
-        target_curso, title, filename = mapping[cluster]
+    # mapping cluster -> (target_course, title, filename)
+    mapping = {
+        1: (481,
+            "Boxplot Chart - Salários: Serviços de transportes (curso gerais)/Oficiais de convés e afins(840/2151) - Cluster 2 - KMeans3",
+            "Grafico_Boxplot_Salarios_ServicosTransportes_OficiaisConves_840_2151_Cluster2_KMeans3.png"),
+        0: (721,
+            "Boxplot Chart - Salários: Medicina/Médicos Clinicos(721/2251) - Cluster 1 - KMeans3",
+            "Grafico_Boxplot_Salarios_Medicina_MedicosClinicos_721_2251_Cluster1_KMeans3.png"),
+        2: (726,
+            "Boxplot Chart - Salários: Mineração e extração/Engenheiros de minas e afins(544/2147)  - Cluster 0 - KMeans3",
+            "Grafico_Boxplot_Salarios_Mineracao_EngenheirosMinas_544_2147_Cluster0_KMeans3.png")
+    }
 
-        # NOTE: original code ended up filtering by Curso only (it reassigned filtrados),
-        # so we preserve that behavior here.
-        filtrados = resultados.query(f'Curso == {int(target_curso)}').reset_index(drop=True)
+    target_curso, title, filename = mapping[cluster]
 
-        # match original's attempt to drop index 5 if present
-        if 5 in filtrados.index:
-            filtrados = filtrados.drop(5).reset_index(drop=True)
+    # filtra por Curso
+    filtrados = resultados.query(f'Curso == {int(target_curso)}').reset_index(drop=True)
 
-        CBO = filtrados['Cbo'].tolist()
-        CURSO = filtrados['Curso'].tolist()
-        IDADE = filtrados['Idade'].tolist()
+    # manter compatibilidade com versão antiga (remover índice 5 se existir)
+    if 5 in filtrados.index:
+        filtrados = filtrados.drop(5).reset_index(drop=True)
 
-        # prepare containers (one list per IDADE entry)
-        dados = [[] for _ in range(len(CBO))]
+    # se não houver dados, sair
+    if filtrados.empty:
+        print("Nenhum registro encontrado para o curso alvo:", target_curso)
+        return
 
-        # vectorized selection from FinalSemZero for each (CBO, CURSO, IDADE)
-        for i, (cbo_val, curso_val, idade_val) in enumerate(zip(CBO, CURSO, IDADE)):
-            cbo_str = str(int(float(cbo_val)))
-            curso_str = str(int(float(curso_val)))
+    # iremos agrupar por faixa etária para garantir que cada idade apareça apenas uma vez no eixo x
+    unique_idades = []
+    for v in filtrados['Idade'].tolist():
+        if v not in unique_idades:
+            unique_idades.append(v)
 
-            # build mask for occupation/course
+    dados = []
+    xticks = []
+
+    # para cada faixa etária, agregamos os valores de todas as linhas que pertencem àquela faixa
+    for idade_val in unique_idades:
+        idade_values = []
+        subset = filtrados[filtrados['Idade'] == idade_val]
+        for _, row in subset.iterrows():
+            cbo_val = row['Cbo']
+            curso_val = row['Curso']
+            try:
+                cbo_str = str(int(float(cbo_val)))
+            except Exception:
+                cbo_str = str(cbo_val).strip()
+
+            try:
+                curso_str = str(int(float(curso_val)))
+            except Exception:
+                curso_str = str(curso_val).strip()
+
             mask_base = (FinalSemZero['CBO-Domiciliar'].astype(str) == cbo_str) & \
                         (FinalSemZero['Curso_Superior_Graduação_Código'].astype(str) == curso_str)
 
@@ -4511,28 +4526,35 @@ def Salarios_CBO_Idade(path,name,path1,name1,cluster):
             elif str(idade_val) == '60':
                 mask = mask_base & (FinalSemZero['Idade_em_Anos'] >= 60)
             else:
-                mask = mask_base  # fallback: keep all if age bucket unexpected
+                mask = mask_base
 
-            # collect Qtdade_Salario / 100 as list (preserves original volume ordering)
-            values = (FinalSemZero.loc[mask, 'Qtdade_Salario'] / 100).tolist()
-            dados[i].extend(values)
+            values = (FinalSemZero.loc[mask, 'Qtdade_Salario'] / 100).dropna().tolist()
+            if values:
+                idade_values.extend(values)
 
-        # prepare xticks as original
-        xticks = [str(x) for x in IDADE]
+        # só adicionar grupos que possuem algum dado (evita erro do boxplot com listas vazias)
+        if idade_values:
+            dados.append(idade_values)
+            xticks.append(str(idade_val))
 
-        # plot boxplot (same aesthetics as original)
-        import matplotlib.pyplot as plt
-        plt.rcParams.update({'font.size': 20})
-        fig, ax = plt.subplots(figsize=(20, 10))
-        ax.boxplot(dados)
-        ax.set_yscale('log')
-        ax.set_title(title)
-        ax.set_xlabel('Idade')
-        ax.set_ylabel('Numero de Salários')
-        ax.set_xticklabels(xticks)
+    if not dados:
+        print("Nenhum dado de salário disponível para os filtros selecionados (curso/cbo/idade).")
+        return
 
-        plt.savefig(os.path.join(save_results_to, filename))
-        plt.close()
+    # usar o matplotlib importado no topo do arquivo (evita re-import e possíveis avisos de análise)
+    plt.rcParams.update({'font.size': 20})
+    fig, ax = plt.subplots(figsize=(20, 10))
+    ax.boxplot(dados)
+    ax.set_yscale('log')
+    ax.set_title(title)
+    ax.set_xlabel('Idade')
+    ax.set_ylabel('Numero de Salários')
+    ax.set_xticklabels(xticks)
+
+    out_path = os.path.join(save_results_to, filename)
+    # usar fig.savefig para aproveitar a variável 'fig' e evitar aviso de "não usado"
+    fig.savefig(out_path)
+    plt.close(fig)
 
     # if cluster == 1:       
     #     #Filtrados ... Cluster 0 ... Ciência da Computação/Analistas de Sistemas(481/2511)
